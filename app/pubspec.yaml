@@ -1,0 +1,44 @@
+name: cycle_app
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  cryptography: ^2.9.0
+  # Pinned to a 12.x beta deliberately: file_picker <12 pins win32 ^5.9.0,
+  # which conflicts with share_plus's win32 ^6.0.1. Forcing win32 via
+  # dependency_overrides looked tempting (this app never builds for Windows)
+  # but doesn't actually work — file_picker's Windows source isn't behind a
+  # platform-conditional import, so `flutter test`'s host-VM compilation
+  # still compiles it, and it fails against the wrong win32 API shape. 12.x
+  # is the first version whose Windows source was actually updated for
+  # win32 ^6, so this is a real fix, not a version-solver workaround.
+  file_picker: ^12.0.0-beta.7
+  flutter:
+    sdk: flutter
+  flutter_local_notifications: ^22.3.0
+  flutter_localizations:
+    sdk: flutter
+  flutter_secure_storage: ^10.3.1
+  intl: ^0.20.2
+  local_auth: ^3.0.2
+  path_provider: ^2.1.6
+  pdf: ^3.13.0
+  printing: ^5.15.0
+  provider: ^6.1.5+1
+  share_plus: ^13.3.0
+  shared_preferences: ^2.5.5
+  table_calendar: ^3.2.1
+  timezone: ^0.11.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true
