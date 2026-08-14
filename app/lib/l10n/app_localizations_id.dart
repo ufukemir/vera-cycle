@@ -960,4 +960,93 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get dayLogMedicationNameHint => 'Nama obat';
+
+  @override
+  String get navAssistant => 'Asisten';
+
+  @override
+  String get assistantTitle => 'Asisten Vera';
+
+  @override
+  String get assistantInputHint => 'Tanyakan tentang siklusmu…';
+
+  @override
+  String get assistantIntro =>
+      'Hai! Aku bisa menjawab pertanyaan tentang haid, siklus, dan cara kerja Vera — langsung di ponselmu, tidak ada yang keluar dari perangkatmu. Aku bukan dokter dan ini bukan nasihat medis.';
+
+  @override
+  String get insightMenstrual3 =>
+      'Darah haid bukan \"darah kotor\" — itu campuran darah dan lapisan rahim, bagian yang sepenuhnya normal dari siklus.';
+
+  @override
+  String get insightMenstrual4 =>
+      'Kehangatan lembut di perut bawah benar-benar meredakan kram — botol air hangat adalah cara klasik yang terbukti.';
+
+  @override
+  String get insightMenstrual5 =>
+      'Aliran biasanya paling deras di dua hari pertama lalu berkurang — pola itu umum.';
+
+  @override
+  String get insightMenstrual6 =>
+      'Merasa sedikit lebih lelah saat haid itu umum — zat besi keluar dari tubuh bersama darah haid.';
+
+  @override
+  String get insightFollicular3 =>
+      'Estrogen membangun kembali lapisan rahim setelah haid — tubuhmu sedang bersiap dari awal.';
+
+  @override
+  String get insightFollicular4 =>
+      'Kulit sering terlihat paling bersih di fase ini saat hormon mulai stabil.';
+
+  @override
+  String get insightFollicular5 =>
+      'Daya tahan dan waktu reaksi mencapai puncak di akhir fase folikular bagi banyak orang.';
+
+  @override
+  String get insightFollicular6 =>
+      'Panjang fase inilah yang paling bervariasi antar orang — fase luteal jauh lebih konstan.';
+
+  @override
+  String get insightFertile3 =>
+      'Sel telur hidup sekitar 12–24 jam, tapi sperma bisa menunggu hingga 5 hari — itulah mengapa masa subur mencakup beberapa hari.';
+
+  @override
+  String get insightFertile4 =>
+      'Menjelang ovulasi, lendir serviks sering menjadi bening dan elastis — seperti putih telur mentah.';
+
+  @override
+  String get insightFertile5 =>
+      'Sebagian orang merasakan nyeri singkat di satu sisi saat ovulasi — bahkan ada namanya: mittelschmerz.';
+
+  @override
+  String get insightFertile6 =>
+      'Suhu basal tubuh naik sedikit *setelah* ovulasi — ia mengonfirmasi, bukan memprediksi.';
+
+  @override
+  String get insightLuteal3 =>
+      'Progesteron memuncak sekitar seminggu setelah ovulasi — kembung dan nyeri payudara saat itu umum terjadi.';
+
+  @override
+  String get insightLuteal4 =>
+      'Keinginan makan karbohidrat sebelum haid itu nyata — kebutuhan energi sedikit naik di fase luteal.';
+
+  @override
+  String get insightLuteal5 =>
+      'Gejala PMS biasanya mereda satu-dua hari setelah pendarahan dimulai.';
+
+  @override
+  String get insightLuteal6 =>
+      'Rutinitas tidur yang konsisten bisa sangat meringankan penurunan suasana hati di akhir fase luteal.';
+
+  @override
+  String get insightUnknown2 =>
+      'Mencatat tiga siklus saja sering cukup untuk melihat pola khasmu muncul.';
+
+  @override
+  String get insightUnknown3 =>
+      'Siklus itu personal — membandingkan siklusmu dengan milik teman jarang memberi info berguna.';
+
+  @override
+  String get insightUnknown4 =>
+      'Stres, perjalanan, dan sakit bisa menggeser ovulasi — haid yang \"terlambat\" sering hanya berarti ovulasi yang terlambat.';
 }

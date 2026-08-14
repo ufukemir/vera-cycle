@@ -8,6 +8,7 @@ import '../../state/app_lock_controller.dart';
 import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
 import '../../util/day.dart';
+import '../../widgets/illustrations.dart';
 import '../lock/pin_setup_screen.dart';
 import 'steps/building_plan_step.dart';
 import 'steps/cycle_length_step.dart';
@@ -147,12 +148,14 @@ class _OnboardingFlowState extends State<OnboardingFlow> {
         );
       case _Step.regularity:
         return ThreeChoiceQuestionStep(
+          scene: IllustrationScene.calendarFlowers,
           title: l10n.onboardingRegularityTitle,
           body: l10n.onboardingRegularityBody,
           onAnswer: () => setState(() => _step = _Step.cramps),
         );
       case _Step.cramps:
         return ThreeChoiceQuestionStep(
+          scene: IllustrationScene.dropletFriend,
           title: l10n.onboardingCrampsTitle,
           body: l10n.onboardingCrampsBody,
           onAnswer: () => setState(() => _step = _Step.notifications),

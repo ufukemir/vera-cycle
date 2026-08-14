@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../widgets/illustrations.dart';
+
 class OnboardingChoiceOption<T> {
   const OnboardingChoiceOption({required this.value, required this.label, this.icon});
 
@@ -19,12 +21,14 @@ class OnboardingChoiceScaffold<T> extends StatelessWidget {
     required this.body,
     required this.options,
     required this.onSelected,
+    this.scene,
   });
 
   final String title;
   final String body;
   final List<OnboardingChoiceOption<T>> options;
   final ValueChanged<T> onSelected;
+  final IllustrationScene? scene;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +40,10 @@ class OnboardingChoiceScaffold<T> extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Spacer(),
+              if (scene != null) ...[
+                HeroIllustration(scene: scene!, height: 160),
+                const SizedBox(height: 20),
+              ],
               Text(title,
                   style: Theme.of(context).textTheme.headlineSmall,
                   textAlign: TextAlign.center),

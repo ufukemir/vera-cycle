@@ -49,11 +49,10 @@ class MedicationsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    // Section heading comes from the parent's category card.
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(l10n.dayLogMedicationsLabel, style: Theme.of(context).textTheme.bodyMedium),
-        const SizedBox(height: 8),
         Wrap(
           spacing: 8,
           runSpacing: 8,

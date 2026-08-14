@@ -21,15 +21,48 @@ class DailyInsightCard extends StatelessWidget {
   List<String> _candidates(AppLocalizations l10n) {
     switch (phase) {
       case CyclePhase.menstrual:
-        return [l10n.insightMenstrual1, l10n.insightMenstrual2];
+        return [
+          l10n.insightMenstrual1,
+          l10n.insightMenstrual2,
+          l10n.insightMenstrual3,
+          l10n.insightMenstrual4,
+          l10n.insightMenstrual5,
+          l10n.insightMenstrual6,
+        ];
       case CyclePhase.follicular:
-        return [l10n.insightFollicular1, l10n.insightFollicular2];
+        return [
+          l10n.insightFollicular1,
+          l10n.insightFollicular2,
+          l10n.insightFollicular3,
+          l10n.insightFollicular4,
+          l10n.insightFollicular5,
+          l10n.insightFollicular6,
+        ];
       case CyclePhase.fertileWindow:
-        return [l10n.insightFertile1, l10n.insightFertile2];
+        return [
+          l10n.insightFertile1,
+          l10n.insightFertile2,
+          l10n.insightFertile3,
+          l10n.insightFertile4,
+          l10n.insightFertile5,
+          l10n.insightFertile6,
+        ];
       case CyclePhase.luteal:
-        return [l10n.insightLuteal1, l10n.insightLuteal2];
+        return [
+          l10n.insightLuteal1,
+          l10n.insightLuteal2,
+          l10n.insightLuteal3,
+          l10n.insightLuteal4,
+          l10n.insightLuteal5,
+          l10n.insightLuteal6,
+        ];
       case CyclePhase.unknown:
-        return [l10n.insightUnknown1];
+        return [
+          l10n.insightUnknown1,
+          l10n.insightUnknown2,
+          l10n.insightUnknown3,
+          l10n.insightUnknown4,
+        ];
     }
   }
 

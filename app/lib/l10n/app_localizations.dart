@@ -10,8 +10,16 @@ import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
 import 'app_localizations_es.dart';
 import 'app_localizations_fr.dart';
+import 'app_localizations_hi.dart';
 import 'app_localizations_id.dart';
+import 'app_localizations_it.dart';
+import 'app_localizations_ja.dart';
+import 'app_localizations_ko.dart';
+import 'app_localizations_pt.dart';
+import 'app_localizations_ru.dart';
 import 'app_localizations_tr.dart';
+import 'app_localizations_ur.dart';
+import 'app_localizations_zh.dart';
 
 // ignore_for_file: type=lint
 
@@ -104,8 +112,16 @@ abstract class AppLocalizations {
     Locale('en'),
     Locale('es'),
     Locale('fr'),
+    Locale('hi'),
     Locale('id'),
+    Locale('it'),
+    Locale('ja'),
+    Locale('ko'),
+    Locale('pt'),
+    Locale('ru'),
     Locale('tr'),
+    Locale('ur'),
+    Locale('zh'),
   ];
 
   /// The application name, shown as the app title.
@@ -1877,6 +1893,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Medication name'**
   String get dayLogMedicationNameHint;
+
+  /// No description provided for @navAssistant.
+  ///
+  /// In en, this message translates to:
+  /// **'Assistant'**
+  String get navAssistant;
+
+  /// No description provided for @assistantTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Vera Assistant'**
+  String get assistantTitle;
+
+  /// No description provided for @assistantInputHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask about your cycle…'**
+  String get assistantInputHint;
+
+  /// No description provided for @assistantIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Hi! I can answer questions about periods, cycles, and how Vera works — right here on your phone, nothing leaves your device. I\'m not a doctor and this isn\'t medical advice.'**
+  String get assistantIntro;
+
+  /// No description provided for @insightMenstrual3.
+  ///
+  /// In en, this message translates to:
+  /// **'Period blood isn\'t \"dirty blood\" — it\'s a mix of blood and uterine lining, a completely normal part of the cycle.'**
+  String get insightMenstrual3;
+
+  /// No description provided for @insightMenstrual4.
+  ///
+  /// In en, this message translates to:
+  /// **'Gentle heat on the lower belly genuinely eases cramps — a warm water bottle is an evidence-backed classic.'**
+  String get insightMenstrual4;
+
+  /// No description provided for @insightMenstrual5.
+  ///
+  /// In en, this message translates to:
+  /// **'Flow is often heaviest in the first two days and tapers off after — that pattern is typical.'**
+  String get insightMenstrual5;
+
+  /// No description provided for @insightMenstrual6.
+  ///
+  /// In en, this message translates to:
+  /// **'Feeling a bit more tired during your period is common — iron leaves the body with menstrual blood.'**
+  String get insightMenstrual6;
+
+  /// No description provided for @insightFollicular3.
+  ///
+  /// In en, this message translates to:
+  /// **'Estrogen is rebuilding your uterine lining after your period — your body is prepping fresh.'**
+  String get insightFollicular3;
+
+  /// No description provided for @insightFollicular4.
+  ///
+  /// In en, this message translates to:
+  /// **'Skin often looks its clearest in this phase as hormone levels settle.'**
+  String get insightFollicular4;
+
+  /// No description provided for @insightFollicular5.
+  ///
+  /// In en, this message translates to:
+  /// **'Endurance and reaction times peak in the late follicular phase for many people.'**
+  String get insightFollicular5;
+
+  /// No description provided for @insightFollicular6.
+  ///
+  /// In en, this message translates to:
+  /// **'This phase\'s length is what varies most between people — the luteal phase is far more constant.'**
+  String get insightFollicular6;
+
+  /// No description provided for @insightFertile3.
+  ///
+  /// In en, this message translates to:
+  /// **'An egg lives about 12–24 hours, but sperm can wait up to 5 days — that\'s why the fertile window spans several days.'**
+  String get insightFertile3;
+
+  /// No description provided for @insightFertile4.
+  ///
+  /// In en, this message translates to:
+  /// **'Around ovulation, cervical mucus often turns clear and stretchy — like raw egg white.'**
+  String get insightFertile4;
+
+  /// No description provided for @insightFertile5.
+  ///
+  /// In en, this message translates to:
+  /// **'Some people feel a brief one-sided twinge at ovulation — it even has a name: mittelschmerz.'**
+  String get insightFertile5;
+
+  /// No description provided for @insightFertile6.
+  ///
+  /// In en, this message translates to:
+  /// **'Basal body temperature rises slightly *after* ovulation — it confirms it happened rather than predicting it.'**
+  String get insightFertile6;
+
+  /// No description provided for @insightLuteal3.
+  ///
+  /// In en, this message translates to:
+  /// **'Progesterone peaks about a week after ovulation — bloating and breast tenderness around then are common.'**
+  String get insightLuteal3;
+
+  /// No description provided for @insightLuteal4.
+  ///
+  /// In en, this message translates to:
+  /// **'Craving carbs before your period is real — energy needs rise slightly in the luteal phase.'**
+  String get insightLuteal4;
+
+  /// No description provided for @insightLuteal5.
+  ///
+  /// In en, this message translates to:
+  /// **'PMS symptoms usually ease within a day or two after bleeding starts.'**
+  String get insightLuteal5;
+
+  /// No description provided for @insightLuteal6.
+  ///
+  /// In en, this message translates to:
+  /// **'A consistent sleep routine can noticeably soften late-luteal mood dips.'**
+  String get insightLuteal6;
+
+  /// No description provided for @insightUnknown2.
+  ///
+  /// In en, this message translates to:
+  /// **'Tracking just three cycles is often enough to see your own pattern emerge.'**
+  String get insightUnknown2;
+
+  /// No description provided for @insightUnknown3.
+  ///
+  /// In en, this message translates to:
+  /// **'Cycles are personal — comparing yours to a friend\'s rarely tells you anything useful.'**
+  String get insightUnknown3;
+
+  /// No description provided for @insightUnknown4.
+  ///
+  /// In en, this message translates to:
+  /// **'Stress, travel, and illness can all shift ovulation — a \"late\" period often just means late ovulation.'**
+  String get insightUnknown4;
 }
 
 class _AppLocalizationsDelegate
@@ -1895,8 +2049,16 @@ class _AppLocalizationsDelegate
     'en',
     'es',
     'fr',
+    'hi',
     'id',
+    'it',
+    'ja',
+    'ko',
+    'pt',
+    'ru',
     'tr',
+    'ur',
+    'zh',
   ].contains(locale.languageCode);
 
   @override
@@ -1916,10 +2078,26 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsEs();
     case 'fr':
       return AppLocalizationsFr();
+    case 'hi':
+      return AppLocalizationsHi();
     case 'id':
       return AppLocalizationsId();
+    case 'it':
+      return AppLocalizationsIt();
+    case 'ja':
+      return AppLocalizationsJa();
+    case 'ko':
+      return AppLocalizationsKo();
+    case 'pt':
+      return AppLocalizationsPt();
+    case 'ru':
+      return AppLocalizationsRu();
     case 'tr':
       return AppLocalizationsTr();
+    case 'ur':
+      return AppLocalizationsUr();
+    case 'zh':
+      return AppLocalizationsZh();
   }
 
   throw FlutterError(

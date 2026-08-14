@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
+import '../../../widgets/illustrations.dart';
 import '../../../widgets/organic_blob_background.dart';
 
 /// A short "getting things ready" screen shown after PIN setup and before
@@ -59,6 +60,9 @@ class _BuildingPlanStepState extends State<BuildingPlanStep> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                const HeroIllustration(
+                    scene: IllustrationScene.sunrise, height: 170),
+                const SizedBox(height: 28),
                 Text(
                   _completedSteps >= steps.length
                       ? l10n.onboardingBuildingPlanDone

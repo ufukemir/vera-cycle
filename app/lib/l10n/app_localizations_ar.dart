@@ -953,4 +953,93 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get dayLogMedicationNameHint => 'اسم الدواء';
+
+  @override
+  String get navAssistant => 'المساعدة';
+
+  @override
+  String get assistantTitle => 'مساعدة فيرا';
+
+  @override
+  String get assistantInputHint => 'اسألي عن دورتك…';
+
+  @override
+  String get assistantIntro =>
+      'مرحبًا! يمكنني الإجابة عن أسئلتك حول الدورة الشهرية وكيفية عمل فيرا — هنا على هاتفك، لا يغادر أي شيء جهازك. لستُ طبيبة وهذه ليست نصيحة طبية.';
+
+  @override
+  String get insightMenstrual3 =>
+      'دم الدورة ليس \"دمًا فاسدًا\" — إنه مزيج من الدم وبطانة الرحم، وهو جزء طبيعي تمامًا من الدورة.';
+
+  @override
+  String get insightMenstrual4 =>
+      'الحرارة اللطيفة على أسفل البطن تخفف التقلصات فعلًا — قربة الماء الدافئ وسيلة كلاسيكية مدعومة علميًا.';
+
+  @override
+  String get insightMenstrual5 =>
+      'يكون التدفق غالبًا أغزر في اليومين الأولين ثم يخف تدريجيًا — هذا النمط معتاد.';
+
+  @override
+  String get insightMenstrual6 =>
+      'الشعور بتعب أكبر قليلًا أثناء الدورة شائع — فالحديد يغادر الجسم مع دم الحيض.';
+
+  @override
+  String get insightFollicular3 =>
+      'الإستروجين يعيد بناء بطانة الرحم بعد الدورة — جسمك يستعد لبداية جديدة.';
+
+  @override
+  String get insightFollicular4 =>
+      'غالبًا ما تبدو البشرة في أصفى حالاتها في هذه المرحلة مع استقرار الهرمونات.';
+
+  @override
+  String get insightFollicular5 =>
+      'تبلغ القدرة على التحمل وسرعة الاستجابة ذروتهما في أواخر المرحلة الجرابية لدى كثيرين.';
+
+  @override
+  String get insightFollicular6 =>
+      'طول هذه المرحلة هو الأكثر تفاوتًا بين الأشخاص — أما المرحلة الأصفرية فأكثر ثباتًا.';
+
+  @override
+  String get insightFertile3 =>
+      'تعيش البويضة نحو 12–24 ساعة، لكن الحيوانات المنوية قد تنتظر حتى 5 أيام — لهذا تمتد نافذة الخصوبة عدة أيام.';
+
+  @override
+  String get insightFertile4 =>
+      'قرب الإباضة، غالبًا ما يصبح مخاط عنق الرحم شفافًا ومطاطيًا — مثل بياض البيض النيء.';
+
+  @override
+  String get insightFertile5 =>
+      'يشعر بعض الأشخاص بوخزة قصيرة في جانب واحد عند الإباضة — ولها اسم أيضًا: ألم منتصف الدورة.';
+
+  @override
+  String get insightFertile6 =>
+      'ترتفع درجة حرارة الجسم القاعدية قليلًا *بعد* الإباضة — فهي تؤكد حدوثها ولا تتنبأ بها.';
+
+  @override
+  String get insightLuteal3 =>
+      'يبلغ البروجسترون ذروته بعد نحو أسبوع من الإباضة — والانتفاخ وحساسية الثدي حينها شائعان.';
+
+  @override
+  String get insightLuteal4 =>
+      'الرغبة في الكربوهيدرات قبل الدورة حقيقية — إذ ترتفع احتياجات الطاقة قليلًا في المرحلة الأصفرية.';
+
+  @override
+  String get insightLuteal5 =>
+      'عادةً ما تخف أعراض متلازمة ما قبل الحيض خلال يوم أو يومين من بدء النزيف.';
+
+  @override
+  String get insightLuteal6 =>
+      'روتين نوم منتظم يمكن أن يخفف بوضوح تقلبات المزاج في أواخر المرحلة الأصفرية.';
+
+  @override
+  String get insightUnknown2 =>
+      'تتبُّع ثلاث دورات فقط يكفي غالبًا لتبدأ ملامح نمطك الخاص بالظهور.';
+
+  @override
+  String get insightUnknown3 =>
+      'الدورات مسألة شخصية — ومقارنة دورتك بدورة صديقتك نادرًا ما تفيدك بشيء.';
+
+  @override
+  String get insightUnknown4 =>
+      'التوتر والسفر والمرض يمكن أن تؤخر الإباضة — فالدورة \"المتأخرة\" غالبًا تعني إباضة متأخرة فحسب.';
 }

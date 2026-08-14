@@ -80,6 +80,15 @@ Adet döngünü, verin telefonundan hiç çıkmadan takip et — ve tahminlerin 
 - 2 döngüden az veri varsa tahmin yapılmaz; "henüz yeterli veri yok" denir.
 - Düzensizliği gizlemez; nazikçe işaret eder (tanı koymadan).
 
+### 5b. Cihaz-üstü asistan (sohbet sekmesi)
+- Küratörlü, elle yazılmış bilgi tabanı üzerinde anahtar-kelime eşleştirmeli
+  soru-cevap (~22 konu; TR+EN tam içerik, diğer diller İngilizceye düşer).
+- Cevaplar kullanıcının kendi verisiyle kişiselleşir (döngü günü, ortalama,
+  tahmin penceresi) ama asla tanı koymaz; sohbet geçmişi bilerek KAYDEDİLMEZ.
+- Bulut LLM (Gemini vb.) bilinçli olarak KULLANILMAZ: INTERNET izni
+  gerektirir ve kanıtlanabilir mahremiyet iddiasını bozar (backlog #1'in
+  "gerçekten cihaz-üstü" tezi).
+
 ### 6. İçgörüler
 - Ortalama döngü uzunluğu, değişkenlik, ortalama adet süresi, kayıtlı döngü sayısı.
 - Basit semptom örüntüsü: "kramplar en çok 1-2. günlerde".
@@ -101,8 +110,9 @@ Adet döngünü, verin telefonundan hiç çıkmadan takip et — ve tahminlerin 
 - Paylaşım daima kullanıcının başlattığı sistem paylaşım sayfası üzerinden.
 
 ### 9. Ayarlar
-- Dil (7 dil: EN/TR/AR/ES/FR/DE/ID, varsayılan sistem dili), hafta başlangıcı,
-  sıcaklık birimi.
+- Dil (15 dil: EN/TR/AR/ES/FR/DE/ID tam; PT/IT/RU/HI/JA/KO/ZH/UR çekirdek
+  ekranlar çevrili, kalanı İngilizceye düşer — varsayılan sistem dili),
+  hafta başlangıcı, sıcaklık birimi.
 - Şeffaf "Tahmin Ayarları" ekranı: kullanıcının kendi bildirdiği regl/döngü
   uzunluğu (sadece süs — CycleRing'i ölçekler, tahmine karışmaz) ile luteal
   faz uzunluğu (gerçek girdi — PredictionEngine'in doğurgan pencereyi

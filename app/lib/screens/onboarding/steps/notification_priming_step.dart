@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../services/reminder_service.dart';
 import '../../../state/app_preferences.dart';
+import '../../../widgets/illustrations.dart';
 
 /// Shows a realistic (but clearly in-app) mockup of what a reminder looks
 /// like before asking the OS for real notification permission — so the
@@ -39,6 +40,9 @@ class NotificationPrimingStep extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Spacer(),
+              const HeroIllustration(
+                  scene: IllustrationScene.moonAndStars, height: 170),
+              const SizedBox(height: 24),
               Text(
                 l10n.onboardingNotificationTitle,
                 style: Theme.of(context).textTheme.headlineSmall,

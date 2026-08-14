@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
+import '../../../widgets/illustrations.dart';
 
-/// Shared layout for a skippable onboarding question.
+/// Shared layout for a skippable onboarding question, with an illustrated
+/// hero card up top (see [IllustrationScene]).
 ///
 /// Skip and Continue render as equal-weight buttons, not a dismissive small
 /// link for Skip — an onboarding question the user genuinely doesn't know the
@@ -16,6 +18,7 @@ class OnboardingQuestionScaffold extends StatelessWidget {
     required this.content,
     required this.onSkip,
     required this.onContinue,
+    this.scene,
   });
 
   final String title;
@@ -23,6 +26,7 @@ class OnboardingQuestionScaffold extends StatelessWidget {
   final Widget content;
   final VoidCallback onSkip;
   final VoidCallback onContinue;
+  final IllustrationScene? scene;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +39,10 @@ class OnboardingQuestionScaffold extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Spacer(),
+              if (scene != null) ...[
+                HeroIllustration(scene: scene!, height: 180),
+                const SizedBox(height: 24),
+              ],
               Text(title,
                   style: Theme.of(context).textTheme.headlineSmall,
                   textAlign: TextAlign.center),

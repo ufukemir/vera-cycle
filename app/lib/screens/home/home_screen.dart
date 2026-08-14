@@ -5,6 +5,7 @@ import '../../l10n/app_localizations.dart';
 import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
 import '../../util/day.dart';
+import '../../widgets/illustrations.dart';
 import '../day_log/day_log_screen.dart';
 import 'widgets/ad_placeholder_banner.dart';
 import 'widgets/cycle_day_badge.dart';
@@ -48,10 +49,13 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 8),
-              CycleRing(
-                cycleDay: status.cycleDay,
-                cycleLength: ringLength,
-                child: CycleDayBadge(cycleDay: status.cycleDay, phase: status.phase),
+              DoodleFrame(
+                child: CycleRing(
+                  cycleDay: status.cycleDay,
+                  cycleLength: ringLength,
+                  child:
+                      CycleDayBadge(cycleDay: status.cycleDay, phase: status.phase),
+                ),
               ),
               const SizedBox(height: 28),
               PredictionRangeCard(prediction: prediction),

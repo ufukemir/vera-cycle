@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../util/day.dart';
+import '../../../widgets/illustrations.dart';
 import 'onboarding_question_scaffold.dart';
 
 class LastPeriodStep extends StatefulWidget {
@@ -36,6 +37,7 @@ class _LastPeriodStepState extends State<LastPeriodStep> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return OnboardingQuestionScaffold(
+      scene: IllustrationScene.calendarFlowers,
       title: l10n.onboardingLastPeriodTitle,
       body: l10n.onboardingLastPeriodBody,
       onSkip: widget.onSkip,

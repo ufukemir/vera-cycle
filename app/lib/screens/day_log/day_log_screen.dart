@@ -8,6 +8,7 @@ import '../../l10n/app_localizations.dart';
 import '../../models/day_log.dart';
 import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
+import '../../theme/app_theme.dart';
 import 'widgets/energy_selector.dart';
 import 'widgets/fertility_status_banner.dart';
 import 'widgets/flow_selector.dart';
@@ -98,42 +99,75 @@ class _DayLogScreenState extends State<DayLogScreen> {
                   _save(_current.copyWith(weightKg: v, clearWeight: v == null)),
             ),
             const SizedBox(height: 24),
-            _sectionLabel(context, l10n.dayLogFlowLabel),
-            FlowSelector(
-              value: _current.flow,
-              onChanged: (v) => _save(_current.copyWith(flow: v, clearFlow: v == null)),
+            _SectionCard(
+              icon: Icons.water_drop_outlined,
+              title: l10n.dayLogFlowLabel,
+              background: AppPalette.roseSoft,
+              foreground: AppPalette.roseSoftText,
+              child: FlowSelector(
+                value: _current.flow,
+                onChanged: (v) =>
+                    _save(_current.copyWith(flow: v, clearFlow: v == null)),
+              ),
             ),
-            const SizedBox(height: 24),
-            _sectionLabel(context, l10n.dayLogSymptomsLabel),
-            SymptomMultiselect(
-              value: _current.symptoms,
-              onChanged: (s) => _save(_current.copyWith(symptoms: s)),
+            const SizedBox(height: 16),
+            _SectionCard(
+              icon: Icons.healing_outlined,
+              title: l10n.dayLogSymptomsLabel,
+              background: AppPalette.lavenderSoft,
+              foreground: AppPalette.lavenderSoftText,
+              child: SymptomMultiselect(
+                value: _current.symptoms,
+                onChanged: (s) => _save(_current.copyWith(symptoms: s)),
+              ),
             ),
-            const SizedBox(height: 24),
-            _sectionLabel(context, l10n.dayLogMoodLabel),
-            MoodSelector(
-              value: _current.mood,
-              onChanged: (v) => _save(_current.copyWith(mood: v, clearMood: v == null)),
+            const SizedBox(height: 16),
+            _SectionCard(
+              icon: Icons.sentiment_satisfied_outlined,
+              title: l10n.dayLogMoodLabel,
+              background: AppPalette.skySoft,
+              foreground: AppPalette.skySoftText,
+              child: MoodSelector(
+                value: _current.mood,
+                onChanged: (v) =>
+                    _save(_current.copyWith(mood: v, clearMood: v == null)),
+              ),
             ),
-            const SizedBox(height: 24),
-            _sectionLabel(context, l10n.dayLogEnergyLabel),
-            EnergySelector(
-              value: _current.energyLevel,
-              onChanged: (v) =>
-                  _save(_current.copyWith(energyLevel: v, clearEnergyLevel: v == null)),
+            const SizedBox(height: 16),
+            _SectionCard(
+              icon: Icons.bolt_outlined,
+              title: l10n.dayLogEnergyLabel,
+              background: AppPalette.goldSoft,
+              foreground: AppPalette.goldSoftText,
+              child: EnergySelector(
+                value: _current.energyLevel,
+                onChanged: (v) => _save(
+                    _current.copyWith(energyLevel: v, clearEnergyLevel: v == null)),
+              ),
             ),
-            const SizedBox(height: 24),
-            _sectionLabel(context, l10n.dayLogSkinHairLabel),
-            SkinHairMultiselect(
-              value: _current.skinHair,
-              onChanged: (s) => _save(_current.copyWith(skinHair: s)),
+            const SizedBox(height: 16),
+            _SectionCard(
+              icon: Icons.face_retouching_natural_outlined,
+              title: l10n.dayLogSkinHairLabel,
+              background: AppPalette.mintSoft,
+              foreground: AppPalette.mintSoftText,
+              child: SkinHairMultiselect(
+                value: _current.skinHair,
+                onChanged: (s) => _save(_current.copyWith(skinHair: s)),
+              ),
             ),
-            const SizedBox(height: 24),
-            MedicationsSection(
-              value: _current.medications,
-              onChanged: (m) => _save(_current.copyWith(medications: m)),
+            const SizedBox(height: 16),
+            _SectionCard(
+              icon: Icons.medication_outlined,
+              title: l10n.dayLogMedicationsLabel,
+              background: AppPalette.terracottaSoft,
+              foreground: AppPalette.terracottaSoftText,
+              child: MedicationsSection(
+                value: _current.medications,
+                onChanged: (m) => _save(_current.copyWith(medications: m)),
+              ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 16),
             NoteField(controller: _noteController, onChanged: _onNoteChanged),
             const SizedBox(height: 24),
             if (mucusTrackingEnabled)
@@ -172,8 +206,59 @@ class _DayLogScreenState extends State<DayLogScreen> {
     );
   }
 
-  Widget _sectionLabel(BuildContext context, String text) => Padding(
-        padding: const EdgeInsets.only(bottom: 8),
-        child: Text(text, style: Theme.of(context).textTheme.titleMedium),
-      );
+}
+
+/// A pastel category card with a tinted icon badge — the reference app's
+/// colorful sectioned-log pattern, using [AppPalette]'s soft tones.
+class _SectionCard extends StatelessWidget {
+  const _SectionCard({
+    required this.icon,
+    required this.title,
+    required this.background,
+    required this.foreground,
+    required this.child,
+  });
+
+  final IconData icon;
+  final String title;
+  final Color background;
+  final Color foreground;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: background.withValues(alpha: 0.55),
+        borderRadius: BorderRadius.circular(24),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 34,
+                height: 34,
+                decoration: BoxDecoration(shape: BoxShape.circle, color: background),
+                child: Icon(icon, size: 18, color: foreground),
+              ),
+              const SizedBox(width: 10),
+              Text(
+                title,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(color: foreground),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          child,
+        ],
+      ),
+    );
+  }
 }

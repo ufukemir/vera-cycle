@@ -967,4 +967,93 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get dayLogMedicationNameHint => 'Name des Medikaments';
+
+  @override
+  String get navAssistant => 'Assistentin';
+
+  @override
+  String get assistantTitle => 'Vera-Assistentin';
+
+  @override
+  String get assistantInputHint => 'Frag etwas über deinen Zyklus…';
+
+  @override
+  String get assistantIntro =>
+      'Hallo! Ich kann Fragen zu Periode, Zyklus und zur Funktionsweise von Vera beantworten — direkt auf deinem Telefon, nichts verlässt dein Gerät. Ich bin keine Ärztin und das ist kein medizinischer Rat.';
+
+  @override
+  String get insightMenstrual3 =>
+      'Periodenblut ist kein \"schmutziges Blut\" — es ist eine Mischung aus Blut und Gebärmutterschleimhaut, ein völlig normaler Teil des Zyklus.';
+
+  @override
+  String get insightMenstrual4 =>
+      'Sanfte Wärme am Unterbauch lindert Krämpfe wirklich — die Wärmflasche ist ein wissenschaftlich belegter Klassiker.';
+
+  @override
+  String get insightMenstrual5 =>
+      'Die Blutung ist oft in den ersten zwei Tagen am stärksten und lässt dann nach — dieses Muster ist typisch.';
+
+  @override
+  String get insightMenstrual6 =>
+      'Sich während der Periode etwas müder zu fühlen ist normal — mit dem Menstruationsblut verliert der Körper Eisen.';
+
+  @override
+  String get insightFollicular3 =>
+      'Östrogen baut die Gebärmutterschleimhaut nach der Periode wieder auf — dein Körper bereitet sich frisch vor.';
+
+  @override
+  String get insightFollicular4 =>
+      'Die Haut wirkt in dieser Phase oft am klarsten, während sich die Hormone einpendeln.';
+
+  @override
+  String get insightFollicular5 =>
+      'Ausdauer und Reaktionszeit erreichen bei vielen in der späten Follikelphase ihren Höhepunkt.';
+
+  @override
+  String get insightFollicular6 =>
+      'Die Länge dieser Phase variiert am stärksten zwischen Personen — die Lutealphase ist deutlich konstanter.';
+
+  @override
+  String get insightFertile3 =>
+      'Eine Eizelle lebt etwa 12–24 Stunden, Spermien können aber bis zu 5 Tage warten — deshalb umfasst das fruchtbare Fenster mehrere Tage.';
+
+  @override
+  String get insightFertile4 =>
+      'Um den Eisprung herum wird der Zervixschleim oft klar und dehnbar — wie rohes Eiweiß.';
+
+  @override
+  String get insightFertile5 =>
+      'Manche spüren beim Eisprung ein kurzes einseitiges Ziehen — es hat sogar einen Namen: Mittelschmerz.';
+
+  @override
+  String get insightFertile6 =>
+      'Die Basaltemperatur steigt leicht *nach* dem Eisprung — sie bestätigt ihn, statt ihn vorherzusagen.';
+
+  @override
+  String get insightLuteal3 =>
+      'Progesteron erreicht etwa eine Woche nach dem Eisprung seinen Höhepunkt — Blähbauch und empfindliche Brüste sind dann häufig.';
+
+  @override
+  String get insightLuteal4 =>
+      'Heißhunger auf Kohlenhydrate vor der Periode ist real — der Energiebedarf steigt in der Lutealphase leicht an.';
+
+  @override
+  String get insightLuteal5 =>
+      'PMS-Beschwerden lassen meist ein bis zwei Tage nach Einsetzen der Blutung nach.';
+
+  @override
+  String get insightLuteal6 =>
+      'Eine feste Schlafroutine kann Stimmungstiefs in der späten Lutealphase spürbar abmildern.';
+
+  @override
+  String get insightUnknown2 =>
+      'Schon drei erfasste Zyklen reichen oft, um dein eigenes Muster zu erkennen.';
+
+  @override
+  String get insightUnknown3 =>
+      'Zyklen sind individuell — deinen mit dem einer Freundin zu vergleichen bringt selten etwas.';
+
+  @override
+  String get insightUnknown4 =>
+      'Stress, Reisen und Krankheit können den Eisprung verschieben — eine \"verspätete\" Periode heißt oft nur: später Eisprung.';
 }

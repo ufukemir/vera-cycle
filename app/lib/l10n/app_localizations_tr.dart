@@ -956,4 +956,93 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get dayLogMedicationNameHint => 'İlaç adı';
+
+  @override
+  String get navAssistant => 'Asistan';
+
+  @override
+  String get assistantTitle => 'Vera Asistan';
+
+  @override
+  String get assistantInputHint => 'Döngün hakkında sor…';
+
+  @override
+  String get assistantIntro =>
+      'Merhaba! Regl, döngü ve Vera\'nın nasıl çalıştığıyla ilgili soruları burada, telefonundan hiç çıkmadan cevaplayabilirim. Doktor değilim ve bunlar tıbbi tavsiye değildir.';
+
+  @override
+  String get insightMenstrual3 =>
+      'Regl kanı \"kirli kan\" değildir — kan ve rahim iç zarının karışımıdır, döngünün tamamen normal bir parçasıdır.';
+
+  @override
+  String get insightMenstrual4 =>
+      'Karnın alt kısmına hafif sıcaklık kramları gerçekten hafifletir — sıcak su torbası bilimsel desteği olan bir klasiktir.';
+
+  @override
+  String get insightMenstrual5 =>
+      'Kanama genelde ilk iki gün en yoğundur ve sonra azalır — bu örüntü gayet tipiktir.';
+
+  @override
+  String get insightMenstrual6 =>
+      'Regl sırasında biraz daha yorgun hissetmek yaygındır — demir, regl kanıyla birlikte vücuttan çıkar.';
+
+  @override
+  String get insightFollicular3 =>
+      'Östrojen, regl sonrası rahim iç zarını yeniden inşa ediyor — vücudun taze bir başlangıç hazırlığında.';
+
+  @override
+  String get insightFollicular4 =>
+      'Hormon seviyeleri dengelendikçe cilt genelde bu evrede en berrak halinde görünür.';
+
+  @override
+  String get insightFollicular5 =>
+      'Birçok kişide dayanıklılık ve tepki süresi foliküler evrenin sonlarında zirve yapar.';
+
+  @override
+  String get insightFollicular6 =>
+      'Kişiden kişiye en çok değişen bu evrenin uzunluğudur — luteal faz çok daha sabittir.';
+
+  @override
+  String get insightFertile3 =>
+      'Yumurta yaklaşık 12–24 saat yaşar ama spermler 5 güne kadar bekleyebilir — doğurgan pencerenin birkaç güne yayılmasının nedeni bu.';
+
+  @override
+  String get insightFertile4 =>
+      'Ovülasyon civarında servikal mukus genelde şeffaf ve esnek olur — çiğ yumurta akı gibi.';
+
+  @override
+  String get insightFertile5 =>
+      'Bazı kişiler ovülasyonda tek tarafta kısa bir sancı hisseder — bunun bir adı bile var: mittelschmerz.';
+
+  @override
+  String get insightFertile6 =>
+      'Bazal vücut sıcaklığı ovülasyondan *sonra* hafifçe yükselir — ovülasyonu önceden bildirmez, gerçekleştiğini doğrular.';
+
+  @override
+  String get insightLuteal3 =>
+      'Progesteron ovülasyondan yaklaşık bir hafta sonra zirve yapar — o dönemde şişkinlik ve göğüs hassasiyeti yaygındır.';
+
+  @override
+  String get insightLuteal4 =>
+      'Regl öncesi karbonhidrat isteği gerçektir — luteal fazda enerji ihtiyacı hafifçe artar.';
+
+  @override
+  String get insightLuteal5 =>
+      'PMS belirtileri genelde kanama başladıktan bir-iki gün sonra hafifler.';
+
+  @override
+  String get insightLuteal6 =>
+      'Düzenli bir uyku rutini, luteal fazın sonundaki duygu dalgalanmalarını fark edilir şekilde yumuşatabilir.';
+
+  @override
+  String get insightUnknown2 =>
+      'Sadece üç döngü kaydetmek, kendi örüntünün belirmeye başlaması için çoğu zaman yeterlidir.';
+
+  @override
+  String get insightUnknown3 =>
+      'Döngüler kişiseldir — kendi döngünü bir arkadaşınkiyle karşılaştırmak nadiren işe yarar bir şey söyler.';
+
+  @override
+  String get insightUnknown4 =>
+      'Stres, seyahat ve hastalık ovülasyonu kaydırabilir — \"geciken\" regl çoğu zaman sadece geciken ovülasyon demektir.';
 }

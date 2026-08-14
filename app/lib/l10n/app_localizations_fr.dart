@@ -971,4 +971,93 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get dayLogMedicationNameHint => 'Nom du médicament';
+
+  @override
+  String get navAssistant => 'Assistant';
+
+  @override
+  String get assistantTitle => 'Assistant Vera';
+
+  @override
+  String get assistantInputHint => 'Pose une question sur ton cycle…';
+
+  @override
+  String get assistantIntro =>
+      'Salut ! Je peux répondre à tes questions sur les règles, le cycle et le fonctionnement de Vera — ici, sur ton téléphone, rien ne quitte ton appareil. Je ne suis pas médecin et ceci n\'est pas un avis médical.';
+
+  @override
+  String get insightMenstrual3 =>
+      'Le sang des règles n\'est pas du \"sang impur\" — c\'est un mélange de sang et de muqueuse utérine, une partie tout à fait normale du cycle.';
+
+  @override
+  String get insightMenstrual4 =>
+      'Une chaleur douce sur le bas-ventre soulage vraiment les crampes — la bouillotte est un classique validé par la science.';
+
+  @override
+  String get insightMenstrual5 =>
+      'Le flux est souvent plus abondant les deux premiers jours puis diminue — ce schéma est typique.';
+
+  @override
+  String get insightMenstrual6 =>
+      'Se sentir un peu plus fatiguée pendant ses règles est courant — le fer quitte le corps avec le sang menstruel.';
+
+  @override
+  String get insightFollicular3 =>
+      'L\'œstrogène reconstruit la muqueuse utérine après les règles — ton corps prépare du neuf.';
+
+  @override
+  String get insightFollicular4 =>
+      'La peau paraît souvent plus nette dans cette phase, à mesure que les hormones se stabilisent.';
+
+  @override
+  String get insightFollicular5 =>
+      'L\'endurance et les réflexes atteignent souvent leur pic en fin de phase folliculaire.';
+
+  @override
+  String get insightFollicular6 =>
+      'C\'est la durée de cette phase qui varie le plus d\'une personne à l\'autre — la phase lutéale est bien plus constante.';
+
+  @override
+  String get insightFertile3 =>
+      'L\'ovule vit environ 12 à 24 heures, mais les spermatozoïdes peuvent attendre jusqu\'à 5 jours — c\'est pourquoi la fenêtre fertile s\'étend sur plusieurs jours.';
+
+  @override
+  String get insightFertile4 =>
+      'Autour de l\'ovulation, la glaire cervicale devient souvent claire et filante — comme du blanc d\'œuf cru.';
+
+  @override
+  String get insightFertile5 =>
+      'Certaines personnes ressentent un bref pincement d\'un côté à l\'ovulation — ça porte même un nom : mittelschmerz.';
+
+  @override
+  String get insightFertile6 =>
+      'La température basale monte légèrement *après* l\'ovulation — elle la confirme plutôt qu\'elle ne la prédit.';
+
+  @override
+  String get insightLuteal3 =>
+      'La progestérone atteint son pic environ une semaine après l\'ovulation — ballonnements et seins sensibles sont alors courants.';
+
+  @override
+  String get insightLuteal4 =>
+      'L\'envie de glucides avant les règles est réelle — les besoins énergétiques augmentent légèrement en phase lutéale.';
+
+  @override
+  String get insightLuteal5 =>
+      'Les symptômes du SPM s\'atténuent généralement un à deux jours après le début des saignements.';
+
+  @override
+  String get insightLuteal6 =>
+      'Une routine de sommeil régulière peut nettement adoucir les baisses d\'humeur de fin de phase lutéale.';
+
+  @override
+  String get insightUnknown2 =>
+      'Suivre seulement trois cycles suffit souvent pour voir ton propre schéma émerger.';
+
+  @override
+  String get insightUnknown3 =>
+      'Les cycles sont personnels — comparer le tien à celui d\'une amie n\'apprend généralement rien d\'utile.';
+
+  @override
+  String get insightUnknown4 =>
+      'Le stress, les voyages et la maladie peuvent décaler l\'ovulation — des règles \"en retard\" signifient souvent juste une ovulation tardive.';
 }

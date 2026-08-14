@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../widgets/number_stepper.dart';
+import '../../../widgets/illustrations.dart';
 import 'onboarding_question_scaffold.dart';
 
 class PeriodLengthStep extends StatefulWidget {
@@ -25,6 +26,7 @@ class _PeriodLengthStepState extends State<PeriodLengthStep> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return OnboardingQuestionScaffold(
+      scene: IllustrationScene.dropletFriend,
       title: l10n.onboardingPeriodLengthTitle,
       body: l10n.onboardingPeriodLengthBody,
       onSkip: widget.onSkip,

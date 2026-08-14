@@ -28,6 +28,17 @@ class AppPalette {
   static const plum = Color(0xFF3A2A2E);
   static const error = Color(0xFFBA3D3D);
 
+  /// Cool pastel accents for category cards — the warm core palette alone
+  /// reads monotonous across the day-log's many sections; these keep each
+  /// section visually distinct (reference-app pattern) without leaving the
+  /// soft, low-saturation register.
+  static const lavenderSoft = Color(0xFFE9DFF7);
+  static const lavenderSoftText = Color(0xFF3E2A5C);
+  static const skySoft = Color(0xFFDCEDF7);
+  static const skySoftText = Color(0xFF163B52);
+  static const mintSoft = Color(0xFFDDF2E4);
+  static const mintSoftText = Color(0xFF1C4A2D);
+
   /// Warm gradient used behind hero/illustration moments (onboarding,
   /// celebratory states) — never behind dense text, for contrast's sake.
   static const heroGradient = LinearGradient(
@@ -69,6 +80,12 @@ ThemeData buildAppTheme() {
     scaffoldBackgroundColor: colorScheme.surface,
     fontFamily: 'Quicksand',
     textTheme: textTheme,
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: {
+        TargetPlatform.android: _GentleSlidePageTransitionsBuilder(),
+        TargetPlatform.iOS: _GentleSlidePageTransitionsBuilder(),
+      },
+    ),
     appBarTheme: AppBarTheme(
       backgroundColor: colorScheme.surface,
       foregroundColor: colorScheme.onSurface,
@@ -110,6 +127,35 @@ ThemeData buildAppTheme() {
       elevation: 0,
     ),
   );
+}
+
+/// Fade + gentle upward slide for every pushed route, on both platforms —
+/// noticeably softer than the stock zoom/cupertino transitions and
+/// consistent with the onboarding step animation language. Purely
+/// decorative motion; it never delays content (280ms, curve out).
+class _GentleSlidePageTransitionsBuilder extends PageTransitionsBuilder {
+  const _GentleSlidePageTransitionsBuilder();
+
+  @override
+  Widget buildTransitions<T>(
+    PageRoute<T> route,
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    final curved = CurvedAnimation(parent: animation, curve: Curves.easeOutCubic);
+    return FadeTransition(
+      opacity: curved,
+      child: SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(0, 0.03),
+          end: Offset.zero,
+        ).animate(curved),
+        child: child,
+      ),
+    );
+  }
 }
 
 /// Fraunces (a warm, soft-optical-size serif) for anything that should feel

@@ -12,7 +12,9 @@ import '../../../state/app_preferences.dart';
 const _systemSentinel = '_system_';
 
 const _supportedCodes = <String>[
-  _systemSentinel, 'en', 'tr', 'ar', 'es', 'fr', 'de', 'id',
+  _systemSentinel,
+  'en', 'tr', 'ar', 'es', 'fr', 'de', 'id',
+  'pt', 'it', 'ru', 'hi', 'ja', 'ko', 'zh', 'ur',
 ];
 
 String _labelFor(AppLocalizations l10n, String code) {
@@ -33,6 +35,22 @@ String _labelFor(AppLocalizations l10n, String code) {
       return l10n.settingsLanguageGerman;
     case 'id':
       return l10n.settingsLanguageIndonesian;
+    case 'pt':
+      return l10n.settingsLanguagePortuguese;
+    case 'it':
+      return l10n.settingsLanguageItalian;
+    case 'ru':
+      return l10n.settingsLanguageRussian;
+    case 'hi':
+      return l10n.settingsLanguageHindi;
+    case 'ja':
+      return l10n.settingsLanguageJapanese;
+    case 'ko':
+      return l10n.settingsLanguageKorean;
+    case 'zh':
+      return l10n.settingsLanguageChinese;
+    case 'ur':
+      return l10n.settingsLanguageUrdu;
     default:
       return code;
   }

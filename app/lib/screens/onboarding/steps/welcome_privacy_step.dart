@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
+import '../../../widgets/illustrations.dart';
 import '../../../widgets/organic_blob_background.dart';
 
 class WelcomePrivacyStep extends StatelessWidget {
@@ -11,7 +12,6 @@ class WelcomePrivacyStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final scheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       body: OrganicBlobBackground(
@@ -34,18 +34,9 @@ class WelcomePrivacyStep extends StatelessWidget {
                     scale: 0.7 + 0.3 * t,
                     child: Opacity(opacity: t.clamp(0, 1), child: child),
                   ),
-                  child: Center(
-                    child: Container(
-                      width: 96,
-                      height: 96,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: LinearGradient(
-                          colors: [scheme.primary, scheme.secondary],
-                        ),
-                      ),
-                      child: const Icon(Icons.shield_outlined, size: 44, color: Colors.white),
-                    ),
+                  child: const HeroIllustration(
+                    scene: IllustrationScene.shieldHeart,
+                    height: 190,
                   ),
                 ),
                 const SizedBox(height: 24),

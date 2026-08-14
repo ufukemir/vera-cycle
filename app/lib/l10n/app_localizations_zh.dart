@@ -4,42 +4,42 @@ import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
 
-/// The translations for English (`en`).
-class AppLocalizationsEn extends AppLocalizations {
-  AppLocalizationsEn([String locale = 'en']) : super(locale);
+/// The translations for Chinese (`zh`).
+class AppLocalizationsZh extends AppLocalizations {
+  AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
   String get appTitle => 'Vera';
 
   @override
-  String get actionSkip => 'Skip';
+  String get actionSkip => '跳过';
 
   @override
-  String get actionContinue => 'Continue';
+  String get actionContinue => '继续';
 
   @override
-  String get actionDone => 'Done';
+  String get actionDone => '完成';
 
   @override
-  String get actionCancel => 'Cancel';
+  String get actionCancel => '取消';
 
   @override
-  String get actionDelete => 'Delete';
+  String get actionDelete => '删除';
 
   @override
-  String get actionEnable => 'Enable';
+  String get actionEnable => '开启';
 
   @override
-  String get commonIDontKnow => 'I don\'t know';
+  String get commonIDontKnow => '不知道';
 
   @override
-  String get commonYes => 'Yes';
+  String get commonYes => '是';
 
   @override
-  String get commonNo => 'No';
+  String get commonNo => '否';
 
   @override
-  String get commonNotSure => 'Not sure';
+  String get commonNotSure => '不确定';
 
   @override
   String get pinSetupTitle => 'Set up a PIN';
@@ -91,72 +91,71 @@ class AppLocalizationsEn extends AppLocalizations {
   String get lockScreenEraseConfirm => 'Erase everything';
 
   @override
-  String get onboardingPrivacyTitle => 'Welcome';
+  String get onboardingPrivacyTitle => '欢迎';
 
   @override
   String get onboardingPrivacyBody =>
-      'Your data stays only on this device. There\'s no account, no cloud, nothing sent anywhere — the app doesn\'t even have permission to use the internet, and you can check that yourself in your phone\'s settings.';
+      '你的数据只保存在这台设备上。没有账号、没有云端、不向任何地方发送 — 应用甚至没有联网权限，你可以在手机设置中亲自验证。';
 
   @override
-  String get onboardingLastPeriodTitle => 'When did your last period start?';
+  String get onboardingLastPeriodTitle => '上次月经是什么时候开始的？';
 
   @override
   String get onboardingLastPeriodBody =>
       'This helps us get started — you can always correct it later from the calendar.';
 
   @override
-  String get onboardingPickDate => 'Choose a date';
+  String get onboardingPickDate => '选择日期';
 
   @override
-  String get onboardingCycleLengthTitle => 'How long is your cycle, typically?';
+  String get onboardingCycleLengthTitle => '你的周期通常多长？';
 
   @override
   String get onboardingCycleLengthBody =>
       'A rough number is fine. We\'ll start giving you a real estimate once we\'ve seen a couple of full cycles.';
 
   @override
-  String get onboardingPeriodLengthTitle =>
-      'How many days does your period usually last?';
+  String get onboardingPeriodLengthTitle => '月经通常持续几天？';
 
   @override
   String get onboardingPeriodLengthBody =>
       'We\'ll use this to fill in your last period so you\'re not starting from zero.';
 
   @override
-  String get onboardingDaysUnit => 'days';
+  String get onboardingDaysUnit => '天';
 
   @override
-  String get onboardingGoalTitle => 'What brings you here?';
+  String get onboardingGoalTitle => '你为什么使用这个应用？';
 
   @override
   String get onboardingGoalBody =>
       'This just helps us show you the right things first — you can change your mind anytime in Settings.';
 
   @override
-  String get goalTrackPeriod => 'Track my period';
+  String get goalTrackPeriod => '记录月经';
 
   @override
-  String get goalTryingToConceive => 'Trying to conceive';
+  String get goalTryingToConceive => '备孕中';
 
   @override
-  String get goalPregnancyTracking => 'Tracking a pregnancy';
+  String get goalPregnancyTracking => '记录孕期';
 
   @override
-  String get onboardingRegularityTitle => 'Are your periods usually regular?';
+  String get onboardingRegularityTitle => '你的月经通常规律吗？';
 
   @override
   String get onboardingRegularityBody =>
       'No wrong answer here — this just helps us get to know your body a little.';
 
   @override
-  String get onboardingCrampsTitle => 'Do you usually get cramps?';
+  String get onboardingCrampsTitle => '你经常痛经吗？';
 
   @override
   String get onboardingCrampsBody =>
       'We\'ll make sure it\'s easy to log how you\'re feeling on days like that.';
 
   @override
-  String get onboardingNotificationTitle => 'Would you like gentle reminders?';
+  String get onboardingNotificationTitle => '需要温和的提醒吗？';
 
   @override
   String get onboardingNotificationBody =>
@@ -169,10 +168,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardingNotificationMockBody => 'Based on your logged cycles';
 
   @override
-  String get onboardingNotificationAllow => 'Turn on reminders';
+  String get onboardingNotificationAllow => '开启提醒';
 
   @override
-  String get onboardingNotificationNotNow => 'Not now';
+  String get onboardingNotificationNotNow => '暂不';
 
   @override
   String get onboardingBuildingPlanTitle => 'Setting things up for you';
@@ -190,39 +189,39 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardingBuildingPlanDone => 'All set';
 
   @override
-  String get navHome => 'Home';
+  String get navHome => '首页';
 
   @override
-  String get navCalendar => 'Calendar';
+  String get navCalendar => '日历';
 
   @override
-  String get navInsights => 'Insights';
+  String get navInsights => '洞察';
 
   @override
-  String get navSettings => 'Settings';
+  String get navSettings => '设置';
 
   @override
   String homeCycleDayLabel(int day) {
-    return 'Day $day';
+    return '第 $day 天';
   }
 
   @override
-  String get homeNoCycleYet => 'No period logged yet';
+  String get homeNoCycleYet => '还没有记录月经';
 
   @override
-  String get homePhaseMenstrual => 'Period';
+  String get homePhaseMenstrual => '月经期';
 
   @override
-  String get homePhaseFollicular => 'Follicular phase';
+  String get homePhaseFollicular => '卵泡期';
 
   @override
-  String get homePhaseFertileWindow => 'Estimated fertile window';
+  String get homePhaseFertileWindow => '预计易孕期';
 
   @override
-  String get homePhaseLuteal => 'Luteal phase';
+  String get homePhaseLuteal => '黄体期';
 
   @override
-  String get homePhaseUnknown => 'Not enough recent data';
+  String get homePhaseUnknown => '近期数据不足';
 
   @override
   String get homePredictionInsufficientTitle => 'Not enough data yet';
@@ -250,41 +249,40 @@ class AppLocalizationsEn extends AppLocalizations {
       'Your cycle length has varied more than usual lately. If that\'s new for you, it may be worth mentioning at a checkup.';
 
   @override
-  String get homeFertileWindowDisclaimer =>
-      'Based on typical cycle timing — not a method of contraception.';
+  String get homeFertileWindowDisclaimer => '基于典型周期时间的估计 — 不是避孕方法。';
 
   @override
-  String get homePeriodStartedButton => 'Period started today';
+  String get homePeriodStartedButton => '今天月经开始了';
 
   @override
   String get homePeriodStartedSnackbar => 'Logged — period started today';
 
   @override
-  String get actionUndo => 'Undo';
+  String get actionUndo => '撤销';
 
   @override
   String get comingSoon => 'Coming soon';
 
   @override
-  String get dayLogFlowLabel => 'Flow';
+  String get dayLogFlowLabel => '流量';
 
   @override
-  String get flowSpotting => 'Spotting';
+  String get flowSpotting => '点滴出血';
 
   @override
-  String get flowLight => 'Light';
+  String get flowLight => '少量';
 
   @override
-  String get flowMedium => 'Medium';
+  String get flowMedium => '中等';
 
   @override
-  String get flowHeavy => 'Heavy';
+  String get flowHeavy => '大量';
 
   @override
   String get flowNone => 'None';
 
   @override
-  String get dayLogSymptomsLabel => 'Symptoms';
+  String get dayLogSymptomsLabel => '症状';
 
   @override
   String get symptomCramps => 'Cramps';
@@ -323,7 +321,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get symptomDizziness => 'Dizziness';
 
   @override
-  String get dayLogMoodLabel => 'Mood';
+  String get dayLogMoodLabel => '心情';
 
   @override
   String get moodCalm => 'Calm';
@@ -356,7 +354,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get moodEmotional => 'Emotional';
 
   @override
-  String get dayLogNoteLabel => 'Note';
+  String get dayLogNoteLabel => '笔记';
 
   @override
   String get dayLogNoteHint => 'Anything you want to remember about today';
@@ -395,16 +393,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeOpenTodayLog => 'Add details for today';
 
   @override
-  String get calendarLegendActual => 'Logged period';
+  String get calendarLegendActual => '已记录的月经';
 
   @override
-  String get calendarLegendPredicted => 'Predicted window';
+  String get calendarLegendPredicted => '预测窗口';
 
   @override
-  String get calendarLegendFertile => 'Estimated fertile window';
+  String get calendarLegendFertile => '预计易孕期';
 
   @override
-  String get calendarLegendOvulation => 'Estimated ovulation';
+  String get calendarLegendOvulation => '预计排卵日';
 
   @override
   String get dayDetailFertileTitle => 'In your estimated fertile window';
@@ -444,10 +442,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get insightsNoSymptomsLogged => 'No symptoms logged yet';
 
   @override
-  String get settingsLanguageLabel => 'Language';
+  String get settingsLanguageLabel => '语言';
 
   @override
-  String get settingsLanguageSystem => 'System language';
+  String get settingsLanguageSystem => '系统语言';
 
   @override
   String get settingsLanguageEnglish => 'English';
@@ -557,10 +555,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsCervixToggle => 'Cervix position & firmness';
 
   @override
-  String get settingsPrivacyEntry => 'Privacy';
+  String get settingsPrivacyEntry => '隐私';
 
   @override
-  String get settingsDeleteAllData => 'Delete all data';
+  String get settingsDeleteAllData => '删除所有数据';
 
   @override
   String get privacyScreenTitle => 'Privacy';
@@ -628,7 +626,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reminderAppointmentBody => 'You have an appointment coming up.';
 
   @override
-  String get settingsExportEntry => 'Export & backup';
+  String get settingsExportEntry => '导出与备份';
 
   @override
   String get exportBackupHeading => 'Encrypted backup';
@@ -725,7 +723,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get doctorReportTimelineOngoing => 'Ongoing';
 
   @override
-  String get dailyInsightLabel => 'Did you know?';
+  String get dailyInsightLabel => '你知道吗？';
 
   @override
   String get insightMenstrual1 =>
@@ -837,7 +835,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'The typical days between ovulation and your next period. Used to place the estimated fertile window — this one keeps being used even after real predictions start.';
 
   @override
-  String get dayLogEnergyLabel => 'Energy';
+  String get dayLogEnergyLabel => '精力';
 
   @override
   String get energyLevelLow => 'Low';
@@ -852,7 +850,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get energyLevelEnergetic => 'Energized';
 
   @override
-  String get dayLogSkinHairLabel => 'Skin & hair';
+  String get dayLogSkinHairLabel => '皮肤与头发';
 
   @override
   String get skinHealthyGlow => 'Healthy glow';
@@ -945,7 +943,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dayLogWeightLabel => 'Weight';
 
   @override
-  String get dayLogMedicationsLabel => 'Medication';
+  String get dayLogMedicationsLabel => '用药';
 
   @override
   String get dayLogAddMedication => 'Add medication';
@@ -954,17 +952,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dayLogMedicationNameHint => 'Medication name';
 
   @override
-  String get navAssistant => 'Assistant';
+  String get navAssistant => '助手';
 
   @override
-  String get assistantTitle => 'Vera Assistant';
+  String get assistantTitle => 'Vera 助手';
 
   @override
-  String get assistantInputHint => 'Ask about your cycle…';
+  String get assistantInputHint => '询问你的周期…';
 
   @override
   String get assistantIntro =>
-      'Hi! I can answer questions about periods, cycles, and how Vera works — right here on your phone, nothing leaves your device. I\'m not a doctor and this isn\'t medical advice.';
+      '你好！我可以回答关于月经、周期以及 Vera 工作方式的问题 — 就在你的手机上，任何内容都不会离开设备。我不是医生，这不是医疗建议。';
 
   @override
   String get insightMenstrual3 =>

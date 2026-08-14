@@ -4,42 +4,42 @@ import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
 
-/// The translations for English (`en`).
-class AppLocalizationsEn extends AppLocalizations {
-  AppLocalizationsEn([String locale = 'en']) : super(locale);
+/// The translations for Portuguese (`pt`).
+class AppLocalizationsPt extends AppLocalizations {
+  AppLocalizationsPt([String locale = 'pt']) : super(locale);
 
   @override
   String get appTitle => 'Vera';
 
   @override
-  String get actionSkip => 'Skip';
+  String get actionSkip => 'Pular';
 
   @override
-  String get actionContinue => 'Continue';
+  String get actionContinue => 'Continuar';
 
   @override
-  String get actionDone => 'Done';
+  String get actionDone => 'Concluído';
 
   @override
-  String get actionCancel => 'Cancel';
+  String get actionCancel => 'Cancelar';
 
   @override
-  String get actionDelete => 'Delete';
+  String get actionDelete => 'Excluir';
 
   @override
-  String get actionEnable => 'Enable';
+  String get actionEnable => 'Ativar';
 
   @override
-  String get commonIDontKnow => 'I don\'t know';
+  String get commonIDontKnow => 'Não sei';
 
   @override
-  String get commonYes => 'Yes';
+  String get commonYes => 'Sim';
 
   @override
-  String get commonNo => 'No';
+  String get commonNo => 'Não';
 
   @override
-  String get commonNotSure => 'Not sure';
+  String get commonNotSure => 'Não tenho certeza';
 
   @override
   String get pinSetupTitle => 'Set up a PIN';
@@ -91,24 +91,26 @@ class AppLocalizationsEn extends AppLocalizations {
   String get lockScreenEraseConfirm => 'Erase everything';
 
   @override
-  String get onboardingPrivacyTitle => 'Welcome';
+  String get onboardingPrivacyTitle => 'Boas-vindas';
 
   @override
   String get onboardingPrivacyBody =>
-      'Your data stays only on this device. There\'s no account, no cloud, nothing sent anywhere — the app doesn\'t even have permission to use the internet, and you can check that yourself in your phone\'s settings.';
+      'Seus dados ficam apenas neste aparelho. Sem conta, sem nuvem, nada é enviado a lugar nenhum — o app nem tem permissão de internet, e você pode verificar isso nas configurações do celular.';
 
   @override
-  String get onboardingLastPeriodTitle => 'When did your last period start?';
+  String get onboardingLastPeriodTitle =>
+      'Quando começou sua última menstruação?';
 
   @override
   String get onboardingLastPeriodBody =>
       'This helps us get started — you can always correct it later from the calendar.';
 
   @override
-  String get onboardingPickDate => 'Choose a date';
+  String get onboardingPickDate => 'Escolher uma data';
 
   @override
-  String get onboardingCycleLengthTitle => 'How long is your cycle, typically?';
+  String get onboardingCycleLengthTitle =>
+      'Qual a duração típica do seu ciclo?';
 
   @override
   String get onboardingCycleLengthBody =>
@@ -116,47 +118,47 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboardingPeriodLengthTitle =>
-      'How many days does your period usually last?';
+      'Quantos dias costuma durar sua menstruação?';
 
   @override
   String get onboardingPeriodLengthBody =>
       'We\'ll use this to fill in your last period so you\'re not starting from zero.';
 
   @override
-  String get onboardingDaysUnit => 'days';
+  String get onboardingDaysUnit => 'dias';
 
   @override
-  String get onboardingGoalTitle => 'What brings you here?';
+  String get onboardingGoalTitle => 'O que traz você aqui?';
 
   @override
   String get onboardingGoalBody =>
       'This just helps us show you the right things first — you can change your mind anytime in Settings.';
 
   @override
-  String get goalTrackPeriod => 'Track my period';
+  String get goalTrackPeriod => 'Acompanhar minha menstruação';
 
   @override
-  String get goalTryingToConceive => 'Trying to conceive';
+  String get goalTryingToConceive => 'Tentando engravidar';
 
   @override
-  String get goalPregnancyTracking => 'Tracking a pregnancy';
+  String get goalPregnancyTracking => 'Acompanhando uma gravidez';
 
   @override
-  String get onboardingRegularityTitle => 'Are your periods usually regular?';
+  String get onboardingRegularityTitle => 'Seus ciclos costumam ser regulares?';
 
   @override
   String get onboardingRegularityBody =>
       'No wrong answer here — this just helps us get to know your body a little.';
 
   @override
-  String get onboardingCrampsTitle => 'Do you usually get cramps?';
+  String get onboardingCrampsTitle => 'Você costuma ter cólicas?';
 
   @override
   String get onboardingCrampsBody =>
       'We\'ll make sure it\'s easy to log how you\'re feeling on days like that.';
 
   @override
-  String get onboardingNotificationTitle => 'Would you like gentle reminders?';
+  String get onboardingNotificationTitle => 'Quer lembretes gentis?';
 
   @override
   String get onboardingNotificationBody =>
@@ -169,10 +171,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardingNotificationMockBody => 'Based on your logged cycles';
 
   @override
-  String get onboardingNotificationAllow => 'Turn on reminders';
+  String get onboardingNotificationAllow => 'Ativar lembretes';
 
   @override
-  String get onboardingNotificationNotNow => 'Not now';
+  String get onboardingNotificationNotNow => 'Agora não';
 
   @override
   String get onboardingBuildingPlanTitle => 'Setting things up for you';
@@ -190,39 +192,39 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardingBuildingPlanDone => 'All set';
 
   @override
-  String get navHome => 'Home';
+  String get navHome => 'Início';
 
   @override
-  String get navCalendar => 'Calendar';
+  String get navCalendar => 'Calendário';
 
   @override
-  String get navInsights => 'Insights';
+  String get navInsights => 'Estatísticas';
 
   @override
-  String get navSettings => 'Settings';
+  String get navSettings => 'Ajustes';
 
   @override
   String homeCycleDayLabel(int day) {
-    return 'Day $day';
+    return 'Dia $day';
   }
 
   @override
-  String get homeNoCycleYet => 'No period logged yet';
+  String get homeNoCycleYet => 'Nenhuma menstruação registrada ainda';
 
   @override
-  String get homePhaseMenstrual => 'Period';
+  String get homePhaseMenstrual => 'Menstruação';
 
   @override
-  String get homePhaseFollicular => 'Follicular phase';
+  String get homePhaseFollicular => 'Fase folicular';
 
   @override
-  String get homePhaseFertileWindow => 'Estimated fertile window';
+  String get homePhaseFertileWindow => 'Janela fértil estimada';
 
   @override
-  String get homePhaseLuteal => 'Luteal phase';
+  String get homePhaseLuteal => 'Fase lútea';
 
   @override
-  String get homePhaseUnknown => 'Not enough recent data';
+  String get homePhaseUnknown => 'Dados recentes insuficientes';
 
   @override
   String get homePredictionInsufficientTitle => 'Not enough data yet';
@@ -251,40 +253,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeFertileWindowDisclaimer =>
-      'Based on typical cycle timing — not a method of contraception.';
+      'Baseado no ritmo típico do ciclo — não é um método contraceptivo.';
 
   @override
-  String get homePeriodStartedButton => 'Period started today';
+  String get homePeriodStartedButton => 'Menstruação começou hoje';
 
   @override
   String get homePeriodStartedSnackbar => 'Logged — period started today';
 
   @override
-  String get actionUndo => 'Undo';
+  String get actionUndo => 'Desfazer';
 
   @override
   String get comingSoon => 'Coming soon';
 
   @override
-  String get dayLogFlowLabel => 'Flow';
+  String get dayLogFlowLabel => 'Fluxo';
 
   @override
-  String get flowSpotting => 'Spotting';
+  String get flowSpotting => 'Escape';
 
   @override
-  String get flowLight => 'Light';
+  String get flowLight => 'Leve';
 
   @override
-  String get flowMedium => 'Medium';
+  String get flowMedium => 'Médio';
 
   @override
-  String get flowHeavy => 'Heavy';
+  String get flowHeavy => 'Intenso';
 
   @override
   String get flowNone => 'None';
 
   @override
-  String get dayLogSymptomsLabel => 'Symptoms';
+  String get dayLogSymptomsLabel => 'Sintomas';
 
   @override
   String get symptomCramps => 'Cramps';
@@ -323,7 +325,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get symptomDizziness => 'Dizziness';
 
   @override
-  String get dayLogMoodLabel => 'Mood';
+  String get dayLogMoodLabel => 'Humor';
 
   @override
   String get moodCalm => 'Calm';
@@ -356,7 +358,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get moodEmotional => 'Emotional';
 
   @override
-  String get dayLogNoteLabel => 'Note';
+  String get dayLogNoteLabel => 'Nota';
 
   @override
   String get dayLogNoteHint => 'Anything you want to remember about today';
@@ -395,16 +397,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeOpenTodayLog => 'Add details for today';
 
   @override
-  String get calendarLegendActual => 'Logged period';
+  String get calendarLegendActual => 'Menstruação registrada';
 
   @override
-  String get calendarLegendPredicted => 'Predicted window';
+  String get calendarLegendPredicted => 'Janela prevista';
 
   @override
-  String get calendarLegendFertile => 'Estimated fertile window';
+  String get calendarLegendFertile => 'Janela fértil estimada';
 
   @override
-  String get calendarLegendOvulation => 'Estimated ovulation';
+  String get calendarLegendOvulation => 'Ovulação estimada';
 
   @override
   String get dayDetailFertileTitle => 'In your estimated fertile window';
@@ -444,10 +446,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get insightsNoSymptomsLogged => 'No symptoms logged yet';
 
   @override
-  String get settingsLanguageLabel => 'Language';
+  String get settingsLanguageLabel => 'Idioma';
 
   @override
-  String get settingsLanguageSystem => 'System language';
+  String get settingsLanguageSystem => 'Idioma do sistema';
 
   @override
   String get settingsLanguageEnglish => 'English';
@@ -557,10 +559,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsCervixToggle => 'Cervix position & firmness';
 
   @override
-  String get settingsPrivacyEntry => 'Privacy';
+  String get settingsPrivacyEntry => 'Privacidade';
 
   @override
-  String get settingsDeleteAllData => 'Delete all data';
+  String get settingsDeleteAllData => 'Excluir todos os dados';
 
   @override
   String get privacyScreenTitle => 'Privacy';
@@ -628,7 +630,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reminderAppointmentBody => 'You have an appointment coming up.';
 
   @override
-  String get settingsExportEntry => 'Export & backup';
+  String get settingsExportEntry => 'Exportar e backup';
 
   @override
   String get exportBackupHeading => 'Encrypted backup';
@@ -725,7 +727,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get doctorReportTimelineOngoing => 'Ongoing';
 
   @override
-  String get dailyInsightLabel => 'Did you know?';
+  String get dailyInsightLabel => 'Você sabia?';
 
   @override
   String get insightMenstrual1 =>
@@ -837,7 +839,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'The typical days between ovulation and your next period. Used to place the estimated fertile window — this one keeps being used even after real predictions start.';
 
   @override
-  String get dayLogEnergyLabel => 'Energy';
+  String get dayLogEnergyLabel => 'Energia';
 
   @override
   String get energyLevelLow => 'Low';
@@ -852,7 +854,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get energyLevelEnergetic => 'Energized';
 
   @override
-  String get dayLogSkinHairLabel => 'Skin & hair';
+  String get dayLogSkinHairLabel => 'Pele e cabelo';
 
   @override
   String get skinHealthyGlow => 'Healthy glow';
@@ -945,7 +947,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dayLogWeightLabel => 'Weight';
 
   @override
-  String get dayLogMedicationsLabel => 'Medication';
+  String get dayLogMedicationsLabel => 'Medicação';
 
   @override
   String get dayLogAddMedication => 'Add medication';
@@ -954,17 +956,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dayLogMedicationNameHint => 'Medication name';
 
   @override
-  String get navAssistant => 'Assistant';
+  String get navAssistant => 'Assistente';
 
   @override
-  String get assistantTitle => 'Vera Assistant';
+  String get assistantTitle => 'Assistente Vera';
 
   @override
-  String get assistantInputHint => 'Ask about your cycle…';
+  String get assistantInputHint => 'Pergunte sobre seu ciclo…';
 
   @override
   String get assistantIntro =>
-      'Hi! I can answer questions about periods, cycles, and how Vera works — right here on your phone, nothing leaves your device. I\'m not a doctor and this isn\'t medical advice.';
+      'Oi! Posso responder perguntas sobre menstruação, ciclos e como a Vera funciona — aqui no seu celular, nada sai do aparelho. Não sou médica e isto não é aconselhamento médico.';
 
   @override
   String get insightMenstrual3 =>

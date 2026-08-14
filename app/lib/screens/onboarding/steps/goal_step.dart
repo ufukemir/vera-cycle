@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../models/enums.dart';
+import '../../../widgets/illustrations.dart';
 import 'onboarding_choice_scaffold.dart';
 
 class GoalStep extends StatelessWidget {
@@ -13,6 +14,7 @@ class GoalStep extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return OnboardingChoiceScaffold<Goal>(
+      scene: IllustrationScene.dropletFriend,
       title: l10n.onboardingGoalTitle,
       body: l10n.onboardingGoalBody,
       onSelected: onContinue,

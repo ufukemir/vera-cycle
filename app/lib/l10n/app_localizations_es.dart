@@ -961,4 +961,93 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get dayLogMedicationNameHint => 'Nombre del medicamento';
+
+  @override
+  String get navAssistant => 'Asistente';
+
+  @override
+  String get assistantTitle => 'Asistente Vera';
+
+  @override
+  String get assistantInputHint => 'Pregunta sobre tu ciclo…';
+
+  @override
+  String get assistantIntro =>
+      '¡Hola! Puedo responder preguntas sobre el periodo, el ciclo y cómo funciona Vera — aquí en tu teléfono, nada sale de tu dispositivo. No soy médica y esto no es consejo médico.';
+
+  @override
+  String get insightMenstrual3 =>
+      'La sangre menstrual no es \"sangre sucia\" — es una mezcla de sangre y revestimiento uterino, una parte completamente normal del ciclo.';
+
+  @override
+  String get insightMenstrual4 =>
+      'El calor suave en el bajo vientre alivia de verdad los cólicos — la bolsa de agua caliente es un clásico con respaldo científico.';
+
+  @override
+  String get insightMenstrual5 =>
+      'El flujo suele ser más abundante los dos primeros días y luego disminuye — ese patrón es típico.';
+
+  @override
+  String get insightMenstrual6 =>
+      'Sentirse un poco más cansada durante el periodo es común — el hierro sale del cuerpo con la sangre menstrual.';
+
+  @override
+  String get insightFollicular3 =>
+      'El estrógeno reconstruye el revestimiento uterino tras el periodo — tu cuerpo se prepara de nuevo.';
+
+  @override
+  String get insightFollicular4 =>
+      'La piel suele verse más limpia en esta fase, a medida que las hormonas se estabilizan.';
+
+  @override
+  String get insightFollicular5 =>
+      'La resistencia y los reflejos alcanzan su punto máximo al final de la fase folicular en muchas personas.';
+
+  @override
+  String get insightFollicular6 =>
+      'La duración de esta fase es la que más varía entre personas — la fase lútea es mucho más constante.';
+
+  @override
+  String get insightFertile3 =>
+      'El óvulo vive unas 12–24 horas, pero los espermatozoides pueden esperar hasta 5 días — por eso la ventana fértil abarca varios días.';
+
+  @override
+  String get insightFertile4 =>
+      'Cerca de la ovulación, el moco cervical suele volverse claro y elástico — como clara de huevo cruda.';
+
+  @override
+  String get insightFertile5 =>
+      'Algunas personas sienten una punzada breve en un lado al ovular — incluso tiene nombre: mittelschmerz.';
+
+  @override
+  String get insightFertile6 =>
+      'La temperatura basal sube ligeramente *después* de la ovulación — la confirma, no la predice.';
+
+  @override
+  String get insightLuteal3 =>
+      'La progesterona alcanza su pico una semana tras la ovulación — la hinchazón y la sensibilidad en los senos son comunes entonces.';
+
+  @override
+  String get insightLuteal4 =>
+      'El antojo de carbohidratos antes del periodo es real — las necesidades energéticas suben un poco en la fase lútea.';
+
+  @override
+  String get insightLuteal5 =>
+      'Los síntomas del SPM suelen aliviarse uno o dos días después de que empiece el sangrado.';
+
+  @override
+  String get insightLuteal6 =>
+      'Una rutina de sueño constante puede suavizar notablemente los bajones de ánimo al final de la fase lútea.';
+
+  @override
+  String get insightUnknown2 =>
+      'Registrar solo tres ciclos suele bastar para que emerja tu propio patrón.';
+
+  @override
+  String get insightUnknown3 =>
+      'Los ciclos son personales — comparar el tuyo con el de una amiga rara vez dice algo útil.';
+
+  @override
+  String get insightUnknown4 =>
+      'El estrés, los viajes y las enfermedades pueden desplazar la ovulación — un periodo \"tardío\" a menudo solo significa ovulación tardía.';
 }
