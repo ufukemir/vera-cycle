@@ -22,6 +22,7 @@ class OnboardingChoiceScaffold<T> extends StatelessWidget {
     required this.options,
     required this.onSelected,
     this.scene,
+    this.photoAsset,
   });
 
   final String title;
@@ -29,6 +30,7 @@ class OnboardingChoiceScaffold<T> extends StatelessWidget {
   final List<OnboardingChoiceOption<T>> options;
   final ValueChanged<T> onSelected;
   final IllustrationScene? scene;
+  final String? photoAsset;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,10 @@ class OnboardingChoiceScaffold<T> extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Spacer(),
-              if (scene != null) ...[
+              if (photoAsset != null) ...[
+                PhotoHero(asset: photoAsset!, height: 180),
+                const SizedBox(height: 20),
+              ] else if (scene != null) ...[
                 HeroIllustration(scene: scene!, height: 160),
                 const SizedBox(height: 20),
               ],

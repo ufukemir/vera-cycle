@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
-import '../../../widgets/illustrations.dart';
 import '../../../widgets/number_stepper.dart';
 import 'onboarding_question_scaffold.dart';
 
@@ -28,7 +27,7 @@ class _CycleLengthStepState extends State<CycleLengthStep> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return OnboardingQuestionScaffold(
-      scene: IllustrationScene.moonAndStars,
+      photoAsset: 'assets/photos/greenery_smile.jpg',
       title: l10n.onboardingCycleLengthTitle,
       body: l10n.onboardingCycleLengthBody,
       onSkip: widget.onSkip,

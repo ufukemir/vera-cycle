@@ -17,12 +17,14 @@ class ThreeChoiceQuestionStep extends StatelessWidget {
     required this.body,
     required this.onAnswer,
     this.scene = IllustrationScene.calendarFlowers,
+    this.photoAsset,
   });
 
   final String title;
   final String body;
   final VoidCallback onAnswer;
   final IllustrationScene scene;
+  final String? photoAsset;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,10 @@ class ThreeChoiceQuestionStep extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Spacer(),
-              HeroIllustration(scene: scene, height: 190),
+              if (photoAsset != null)
+                PhotoHero(asset: photoAsset!, height: 210)
+              else
+                HeroIllustration(scene: scene, height: 190),
               const SizedBox(height: 24),
               Text(title,
                   style: Theme.of(context).textTheme.headlineSmall,

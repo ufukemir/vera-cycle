@@ -22,24 +22,30 @@ class AdPlaceholderBanner extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: scheme.outlineVariant, style: BorderStyle.solid),
       ),
-      child: Row(
+      child: Column(
         children: [
-          Icon(Icons.ads_click_outlined, size: 18, color: scheme.outline),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Text(
-              l10n.adPlaceholderLabel,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodySmall
-                  ?.copyWith(color: scheme.outline),
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.ads_click_outlined, size: 16, color: scheme.outline),
+              const SizedBox(width: 6),
+              Text(
+                l10n.adPlaceholderLabel,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodySmall
+                    ?.copyWith(color: scheme.outline),
+              ),
+            ],
           ),
           TextButton(
             onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(l10n.comingSoon)),
             ),
-            child: Text(l10n.adPlaceholderUpgradeCta),
+            child: Text(
+              l10n.adPlaceholderUpgradeCta,
+              textAlign: TextAlign.center,
+            ),
           ),
         ],
       ),

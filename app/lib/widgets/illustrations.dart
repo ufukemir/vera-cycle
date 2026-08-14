@@ -35,6 +35,72 @@ class HeroIllustration extends StatelessWidget {
   }
 }
 
+/// A real-photograph hero card: openly-licensed photo (see
+/// assets/photos/NOTICE.md — Pexels License, bundled locally, never
+/// fetched) framed like [HeroIllustration] and finished with the same
+/// flower/sparkle doodle stickers the reference app lays over its photos.
+class PhotoHero extends StatelessWidget {
+  const PhotoHero({super.key, required this.asset, this.height = 220});
+
+  final String asset;
+  final double height;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: height,
+      width: double.infinity,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(28),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Image.asset(asset, fit: BoxFit.cover),
+            // Soft warm wash at the bottom so the card blends into the
+            // cream page instead of ending on a hard photographic edge.
+            DecoratedBox(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  stops: const [0.6, 1.0],
+                  colors: [
+                    Colors.transparent,
+                    AppPalette.cream.withValues(alpha: 0.55),
+                  ],
+                ),
+              ),
+            ),
+            const Positioned.fill(
+              child: CustomPaint(painter: _StickerOverlayPainter()),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _StickerOverlayPainter extends CustomPainter {
+  const _StickerOverlayPainter();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final p = _ScenePainter(IllustrationScene.calendarFlowers);
+    p._flower(canvas, Offset(size.width * 0.08, size.height * 0.14),
+        size.height * 0.05, AppPalette.roseSoft);
+    p._flower(canvas, Offset(size.width * 0.92, size.height * 0.82),
+        size.height * 0.055, AppPalette.gold);
+    p._sparkle(canvas, Offset(size.width * 0.9, size.height * 0.12),
+        size.height * 0.04, Colors.white);
+    p._sparkle(canvas, Offset(size.width * 0.08, size.height * 0.86),
+        size.height * 0.035, AppPalette.terracottaSoft);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
 /// Scatters small flowers/sparkles around [child] — used to give the home
 /// screen's cycle ring the reference app's decorated-hero feel without any
 /// literal asset copying.

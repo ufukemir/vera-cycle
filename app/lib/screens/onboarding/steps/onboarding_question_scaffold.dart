@@ -19,6 +19,7 @@ class OnboardingQuestionScaffold extends StatelessWidget {
     required this.onSkip,
     required this.onContinue,
     this.scene,
+    this.photoAsset,
   });
 
   final String title;
@@ -27,6 +28,9 @@ class OnboardingQuestionScaffold extends StatelessWidget {
   final VoidCallback onSkip;
   final VoidCallback onContinue;
   final IllustrationScene? scene;
+
+  /// When set, wins over [scene] — a real licensed photo hero.
+  final String? photoAsset;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +43,10 @@ class OnboardingQuestionScaffold extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Spacer(),
-              if (scene != null) ...[
+              if (photoAsset != null) ...[
+                PhotoHero(asset: photoAsset!, height: 200),
+                const SizedBox(height: 24),
+              ] else if (scene != null) ...[
                 HeroIllustration(scene: scene!, height: 180),
                 const SizedBox(height: 24),
               ],

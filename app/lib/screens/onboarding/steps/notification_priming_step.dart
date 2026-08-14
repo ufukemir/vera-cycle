@@ -40,8 +40,8 @@ class NotificationPrimingStep extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Spacer(),
-              const HeroIllustration(
-                  scene: IllustrationScene.moonAndStars, height: 170),
+              const PhotoHero(
+                  asset: 'assets/photos/hijabi_friends.jpg', height: 190),
               const SizedBox(height: 24),
               Text(
                 l10n.onboardingNotificationTitle,
