@@ -9,7 +9,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'Cycle';
+  String get appTitle => 'Vera';
 
   @override
   String get actionSkip => 'Skip';
@@ -31,6 +31,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get commonIDontKnow => 'I don\'t know';
+
+  @override
+  String get commonYes => 'Yes';
+
+  @override
+  String get commonNo => 'No';
+
+  @override
+  String get commonNotSure => 'Not sure';
 
   @override
   String get pinSetupTitle => 'Set up a PIN';
@@ -115,6 +124,70 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboardingDaysUnit => 'days';
+
+  @override
+  String get onboardingGoalTitle => 'What brings you here?';
+
+  @override
+  String get onboardingGoalBody =>
+      'This just helps us show you the right things first — you can change your mind anytime in Settings.';
+
+  @override
+  String get goalTrackPeriod => 'Track my period';
+
+  @override
+  String get goalTryingToConceive => 'Trying to conceive';
+
+  @override
+  String get goalPregnancyTracking => 'Tracking a pregnancy';
+
+  @override
+  String get onboardingRegularityTitle => 'Are your periods usually regular?';
+
+  @override
+  String get onboardingRegularityBody =>
+      'No wrong answer here — this just helps us get to know your body a little.';
+
+  @override
+  String get onboardingCrampsTitle => 'Do you usually get cramps?';
+
+  @override
+  String get onboardingCrampsBody =>
+      'We\'ll make sure it\'s easy to log how you\'re feeling on days like that.';
+
+  @override
+  String get onboardingNotificationTitle => 'Would you like gentle reminders?';
+
+  @override
+  String get onboardingNotificationBody =>
+      'We can nudge you before your period is expected. Notifications happen entirely on your phone — nothing is sent to a server to make them work.';
+
+  @override
+  String get onboardingNotificationMockTitle => 'Your period may start soon';
+
+  @override
+  String get onboardingNotificationMockBody => 'Based on your logged cycles';
+
+  @override
+  String get onboardingNotificationAllow => 'Turn on reminders';
+
+  @override
+  String get onboardingNotificationNotNow => 'Not now';
+
+  @override
+  String get onboardingBuildingPlanTitle => 'Setting things up for you';
+
+  @override
+  String get onboardingBuildingPlanStep1 => 'Securing your data on this device';
+
+  @override
+  String get onboardingBuildingPlanStep2 => 'Saving your preferences';
+
+  @override
+  String get onboardingBuildingPlanStep3 => 'Getting your calendar ready';
+
+  @override
+  String get onboardingBuildingPlanDone => 'All set';
 
   @override
   String get navHome => 'Home';
@@ -244,6 +317,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get symptomSleepTrouble => 'Sleep trouble';
 
   @override
+  String get symptomPelvicPain => 'Pelvic pain';
+
+  @override
+  String get symptomDizziness => 'Dizziness';
+
+  @override
   String get dayLogMoodLabel => 'Mood';
 
   @override
@@ -260,6 +339,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get moodEnergetic => 'Energetic';
+
+  @override
+  String get moodHappy => 'Happy';
+
+  @override
+  String get moodContent => 'Content';
+
+  @override
+  String get moodSad => 'Sad';
+
+  @override
+  String get moodDepressed => 'Depressed';
+
+  @override
+  String get moodEmotional => 'Emotional';
 
   @override
   String get dayLogNoteLabel => 'Note';
@@ -310,6 +404,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get calendarLegendFertile => 'Estimated fertile window';
 
   @override
+  String get calendarLegendOvulation => 'Estimated ovulation';
+
+  @override
+  String get dayDetailFertileTitle => 'In your estimated fertile window';
+
+  @override
+  String get dayDetailOvulationTitle => 'Estimated ovulation day';
+
+  @override
+  String get dayDetailOvulationBody =>
+      'Pregnancy is typically more likely around this day, based on usual timing — this is an estimate, not a guarantee.';
+
+  @override
   String get insightsCyclesLoggedLabel => 'Cycles logged';
 
   @override
@@ -340,10 +447,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsLanguageLabel => 'Language';
 
   @override
+  String get settingsLanguageSystem => 'System language';
+
+  @override
   String get settingsLanguageEnglish => 'English';
 
   @override
   String get settingsLanguageTurkish => 'Türkçe';
+
+  @override
+  String get settingsLanguageArabic => 'العربية';
+
+  @override
+  String get settingsLanguageSpanish => 'Español';
+
+  @override
+  String get settingsLanguageFrench => 'Français';
+
+  @override
+  String get settingsLanguageGerman => 'Deutsch';
+
+  @override
+  String get settingsLanguageIndonesian => 'Bahasa Indonesia';
 
   @override
   String get settingsWeekStartLabel => 'Week starts on';
@@ -367,6 +492,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsRemindersLabel => 'Remind me before my period';
 
   @override
+  String get settingsRemindersPeriodEndLabel =>
+      'Check in when my period should be ending';
+
+  @override
+  String get settingsRemindersMedicationLabel => 'Medication reminder';
+
+  @override
+  String get settingsRemindersWaterLabel => 'Water reminder';
+
+  @override
+  String get settingsRemindersAppointmentLabel => 'Appointment reminder';
+
+  @override
+  String get settingsRemindersAppointmentSet => 'Set date & time';
+
+  @override
+  String get settingsRemindersAppointmentClear => 'Clear';
+
+  @override
   String get settingsOptionalTrackersHeading => 'Optional trackers';
 
   @override
@@ -381,6 +525,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsMucusToggle => 'Cervical mucus';
+
+  @override
+  String get settingsBreastExamToggle => 'Self breast exam';
+
+  @override
+  String get settingsCervixToggle => 'Cervix position & firmness';
 
   @override
   String get settingsPrivacyEntry => 'Privacy';
@@ -421,6 +571,31 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get reminderNotificationBody =>
       'Based on your logged cycles, your estimated window is coming up.';
+
+  @override
+  String get reminderPeriodEndTitle => 'Your period may be wrapping up';
+
+  @override
+  String get reminderPeriodEndBody =>
+      'If it\'s still going, that\'s completely normal — just a gentle check-in.';
+
+  @override
+  String get reminderMedicationTitle => 'Medication reminder';
+
+  @override
+  String get reminderMedicationBody => 'Time to take your medication.';
+
+  @override
+  String get reminderWaterTitle => 'Stay hydrated';
+
+  @override
+  String get reminderWaterBody => 'A little water reminder.';
+
+  @override
+  String get reminderAppointmentTitle => 'Upcoming appointment';
+
+  @override
+  String get reminderAppointmentBody => 'You have an appointment coming up.';
 
   @override
   String get settingsExportEntry => 'Export & backup';
@@ -464,7 +639,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get exportWrongPassword => 'That password doesn\'t match this backup';
 
   @override
-  String get exportInvalidFile => 'That file doesn\'t look like a Cycle backup';
+  String get exportInvalidFile => 'That file doesn\'t look like a Vera backup';
 
   @override
   String get exportBackupCreated => 'Backup ready to share';
@@ -490,7 +665,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get doctorReportDisclaimer =>
-      'Generated by Cycle from user-entered data. Not a medical diagnosis.';
+      'Generated by Vera from user-entered data. Not a medical diagnosis.';
 
   @override
   String get doctorReportGeneratedOn => 'Generated on';
@@ -503,4 +678,199 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get doctorReportColumnDate => 'Date';
+
+  @override
+  String get doctorReportTimelineHeading => 'Cycle timeline';
+
+  @override
+  String get doctorReportCycleLabel => 'Cycle';
+
+  @override
+  String get doctorReportTimelineLegendPeriod => 'Period';
+
+  @override
+  String get doctorReportTimelineLegendCycle => 'Rest of cycle';
+
+  @override
+  String get doctorReportTimelineOngoing => 'Ongoing';
+
+  @override
+  String get dailyInsightLabel => 'Did you know?';
+
+  @override
+  String get insightMenstrual1 =>
+      'Your uterine lining is shedding right now — most periods last 3 to 7 days, and that\'s completely normal.';
+
+  @override
+  String get insightMenstrual2 =>
+      'Iron-rich foods like leafy greens and lentils can help offset what your body loses this week.';
+
+  @override
+  String get insightFollicular1 =>
+      'Estrogen is rising, and many people notice more energy and better focus starting around now.';
+
+  @override
+  String get insightFollicular2 =>
+      'Your body is preparing an egg for release — this phase can last anywhere from a week to a few weeks.';
+
+  @override
+  String get insightFertile1 =>
+      'This is your estimated fertile window — the days around ovulation when pregnancy is most likely, based on typical timing.';
+
+  @override
+  String get insightFertile2 =>
+      'Some people notice a slight rise in basal body temperature or changes in cervical mucus around ovulation.';
+
+  @override
+  String get insightLuteal1 =>
+      'Progesterone rises after ovulation — this is often when PMS symptoms like mood changes or bloating show up.';
+
+  @override
+  String get insightLuteal2 =>
+      'If a pregnancy hasn\'t implanted, hormone levels drop near the end of this phase, triggering your next period.';
+
+  @override
+  String get insightUnknown1 =>
+      'Cycle lengths vary a lot from person to person — anywhere from 21 to 35 days is considered typical.';
+
+  @override
+  String get predictionSettingsEntry => 'Prediction settings';
+
+  @override
+  String get predictionSettingsIntro =>
+      'These are assumptions, shown openly. Once you\'ve logged 2 full cycles, your real prediction on Home is calculated from your own data — these numbers stop being used for that.';
+
+  @override
+  String get predictionSettingsPeriodLengthLabel => 'Typical period length';
+
+  @override
+  String get predictionSettingsCycleLengthLabel => 'Typical cycle length';
+
+  @override
+  String get predictionSettingsCycleLengthHint =>
+      'Used to scale the ring on Home until we have real data.';
+
+  @override
+  String get predictionSettingsLutealLabel => 'Luteal phase length';
+
+  @override
+  String get predictionSettingsLutealHint =>
+      'The typical days between ovulation and your next period. Used to place the estimated fertile window — this one keeps being used even after real predictions start.';
+
+  @override
+  String get dayLogEnergyLabel => 'Energy';
+
+  @override
+  String get energyLevelLow => 'Low';
+
+  @override
+  String get energyLevelMedium => 'Medium';
+
+  @override
+  String get energyLevelHigh => 'High';
+
+  @override
+  String get energyLevelEnergetic => 'Energized';
+
+  @override
+  String get dayLogSkinHairLabel => 'Skin & hair';
+
+  @override
+  String get skinHealthyGlow => 'Healthy glow';
+
+  @override
+  String get skinRedness => 'Redness';
+
+  @override
+  String get skinDryness => 'Dryness';
+
+  @override
+  String get skinOiliness => 'Oiliness';
+
+  @override
+  String get hairGoodDay => 'Good hair day';
+
+  @override
+  String get hairBadDay => 'Bad hair day';
+
+  @override
+  String get hairLoss => 'Hair loss';
+
+  @override
+  String get scalpOily => 'Oily scalp';
+
+  @override
+  String get dayLogBreastExamLabel => 'Self breast exam';
+
+  @override
+  String get breastExamAllNormal => 'Nothing unusual';
+
+  @override
+  String get breastExamLump => 'Lump';
+
+  @override
+  String get breastExamIndentation => 'Indentation';
+
+  @override
+  String get breastExamRedness => 'Redness';
+
+  @override
+  String get breastExamCrackedNipple => 'Cracked nipple';
+
+  @override
+  String get breastExamDischarge => 'Discharge';
+
+  @override
+  String get cervixPositionLabel => 'Cervix position';
+
+  @override
+  String get cervixPositionLow => 'Low';
+
+  @override
+  String get cervixPositionMedium => 'Medium';
+
+  @override
+  String get cervixPositionHigh => 'High';
+
+  @override
+  String get cervixOpeningLabel => 'Cervix opening';
+
+  @override
+  String get cervixOpeningClosed => 'Closed';
+
+  @override
+  String get cervixOpeningMedium => 'Medium';
+
+  @override
+  String get cervixOpeningOpen => 'Open';
+
+  @override
+  String get cervixFirmnessLabel => 'Cervix firmness';
+
+  @override
+  String get cervixFirmnessSoft => 'Soft';
+
+  @override
+  String get cervixFirmnessMedium => 'Medium';
+
+  @override
+  String get cervixFirmnessFirm => 'Firm';
+
+  @override
+  String get dayLogWaterLabel => 'Water';
+
+  @override
+  String get dayLogSleepLabel => 'Sleep';
+
+  @override
+  String get dayLogWeightLabel => 'Weight';
+
+  @override
+  String get dayLogMedicationsLabel => 'Medication';
+
+  @override
+  String get dayLogAddMedication => 'Add medication';
+
+  @override
+  String get dayLogMedicationNameHint => 'Medication name';
 }

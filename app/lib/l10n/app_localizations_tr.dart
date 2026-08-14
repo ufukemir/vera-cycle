@@ -9,7 +9,7 @@ class AppLocalizationsTr extends AppLocalizations {
   AppLocalizationsTr([String locale = 'tr']) : super(locale);
 
   @override
-  String get appTitle => 'Cycle';
+  String get appTitle => 'Vera';
 
   @override
   String get actionSkip => 'Geç';
@@ -31,6 +31,15 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get commonIDontKnow => 'Bilmiyorum';
+
+  @override
+  String get commonYes => 'Evet';
+
+  @override
+  String get commonNo => 'Hayır';
+
+  @override
+  String get commonNotSure => 'Emin değilim';
 
   @override
   String get pinSetupTitle => 'PIN oluştur';
@@ -116,6 +125,72 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get onboardingDaysUnit => 'gün';
+
+  @override
+  String get onboardingGoalTitle => 'Seni buraya getiren ne?';
+
+  @override
+  String get onboardingGoalBody =>
+      'Bu sadece sana önce doğru şeyleri gösterebilmemiz için — fikrini istediğin zaman Ayarlar\'dan değiştirebilirsin.';
+
+  @override
+  String get goalTrackPeriod => 'Regl dönemimi takip et';
+
+  @override
+  String get goalTryingToConceive => 'Gebe kalmaya çalışıyorum';
+
+  @override
+  String get goalPregnancyTracking => 'Gebeliğimi takip ediyorum';
+
+  @override
+  String get onboardingRegularityTitle => 'Regl dönemlerin genelde düzenli mi?';
+
+  @override
+  String get onboardingRegularityBody =>
+      'Burada yanlış cevap yok — sadece vücudunu biraz tanımamıza yardımcı olur.';
+
+  @override
+  String get onboardingCrampsTitle => 'Genelde kramp giriyor musun?';
+
+  @override
+  String get onboardingCrampsBody =>
+      'O günlerde nasıl hissettiğini kolayca kaydedebilmeni sağlayacağız.';
+
+  @override
+  String get onboardingNotificationTitle => 'Nazik hatırlatmalar ister misin?';
+
+  @override
+  String get onboardingNotificationBody =>
+      'Regl dönemin yaklaşırken seni hafifçe uyarabiliriz. Bildirimler tamamen telefonunda gerçekleşir — çalışması için hiçbir şey bir sunucuya gönderilmez.';
+
+  @override
+  String get onboardingNotificationMockTitle =>
+      'Regl dönemin yakında başlayabilir';
+
+  @override
+  String get onboardingNotificationMockBody => 'Kaydettiğin döngülere göre';
+
+  @override
+  String get onboardingNotificationAllow => 'Hatırlatmaları aç';
+
+  @override
+  String get onboardingNotificationNotNow => 'Şimdi değil';
+
+  @override
+  String get onboardingBuildingPlanTitle => 'Senin için hazırlıyoruz';
+
+  @override
+  String get onboardingBuildingPlanStep1 =>
+      'Verilerin bu cihazda güvenceye alınıyor';
+
+  @override
+  String get onboardingBuildingPlanStep2 => 'Tercihlerin kaydediliyor';
+
+  @override
+  String get onboardingBuildingPlanStep3 => 'Takvimin hazırlanıyor';
+
+  @override
+  String get onboardingBuildingPlanDone => 'Hazır';
 
   @override
   String get navHome => 'Ana Sayfa';
@@ -245,6 +320,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get symptomSleepTrouble => 'Uyku sorunu';
 
   @override
+  String get symptomPelvicPain => 'Pelvik ağrı';
+
+  @override
+  String get symptomDizziness => 'Baş dönmesi';
+
+  @override
   String get dayLogMoodLabel => 'Ruh hali';
 
   @override
@@ -261,6 +342,21 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get moodEnergetic => 'Enerjik';
+
+  @override
+  String get moodHappy => 'Mutlu';
+
+  @override
+  String get moodContent => 'Memnun';
+
+  @override
+  String get moodSad => 'Üzgün';
+
+  @override
+  String get moodDepressed => 'Depresif';
+
+  @override
+  String get moodEmotional => 'Duygusal';
 
   @override
   String get dayLogNoteLabel => 'Not';
@@ -311,6 +407,19 @@ class AppLocalizationsTr extends AppLocalizations {
   String get calendarLegendFertile => 'Tahmini doğurgan pencere';
 
   @override
+  String get calendarLegendOvulation => 'Tahmini ovülasyon';
+
+  @override
+  String get dayDetailFertileTitle => 'Tahmini doğurgan pencerendesin';
+
+  @override
+  String get dayDetailOvulationTitle => 'Tahmini ovülasyon günü';
+
+  @override
+  String get dayDetailOvulationBody =>
+      'Genelde bu günün civarında gebe kalma olasılığı biraz daha yüksek olur — bu bir tahmindir, garanti değildir.';
+
+  @override
   String get insightsCyclesLoggedLabel => 'Kaydedilen döngü';
 
   @override
@@ -341,10 +450,28 @@ class AppLocalizationsTr extends AppLocalizations {
   String get settingsLanguageLabel => 'Dil';
 
   @override
+  String get settingsLanguageSystem => 'Sistem dili';
+
+  @override
   String get settingsLanguageEnglish => 'English';
 
   @override
   String get settingsLanguageTurkish => 'Türkçe';
+
+  @override
+  String get settingsLanguageArabic => 'العربية';
+
+  @override
+  String get settingsLanguageSpanish => 'Español';
+
+  @override
+  String get settingsLanguageFrench => 'Français';
+
+  @override
+  String get settingsLanguageGerman => 'Deutsch';
+
+  @override
+  String get settingsLanguageIndonesian => 'Bahasa Indonesia';
 
   @override
   String get settingsWeekStartLabel => 'Hafta başlangıcı';
@@ -368,6 +495,25 @@ class AppLocalizationsTr extends AppLocalizations {
   String get settingsRemindersLabel => 'Adetimden önce hatırlat';
 
   @override
+  String get settingsRemindersPeriodEndLabel =>
+      'Regl dönemim bitmek üzereyken kontrol et';
+
+  @override
+  String get settingsRemindersMedicationLabel => 'İlaç hatırlatıcısı';
+
+  @override
+  String get settingsRemindersWaterLabel => 'Su hatırlatıcısı';
+
+  @override
+  String get settingsRemindersAppointmentLabel => 'Randevu hatırlatıcısı';
+
+  @override
+  String get settingsRemindersAppointmentSet => 'Tarih ve saat belirle';
+
+  @override
+  String get settingsRemindersAppointmentClear => 'Kaldır';
+
+  @override
   String get settingsOptionalTrackersHeading => 'Opsiyonel izleyiciler';
 
   @override
@@ -382,6 +528,12 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get settingsMucusToggle => 'Servikal mukus';
+
+  @override
+  String get settingsBreastExamToggle => 'Kendi kendine göğüs muayenesi';
+
+  @override
+  String get settingsCervixToggle => 'Serviks pozisyonu ve sertliği';
 
   @override
   String get settingsPrivacyEntry => 'Mahremiyet';
@@ -422,6 +574,31 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get reminderNotificationBody =>
       'Kaydettiğin döngülere göre tahmini pencerene yaklaşıyorsun.';
+
+  @override
+  String get reminderPeriodEndTitle => 'Regl dönemin bitmek üzere olabilir';
+
+  @override
+  String get reminderPeriodEndBody =>
+      'Hâlâ devam ediyorsa bu tamamen normal — sadece nazik bir kontrol.';
+
+  @override
+  String get reminderMedicationTitle => 'İlaç hatırlatıcısı';
+
+  @override
+  String get reminderMedicationBody => 'İlacını alma zamanı.';
+
+  @override
+  String get reminderWaterTitle => 'Su içmeyi unutma';
+
+  @override
+  String get reminderWaterBody => 'Küçük bir su hatırlatıcısı.';
+
+  @override
+  String get reminderAppointmentTitle => 'Yaklaşan randevu';
+
+  @override
+  String get reminderAppointmentBody => 'Yaklaşan bir randevun var.';
 
   @override
   String get settingsExportEntry => 'Dışa aktarma & yedekleme';
@@ -466,7 +643,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get exportWrongPassword => 'Bu parola bu yedekle eşleşmiyor';
 
   @override
-  String get exportInvalidFile => 'Bu dosya bir Cycle yedeği gibi görünmüyor';
+  String get exportInvalidFile => 'Bu dosya bir Vera yedeği gibi görünmüyor';
 
   @override
   String get exportBackupCreated => 'Yedek paylaşıma hazır';
@@ -492,7 +669,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get doctorReportDisclaimer =>
-      'Cycle tarafından kullanıcı tarafından girilen verilerden oluşturuldu. Tıbbi bir teşhis değildir.';
+      'Vera tarafından kullanıcı tarafından girilen verilerden oluşturuldu. Tıbbi bir teşhis değildir.';
 
   @override
   String get doctorReportGeneratedOn => 'Oluşturulma tarihi';
@@ -505,4 +682,199 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get doctorReportColumnDate => 'Tarih';
+
+  @override
+  String get doctorReportTimelineHeading => 'Döngü zaman çizelgesi';
+
+  @override
+  String get doctorReportCycleLabel => 'Döngü';
+
+  @override
+  String get doctorReportTimelineLegendPeriod => 'Regl';
+
+  @override
+  String get doctorReportTimelineLegendCycle => 'Döngünün geri kalanı';
+
+  @override
+  String get doctorReportTimelineOngoing => 'Devam ediyor';
+
+  @override
+  String get dailyInsightLabel => 'Biliyor muydun?';
+
+  @override
+  String get insightMenstrual1 =>
+      'Rahim iç zarın şu an dökülüyor — çoğu adet 3 ila 7 gün sürer, bu tamamen normal.';
+
+  @override
+  String get insightMenstrual2 =>
+      'Yeşil yapraklı sebzeler ve mercimek gibi demir açısından zengin gıdalar bu hafta kaybettiğini dengelemene yardımcı olabilir.';
+
+  @override
+  String get insightFollicular1 =>
+      'Östrojen yükseliyor, birçok kişi bu dönemde daha fazla enerji ve odaklanma fark ediyor.';
+
+  @override
+  String get insightFollicular2 =>
+      'Vücudun bir yumurta salınımına hazırlanıyor — bu evre bir haftadan birkaç haftaya kadar sürebilir.';
+
+  @override
+  String get insightFertile1 =>
+      'Bu, tahmini doğurgan pencerendir — tipik zamanlamaya göre gebeliğin en olası olduğu, ovülasyon çevresindeki günler.';
+
+  @override
+  String get insightFertile2 =>
+      'Bazı kişiler ovülasyon civarında bazal vücut sıcaklığında hafif bir yükseliş veya servikal mukus değişimi fark eder.';
+
+  @override
+  String get insightLuteal1 =>
+      'Ovülasyondan sonra progesteron yükselir — ruh hali değişimleri veya şişkinlik gibi PMS belirtileri genelde bu dönemde ortaya çıkar.';
+
+  @override
+  String get insightLuteal2 =>
+      'Bir gebelik yerleşmediyse, bu evrenin sonuna doğru hormon seviyeleri düşer ve bir sonraki adetini tetikler.';
+
+  @override
+  String get insightUnknown1 =>
+      'Döngü uzunlukları kişiden kişiye çok değişir — 21 ila 35 gün arası tipik kabul edilir.';
+
+  @override
+  String get predictionSettingsEntry => 'Tahmin ayarları';
+
+  @override
+  String get predictionSettingsIntro =>
+      'Bunlar açıkça gösterilen varsayımlardır. 2 tam döngü kaydettiğinde, ana ekrandaki gerçek tahminin kendi verilerinden hesaplanır — bu sayılar o hesap için artık kullanılmaz.';
+
+  @override
+  String get predictionSettingsPeriodLengthLabel => 'Tipik adet süresi';
+
+  @override
+  String get predictionSettingsCycleLengthLabel => 'Tipik döngü uzunluğu';
+
+  @override
+  String get predictionSettingsCycleLengthHint =>
+      'Gerçek veri birikene kadar ana ekrandaki halkayı ölçeklemek için kullanılır.';
+
+  @override
+  String get predictionSettingsLutealLabel => 'Luteal faz uzunluğu';
+
+  @override
+  String get predictionSettingsLutealHint =>
+      'Ovülasyon ile bir sonraki adetin arasındaki tipik gün sayısı. Tahmini doğurgan pencereyi yerleştirmek için kullanılır — gerçek tahminler başladıktan sonra da kullanılmaya devam eder.';
+
+  @override
+  String get dayLogEnergyLabel => 'Enerji';
+
+  @override
+  String get energyLevelLow => 'Düşük';
+
+  @override
+  String get energyLevelMedium => 'Orta';
+
+  @override
+  String get energyLevelHigh => 'Yüksek';
+
+  @override
+  String get energyLevelEnergetic => 'Enerjik';
+
+  @override
+  String get dayLogSkinHairLabel => 'Cilt ve saç';
+
+  @override
+  String get skinHealthyGlow => 'Sağlıklı ışıltı';
+
+  @override
+  String get skinRedness => 'Kızarıklık';
+
+  @override
+  String get skinDryness => 'Kuruluk';
+
+  @override
+  String get skinOiliness => 'Yağlanma';
+
+  @override
+  String get hairGoodDay => 'Saçların iyi';
+
+  @override
+  String get hairBadDay => 'Saçların kötü';
+
+  @override
+  String get hairLoss => 'Saç dökülmesi';
+
+  @override
+  String get scalpOily => 'Saçta yağlanma';
+
+  @override
+  String get dayLogBreastExamLabel => 'Kendi kendine göğüs muayenesi';
+
+  @override
+  String get breastExamAllNormal => 'Her şey normal';
+
+  @override
+  String get breastExamLump => 'Kitle';
+
+  @override
+  String get breastExamIndentation => 'İçeri çökme';
+
+  @override
+  String get breastExamRedness => 'Cilt kızarıklığı';
+
+  @override
+  String get breastExamCrackedNipple => 'Çatlak meme başı';
+
+  @override
+  String get breastExamDischarge => 'Meme başı akıntısı';
+
+  @override
+  String get cervixPositionLabel => 'Serviks pozisyonu';
+
+  @override
+  String get cervixPositionLow => 'Düşük';
+
+  @override
+  String get cervixPositionMedium => 'Orta';
+
+  @override
+  String get cervixPositionHigh => 'Yüksek';
+
+  @override
+  String get cervixOpeningLabel => 'Serviks açıklığı';
+
+  @override
+  String get cervixOpeningClosed => 'Kapalı';
+
+  @override
+  String get cervixOpeningMedium => 'Orta';
+
+  @override
+  String get cervixOpeningOpen => 'Açık';
+
+  @override
+  String get cervixFirmnessLabel => 'Serviks sertliği';
+
+  @override
+  String get cervixFirmnessSoft => 'Yumuşak';
+
+  @override
+  String get cervixFirmnessMedium => 'Orta';
+
+  @override
+  String get cervixFirmnessFirm => 'Sert';
+
+  @override
+  String get dayLogWaterLabel => 'Su';
+
+  @override
+  String get dayLogSleepLabel => 'Uyku';
+
+  @override
+  String get dayLogWeightLabel => 'Kilo';
+
+  @override
+  String get dayLogMedicationsLabel => 'İlaç';
+
+  @override
+  String get dayLogAddMedication => 'İlaç ekle';
+
+  @override
+  String get dayLogMedicationNameHint => 'İlaç adı';
 }

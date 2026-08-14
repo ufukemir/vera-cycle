@@ -26,6 +26,8 @@ class SymptomMultiselect extends StatelessWidget {
       Symptom.backPain: l10n.symptomBackPain,
       Symptom.appetiteChange: l10n.symptomAppetiteChange,
       Symptom.sleepTrouble: l10n.symptomSleepTrouble,
+      Symptom.pelvicPain: l10n.symptomPelvicPain,
+      Symptom.dizziness: l10n.symptomDizziness,
     };
 
     return Wrap(

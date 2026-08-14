@@ -32,7 +32,7 @@ class CycleController extends ChangeNotifier {
 
   final DayLogRepository _repository;
   final CycleAnalyzer _analyzer;
-  final PredictionEngine _predictionEngine;
+  PredictionEngine _predictionEngine;
 
   bool _loading = true;
   List<DayLog> _logs = const [];
@@ -92,6 +92,15 @@ class CycleController extends ChangeNotifier {
     final updated =
         (existing ?? DayLog(date: today())).copyWith(flow: FlowIntensity.medium);
     await upsertDay(updated);
+  }
+
+  /// Swaps the prediction engine (e.g. after the user changes the luteal
+  /// phase assumption in Settings) and immediately recomputes — real logged
+  /// cycles are unaffected, only how they're interpreted.
+  void updatePredictionEngine(PredictionEngine engine) {
+    _predictionEngine = engine;
+    _recompute();
+    notifyListeners();
   }
 
   /// Restores a full history from a decrypted backup.

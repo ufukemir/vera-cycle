@@ -7,13 +7,15 @@ import '../../services/reminder_service.dart';
 import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
 import '../export/export_screen.dart';
+import 'prediction_settings_screen.dart';
 import 'privacy_screen.dart';
+import 'widgets/language_picker_tile.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
-  /// Re-derives the single scheduled reminder from current prefs + the
-  /// current prediction. Called after any change that could affect it.
+  /// Re-derives the period-start reminder from current prefs + the current
+  /// prediction. Called after any change that could affect it.
   ///
   /// Known v1 simplification: this only re-fires when the user touches a
   /// reminder-related control on this screen, not automatically every time
@@ -21,12 +23,12 @@ class SettingsScreen extends StatelessWidget {
   /// logging a new period on Home). The reminder can drift stale until the
   /// user revisits Settings — acceptable for a default-off convenience
   /// feature, not acceptable for anything the app's honesty claims depend on.
-  Future<void> _rescheduleReminder(BuildContext context) async {
+  Future<void> _reschedulePeriodStartReminder(BuildContext context) async {
     final prefs = context.read<AppPreferences>();
     final reminders = context.read<ReminderService>();
 
     if (!prefs.remindersEnabled) {
-      await reminders.cancelAll();
+      await reminders.cancel(ReminderCategory.periodStart);
       return;
     }
 
@@ -45,10 +47,107 @@ class SettingsScreen extends StatelessWidget {
       time.hour,
       time.minute,
     );
-    await reminders.scheduleUpcomingPeriodReminder(
+    await reminders.scheduleOneOff(
+      category: ReminderCategory.periodStart,
       fireAtLocalWallClock: fireDate,
       title: l10n.reminderNotificationTitle,
       body: l10n.reminderNotificationBody,
+    );
+  }
+
+  /// Same idea as [_reschedulePeriodStartReminder], anchored to
+  /// `earliestStart + estimatedPeriodLengthDays` — [AppPreferences]'s
+  /// decorative period-length estimate. Using it here is fine: this only
+  /// times a gentle nudge notification, never a claim shown as data (see
+  /// docs/03-rakip-analizi.md and the "Tahmin Ayarları" screen doc comment
+  /// for why that estimate must stay decorative everywhere it's presented
+  /// as information).
+  Future<void> _reschedulePeriodEndReminder(BuildContext context) async {
+    final prefs = context.read<AppPreferences>();
+    final reminders = context.read<ReminderService>();
+
+    if (!prefs.periodEndRemindersEnabled) {
+      await reminders.cancel(ReminderCategory.periodEnd);
+      return;
+    }
+
+    final prediction = context.read<CycleController>().prediction;
+    if (!prediction.hasPrediction) return;
+
+    if (!context.mounted) return;
+    final l10n = AppLocalizations.of(context)!;
+    await reminders.requestPermission();
+
+    final time = prefs.periodEndReminderTime;
+    final estimatedEnd = prediction.earliestStart!
+        .add(Duration(days: prefs.estimatedPeriodLengthDays));
+    final fireDate = DateTime(
+      estimatedEnd.year,
+      estimatedEnd.month,
+      estimatedEnd.day,
+      time.hour,
+      time.minute,
+    );
+    await reminders.scheduleOneOff(
+      category: ReminderCategory.periodEnd,
+      fireAtLocalWallClock: fireDate,
+      title: l10n.reminderPeriodEndTitle,
+      body: l10n.reminderPeriodEndBody,
+    );
+  }
+
+  Future<void> _rescheduleMedicationReminder(BuildContext context) async {
+    final prefs = context.read<AppPreferences>();
+    final reminders = context.read<ReminderService>();
+
+    if (!prefs.medicationRemindersEnabled) {
+      await reminders.cancel(ReminderCategory.medication);
+      return;
+    }
+    final l10n = AppLocalizations.of(context)!;
+    await reminders.requestPermission();
+    await reminders.scheduleDaily(
+      category: ReminderCategory.medication,
+      time: prefs.medicationReminderTime,
+      title: l10n.reminderMedicationTitle,
+      body: l10n.reminderMedicationBody,
+    );
+  }
+
+  Future<void> _rescheduleWaterReminder(BuildContext context) async {
+    final prefs = context.read<AppPreferences>();
+    final reminders = context.read<ReminderService>();
+
+    if (!prefs.waterRemindersEnabled) {
+      await reminders.cancel(ReminderCategory.water);
+      return;
+    }
+    final l10n = AppLocalizations.of(context)!;
+    await reminders.requestPermission();
+    await reminders.scheduleDaily(
+      category: ReminderCategory.water,
+      time: prefs.waterReminderTime,
+      title: l10n.reminderWaterTitle,
+      body: l10n.reminderWaterBody,
+    );
+  }
+
+  Future<void> _rescheduleAppointmentReminder(BuildContext context) async {
+    final prefs = context.read<AppPreferences>();
+    final reminders = context.read<ReminderService>();
+
+    final at = prefs.appointmentReminderAt;
+    if (at == null) {
+      await reminders.cancel(ReminderCategory.appointment);
+      return;
+    }
+    final l10n = AppLocalizations.of(context)!;
+    await reminders.requestPermission();
+    await reminders.scheduleOneOff(
+      category: ReminderCategory.appointment,
+      fireAtLocalWallClock: at,
+      title: l10n.reminderAppointmentTitle,
+      body: l10n.reminderAppointmentBody,
     );
   }
 
@@ -96,18 +195,7 @@ class SettingsScreen extends StatelessWidget {
       body: SafeArea(
         child: ListView(
           children: [
-            _sectionHeading(context, l10n.settingsLanguageLabel),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SegmentedButton<String>(
-                segments: [
-                  ButtonSegment(value: 'en', label: Text(l10n.settingsLanguageEnglish)),
-                  ButtonSegment(value: 'tr', label: Text(l10n.settingsLanguageTurkish)),
-                ],
-                selected: {prefs.locale.languageCode},
-                onSelectionChanged: (s) => prefs.setLocale(Locale(s.first)),
-              ),
-            ),
+            const LanguagePickerTile(),
             const Divider(),
             _sectionHeading(context, l10n.settingsWeekStartLabel),
             Padding(
@@ -146,7 +234,7 @@ class SettingsScreen extends StatelessWidget {
               value: prefs.remindersEnabled,
               onChanged: (v) async {
                 await prefs.setRemindersEnabled(v);
-                if (context.mounted) await _rescheduleReminder(context);
+                if (context.mounted) await _reschedulePeriodStartReminder(context);
               },
             ),
             if (prefs.remindersEnabled)
@@ -160,9 +248,114 @@ class SettingsScreen extends StatelessWidget {
                   );
                   if (picked == null || !context.mounted) return;
                   await prefs.setReminderTime(picked);
-                  if (context.mounted) await _rescheduleReminder(context);
+                  if (context.mounted) await _reschedulePeriodStartReminder(context);
                 },
               ),
+            SwitchListTile(
+              title: Text(l10n.settingsRemindersPeriodEndLabel),
+              value: prefs.periodEndRemindersEnabled,
+              onChanged: (v) async {
+                await prefs.setPeriodEndRemindersEnabled(v);
+                if (context.mounted) await _reschedulePeriodEndReminder(context);
+              },
+            ),
+            if (prefs.periodEndRemindersEnabled)
+              ListTile(
+                title: Text(prefs.periodEndReminderTime.format(context)),
+                trailing: const Icon(Icons.access_time),
+                onTap: () async {
+                  final picked = await showTimePicker(
+                    context: context,
+                    initialTime: prefs.periodEndReminderTime,
+                  );
+                  if (picked == null || !context.mounted) return;
+                  await prefs.setPeriodEndReminderTime(picked);
+                  if (context.mounted) await _reschedulePeriodEndReminder(context);
+                },
+              ),
+            SwitchListTile(
+              title: Text(l10n.settingsRemindersMedicationLabel),
+              value: prefs.medicationRemindersEnabled,
+              onChanged: (v) async {
+                await prefs.setMedicationRemindersEnabled(v);
+                if (context.mounted) await _rescheduleMedicationReminder(context);
+              },
+            ),
+            if (prefs.medicationRemindersEnabled)
+              ListTile(
+                title: Text(prefs.medicationReminderTime.format(context)),
+                trailing: const Icon(Icons.access_time),
+                onTap: () async {
+                  final picked = await showTimePicker(
+                    context: context,
+                    initialTime: prefs.medicationReminderTime,
+                  );
+                  if (picked == null || !context.mounted) return;
+                  await prefs.setMedicationReminderTime(picked);
+                  if (context.mounted) await _rescheduleMedicationReminder(context);
+                },
+              ),
+            SwitchListTile(
+              title: Text(l10n.settingsRemindersWaterLabel),
+              value: prefs.waterRemindersEnabled,
+              onChanged: (v) async {
+                await prefs.setWaterRemindersEnabled(v);
+                if (context.mounted) await _rescheduleWaterReminder(context);
+              },
+            ),
+            if (prefs.waterRemindersEnabled)
+              ListTile(
+                title: Text(prefs.waterReminderTime.format(context)),
+                trailing: const Icon(Icons.access_time),
+                onTap: () async {
+                  final picked = await showTimePicker(
+                    context: context,
+                    initialTime: prefs.waterReminderTime,
+                  );
+                  if (picked == null || !context.mounted) return;
+                  await prefs.setWaterReminderTime(picked);
+                  if (context.mounted) await _rescheduleWaterReminder(context);
+                },
+              ),
+            ListTile(
+              title: Text(l10n.settingsRemindersAppointmentLabel),
+              subtitle: prefs.appointmentReminderAt == null
+                  ? null
+                  : Text(MaterialLocalizations.of(context)
+                      .formatMediumDate(prefs.appointmentReminderAt!)),
+              trailing: prefs.appointmentReminderAt == null
+                  ? const Icon(Icons.chevron_right)
+                  : IconButton(
+                      icon: const Icon(Icons.close),
+                      tooltip: l10n.settingsRemindersAppointmentClear,
+                      onPressed: () async {
+                        await prefs.setAppointmentReminderAt(null);
+                        if (context.mounted) {
+                          await _rescheduleAppointmentReminder(context);
+                        }
+                      },
+                    ),
+              onTap: () async {
+                final now = DateTime.now();
+                final date = await showDatePicker(
+                  context: context,
+                  initialDate: prefs.appointmentReminderAt ?? now,
+                  firstDate: now,
+                  lastDate: now.add(const Duration(days: 365)),
+                );
+                if (date == null || !context.mounted) return;
+                final time = await showTimePicker(
+                  context: context,
+                  initialTime: TimeOfDay.fromDateTime(
+                      prefs.appointmentReminderAt ?? now),
+                );
+                if (time == null || !context.mounted) return;
+                await prefs.setAppointmentReminderAt(
+                  DateTime(date.year, date.month, date.day, time.hour, time.minute),
+                );
+                if (context.mounted) await _rescheduleAppointmentReminder(context);
+              },
+            ),
             const Divider(),
             _sectionHeading(context, l10n.settingsOptionalTrackersHeading),
             Padding(
@@ -185,7 +378,24 @@ class SettingsScreen extends StatelessWidget {
               value: prefs.mucusTrackingEnabled,
               onChanged: (v) => prefs.setMucusTrackingEnabled(v),
             ),
+            SwitchListTile(
+              title: Text(l10n.settingsBreastExamToggle),
+              value: prefs.breastExamTrackingEnabled,
+              onChanged: (v) => prefs.setBreastExamTrackingEnabled(v),
+            ),
+            SwitchListTile(
+              title: Text(l10n.settingsCervixToggle),
+              value: prefs.cervixTrackingEnabled,
+              onChanged: (v) => prefs.setCervixTrackingEnabled(v),
+            ),
             const Divider(),
+            ListTile(
+              title: Text(l10n.predictionSettingsEntry),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const PredictionSettingsScreen()),
+              ),
+            ),
             ListTile(
               title: Text(l10n.settingsPrivacyEntry),
               trailing: const Icon(Icons.chevron_right),

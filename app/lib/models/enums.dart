@@ -17,15 +17,72 @@ enum Symptom {
   backPain,
   appetiteChange,
   sleepTrouble,
+  pelvicPain,
+  dizziness,
 }
 
 /// Mood labels. Chosen to be descriptive rather than evaluative — no "good"/"bad"
 /// days, because the app must not imply the user's cycle makes them a worse person.
-enum Mood { calm, anxious, irritable, low, energetic }
+enum Mood {
+  calm,
+  anxious,
+  irritable,
+  low,
+  energetic,
+  happy,
+  content,
+  sad,
+  depressed,
+  emotional,
+}
 
 /// Cervical mucus observation (fertility-awareness users). Optional tracker,
 /// disabled by default.
 enum CervicalMucus { dry, sticky, creamy, watery, eggWhite }
+
+/// Energy level — deliberately separate from [Mood]: a low-energy day and an
+/// anxious day are different things, and conflating them loses information a
+/// user might specifically want to correlate with cycle phase.
+enum EnergyLevel { low, medium, high, energetic }
+
+/// Skin and hair observations. Descriptive, not a dermatology diagnosis.
+enum SkinHairSymptom {
+  healthyGlow,
+  skinRedness,
+  skinDryness,
+  skinOiliness,
+  goodHairDay,
+  badHairDay,
+  hairLoss,
+  oilyScalp,
+}
+
+/// Self breast-exam findings. This is a logging aid, not a screening tool —
+/// see CLAUDE.md principle 7; the app never interprets these, it only
+/// records what the user noticed so they have a timeline to bring to a
+/// clinician.
+enum BreastExamFinding {
+  allNormal,
+  lump,
+  indentation,
+  redness,
+  crackedNipple,
+  discharge,
+}
+
+/// Cervix position (fertility-awareness method). Advanced/opt-in tracker.
+enum CervixPosition { low, medium, high }
+
+/// Cervix os opening (fertility-awareness method). Advanced/opt-in tracker.
+enum CervixOpening { closed, medium, open }
+
+/// Cervix firmness (fertility-awareness method). Advanced/opt-in tracker.
+enum CervixFirmness { soft, medium, firm }
+
+/// Why the user opened the app, collected once during onboarding. Informs
+/// light personalization only (e.g. which optional trackers default on) —
+/// never gates a core feature behind it.
+enum Goal { trackPeriod, tryingToConceive, pregnancyTracking }
 
 /// Phase of the cycle shown on the home screen.
 ///

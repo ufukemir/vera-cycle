@@ -128,6 +128,11 @@ class _ExportScreenState extends State<ExportScreen> {
       columnFlow: l10n.dayLogFlowLabel,
       columnSymptoms: l10n.dayLogSymptomsLabel,
       columnMood: l10n.dayLogMoodLabel,
+      timelineHeading: l10n.doctorReportTimelineHeading,
+      cycleLabel: l10n.doctorReportCycleLabel,
+      timelineLegendPeriod: l10n.doctorReportTimelineLegendPeriod,
+      timelineLegendCycle: l10n.doctorReportTimelineLegendCycle,
+      timelineOngoing: l10n.doctorReportTimelineOngoing,
     );
 
     final bytes = await _pdfBuilder.build(
@@ -135,6 +140,7 @@ class _ExportScreenState extends State<ExportScreen> {
       insights: insights,
       generatedAt: today(),
       labels: labels,
+      cycles: controller.cycles,
     );
 
     await Printing.layoutPdf(onLayout: (_) async => bytes);

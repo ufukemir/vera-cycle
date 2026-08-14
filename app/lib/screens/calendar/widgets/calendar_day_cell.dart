@@ -14,11 +14,20 @@ class CalendarDayCell extends StatelessWidget {
     required this.day,
     required this.mark,
     this.isToday = false,
+    this.isEstimatedOvulation = false,
   });
 
   final DateTime day;
   final CalendarDayMark mark;
   final bool isToday;
+
+  /// A single day inside the fertile-window estimate, singled out as "the"
+  /// ovulation estimate. Shown as a small corner dot, not a bolder/bigger
+  /// ring — the fertile-window ring itself still renders identically on
+  /// every day in the range, so this never reintroduces the false precision
+  /// [CalendarDayMark.predicted]'s doc comment warns against; it only adds
+  /// a distinct, clearly-labelled (see [CalendarLegend]) data point.
+  final bool isEstimatedOvulation;
 
   @override
   Widget build(BuildContext context) {
@@ -45,17 +54,35 @@ class CalendarDayCell extends StatelessWidget {
     }
 
     return Center(
-      child: Container(
+      child: SizedBox(
         width: 36,
         height: 36,
-        decoration: decoration,
-        alignment: Alignment.center,
-        child: Text(
-          '${day.day}',
-          style: TextStyle(
-            color: textColor,
-            fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
-          ),
+        child: Stack(
+          clipBehavior: Clip.none,
+          alignment: Alignment.center,
+          children: [
+            Container(
+              decoration: decoration,
+              alignment: Alignment.center,
+              child: Text(
+                '${day.day}',
+                style: TextStyle(
+                  color: textColor,
+                  fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
+                ),
+              ),
+            ),
+            if (isEstimatedOvulation)
+              Positioned(
+                top: -2,
+                right: -2,
+                child: Container(
+                  width: 8,
+                  height: 8,
+                  decoration: BoxDecoration(shape: BoxShape.circle, color: scheme.tertiary),
+                ),
+              ),
+          ],
         ),
       ),
     );

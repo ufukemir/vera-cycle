@@ -6,11 +6,18 @@ import 'package:provider/provider.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/day_log.dart';
+import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
+import 'widgets/energy_selector.dart';
+import 'widgets/fertility_status_banner.dart';
 import 'widgets/flow_selector.dart';
+import 'widgets/medications_section.dart';
 import 'widgets/mood_selector.dart';
+import 'widgets/mucus_history_summary.dart';
 import 'widgets/note_field.dart';
 import 'widgets/optional_trackers_section.dart';
+import 'widgets/quick_stats_row.dart';
+import 'widgets/skin_hair_multiselect.dart';
 import 'widgets/symptom_multiselect.dart';
 
 /// A single day's log. Autosaves on every change — chip/selector taps commit
@@ -63,6 +70,9 @@ class _DayLogScreenState extends State<DayLogScreen> {
     final l10n = AppLocalizations.of(context)!;
     final dateLabel = DateFormat.yMMMMd(Localizations.localeOf(context).toString())
         .format(widget.date);
+    final cycleController = context.watch<CycleController>();
+    final mucusTrackingEnabled =
+        context.watch<AppPreferences>().mucusTrackingEnabled;
 
     return Scaffold(
       appBar: AppBar(title: Text(dateLabel)),
@@ -70,6 +80,24 @@ class _DayLogScreenState extends State<DayLogScreen> {
         child: ListView(
           padding: const EdgeInsets.all(20),
           children: [
+            FertilityStatusBanner(
+              date: widget.date,
+              status: cycleController.statusOn(widget.date),
+            ),
+            QuickStatsRow(
+              waterIntakeMl: _current.waterIntakeMl,
+              onWaterChanged: (v) => _save(
+                _current.copyWith(waterIntakeMl: v, clearWaterIntake: v == null),
+              ),
+              sleepMinutes: _current.sleepMinutes,
+              onSleepChanged: (v) => _save(
+                _current.copyWith(sleepMinutes: v, clearSleepMinutes: v == null),
+              ),
+              weightKg: _current.weightKg,
+              onWeightChanged: (v) =>
+                  _save(_current.copyWith(weightKg: v, clearWeight: v == null)),
+            ),
+            const SizedBox(height: 24),
             _sectionLabel(context, l10n.dayLogFlowLabel),
             FlowSelector(
               value: _current.flow,
@@ -88,8 +116,31 @@ class _DayLogScreenState extends State<DayLogScreen> {
               onChanged: (v) => _save(_current.copyWith(mood: v, clearMood: v == null)),
             ),
             const SizedBox(height: 24),
+            _sectionLabel(context, l10n.dayLogEnergyLabel),
+            EnergySelector(
+              value: _current.energyLevel,
+              onChanged: (v) =>
+                  _save(_current.copyWith(energyLevel: v, clearEnergyLevel: v == null)),
+            ),
+            const SizedBox(height: 24),
+            _sectionLabel(context, l10n.dayLogSkinHairLabel),
+            SkinHairMultiselect(
+              value: _current.skinHair,
+              onChanged: (s) => _save(_current.copyWith(skinHair: s)),
+            ),
+            const SizedBox(height: 24),
+            MedicationsSection(
+              value: _current.medications,
+              onChanged: (m) => _save(_current.copyWith(medications: m)),
+            ),
+            const SizedBox(height: 24),
             NoteField(controller: _noteController, onChanged: _onNoteChanged),
             const SizedBox(height: 24),
+            if (mucusTrackingEnabled)
+              MucusHistorySummary(
+                upToExclusive: widget.date,
+                logs: cycleController.logs,
+              ),
             OptionalTrackersSection(
               sexualActivity: _current.sexualActivity,
               onSexualActivityChanged: (v) => _save(_current.copyWith(sexualActivity: v)),
@@ -100,6 +151,20 @@ class _DayLogScreenState extends State<DayLogScreen> {
               mucus: _current.mucus,
               onMucusChanged: (v) =>
                   _save(_current.copyWith(mucus: v, clearMucus: v == null)),
+              breastExam: _current.breastExam,
+              onBreastExamChanged: (s) => _save(_current.copyWith(breastExam: s)),
+              cervixPosition: _current.cervixPosition,
+              onCervixPositionChanged: (v) => _save(
+                _current.copyWith(cervixPosition: v, clearCervixPosition: v == null),
+              ),
+              cervixOpening: _current.cervixOpening,
+              onCervixOpeningChanged: (v) => _save(
+                _current.copyWith(cervixOpening: v, clearCervixOpening: v == null),
+              ),
+              cervixFirmness: _current.cervixFirmness,
+              onCervixFirmnessChanged: (v) => _save(
+                _current.copyWith(cervixFirmness: v, clearCervixFirmness: v == null),
+              ),
             ),
           ],
         ),

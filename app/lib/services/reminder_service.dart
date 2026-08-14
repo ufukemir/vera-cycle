@@ -1,6 +1,24 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
+
+/// One independently toggleable reminder category — each has its own
+/// notification id, so turning one off (or rescheduling it after new data
+/// comes in) never disturbs the others.
+enum ReminderCategory {
+  periodStart(1, 'period_start', 'Upcoming period'),
+  periodEnd(2, 'period_end', 'Period end check-in'),
+  medication(3, 'medication', 'Medication'),
+  water(4, 'water', 'Water'),
+  appointment(5, 'appointment', 'Appointment');
+
+  const ReminderCategory(this.notificationId, this.channelId, this.channelName);
+
+  final int notificationId;
+  final String channelId;
+  final String channelName;
+}
 
 /// Local-only notification scheduling — no push server exists, so
 /// "scheduling" means asking the OS to fire the notification itself at a
@@ -18,8 +36,6 @@ import 'package:timezone/timezone.dart' as tz;
 class ReminderService {
   ReminderService({FlutterLocalNotificationsPlugin? plugin})
       : _plugin = plugin ?? FlutterLocalNotificationsPlugin();
-
-  static const _upcomingPeriodId = 1;
 
   final FlutterLocalNotificationsPlugin _plugin;
   bool _initialized = false;
@@ -52,36 +68,80 @@ class ReminderService {
     return (androidGranted ?? true) && (iosGranted ?? true);
   }
 
-  /// Replaces any previously scheduled "upcoming period" reminder — there is
-  /// only ever one, since a new prediction supersedes the old one rather
-  /// than stacking reminders.
-  Future<void> scheduleUpcomingPeriodReminder({
+  /// Schedules a single one-off notification for [category], replacing any
+  /// previous one under the same id — used for date-anchored reminders
+  /// (upcoming period, an estimated period end, a specific appointment) that
+  /// supersede rather than stack as new data comes in.
+  Future<void> scheduleOneOff({
+    required ReminderCategory category,
     required DateTime fireAtLocalWallClock,
     required String title,
     required String body,
   }) async {
     await _ensureInitialized();
     final target = tz.TZDateTime.from(fireAtLocalWallClock.toUtc(), tz.local);
-    if (!target.isAfter(tz.TZDateTime.now(tz.local))) return;
+    if (!target.isAfter(tz.TZDateTime.now(tz.local))) {
+      await _plugin.cancel(id: category.notificationId);
+      return;
+    }
 
     await _plugin.zonedSchedule(
-      id: _upcomingPeriodId,
+      id: category.notificationId,
       title: title,
       body: body,
       scheduledDate: target,
-      notificationDetails: const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'upcoming_period',
-          'Upcoming period',
-        ),
-        iOS: DarwinNotificationDetails(),
+      notificationDetails: NotificationDetails(
+        android: AndroidNotificationDetails(category.channelId, category.channelName),
+        iOS: const DarwinNotificationDetails(),
       ),
-      // Inexact rather than exact: a period reminder firing within a rough
-      // window of the target time is fine, and this avoids requesting
-      // Android's SCHEDULE_EXACT_ALARM permission — a fairly invasive prompt
-      // for what's explicitly a default-off convenience feature.
+      // Inexact rather than exact: firing within a rough window of the
+      // target time is fine for every category here, and this avoids
+      // requesting Android's SCHEDULE_EXACT_ALARM permission — a fairly
+      // invasive prompt for what's explicitly a default-off convenience
+      // feature.
       androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
     );
+  }
+
+  /// Schedules a daily-repeating notification for [category] at [time] —
+  /// used for medication/water, which aren't anchored to a predicted date.
+  Future<void> scheduleDaily({
+    required ReminderCategory category,
+    required TimeOfDay time,
+    required String title,
+    required String body,
+  }) async {
+    await _ensureInitialized();
+    final now = tz.TZDateTime.now(tz.local);
+    var first = tz.TZDateTime(
+      tz.local,
+      now.year,
+      now.month,
+      now.day,
+      time.hour,
+      time.minute,
+    );
+    if (!first.isAfter(now)) {
+      first = first.add(const Duration(days: 1));
+    }
+
+    await _plugin.zonedSchedule(
+      id: category.notificationId,
+      title: title,
+      body: body,
+      scheduledDate: first,
+      notificationDetails: NotificationDetails(
+        android: AndroidNotificationDetails(category.channelId, category.channelName),
+        iOS: const DarwinNotificationDetails(),
+      ),
+      androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+      matchDateTimeComponents: DateTimeComponents.time,
+    );
+  }
+
+  Future<void> cancel(ReminderCategory category) async {
+    await _ensureInitialized();
+    await _plugin.cancel(id: category.notificationId);
   }
 
   Future<void> cancelAll() async {

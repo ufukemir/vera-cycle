@@ -19,14 +19,15 @@ class CalendarLegend extends StatelessWidget {
           _entry(_filledDot(scheme.primary), l10n.calendarLegendActual),
           _entry(_ringDot(scheme.primary), l10n.calendarLegendPredicted),
           _entry(_ringDot(scheme.tertiary), l10n.calendarLegendFertile),
+          _entry(_filledDot(scheme.tertiary, size: 8), l10n.calendarLegendOvulation),
         ],
       ),
     );
   }
 
-  Widget _filledDot(Color color) => Container(
-        width: 14,
-        height: 14,
+  Widget _filledDot(Color color, {double size = 14}) => Container(
+        width: size,
+        height: size,
         decoration: BoxDecoration(shape: BoxShape.circle, color: color),
       );
 

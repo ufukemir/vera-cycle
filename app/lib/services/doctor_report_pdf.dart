@@ -3,9 +3,16 @@ import 'dart:typed_data';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
+import '../models/cycle.dart';
 import '../models/day_log.dart';
 import '../services/cycle_insights.dart';
 import '../util/day.dart';
+
+/// Matches [AppPalette.rose]/[AppPalette.roseSoft] — the PDF is built
+/// without any Flutter dependency (see class doc), so the brand colors are
+/// duplicated here as raw values rather than imported.
+const _periodBarColor = PdfColor.fromInt(0xFFB5406B);
+const _cycleBarColor = PdfColor.fromInt(0xFFE8D3C8);
 
 /// Builds the printable doctor summary PDF via `printing`'s native
 /// print/PDF-save dialog. All copy is passed in by the caller (see
@@ -20,6 +27,7 @@ class DoctorReportPdf {
     required CycleInsights insights,
     required DateTime generatedAt,
     required DoctorReportPdfLabels labels,
+    List<ObservedCycle> cycles = const [],
   }) async {
     final doc = pw.Document();
 
@@ -50,6 +58,15 @@ class DoctorReportPdf {
               '${insights.averageCycleLength!.toStringAsFixed(1)} ${labels.daysUnit} '
               '(± ${insights.cycleLengthStdDev!.toStringAsFixed(1)})',
             ),
+          if (cycles.isNotEmpty) ...[
+            pw.Divider(height: 24),
+            pw.Text(labels.timelineHeading,
+                style: pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 13)),
+            pw.SizedBox(height: 8),
+            _buildTimelineLegend(labels),
+            pw.SizedBox(height: 8),
+            ..._buildTimelineRows(cycles, labels),
+          ],
           pw.Divider(height: 24),
           pw.Text(labels.dailyLogHeading,
               style: pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 13)),
@@ -79,6 +96,72 @@ class DoctorReportPdf {
 
     return doc.save();
   }
+
+  static const _barMaxWidth = 220.0;
+  static const _barHeight = 10.0;
+
+  pw.Widget _buildTimelineLegend(DoctorReportPdfLabels labels) {
+    pw.Widget swatch(PdfColor color, String label) => pw.Row(
+          mainAxisSize: pw.MainAxisSize.min,
+          children: [
+            pw.Container(width: 10, height: 10, color: color),
+            pw.SizedBox(width: 4),
+            pw.Text(label, style: const pw.TextStyle(fontSize: 9)),
+          ],
+        );
+
+    return pw.Row(children: [
+      swatch(_periodBarColor, labels.timelineLegendPeriod),
+      pw.SizedBox(width: 16),
+      swatch(_cycleBarColor, labels.timelineLegendCycle),
+    ]);
+  }
+
+  /// One horizontal bar per recorded cycle: a solid segment for the period,
+  /// a lighter segment for the rest of the cycle, both scaled to the same
+  /// day-to-point ratio so bar lengths are visually comparable across rows
+  /// — a doctor can see at a glance which cycles ran long or short.
+  List<pw.Widget> _buildTimelineRows(
+    List<ObservedCycle> cycles,
+    DoctorReportPdfLabels labels,
+  ) {
+    final longestKnownLength = cycles
+        .map((c) => c.length ?? c.periodLength)
+        .fold<int>(1, (max, length) => length > max ? length : max);
+    final pointsPerDay = _barMaxWidth / longestKnownLength;
+
+    return [
+      for (var i = 0; i < cycles.length; i++)
+        pw.Padding(
+          padding: const pw.EdgeInsets.only(bottom: 6),
+          child: pw.Row(
+            children: [
+              pw.SizedBox(
+                width: 60,
+                child: pw.Text('${labels.cycleLabel} ${i + 1}',
+                    style: const pw.TextStyle(fontSize: 9)),
+              ),
+              pw.Container(
+                width: cycles[i].periodLength * pointsPerDay,
+                height: _barHeight,
+                color: _periodBarColor,
+              ),
+              if (cycles[i].isComplete)
+                pw.Container(
+                  width: (cycles[i].length! - cycles[i].periodLength) * pointsPerDay,
+                  height: _barHeight,
+                  color: _cycleBarColor,
+                )
+              else ...[
+                pw.SizedBox(width: 6),
+                pw.Text(labels.timelineOngoing,
+                    style: pw.TextStyle(fontSize: 8, color: PdfColors.grey700)),
+              ],
+            ],
+          ),
+        ),
+    ];
+  }
 }
 
 /// All display strings [DoctorReportPdf] needs, supplied by the caller so
@@ -99,6 +182,11 @@ class DoctorReportPdfLabels {
     required this.columnFlow,
     required this.columnSymptoms,
     required this.columnMood,
+    required this.timelineHeading,
+    required this.cycleLabel,
+    required this.timelineLegendPeriod,
+    required this.timelineLegendCycle,
+    required this.timelineOngoing,
   });
 
   final String title;
@@ -108,6 +196,11 @@ class DoctorReportPdfLabels {
   final String cyclesLogged;
   final String averagePeriodLength;
   final String averageCycleLength;
+  final String timelineHeading;
+  final String cycleLabel;
+  final String timelineLegendPeriod;
+  final String timelineLegendCycle;
+  final String timelineOngoing;
   final String daysUnit;
   final String dailyLogHeading;
   final String columnDate;

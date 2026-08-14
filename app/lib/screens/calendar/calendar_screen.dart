@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:table_calendar/table_calendar.dart';
+import 'package:table_calendar/table_calendar.dart' hide isSameDay;
 
 import '../../l10n/app_localizations.dart';
 import '../../models/prediction.dart';
@@ -43,6 +43,16 @@ class _CalendarScreenState extends State<CalendarScreen> {
     return CalendarDayMark.none;
   }
 
+  /// The fertile window's last day is always ovulation + 1 (see
+  /// [PredictionEngine.status]'s `fertileEnd = addDays(ovulation, 1)`) — so
+  /// it can be derived here without exposing a new field on [CycleStatus].
+  bool _isEstimatedOvulation(DateTime day, CycleController controller) {
+    final date = dateOnly(day);
+    final status = controller.statusOn(date);
+    if (!status.hasFertileEstimate) return false;
+    return isSameDay(date, addDays(status.fertileWindowEnd!, -1));
+  }
+
   void _openDay(DateTime day) {
     final date = dateOnly(day);
     if (date.isAfter(today())) return;
@@ -81,10 +91,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 defaultBuilder: (context, day, focusedDay) => CalendarDayCell(
                   day: day,
                   mark: _markFor(day, controller, prediction),
+                  isEstimatedOvulation: _isEstimatedOvulation(day, controller),
                 ),
                 todayBuilder: (context, day, focusedDay) => CalendarDayCell(
                   day: day,
                   mark: _markFor(day, controller, prediction),
+                  isEstimatedOvulation: _isEstimatedOvulation(day, controller),
                   isToday: true,
                 ),
               ),

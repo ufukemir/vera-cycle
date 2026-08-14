@@ -20,6 +20,11 @@ class MoodSelector extends StatelessWidget {
       Mood.irritable: l10n.moodIrritable,
       Mood.low: l10n.moodLow,
       Mood.energetic: l10n.moodEnergetic,
+      Mood.happy: l10n.moodHappy,
+      Mood.content: l10n.moodContent,
+      Mood.sad: l10n.moodSad,
+      Mood.depressed: l10n.moodDepressed,
+      Mood.emotional: l10n.moodEmotional,
     };
 
     return Wrap(

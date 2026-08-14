@@ -5,7 +5,12 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'app_localizations_ar.dart';
+import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
+import 'app_localizations_es.dart';
+import 'app_localizations_fr.dart';
+import 'app_localizations_id.dart';
 import 'app_localizations_tr.dart';
 
 // ignore_for_file: type=lint
@@ -94,14 +99,19 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('ar'),
+    Locale('de'),
     Locale('en'),
+    Locale('es'),
+    Locale('fr'),
+    Locale('id'),
     Locale('tr'),
   ];
 
   /// The application name, shown as the app title.
   ///
   /// In en, this message translates to:
-  /// **'Cycle'**
+  /// **'Vera'**
   String get appTitle;
 
   /// No description provided for @actionSkip.
@@ -145,6 +155,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'I don\'t know'**
   String get commonIDontKnow;
+
+  /// No description provided for @commonYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get commonYes;
+
+  /// No description provided for @commonNo.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get commonNo;
+
+  /// No description provided for @commonNotSure.
+  ///
+  /// In en, this message translates to:
+  /// **'Not sure'**
+  String get commonNotSure;
 
   /// No description provided for @pinSetupTitle.
   ///
@@ -295,6 +323,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'days'**
   String get onboardingDaysUnit;
+
+  /// No description provided for @onboardingGoalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What brings you here?'**
+  String get onboardingGoalTitle;
+
+  /// No description provided for @onboardingGoalBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This just helps us show you the right things first — you can change your mind anytime in Settings.'**
+  String get onboardingGoalBody;
+
+  /// No description provided for @goalTrackPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Track my period'**
+  String get goalTrackPeriod;
+
+  /// No description provided for @goalTryingToConceive.
+  ///
+  /// In en, this message translates to:
+  /// **'Trying to conceive'**
+  String get goalTryingToConceive;
+
+  /// No description provided for @goalPregnancyTracking.
+  ///
+  /// In en, this message translates to:
+  /// **'Tracking a pregnancy'**
+  String get goalPregnancyTracking;
+
+  /// No description provided for @onboardingRegularityTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Are your periods usually regular?'**
+  String get onboardingRegularityTitle;
+
+  /// No description provided for @onboardingRegularityBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No wrong answer here — this just helps us get to know your body a little.'**
+  String get onboardingRegularityBody;
+
+  /// No description provided for @onboardingCrampsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you usually get cramps?'**
+  String get onboardingCrampsTitle;
+
+  /// No description provided for @onboardingCrampsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'ll make sure it\'s easy to log how you\'re feeling on days like that.'**
+  String get onboardingCrampsBody;
+
+  /// No description provided for @onboardingNotificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Would you like gentle reminders?'**
+  String get onboardingNotificationTitle;
+
+  /// No description provided for @onboardingNotificationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We can nudge you before your period is expected. Notifications happen entirely on your phone — nothing is sent to a server to make them work.'**
+  String get onboardingNotificationBody;
+
+  /// No description provided for @onboardingNotificationMockTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your period may start soon'**
+  String get onboardingNotificationMockTitle;
+
+  /// No description provided for @onboardingNotificationMockBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Based on your logged cycles'**
+  String get onboardingNotificationMockBody;
+
+  /// No description provided for @onboardingNotificationAllow.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on reminders'**
+  String get onboardingNotificationAllow;
+
+  /// No description provided for @onboardingNotificationNotNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get onboardingNotificationNotNow;
+
+  /// No description provided for @onboardingBuildingPlanTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Setting things up for you'**
+  String get onboardingBuildingPlanTitle;
+
+  /// No description provided for @onboardingBuildingPlanStep1.
+  ///
+  /// In en, this message translates to:
+  /// **'Securing your data on this device'**
+  String get onboardingBuildingPlanStep1;
+
+  /// No description provided for @onboardingBuildingPlanStep2.
+  ///
+  /// In en, this message translates to:
+  /// **'Saving your preferences'**
+  String get onboardingBuildingPlanStep2;
+
+  /// No description provided for @onboardingBuildingPlanStep3.
+  ///
+  /// In en, this message translates to:
+  /// **'Getting your calendar ready'**
+  String get onboardingBuildingPlanStep3;
+
+  /// No description provided for @onboardingBuildingPlanDone.
+  ///
+  /// In en, this message translates to:
+  /// **'All set'**
+  String get onboardingBuildingPlanDone;
 
   /// No description provided for @navHome.
   ///
@@ -536,6 +684,18 @@ abstract class AppLocalizations {
   /// **'Sleep trouble'**
   String get symptomSleepTrouble;
 
+  /// No description provided for @symptomPelvicPain.
+  ///
+  /// In en, this message translates to:
+  /// **'Pelvic pain'**
+  String get symptomPelvicPain;
+
+  /// No description provided for @symptomDizziness.
+  ///
+  /// In en, this message translates to:
+  /// **'Dizziness'**
+  String get symptomDizziness;
+
   /// No description provided for @dayLogMoodLabel.
   ///
   /// In en, this message translates to:
@@ -571,6 +731,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Energetic'**
   String get moodEnergetic;
+
+  /// No description provided for @moodHappy.
+  ///
+  /// In en, this message translates to:
+  /// **'Happy'**
+  String get moodHappy;
+
+  /// No description provided for @moodContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Content'**
+  String get moodContent;
+
+  /// No description provided for @moodSad.
+  ///
+  /// In en, this message translates to:
+  /// **'Sad'**
+  String get moodSad;
+
+  /// No description provided for @moodDepressed.
+  ///
+  /// In en, this message translates to:
+  /// **'Depressed'**
+  String get moodDepressed;
+
+  /// No description provided for @moodEmotional.
+  ///
+  /// In en, this message translates to:
+  /// **'Emotional'**
+  String get moodEmotional;
 
   /// No description provided for @dayLogNoteLabel.
   ///
@@ -668,6 +858,30 @@ abstract class AppLocalizations {
   /// **'Estimated fertile window'**
   String get calendarLegendFertile;
 
+  /// No description provided for @calendarLegendOvulation.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated ovulation'**
+  String get calendarLegendOvulation;
+
+  /// No description provided for @dayDetailFertileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'In your estimated fertile window'**
+  String get dayDetailFertileTitle;
+
+  /// No description provided for @dayDetailOvulationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated ovulation day'**
+  String get dayDetailOvulationTitle;
+
+  /// No description provided for @dayDetailOvulationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Pregnancy is typically more likely around this day, based on usual timing — this is an estimate, not a guarantee.'**
+  String get dayDetailOvulationBody;
+
   /// No description provided for @insightsCyclesLoggedLabel.
   ///
   /// In en, this message translates to:
@@ -722,6 +936,12 @@ abstract class AppLocalizations {
   /// **'Language'**
   String get settingsLanguageLabel;
 
+  /// No description provided for @settingsLanguageSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System language'**
+  String get settingsLanguageSystem;
+
   /// No description provided for @settingsLanguageEnglish.
   ///
   /// In en, this message translates to:
@@ -733,6 +953,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Türkçe'**
   String get settingsLanguageTurkish;
+
+  /// No description provided for @settingsLanguageArabic.
+  ///
+  /// In en, this message translates to:
+  /// **'العربية'**
+  String get settingsLanguageArabic;
+
+  /// No description provided for @settingsLanguageSpanish.
+  ///
+  /// In en, this message translates to:
+  /// **'Español'**
+  String get settingsLanguageSpanish;
+
+  /// No description provided for @settingsLanguageFrench.
+  ///
+  /// In en, this message translates to:
+  /// **'Français'**
+  String get settingsLanguageFrench;
+
+  /// No description provided for @settingsLanguageGerman.
+  ///
+  /// In en, this message translates to:
+  /// **'Deutsch'**
+  String get settingsLanguageGerman;
+
+  /// No description provided for @settingsLanguageIndonesian.
+  ///
+  /// In en, this message translates to:
+  /// **'Bahasa Indonesia'**
+  String get settingsLanguageIndonesian;
 
   /// No description provided for @settingsWeekStartLabel.
   ///
@@ -776,6 +1026,42 @@ abstract class AppLocalizations {
   /// **'Remind me before my period'**
   String get settingsRemindersLabel;
 
+  /// No description provided for @settingsRemindersPeriodEndLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Check in when my period should be ending'**
+  String get settingsRemindersPeriodEndLabel;
+
+  /// No description provided for @settingsRemindersMedicationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication reminder'**
+  String get settingsRemindersMedicationLabel;
+
+  /// No description provided for @settingsRemindersWaterLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Water reminder'**
+  String get settingsRemindersWaterLabel;
+
+  /// No description provided for @settingsRemindersAppointmentLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Appointment reminder'**
+  String get settingsRemindersAppointmentLabel;
+
+  /// No description provided for @settingsRemindersAppointmentSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Set date & time'**
+  String get settingsRemindersAppointmentSet;
+
+  /// No description provided for @settingsRemindersAppointmentClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get settingsRemindersAppointmentClear;
+
   /// No description provided for @settingsOptionalTrackersHeading.
   ///
   /// In en, this message translates to:
@@ -805,6 +1091,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cervical mucus'**
   String get settingsMucusToggle;
+
+  /// No description provided for @settingsBreastExamToggle.
+  ///
+  /// In en, this message translates to:
+  /// **'Self breast exam'**
+  String get settingsBreastExamToggle;
+
+  /// No description provided for @settingsCervixToggle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cervix position & firmness'**
+  String get settingsCervixToggle;
 
   /// No description provided for @settingsPrivacyEntry.
   ///
@@ -871,6 +1169,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Based on your logged cycles, your estimated window is coming up.'**
   String get reminderNotificationBody;
+
+  /// No description provided for @reminderPeriodEndTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your period may be wrapping up'**
+  String get reminderPeriodEndTitle;
+
+  /// No description provided for @reminderPeriodEndBody.
+  ///
+  /// In en, this message translates to:
+  /// **'If it\'s still going, that\'s completely normal — just a gentle check-in.'**
+  String get reminderPeriodEndBody;
+
+  /// No description provided for @reminderMedicationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication reminder'**
+  String get reminderMedicationTitle;
+
+  /// No description provided for @reminderMedicationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Time to take your medication.'**
+  String get reminderMedicationBody;
+
+  /// No description provided for @reminderWaterTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stay hydrated'**
+  String get reminderWaterTitle;
+
+  /// No description provided for @reminderWaterBody.
+  ///
+  /// In en, this message translates to:
+  /// **'A little water reminder.'**
+  String get reminderWaterBody;
+
+  /// No description provided for @reminderAppointmentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming appointment'**
+  String get reminderAppointmentTitle;
+
+  /// No description provided for @reminderAppointmentBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You have an appointment coming up.'**
+  String get reminderAppointmentBody;
 
   /// No description provided for @settingsExportEntry.
   ///
@@ -953,7 +1299,7 @@ abstract class AppLocalizations {
   /// No description provided for @exportInvalidFile.
   ///
   /// In en, this message translates to:
-  /// **'That file doesn\'t look like a Cycle backup'**
+  /// **'That file doesn\'t look like a Vera backup'**
   String get exportInvalidFile;
 
   /// No description provided for @exportBackupCreated.
@@ -1001,7 +1347,7 @@ abstract class AppLocalizations {
   /// No description provided for @doctorReportDisclaimer.
   ///
   /// In en, this message translates to:
-  /// **'Generated by Cycle from user-entered data. Not a medical diagnosis.'**
+  /// **'Generated by Vera from user-entered data. Not a medical diagnosis.'**
   String get doctorReportDisclaimer;
 
   /// No description provided for @doctorReportGeneratedOn.
@@ -1027,6 +1373,372 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Date'**
   String get doctorReportColumnDate;
+
+  /// No description provided for @doctorReportTimelineHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Cycle timeline'**
+  String get doctorReportTimelineHeading;
+
+  /// No description provided for @doctorReportCycleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cycle'**
+  String get doctorReportCycleLabel;
+
+  /// No description provided for @doctorReportTimelineLegendPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Period'**
+  String get doctorReportTimelineLegendPeriod;
+
+  /// No description provided for @doctorReportTimelineLegendCycle.
+  ///
+  /// In en, this message translates to:
+  /// **'Rest of cycle'**
+  String get doctorReportTimelineLegendCycle;
+
+  /// No description provided for @doctorReportTimelineOngoing.
+  ///
+  /// In en, this message translates to:
+  /// **'Ongoing'**
+  String get doctorReportTimelineOngoing;
+
+  /// No description provided for @dailyInsightLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Did you know?'**
+  String get dailyInsightLabel;
+
+  /// No description provided for @insightMenstrual1.
+  ///
+  /// In en, this message translates to:
+  /// **'Your uterine lining is shedding right now — most periods last 3 to 7 days, and that\'s completely normal.'**
+  String get insightMenstrual1;
+
+  /// No description provided for @insightMenstrual2.
+  ///
+  /// In en, this message translates to:
+  /// **'Iron-rich foods like leafy greens and lentils can help offset what your body loses this week.'**
+  String get insightMenstrual2;
+
+  /// No description provided for @insightFollicular1.
+  ///
+  /// In en, this message translates to:
+  /// **'Estrogen is rising, and many people notice more energy and better focus starting around now.'**
+  String get insightFollicular1;
+
+  /// No description provided for @insightFollicular2.
+  ///
+  /// In en, this message translates to:
+  /// **'Your body is preparing an egg for release — this phase can last anywhere from a week to a few weeks.'**
+  String get insightFollicular2;
+
+  /// No description provided for @insightFertile1.
+  ///
+  /// In en, this message translates to:
+  /// **'This is your estimated fertile window — the days around ovulation when pregnancy is most likely, based on typical timing.'**
+  String get insightFertile1;
+
+  /// No description provided for @insightFertile2.
+  ///
+  /// In en, this message translates to:
+  /// **'Some people notice a slight rise in basal body temperature or changes in cervical mucus around ovulation.'**
+  String get insightFertile2;
+
+  /// No description provided for @insightLuteal1.
+  ///
+  /// In en, this message translates to:
+  /// **'Progesterone rises after ovulation — this is often when PMS symptoms like mood changes or bloating show up.'**
+  String get insightLuteal1;
+
+  /// No description provided for @insightLuteal2.
+  ///
+  /// In en, this message translates to:
+  /// **'If a pregnancy hasn\'t implanted, hormone levels drop near the end of this phase, triggering your next period.'**
+  String get insightLuteal2;
+
+  /// No description provided for @insightUnknown1.
+  ///
+  /// In en, this message translates to:
+  /// **'Cycle lengths vary a lot from person to person — anywhere from 21 to 35 days is considered typical.'**
+  String get insightUnknown1;
+
+  /// No description provided for @predictionSettingsEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'Prediction settings'**
+  String get predictionSettingsEntry;
+
+  /// No description provided for @predictionSettingsIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'These are assumptions, shown openly. Once you\'ve logged 2 full cycles, your real prediction on Home is calculated from your own data — these numbers stop being used for that.'**
+  String get predictionSettingsIntro;
+
+  /// No description provided for @predictionSettingsPeriodLengthLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Typical period length'**
+  String get predictionSettingsPeriodLengthLabel;
+
+  /// No description provided for @predictionSettingsCycleLengthLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Typical cycle length'**
+  String get predictionSettingsCycleLengthLabel;
+
+  /// No description provided for @predictionSettingsCycleLengthHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Used to scale the ring on Home until we have real data.'**
+  String get predictionSettingsCycleLengthHint;
+
+  /// No description provided for @predictionSettingsLutealLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Luteal phase length'**
+  String get predictionSettingsLutealLabel;
+
+  /// No description provided for @predictionSettingsLutealHint.
+  ///
+  /// In en, this message translates to:
+  /// **'The typical days between ovulation and your next period. Used to place the estimated fertile window — this one keeps being used even after real predictions start.'**
+  String get predictionSettingsLutealHint;
+
+  /// No description provided for @dayLogEnergyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Energy'**
+  String get dayLogEnergyLabel;
+
+  /// No description provided for @energyLevelLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get energyLevelLow;
+
+  /// No description provided for @energyLevelMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get energyLevelMedium;
+
+  /// No description provided for @energyLevelHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get energyLevelHigh;
+
+  /// No description provided for @energyLevelEnergetic.
+  ///
+  /// In en, this message translates to:
+  /// **'Energized'**
+  String get energyLevelEnergetic;
+
+  /// No description provided for @dayLogSkinHairLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Skin & hair'**
+  String get dayLogSkinHairLabel;
+
+  /// No description provided for @skinHealthyGlow.
+  ///
+  /// In en, this message translates to:
+  /// **'Healthy glow'**
+  String get skinHealthyGlow;
+
+  /// No description provided for @skinRedness.
+  ///
+  /// In en, this message translates to:
+  /// **'Redness'**
+  String get skinRedness;
+
+  /// No description provided for @skinDryness.
+  ///
+  /// In en, this message translates to:
+  /// **'Dryness'**
+  String get skinDryness;
+
+  /// No description provided for @skinOiliness.
+  ///
+  /// In en, this message translates to:
+  /// **'Oiliness'**
+  String get skinOiliness;
+
+  /// No description provided for @hairGoodDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Good hair day'**
+  String get hairGoodDay;
+
+  /// No description provided for @hairBadDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Bad hair day'**
+  String get hairBadDay;
+
+  /// No description provided for @hairLoss.
+  ///
+  /// In en, this message translates to:
+  /// **'Hair loss'**
+  String get hairLoss;
+
+  /// No description provided for @scalpOily.
+  ///
+  /// In en, this message translates to:
+  /// **'Oily scalp'**
+  String get scalpOily;
+
+  /// No description provided for @dayLogBreastExamLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Self breast exam'**
+  String get dayLogBreastExamLabel;
+
+  /// No description provided for @breastExamAllNormal.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing unusual'**
+  String get breastExamAllNormal;
+
+  /// No description provided for @breastExamLump.
+  ///
+  /// In en, this message translates to:
+  /// **'Lump'**
+  String get breastExamLump;
+
+  /// No description provided for @breastExamIndentation.
+  ///
+  /// In en, this message translates to:
+  /// **'Indentation'**
+  String get breastExamIndentation;
+
+  /// No description provided for @breastExamRedness.
+  ///
+  /// In en, this message translates to:
+  /// **'Redness'**
+  String get breastExamRedness;
+
+  /// No description provided for @breastExamCrackedNipple.
+  ///
+  /// In en, this message translates to:
+  /// **'Cracked nipple'**
+  String get breastExamCrackedNipple;
+
+  /// No description provided for @breastExamDischarge.
+  ///
+  /// In en, this message translates to:
+  /// **'Discharge'**
+  String get breastExamDischarge;
+
+  /// No description provided for @cervixPositionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cervix position'**
+  String get cervixPositionLabel;
+
+  /// No description provided for @cervixPositionLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get cervixPositionLow;
+
+  /// No description provided for @cervixPositionMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get cervixPositionMedium;
+
+  /// No description provided for @cervixPositionHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get cervixPositionHigh;
+
+  /// No description provided for @cervixOpeningLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cervix opening'**
+  String get cervixOpeningLabel;
+
+  /// No description provided for @cervixOpeningClosed.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get cervixOpeningClosed;
+
+  /// No description provided for @cervixOpeningMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get cervixOpeningMedium;
+
+  /// No description provided for @cervixOpeningOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get cervixOpeningOpen;
+
+  /// No description provided for @cervixFirmnessLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cervix firmness'**
+  String get cervixFirmnessLabel;
+
+  /// No description provided for @cervixFirmnessSoft.
+  ///
+  /// In en, this message translates to:
+  /// **'Soft'**
+  String get cervixFirmnessSoft;
+
+  /// No description provided for @cervixFirmnessMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get cervixFirmnessMedium;
+
+  /// No description provided for @cervixFirmnessFirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Firm'**
+  String get cervixFirmnessFirm;
+
+  /// No description provided for @dayLogWaterLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Water'**
+  String get dayLogWaterLabel;
+
+  /// No description provided for @dayLogSleepLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep'**
+  String get dayLogSleepLabel;
+
+  /// No description provided for @dayLogWeightLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight'**
+  String get dayLogWeightLabel;
+
+  /// No description provided for @dayLogMedicationsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication'**
+  String get dayLogMedicationsLabel;
+
+  /// No description provided for @dayLogAddMedication.
+  ///
+  /// In en, this message translates to:
+  /// **'Add medication'**
+  String get dayLogAddMedication;
+
+  /// No description provided for @dayLogMedicationNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication name'**
+  String get dayLogMedicationNameHint;
 }
 
 class _AppLocalizationsDelegate
@@ -1039,8 +1751,15 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en', 'tr'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>[
+    'ar',
+    'de',
+    'en',
+    'es',
+    'fr',
+    'id',
+    'tr',
+  ].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -1049,8 +1768,18 @@ class _AppLocalizationsDelegate
 AppLocalizations lookupAppLocalizations(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'ar':
+      return AppLocalizationsAr();
+    case 'de':
+      return AppLocalizationsDe();
     case 'en':
       return AppLocalizationsEn();
+    case 'es':
+      return AppLocalizationsEs();
+    case 'fr':
+      return AppLocalizationsFr();
+    case 'id':
+      return AppLocalizationsId();
     case 'tr':
       return AppLocalizationsTr();
   }

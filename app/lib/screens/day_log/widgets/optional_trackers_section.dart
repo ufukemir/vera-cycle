@@ -18,6 +18,14 @@ class OptionalTrackersSection extends StatelessWidget {
     required this.onBasalTempChanged,
     required this.mucus,
     required this.onMucusChanged,
+    required this.breastExam,
+    required this.onBreastExamChanged,
+    required this.cervixPosition,
+    required this.onCervixPositionChanged,
+    required this.cervixOpening,
+    required this.onCervixOpeningChanged,
+    required this.cervixFirmness,
+    required this.onCervixFirmnessChanged,
   });
 
   final bool? sexualActivity;
@@ -26,6 +34,14 @@ class OptionalTrackersSection extends StatelessWidget {
   final ValueChanged<double?> onBasalTempChanged;
   final CervicalMucus? mucus;
   final ValueChanged<CervicalMucus?> onMucusChanged;
+  final Set<BreastExamFinding> breastExam;
+  final ValueChanged<Set<BreastExamFinding>> onBreastExamChanged;
+  final CervixPosition? cervixPosition;
+  final ValueChanged<CervixPosition?> onCervixPositionChanged;
+  final CervixOpening? cervixOpening;
+  final ValueChanged<CervixOpening?> onCervixOpeningChanged;
+  final CervixFirmness? cervixFirmness;
+  final ValueChanged<CervixFirmness?> onCervixFirmnessChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +64,17 @@ class OptionalTrackersSection extends StatelessWidget {
         ),
       if (prefs.mucusTrackingEnabled)
         _MucusSelector(value: mucus, onChanged: onMucusChanged),
+      if (prefs.breastExamTrackingEnabled)
+        _BreastExamMultiselect(value: breastExam, onChanged: onBreastExamChanged),
+      if (prefs.cervixTrackingEnabled)
+        _CervixSelectors(
+          position: cervixPosition,
+          onPositionChanged: onCervixPositionChanged,
+          opening: cervixOpening,
+          onOpeningChanged: onCervixOpeningChanged,
+          firmness: cervixFirmness,
+          onFirmnessChanged: onCervixFirmnessChanged,
+        ),
     ];
 
     if (fields.isEmpty) return const SizedBox.shrink();
@@ -166,6 +193,121 @@ class _MucusSelector extends StatelessWidget {
               ),
           ],
         ),
+      ],
+    );
+  }
+}
+
+class _BreastExamMultiselect extends StatelessWidget {
+  const _BreastExamMultiselect({required this.value, required this.onChanged});
+
+  final Set<BreastExamFinding> value;
+  final ValueChanged<Set<BreastExamFinding>> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final labels = <BreastExamFinding, String>{
+      BreastExamFinding.allNormal: l10n.breastExamAllNormal,
+      BreastExamFinding.lump: l10n.breastExamLump,
+      BreastExamFinding.indentation: l10n.breastExamIndentation,
+      BreastExamFinding.redness: l10n.breastExamRedness,
+      BreastExamFinding.crackedNipple: l10n.breastExamCrackedNipple,
+      BreastExamFinding.discharge: l10n.breastExamDischarge,
+    };
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(l10n.dayLogBreastExamLabel, style: Theme.of(context).textTheme.bodyMedium),
+        const SizedBox(height: 8),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            for (final entry in labels.entries)
+              FilterChip(
+                label: Text(entry.value),
+                selected: value.contains(entry.key),
+                onSelected: (selected) {
+                  final next = Set<BreastExamFinding>.of(value);
+                  selected ? next.add(entry.key) : next.remove(entry.key);
+                  onChanged(next);
+                },
+              ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _CervixSelectors extends StatelessWidget {
+  const _CervixSelectors({
+    required this.position,
+    required this.onPositionChanged,
+    required this.opening,
+    required this.onOpeningChanged,
+    required this.firmness,
+    required this.onFirmnessChanged,
+  });
+
+  final CervixPosition? position;
+  final ValueChanged<CervixPosition?> onPositionChanged;
+  final CervixOpening? opening;
+  final ValueChanged<CervixOpening?> onOpeningChanged;
+  final CervixFirmness? firmness;
+  final ValueChanged<CervixFirmness?> onFirmnessChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final positionLabels = <CervixPosition, String>{
+      CervixPosition.low: l10n.cervixPositionLow,
+      CervixPosition.medium: l10n.cervixPositionMedium,
+      CervixPosition.high: l10n.cervixPositionHigh,
+    };
+    final openingLabels = <CervixOpening, String>{
+      CervixOpening.closed: l10n.cervixOpeningClosed,
+      CervixOpening.medium: l10n.cervixOpeningMedium,
+      CervixOpening.open: l10n.cervixOpeningOpen,
+    };
+    final firmnessLabels = <CervixFirmness, String>{
+      CervixFirmness.soft: l10n.cervixFirmnessSoft,
+      CervixFirmness.medium: l10n.cervixFirmnessMedium,
+      CervixFirmness.firm: l10n.cervixFirmnessFirm,
+    };
+
+    Widget row<T>(String label, Map<T, String> labels, T? selected, ValueChanged<T?> onSelected) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label, style: Theme.of(context).textTheme.bodyMedium),
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              for (final entry in labels.entries)
+                ChoiceChip(
+                  label: Text(entry.value),
+                  selected: selected == entry.key,
+                  onSelected: (isSelected) => onSelected(isSelected ? entry.key : null),
+                ),
+            ],
+          ),
+        ],
+      );
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        row(l10n.cervixPositionLabel, positionLabels, position, onPositionChanged),
+        const SizedBox(height: 12),
+        row(l10n.cervixOpeningLabel, openingLabels, opening, onOpeningChanged),
+        const SizedBox(height: 12),
+        row(l10n.cervixFirmnessLabel, firmnessLabels, firmness, onFirmnessChanged),
       ],
     );
   }
