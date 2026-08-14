@@ -49,7 +49,7 @@
   "onboardingCrampsTitle": "As-tu généralement des crampes ?",
   "onboardingCrampsBody": "Nous nous assurerons qu'il soit facile de noter comment tu te sens ces jours-là.",
   "onboardingNotificationTitle": "Souhaites-tu des rappels en douceur ?",
-  "onboardingNotificationBody": "Nous pouvons te prévenir avant l'arrivée prévue de tes règles. Les notifications se passent entièrement sur ton téléphone — rien n'est envoyé à un serveur pour qu'elles fonctionnent.",
+  "onboardingNotificationBody": "Nous pouvons te prévenir avant l'arrivée prévue de tes règles.",
   "onboardingNotificationMockTitle": "Tes règles pourraient bientôt commencer",
   "onboardingNotificationMockBody": "D'après tes cycles enregistrés",
   "onboardingNotificationAllow": "Activer les rappels",

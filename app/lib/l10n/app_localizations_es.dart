@@ -162,7 +162,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get onboardingNotificationBody =>
-      'Podemos avisarte antes de que se espere tu periodo. Las notificaciones ocurren enteramente en tu teléfono — no se envía nada a ningún servidor para que funcionen.';
+      'Podemos avisarte antes de que se espere tu periodo.';
 
   @override
   String get onboardingNotificationMockTitle =>

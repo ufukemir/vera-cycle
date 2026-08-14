@@ -49,7 +49,7 @@
   "onboardingCrampsTitle": "¿Sueles tener cólicos?",
   "onboardingCrampsBody": "Nos aseguraremos de que sea fácil registrar cómo te sientes esos días.",
   "onboardingNotificationTitle": "¿Quieres recordatorios suaves?",
-  "onboardingNotificationBody": "Podemos avisarte antes de que se espere tu periodo. Las notificaciones ocurren enteramente en tu teléfono — no se envía nada a ningún servidor para que funcionen.",
+  "onboardingNotificationBody": "Podemos avisarte antes de que se espere tu periodo.",
   "onboardingNotificationMockTitle": "Tu periodo podría empezar pronto",
   "onboardingNotificationMockBody": "Según tus ciclos registrados",
   "onboardingNotificationAllow": "Activar recordatorios",

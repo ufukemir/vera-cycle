@@ -161,7 +161,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get onboardingNotificationBody =>
-      'Kami bisa mengingatkanmu sebelum menstruasi diperkirakan datang. Notifikasi sepenuhnya terjadi di ponselmu — tidak ada yang dikirim ke server agar bisa berfungsi.';
+      'Kami bisa mengingatkanmu sebelum menstruasi diperkirakan datang.';
 
   @override
   String get onboardingNotificationMockTitle =>

@@ -161,7 +161,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get onboardingNotificationBody =>
-      'Regl dönemin yaklaşırken seni hafifçe uyarabiliriz. Bildirimler tamamen telefonunda gerçekleşir — çalışması için hiçbir şey bir sunucuya gönderilmez.';
+      'Regl dönemin yaklaşırken seni hafifçe uyarabiliriz.';
 
   @override
   String get onboardingNotificationMockTitle =>

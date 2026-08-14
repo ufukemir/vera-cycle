@@ -49,7 +49,7 @@
   "onboardingCrampsTitle": "Apakah kamu biasanya mengalami kram?",
   "onboardingCrampsBody": "Kami akan memastikan mudah untuk mencatat perasaanmu di hari-hari seperti itu.",
   "onboardingNotificationTitle": "Ingin pengingat yang lembut?",
-  "onboardingNotificationBody": "Kami bisa mengingatkanmu sebelum menstruasi diperkirakan datang. Notifikasi sepenuhnya terjadi di ponselmu — tidak ada yang dikirim ke server agar bisa berfungsi.",
+  "onboardingNotificationBody": "Kami bisa mengingatkanmu sebelum menstruasi diperkirakan datang.",
   "onboardingNotificationMockTitle": "Menstruasimu mungkin segera dimulai",
   "onboardingNotificationMockBody": "Berdasarkan siklus yang kamu catat",
   "onboardingNotificationAllow": "Aktifkan pengingat",

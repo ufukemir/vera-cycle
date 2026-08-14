@@ -160,7 +160,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboardingNotificationBody =>
-      'We can nudge you before your period is expected. Notifications happen entirely on your phone — nothing is sent to a server to make them work.';
+      'We can nudge you before your period is expected.';
 
   @override
   String get onboardingNotificationMockTitle => 'Your period may start soon';

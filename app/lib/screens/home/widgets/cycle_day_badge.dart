@@ -36,6 +36,7 @@ class CycleDayBadge extends StatelessWidget {
     }
 
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Text(
           l10n.homeCycleDayLabel(cycleDay!),

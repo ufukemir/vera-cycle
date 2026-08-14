@@ -49,7 +49,7 @@
   "onboardingCrampsTitle": "هل تعانين عادةً من تقلصات؟",
   "onboardingCrampsBody": "سنحرص على أن يكون تسجيل شعورك في تلك الأيام أمرًا سهلاً.",
   "onboardingNotificationTitle": "هل ترغبين في تذكيرات لطيفة؟",
-  "onboardingNotificationBody": "يمكننا تنبيهك قبل الموعد المتوقع لدورتك الشهرية. تحدث الإشعارات بالكامل على هاتفك — لا يُرسل أي شيء إلى أي خادم لتعمل.",
+  "onboardingNotificationBody": "يمكننا تنبيهك قبل الموعد المتوقع لدورتك الشهرية.",
   "onboardingNotificationMockTitle": "قد تبدأ دورتك الشهرية قريبًا",
   "onboardingNotificationMockBody": "بناءً على دوراتك المسجّلة",
   "onboardingNotificationAllow": "تفعيل التذكيرات",

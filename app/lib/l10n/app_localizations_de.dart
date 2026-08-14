@@ -164,7 +164,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get onboardingNotificationBody =>
-      'Wir können dich benachrichtigen, bevor deine Periode erwartet wird. Benachrichtigungen laufen komplett auf deinem Telefon ab — dafür wird nichts an einen Server gesendet.';
+      'Wir können dich benachrichtigen, bevor deine Periode erwartet wird.';
 
   @override
   String get onboardingNotificationMockTitle =>

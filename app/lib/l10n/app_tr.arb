@@ -49,7 +49,7 @@
   "onboardingCrampsTitle": "Genelde kramp giriyor musun?",
   "onboardingCrampsBody": "O günlerde nasıl hissettiğini kolayca kaydedebilmeni sağlayacağız.",
   "onboardingNotificationTitle": "Nazik hatırlatmalar ister misin?",
-  "onboardingNotificationBody": "Regl dönemin yaklaşırken seni hafifçe uyarabiliriz. Bildirimler tamamen telefonunda gerçekleşir — çalışması için hiçbir şey bir sunucuya gönderilmez.",
+  "onboardingNotificationBody": "Regl dönemin yaklaşırken seni hafifçe uyarabiliriz.",
   "onboardingNotificationMockTitle": "Regl dönemin yakında başlayabilir",
   "onboardingNotificationMockBody": "Kaydettiğin döngülere göre",
   "onboardingNotificationAllow": "Hatırlatmaları aç",

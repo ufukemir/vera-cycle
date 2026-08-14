@@ -55,7 +55,7 @@
   "onboardingCrampsTitle": "Do you usually get cramps?",
   "onboardingCrampsBody": "We'll make sure it's easy to log how you're feeling on days like that.",
   "onboardingNotificationTitle": "Would you like gentle reminders?",
-  "onboardingNotificationBody": "We can nudge you before your period is expected. Notifications happen entirely on your phone — nothing is sent to a server to make them work.",
+  "onboardingNotificationBody": "We can nudge you before your period is expected.",
   "onboardingNotificationMockTitle": "Your period may start soon",
   "onboardingNotificationMockBody": "Based on your logged cycles",
   "onboardingNotificationAllow": "Turn on reminders",

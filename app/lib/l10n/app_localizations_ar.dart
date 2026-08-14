@@ -160,7 +160,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get onboardingNotificationBody =>
-      'يمكننا تنبيهك قبل الموعد المتوقع لدورتك الشهرية. تحدث الإشعارات بالكامل على هاتفك — لا يُرسل أي شيء إلى أي خادم لتعمل.';
+      'يمكننا تنبيهك قبل الموعد المتوقع لدورتك الشهرية.';
 
   @override
   String get onboardingNotificationMockTitle => 'قد تبدأ دورتك الشهرية قريبًا';

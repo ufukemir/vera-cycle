@@ -387,7 +387,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingNotificationBody.
   ///
   /// In en, this message translates to:
-  /// **'We can nudge you before your period is expected. Notifications happen entirely on your phone — nothing is sent to a server to make them work.'**
+  /// **'We can nudge you before your period is expected.'**
   String get onboardingNotificationBody;
 
   /// No description provided for @onboardingNotificationMockTitle.

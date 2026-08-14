@@ -165,7 +165,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get onboardingNotificationBody =>
-      'Nous pouvons te prévenir avant l\'arrivée prévue de tes règles. Les notifications se passent entièrement sur ton téléphone — rien n\'est envoyé à un serveur pour qu\'elles fonctionnent.';
+      'Nous pouvons te prévenir avant l\'arrivée prévue de tes règles.';
 
   @override
   String get onboardingNotificationMockTitle =>

@@ -49,7 +49,7 @@
   "onboardingCrampsTitle": "Hast du meist Krämpfe?",
   "onboardingCrampsBody": "Wir sorgen dafür, dass du an solchen Tagen leicht festhalten kannst, wie du dich fühlst.",
   "onboardingNotificationTitle": "Möchtest du sanfte Erinnerungen?",
-  "onboardingNotificationBody": "Wir können dich benachrichtigen, bevor deine Periode erwartet wird. Benachrichtigungen laufen komplett auf deinem Telefon ab — dafür wird nichts an einen Server gesendet.",
+  "onboardingNotificationBody": "Wir können dich benachrichtigen, bevor deine Periode erwartet wird.",
   "onboardingNotificationMockTitle": "Deine Periode könnte bald beginnen",
   "onboardingNotificationMockBody": "Basierend auf deinen erfassten Zyklen",
   "onboardingNotificationAllow": "Erinnerungen aktivieren",
