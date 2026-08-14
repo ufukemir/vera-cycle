@@ -11,14 +11,12 @@
   "commonYes": "Ja",
   "commonNo": "Nein",
   "commonNotSure": "Nicht sicher",
-
   "pinSetupTitle": "PIN einrichten",
   "pinSetupEnterPrompt": "Wähle eine 6-stellige PIN, um die App zu sperren",
   "pinSetupConfirmPrompt": "Gib sie zur Bestätigung erneut ein",
   "pinSetupMismatch": "Das stimmt nicht überein — versuchen wir es noch einmal",
   "pinSetupBiometricTitle": "Schnellere Entsperrung?",
   "pinSetupBiometricBody": "Du kannst auch deinen Fingerabdruck oder dein Gesicht zum Entsperren nutzen — deine PIN funktioniert weiterhin als Rückfalloption.",
-
   "lockScreenTitle": "Gesperrt",
   "lockScreenEnterPin": "Gib deine PIN ein",
   "lockScreenWrongPin": "Diese PIN stimmt nicht überein",
@@ -28,7 +26,6 @@
   "lockScreenEraseTitle": "Alle Daten löschen?",
   "lockScreenEraseBody": "Dies löscht dauerhaft alles auf diesem Gerät. Es gibt kein Konto und kein Server-Backup, daher kann dies nicht rückgängig gemacht werden.",
   "lockScreenEraseConfirm": "Alles löschen",
-
   "onboardingPrivacyTitle": "Willkommen",
   "onboardingPrivacyBody": "Deine Daten bleiben nur auf diesem Gerät. Kein Konto, keine Cloud, nichts wird irgendwohin gesendet — die App hat nicht einmal die Berechtigung, das Internet zu nutzen, und du kannst das selbst in den Einstellungen deines Telefons überprüfen.",
   "onboardingLastPeriodTitle": "Wann hat deine letzte Periode begonnen?",
@@ -59,12 +56,10 @@
   "onboardingBuildingPlanStep2": "Deine Einstellungen werden gespeichert",
   "onboardingBuildingPlanStep3": "Dein Kalender wird vorbereitet",
   "onboardingBuildingPlanDone": "Fertig",
-
   "navHome": "Start",
   "navCalendar": "Kalender",
   "navInsights": "Einblicke",
   "navSettings": "Einstellungen",
-
   "homeCycleDayLabel": "Tag {day}",
   "homeNoCycleYet": "Noch keine Periode erfasst",
   "homePhaseMenstrual": "Periode",
@@ -84,14 +79,12 @@
   "homePeriodStartedSnackbar": "Erfasst — Periode hat heute begonnen",
   "actionUndo": "Rückgängig",
   "comingSoon": "Demnächst verfügbar",
-
   "dayLogFlowLabel": "Blutungsstärke",
   "flowSpotting": "Schmierblutung",
   "flowLight": "Leicht",
   "flowMedium": "Mittel",
   "flowHeavy": "Stark",
   "flowNone": "Keine",
-
   "dayLogSymptomsLabel": "Symptome",
   "symptomCramps": "Krämpfe",
   "symptomHeadache": "Kopfschmerzen",
@@ -105,7 +98,6 @@
   "symptomSleepTrouble": "Schlafprobleme",
   "symptomPelvicPain": "Beckenschmerzen",
   "symptomDizziness": "Schwindel",
-
   "dayLogMoodLabel": "Stimmung",
   "moodCalm": "Ruhig",
   "moodAnxious": "Ängstlich",
@@ -117,10 +109,8 @@
   "moodSad": "Traurig",
   "moodDepressed": "Niedergeschlagen",
   "moodEmotional": "Emotional",
-
   "dayLogNoteLabel": "Notiz",
   "dayLogNoteHint": "Alles, was du dir über heute merken möchtest",
-
   "dayLogOptionalTrackersLabel": "Optionale Tracker",
   "dayLogSexualActivityLabel": "Sexuelle Aktivität",
   "dayLogBbtLabel": "Basaltemperatur",
@@ -130,10 +120,8 @@
   "mucusCreamy": "Cremig",
   "mucusWatery": "Wässrig",
   "mucusEggWhite": "Eiklar",
-
   "dayLogSavedIndicator": "Gespeichert",
   "homeOpenTodayLog": "Details für heute hinzufügen",
-
   "calendarLegendActual": "Erfasste Periode",
   "calendarLegendPredicted": "Vorhergesagtes Fenster",
   "calendarLegendFertile": "Geschätztes fruchtbares Fenster",
@@ -141,7 +129,6 @@
   "dayDetailFertileTitle": "Du bist in deinem geschätzten fruchtbaren Fenster",
   "dayDetailOvulationTitle": "Geschätzter Eisprungtag",
   "dayDetailOvulationBody": "Eine Schwangerschaft ist um diesen Tag herum typischerweise wahrscheinlicher, basierend auf dem üblichen Timing — das ist eine Schätzung, keine Garantie.",
-
   "insightsCyclesLoggedLabel": "Erfasste Zyklen",
   "insightsAveragePeriodLengthLabel": "Durchschnittliche Periodendauer",
   "insightsAverageCycleLengthLabel": "Durchschnittliche Zykluslänge",
@@ -150,7 +137,6 @@
   "insightsNotEnoughDataBody": "Erfasse ein paar vollständige Zyklen, dann erscheinen hier deine Durchschnittswerte.",
   "insightsSymptomFrequencyTitle": "Symptome nach Zyklustag",
   "insightsNoSymptomsLogged": "Noch keine Symptome erfasst",
-
   "settingsLanguageLabel": "Sprache",
   "settingsLanguageSystem": "Systemsprache",
   "settingsLanguageEnglish": "English",
@@ -160,6 +146,14 @@
   "settingsLanguageFrench": "Français",
   "settingsLanguageGerman": "Deutsch",
   "settingsLanguageIndonesian": "Bahasa Indonesia",
+  "settingsLanguagePortuguese": "Português",
+  "settingsLanguageItalian": "Italiano",
+  "settingsLanguageRussian": "Русский",
+  "settingsLanguageHindi": "हिन्दी",
+  "settingsLanguageJapanese": "日本語",
+  "settingsLanguageKorean": "한국어",
+  "settingsLanguageChinese": "简体中文",
+  "settingsLanguageUrdu": "اردو",
   "settingsWeekStartLabel": "Woche beginnt am",
   "settingsWeekStartMonday": "Montag",
   "settingsWeekStartSunday": "Sonntag",
@@ -182,15 +176,15 @@
   "settingsCervixToggle": "Muttermundposition & -festigkeit",
   "settingsPrivacyEntry": "Datenschutz",
   "settingsDeleteAllData": "Alle Daten löschen",
-
   "privacyScreenTitle": "Datenschutz",
   "privacyScreenIntro": "Hier erfährst du in einfacher Sprache genau, was mit deinen Daten passiert.",
   "privacyScreenStorage": "Alles, was du erfasst, wird verschlüsselt und nur auf diesem Gerät in einer einzigen Datei gespeichert. Der Verschlüsselungscode liegt in der sicheren Hardware deines Telefons — Keychain unter iOS, Keystore unter Android — nicht in der Datei selbst.",
   "privacyScreenNoNetwork": "Diese App hat keinen Server. Sie hat nicht einmal die Berechtigung, das Internet zu nutzen — das kannst du selbst in den App-Einstellungen deines Telefons prüfen.",
-  "privacyScreenNoThirdParty": "Es gibt keine Analyse-Tools, kein Absturzberichtssystem, keine Werbung und kein SDK von Drittanbietern.",
+  "privacyScreenNoThirdParty": "Es gibt keine Analysen, keine Absturzberichte und keinerlei Drittanbieter-SDKs.",
   "privacyScreenExport": "Deine Daten verlassen dieses Gerät nur, wenn du sie selbst exportierst, und dieser Export wird mit einem Passwort verschlüsselt, das nur du kennst.",
   "privacyScreenDelete": "Das Löschen deiner Daten ist echt und sofort. Es gibt weder ein Konto noch eine Sicherung auf unserer Seite — einmal weg, für immer weg.",
-
+  "adPlaceholderLabel": "Werbefläche",
+  "adPlaceholderUpgradeCta": "Mit Premium werbefrei werden",
   "reminderNotificationTitle": "Deine Periode könnte bald beginnen",
   "reminderNotificationBody": "Basierend auf deinen erfassten Zyklen rückt dein geschätztes Fenster näher.",
   "reminderPeriodEndTitle": "Deine Periode könnte sich dem Ende nähern",
@@ -201,7 +195,6 @@
   "reminderWaterBody": "Eine kleine Trinkerinnerung.",
   "reminderAppointmentTitle": "Anstehender Termin",
   "reminderAppointmentBody": "Du hast einen anstehenden Termin.",
-
   "settingsExportEntry": "Exportieren & sichern",
   "exportBackupHeading": "Verschlüsseltes Backup",
   "exportBackupBody": "Speichere eine verschlüsselte Kopie deines Verlaufs, um sie auf ein neues Gerät zu übertragen. Zum Wiederherstellen brauchst du erneut das Passwort — es gibt keine andere Möglichkeit, es wiederherzustellen.",
@@ -218,7 +211,6 @@
   "exportInvalidFile": "Diese Datei sieht nicht wie ein Vera-Backup aus",
   "exportBackupCreated": "Backup bereit zum Teilen",
   "exportRestoreSuccess": "Backup wiederhergestellt",
-
   "exportDoctorReportHeading": "Arztbericht",
   "exportDoctorReportBody": "Eine Zusammenfassung, die du mit einer Ärztin oder einem Arzt teilen kannst.",
   "exportIncludeNotesToggle": "Persönliche Notizen einschließen",
@@ -234,7 +226,6 @@
   "doctorReportTimelineLegendPeriod": "Periode",
   "doctorReportTimelineLegendCycle": "Restlicher Zyklus",
   "doctorReportTimelineOngoing": "Läuft noch",
-
   "dailyInsightLabel": "Wusstest du schon?",
   "insightMenstrual1": "Deine Gebärmutterschleimhaut löst sich gerade jetzt ab — die meisten Perioden dauern 3 bis 7 Tage, und das ist völlig normal.",
   "insightMenstrual2": "Eisenreiche Lebensmittel wie Blattgemüse und Linsen können helfen, den Verlust dieser Woche auszugleichen.",
@@ -245,7 +236,6 @@
   "insightLuteal1": "Nach dem Eisprung steigt das Progesteron — oft treten dann PMS-Symptome wie Stimmungsschwankungen oder Blähungen auf.",
   "insightLuteal2": "Wenn sich keine Schwangerschaft eingenistet hat, sinken die Hormonspiegel gegen Ende dieser Phase und lösen deine nächste Periode aus.",
   "insightUnknown1": "Die Zykluslänge variiert von Person zu Person stark — 21 bis 35 Tage gelten als typisch.",
-
   "insightsPhaseTipsTitle": "Kann in dieser Phase guttun",
   "tipFitnessLabel": "Bewegung",
   "tipNutritionLabel": "Ernährung",
@@ -259,7 +249,6 @@
   "tipNutritionFertile": "Ausreichend Flüssigkeit und ausgewogene Mahlzeiten unterstützen deine Energie in dieser aktiver wirkenden Phase.",
   "tipNutritionLuteal": "Heißhunger kann sich hier verändern — komplexe Kohlenhydrate und magnesiumreiche Lebensmittel wie Nüsse und dunkle Schokolade sind gängige Optionen.",
   "tipNutritionUnknown": "Ausgewogene, regelmäßige Mahlzeiten sind eine solide Standardwahl, solange deine Phase noch nicht klar ist.",
-
   "predictionSettingsEntry": "Vorhersage-Einstellungen",
   "predictionSettingsIntro": "Das sind offen gezeigte Annahmen. Sobald du 2 vollständige Zyklen erfasst hast, wird deine echte Vorhersage auf der Startseite aus deinen eigenen Daten berechnet — diese Zahlen werden dafür dann nicht mehr verwendet.",
   "predictionSettingsPeriodLengthLabel": "Typische Periodendauer",
@@ -267,13 +256,11 @@
   "predictionSettingsCycleLengthHint": "Wird verwendet, um den Ring auf der Startseite zu skalieren, bis echte Daten vorliegen.",
   "predictionSettingsLutealLabel": "Lutealphasen-Länge",
   "predictionSettingsLutealHint": "Die typischen Tage zwischen Eisprung und deiner nächsten Periode. Wird verwendet, um das geschätzte fruchtbare Fenster zu platzieren — dieser Wert wird auch nach Beginn echter Vorhersagen weiter verwendet.",
-
   "dayLogEnergyLabel": "Energie",
   "energyLevelLow": "Niedrig",
   "energyLevelMedium": "Mittel",
   "energyLevelHigh": "Hoch",
   "energyLevelEnergetic": "Energiegeladen",
-
   "dayLogSkinHairLabel": "Haut & Haare",
   "skinHealthyGlow": "Gesunder Glow",
   "skinRedness": "Rötung",
@@ -283,7 +270,6 @@
   "hairBadDay": "Schlechter Haartag",
   "hairLoss": "Haarausfall",
   "scalpOily": "Fettige Kopfhaut",
-
   "dayLogBreastExamLabel": "Brust-Selbstuntersuchung",
   "breastExamAllNormal": "Nichts Ungewöhnliches",
   "breastExamLump": "Knoten",
@@ -291,7 +277,6 @@
   "breastExamRedness": "Rötung",
   "breastExamCrackedNipple": "Rissige Brustwarze",
   "breastExamDischarge": "Ausfluss",
-
   "cervixPositionLabel": "Muttermundposition",
   "cervixPositionLow": "Tief",
   "cervixPositionMedium": "Mittel",
@@ -304,7 +289,6 @@
   "cervixFirmnessSoft": "Weich",
   "cervixFirmnessMedium": "Mittel",
   "cervixFirmnessFirm": "Fest",
-
   "dayLogWaterLabel": "Wasser",
   "dayLogSleepLabel": "Schlaf",
   "dayLogWeightLabel": "Gewicht",

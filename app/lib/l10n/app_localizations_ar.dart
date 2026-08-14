@@ -471,6 +471,30 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsLanguageIndonesian => 'Bahasa Indonesia';
 
   @override
+  String get settingsLanguagePortuguese => 'Português';
+
+  @override
+  String get settingsLanguageItalian => 'Italiano';
+
+  @override
+  String get settingsLanguageRussian => 'Русский';
+
+  @override
+  String get settingsLanguageHindi => 'हिन्दी';
+
+  @override
+  String get settingsLanguageJapanese => '日本語';
+
+  @override
+  String get settingsLanguageKorean => '한국어';
+
+  @override
+  String get settingsLanguageChinese => '简体中文';
+
+  @override
+  String get settingsLanguageUrdu => 'اردو';
+
+  @override
   String get settingsWeekStartLabel => 'يبدأ الأسبوع يوم';
 
   @override
@@ -554,7 +578,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get privacyScreenNoThirdParty =>
-      'لا توجد أدوات تحليل، ولا تقارير أعطال، ولا إعلانات، ولا أي حزمة تطوير من طرف ثالث.';
+      'لا توجد تحليلات، ولا تقارير أعطال، ولا أي حزمة تطوير طرف ثالث من أي نوع.';
 
   @override
   String get privacyScreenExport =>
@@ -563,6 +587,13 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get privacyScreenDelete =>
       'حذف بياناتك حقيقي وفوري. لا يوجد حساب ولا نسخة احتياطية لدينا — بمجرد أن تُحذف، تُحذف نهائيًا.';
+
+  @override
+  String get adPlaceholderLabel => 'مساحة إعلانية';
+
+  @override
+  String get adPlaceholderUpgradeCta =>
+      'انتقلي إلى بريميوم للتجربة بدون إعلانات';
 
   @override
   String get reminderNotificationTitle => 'قد تبدأ دورتك قريبًا';

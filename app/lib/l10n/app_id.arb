@@ -11,14 +11,12 @@
   "commonYes": "Ya",
   "commonNo": "Tidak",
   "commonNotSure": "Tidak yakin",
-
   "pinSetupTitle": "Atur PIN",
   "pinSetupEnterPrompt": "Pilih PIN 6 digit untuk mengunci aplikasi",
   "pinSetupConfirmPrompt": "Masukkan lagi untuk konfirmasi",
   "pinSetupMismatch": "Tidak cocok — coba lagi ya",
   "pinSetupBiometricTitle": "Buka lebih cepat?",
   "pinSetupBiometricBody": "Kamu juga bisa memakai sidik jari atau wajah untuk membuka kunci — PIN tetap berfungsi sebagai cadangan.",
-
   "lockScreenTitle": "Terkunci",
   "lockScreenEnterPin": "Masukkan PIN kamu",
   "lockScreenWrongPin": "PIN itu tidak cocok",
@@ -28,7 +26,6 @@
   "lockScreenEraseTitle": "Hapus semua data?",
   "lockScreenEraseBody": "Ini akan menghapus semuanya di perangkat ini secara permanen. Tidak ada akun atau cadangan server, jadi ini tidak bisa dibatalkan.",
   "lockScreenEraseConfirm": "Hapus semuanya",
-
   "onboardingPrivacyTitle": "Selamat datang",
   "onboardingPrivacyBody": "Datamu hanya tersimpan di perangkat ini. Tidak ada akun, tidak ada cloud, tidak ada yang dikirim ke mana pun — aplikasi ini bahkan tidak punya izin memakai internet, dan kamu bisa memeriksanya sendiri di pengaturan ponsel.",
   "onboardingLastPeriodTitle": "Kapan haid terakhirmu mulai?",
@@ -59,12 +56,10 @@
   "onboardingBuildingPlanStep2": "Menyimpan preferensimu",
   "onboardingBuildingPlanStep3": "Menyiapkan kalendermu",
   "onboardingBuildingPlanDone": "Semua siap",
-
   "navHome": "Beranda",
   "navCalendar": "Kalender",
   "navInsights": "Wawasan",
   "navSettings": "Pengaturan",
-
   "homeCycleDayLabel": "Hari ke-{day}",
   "homeNoCycleYet": "Belum ada haid yang dicatat",
   "homePhaseMenstrual": "Haid",
@@ -84,14 +79,12 @@
   "homePeriodStartedSnackbar": "Tercatat — haid dimulai hari ini",
   "actionUndo": "Urungkan",
   "comingSoon": "Segera hadir",
-
   "dayLogFlowLabel": "Aliran",
   "flowSpotting": "Flek",
   "flowLight": "Ringan",
   "flowMedium": "Sedang",
   "flowHeavy": "Deras",
   "flowNone": "Tidak ada",
-
   "dayLogSymptomsLabel": "Gejala",
   "symptomCramps": "Kram",
   "symptomHeadache": "Sakit kepala",
@@ -105,7 +98,6 @@
   "symptomSleepTrouble": "Sulit tidur",
   "symptomPelvicPain": "Nyeri panggul",
   "symptomDizziness": "Pusing",
-
   "dayLogMoodLabel": "Suasana hati",
   "moodCalm": "Tenang",
   "moodAnxious": "Cemas",
@@ -117,10 +109,8 @@
   "moodSad": "Sedih",
   "moodDepressed": "Depresi",
   "moodEmotional": "Sensitif",
-
   "dayLogNoteLabel": "Catatan",
   "dayLogNoteHint": "Apa pun yang ingin kamu ingat tentang hari ini",
-
   "dayLogOptionalTrackersLabel": "Pelacak opsional",
   "dayLogSexualActivityLabel": "Aktivitas seksual",
   "dayLogBbtLabel": "Suhu basal tubuh",
@@ -130,10 +120,8 @@
   "mucusCreamy": "Krim",
   "mucusWatery": "Encer",
   "mucusEggWhite": "Putih telur",
-
   "dayLogSavedIndicator": "Tersimpan",
   "homeOpenTodayLog": "Tambah detail untuk hari ini",
-
   "calendarLegendActual": "Haid tercatat",
   "calendarLegendPredicted": "Perkiraan jendela",
   "calendarLegendFertile": "Perkiraan masa subur",
@@ -141,7 +129,6 @@
   "dayDetailFertileTitle": "Kamu sedang berada di perkiraan masa subur",
   "dayDetailOvulationTitle": "Perkiraan hari ovulasi",
   "dayDetailOvulationBody": "Kehamilan biasanya lebih mungkin terjadi di sekitar hari ini, berdasarkan waktu yang umum — ini perkiraan, bukan jaminan.",
-
   "insightsCyclesLoggedLabel": "Siklus tercatat",
   "insightsAveragePeriodLengthLabel": "Rata-rata lama haid",
   "insightsAverageCycleLengthLabel": "Rata-rata panjang siklus",
@@ -150,7 +137,6 @@
   "insightsNotEnoughDataBody": "Catat beberapa siklus penuh, dan rata-ratamu akan muncul di sini.",
   "insightsSymptomFrequencyTitle": "Gejala berdasarkan hari siklus",
   "insightsNoSymptomsLogged": "Belum ada gejala yang dicatat",
-
   "settingsLanguageLabel": "Bahasa",
   "settingsLanguageSystem": "Bahasa sistem",
   "settingsLanguageEnglish": "English",
@@ -160,6 +146,14 @@
   "settingsLanguageFrench": "Français",
   "settingsLanguageGerman": "Deutsch",
   "settingsLanguageIndonesian": "Bahasa Indonesia",
+  "settingsLanguagePortuguese": "Português",
+  "settingsLanguageItalian": "Italiano",
+  "settingsLanguageRussian": "Русский",
+  "settingsLanguageHindi": "हिन्दी",
+  "settingsLanguageJapanese": "日本語",
+  "settingsLanguageKorean": "한국어",
+  "settingsLanguageChinese": "简体中文",
+  "settingsLanguageUrdu": "اردو",
   "settingsWeekStartLabel": "Minggu dimulai pada",
   "settingsWeekStartMonday": "Senin",
   "settingsWeekStartSunday": "Minggu",
@@ -182,15 +176,15 @@
   "settingsCervixToggle": "Posisi & kekakuan serviks",
   "settingsPrivacyEntry": "Privasi",
   "settingsDeleteAllData": "Hapus semua data",
-
   "privacyScreenTitle": "Privasi",
   "privacyScreenIntro": "Berikut yang sebenarnya terjadi pada datamu, dengan bahasa sederhana.",
   "privacyScreenStorage": "Semua yang kamu catat dienkripsi dan hanya disimpan di perangkat ini, dalam satu file. Kunci enkripsi tersimpan di perangkat keras aman ponselmu — Keychain di iOS, Keystore di Android — bukan di dalam file itu sendiri.",
   "privacyScreenNoNetwork": "Aplikasi ini tidak memiliki server. Bahkan tidak punya izin memakai internet sama sekali — kamu bisa memeriksanya sendiri di pengaturan aplikasi ponselmu.",
-  "privacyScreenNoThirdParty": "Tidak ada analitik, laporan crash, iklan, atau SDK pihak ketiga apa pun.",
+  "privacyScreenNoThirdParty": "Tidak ada analitik, tidak ada pelaporan crash, dan tidak ada SDK pihak ketiga dalam bentuk apa pun.",
   "privacyScreenExport": "Satu-satunya cara datamu keluar dari perangkat ini adalah jika kamu mengekspornya sendiri, dan ekspor itu dienkripsi dengan kata sandi yang hanya kamu ketahui.",
   "privacyScreenDelete": "Menghapus datamu itu nyata dan langsung. Tidak ada akun atau cadangan di pihak kami — sekali hilang, hilang selamanya.",
-
+  "adPlaceholderLabel": "Ruang iklan",
+  "adPlaceholderUpgradeCta": "Beralih ke Premium untuk pengalaman bebas iklan",
   "reminderNotificationTitle": "Haidmu mungkin akan segera dimulai",
   "reminderNotificationBody": "Berdasarkan siklus yang kamu catat, perkiraan jendelamu sudah dekat.",
   "reminderPeriodEndTitle": "Haidmu mungkin akan segera berakhir",
@@ -201,7 +195,6 @@
   "reminderWaterBody": "Pengingat kecil untuk minum air.",
   "reminderAppointmentTitle": "Janji temu mendatang",
   "reminderAppointmentBody": "Kamu punya janji temu yang akan datang.",
-
   "settingsExportEntry": "Ekspor & cadangan",
   "exportBackupHeading": "Cadangan terenkripsi",
   "exportBackupBody": "Simpan salinan terenkripsi dari riwayatmu untuk dipindahkan ke perangkat baru. Kamu memerlukan kata sandi itu lagi untuk memulihkannya — tidak ada cara lain untuk mengambilnya kembali.",
@@ -218,7 +211,6 @@
   "exportInvalidFile": "File itu sepertinya bukan cadangan Vera",
   "exportBackupCreated": "Cadangan siap dibagikan",
   "exportRestoreSuccess": "Cadangan berhasil dipulihkan",
-
   "exportDoctorReportHeading": "Laporan untuk dokter",
   "exportDoctorReportBody": "Ringkasan yang bisa kamu bagikan dengan tenaga medis.",
   "exportIncludeNotesToggle": "Sertakan catatan pribadi",
@@ -234,7 +226,6 @@
   "doctorReportTimelineLegendPeriod": "Menstruasi",
   "doctorReportTimelineLegendCycle": "Sisa siklus",
   "doctorReportTimelineOngoing": "Berlangsung",
-
   "dailyInsightLabel": "Tahukah kamu?",
   "insightMenstrual1": "Lapisan rahimmu sedang meluruh sekarang — kebanyakan haid berlangsung 3 hingga 7 hari, dan itu sepenuhnya normal.",
   "insightMenstrual2": "Makanan kaya zat besi seperti sayuran hijau dan kacang lentil bisa membantu mengganti yang hilang dari tubuhmu minggu ini.",
@@ -245,7 +236,6 @@
   "insightLuteal1": "Progesteron meningkat setelah ovulasi — ini sering menjadi saat munculnya gejala PMS seperti perubahan suasana hati atau kembung.",
   "insightLuteal2": "Jika kehamilan tidak terjadi, kadar hormon turun menjelang akhir fase ini, memicu haid berikutnya.",
   "insightUnknown1": "Panjang siklus sangat bervariasi antar orang — sekitar 21 hingga 35 hari dianggap umum.",
-
   "insightsPhaseTipsTitle": "Mungkin terasa baik di fase ini",
   "tipFitnessLabel": "Gerak tubuh",
   "tipNutritionLabel": "Nutrisi",
@@ -259,7 +249,6 @@
   "tipNutritionFertile": "Tetap terhidrasi dan menjaga makanan seimbang mendukung energimu selama fase yang terasa lebih aktif ini.",
   "tipNutritionLuteal": "Keinginan makan bisa berubah di sini — karbohidrat kompleks dan makanan kaya magnesium seperti kacang-kacangan dan cokelat hitam jadi pilihan umum.",
   "tipNutritionUnknown": "Makanan seimbang dan teratur adalah pilihan default yang baik selama fasemu belum jelas.",
-
   "predictionSettingsEntry": "Pengaturan prediksi",
   "predictionSettingsIntro": "Ini adalah asumsi, ditampilkan secara terbuka. Setelah kamu mencatat 2 siklus penuh, perkiraan sebenarnya di Beranda dihitung dari datamu sendiri — angka ini berhenti dipakai untuk itu.",
   "predictionSettingsPeriodLengthLabel": "Lama haid biasanya",
@@ -267,13 +256,11 @@
   "predictionSettingsCycleLengthHint": "Digunakan untuk menskalakan cincin di Beranda sampai kami punya data nyata.",
   "predictionSettingsLutealLabel": "Panjang fase luteal",
   "predictionSettingsLutealHint": "Jumlah hari biasa antara ovulasi dan haid berikutnya. Digunakan untuk menempatkan perkiraan masa subur — nilai ini tetap dipakai bahkan setelah perkiraan nyata dimulai.",
-
   "dayLogEnergyLabel": "Energi",
   "energyLevelLow": "Rendah",
   "energyLevelMedium": "Sedang",
   "energyLevelHigh": "Tinggi",
   "energyLevelEnergetic": "Penuh energi",
-
   "dayLogSkinHairLabel": "Kulit & rambut",
   "skinHealthyGlow": "Bercahaya sehat",
   "skinRedness": "Kemerahan",
@@ -283,7 +270,6 @@
   "hairBadDay": "Rambut lagi jelek",
   "hairLoss": "Rambut rontok",
   "scalpOily": "Kulit kepala berminyak",
-
   "dayLogBreastExamLabel": "Periksa payudara sendiri",
   "breastExamAllNormal": "Tidak ada yang aneh",
   "breastExamLump": "Benjolan",
@@ -291,7 +277,6 @@
   "breastExamRedness": "Kemerahan",
   "breastExamCrackedNipple": "Puting pecah-pecah",
   "breastExamDischarge": "Keluar cairan",
-
   "cervixPositionLabel": "Posisi serviks",
   "cervixPositionLow": "Rendah",
   "cervixPositionMedium": "Sedang",
@@ -304,7 +289,6 @@
   "cervixFirmnessSoft": "Lembut",
   "cervixFirmnessMedium": "Sedang",
   "cervixFirmnessFirm": "Kaku",
-
   "dayLogWaterLabel": "Air",
   "dayLogSleepLabel": "Tidur",
   "dayLogWeightLabel": "Berat badan",

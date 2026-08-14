@@ -11,14 +11,12 @@
   "commonYes": "Oui",
   "commonNo": "Non",
   "commonNotSure": "Pas sûre",
-
   "pinSetupTitle": "Configurer un code PIN",
   "pinSetupEnterPrompt": "Choisis un code PIN à 6 chiffres pour verrouiller l'app",
   "pinSetupConfirmPrompt": "Saisis-le à nouveau pour confirmer",
   "pinSetupMismatch": "Ça ne correspond pas — réessayons",
   "pinSetupBiometricTitle": "Déverrouillage plus rapide ?",
   "pinSetupBiometricBody": "Tu peux aussi utiliser ton empreinte ou ton visage pour déverrouiller — ton code PIN reste utilisable en secours.",
-
   "lockScreenTitle": "Verrouillé",
   "lockScreenEnterPin": "Saisis ton code PIN",
   "lockScreenWrongPin": "Ce code PIN ne correspond pas",
@@ -28,7 +26,6 @@
   "lockScreenEraseTitle": "Effacer toutes les données ?",
   "lockScreenEraseBody": "Cette action supprime définitivement tout sur cet appareil. Il n'y a ni compte ni sauvegarde sur un serveur, donc c'est irréversible.",
   "lockScreenEraseConfirm": "Tout effacer",
-
   "onboardingPrivacyTitle": "Bienvenue",
   "onboardingPrivacyBody": "Tes données restent uniquement sur cet appareil. Pas de compte, pas de cloud, rien n'est envoyé nulle part — l'app n'a même pas la permission d'utiliser internet, et tu peux le vérifier toi-même dans les réglages de ton téléphone.",
   "onboardingLastPeriodTitle": "Quand tes dernières règles ont-elles commencé ?",
@@ -59,12 +56,10 @@
   "onboardingBuildingPlanStep2": "Enregistrement de tes préférences",
   "onboardingBuildingPlanStep3": "Préparation de ton calendrier",
   "onboardingBuildingPlanDone": "Tout est prêt",
-
   "navHome": "Accueil",
   "navCalendar": "Calendrier",
   "navInsights": "Statistiques",
   "navSettings": "Réglages",
-
   "homeCycleDayLabel": "Jour {day}",
   "homeNoCycleYet": "Aucune règle enregistrée pour l'instant",
   "homePhaseMenstrual": "Règles",
@@ -84,14 +79,12 @@
   "homePeriodStartedSnackbar": "Enregistré — règles commencées aujourd'hui",
   "actionUndo": "Annuler l'action",
   "comingSoon": "Bientôt disponible",
-
   "dayLogFlowLabel": "Flux",
   "flowSpotting": "Spotting",
   "flowLight": "Léger",
   "flowMedium": "Moyen",
   "flowHeavy": "Abondant",
   "flowNone": "Aucun",
-
   "dayLogSymptomsLabel": "Symptômes",
   "symptomCramps": "Crampes",
   "symptomHeadache": "Mal de tête",
@@ -105,7 +98,6 @@
   "symptomSleepTrouble": "Troubles du sommeil",
   "symptomPelvicPain": "Douleur pelvienne",
   "symptomDizziness": "Vertiges",
-
   "dayLogMoodLabel": "Humeur",
   "moodCalm": "Calme",
   "moodAnxious": "Anxieuse",
@@ -117,10 +109,8 @@
   "moodSad": "Triste",
   "moodDepressed": "Déprimée",
   "moodEmotional": "Émotive",
-
   "dayLogNoteLabel": "Note",
   "dayLogNoteHint": "Tout ce dont tu veux te souvenir aujourd'hui",
-
   "dayLogOptionalTrackersLabel": "Suivis optionnels",
   "dayLogSexualActivityLabel": "Activité sexuelle",
   "dayLogBbtLabel": "Température basale",
@@ -130,10 +120,8 @@
   "mucusCreamy": "Crémeuse",
   "mucusWatery": "Aqueuse",
   "mucusEggWhite": "Blanc d'œuf",
-
   "dayLogSavedIndicator": "Enregistré",
   "homeOpenTodayLog": "Ajouter des détails pour aujourd'hui",
-
   "calendarLegendActual": "Règles enregistrées",
   "calendarLegendPredicted": "Fenêtre prévue",
   "calendarLegendFertile": "Fenêtre de fertilité estimée",
@@ -141,7 +129,6 @@
   "dayDetailFertileTitle": "Tu es dans ta fenêtre de fertilité estimée",
   "dayDetailOvulationTitle": "Jour d'ovulation estimé",
   "dayDetailOvulationBody": "Une grossesse est généralement plus probable autour de ce jour, selon le timing habituel — c'est une estimation, pas une garantie.",
-
   "insightsCyclesLoggedLabel": "Cycles enregistrés",
   "insightsAveragePeriodLengthLabel": "Durée moyenne des règles",
   "insightsAverageCycleLengthLabel": "Durée moyenne du cycle",
@@ -150,7 +137,6 @@
   "insightsNotEnoughDataBody": "Enregistre quelques cycles complets et tes moyennes apparaîtront ici.",
   "insightsSymptomFrequencyTitle": "Symptômes par jour du cycle",
   "insightsNoSymptomsLogged": "Aucun symptôme enregistré pour l'instant",
-
   "settingsLanguageLabel": "Langue",
   "settingsLanguageSystem": "Langue du système",
   "settingsLanguageEnglish": "English",
@@ -160,6 +146,14 @@
   "settingsLanguageFrench": "Français",
   "settingsLanguageGerman": "Deutsch",
   "settingsLanguageIndonesian": "Bahasa Indonesia",
+  "settingsLanguagePortuguese": "Português",
+  "settingsLanguageItalian": "Italiano",
+  "settingsLanguageRussian": "Русский",
+  "settingsLanguageHindi": "हिन्दी",
+  "settingsLanguageJapanese": "日本語",
+  "settingsLanguageKorean": "한국어",
+  "settingsLanguageChinese": "简体中文",
+  "settingsLanguageUrdu": "اردو",
   "settingsWeekStartLabel": "La semaine commence le",
   "settingsWeekStartMonday": "Lundi",
   "settingsWeekStartSunday": "Dimanche",
@@ -182,15 +176,15 @@
   "settingsCervixToggle": "Position et fermeté du col",
   "settingsPrivacyEntry": "Confidentialité",
   "settingsDeleteAllData": "Supprimer toutes les données",
-
   "privacyScreenTitle": "Confidentialité",
   "privacyScreenIntro": "Voici exactement ce qui arrive à tes données, en langage clair.",
   "privacyScreenStorage": "Tout ce que tu enregistres est chiffré et stocké uniquement sur cet appareil, dans un seul fichier. La clé de chiffrement se trouve dans le matériel sécurisé de ton téléphone — Trousseau (Keychain) sur iOS, Keystore sur Android — pas dans le fichier lui-même.",
   "privacyScreenNoNetwork": "Cette app n'a pas de serveur. Elle n'a même pas la permission d'utiliser internet — tu peux le vérifier toi-même dans les réglages de ton téléphone.",
-  "privacyScreenNoThirdParty": "Il n'y a ni analytique, ni rapport de plantage, ni publicité, ni aucun SDK tiers.",
+  "privacyScreenNoThirdParty": "Il n'y a ni analyse, ni rapport de plantage, ni aucun SDK tiers d'aucune sorte.",
   "privacyScreenExport": "La seule façon dont tes données quittent cet appareil, c'est si tu les exportes toi-même, et cet export est chiffré avec un mot de passe que toi seule connais.",
   "privacyScreenDelete": "Supprimer tes données est réel et immédiat. Il n'y a ni compte ni sauvegarde de notre côté — une fois supprimées, elles le sont pour de bon.",
-
+  "adPlaceholderLabel": "Espace publicitaire",
+  "adPlaceholderUpgradeCta": "Passe à Premium pour une expérience sans publicité",
   "reminderNotificationTitle": "Tes règles pourraient bientôt commencer",
   "reminderNotificationBody": "D'après tes cycles enregistrés, ta fenêtre estimée approche.",
   "reminderPeriodEndTitle": "Tes règles pourraient bientôt se terminer",
@@ -201,7 +195,6 @@
   "reminderWaterBody": "Un petit rappel pour boire de l'eau.",
   "reminderAppointmentTitle": "Rendez-vous à venir",
   "reminderAppointmentBody": "Tu as un rendez-vous à venir.",
-
   "settingsExportEntry": "Exporter et sauvegarder",
   "exportBackupHeading": "Sauvegarde chiffrée",
   "exportBackupBody": "Enregistre une copie chiffrée de ton historique pour la transférer sur un nouvel appareil. Tu auras besoin du mot de passe pour la restaurer — il n'y a aucun autre moyen de le récupérer.",
@@ -218,7 +211,6 @@
   "exportInvalidFile": "Ce fichier ne ressemble pas à une sauvegarde Vera",
   "exportBackupCreated": "Sauvegarde prête à partager",
   "exportRestoreSuccess": "Sauvegarde restaurée",
-
   "exportDoctorReportHeading": "Rapport médical",
   "exportDoctorReportBody": "Un résumé que tu peux partager avec un professionnel de santé.",
   "exportIncludeNotesToggle": "Inclure les notes personnelles",
@@ -234,7 +226,6 @@
   "doctorReportTimelineLegendPeriod": "Règles",
   "doctorReportTimelineLegendCycle": "Reste du cycle",
   "doctorReportTimelineOngoing": "En cours",
-
   "dailyInsightLabel": "Le savais-tu ?",
   "insightMenstrual1": "Ta muqueuse utérine se détache en ce moment — la plupart des règles durent de 3 à 7 jours, et c'est tout à fait normal.",
   "insightMenstrual2": "Les aliments riches en fer, comme les légumes verts à feuilles et les lentilles, peuvent aider à compenser ce que ton corps perd cette semaine.",
@@ -245,7 +236,6 @@
   "insightLuteal1": "La progestérone augmente après l'ovulation — c'est souvent à ce moment qu'apparaissent des symptômes du SPM comme les sautes d'humeur ou les ballonnements.",
   "insightLuteal2": "Si une grossesse ne s'est pas implantée, les niveaux d'hormones chutent vers la fin de cette phase, déclenchant tes prochaines règles.",
   "insightUnknown1": "La durée du cycle varie beaucoup d'une personne à l'autre — entre 21 et 35 jours est considéré comme habituel.",
-
   "insightsPhaseTipsTitle": "Peut faire du bien dans cette phase",
   "tipFitnessLabel": "Mouvement",
   "tipNutritionLabel": "Nutrition",
@@ -259,7 +249,6 @@
   "tipNutritionFertile": "Rester hydratée et garder des repas équilibrés soutient ton énergie durant cette phase qui se sent plus active.",
   "tipNutritionLuteal": "Les envies peuvent changer ici — les glucides complexes et les aliments riches en magnésium comme les noix et le chocolat noir sont des choix courants.",
   "tipNutritionUnknown": "Des repas équilibrés et réguliers sont un bon choix par défaut tant que ta phase n'est pas encore claire.",
-
   "predictionSettingsEntry": "Réglages de prédiction",
   "predictionSettingsIntro": "Ce sont des hypothèses, affichées ouvertement. Une fois 2 cycles complets enregistrés, ta vraie prédiction sur Accueil est calculée à partir de tes propres données — ces chiffres ne sont alors plus utilisés pour ça.",
   "predictionSettingsPeriodLengthLabel": "Durée habituelle des règles",
@@ -267,13 +256,11 @@
   "predictionSettingsCycleLengthHint": "Utilisé pour dimensionner l'anneau sur Accueil en attendant de vraies données.",
   "predictionSettingsLutealLabel": "Durée de la phase lutéale",
   "predictionSettingsLutealHint": "Le nombre de jours habituel entre l'ovulation et tes prochaines règles. Utilisé pour placer la fenêtre de fertilité estimée — cette valeur continue d'être utilisée même après le début des vraies prédictions.",
-
   "dayLogEnergyLabel": "Énergie",
   "energyLevelLow": "Faible",
   "energyLevelMedium": "Moyenne",
   "energyLevelHigh": "Élevée",
   "energyLevelEnergetic": "Pleine d'énergie",
-
   "dayLogSkinHairLabel": "Peau et cheveux",
   "skinHealthyGlow": "Éclat sain",
   "skinRedness": "Rougeurs",
@@ -283,7 +270,6 @@
   "hairBadDay": "Mauvais jour capillaire",
   "hairLoss": "Chute de cheveux",
   "scalpOily": "Cuir chevelu gras",
-
   "dayLogBreastExamLabel": "Auto-examen des seins",
   "breastExamAllNormal": "Rien d'inhabituel",
   "breastExamLump": "Grosseur",
@@ -291,7 +277,6 @@
   "breastExamRedness": "Rougeur",
   "breastExamCrackedNipple": "Mamelon crevassé",
   "breastExamDischarge": "Écoulement",
-
   "cervixPositionLabel": "Position du col",
   "cervixPositionLow": "Bas",
   "cervixPositionMedium": "Moyen",
@@ -304,7 +289,6 @@
   "cervixFirmnessSoft": "Souple",
   "cervixFirmnessMedium": "Moyenne",
   "cervixFirmnessFirm": "Ferme",
-
   "dayLogWaterLabel": "Eau",
   "dayLogSleepLabel": "Sommeil",
   "dayLogWeightLabel": "Poids",

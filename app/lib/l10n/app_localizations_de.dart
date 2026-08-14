@@ -482,6 +482,30 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsLanguageIndonesian => 'Bahasa Indonesia';
 
   @override
+  String get settingsLanguagePortuguese => 'Português';
+
+  @override
+  String get settingsLanguageItalian => 'Italiano';
+
+  @override
+  String get settingsLanguageRussian => 'Русский';
+
+  @override
+  String get settingsLanguageHindi => 'हिन्दी';
+
+  @override
+  String get settingsLanguageJapanese => '日本語';
+
+  @override
+  String get settingsLanguageKorean => '한국어';
+
+  @override
+  String get settingsLanguageChinese => '简体中文';
+
+  @override
+  String get settingsLanguageUrdu => 'اردو';
+
+  @override
   String get settingsWeekStartLabel => 'Woche beginnt am';
 
   @override
@@ -566,7 +590,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get privacyScreenNoThirdParty =>
-      'Es gibt keine Analyse-Tools, kein Absturzberichtssystem, keine Werbung und kein SDK von Drittanbietern.';
+      'Es gibt keine Analysen, keine Absturzberichte und keinerlei Drittanbieter-SDKs.';
 
   @override
   String get privacyScreenExport =>
@@ -575,6 +599,12 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get privacyScreenDelete =>
       'Das Löschen deiner Daten ist echt und sofort. Es gibt weder ein Konto noch eine Sicherung auf unserer Seite — einmal weg, für immer weg.';
+
+  @override
+  String get adPlaceholderLabel => 'Werbefläche';
+
+  @override
+  String get adPlaceholderUpgradeCta => 'Mit Premium werbefrei werden';
 
   @override
   String get reminderNotificationTitle => 'Deine Periode könnte bald beginnen';

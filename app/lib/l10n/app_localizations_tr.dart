@@ -474,6 +474,30 @@ class AppLocalizationsTr extends AppLocalizations {
   String get settingsLanguageIndonesian => 'Bahasa Indonesia';
 
   @override
+  String get settingsLanguagePortuguese => 'Português';
+
+  @override
+  String get settingsLanguageItalian => 'Italiano';
+
+  @override
+  String get settingsLanguageRussian => 'Русский';
+
+  @override
+  String get settingsLanguageHindi => 'हिन्दी';
+
+  @override
+  String get settingsLanguageJapanese => '日本語';
+
+  @override
+  String get settingsLanguageKorean => '한국어';
+
+  @override
+  String get settingsLanguageChinese => '简体中文';
+
+  @override
+  String get settingsLanguageUrdu => 'اردو';
+
+  @override
   String get settingsWeekStartLabel => 'Hafta başlangıcı';
 
   @override
@@ -558,7 +582,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get privacyScreenNoThirdParty =>
-      'Analitik yok, çökme raporlama yok, reklam yok ve hiçbir türde üçüncü taraf SDK\'sı yok.';
+      'Analitik yok, çökme raporlama yok ve hiçbir türde üçüncü taraf SDK\'sı yok.';
 
   @override
   String get privacyScreenExport =>
@@ -567,6 +591,12 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get privacyScreenDelete =>
       'Verini silmek gerçek ve anındadır. Hesap ve bizim tarafımızda bir yedek olmadığı için — bir kere gidince gider.';
+
+  @override
+  String get adPlaceholderLabel => 'Reklam alanı';
+
+  @override
+  String get adPlaceholderUpgradeCta => 'Premium ile reklamsız deneyime geç';
 
   @override
   String get reminderNotificationTitle => 'Adetin yakında başlayabilir';

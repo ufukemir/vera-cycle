@@ -6,6 +6,7 @@ import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
 import '../../util/day.dart';
 import '../day_log/day_log_screen.dart';
+import 'widgets/ad_placeholder_banner.dart';
 import 'widgets/cycle_day_badge.dart';
 import 'widgets/cycle_ring.dart';
 import 'widgets/daily_insight_card.dart';
@@ -66,6 +67,8 @@ class HomeScreen extends StatelessWidget {
               DailyInsightCard(phase: status.phase),
               const SizedBox(height: 24),
               const PeriodStartedButton(),
+              const SizedBox(height: 24),
+              const AdPlaceholderBanner(),
             ],
           ),
         ),

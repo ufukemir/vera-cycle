@@ -11,14 +11,12 @@
   "commonYes": "Evet",
   "commonNo": "Hayır",
   "commonNotSure": "Emin değilim",
-
   "pinSetupTitle": "PIN oluştur",
   "pinSetupEnterPrompt": "Uygulamayı kilitlemek için 6 haneli bir PIN seç",
   "pinSetupConfirmPrompt": "Onaylamak için tekrar gir",
   "pinSetupMismatch": "Eşleşmedi — tekrar deneyelim",
   "pinSetupBiometricTitle": "Daha hızlı kilit açma?",
   "pinSetupBiometricBody": "Parmak izi veya yüzünle de kilidi açabilirsin — PIN'in yedek olarak kalır.",
-
   "lockScreenTitle": "Kilitli",
   "lockScreenEnterPin": "PIN'ini gir",
   "lockScreenWrongPin": "Bu PIN eşleşmiyor",
@@ -28,7 +26,6 @@
   "lockScreenEraseTitle": "Tüm veriler silinsin mi?",
   "lockScreenEraseBody": "Bu, cihazdaki her şeyi kalıcı olarak siler. Hesap ve sunucu yedeği olmadığı için bu işlem geri alınamaz.",
   "lockScreenEraseConfirm": "Her şeyi sil",
-
   "onboardingPrivacyTitle": "Hoş geldin",
   "onboardingPrivacyBody": "Verilerin sadece bu cihazda kalır. Hesap yok, bulut yok, hiçbir yere bir şey gönderilmiyor — uygulamanın internet kullanma izni bile yok, bunu telefonunun ayarlarından kendin kontrol edebilirsin.",
   "onboardingLastPeriodTitle": "Son adetin ne zaman başladı?",
@@ -59,12 +56,10 @@
   "onboardingBuildingPlanStep2": "Tercihlerin kaydediliyor",
   "onboardingBuildingPlanStep3": "Takvimin hazırlanıyor",
   "onboardingBuildingPlanDone": "Hazır",
-
   "navHome": "Ana Sayfa",
   "navCalendar": "Takvim",
   "navInsights": "İçgörüler",
   "navSettings": "Ayarlar",
-
   "homeCycleDayLabel": "{day}. gün",
   "homeNoCycleYet": "Henüz adet kaydı yok",
   "homePhaseMenstrual": "Adet",
@@ -84,14 +79,12 @@
   "homePeriodStartedSnackbar": "Kaydedildi — adet bugün başladı",
   "actionUndo": "Geri al",
   "comingSoon": "Yakında",
-
   "dayLogFlowLabel": "Akış",
   "flowSpotting": "Leke",
   "flowLight": "Hafif",
   "flowMedium": "Orta",
   "flowHeavy": "Yoğun",
   "flowNone": "Yok",
-
   "dayLogSymptomsLabel": "Semptomlar",
   "symptomCramps": "Kramp",
   "symptomHeadache": "Baş ağrısı",
@@ -105,7 +98,6 @@
   "symptomSleepTrouble": "Uyku sorunu",
   "symptomPelvicPain": "Pelvik ağrı",
   "symptomDizziness": "Baş dönmesi",
-
   "dayLogMoodLabel": "Ruh hali",
   "moodCalm": "Sakin",
   "moodAnxious": "Kaygılı",
@@ -117,10 +109,8 @@
   "moodSad": "Üzgün",
   "moodDepressed": "Depresif",
   "moodEmotional": "Duygusal",
-
   "dayLogNoteLabel": "Not",
   "dayLogNoteHint": "Bugünle ilgili hatırlamak istediğin bir şey",
-
   "dayLogOptionalTrackersLabel": "Opsiyonel izleyiciler",
   "dayLogSexualActivityLabel": "Cinsel aktivite",
   "dayLogBbtLabel": "Bazal vücut sıcaklığı",
@@ -130,10 +120,8 @@
   "mucusCreamy": "Kremsi",
   "mucusWatery": "Sulu",
   "mucusEggWhite": "Yumurta akı",
-
   "dayLogSavedIndicator": "Kaydedildi",
   "homeOpenTodayLog": "Bugün için detay ekle",
-
   "calendarLegendActual": "Kaydedilen adet",
   "calendarLegendPredicted": "Tahmini pencere",
   "calendarLegendFertile": "Tahmini doğurgan pencere",
@@ -141,7 +129,6 @@
   "dayDetailFertileTitle": "Tahmini doğurgan pencerendesin",
   "dayDetailOvulationTitle": "Tahmini ovülasyon günü",
   "dayDetailOvulationBody": "Genelde bu günün civarında gebe kalma olasılığı biraz daha yüksek olur — bu bir tahmindir, garanti değildir.",
-
   "insightsCyclesLoggedLabel": "Kaydedilen döngü",
   "insightsAveragePeriodLengthLabel": "Ortalama adet süresi",
   "insightsAverageCycleLengthLabel": "Ortalama döngü uzunluğu",
@@ -150,7 +137,6 @@
   "insightsNotEnoughDataBody": "Birkaç tam döngü kaydet, ortalamaların burada görünsün.",
   "insightsSymptomFrequencyTitle": "Döngü gününe göre semptomlar",
   "insightsNoSymptomsLogged": "Henüz semptom kaydedilmedi",
-
   "settingsLanguageLabel": "Dil",
   "settingsLanguageSystem": "Sistem dili",
   "settingsLanguageEnglish": "English",
@@ -160,6 +146,14 @@
   "settingsLanguageFrench": "Français",
   "settingsLanguageGerman": "Deutsch",
   "settingsLanguageIndonesian": "Bahasa Indonesia",
+  "settingsLanguagePortuguese": "Português",
+  "settingsLanguageItalian": "Italiano",
+  "settingsLanguageRussian": "Русский",
+  "settingsLanguageHindi": "हिन्दी",
+  "settingsLanguageJapanese": "日本語",
+  "settingsLanguageKorean": "한국어",
+  "settingsLanguageChinese": "简体中文",
+  "settingsLanguageUrdu": "اردو",
   "settingsWeekStartLabel": "Hafta başlangıcı",
   "settingsWeekStartMonday": "Pazartesi",
   "settingsWeekStartSunday": "Pazar",
@@ -182,15 +176,15 @@
   "settingsCervixToggle": "Serviks pozisyonu ve sertliği",
   "settingsPrivacyEntry": "Mahremiyet",
   "settingsDeleteAllData": "Tüm veriyi sil",
-
   "privacyScreenTitle": "Mahremiyet",
   "privacyScreenIntro": "Verine tam olarak ne olduğu, düz bir dille.",
   "privacyScreenStorage": "Kaydettiğin her şey şifrelenir ve sadece bu cihazda, tek bir dosyada saklanır. Şifreleme anahtarı telefonunun güvenli donanımında yaşar — iOS'ta Keychain, Android'de Keystore — dosyanın kendisinde değil.",
   "privacyScreenNoNetwork": "Bu uygulamanın sunucusu yok. İnternet kullanma izni bile yok — bunu telefonunun uygulama ayarlarından kendin kontrol edebilirsin.",
-  "privacyScreenNoThirdParty": "Analitik yok, çökme raporlama yok, reklam yok ve hiçbir türde üçüncü taraf SDK'sı yok.",
+  "privacyScreenNoThirdParty": "Analitik yok, çökme raporlama yok ve hiçbir türde üçüncü taraf SDK'sı yok.",
   "privacyScreenExport": "Verinin bu cihazdan çıkmasının tek yolu kendin dışa aktarmandır, o dışa aktarma da sadece senin bildiğin bir parolayla şifrelenir.",
   "privacyScreenDelete": "Verini silmek gerçek ve anındadır. Hesap ve bizim tarafımızda bir yedek olmadığı için — bir kere gidince gider.",
-
+  "adPlaceholderLabel": "Reklam alanı",
+  "adPlaceholderUpgradeCta": "Premium ile reklamsız deneyime geç",
   "reminderNotificationTitle": "Adetin yakında başlayabilir",
   "reminderNotificationBody": "Kaydettiğin döngülere göre tahmini pencerene yaklaşıyorsun.",
   "reminderPeriodEndTitle": "Regl dönemin bitmek üzere olabilir",
@@ -201,7 +195,6 @@
   "reminderWaterBody": "Küçük bir su hatırlatıcısı.",
   "reminderAppointmentTitle": "Yaklaşan randevu",
   "reminderAppointmentBody": "Yaklaşan bir randevun var.",
-
   "settingsExportEntry": "Dışa aktarma & yedekleme",
   "exportBackupHeading": "Şifreli yedek",
   "exportBackupBody": "Geçmişinin şifreli bir kopyasını yeni bir cihaza taşımak için kaydet. Geri yüklemek için parolayı tekrar gireceksin — başka bir kurtarma yolu yok.",
@@ -218,7 +211,6 @@
   "exportInvalidFile": "Bu dosya bir Vera yedeği gibi görünmüyor",
   "exportBackupCreated": "Yedek paylaşıma hazır",
   "exportRestoreSuccess": "Yedek geri yüklendi",
-
   "exportDoctorReportHeading": "Doktor raporu",
   "exportDoctorReportBody": "Bir klinisyenle paylaşabileceğin bir özet.",
   "exportIncludeNotesToggle": "Kişisel notları dahil et",
@@ -234,7 +226,6 @@
   "doctorReportTimelineLegendPeriod": "Regl",
   "doctorReportTimelineLegendCycle": "Döngünün geri kalanı",
   "doctorReportTimelineOngoing": "Devam ediyor",
-
   "dailyInsightLabel": "Biliyor muydun?",
   "insightMenstrual1": "Rahim iç zarın şu an dökülüyor — çoğu adet 3 ila 7 gün sürer, bu tamamen normal.",
   "insightMenstrual2": "Yeşil yapraklı sebzeler ve mercimek gibi demir açısından zengin gıdalar bu hafta kaybettiğini dengelemene yardımcı olabilir.",
@@ -245,7 +236,6 @@
   "insightLuteal1": "Ovülasyondan sonra progesteron yükselir — ruh hali değişimleri veya şişkinlik gibi PMS belirtileri genelde bu dönemde ortaya çıkar.",
   "insightLuteal2": "Bir gebelik yerleşmediyse, bu evrenin sonuna doğru hormon seviyeleri düşer ve bir sonraki adetini tetikler.",
   "insightUnknown1": "Döngü uzunlukları kişiden kişiye çok değişir — 21 ila 35 gün arası tipik kabul edilir.",
-
   "insightsPhaseTipsTitle": "Bu evrede sana iyi gelebilir",
   "tipFitnessLabel": "Hareket",
   "tipNutritionLabel": "Beslenme",
@@ -259,7 +249,6 @@
   "tipNutritionFertile": "Bol su içmek ve dengeli beslenmek, bu daha hareketli hissettiren evrede enerjini destekler.",
   "tipNutritionLuteal": "Burada canın farklı şeyler çekebilir — kompleks karbonhidratlar ve kuruyemiş, bitter çikolata gibi magnezyum açısından zengin besinler yaygın tercihlerdir.",
   "tipNutritionUnknown": "Evren henüz netleşmediğinde dengeli, düzenli öğünler sağlam bir varsayılan seçimdir.",
-
   "predictionSettingsEntry": "Tahmin ayarları",
   "predictionSettingsIntro": "Bunlar açıkça gösterilen varsayımlardır. 2 tam döngü kaydettiğinde, ana ekrandaki gerçek tahminin kendi verilerinden hesaplanır — bu sayılar o hesap için artık kullanılmaz.",
   "predictionSettingsPeriodLengthLabel": "Tipik adet süresi",
@@ -267,13 +256,11 @@
   "predictionSettingsCycleLengthHint": "Gerçek veri birikene kadar ana ekrandaki halkayı ölçeklemek için kullanılır.",
   "predictionSettingsLutealLabel": "Luteal faz uzunluğu",
   "predictionSettingsLutealHint": "Ovülasyon ile bir sonraki adetin arasındaki tipik gün sayısı. Tahmini doğurgan pencereyi yerleştirmek için kullanılır — gerçek tahminler başladıktan sonra da kullanılmaya devam eder.",
-
   "dayLogEnergyLabel": "Enerji",
   "energyLevelLow": "Düşük",
   "energyLevelMedium": "Orta",
   "energyLevelHigh": "Yüksek",
   "energyLevelEnergetic": "Enerjik",
-
   "dayLogSkinHairLabel": "Cilt ve saç",
   "skinHealthyGlow": "Sağlıklı ışıltı",
   "skinRedness": "Kızarıklık",
@@ -283,7 +270,6 @@
   "hairBadDay": "Saçların kötü",
   "hairLoss": "Saç dökülmesi",
   "scalpOily": "Saçta yağlanma",
-
   "dayLogBreastExamLabel": "Kendi kendine göğüs muayenesi",
   "breastExamAllNormal": "Her şey normal",
   "breastExamLump": "Kitle",
@@ -291,7 +277,6 @@
   "breastExamRedness": "Cilt kızarıklığı",
   "breastExamCrackedNipple": "Çatlak meme başı",
   "breastExamDischarge": "Meme başı akıntısı",
-
   "cervixPositionLabel": "Serviks pozisyonu",
   "cervixPositionLow": "Düşük",
   "cervixPositionMedium": "Orta",
@@ -304,7 +289,6 @@
   "cervixFirmnessSoft": "Yumuşak",
   "cervixFirmnessMedium": "Orta",
   "cervixFirmnessFirm": "Sert",
-
   "dayLogWaterLabel": "Su",
   "dayLogSleepLabel": "Uyku",
   "dayLogWeightLabel": "Kilo",

@@ -11,14 +11,12 @@
   "commonYes": "Sí",
   "commonNo": "No",
   "commonNotSure": "No estoy segura",
-
   "pinSetupTitle": "Configura un PIN",
   "pinSetupEnterPrompt": "Elige un PIN de 6 dígitos para bloquear la app",
   "pinSetupConfirmPrompt": "Vuelve a escribirlo para confirmar",
   "pinSetupMismatch": "No coinciden — intentemos de nuevo",
   "pinSetupBiometricTitle": "¿Desbloqueo más rápido?",
   "pinSetupBiometricBody": "También puedes usar tu huella o rostro para desbloquear — tu PIN sigue funcionando como respaldo.",
-
   "lockScreenTitle": "Bloqueado",
   "lockScreenEnterPin": "Ingresa tu PIN",
   "lockScreenWrongPin": "Ese PIN no coincide",
@@ -28,7 +26,6 @@
   "lockScreenEraseTitle": "¿Borrar todos los datos?",
   "lockScreenEraseBody": "Esto elimina permanentemente todo en este dispositivo. No hay cuenta ni copia de seguridad en un servidor, así que no se puede deshacer.",
   "lockScreenEraseConfirm": "Borrar todo",
-
   "onboardingPrivacyTitle": "Bienvenida",
   "onboardingPrivacyBody": "Tus datos permanecen solo en este dispositivo. No hay cuenta, ni nube, no se envía nada a ningún lado — la app ni siquiera tiene permiso para usar internet, y puedes comprobarlo tú misma en los ajustes de tu teléfono.",
   "onboardingLastPeriodTitle": "¿Cuándo comenzó tu último periodo?",
@@ -59,12 +56,10 @@
   "onboardingBuildingPlanStep2": "Guardando tus preferencias",
   "onboardingBuildingPlanStep3": "Preparando tu calendario",
   "onboardingBuildingPlanDone": "Todo listo",
-
   "navHome": "Inicio",
   "navCalendar": "Calendario",
   "navInsights": "Estadísticas",
   "navSettings": "Ajustes",
-
   "homeCycleDayLabel": "Día {day}",
   "homeNoCycleYet": "Aún no hay periodo registrado",
   "homePhaseMenstrual": "Periodo",
@@ -84,14 +79,12 @@
   "homePeriodStartedSnackbar": "Registrado — el periodo empezó hoy",
   "actionUndo": "Deshacer",
   "comingSoon": "Próximamente",
-
   "dayLogFlowLabel": "Flujo",
   "flowSpotting": "Manchado",
   "flowLight": "Ligero",
   "flowMedium": "Moderado",
   "flowHeavy": "Abundante",
   "flowNone": "Ninguno",
-
   "dayLogSymptomsLabel": "Síntomas",
   "symptomCramps": "Cólicos",
   "symptomHeadache": "Dolor de cabeza",
@@ -105,7 +98,6 @@
   "symptomSleepTrouble": "Problemas para dormir",
   "symptomPelvicPain": "Dolor pélvico",
   "symptomDizziness": "Mareo",
-
   "dayLogMoodLabel": "Estado de ánimo",
   "moodCalm": "Tranquila",
   "moodAnxious": "Ansiosa",
@@ -117,10 +109,8 @@
   "moodSad": "Triste",
   "moodDepressed": "Deprimida",
   "moodEmotional": "Sensible",
-
   "dayLogNoteLabel": "Nota",
   "dayLogNoteHint": "Cualquier cosa que quieras recordar sobre hoy",
-
   "dayLogOptionalTrackersLabel": "Seguimientos opcionales",
   "dayLogSexualActivityLabel": "Actividad sexual",
   "dayLogBbtLabel": "Temperatura basal",
@@ -130,10 +120,8 @@
   "mucusCreamy": "Cremoso",
   "mucusWatery": "Acuoso",
   "mucusEggWhite": "Clara de huevo",
-
   "dayLogSavedIndicator": "Guardado",
   "homeOpenTodayLog": "Añadir detalles de hoy",
-
   "calendarLegendActual": "Periodo registrado",
   "calendarLegendPredicted": "Ventana prevista",
   "calendarLegendFertile": "Ventana fértil estimada",
@@ -141,7 +129,6 @@
   "dayDetailFertileTitle": "Estás en tu ventana fértil estimada",
   "dayDetailOvulationTitle": "Día de ovulación estimado",
   "dayDetailOvulationBody": "El embarazo suele ser más probable alrededor de este día, según la sincronización habitual — esto es una estimación, no una garantía.",
-
   "insightsCyclesLoggedLabel": "Ciclos registrados",
   "insightsAveragePeriodLengthLabel": "Duración media del periodo",
   "insightsAverageCycleLengthLabel": "Duración media del ciclo",
@@ -150,7 +137,6 @@
   "insightsNotEnoughDataBody": "Registra un par de ciclos completos y tus promedios aparecerán aquí.",
   "insightsSymptomFrequencyTitle": "Síntomas por día del ciclo",
   "insightsNoSymptomsLogged": "Aún no hay síntomas registrados",
-
   "settingsLanguageLabel": "Idioma",
   "settingsLanguageSystem": "Idioma del sistema",
   "settingsLanguageEnglish": "English",
@@ -160,6 +146,14 @@
   "settingsLanguageFrench": "Français",
   "settingsLanguageGerman": "Deutsch",
   "settingsLanguageIndonesian": "Bahasa Indonesia",
+  "settingsLanguagePortuguese": "Português",
+  "settingsLanguageItalian": "Italiano",
+  "settingsLanguageRussian": "Русский",
+  "settingsLanguageHindi": "हिन्दी",
+  "settingsLanguageJapanese": "日本語",
+  "settingsLanguageKorean": "한국어",
+  "settingsLanguageChinese": "简体中文",
+  "settingsLanguageUrdu": "اردو",
   "settingsWeekStartLabel": "La semana empieza el",
   "settingsWeekStartMonday": "Lunes",
   "settingsWeekStartSunday": "Domingo",
@@ -182,15 +176,15 @@
   "settingsCervixToggle": "Posición y firmeza del cuello uterino",
   "settingsPrivacyEntry": "Privacidad",
   "settingsDeleteAllData": "Eliminar todos los datos",
-
   "privacyScreenTitle": "Privacidad",
   "privacyScreenIntro": "Esto es exactamente lo que ocurre con tus datos, en lenguaje sencillo.",
   "privacyScreenStorage": "Todo lo que registras se cifra y se guarda solo en este dispositivo, en un único archivo. La clave de cifrado vive en el hardware seguro de tu teléfono — Keychain en iOS, Keystore en Android — no en el archivo en sí.",
   "privacyScreenNoNetwork": "Esta app no tiene servidor. Ni siquiera tiene permiso para usar internet — puedes comprobarlo tú misma en los ajustes de tu teléfono.",
-  "privacyScreenNoThirdParty": "No hay análisis, ni reportes de errores, ni anuncios, ni ningún SDK de terceros.",
+  "privacyScreenNoThirdParty": "No hay analítica, ni informes de fallos, ni ningún tipo de SDK de terceros.",
   "privacyScreenExport": "La única forma en que tus datos salen de este dispositivo es si tú misma los exportas, y esa exportación se cifra con una contraseña que solo tú conoces.",
   "privacyScreenDelete": "Eliminar tus datos es real e inmediato. No hay cuenta ni copia de seguridad de nuestra parte — una vez que se van, se van.",
-
+  "adPlaceholderLabel": "Espacio publicitario",
+  "adPlaceholderUpgradeCta": "Pasa a Premium para una experiencia sin anuncios",
   "reminderNotificationTitle": "Tu periodo podría empezar pronto",
   "reminderNotificationBody": "Según tus ciclos registrados, tu ventana estimada se acerca.",
   "reminderPeriodEndTitle": "Tu periodo podría estar terminando",
@@ -201,7 +195,6 @@
   "reminderWaterBody": "Un pequeño recordatorio de agua.",
   "reminderAppointmentTitle": "Cita próxima",
   "reminderAppointmentBody": "Tienes una cita próxima.",
-
   "settingsExportEntry": "Exportar y respaldar",
   "exportBackupHeading": "Copia de seguridad cifrada",
   "exportBackupBody": "Guarda una copia cifrada de tu historial para moverla a otro dispositivo. Necesitarás la contraseña de nuevo para restaurarla — no hay otra forma de recuperarla.",
@@ -218,7 +211,6 @@
   "exportInvalidFile": "Ese archivo no parece ser una copia de seguridad de Vera",
   "exportBackupCreated": "Copia de seguridad lista para compartir",
   "exportRestoreSuccess": "Copia de seguridad restaurada",
-
   "exportDoctorReportHeading": "Informe para el médico",
   "exportDoctorReportBody": "Un resumen que puedes compartir con un profesional de la salud.",
   "exportIncludeNotesToggle": "Incluir notas personales",
@@ -234,7 +226,6 @@
   "doctorReportTimelineLegendPeriod": "Periodo",
   "doctorReportTimelineLegendCycle": "Resto del ciclo",
   "doctorReportTimelineOngoing": "En curso",
-
   "dailyInsightLabel": "¿Sabías que...?",
   "insightMenstrual1": "Tu revestimiento uterino se está desprendiendo ahora mismo — la mayoría de los periodos duran de 3 a 7 días, y eso es completamente normal.",
   "insightMenstrual2": "Los alimentos ricos en hierro, como las verduras de hoja verde y las lentejas, pueden ayudar a compensar lo que tu cuerpo pierde esta semana.",
@@ -245,7 +236,6 @@
   "insightLuteal1": "La progesterona sube después de la ovulación — a menudo es cuando aparecen síntomas de SPM como cambios de humor o hinchazón.",
   "insightLuteal2": "Si un embarazo no se ha implantado, los niveles hormonales bajan cerca del final de esta fase, desencadenando tu próximo periodo.",
   "insightUnknown1": "La duración del ciclo varía mucho de una persona a otra — entre 21 y 35 días se considera típico.",
-
   "insightsPhaseTipsTitle": "Puede sentarte bien en esta fase",
   "tipFitnessLabel": "Movimiento",
   "tipNutritionLabel": "Nutrición",
@@ -259,7 +249,6 @@
   "tipNutritionFertile": "Mantenerte hidratada y llevar comidas equilibradas apoya tu energía en esta fase que se siente más activa.",
   "tipNutritionLuteal": "Los antojos pueden cambiar aquí — los carbohidratos complejos y alimentos ricos en magnesio como frutos secos y chocolate negro son opciones habituales.",
   "tipNutritionUnknown": "Las comidas equilibradas y regulares son una buena opción por defecto cuando tu fase aún no está clara.",
-
   "predictionSettingsEntry": "Ajustes de predicción",
   "predictionSettingsIntro": "Estas son suposiciones, mostradas con transparencia. Una vez que registres 2 ciclos completos, tu predicción real en Inicio se calcula con tus propios datos — estos números dejan de usarse para eso.",
   "predictionSettingsPeriodLengthLabel": "Duración típica del periodo",
@@ -267,13 +256,11 @@
   "predictionSettingsCycleLengthHint": "Se usa para escalar el anillo de Inicio hasta que tengamos datos reales.",
   "predictionSettingsLutealLabel": "Duración de la fase lútea",
   "predictionSettingsLutealHint": "Los días típicos entre la ovulación y tu próximo periodo. Se usa para ubicar la ventana fértil estimada — este valor se sigue usando incluso después de que empiecen las predicciones reales.",
-
   "dayLogEnergyLabel": "Energía",
   "energyLevelLow": "Baja",
   "energyLevelMedium": "Media",
   "energyLevelHigh": "Alta",
   "energyLevelEnergetic": "Con mucha energía",
-
   "dayLogSkinHairLabel": "Piel y cabello",
   "skinHealthyGlow": "Piel radiante",
   "skinRedness": "Enrojecimiento",
@@ -283,7 +270,6 @@
   "hairBadDay": "Mal día de cabello",
   "hairLoss": "Caída del cabello",
   "scalpOily": "Cuero cabelludo graso",
-
   "dayLogBreastExamLabel": "Autoexamen de mama",
   "breastExamAllNormal": "Nada fuera de lo normal",
   "breastExamLump": "Bulto",
@@ -291,7 +277,6 @@
   "breastExamRedness": "Enrojecimiento",
   "breastExamCrackedNipple": "Pezón agrietado",
   "breastExamDischarge": "Secreción",
-
   "cervixPositionLabel": "Posición del cuello uterino",
   "cervixPositionLow": "Baja",
   "cervixPositionMedium": "Media",
@@ -304,7 +289,6 @@
   "cervixFirmnessSoft": "Blando",
   "cervixFirmnessMedium": "Media",
   "cervixFirmnessFirm": "Firme",
-
   "dayLogWaterLabel": "Agua",
   "dayLogSleepLabel": "Sueño",
   "dayLogWeightLabel": "Peso",

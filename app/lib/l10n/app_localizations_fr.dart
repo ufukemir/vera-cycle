@@ -482,6 +482,30 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsLanguageIndonesian => 'Bahasa Indonesia';
 
   @override
+  String get settingsLanguagePortuguese => 'Português';
+
+  @override
+  String get settingsLanguageItalian => 'Italiano';
+
+  @override
+  String get settingsLanguageRussian => 'Русский';
+
+  @override
+  String get settingsLanguageHindi => 'हिन्दी';
+
+  @override
+  String get settingsLanguageJapanese => '日本語';
+
+  @override
+  String get settingsLanguageKorean => '한국어';
+
+  @override
+  String get settingsLanguageChinese => '简体中文';
+
+  @override
+  String get settingsLanguageUrdu => 'اردو';
+
+  @override
   String get settingsWeekStartLabel => 'La semaine commence le';
 
   @override
@@ -566,7 +590,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get privacyScreenNoThirdParty =>
-      'Il n\'y a ni analytique, ni rapport de plantage, ni publicité, ni aucun SDK tiers.';
+      'Il n\'y a ni analyse, ni rapport de plantage, ni aucun SDK tiers d\'aucune sorte.';
 
   @override
   String get privacyScreenExport =>
@@ -575,6 +599,13 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get privacyScreenDelete =>
       'Supprimer tes données est réel et immédiat. Il n\'y a ni compte ni sauvegarde de notre côté — une fois supprimées, elles le sont pour de bon.';
+
+  @override
+  String get adPlaceholderLabel => 'Espace publicitaire';
+
+  @override
+  String get adPlaceholderUpgradeCta =>
+      'Passe à Premium pour une expérience sans publicité';
 
   @override
   String get reminderNotificationTitle =>

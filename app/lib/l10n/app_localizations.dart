@@ -984,6 +984,54 @@ abstract class AppLocalizations {
   /// **'Bahasa Indonesia'**
   String get settingsLanguageIndonesian;
 
+  /// No description provided for @settingsLanguagePortuguese.
+  ///
+  /// In en, this message translates to:
+  /// **'Português'**
+  String get settingsLanguagePortuguese;
+
+  /// No description provided for @settingsLanguageItalian.
+  ///
+  /// In en, this message translates to:
+  /// **'Italiano'**
+  String get settingsLanguageItalian;
+
+  /// No description provided for @settingsLanguageRussian.
+  ///
+  /// In en, this message translates to:
+  /// **'Русский'**
+  String get settingsLanguageRussian;
+
+  /// No description provided for @settingsLanguageHindi.
+  ///
+  /// In en, this message translates to:
+  /// **'हिन्दी'**
+  String get settingsLanguageHindi;
+
+  /// No description provided for @settingsLanguageJapanese.
+  ///
+  /// In en, this message translates to:
+  /// **'日本語'**
+  String get settingsLanguageJapanese;
+
+  /// No description provided for @settingsLanguageKorean.
+  ///
+  /// In en, this message translates to:
+  /// **'한국어'**
+  String get settingsLanguageKorean;
+
+  /// No description provided for @settingsLanguageChinese.
+  ///
+  /// In en, this message translates to:
+  /// **'简体中文'**
+  String get settingsLanguageChinese;
+
+  /// No description provided for @settingsLanguageUrdu.
+  ///
+  /// In en, this message translates to:
+  /// **'اردو'**
+  String get settingsLanguageUrdu;
+
   /// No description provided for @settingsWeekStartLabel.
   ///
   /// In en, this message translates to:
@@ -1143,7 +1191,7 @@ abstract class AppLocalizations {
   /// No description provided for @privacyScreenNoThirdParty.
   ///
   /// In en, this message translates to:
-  /// **'There\'s no analytics, no crash reporting, no ads, and no third-party SDK of any kind.'**
+  /// **'There\'s no analytics, no crash reporting, and no third-party SDK of any kind.'**
   String get privacyScreenNoThirdParty;
 
   /// No description provided for @privacyScreenExport.
@@ -1157,6 +1205,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Deleting your data is real and immediate. There\'s no account and no backup on our end — once it\'s gone, it\'s gone.'**
   String get privacyScreenDelete;
+
+  /// No description provided for @adPlaceholderLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Ad space'**
+  String get adPlaceholderLabel;
+
+  /// No description provided for @adPlaceholderUpgradeCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Go ad-free with Premium'**
+  String get adPlaceholderUpgradeCta;
 
   /// No description provided for @reminderNotificationTitle.
   ///

@@ -14,14 +14,12 @@
   "commonYes": "Yes",
   "commonNo": "No",
   "commonNotSure": "Not sure",
-
   "pinSetupTitle": "Set up a PIN",
   "pinSetupEnterPrompt": "Choose a 6-digit PIN to lock the app",
   "pinSetupConfirmPrompt": "Enter it again to confirm",
   "pinSetupMismatch": "Those didn't match — let's try again",
   "pinSetupBiometricTitle": "Faster unlock?",
   "pinSetupBiometricBody": "You can also use your fingerprint or face to unlock — your PIN still works as a backup.",
-
   "lockScreenTitle": "Locked",
   "lockScreenEnterPin": "Enter your PIN",
   "lockScreenWrongPin": "That PIN doesn't match",
@@ -29,12 +27,15 @@
   "lockScreenForgotPin": "Forgot your PIN?",
   "lockScreenThrottled": "Too many attempts. Try again in {seconds}s",
   "@lockScreenThrottled": {
-    "placeholders": { "seconds": { "type": "int" } }
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
   },
   "lockScreenEraseTitle": "Erase all data?",
   "lockScreenEraseBody": "This permanently deletes everything on this device. There's no account and no server backup, so this can't be undone.",
   "lockScreenEraseConfirm": "Erase everything",
-
   "onboardingPrivacyTitle": "Welcome",
   "onboardingPrivacyBody": "Your data stays only on this device. There's no account, no cloud, nothing sent anywhere — the app doesn't even have permission to use the internet, and you can check that yourself in your phone's settings.",
   "onboardingLastPeriodTitle": "When did your last period start?",
@@ -65,15 +66,17 @@
   "onboardingBuildingPlanStep2": "Saving your preferences",
   "onboardingBuildingPlanStep3": "Getting your calendar ready",
   "onboardingBuildingPlanDone": "All set",
-
   "navHome": "Home",
   "navCalendar": "Calendar",
   "navInsights": "Insights",
   "navSettings": "Settings",
-
   "homeCycleDayLabel": "Day {day}",
   "@homeCycleDayLabel": {
-    "placeholders": { "day": { "type": "int" } }
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
   },
   "homeNoCycleYet": "No period logged yet",
   "homePhaseMenstrual": "Period",
@@ -85,7 +88,14 @@
   "homePredictionInsufficientBody": "Log your next period and we'll start estimating.",
   "homePredictionRangeLabel": "{start} – {end}",
   "@homePredictionRangeLabel": {
-    "placeholders": { "start": { "type": "String" }, "end": { "type": "String" } }
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
   },
   "homeConfidenceHigh": "High confidence",
   "homeConfidenceMedium": "Medium confidence",
@@ -96,14 +106,12 @@
   "homePeriodStartedSnackbar": "Logged — period started today",
   "actionUndo": "Undo",
   "comingSoon": "Coming soon",
-
   "dayLogFlowLabel": "Flow",
   "flowSpotting": "Spotting",
   "flowLight": "Light",
   "flowMedium": "Medium",
   "flowHeavy": "Heavy",
   "flowNone": "None",
-
   "dayLogSymptomsLabel": "Symptoms",
   "symptomCramps": "Cramps",
   "symptomHeadache": "Headache",
@@ -117,7 +125,6 @@
   "symptomSleepTrouble": "Sleep trouble",
   "symptomPelvicPain": "Pelvic pain",
   "symptomDizziness": "Dizziness",
-
   "dayLogMoodLabel": "Mood",
   "moodCalm": "Calm",
   "moodAnxious": "Anxious",
@@ -129,10 +136,8 @@
   "moodSad": "Sad",
   "moodDepressed": "Depressed",
   "moodEmotional": "Emotional",
-
   "dayLogNoteLabel": "Note",
   "dayLogNoteHint": "Anything you want to remember about today",
-
   "dayLogOptionalTrackersLabel": "Optional trackers",
   "dayLogSexualActivityLabel": "Sexual activity",
   "dayLogBbtLabel": "Basal body temperature",
@@ -142,10 +147,8 @@
   "mucusCreamy": "Creamy",
   "mucusWatery": "Watery",
   "mucusEggWhite": "Egg white",
-
   "dayLogSavedIndicator": "Saved",
   "homeOpenTodayLog": "Add details for today",
-
   "calendarLegendActual": "Logged period",
   "calendarLegendPredicted": "Predicted window",
   "calendarLegendFertile": "Estimated fertile window",
@@ -153,19 +156,21 @@
   "dayDetailFertileTitle": "In your estimated fertile window",
   "dayDetailOvulationTitle": "Estimated ovulation day",
   "dayDetailOvulationBody": "Pregnancy is typically more likely around this day, based on usual timing — this is an estimate, not a guarantee.",
-
   "insightsCyclesLoggedLabel": "Cycles logged",
   "insightsAveragePeriodLengthLabel": "Average period length",
   "insightsAverageCycleLengthLabel": "Average cycle length",
   "insightsVariabilityLabel": "Varies by about {days} days",
   "@insightsVariabilityLabel": {
-    "placeholders": { "days": { "type": "String" } }
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
   },
   "insightsNotEnoughDataTitle": "Not enough data yet",
   "insightsNotEnoughDataBody": "Log a couple of full cycles and your averages will show up here.",
   "insightsSymptomFrequencyTitle": "Symptoms by cycle day",
   "insightsNoSymptomsLogged": "No symptoms logged yet",
-
   "settingsLanguageLabel": "Language",
   "settingsLanguageSystem": "System language",
   "settingsLanguageEnglish": "English",
@@ -175,6 +180,14 @@
   "settingsLanguageFrench": "Français",
   "settingsLanguageGerman": "Deutsch",
   "settingsLanguageIndonesian": "Bahasa Indonesia",
+  "settingsLanguagePortuguese": "Português",
+  "settingsLanguageItalian": "Italiano",
+  "settingsLanguageRussian": "Русский",
+  "settingsLanguageHindi": "हिन्दी",
+  "settingsLanguageJapanese": "日本語",
+  "settingsLanguageKorean": "한국어",
+  "settingsLanguageChinese": "简体中文",
+  "settingsLanguageUrdu": "اردو",
   "settingsWeekStartLabel": "Week starts on",
   "settingsWeekStartMonday": "Monday",
   "settingsWeekStartSunday": "Sunday",
@@ -197,15 +210,15 @@
   "settingsCervixToggle": "Cervix position & firmness",
   "settingsPrivacyEntry": "Privacy",
   "settingsDeleteAllData": "Delete all data",
-
   "privacyScreenTitle": "Privacy",
   "privacyScreenIntro": "Here's exactly what happens to your data, in plain language.",
   "privacyScreenStorage": "Everything you log is encrypted and stored only on this device, in a single file. The encryption key lives in your phone's secure hardware — Keychain on iOS, Keystore on Android — not in the file itself.",
   "privacyScreenNoNetwork": "This app has no server. It doesn't have permission to use the internet at all — you can check that yourself in your phone's app settings.",
-  "privacyScreenNoThirdParty": "There's no analytics, no crash reporting, no ads, and no third-party SDK of any kind.",
+  "privacyScreenNoThirdParty": "There's no analytics, no crash reporting, and no third-party SDK of any kind.",
   "privacyScreenExport": "The only way your data ever leaves this device is if you export it yourself, and that export is encrypted with a password only you know.",
   "privacyScreenDelete": "Deleting your data is real and immediate. There's no account and no backup on our end — once it's gone, it's gone.",
-
+  "adPlaceholderLabel": "Ad space",
+  "adPlaceholderUpgradeCta": "Go ad-free with Premium",
   "reminderNotificationTitle": "Your period may be starting soon",
   "reminderNotificationBody": "Based on your logged cycles, your estimated window is coming up.",
   "reminderPeriodEndTitle": "Your period may be wrapping up",
@@ -216,7 +229,6 @@
   "reminderWaterBody": "A little water reminder.",
   "reminderAppointmentTitle": "Upcoming appointment",
   "reminderAppointmentBody": "You have an appointment coming up.",
-
   "settingsExportEntry": "Export & backup",
   "exportBackupHeading": "Encrypted backup",
   "exportBackupBody": "Save an encrypted copy of your history to move to a new device. You'll need the password again to restore it — there's no way to recover it otherwise.",
@@ -233,7 +245,6 @@
   "exportInvalidFile": "That file doesn't look like a Vera backup",
   "exportBackupCreated": "Backup ready to share",
   "exportRestoreSuccess": "Backup restored",
-
   "exportDoctorReportHeading": "Doctor report",
   "exportDoctorReportBody": "A summary you can share with a clinician.",
   "exportIncludeNotesToggle": "Include personal notes",
@@ -249,7 +260,6 @@
   "doctorReportTimelineLegendPeriod": "Period",
   "doctorReportTimelineLegendCycle": "Rest of cycle",
   "doctorReportTimelineOngoing": "Ongoing",
-
   "dailyInsightLabel": "Did you know?",
   "insightMenstrual1": "Your uterine lining is shedding right now — most periods last 3 to 7 days, and that's completely normal.",
   "insightMenstrual2": "Iron-rich foods like leafy greens and lentils can help offset what your body loses this week.",
@@ -260,7 +270,6 @@
   "insightLuteal1": "Progesterone rises after ovulation — this is often when PMS symptoms like mood changes or bloating show up.",
   "insightLuteal2": "If a pregnancy hasn't implanted, hormone levels drop near the end of this phase, triggering your next period.",
   "insightUnknown1": "Cycle lengths vary a lot from person to person — anywhere from 21 to 35 days is considered typical.",
-
   "insightsPhaseTipsTitle": "May feel good in this phase",
   "tipFitnessLabel": "Movement",
   "tipNutritionLabel": "Nutrition",
@@ -274,7 +283,6 @@
   "tipNutritionFertile": "Staying hydrated and keeping meals balanced supports energy through this more active-feeling phase.",
   "tipNutritionLuteal": "Cravings can shift here — complex carbs and magnesium-rich foods like nuts and dark chocolate are common go-tos.",
   "tipNutritionUnknown": "Balanced, regular meals are a solid default whenever your phase isn't clear yet.",
-
   "predictionSettingsEntry": "Prediction settings",
   "predictionSettingsIntro": "These are assumptions, shown openly. Once you've logged 2 full cycles, your real prediction on Home is calculated from your own data — these numbers stop being used for that.",
   "predictionSettingsPeriodLengthLabel": "Typical period length",
@@ -282,13 +290,11 @@
   "predictionSettingsCycleLengthHint": "Used to scale the ring on Home until we have real data.",
   "predictionSettingsLutealLabel": "Luteal phase length",
   "predictionSettingsLutealHint": "The typical days between ovulation and your next period. Used to place the estimated fertile window — this one keeps being used even after real predictions start.",
-
   "dayLogEnergyLabel": "Energy",
   "energyLevelLow": "Low",
   "energyLevelMedium": "Medium",
   "energyLevelHigh": "High",
   "energyLevelEnergetic": "Energized",
-
   "dayLogSkinHairLabel": "Skin & hair",
   "skinHealthyGlow": "Healthy glow",
   "skinRedness": "Redness",
@@ -298,7 +304,6 @@
   "hairBadDay": "Bad hair day",
   "hairLoss": "Hair loss",
   "scalpOily": "Oily scalp",
-
   "dayLogBreastExamLabel": "Self breast exam",
   "breastExamAllNormal": "Nothing unusual",
   "breastExamLump": "Lump",
@@ -306,7 +311,6 @@
   "breastExamRedness": "Redness",
   "breastExamCrackedNipple": "Cracked nipple",
   "breastExamDischarge": "Discharge",
-
   "cervixPositionLabel": "Cervix position",
   "cervixPositionLow": "Low",
   "cervixPositionMedium": "Medium",
@@ -319,7 +323,6 @@
   "cervixFirmnessSoft": "Soft",
   "cervixFirmnessMedium": "Medium",
   "cervixFirmnessFirm": "Firm",
-
   "dayLogWaterLabel": "Water",
   "dayLogSleepLabel": "Sleep",
   "dayLogWeightLabel": "Weight",

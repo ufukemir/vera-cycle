@@ -476,6 +476,30 @@ class AppLocalizationsId extends AppLocalizations {
   String get settingsLanguageIndonesian => 'Bahasa Indonesia';
 
   @override
+  String get settingsLanguagePortuguese => 'Português';
+
+  @override
+  String get settingsLanguageItalian => 'Italiano';
+
+  @override
+  String get settingsLanguageRussian => 'Русский';
+
+  @override
+  String get settingsLanguageHindi => 'हिन्दी';
+
+  @override
+  String get settingsLanguageJapanese => '日本語';
+
+  @override
+  String get settingsLanguageKorean => '한국어';
+
+  @override
+  String get settingsLanguageChinese => '简体中文';
+
+  @override
+  String get settingsLanguageUrdu => 'اردو';
+
+  @override
   String get settingsWeekStartLabel => 'Minggu dimulai pada';
 
   @override
@@ -560,7 +584,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get privacyScreenNoThirdParty =>
-      'Tidak ada analitik, laporan crash, iklan, atau SDK pihak ketiga apa pun.';
+      'Tidak ada analitik, tidak ada pelaporan crash, dan tidak ada SDK pihak ketiga dalam bentuk apa pun.';
 
   @override
   String get privacyScreenExport =>
@@ -569,6 +593,13 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get privacyScreenDelete =>
       'Menghapus datamu itu nyata dan langsung. Tidak ada akun atau cadangan di pihak kami — sekali hilang, hilang selamanya.';
+
+  @override
+  String get adPlaceholderLabel => 'Ruang iklan';
+
+  @override
+  String get adPlaceholderUpgradeCta =>
+      'Beralih ke Premium untuk pengalaman bebas iklan';
 
   @override
   String get reminderNotificationTitle => 'Haidmu mungkin akan segera dimulai';

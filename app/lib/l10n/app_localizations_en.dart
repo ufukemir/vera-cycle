@@ -471,6 +471,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsLanguageIndonesian => 'Bahasa Indonesia';
 
   @override
+  String get settingsLanguagePortuguese => 'Português';
+
+  @override
+  String get settingsLanguageItalian => 'Italiano';
+
+  @override
+  String get settingsLanguageRussian => 'Русский';
+
+  @override
+  String get settingsLanguageHindi => 'हिन्दी';
+
+  @override
+  String get settingsLanguageJapanese => '日本語';
+
+  @override
+  String get settingsLanguageKorean => '한국어';
+
+  @override
+  String get settingsLanguageChinese => '简体中文';
+
+  @override
+  String get settingsLanguageUrdu => 'اردو';
+
+  @override
   String get settingsWeekStartLabel => 'Week starts on';
 
   @override
@@ -555,7 +579,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get privacyScreenNoThirdParty =>
-      'There\'s no analytics, no crash reporting, no ads, and no third-party SDK of any kind.';
+      'There\'s no analytics, no crash reporting, and no third-party SDK of any kind.';
 
   @override
   String get privacyScreenExport =>
@@ -564,6 +588,12 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get privacyScreenDelete =>
       'Deleting your data is real and immediate. There\'s no account and no backup on our end — once it\'s gone, it\'s gone.';
+
+  @override
+  String get adPlaceholderLabel => 'Ad space';
+
+  @override
+  String get adPlaceholderUpgradeCta => 'Go ad-free with Premium';
 
   @override
   String get reminderNotificationTitle => 'Your period may be starting soon';
