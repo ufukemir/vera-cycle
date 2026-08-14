@@ -160,7 +160,7 @@ class _EmptyState extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(20),
       children: [
-        const HeroIllustration(scene: IllustrationScene.chatSparkles, height: 180),
+        const PhotoHero(asset: 'assets/photos/selfcare_plants.jpg', height: 190),
         const SizedBox(height: 20),
         Text(intro, style: Theme.of(context).textTheme.bodyMedium),
         const SizedBox(height: 20),

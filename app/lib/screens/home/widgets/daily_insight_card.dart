@@ -18,6 +18,21 @@ class DailyInsightCard extends StatelessWidget {
 
   final CyclePhase phase;
 
+  String get _photoAsset {
+    switch (phase) {
+      case CyclePhase.menstrual:
+        return 'assets/photos/sleeping_soft.jpg';
+      case CyclePhase.follicular:
+        return 'assets/photos/pier_stretch.jpg';
+      case CyclePhase.fertileWindow:
+        return 'assets/photos/lemon_water.jpg';
+      case CyclePhase.luteal:
+        return 'assets/photos/water_glass.jpg';
+      case CyclePhase.unknown:
+        return 'assets/photos/sunny_smile.jpg';
+    }
+  }
+
   List<String> _candidates(AppLocalizations l10n) {
     switch (phase) {
       case CyclePhase.menstrual:
@@ -75,7 +90,7 @@ class DailyInsightCard extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(18),
+      clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -90,15 +105,27 @@ class DailyInsightCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              const Icon(Icons.spa_outlined, size: 18),
-              const SizedBox(width: 6),
-              Text(l10n.dailyInsightLabel, style: theme.textTheme.labelLarge),
-            ],
+          // Phase-matched licensed photo (assets/photos/NOTICE.md).
+          Image.asset(_photoAsset,
+              height: 110, width: double.infinity, fit: BoxFit.cover),
+          Padding(
+            padding: const EdgeInsets.all(18),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    const Icon(Icons.spa_outlined, size: 18),
+                    const SizedBox(width: 6),
+                    Text(l10n.dailyInsightLabel,
+                        style: theme.textTheme.labelLarge),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Text(fact, style: theme.textTheme.bodyMedium),
+              ],
+            ),
           ),
-          const SizedBox(height: 8),
-          Text(fact, style: theme.textTheme.bodyMedium),
         ],
       ),
     );
