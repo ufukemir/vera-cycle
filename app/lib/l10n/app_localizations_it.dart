@@ -1044,4 +1044,89 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get insightUnknown4 =>
       'Stress, travel, and illness can all shift ovulation — a \"late\" period often just means late ovulation.';
+
+  @override
+  String get settingsThemeLabel => 'Theme';
+
+  @override
+  String get settingsThemeSystem => 'System';
+
+  @override
+  String get settingsThemeLight => 'Light';
+
+  @override
+  String get settingsThemeDark => 'Dark';
+
+  @override
+  String get settingsMascotLabel => 'Companion mascot';
+
+  @override
+  String get mascotDroplet => 'Droplet';
+
+  @override
+  String get mascotFlower => 'Flower';
+
+  @override
+  String get mascotMoon => 'Moon';
+
+  @override
+  String get mascotNone => 'None';
+
+  @override
+  String homeWindowCountdown(int days) {
+    return 'Predicted window starts in about $days days';
+  }
+
+  @override
+  String homeOvulationCountdown(int days) {
+    return 'Estimated ovulation in about $days days';
+  }
+
+  @override
+  String get homeQuickLogTitle => 'How does your body feel today?';
+
+  @override
+  String get actionSave => 'Save';
+
+  @override
+  String get insightsTrackerHubTitle => 'Your trackers';
+
+  @override
+  String get trackerHistoryEmpty => 'No entries in this range yet';
+
+  @override
+  String get rangeFilter1m => '1 mo';
+
+  @override
+  String get rangeFilter3m => '3 mo';
+
+  @override
+  String get rangeFilter6m => '6 mo';
+
+  @override
+  String get dayLogOvulationTestLabel => 'Ovulation test';
+
+  @override
+  String get ovulationTestNegative => 'Negative';
+
+  @override
+  String get ovulationTestPositive => 'Positive';
+
+  @override
+  String get settingsOvulationTestToggle => 'Ovulation test';
+
+  @override
+  String get settingsRemindersOvulationLabel => 'Fertile window heads-up';
+
+  @override
+  String get reminderOvulationTitle => 'Estimated fertile window approaching';
+
+  @override
+  String get reminderOvulationBody =>
+      'Based on your logged cycles, your estimated fertile window may start soon.';
+
+  @override
+  String trackerEntriesCount(int count) {
+    return '$count entries';
+  }
 }

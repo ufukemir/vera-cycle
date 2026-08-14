@@ -43,6 +43,10 @@ class AppPreferences extends ChangeNotifier {
   static const _kWaterRemindersEnabled = 'water_reminders_enabled';
   static const _kWaterReminderMinuteOfDay = 'water_reminder_minute_of_day';
   static const _kAppointmentReminderAt = 'appointment_reminder_at';
+  static const _kThemeMode = 'theme_mode';
+  static const _kOvulationTestTracking = 'track_ovulation_test';
+  static const _kOvulationRemindersEnabled = 'ovulation_reminders_enabled';
+  static const _kMascot = 'mascot';
 
   bool get onboardingComplete => _prefs.getBool(_kOnboardingComplete) ?? false;
 
@@ -152,6 +156,24 @@ class AppPreferences extends ChangeNotifier {
   }
 
   bool get cervixTrackingEnabled => _prefs.getBool(_kCervixTracking) ?? false;
+
+  bool get ovulationTestTrackingEnabled =>
+      _prefs.getBool(_kOvulationTestTracking) ?? false;
+
+  Future<void> setOvulationTestTrackingEnabled(bool value) async {
+    await _prefs.setBool(_kOvulationTestTracking, value);
+    notifyListeners();
+  }
+
+  /// Default OFF like every reminder. Fires once, at the estimated fertile
+  /// window's start, at [reminderTime].
+  bool get ovulationRemindersEnabled =>
+      _prefs.getBool(_kOvulationRemindersEnabled) ?? false;
+
+  Future<void> setOvulationRemindersEnabled(bool value) async {
+    await _prefs.setBool(_kOvulationRemindersEnabled, value);
+    notifyListeners();
+  }
 
   Future<void> setCervixTrackingEnabled(bool value) async {
     await _prefs.setBool(_kCervixTracking, value);
@@ -275,6 +297,41 @@ class AppPreferences extends ChangeNotifier {
     } else {
       await _prefs.setInt(_kAppointmentReminderAt, value.millisecondsSinceEpoch);
     }
+    notifyListeners();
+  }
+
+  /// Follows the system by default, like [locale].
+  ThemeMode get themeMode {
+    switch (_prefs.getString(_kThemeMode)) {
+      case 'light':
+        return ThemeMode.light;
+      case 'dark':
+        return ThemeMode.dark;
+      default:
+        return ThemeMode.system;
+    }
+  }
+
+  Future<void> setThemeMode(ThemeMode value) async {
+    if (value == ThemeMode.system) {
+      await _prefs.remove(_kThemeMode);
+    } else {
+      await _prefs.setString(_kThemeMode, value.name);
+    }
+    notifyListeners();
+  }
+
+  /// Which companion mascot decorates the home screen. See [Mascot].
+  Mascot get mascot {
+    final raw = _prefs.getString(_kMascot);
+    return Mascot.values.firstWhere(
+      (m) => m.name == raw,
+      orElse: () => Mascot.droplet,
+    );
+  }
+
+  Future<void> setMascot(Mascot value) async {
+    await _prefs.setString(_kMascot, value.name);
     notifyListeners();
   }
 }

@@ -1056,4 +1056,90 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get insightUnknown4 =>
       'Stress, Reisen und Krankheit können den Eisprung verschieben — eine \"verspätete\" Periode heißt oft nur: später Eisprung.';
+
+  @override
+  String get settingsThemeLabel => 'Design';
+
+  @override
+  String get settingsThemeSystem => 'System';
+
+  @override
+  String get settingsThemeLight => 'Hell';
+
+  @override
+  String get settingsThemeDark => 'Dunkel';
+
+  @override
+  String get settingsMascotLabel => 'Begleit-Maskottchen';
+
+  @override
+  String get mascotDroplet => 'Tröpfchen';
+
+  @override
+  String get mascotFlower => 'Blume';
+
+  @override
+  String get mascotMoon => 'Mond';
+
+  @override
+  String get mascotNone => 'Keins';
+
+  @override
+  String homeWindowCountdown(int days) {
+    return 'Das vorhergesagte Fenster beginnt in etwa $days Tagen';
+  }
+
+  @override
+  String homeOvulationCountdown(int days) {
+    return 'Geschätzter Eisprung in etwa $days Tagen';
+  }
+
+  @override
+  String get homeQuickLogTitle => 'Wie fühlt sich dein Körper heute an?';
+
+  @override
+  String get actionSave => 'Speichern';
+
+  @override
+  String get insightsTrackerHubTitle => 'Deine Tracker';
+
+  @override
+  String get trackerHistoryEmpty => 'Noch keine Einträge in diesem Zeitraum';
+
+  @override
+  String get rangeFilter1m => '1 Mon.';
+
+  @override
+  String get rangeFilter3m => '3 Mon.';
+
+  @override
+  String get rangeFilter6m => '6 Mon.';
+
+  @override
+  String get dayLogOvulationTestLabel => 'Ovulationstest';
+
+  @override
+  String get ovulationTestNegative => 'Negativ';
+
+  @override
+  String get ovulationTestPositive => 'Positiv';
+
+  @override
+  String get settingsOvulationTestToggle => 'Ovulationstest';
+
+  @override
+  String get settingsRemindersOvulationLabel =>
+      'Hinweis aufs fruchtbare Fenster';
+
+  @override
+  String get reminderOvulationTitle => 'Geschätztes fruchtbares Fenster naht';
+
+  @override
+  String get reminderOvulationBody =>
+      'Basierend auf deinen Zyklen könnte dein geschätztes fruchtbares Fenster bald beginnen.';
+
+  @override
+  String trackerEntriesCount(int count) {
+    return '$count Einträge';
+  }
 }

@@ -1060,4 +1060,90 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get insightUnknown4 =>
       'Le stress, les voyages et la maladie peuvent décaler l\'ovulation — des règles \"en retard\" signifient souvent juste une ovulation tardive.';
+
+  @override
+  String get settingsThemeLabel => 'Thème';
+
+  @override
+  String get settingsThemeSystem => 'Système';
+
+  @override
+  String get settingsThemeLight => 'Clair';
+
+  @override
+  String get settingsThemeDark => 'Sombre';
+
+  @override
+  String get settingsMascotLabel => 'Mascotte compagnon';
+
+  @override
+  String get mascotDroplet => 'Gouttelette';
+
+  @override
+  String get mascotFlower => 'Fleur';
+
+  @override
+  String get mascotMoon => 'Lune';
+
+  @override
+  String get mascotNone => 'Aucune';
+
+  @override
+  String homeWindowCountdown(int days) {
+    return 'La fenêtre prévue commence dans environ $days jours';
+  }
+
+  @override
+  String homeOvulationCountdown(int days) {
+    return 'Ovulation estimée dans environ $days jours';
+  }
+
+  @override
+  String get homeQuickLogTitle => 'Comment ton corps se sent-il aujourd\'hui ?';
+
+  @override
+  String get actionSave => 'Enregistrer';
+
+  @override
+  String get insightsTrackerHubTitle => 'Tes suivis';
+
+  @override
+  String get trackerHistoryEmpty =>
+      'Aucune entrée sur cette période pour l\'instant';
+
+  @override
+  String get rangeFilter1m => '1 mois';
+
+  @override
+  String get rangeFilter3m => '3 mois';
+
+  @override
+  String get rangeFilter6m => '6 mois';
+
+  @override
+  String get dayLogOvulationTestLabel => 'Test d\'ovulation';
+
+  @override
+  String get ovulationTestNegative => 'Négatif';
+
+  @override
+  String get ovulationTestPositive => 'Positif';
+
+  @override
+  String get settingsOvulationTestToggle => 'Test d\'ovulation';
+
+  @override
+  String get settingsRemindersOvulationLabel => 'Alerte fenêtre fertile';
+
+  @override
+  String get reminderOvulationTitle => 'La fenêtre fertile estimée approche';
+
+  @override
+  String get reminderOvulationBody =>
+      'D\'après tes cycles enregistrés, ta fenêtre fertile estimée pourrait bientôt commencer.';
+
+  @override
+  String trackerEntriesCount(int count) {
+    return '$count entrées';
+  }
 }

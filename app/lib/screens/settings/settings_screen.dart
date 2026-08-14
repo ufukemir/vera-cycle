@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../models/enums.dart';
 import '../../services/pin_vault.dart';
 import '../../services/reminder_service.dart';
 import '../../state/app_preferences.dart';
@@ -93,6 +94,33 @@ class SettingsScreen extends StatelessWidget {
       fireAtLocalWallClock: fireDate,
       title: l10n.reminderPeriodEndTitle,
       body: l10n.reminderPeriodEndBody,
+    );
+  }
+
+  Future<void> _rescheduleOvulationReminder(BuildContext context) async {
+    final prefs = context.read<AppPreferences>();
+    final reminders = context.read<ReminderService>();
+
+    if (!prefs.ovulationRemindersEnabled) {
+      await reminders.cancel(ReminderCategory.ovulation);
+      return;
+    }
+
+    final status = context.read<CycleController>().todayStatus;
+    if (!status.hasFertileEstimate) return;
+
+    if (!context.mounted) return;
+    final l10n = AppLocalizations.of(context)!;
+    await reminders.requestPermission();
+
+    final time = prefs.reminderTime;
+    final start = status.fertileWindowStart!;
+    await reminders.scheduleOneOff(
+      category: ReminderCategory.ovulation,
+      fireAtLocalWallClock: DateTime(
+          start.year, start.month, start.day, time.hour, time.minute),
+      title: l10n.reminderOvulationTitle,
+      body: l10n.reminderOvulationBody,
     );
   }
 
@@ -229,6 +257,46 @@ class SettingsScreen extends StatelessWidget {
               ),
             ),
             const Divider(),
+            _sectionHeading(context, l10n.settingsThemeLabel),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: SegmentedButton<ThemeMode>(
+                segments: [
+                  ButtonSegment(
+                      value: ThemeMode.system,
+                      label: Text(l10n.settingsThemeSystem)),
+                  ButtonSegment(
+                      value: ThemeMode.light,
+                      label: Text(l10n.settingsThemeLight)),
+                  ButtonSegment(
+                      value: ThemeMode.dark,
+                      label: Text(l10n.settingsThemeDark)),
+                ],
+                selected: {prefs.themeMode},
+                onSelectionChanged: (s) => prefs.setThemeMode(s.first),
+              ),
+            ),
+            _sectionHeading(context, l10n.settingsMascotLabel),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Wrap(
+                spacing: 8,
+                children: [
+                  for (final entry in {
+                    Mascot.droplet: l10n.mascotDroplet,
+                    Mascot.flower: l10n.mascotFlower,
+                    Mascot.moon: l10n.mascotMoon,
+                    Mascot.none: l10n.mascotNone,
+                  }.entries)
+                    ChoiceChip(
+                      label: Text(entry.value),
+                      selected: prefs.mascot == entry.key,
+                      onSelected: (_) => prefs.setMascot(entry.key),
+                    ),
+                ],
+              ),
+            ),
+            const Divider(),
             SwitchListTile(
               title: Text(l10n.settingsRemindersLabel),
               value: prefs.remindersEnabled,
@@ -317,6 +385,14 @@ class SettingsScreen extends StatelessWidget {
                   if (context.mounted) await _rescheduleWaterReminder(context);
                 },
               ),
+            SwitchListTile(
+              title: Text(l10n.settingsRemindersOvulationLabel),
+              value: prefs.ovulationRemindersEnabled,
+              onChanged: (v) async {
+                await prefs.setOvulationRemindersEnabled(v);
+                if (context.mounted) await _rescheduleOvulationReminder(context);
+              },
+            ),
             ListTile(
               title: Text(l10n.settingsRemindersAppointmentLabel),
               subtitle: prefs.appointmentReminderAt == null
@@ -387,6 +463,11 @@ class SettingsScreen extends StatelessWidget {
               title: Text(l10n.settingsCervixToggle),
               value: prefs.cervixTrackingEnabled,
               onChanged: (v) => prefs.setCervixTrackingEnabled(v),
+            ),
+            SwitchListTile(
+              title: Text(l10n.settingsOvulationTestToggle),
+              value: prefs.ovulationTestTrackingEnabled,
+              onChanged: (v) => prefs.setOvulationTestTrackingEnabled(v),
             ),
             const Divider(),
             ListTile(

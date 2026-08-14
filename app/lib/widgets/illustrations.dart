@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import '../models/enums.dart';
 import '../theme/app_theme.dart';
 
 /// Original, hand-coded flat vector illustrations — the app's answer to the
@@ -33,6 +34,92 @@ class HeroIllustration extends StatelessWidget {
       child: CustomPaint(painter: _ScenePainter(scene)),
     );
   }
+}
+
+/// A small hand-drawn companion character (see [Mascot]) — original kawaii
+/// vector art with a gentle bobbing animation. Purely decorative; renders
+/// nothing for [Mascot.none].
+class MascotAvatar extends StatefulWidget {
+  const MascotAvatar({super.key, required this.mascot, this.size = 56});
+
+  final Mascot mascot;
+  final double size;
+
+  @override
+  State<MascotAvatar> createState() => _MascotAvatarState();
+}
+
+class _MascotAvatarState extends State<MascotAvatar>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 2400),
+  )..repeat(reverse: true);
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (widget.mascot == Mascot.none) return const SizedBox.shrink();
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) => Transform.translate(
+        offset: Offset(0, -3 * Curves.easeInOut.transform(_controller.value)),
+        child: child,
+      ),
+      child: CustomPaint(
+        size: Size.square(widget.size),
+        painter: _MascotPainter(widget.mascot),
+      ),
+    );
+  }
+}
+
+class _MascotPainter extends CustomPainter {
+  _MascotPainter(this.mascot);
+
+  final Mascot mascot;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final scene = _ScenePainter(IllustrationScene.dropletFriend);
+    final c = size.center(Offset.zero);
+    switch (mascot) {
+      case Mascot.droplet:
+        scene._droplet(canvas, c.translate(0, size.height * 0.06), size.height * 0.32);
+      case Mascot.flower:
+        scene._flower(canvas, c, size.height * 0.26, AppPalette.terracotta);
+        _face(canvas, c, size.height * 0.30, AppPalette.plum);
+      case Mascot.moon:
+        scene._moon(canvas, c, size.height * 0.4);
+        _face(canvas, c.translate(-size.width * 0.12, 0), size.height * 0.32,
+            Colors.white);
+      case Mascot.none:
+        break;
+    }
+  }
+
+  void _face(Canvas canvas, Offset c, double r, Color color) {
+    final eye = Paint()..color = color;
+    canvas.drawCircle(Offset(c.dx - r * 0.22, c.dy - r * 0.05), r * 0.07, eye);
+    canvas.drawCircle(Offset(c.dx + r * 0.22, c.dy - r * 0.05), r * 0.07, eye);
+    final smile = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = r * 0.06
+      ..strokeCap = StrokeCap.round;
+    canvas.drawArc(
+        Rect.fromCircle(center: Offset(c.dx, c.dy + r * 0.12), radius: r * 0.18),
+        math.pi * 0.15, math.pi * 0.7, false, smile);
+  }
+
+  @override
+  bool shouldRepaint(covariant _MascotPainter oldDelegate) =>
+      oldDelegate.mascot != mascot;
 }
 
 /// A real-photograph hero card: openly-licensed photo (see

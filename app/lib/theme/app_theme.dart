@@ -48,31 +48,57 @@ class AppPalette {
   );
 }
 
-ThemeData buildAppTheme() {
+ThemeData buildAppTheme() => _buildTheme(Brightness.light);
+
+/// Warm dark counterpart — same rose/terracotta/gold identity on deep plum
+/// surfaces rather than a generic gray dark theme.
+ThemeData buildDarkAppTheme() => _buildTheme(Brightness.dark);
+
+ThemeData _buildTheme(Brightness brightness) {
+  final isDark = brightness == Brightness.dark;
   final base = ColorScheme.fromSeed(
     seedColor: AppPalette.rose,
-    brightness: Brightness.light,
+    brightness: brightness,
   );
 
-  final colorScheme = base.copyWith(
-    primary: AppPalette.rose,
-    onPrimary: Colors.white,
-    primaryContainer: AppPalette.roseSoft,
-    onPrimaryContainer: AppPalette.roseSoftText,
-    secondary: AppPalette.terracotta,
-    onSecondary: Colors.white,
-    secondaryContainer: AppPalette.terracottaSoft,
-    onSecondaryContainer: AppPalette.terracottaSoftText,
-    tertiary: AppPalette.gold,
-    onTertiary: Colors.white,
-    tertiaryContainer: AppPalette.goldSoft,
-    onTertiaryContainer: AppPalette.goldSoftText,
-    error: AppPalette.error,
-    surface: AppPalette.cream,
-    onSurface: AppPalette.plum,
-  );
+  final colorScheme = isDark
+      ? base.copyWith(
+          primary: const Color(0xFFE87BA4),
+          onPrimary: const Color(0xFF3B0A20),
+          primaryContainer: const Color(0xFF5C2340),
+          onPrimaryContainer: AppPalette.roseSoft,
+          secondary: const Color(0xFFEFA98C),
+          onSecondary: const Color(0xFF3F1D0E),
+          secondaryContainer: const Color(0xFF5C3423),
+          onSecondaryContainer: AppPalette.terracottaSoft,
+          tertiary: const Color(0xFFE0B45C),
+          onTertiary: const Color(0xFF3B2A05),
+          tertiaryContainer: const Color(0xFF54401A),
+          onTertiaryContainer: AppPalette.goldSoft,
+          error: const Color(0xFFE57373),
+          surface: const Color(0xFF241A1E),
+          onSurface: const Color(0xFFF2E6E9),
+        )
+      : base.copyWith(
+          primary: AppPalette.rose,
+          onPrimary: Colors.white,
+          primaryContainer: AppPalette.roseSoft,
+          onPrimaryContainer: AppPalette.roseSoftText,
+          secondary: AppPalette.terracotta,
+          onSecondary: Colors.white,
+          secondaryContainer: AppPalette.terracottaSoft,
+          onSecondaryContainer: AppPalette.terracottaSoftText,
+          tertiary: AppPalette.gold,
+          onTertiary: Colors.white,
+          tertiaryContainer: AppPalette.goldSoft,
+          onTertiaryContainer: AppPalette.goldSoftText,
+          error: AppPalette.error,
+          surface: AppPalette.cream,
+          onSurface: AppPalette.plum,
+        );
 
   final textTheme = _buildTextTheme(colorScheme);
+  final cardColor = isDark ? const Color(0xFF2E2226) : Colors.white;
 
   return ThemeData(
     useMaterial3: true,
@@ -94,7 +120,7 @@ ThemeData buildAppTheme() {
     ),
     cardTheme: CardThemeData(
       elevation: 0,
-      color: Colors.white,
+      color: cardColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
         side: BorderSide(color: colorScheme.outlineVariant.withValues(alpha: 0.4)),
@@ -122,7 +148,7 @@ ThemeData buildAppTheme() {
       ),
     ),
     navigationBarTheme: NavigationBarThemeData(
-      backgroundColor: Colors.white,
+      backgroundColor: cardColor,
       indicatorColor: colorScheme.primaryContainer,
       elevation: 0,
     ),

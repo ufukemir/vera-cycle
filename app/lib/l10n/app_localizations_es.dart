@@ -1050,4 +1050,89 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get insightUnknown4 =>
       'El estrés, los viajes y las enfermedades pueden desplazar la ovulación — un periodo \"tardío\" a menudo solo significa ovulación tardía.';
+
+  @override
+  String get settingsThemeLabel => 'Tema';
+
+  @override
+  String get settingsThemeSystem => 'Sistema';
+
+  @override
+  String get settingsThemeLight => 'Claro';
+
+  @override
+  String get settingsThemeDark => 'Oscuro';
+
+  @override
+  String get settingsMascotLabel => 'Mascota acompañante';
+
+  @override
+  String get mascotDroplet => 'Gotita';
+
+  @override
+  String get mascotFlower => 'Flor';
+
+  @override
+  String get mascotMoon => 'Luna';
+
+  @override
+  String get mascotNone => 'Ninguna';
+
+  @override
+  String homeWindowCountdown(int days) {
+    return 'La ventana prevista empieza en unos $days días';
+  }
+
+  @override
+  String homeOvulationCountdown(int days) {
+    return 'Ovulación estimada en unos $days días';
+  }
+
+  @override
+  String get homeQuickLogTitle => '¿Cómo se siente tu cuerpo hoy?';
+
+  @override
+  String get actionSave => 'Guardar';
+
+  @override
+  String get insightsTrackerHubTitle => 'Tus registros';
+
+  @override
+  String get trackerHistoryEmpty => 'Aún no hay registros en este rango';
+
+  @override
+  String get rangeFilter1m => '1 mes';
+
+  @override
+  String get rangeFilter3m => '3 meses';
+
+  @override
+  String get rangeFilter6m => '6 meses';
+
+  @override
+  String get dayLogOvulationTestLabel => 'Test de ovulación';
+
+  @override
+  String get ovulationTestNegative => 'Negativo';
+
+  @override
+  String get ovulationTestPositive => 'Positivo';
+
+  @override
+  String get settingsOvulationTestToggle => 'Test de ovulación';
+
+  @override
+  String get settingsRemindersOvulationLabel => 'Aviso de ventana fértil';
+
+  @override
+  String get reminderOvulationTitle => 'Se acerca la ventana fértil estimada';
+
+  @override
+  String get reminderOvulationBody =>
+      'Según tus ciclos registrados, tu ventana fértil estimada podría empezar pronto.';
+
+  @override
+  String trackerEntriesCount(int count) {
+    return '$count registros';
+  }
 }

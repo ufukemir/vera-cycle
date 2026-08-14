@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../../services/cycle_insights.dart';
 import '../../state/cycle_controller.dart';
+import 'tracker_history_screen.dart';
 import 'widgets/phase_tips_section.dart';
 import 'widgets/symptom_frequency_bar_row.dart';
 
@@ -61,8 +62,70 @@ class InsightsScreen extends StatelessWidget {
                 maxCycleDay: CycleInsights.maxCycleDay,
               ),
             const SizedBox(height: 28),
+            Text(l10n.insightsTrackerHubTitle,
+                style: Theme.of(context).textTheme.titleMedium),
+            const SizedBox(height: 12),
+            GridView.count(
+              crossAxisCount: 3,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              childAspectRatio: 0.95,
+              children: [
+                for (final type in TrackerType.values)
+                  _TrackerTile(type: type),
+              ],
+            ),
+            const SizedBox(height: 28),
             PhaseTipsSection(phase: controller.todayStatus.phase),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _TrackerTile extends StatelessWidget {
+  const _TrackerTile({required this.type});
+
+  final TrackerType type;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final scheme = Theme.of(context).colorScheme;
+    return Material(
+      color: scheme.surfaceContainerHigh,
+      borderRadius: BorderRadius.circular(18),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(18),
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => TrackerHistoryScreen(type: type)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle, color: scheme.primaryContainer),
+                child: Icon(trackerIcon(type),
+                    size: 20, color: scheme.onPrimaryContainer),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                trackerTitle(l10n, type),
+                style: Theme.of(context).textTheme.labelMedium,
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
         ),
       ),
     );

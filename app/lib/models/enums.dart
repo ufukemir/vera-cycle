@@ -79,6 +79,16 @@ enum CervixOpening { closed, medium, open }
 /// Cervix firmness (fertility-awareness method). Advanced/opt-in tracker.
 enum CervixFirmness { soft, medium, firm }
 
+/// Home-screen companion mascot — hand-drawn vector characters (see
+/// `illustrations.dart`), a playful reference-app pattern rebuilt with
+/// original art. `none` hides it entirely; purely decorative.
+enum Mascot { droplet, flower, moon, none }
+
+/// Optional ovulation (LH) test result for a day. Opt-in tracker, default
+/// off. The app records the result, it never interprets it — see CLAUDE.md
+/// principle 7.
+enum OvulationTestResult { negative, positive }
+
 /// Why the user opened the app, collected once during onboarding. Informs
 /// light personalization only (e.g. which optional trackers default on) —
 /// never gates a core feature behind it.

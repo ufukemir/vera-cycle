@@ -351,5 +351,52 @@
   "insightLuteal6": "A consistent sleep routine can noticeably soften late-luteal mood dips.",
   "insightUnknown2": "Tracking just three cycles is often enough to see your own pattern emerge.",
   "insightUnknown3": "Cycles are personal — comparing yours to a friend's rarely tells you anything useful.",
-  "insightUnknown4": "Stress, travel, and illness can all shift ovulation — a \"late\" period often just means late ovulation."
+  "insightUnknown4": "Stress, travel, and illness can all shift ovulation — a \"late\" period often just means late ovulation.",
+  "settingsThemeLabel": "Theme",
+  "settingsThemeSystem": "System",
+  "settingsThemeLight": "Light",
+  "settingsThemeDark": "Dark",
+  "settingsMascotLabel": "Companion mascot",
+  "mascotDroplet": "Droplet",
+  "mascotFlower": "Flower",
+  "mascotMoon": "Moon",
+  "mascotNone": "None",
+  "homeWindowCountdown": "Predicted window starts in about {days} days",
+  "@homeWindowCountdown": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "homeOvulationCountdown": "Estimated ovulation in about {days} days",
+  "@homeOvulationCountdown": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "homeQuickLogTitle": "How does your body feel today?",
+  "actionSave": "Save",
+  "insightsTrackerHubTitle": "Your trackers",
+  "trackerHistoryEmpty": "No entries in this range yet",
+  "rangeFilter1m": "1 mo",
+  "rangeFilter3m": "3 mo",
+  "rangeFilter6m": "6 mo",
+  "dayLogOvulationTestLabel": "Ovulation test",
+  "ovulationTestNegative": "Negative",
+  "ovulationTestPositive": "Positive",
+  "settingsOvulationTestToggle": "Ovulation test",
+  "settingsRemindersOvulationLabel": "Fertile window heads-up",
+  "reminderOvulationTitle": "Estimated fertile window approaching",
+  "reminderOvulationBody": "Based on your logged cycles, your estimated fertile window may start soon.",
+  "trackerEntriesCount": "{count} entries",
+  "@trackerEntriesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

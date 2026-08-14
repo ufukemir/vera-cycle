@@ -11,7 +11,8 @@ enum ReminderCategory {
   periodEnd(2, 'period_end', 'Period end check-in'),
   medication(3, 'medication', 'Medication'),
   water(4, 'water', 'Water'),
-  appointment(5, 'appointment', 'Appointment');
+  appointment(5, 'appointment', 'Appointment'),
+  ovulation(6, 'ovulation', 'Fertile window');
 
   const ReminderCategory(this.notificationId, this.channelId, this.channelName);
 

@@ -21,6 +21,7 @@ class DayLog {
     this.sexualActivity,
     this.basalTempC,
     this.mucus,
+    this.ovulationTest,
     Set<BreastExamFinding>? breastExam,
     this.cervixPosition,
     this.cervixOpening,
@@ -55,6 +56,7 @@ class DayLog {
   final bool? sexualActivity;
   final double? basalTempC;
   final CervicalMucus? mucus;
+  final OvulationTestResult? ovulationTest;
   final Set<BreastExamFinding> breastExam;
   final CervixPosition? cervixPosition;
   final CervixOpening? cervixOpening;
@@ -79,6 +81,7 @@ class DayLog {
       sexualActivity == null &&
       basalTempC == null &&
       mucus == null &&
+      ovulationTest == null &&
       breastExam.isEmpty &&
       cervixPosition == null &&
       cervixOpening == null &&
@@ -114,6 +117,8 @@ class DayLog {
     bool clearBasalTemp = false,
     CervicalMucus? mucus,
     bool clearMucus = false,
+    OvulationTestResult? ovulationTest,
+    bool clearOvulationTest = false,
     Set<BreastExamFinding>? breastExam,
     CervixPosition? cervixPosition,
     bool clearCervixPosition = false,
@@ -143,6 +148,8 @@ class DayLog {
           : (sexualActivity ?? this.sexualActivity),
       basalTempC: clearBasalTemp ? null : (basalTempC ?? this.basalTempC),
       mucus: clearMucus ? null : (mucus ?? this.mucus),
+      ovulationTest:
+          clearOvulationTest ? null : (ovulationTest ?? this.ovulationTest),
       breastExam: breastExam ?? this.breastExam,
       cervixPosition: clearCervixPosition
           ? null
@@ -174,6 +181,7 @@ class DayLog {
         if (sexualActivity != null) 'sexualActivity': sexualActivity,
         if (basalTempC != null) 'basalTempC': basalTempC,
         if (mucus != null) 'mucus': mucus!.name,
+        if (ovulationTest != null) 'ovulationTest': ovulationTest!.name,
         if (breastExam.isNotEmpty)
           'breastExam': breastExam.map((b) => b.name).toList()..sort(),
         if (cervixPosition != null) 'cervixPosition': cervixPosition!.name,
@@ -206,6 +214,8 @@ class DayLog {
       sexualActivity: json['sexualActivity'] as bool?,
       basalTempC: (json['basalTempC'] as num?)?.toDouble(),
       mucus: _byName(CervicalMucus.values, json['mucus']),
+      ovulationTest:
+          _byName(OvulationTestResult.values, json['ovulationTest']),
       breastExam: <BreastExamFinding>{
         for (final raw in (json['breastExam'] as List<dynamic>? ?? const []))
           ...[_byName(BreastExamFinding.values, raw)]

@@ -15,6 +15,7 @@ void main() {
       cervixPosition: CervixPosition.high,
       cervixOpening: CervixOpening.medium,
       cervixFirmness: CervixFirmness.soft,
+      ovulationTest: OvulationTestResult.positive,
       waterIntakeMl: 1500,
       sleepMinutes: 480,
       weightKg: 62.5,
@@ -29,6 +30,7 @@ void main() {
     expect(restored.cervixPosition, CervixPosition.high);
     expect(restored.cervixOpening, CervixOpening.medium);
     expect(restored.cervixFirmness, CervixFirmness.soft);
+    expect(restored.ovulationTest, OvulationTestResult.positive);
     expect(restored.waterIntakeMl, 1500);
     expect(restored.sleepMinutes, 480);
     expect(restored.weightKg, 62.5);

@@ -12,7 +12,9 @@ import 'widgets/cycle_day_badge.dart';
 import 'widgets/cycle_ring.dart';
 import 'widgets/daily_insight_card.dart';
 import 'widgets/period_started_button.dart';
+import 'widgets/phase_timeline_bar.dart';
 import 'widgets/prediction_range_card.dart';
+import 'widgets/quick_log_sheet.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -21,14 +23,27 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final controller = context.watch<CycleController>();
+    final prefs = context.watch<AppPreferences>();
     final status = controller.todayStatus;
     final prediction = controller.prediction;
     // The ring's scale is purely decorative framing, so falling back to the
     // user's own declared estimate (Settings → Prediction settings) is fine
     // even though `PredictionRangeCard` would never treat that estimate as a
     // real prediction — see CycleRing's doc comment.
-    final ringLength = prediction.meanLength?.round() ??
-        context.watch<AppPreferences>().estimatedCycleLengthDays;
+    final ringLength =
+        prediction.meanLength?.round() ?? prefs.estimatedCycleLengthDays;
+
+    int? daysToWindow;
+    int? daysToOvulation;
+    if (prediction.hasPrediction) {
+      final d = daysBetween(today(), prediction.earliestStart!);
+      if (d > 0) daysToWindow = d;
+    }
+    if (status.hasFertileEstimate) {
+      final ovulation = addDays(status.fertileWindowEnd!, -1);
+      final d = daysBetween(today(), ovulation);
+      if (d > 0) daysToOvulation = d;
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -50,14 +65,53 @@ class HomeScreen extends StatelessWidget {
             children: [
               const SizedBox(height: 8),
               DoodleFrame(
-                child: CycleRing(
-                  cycleDay: status.cycleDay,
-                  cycleLength: ringLength,
-                  child:
-                      CycleDayBadge(cycleDay: status.cycleDay, phase: status.phase),
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  alignment: Alignment.center,
+                  children: [
+                    CycleRing(
+                      cycleDay: status.cycleDay,
+                      cycleLength: ringLength,
+                      child: CycleDayBadge(
+                          cycleDay: status.cycleDay, phase: status.phase),
+                    ),
+                    Positioned(
+                      right: -18,
+                      bottom: -6,
+                      child: MascotAvatar(mascot: prefs.mascot),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(height: 28),
+              const SizedBox(height: 20),
+              PhaseTimelineBar(
+                status: status,
+                cycleLength: ringLength,
+                periodLength: prefs.estimatedPeriodLengthDays,
+              ),
+              if (daysToWindow != null) ...[
+                const SizedBox(height: 10),
+                Text(
+                  l10n.homeWindowCountdown(daysToWindow),
+                  style: Theme.of(context).textTheme.bodyMedium,
+                  textAlign: TextAlign.center,
+                ),
+              ],
+              if (daysToOvulation != null) ...[
+                const SizedBox(height: 4),
+                Text(
+                  l10n.homeOvulationCountdown(daysToOvulation),
+                  style: Theme.of(context).textTheme.bodySmall,
+                  textAlign: TextAlign.center,
+                ),
+              ],
+              const SizedBox(height: 20),
+              OutlinedButton.icon(
+                onPressed: () => showQuickLogSheet(context),
+                icon: const Icon(Icons.add_reaction_outlined),
+                label: Text(l10n.homeQuickLogTitle),
+              ),
+              const SizedBox(height: 20),
               PredictionRangeCard(prediction: prediction),
               if (status.hasFertileEstimate) ...[
                 const SizedBox(height: 12),

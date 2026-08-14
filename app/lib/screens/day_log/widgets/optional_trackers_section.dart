@@ -18,6 +18,8 @@ class OptionalTrackersSection extends StatelessWidget {
     required this.onBasalTempChanged,
     required this.mucus,
     required this.onMucusChanged,
+    required this.ovulationTest,
+    required this.onOvulationTestChanged,
     required this.breastExam,
     required this.onBreastExamChanged,
     required this.cervixPosition,
@@ -34,6 +36,8 @@ class OptionalTrackersSection extends StatelessWidget {
   final ValueChanged<double?> onBasalTempChanged;
   final CervicalMucus? mucus;
   final ValueChanged<CervicalMucus?> onMucusChanged;
+  final OvulationTestResult? ovulationTest;
+  final ValueChanged<OvulationTestResult?> onOvulationTestChanged;
   final Set<BreastExamFinding> breastExam;
   final ValueChanged<Set<BreastExamFinding>> onBreastExamChanged;
   final CervixPosition? cervixPosition;
@@ -64,6 +68,9 @@ class OptionalTrackersSection extends StatelessWidget {
         ),
       if (prefs.mucusTrackingEnabled)
         _MucusSelector(value: mucus, onChanged: onMucusChanged),
+      if (prefs.ovulationTestTrackingEnabled)
+        _OvulationTestSelector(
+            value: ovulationTest, onChanged: onOvulationTestChanged),
       if (prefs.breastExamTrackingEnabled)
         _BreastExamMultiselect(value: breastExam, onChanged: onBreastExamChanged),
       if (prefs.cervixTrackingEnabled)
@@ -190,6 +197,42 @@ class _MucusSelector extends StatelessWidget {
                 label: Text(entry.value),
                 selected: value == entry.key,
                 onSelected: (selected) => onChanged(selected ? entry.key : null),
+              ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _OvulationTestSelector extends StatelessWidget {
+  const _OvulationTestSelector({required this.value, required this.onChanged});
+
+  final OvulationTestResult? value;
+  final ValueChanged<OvulationTestResult?> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final labels = <OvulationTestResult, String>{
+      OvulationTestResult.negative: l10n.ovulationTestNegative,
+      OvulationTestResult.positive: l10n.ovulationTestPositive,
+    };
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(l10n.dayLogOvulationTestLabel,
+            style: Theme.of(context).textTheme.bodyMedium),
+        const SizedBox(height: 8),
+        Wrap(
+          spacing: 8,
+          children: [
+            for (final entry in labels.entries)
+              ChoiceChip(
+                label: Text(entry.value),
+                selected: value == entry.key,
+                onSelected: (selected) =>
+                    onChanged(selected ? entry.key : null),
               ),
           ],
         ),

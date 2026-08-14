@@ -1042,4 +1042,89 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get insightUnknown4 =>
       'التوتر والسفر والمرض يمكن أن تؤخر الإباضة — فالدورة \"المتأخرة\" غالبًا تعني إباضة متأخرة فحسب.';
+
+  @override
+  String get settingsThemeLabel => 'المظهر';
+
+  @override
+  String get settingsThemeSystem => 'النظام';
+
+  @override
+  String get settingsThemeLight => 'فاتح';
+
+  @override
+  String get settingsThemeDark => 'داكن';
+
+  @override
+  String get settingsMascotLabel => 'التميمة المرافقة';
+
+  @override
+  String get mascotDroplet => 'قطرة';
+
+  @override
+  String get mascotFlower => 'زهرة';
+
+  @override
+  String get mascotMoon => 'قمر';
+
+  @override
+  String get mascotNone => 'بدون';
+
+  @override
+  String homeWindowCountdown(int days) {
+    return 'تبدأ النافذة المتوقعة بعد نحو $days أيام';
+  }
+
+  @override
+  String homeOvulationCountdown(int days) {
+    return 'الإباضة المقدرة بعد نحو $days أيام';
+  }
+
+  @override
+  String get homeQuickLogTitle => 'كيف يشعر جسمك اليوم؟';
+
+  @override
+  String get actionSave => 'حفظ';
+
+  @override
+  String get insightsTrackerHubTitle => 'متتبعاتك';
+
+  @override
+  String get trackerHistoryEmpty => 'لا توجد إدخالات في هذا النطاق بعد';
+
+  @override
+  String get rangeFilter1m => 'شهر';
+
+  @override
+  String get rangeFilter3m => '3 أشهر';
+
+  @override
+  String get rangeFilter6m => '6 أشهر';
+
+  @override
+  String get dayLogOvulationTestLabel => 'اختبار الإباضة';
+
+  @override
+  String get ovulationTestNegative => 'سلبي';
+
+  @override
+  String get ovulationTestPositive => 'إيجابي';
+
+  @override
+  String get settingsOvulationTestToggle => 'اختبار الإباضة';
+
+  @override
+  String get settingsRemindersOvulationLabel => 'تنبيه اقتراب نافذة الخصوبة';
+
+  @override
+  String get reminderOvulationTitle => 'نافذة الخصوبة المقدرة تقترب';
+
+  @override
+  String get reminderOvulationBody =>
+      'بناءً على دوراتك المسجلة، قد تبدأ نافذة الخصوبة المقدرة قريبًا.';
+
+  @override
+  String trackerEntriesCount(int count) {
+    return '$count إدخالات';
+  }
 }

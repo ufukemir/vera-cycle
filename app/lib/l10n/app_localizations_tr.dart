@@ -1045,4 +1045,90 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get insightUnknown4 =>
       'Stres, seyahat ve hastalık ovülasyonu kaydırabilir — \"geciken\" regl çoğu zaman sadece geciken ovülasyon demektir.';
+
+  @override
+  String get settingsThemeLabel => 'Tema';
+
+  @override
+  String get settingsThemeSystem => 'Sistem';
+
+  @override
+  String get settingsThemeLight => 'Açık';
+
+  @override
+  String get settingsThemeDark => 'Koyu';
+
+  @override
+  String get settingsMascotLabel => 'Yol arkadaşı maskot';
+
+  @override
+  String get mascotDroplet => 'Damla';
+
+  @override
+  String get mascotFlower => 'Çiçek';
+
+  @override
+  String get mascotMoon => 'Ay';
+
+  @override
+  String get mascotNone => 'Yok';
+
+  @override
+  String homeWindowCountdown(int days) {
+    return 'Tahmini pencereye yaklaşık $days gün var';
+  }
+
+  @override
+  String homeOvulationCountdown(int days) {
+    return 'Tahmini ovülasyona yaklaşık $days gün var';
+  }
+
+  @override
+  String get homeQuickLogTitle => 'Bugün vücudun nasıl hissediyor?';
+
+  @override
+  String get actionSave => 'Kaydet';
+
+  @override
+  String get insightsTrackerHubTitle => 'Takiplerin';
+
+  @override
+  String get trackerHistoryEmpty => 'Bu aralıkta henüz kayıt yok';
+
+  @override
+  String get rangeFilter1m => '1 ay';
+
+  @override
+  String get rangeFilter3m => '3 ay';
+
+  @override
+  String get rangeFilter6m => '6 ay';
+
+  @override
+  String get dayLogOvulationTestLabel => 'Ovülasyon testi';
+
+  @override
+  String get ovulationTestNegative => 'Negatif';
+
+  @override
+  String get ovulationTestPositive => 'Pozitif';
+
+  @override
+  String get settingsOvulationTestToggle => 'Ovülasyon testi';
+
+  @override
+  String get settingsRemindersOvulationLabel =>
+      'Doğurgan pencere yaklaşınca haber ver';
+
+  @override
+  String get reminderOvulationTitle => 'Tahmini doğurgan pencere yaklaşıyor';
+
+  @override
+  String get reminderOvulationBody =>
+      'Kaydettiğin döngülere göre tahmini doğurgan penceren yakında başlayabilir.';
+
+  @override
+  String trackerEntriesCount(int count) {
+    return '$count kayıt';
+  }
 }

@@ -56,6 +56,8 @@ class MainApp extends StatelessWidget {
           return MaterialApp(
             onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
             theme: buildAppTheme(),
+            darkTheme: buildDarkAppTheme(),
+            themeMode: prefs.themeMode,
             locale: prefs.locale,
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,

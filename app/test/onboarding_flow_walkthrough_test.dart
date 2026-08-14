@@ -152,7 +152,11 @@ void main() {
     // With both platform channels mocked, canUseBiometrics() resolves to
     // false cleanly — the biometric-offer stage is skipped and onComplete
     // fires directly, straight into BuildingPlanStep's ~2.2s checklist.
-    await tester.pumpAndSettle();
+    // Bounded pumps rather than pumpAndSettle: the home screen hosts an
+    // endlessly-repeating mascot animation, so the tree never "settles".
+    for (var i = 0; i < 14; i++) {
+      await tester.pump(const Duration(milliseconds: 300));
+    }
 
     // 10. Home shell.
     expect(find.byType(NavigationBar), findsOneWidget);

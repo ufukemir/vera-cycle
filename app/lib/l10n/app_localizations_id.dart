@@ -1049,4 +1049,89 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get insightUnknown4 =>
       'Stres, perjalanan, dan sakit bisa menggeser ovulasi — haid yang \"terlambat\" sering hanya berarti ovulasi yang terlambat.';
+
+  @override
+  String get settingsThemeLabel => 'Tema';
+
+  @override
+  String get settingsThemeSystem => 'Sistem';
+
+  @override
+  String get settingsThemeLight => 'Terang';
+
+  @override
+  String get settingsThemeDark => 'Gelap';
+
+  @override
+  String get settingsMascotLabel => 'Maskot pendamping';
+
+  @override
+  String get mascotDroplet => 'Tetesan';
+
+  @override
+  String get mascotFlower => 'Bunga';
+
+  @override
+  String get mascotMoon => 'Bulan';
+
+  @override
+  String get mascotNone => 'Tidak ada';
+
+  @override
+  String homeWindowCountdown(int days) {
+    return 'Perkiraan jendela dimulai sekitar $days hari lagi';
+  }
+
+  @override
+  String homeOvulationCountdown(int days) {
+    return 'Perkiraan ovulasi sekitar $days hari lagi';
+  }
+
+  @override
+  String get homeQuickLogTitle => 'Bagaimana perasaan tubuhmu hari ini?';
+
+  @override
+  String get actionSave => 'Simpan';
+
+  @override
+  String get insightsTrackerHubTitle => 'Pelacakmu';
+
+  @override
+  String get trackerHistoryEmpty => 'Belum ada catatan dalam rentang ini';
+
+  @override
+  String get rangeFilter1m => '1 bln';
+
+  @override
+  String get rangeFilter3m => '3 bln';
+
+  @override
+  String get rangeFilter6m => '6 bln';
+
+  @override
+  String get dayLogOvulationTestLabel => 'Tes ovulasi';
+
+  @override
+  String get ovulationTestNegative => 'Negatif';
+
+  @override
+  String get ovulationTestPositive => 'Positif';
+
+  @override
+  String get settingsOvulationTestToggle => 'Tes ovulasi';
+
+  @override
+  String get settingsRemindersOvulationLabel => 'Pemberitahuan masa subur';
+
+  @override
+  String get reminderOvulationTitle => 'Perkiraan masa subur mendekat';
+
+  @override
+  String get reminderOvulationBody =>
+      'Berdasarkan siklus yang kamu catat, perkiraan masa suburmu mungkin segera dimulai.';
+
+  @override
+  String trackerEntriesCount(int count) {
+    return '$count catatan';
+  }
 }

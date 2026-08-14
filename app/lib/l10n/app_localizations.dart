@@ -2031,6 +2031,162 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Stress, travel, and illness can all shift ovulation — a \"late\" period often just means late ovulation.'**
   String get insightUnknown4;
+
+  /// No description provided for @settingsThemeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get settingsThemeLabel;
+
+  /// No description provided for @settingsThemeSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get settingsThemeSystem;
+
+  /// No description provided for @settingsThemeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get settingsThemeLight;
+
+  /// No description provided for @settingsThemeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get settingsThemeDark;
+
+  /// No description provided for @settingsMascotLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Companion mascot'**
+  String get settingsMascotLabel;
+
+  /// No description provided for @mascotDroplet.
+  ///
+  /// In en, this message translates to:
+  /// **'Droplet'**
+  String get mascotDroplet;
+
+  /// No description provided for @mascotFlower.
+  ///
+  /// In en, this message translates to:
+  /// **'Flower'**
+  String get mascotFlower;
+
+  /// No description provided for @mascotMoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Moon'**
+  String get mascotMoon;
+
+  /// No description provided for @mascotNone.
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get mascotNone;
+
+  /// No description provided for @homeWindowCountdown.
+  ///
+  /// In en, this message translates to:
+  /// **'Predicted window starts in about {days} days'**
+  String homeWindowCountdown(int days);
+
+  /// No description provided for @homeOvulationCountdown.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated ovulation in about {days} days'**
+  String homeOvulationCountdown(int days);
+
+  /// No description provided for @homeQuickLogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How does your body feel today?'**
+  String get homeQuickLogTitle;
+
+  /// No description provided for @actionSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get actionSave;
+
+  /// No description provided for @insightsTrackerHubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your trackers'**
+  String get insightsTrackerHubTitle;
+
+  /// No description provided for @trackerHistoryEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No entries in this range yet'**
+  String get trackerHistoryEmpty;
+
+  /// No description provided for @rangeFilter1m.
+  ///
+  /// In en, this message translates to:
+  /// **'1 mo'**
+  String get rangeFilter1m;
+
+  /// No description provided for @rangeFilter3m.
+  ///
+  /// In en, this message translates to:
+  /// **'3 mo'**
+  String get rangeFilter3m;
+
+  /// No description provided for @rangeFilter6m.
+  ///
+  /// In en, this message translates to:
+  /// **'6 mo'**
+  String get rangeFilter6m;
+
+  /// No description provided for @dayLogOvulationTestLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Ovulation test'**
+  String get dayLogOvulationTestLabel;
+
+  /// No description provided for @ovulationTestNegative.
+  ///
+  /// In en, this message translates to:
+  /// **'Negative'**
+  String get ovulationTestNegative;
+
+  /// No description provided for @ovulationTestPositive.
+  ///
+  /// In en, this message translates to:
+  /// **'Positive'**
+  String get ovulationTestPositive;
+
+  /// No description provided for @settingsOvulationTestToggle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ovulation test'**
+  String get settingsOvulationTestToggle;
+
+  /// No description provided for @settingsRemindersOvulationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Fertile window heads-up'**
+  String get settingsRemindersOvulationLabel;
+
+  /// No description provided for @reminderOvulationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated fertile window approaching'**
+  String get reminderOvulationTitle;
+
+  /// No description provided for @reminderOvulationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Based on your logged cycles, your estimated fertile window may start soon.'**
+  String get reminderOvulationBody;
+
+  /// No description provided for @trackerEntriesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} entries'**
+  String trackerEntriesCount(int count);
 }
 
 class _AppLocalizationsDelegate
