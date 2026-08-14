@@ -18,7 +18,7 @@
   "navInsights": "インサイト",
   "navSettings": "設定",
   "onboardingPrivacyTitle": "ようこそ",
-  "onboardingPrivacyBody": "あなたのデータはこの端末だけに保存されます。アカウントもクラウドもなく、どこにも送信されません — アプリにはインターネット権限すらなく、端末の設定からご自身で確認できます。",
+  "onboardingPrivacyBody": "あなたの周期データは暗号化され、この端末にのみ保存されます。アカウントもクラウド同期もなく、記録した内容がアップロードされることはありません。無料版では広告が表示され、広告はインターネットを使いますが、あなたの健康データを受け取ることは一切ありません。",
   "onboardingLastPeriodTitle": "前回の生理はいつ始まりましたか？",
   "onboardingPickDate": "日付を選ぶ",
   "onboardingCycleLengthTitle": "周期はふだん何日くらいですか？",

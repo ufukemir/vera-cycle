@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
+import '../../services/pregnancy_info.dart';
 import '../../util/day.dart';
 import '../../widgets/illustrations.dart';
 import '../day_log/day_log_screen.dart';
@@ -13,6 +14,7 @@ import 'widgets/cycle_ring.dart';
 import 'widgets/daily_insight_card.dart';
 import 'widgets/period_started_button.dart';
 import 'widgets/phase_timeline_bar.dart';
+import 'widgets/pregnancy_card.dart';
 import 'widgets/prediction_range_card.dart';
 import 'widgets/quick_log_sheet.dart';
 
@@ -32,6 +34,10 @@ class HomeScreen extends StatelessWidget {
     // real prediction — see CycleRing's doc comment.
     final ringLength =
         prediction.meanLength?.round() ?? prefs.estimatedCycleLengthDays;
+
+    final pregnancyInfo = (prefs.pregnancyMode && prefs.pregnancyLmp != null)
+        ? PregnancyInfo.from(prefs.pregnancyLmp!)
+        : null;
 
     int? daysToWindow;
     int? daysToOvulation;
@@ -64,6 +70,13 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 8),
+              if (pregnancyInfo != null) ...[
+                PregnancyCard(info: pregnancyInfo),
+                const SizedBox(height: 24),
+                DailyInsightCard(phase: status.phase),
+                const SizedBox(height: 24),
+                const AdPlaceholderBanner(),
+              ] else ...[
               DoodleFrame(
                 child: Stack(
                   clipBehavior: Clip.none,
@@ -127,6 +140,7 @@ class HomeScreen extends StatelessWidget {
               const PeriodStartedButton(),
               const SizedBox(height: 24),
               const AdPlaceholderBanner(),
+              ],
             ],
           ),
         ),

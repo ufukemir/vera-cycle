@@ -1,8 +1,17 @@
 # Vera (kod adı: cycle/cycle_app) — Proje Talimatları
 
-Mahremiyet-önce adet ve döngü takip uygulaması. Konumlanma: **"Verin telefonundan çıkmaz —
-ve bunu kanıtlayabiliriz."** Flo'nun yapısal olarak kopyalayamayacağı şey budur: Flo'nun iş
-modeli veriye dayanır, bizimki dayanmaz.
+Adet ve döngü takip uygulaması. Konumlanma (2026-08-14'te revize): **"Sağlık verilerin
+telefonunda şifreli kalır — hesap yok, bulut yok."** Ücretsiz sürüm reklam destekli,
+Premium reklamları kaldırır.
+
+> **ÖNEMLİ İLKE REVİZYONU (2026-08-14, Ufuk'un kararı):** Aşağıdaki 1-2-3 numaralı
+> ilkeler yumuşatıldı. Ufuk ücretsiz sürüme GERÇEK reklam (AdMob), abonelik ekranı,
+> gebelik takip modu ve partner özelliği istedi. Reklam SDK'sı INTERNET izni
+> gerektirdiğinden "internet izni bile yok" iddiası ARTIK GEÇERSİZDİR ve uygulama
+> içinde/mağaza metinlerinde KULLANILMAZ. Yeni dürüst iddia: "Döngü/sağlık verilerin
+> yalnızca cihazında, şifreli durur; hesap yok, bulut senkronu yok. Ücretsiz sürümde
+> reklamlar Google AdMob üzerinden gösterilir ve AdMob kendi çerçevesinde cihaz
+> tanımlayıcıları işleyebilir." Sağlık verisi hiçbir zaman reklam ağına GÖNDERİLMEZ.
 
 > Uygulama içi görünen ad **Vera** (2026-08-13'te seçildi — Latince "gerçek/doğru",
 > dürüst tahmin ilkesini isme kodluyor). Dart paket adı/dizin adı/bundle id hâlâ
@@ -17,23 +26,29 @@ modeli veriye dayanır, bizimki dayanmaz.
 - `docs/04-magaza-listesi.md` — mağaza adı/altyazı/anahtar kelime taslağı (ASO)
 - `docs/backlog.md` — kapsam dışı fikirler buraya
 
-## Mimari ilkeler (değiştirilemez)
+## Mimari ilkeler (2026-08-14 revizyonuyla)
 
-1. **Veri cihazdan çıkmaz.** Sunucu yok, hesap yok, e-posta yok, bulut senkronu yok.
-   Kullanıcının kendi başlattığı dışa aktarma dışında veri hiçbir yere gitmez.
-2. **Android'de `INTERNET` izni YOKTUR.** Bu, pazarlama sözü değil; kullanıcının manifest'ten
-   kendi doğrulayabileceği teknik kanıttır. Bir özellik ağ gerektiriyorsa o özellik yazılmaz.
-3. **Üçüncü taraf SDK yok.** Analitik yok, çökme raporlama yok, reklam yok, attribution yok.
-   Bağımlılık eklemeden önce: bu paket ağ açar mı, telemetri gönderir mi? Gönderiyorsa girmez.
+1. **Sağlık verisi cihazdan çıkmaz.** Sunucu yok, hesap yok, e-posta yok, bulut senkronu
+   yok. Kullanıcının kendi başlattığı dışa aktarma/paylaşma dışında sağlık verisi hiçbir
+   yere gitmez. Reklam SDK'sının kendi trafiği bu kapsamda değildir ama ona ASLA sağlık
+   verisi, döngü bilgisi veya türevi sinyal verilmez.
+2. ~~Android'de INTERNET izni yoktur~~ **(REVİZE)** INTERNET izni yalnızca reklam SDK'sı
+   için vardır. Uygulamanın kendi kodu ağ çağrısı YAPMAZ; bunun regresyon testi
+   `android_manifest_test.dart`'ta izin listesi sabitlemesiyle sürer.
+3. ~~Üçüncü taraf SDK yok~~ **(REVİZE)** Tek istisna: Google Mobile Ads. Analitik,
+   çökme raporlama, attribution SDK'sı hâlâ YASAK. Yeni bağımlılık eklemeden önce aynı
+   soru sorulur: ağ açar mı, telemetri gönderir mi?
 4. **Diskte şifreli.** Tüm döngü verisi AES-GCM ile şifrelenir; anahtar Keychain/Keystore'da
    (donanım destekli). Cihaz yedeklerine düz metin sızmaz.
 5. **Dürüst tahmin.** Sahte kesinlik yasak. Tahmin daima belirsizlik aralığıyla gösterilir
    ("28–31 Ağustos arası", tek bir gün değil). Veri azsa/döngü düzensizse bunu açıkça söyleriz.
-6. **Sömürücü paywall yok.** Karanlık desen yok, sahte geri sayım yok, iptali zorlaştırma yok.
-   Çekirdek takip özellikleri daima ücretsiz kalır.
+6. **Sömürücü paywall yok.** Premium ekranı vardır (2026-08-14) ama karanlık desen yok:
+   sahte geri sayım yok, sahte indirim yok, sahte kullanıcı sayısı yok, iptali
+   zorlaştırma yok. Çekirdek takip özellikleri daima ücretsiz kalır; Premium = reklamsız
+   deneyim + gelecekteki ek konfor özellikleri.
 7. **Tıbbi teşhis değil.** Uygulama tanı koymaz, gebeliği önleme yöntemi olarak sunulmaz.
-   Bu iddialar tıbbi cihaz regülasyonunu tetikler (bkz. Natural Cycles / FDA). Sınırın
-   dışında kalırız.
+   Gebelik modu (2026-08-14) bilgilendirme amaçlıdır: gebelik yaşı/tahmini doğum tarihi
+   SAT'a dayalı kaba hesaptır ve bunu açıkça söyler; tıbbi takip yerine geçmez.
 
 ## Teknik kurallar
 - Flutter (`app/` dizini). iOS + Android eşit öncelikli.

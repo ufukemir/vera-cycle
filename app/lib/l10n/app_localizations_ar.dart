@@ -95,7 +95,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get onboardingPrivacyBody =>
-      'تبقى بياناتك فقط على هذا الجهاز. لا يوجد حساب، ولا سحابة، ولا يُرسَل أي شيء إلى أي مكان — التطبيق لا يملك حتى إذن استخدام الإنترنت، ويمكنك التحقق من ذلك بنفسك من إعدادات هاتفك.';
+      'تبقى بيانات دورتك على هذا الجهاز فقط ومشفّرة. لا يوجد حساب ولا مزامنة سحابية — لا يُرفع أي شيء تسجّلينه. النسخة المجانية تعرض إعلانات تستخدم الإنترنت، لكنها لا تصل أبدًا إلى بياناتك الصحية.';
 
   @override
   String get onboardingLastPeriodTitle => 'متى بدأت آخر دورة شهرية لك؟';
@@ -574,11 +574,11 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get privacyScreenNoNetwork =>
-      'هذا التطبيق لا يملك خادمًا. بل لا يملك حتى إذن استخدام الإنترنت — يمكنك التحقق من ذلك بنفسك من إعدادات التطبيقات في هاتفك.';
+      'لا يملك هذا التطبيق خادمًا خاصًا ولا نظام حسابات — لا تُرفع سجلاتك أبدًا. تتضمن النسخة المجانية إعلانات Google التي تتصل بالإنترنت، لكنها لا تتلقى أي شيء تسجّلينه.';
 
   @override
   String get privacyScreenNoThirdParty =>
-      'لا توجد تحليلات، ولا تقارير أعطال، ولا أي حزمة تطوير طرف ثالث من أي نوع.';
+      'لا توجد تحليلات ولا تقارير أعطال ولا حزم تتبع. المكوّن الوحيد من طرف ثالث هو حزمة إعلانات Google في النسخة المجانية — وبريميوم يزيلها تمامًا.';
 
   @override
   String get privacyScreenExport =>
@@ -1130,4 +1130,105 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get assistantTyping => 'فيرا تكتب…';
+
+  @override
+  String get premiumTitle => 'فيرا بريميوم';
+
+  @override
+  String get premiumHeadline => 'فيرا بلا إعلانات';
+
+  @override
+  String get premiumSubhead =>
+      'تبقى جميع ميزات التتبع مجانية إلى الأبد. بريميوم يزيل الإعلانات فقط ويدعم التطوير.';
+
+  @override
+  String get premiumBenefitNoAds => 'لا إعلانات في أي مكان بالتطبيق';
+
+  @override
+  String get premiumBenefitSupport => 'يدعم تطبيقًا مستقلاً يضع الخصوصية أولاً';
+
+  @override
+  String get premiumBenefitFuture => 'يشمل ميزات بريميوم المستقبلية';
+
+  @override
+  String get premiumMonthly => 'شهري';
+
+  @override
+  String get premiumYearly => 'سنوي';
+
+  @override
+  String get premiumYearlyNote => 'يُفوتر مرة واحدة سنويًا';
+
+  @override
+  String get premiumSubscribeCta => 'متابعة';
+
+  @override
+  String get premiumRestore => 'استعادة الشراء';
+
+  @override
+  String get premiumCancelNote =>
+      'يمكنك الإلغاء في أي وقت من حساب المتجر. لا عدّ تنازلي ولا ضغط — إن لم يكن الوقت مناسبًا، تستمر النسخة المجانية كما هي.';
+
+  @override
+  String get premiumActiveBadge => 'بريميوم مُفعّل';
+
+  @override
+  String get premiumDevToggle => 'محاكاة بريميوم (تطوير)';
+
+  @override
+  String get settingsPremiumEntry => 'فيرا بريميوم';
+
+  @override
+  String get adTestNotice => 'إعلان تجريبي — ليس فعليًا بعد';
+
+  @override
+  String get settingsPregnancyModeLabel => 'وضع الحمل';
+
+  @override
+  String get pregnancyLmpLabel => 'أول يوم في آخر دورة';
+
+  @override
+  String pregnancyWeekLabel(int weeks, int days) {
+    return 'الأسبوع $weeks، اليوم $days';
+  }
+
+  @override
+  String get pregnancyDueDateLabel => 'تاريخ الولادة المقدَّر';
+
+  @override
+  String pregnancyDaysLeft(int days) {
+    return 'يتبقى نحو $days يومًا';
+  }
+
+  @override
+  String pregnancyTrimesterLabel(int n) {
+    return 'الثلث $n';
+  }
+
+  @override
+  String get pregnancyDisclaimer =>
+      'تُقدَّر التواريخ من آخر دورة وفق قاعدة الـ280 يومًا المعتادة. تعطي الموجات فوق الصوتية تاريخًا أدق، والإباضة المتأخرة تزيح هذه الأرقام — هذه معلومات وليست رعاية طبية.';
+
+  @override
+  String get pregnancyWeeklyNoteTitle => 'هذا الأسبوع';
+
+  @override
+  String get pregnancyNeedsLmp => 'أضيفي أول يوم في آخر دورة لبدء التتبع.';
+
+  @override
+  String get pregnancyOutOfRange =>
+      'هذا التاريخ أقدم من 42 أسبوعًا — حدّثيه أو أوقفي وضع الحمل.';
+
+  @override
+  String get partnerShareTitle => 'مشاركة ملخص مع الشريك';
+
+  @override
+  String get partnerShareBody =>
+      'ينشئ ملخصًا نصيًا قصيرًا — مرحلتك الحالية ونافذتك المقدَّرة — ترسلينه بنفسك عبر أي تطبيق. لا مزامنة حية ولا حساب شريك: لا يُشارَك شيء إلا إذا أرسلتِه.';
+
+  @override
+  String get partnerShareCta => 'إنشاء ملخص';
+
+  @override
+  String get partnerSummaryHeader => 'ملخص الدورة من فيرا';
 }

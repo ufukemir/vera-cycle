@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 
 import 'l10n/app_localizations.dart';
@@ -15,6 +18,9 @@ import 'theme/app_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Ad SDK init is fire-and-forget: a slow or failed init must never delay
+  // or block the app, which works entirely offline apart from ads.
+  unawaited(MobileAds.instance.initialize());
   final preferences = await AppPreferences.load();
   runApp(MainApp(preferences: preferences));
 }

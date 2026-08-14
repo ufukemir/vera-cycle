@@ -24,9 +24,9 @@ class AssistantContext {
 
 /// On-device Q&A over a curated, clinician-reviewable knowledge base —
 /// backlog item 1's "gerçekten cihaz-üstü asistan". Deliberately NOT a
-/// cloud LLM: a Gemini/GPT call would need the INTERNET permission and
-/// instantly break the store-provable "your data never leaves the phone"
-/// claim. Retrieval is keyword-scored; answers are hand-written (so they
+/// cloud LLM: even though the app now carries INTERNET for ads, sending
+/// health questions to a third-party model would break the promise that
+/// cycle data never leaves the device. Retrieval is keyword-scored; answers are hand-written (so they
 /// are *correct*, hedged, non-diagnostic — CLAUDE.md principle 7) and get
 /// personalized with the user's own numbers where relevant.
 ///
@@ -68,8 +68,8 @@ class CycleAssistant {
     }
     if (hasAny(['kimsin', 'nesin sen', 'who are you', 'what are you'])) {
       return lang == 'tr'
-          ? 'Ben Vera Asistan — tamamen bu telefonda çalışan bir yardımcıyım. Cevaplarım uzman gözetiminde hazırlanmış bir bilgi tabanından gelir ve kendi kayıtlarınla kişiselleşir; hiçbir şey internete gitmez.'
-          : "I'm the Vera Assistant — a helper that runs entirely on this phone. My answers come from a curated knowledge base and get personalized with your own logs; nothing ever goes to the internet.";
+          ? 'Ben Vera Asistan — tamamen bu telefonda çalışan bir yardımcıyım. Cevaplarım özenle hazırlanmış bir bilgi tabanından gelir ve kendi kayıtlarınla kişiselleşir; sorduklarının hiçbiri cihazdan çıkmaz.'
+          : "I'm the Vera Assistant — a helper that runs entirely on this phone. My answers come from a curated knowledge base and get personalized with your own logs; your questions never leave the device.";
     }
     return null;
   }
@@ -337,9 +337,9 @@ const _topics = <_Topic>[
     },
     answer: {
       'tr':
-          'Verilerin yalnızca bu cihazda, AES-GCM ile şifreli durur; anahtar telefonunun güvenli donanımında (Keychain/Keystore) saklanır. Uygulamanın internet izni bile yok — bunu telefonunun ayarlarından kendin doğrulayabilirsin. Ben de dahil: bu sohbet tamamen cihazında çalışır, hiçbir soru veya cevap dışarı gitmez.',
+          'Verilerin yalnızca bu cihazda, AES-GCM ile şifreli durur; anahtar telefonunun güvenli donanımında (Keychain/Keystore) saklanır. Hesap yok, bulut senkronu yok — kaydettiklerin hiçbir yere yüklenmez. Ben de dahil: bu sohbet tamamen cihazında çalışır, hiçbir soru veya cevap dışarı gitmez. Ücretsiz sürümde gösterilen reklamlar internete bağlanır ama sağlık verilerine erişmez; Premium reklamları tamamen kaldırır.',
       'en':
-          'Your data lives only on this device, encrypted with AES-GCM; the key sits in your phone\'s secure hardware (Keychain/Keystore). The app does not even have internet permission — you can verify that yourself in your phone\'s settings. That includes me: this chat runs entirely on-device, and no question or answer ever leaves it.',
+          'Your data lives only on this device, encrypted with AES-GCM; the key sits in your phone\'s secure hardware (Keychain/Keystore). There is no account and no cloud sync — nothing you log is uploaded. That includes me: this chat runs entirely on-device, and no question or answer ever leaves it. Ads in the free version do connect to the internet, but they never receive your health data; Premium removes them entirely.',
     },
   ),
   _Topic(

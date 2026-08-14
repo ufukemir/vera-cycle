@@ -47,6 +47,9 @@ class AppPreferences extends ChangeNotifier {
   static const _kOvulationTestTracking = 'track_ovulation_test';
   static const _kOvulationRemindersEnabled = 'ovulation_reminders_enabled';
   static const _kMascot = 'mascot';
+  static const _kPremiumActive = 'premium_active';
+  static const _kPregnancyMode = 'pregnancy_mode';
+  static const _kPregnancyLmp = 'pregnancy_lmp';
 
   bool get onboardingComplete => _prefs.getBool(_kOnboardingComplete) ?? false;
 
@@ -332,6 +335,41 @@ class AppPreferences extends ChangeNotifier {
 
   Future<void> setMascot(Mascot value) async {
     await _prefs.setString(_kMascot, value.name);
+    notifyListeners();
+  }
+
+  /// Whether the ad-free Premium tier is active. Today this is only ever
+  /// set locally (there is no billing integration yet); once real
+  /// subscriptions ship it must be derived from the store receipt, not
+  /// from this flag alone.
+  bool get premiumActive => _prefs.getBool(_kPremiumActive) ?? false;
+
+  Future<void> setPremiumActive(bool value) async {
+    await _prefs.setBool(_kPremiumActive, value);
+    notifyListeners();
+  }
+
+  /// Pregnancy mode swaps the home screen's prediction UI for gestational
+  /// tracking. Off by default; turning it on requires an LMP date.
+  bool get pregnancyMode => _prefs.getBool(_kPregnancyMode) ?? false;
+
+  Future<void> setPregnancyMode(bool value) async {
+    await _prefs.setBool(_kPregnancyMode, value);
+    notifyListeners();
+  }
+
+  /// First day of the last menstrual period, the basis for gestational age.
+  DateTime? get pregnancyLmp {
+    final millis = _prefs.getInt(_kPregnancyLmp);
+    return millis == null ? null : DateTime.fromMillisecondsSinceEpoch(millis);
+  }
+
+  Future<void> setPregnancyLmp(DateTime? value) async {
+    if (value == null) {
+      await _prefs.remove(_kPregnancyLmp);
+    } else {
+      await _prefs.setInt(_kPregnancyLmp, value.millisecondsSinceEpoch);
+    }
     notifyListeners();
   }
 }

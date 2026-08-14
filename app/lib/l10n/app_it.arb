@@ -18,7 +18,7 @@
   "navInsights": "Statistiche",
   "navSettings": "Impostazioni",
   "onboardingPrivacyTitle": "Benvenuta",
-  "onboardingPrivacyBody": "I tuoi dati restano solo su questo dispositivo. Nessun account, nessun cloud, nulla viene inviato da nessuna parte — l'app non ha nemmeno il permesso di usare internet, e puoi verificarlo tu stessa nelle impostazioni del telefono.",
+  "onboardingPrivacyBody": "I dati del tuo ciclo restano solo su questo dispositivo, criptati. Nessun account, nessuna sincronizzazione cloud — nulla di ciò che registri viene caricato. La versione gratuita mostra annunci che usano internet, ma non ricevono mai i tuoi dati sanitari.",
   "onboardingLastPeriodTitle": "Quando è iniziato il tuo ultimo ciclo?",
   "onboardingPickDate": "Scegli una data",
   "onboardingCycleLengthTitle": "Quanto dura di solito il tuo ciclo?",

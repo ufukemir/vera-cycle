@@ -95,7 +95,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboardingPrivacyBody =>
-      'Your data stays only on this device. There\'s no account, no cloud, nothing sent anywhere — the app doesn\'t even have permission to use the internet, and you can check that yourself in your phone\'s settings.';
+      'Your cycle data stays only on this device, encrypted. There\'s no account and no cloud sync — nothing you log is ever uploaded. The free version shows ads, which do use the internet, but they never receive your health data.';
 
   @override
   String get onboardingLastPeriodTitle => 'When did your last period start?';
@@ -575,11 +575,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get privacyScreenNoNetwork =>
-      'This app has no server. It doesn\'t have permission to use the internet at all — you can check that yourself in your phone\'s app settings.';
+      'This app has no server of its own and no account system — your logs are never uploaded. The free version does include Google ads, which connect to the internet; they never receive anything you log.';
 
   @override
   String get privacyScreenNoThirdParty =>
-      'There\'s no analytics, no crash reporting, and no third-party SDK of any kind.';
+      'There\'s no analytics, no crash reporting, and no tracking SDK. The only third-party component is Google\'s ad SDK in the free version — Premium removes it entirely.';
 
   @override
   String get privacyScreenExport =>
@@ -1129,4 +1129,107 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get assistantTyping => 'Vera is typing…';
+
+  @override
+  String get premiumTitle => 'Vera Premium';
+
+  @override
+  String get premiumHeadline => 'An ad-free Vera';
+
+  @override
+  String get premiumSubhead =>
+      'Every tracking feature stays free forever. Premium simply removes the ads and supports development.';
+
+  @override
+  String get premiumBenefitNoAds => 'No ads, anywhere in the app';
+
+  @override
+  String get premiumBenefitSupport =>
+      'Supports an independent, privacy-first app';
+
+  @override
+  String get premiumBenefitFuture => 'Includes future Premium comfort features';
+
+  @override
+  String get premiumMonthly => 'Monthly';
+
+  @override
+  String get premiumYearly => 'Yearly';
+
+  @override
+  String get premiumYearlyNote => 'Billed once a year';
+
+  @override
+  String get premiumSubscribeCta => 'Continue';
+
+  @override
+  String get premiumRestore => 'Restore purchase';
+
+  @override
+  String get premiumCancelNote =>
+      'Cancel anytime in your app store account. No countdowns, no pressure — if now isn\'t the time, the free version keeps working exactly as it does today.';
+
+  @override
+  String get premiumActiveBadge => 'Premium is active';
+
+  @override
+  String get premiumDevToggle => 'Simulate Premium (development)';
+
+  @override
+  String get settingsPremiumEntry => 'Vera Premium';
+
+  @override
+  String get adTestNotice => 'Test ad — not a real placement yet';
+
+  @override
+  String get settingsPregnancyModeLabel => 'Pregnancy mode';
+
+  @override
+  String get pregnancyLmpLabel => 'First day of last period';
+
+  @override
+  String pregnancyWeekLabel(int weeks, int days) {
+    return 'Week $weeks, day $days';
+  }
+
+  @override
+  String get pregnancyDueDateLabel => 'Estimated due date';
+
+  @override
+  String pregnancyDaysLeft(int days) {
+    return 'About $days days to go';
+  }
+
+  @override
+  String pregnancyTrimesterLabel(int n) {
+    return 'Trimester $n';
+  }
+
+  @override
+  String get pregnancyDisclaimer =>
+      'Dates are estimated from your last period using the standard 280-day rule. An ultrasound gives a more accurate date, and late ovulation shifts these numbers — this is information, not medical care.';
+
+  @override
+  String get pregnancyWeeklyNoteTitle => 'This week';
+
+  @override
+  String get pregnancyNeedsLmp =>
+      'Add the first day of your last period to start tracking.';
+
+  @override
+  String get pregnancyOutOfRange =>
+      'That date is more than 42 weeks ago — update it or turn pregnancy mode off.';
+
+  @override
+  String get partnerShareTitle => 'Share a summary with a partner';
+
+  @override
+  String get partnerShareBody =>
+      'Creates a short text summary — your current phase and estimated window — that you send yourself through any app. There\'s no live sync and no partner account: nothing is shared unless you send it.';
+
+  @override
+  String get partnerShareCta => 'Create summary';
+
+  @override
+  String get partnerSummaryHeader => 'Cycle summary from Vera';
 }

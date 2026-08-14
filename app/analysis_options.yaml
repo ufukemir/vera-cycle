@@ -1,1 +1,9 @@
 include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    # Swift Package Manager checks plugin sources out here during an iOS
+    # build. Analyzing that copy duplicates every plugin library and
+    # produces hundreds of phantom "defined in both libraries" errors that
+    # say nothing about our code.
+    - build/**

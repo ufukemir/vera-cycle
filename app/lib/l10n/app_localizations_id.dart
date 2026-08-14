@@ -95,7 +95,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get onboardingPrivacyBody =>
-      'Datamu hanya tersimpan di perangkat ini. Tidak ada akun, tidak ada cloud, tidak ada yang dikirim ke mana pun — aplikasi ini bahkan tidak punya izin memakai internet, dan kamu bisa memeriksanya sendiri di pengaturan ponsel.';
+      'Data siklusmu hanya tersimpan di perangkat ini, terenkripsi. Tidak ada akun dan tidak ada sinkronisasi cloud — tidak ada yang kamu catat diunggah. Versi gratis menampilkan iklan yang memang memakai internet, tapi tidak pernah menerima data kesehatanmu.';
 
   @override
   String get onboardingLastPeriodTitle => 'Kapan haid terakhirmu mulai?';
@@ -580,11 +580,11 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get privacyScreenNoNetwork =>
-      'Aplikasi ini tidak memiliki server. Bahkan tidak punya izin memakai internet sama sekali — kamu bisa memeriksanya sendiri di pengaturan aplikasi ponselmu.';
+      'Aplikasi ini tidak punya server sendiri maupun sistem akun — catatanmu tidak pernah diunggah. Versi gratis memuat iklan Google yang terhubung ke internet; iklan itu tidak pernah menerima apa pun yang kamu catat.';
 
   @override
   String get privacyScreenNoThirdParty =>
-      'Tidak ada analitik, tidak ada pelaporan crash, dan tidak ada SDK pihak ketiga dalam bentuk apa pun.';
+      'Tidak ada analitik, pelaporan crash, atau SDK pelacakan. Satu-satunya komponen pihak ketiga adalah SDK iklan Google di versi gratis — Premium menghapusnya sepenuhnya.';
 
   @override
   String get privacyScreenExport =>
@@ -1137,4 +1137,108 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get assistantTyping => 'Vera sedang mengetik…';
+
+  @override
+  String get premiumTitle => 'Vera Premium';
+
+  @override
+  String get premiumHeadline => 'Vera tanpa iklan';
+
+  @override
+  String get premiumSubhead =>
+      'Semua fitur pelacakan tetap gratis selamanya. Premium hanya menghapus iklan dan mendukung pengembangan.';
+
+  @override
+  String get premiumBenefitNoAds => 'Tanpa iklan di mana pun dalam aplikasi';
+
+  @override
+  String get premiumBenefitSupport =>
+      'Mendukung aplikasi independen yang mengutamakan privasi';
+
+  @override
+  String get premiumBenefitFuture =>
+      'Termasuk fitur kenyamanan Premium mendatang';
+
+  @override
+  String get premiumMonthly => 'Bulanan';
+
+  @override
+  String get premiumYearly => 'Tahunan';
+
+  @override
+  String get premiumYearlyNote => 'Ditagih sekali setahun';
+
+  @override
+  String get premiumSubscribeCta => 'Lanjutkan';
+
+  @override
+  String get premiumRestore => 'Pulihkan pembelian';
+
+  @override
+  String get premiumCancelNote =>
+      'Batalkan kapan saja lewat akun toko aplikasimu. Tanpa hitung mundur, tanpa tekanan — kalau sekarang belum waktunya, versi gratis tetap berjalan seperti biasa.';
+
+  @override
+  String get premiumActiveBadge => 'Premium aktif';
+
+  @override
+  String get premiumDevToggle => 'Simulasikan Premium (pengembangan)';
+
+  @override
+  String get settingsPremiumEntry => 'Vera Premium';
+
+  @override
+  String get adTestNotice => 'Iklan uji — belum penempatan asli';
+
+  @override
+  String get settingsPregnancyModeLabel => 'Mode kehamilan';
+
+  @override
+  String get pregnancyLmpLabel => 'Hari pertama haid terakhir';
+
+  @override
+  String pregnancyWeekLabel(int weeks, int days) {
+    return 'Minggu $weeks, hari $days';
+  }
+
+  @override
+  String get pregnancyDueDateLabel => 'Perkiraan tanggal lahir';
+
+  @override
+  String pregnancyDaysLeft(int days) {
+    return 'Sekitar $days hari lagi';
+  }
+
+  @override
+  String pregnancyTrimesterLabel(int n) {
+    return 'Trimester $n';
+  }
+
+  @override
+  String get pregnancyDisclaimer =>
+      'Tanggal diperkirakan dari haid terakhirmu memakai aturan standar 280 hari. USG memberi tanggal yang lebih akurat, dan ovulasi terlambat menggeser angka ini — ini informasi, bukan perawatan medis.';
+
+  @override
+  String get pregnancyWeeklyNoteTitle => 'Minggu ini';
+
+  @override
+  String get pregnancyNeedsLmp =>
+      'Tambahkan hari pertama haid terakhirmu untuk mulai melacak.';
+
+  @override
+  String get pregnancyOutOfRange =>
+      'Tanggal itu lebih dari 42 minggu lalu — perbarui atau matikan mode kehamilan.';
+
+  @override
+  String get partnerShareTitle => 'Bagikan ringkasan dengan pasangan';
+
+  @override
+  String get partnerShareBody =>
+      'Membuat ringkasan teks singkat — fase saat ini dan perkiraan jendelamu — yang kamu kirim sendiri lewat aplikasi apa pun. Tidak ada sinkronisasi langsung dan akun pasangan: tidak ada yang dibagikan kecuali kamu mengirimnya.';
+
+  @override
+  String get partnerShareCta => 'Buat ringkasan';
+
+  @override
+  String get partnerSummaryHeader => 'Ringkasan siklus dari Vera';
 }

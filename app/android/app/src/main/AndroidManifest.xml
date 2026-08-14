@@ -1,7 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Lets a scheduled local reminder survive a device reboot. Not
-         INTERNET — see the receivers below and CLAUDE.md principle 2. -->
+    <!-- Lets a scheduled local reminder survive a device reboot. -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- Required by the ad SDK only (owner decision 2026-08-14). The app's
+         own code makes no network calls; cycle data is never sent anywhere.
+         See CLAUDE.md's revised principles 1-3. -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:label="Vera"
         android:name="${applicationName}"
@@ -33,6 +36,12 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <!-- Google's public sample app id. Replace with the real AdMob app
+             id once Ufuk's AdMob account exists — shipping with the sample
+             id would serve no real ads and violates AdMob policy. -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713" />
         <receiver android:exported="false"
             android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
         <receiver android:exported="false"

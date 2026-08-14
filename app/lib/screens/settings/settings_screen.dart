@@ -8,6 +8,7 @@ import '../../services/reminder_service.dart';
 import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
 import '../export/export_screen.dart';
+import '../premium/premium_screen.dart';
 import 'prediction_settings_screen.dart';
 import 'privacy_screen.dart';
 import 'widgets/language_picker_tile.dart';
@@ -177,6 +178,18 @@ class SettingsScreen extends StatelessWidget {
       title: l10n.reminderAppointmentTitle,
       body: l10n.reminderAppointmentBody,
     );
+  }
+
+  Future<void> _pickLmp(BuildContext context, AppPreferences prefs) async {
+    final now = DateTime.now();
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: prefs.pregnancyLmp ?? now,
+      firstDate: now.subtract(const Duration(days: 300)),
+      lastDate: now,
+    );
+    if (picked == null) return;
+    await prefs.setPregnancyLmp(picked);
   }
 
   Future<void> _confirmErase(BuildContext context) async {
@@ -470,6 +483,40 @@ class SettingsScreen extends StatelessWidget {
               onChanged: (v) => prefs.setOvulationTestTrackingEnabled(v),
             ),
             const Divider(),
+            _sectionHeading(context, l10n.settingsPregnancyModeLabel),
+            SwitchListTile(
+              title: Text(l10n.settingsPregnancyModeLabel),
+              value: prefs.pregnancyMode,
+              onChanged: (v) async {
+                await prefs.setPregnancyMode(v);
+                if (!v || !context.mounted) return;
+                if (prefs.pregnancyLmp == null) {
+                  await _pickLmp(context, prefs);
+                }
+              },
+            ),
+            if (prefs.pregnancyMode)
+              ListTile(
+                title: Text(l10n.pregnancyLmpLabel),
+                subtitle: Text(prefs.pregnancyLmp == null
+                    ? l10n.pregnancyNeedsLmp
+                    : MaterialLocalizations.of(context)
+                        .formatMediumDate(prefs.pregnancyLmp!)),
+                trailing: const Icon(Icons.calendar_today_outlined),
+                onTap: () => _pickLmp(context, prefs),
+              ),
+            const Divider(),
+            ListTile(
+              leading: Icon(Icons.workspace_premium_outlined,
+                  color: Theme.of(context).colorScheme.primary),
+              title: Text(l10n.settingsPremiumEntry),
+              subtitle:
+                  prefs.premiumActive ? Text(l10n.premiumActiveBadge) : null,
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const PremiumScreen()),
+              ),
+            ),
             ListTile(
               title: Text(l10n.predictionSettingsEntry),
               trailing: const Icon(Icons.chevron_right),

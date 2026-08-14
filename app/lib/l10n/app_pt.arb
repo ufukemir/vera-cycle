@@ -18,7 +18,7 @@
   "navInsights": "Estatísticas",
   "navSettings": "Ajustes",
   "onboardingPrivacyTitle": "Boas-vindas",
-  "onboardingPrivacyBody": "Seus dados ficam apenas neste aparelho. Sem conta, sem nuvem, nada é enviado a lugar nenhum — o app nem tem permissão de internet, e você pode verificar isso nas configurações do celular.",
+  "onboardingPrivacyBody": "Os dados do teu ciclo ficam apenas neste aparelho, encriptados. Não há conta nem sincronização na nuvem — nada do que registas é enviado. A versão gratuita mostra anúncios, que usam a internet, mas nunca recebem os teus dados de saúde.",
   "onboardingLastPeriodTitle": "Quando começou sua última menstruação?",
   "onboardingPickDate": "Escolher uma data",
   "onboardingCycleLengthTitle": "Qual a duração típica do seu ciclo?",

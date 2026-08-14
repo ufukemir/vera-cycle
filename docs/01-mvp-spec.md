@@ -13,12 +13,13 @@ Bu listede olmayan özellik v1'e girmez. Yeni fikirler `backlog.md`'ye yazılır
 > özellikle `day_log/`, `onboarding/`, `calendar/`, `settings/`).
 
 ## Ürün tek cümlede
-Adet döngünü, verin telefonundan hiç çıkmadan takip et — ve tahminlerin sana dürüst olsun.
+Adet döngünü, sağlık verin telefonundan hiç çıkmadan takip et — ve tahminlerin
+sana dürüst olsun.
 
 ## Neden var (farklılaşma tezi)
 | Flo'nun zaafı | Bizim cevabımız |
 |---|---|
-| FTC cezası, veri paylaşımı geçmişi, güven açığı | Ağ izni bile yok; kullanıcı doğrulayabilir |
+| FTC cezası, veri paylaşımı geçmişi, güven açığı | Hesap yok, sunucu yok, sağlık verisi cihazdan çıkmaz |
 | Sahte kesinlik ("adetin 14 Mart'ta") | Belirsizlik aralığı + güven seviyesi |
 | Agresif paywall, iptal zorluğu | Çekirdek takip daima ücretsiz, karanlık desen yok |
 | Şişkin arayüz, alakasız içerik akışı | Sade; içerik akışı yok |
@@ -39,7 +40,7 @@ Adet döngünü, verin telefonundan hiç çıkmadan takip et — ve tahminlerin 
 - Bildirim izni için önce uygulama-içi gerçekçi bir önizleme (gerçek OS
   isteminden önce), sonra gerçek izin isteği.
 - Zorunlu PIN kurulumu, ardından kısa "senin için hazırlanıyor" animasyonu.
-- Hesap yok, e-posta yok, sunucu izni yok.
+- Hesap yok, e-posta yok, sunucu yok.
 
 ### 2. Ana ekran
 - Döngünün kaçıncı günü + evre (adet / foliküler / ovülasyon penceresi / luteal).
@@ -85,9 +86,9 @@ Adet döngünü, verin telefonundan hiç çıkmadan takip et — ve tahminlerin 
   soru-cevap (~22 konu; TR+EN tam içerik, diğer diller İngilizceye düşer).
 - Cevaplar kullanıcının kendi verisiyle kişiselleşir (döngü günü, ortalama,
   tahmin penceresi) ama asla tanı koymaz; sohbet geçmişi bilerek KAYDEDİLMEZ.
-- Bulut LLM (Gemini vb.) bilinçli olarak KULLANILMAZ: INTERNET izni
-  gerektirir ve kanıtlanabilir mahremiyet iddiasını bozar (backlog #1'in
-  "gerçekten cihaz-üstü" tezi).
+- Bulut LLM (Gemini vb.) bilinçli olarak KULLANILMAZ: sağlık sorularını
+  üçüncü tarafa göndermek, döngü verisinin cihazdan çıkmaması sözünü bozar
+  (uygulamada INTERNET izni artık var ama yalnızca reklam SDK'sı için).
 
 ### 6. İçgörüler
 - Ortalama döngü uzunluğu, değişkenlik, ortalama adet süresi, kayıtlı döngü sayısı.
@@ -121,15 +122,28 @@ Adet döngünü, verin telefonundan hiç çıkmadan takip et — ve tahminlerin 
   saatiyle: yaklaşan adet başlangıcı, tahmini adet bitişi, ilaç, su,
   randevu (tek seferlik, tarih+saat seçilir). Hepsi varsayılan kapalı.
 
+### 10. Gelir modeli ve gebelik modu (2026-08-14 eklendi)
+- **Reklam destekli ücretsiz sürüm**: Google AdMob banner'ı ana ekranın altında.
+  Uygulamanın kendi kodu ağ çağrısı yapmaz; reklam SDK'sına sağlık verisi
+  ASLA verilmez. `INTERNET` izni yalnızca bunun için vardır.
+- **Vera Premium**: reklamları kaldırır. Fiyat kartları, "iptal her zaman
+  serbest" notu. Sahte geri sayım/indirim/kullanıcı sayısı YASAK olmaya devam
+  eder (ilke 6). Faturalandırma SDK'sı henüz bağlı değil.
+- **Gebelik modu**: SAT'a dayalı gebelik haftası, tahmini doğum tarihi
+  (280 gün), trimester, haftalık bilgilendirme notu. Ultrason daha doğrudur
+  ve bunu ekranda söyler.
+- **Partner özeti**: canlı senkron/partner hesabı YOK. Kullanıcının kendi
+  gönderdiği kısa metin özeti (evre + tahmini pencere), sistem paylaşım
+  sayfasıyla.
+
 ## v1 KAPSAM DIŞI (net)
-Topluluk/sosyal akış · sohbet · yapay zekâ asistanı · gerçek gebelik takip modu
-(onboarding'deki amaç seçimi sadece hafif kişiselleştirme içindir, ayrı bir
-özellik seti değil) · partner paylaşımı/senkron · bulut senkron · hesap sistemi ·
-reklam · abonelik/paywall · giyilebilir cihaz entegrasyonu · menopoz modu ·
-içerik/makale akışı · maskot/evcil hayvan kişiselleştirmesi · sahte kullanıcı
-sayısı rozetleri
+Topluluk/sosyal akış · canlı partner senkronu/partner hesabı · bulut senkron ·
+hesap sistemi · giyilebilir cihaz entegrasyonu · menopoz modu · içerik/makale
+akışı · sahte kullanıcı sayısı rozetleri · sahte geri sayım/indirim
 
 ## Bitti tanımı
 - Tahmin motoru ve şifreleme katmanı testli.
-- Android manifest'inde `INTERNET` izni yok; uygulama uçak modunda tam çalışıyor.
+- Android manifest'i yalnızca gözden geçirilmiş izinleri istiyor
+  (`android_manifest_test.dart` izin listesini sabitliyor); uygulama reklam
+  dışında uçak modunda tam çalışıyor.
 - iOS ve Android'de kurulum → 3 döngü kaydı → tahmin → dışa aktarma akışı elle doğrulandı.

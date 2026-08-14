@@ -4,11 +4,13 @@ import 'dart:typed_data';
 import 'package:cryptography/cryptography.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:printing/printing.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../models/enums.dart';
 import '../../services/backup_service.dart';
 import '../../services/cycle_insights.dart';
 import '../../services/doctor_report_csv.dart';
@@ -93,6 +95,44 @@ class _ExportScreenState extends State<ExportScreen> {
     } finally {
       if (mounted) setState(() => _busy = false);
     }
+  }
+
+  /// The privacy-compatible answer to the reference app's "partner mode":
+  /// a short text summary the user sends themselves through the OS share
+  /// sheet. Live partner sync would need a server and an account, which
+  /// this app deliberately does not have — so instead of a fake version of
+  /// that, this shares exactly what the user chooses to send, once.
+  Future<void> _sharePartnerSummary() async {
+    final l10n = AppLocalizations.of(context)!;
+    final controller = context.read<CycleController>();
+    final status = controller.todayStatus;
+    final prediction = controller.prediction;
+    final fmt = DateFormat.yMMMMd(Localizations.localeOf(context).toString());
+
+    final phaseLabel = switch (status.phase) {
+      CyclePhase.menstrual => l10n.homePhaseMenstrual,
+      CyclePhase.follicular => l10n.homePhaseFollicular,
+      CyclePhase.fertileWindow => l10n.homePhaseFertileWindow,
+      CyclePhase.luteal => l10n.homePhaseLuteal,
+      CyclePhase.unknown => l10n.homePhaseUnknown,
+    };
+
+    final lines = <String>[
+      l10n.partnerSummaryHeader,
+      '',
+      if (status.cycleDay != null) l10n.homeCycleDayLabel(status.cycleDay!),
+      phaseLabel,
+    ];
+    if (prediction.hasPrediction) {
+      lines.add('${l10n.calendarLegendPredicted}: '
+          '${fmt.format(prediction.earliestStart!)} – '
+          '${fmt.format(prediction.latestStart!)}');
+    }
+    lines
+      ..add('')
+      ..add(l10n.homeFertileWindowDisclaimer);
+
+    await SharePlus.instance.share(ShareParams(text: lines.join('\n')));
   }
 
   Future<void> _shareCsv() async {
@@ -215,6 +255,17 @@ class _ExportScreenState extends State<ExportScreen> {
                 OutlinedButton(
                   onPressed: _restoreBackup,
                   child: Text(l10n.exportRestoreBackupButton),
+                ),
+                const SizedBox(height: 32),
+                Text(l10n.partnerShareTitle,
+                    style: Theme.of(context).textTheme.titleMedium),
+                const SizedBox(height: 8),
+                Text(l10n.partnerShareBody),
+                const SizedBox(height: 12),
+                OutlinedButton.icon(
+                  onPressed: _sharePartnerSummary,
+                  icon: const Icon(Icons.favorite_outline),
+                  label: Text(l10n.partnerShareCta),
                 ),
                 const SizedBox(height: 32),
                 Text(l10n.exportDoctorReportHeading,

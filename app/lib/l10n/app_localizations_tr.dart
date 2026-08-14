@@ -96,7 +96,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get onboardingPrivacyBody =>
-      'Verilerin sadece bu cihazda kalır. Hesap yok, bulut yok, hiçbir yere bir şey gönderilmiyor — uygulamanın internet kullanma izni bile yok, bunu telefonunun ayarlarından kendin kontrol edebilirsin.';
+      'Döngü verilerin yalnızca bu cihazda, şifreli olarak kalır. Hesap yok, bulut senkronu yok — kaydettiğin hiçbir şey yüklenmez. Ücretsiz sürümde reklam gösterilir; reklamlar internet kullanır ama sağlık verilerine asla erişmez.';
 
   @override
   String get onboardingLastPeriodTitle => 'Son adetin ne zaman başladı?';
@@ -578,11 +578,11 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get privacyScreenNoNetwork =>
-      'Bu uygulamanın sunucusu yok. İnternet kullanma izni bile yok — bunu telefonunun uygulama ayarlarından kendin kontrol edebilirsin.';
+      'Bu uygulamanın kendi sunucusu ve hesap sistemi yok — kayıtların hiçbir zaman yüklenmez. Ücretsiz sürümde Google reklamları vardır ve bunlar internete bağlanır; kaydettiğin hiçbir şeye erişmezler.';
 
   @override
   String get privacyScreenNoThirdParty =>
-      'Analitik yok, çökme raporlama yok ve hiçbir türde üçüncü taraf SDK\'sı yok.';
+      'Analitik yok, çökme raporlama yok, izleme SDK\'sı yok. Tek üçüncü taraf bileşen, ücretsiz sürümdeki Google reklam SDK\'sıdır — Premium onu tamamen kaldırır.';
 
   @override
   String get privacyScreenExport =>
@@ -1134,4 +1134,108 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get assistantTyping => 'Vera yazıyor…';
+
+  @override
+  String get premiumTitle => 'Vera Premium';
+
+  @override
+  String get premiumHeadline => 'Reklamsız Vera';
+
+  @override
+  String get premiumSubhead =>
+      'Tüm takip özellikleri sonsuza dek ücretsiz kalır. Premium yalnızca reklamları kaldırır ve geliştirmeyi destekler.';
+
+  @override
+  String get premiumBenefitNoAds => 'Uygulamanın hiçbir yerinde reklam yok';
+
+  @override
+  String get premiumBenefitSupport =>
+      'Bağımsız, mahremiyet-önce bir uygulamayı destekler';
+
+  @override
+  String get premiumBenefitFuture =>
+      'Gelecekteki Premium konfor özelliklerini kapsar';
+
+  @override
+  String get premiumMonthly => 'Aylık';
+
+  @override
+  String get premiumYearly => 'Yıllık';
+
+  @override
+  String get premiumYearlyNote => 'Yılda bir kez faturalanır';
+
+  @override
+  String get premiumSubscribeCta => 'Devam et';
+
+  @override
+  String get premiumRestore => 'Satın alımı geri yükle';
+
+  @override
+  String get premiumCancelNote =>
+      'İstediğin zaman mağaza hesabından iptal edebilirsin. Geri sayım yok, baskı yok — şimdi sırası değilse ücretsiz sürüm bugünkü gibi çalışmaya devam eder.';
+
+  @override
+  String get premiumActiveBadge => 'Premium aktif';
+
+  @override
+  String get premiumDevToggle => 'Premium\'u simüle et (geliştirme)';
+
+  @override
+  String get settingsPremiumEntry => 'Vera Premium';
+
+  @override
+  String get adTestNotice => 'Test reklamı — henüz gerçek yayın değil';
+
+  @override
+  String get settingsPregnancyModeLabel => 'Gebelik modu';
+
+  @override
+  String get pregnancyLmpLabel => 'Son adetin ilk günü';
+
+  @override
+  String pregnancyWeekLabel(int weeks, int days) {
+    return '$weeks. hafta, $days. gün';
+  }
+
+  @override
+  String get pregnancyDueDateLabel => 'Tahmini doğum tarihi';
+
+  @override
+  String pregnancyDaysLeft(int days) {
+    return 'Yaklaşık $days gün kaldı';
+  }
+
+  @override
+  String pregnancyTrimesterLabel(int n) {
+    return '$n. trimester';
+  }
+
+  @override
+  String get pregnancyDisclaimer =>
+      'Tarihler, son adetinden standart 280 günlük kurala göre tahmin edilir. Ultrason daha doğru tarih verir ve geç ovülasyon bu sayıları kaydırır — bu bilgilendirmedir, tıbbi takip değildir.';
+
+  @override
+  String get pregnancyWeeklyNoteTitle => 'Bu hafta';
+
+  @override
+  String get pregnancyNeedsLmp =>
+      'Takibe başlamak için son adetinin ilk gününü ekle.';
+
+  @override
+  String get pregnancyOutOfRange =>
+      'Bu tarih 42 haftadan eski — güncelle ya da gebelik modunu kapat.';
+
+  @override
+  String get partnerShareTitle => 'Partnerinle özet paylaş';
+
+  @override
+  String get partnerShareBody =>
+      'Kısa bir metin özeti oluşturur — mevcut evren ve tahmini pencere — ve istediğin uygulamayla sen gönderirsin. Canlı senkron ve partner hesabı yok: sen göndermedikçe hiçbir şey paylaşılmaz.';
+
+  @override
+  String get partnerShareCta => 'Özet oluştur';
+
+  @override
+  String get partnerSummaryHeader => 'Vera\'dan döngü özeti';
 }

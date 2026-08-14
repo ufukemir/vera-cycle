@@ -289,7 +289,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingPrivacyBody.
   ///
   /// In en, this message translates to:
-  /// **'Your data stays only on this device. There\'s no account, no cloud, nothing sent anywhere — the app doesn\'t even have permission to use the internet, and you can check that yourself in your phone\'s settings.'**
+  /// **'Your cycle data stays only on this device, encrypted. There\'s no account and no cloud sync — nothing you log is ever uploaded. The free version shows ads, which do use the internet, but they never receive your health data.'**
   String get onboardingPrivacyBody;
 
   /// No description provided for @onboardingLastPeriodTitle.
@@ -1201,13 +1201,13 @@ abstract class AppLocalizations {
   /// No description provided for @privacyScreenNoNetwork.
   ///
   /// In en, this message translates to:
-  /// **'This app has no server. It doesn\'t have permission to use the internet at all — you can check that yourself in your phone\'s app settings.'**
+  /// **'This app has no server of its own and no account system — your logs are never uploaded. The free version does include Google ads, which connect to the internet; they never receive anything you log.'**
   String get privacyScreenNoNetwork;
 
   /// No description provided for @privacyScreenNoThirdParty.
   ///
   /// In en, this message translates to:
-  /// **'There\'s no analytics, no crash reporting, and no third-party SDK of any kind.'**
+  /// **'There\'s no analytics, no crash reporting, and no tracking SDK. The only third-party component is Google\'s ad SDK in the free version — Premium removes it entirely.'**
   String get privacyScreenNoThirdParty;
 
   /// No description provided for @privacyScreenExport.
@@ -2193,6 +2193,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Vera is typing…'**
   String get assistantTyping;
+
+  /// No description provided for @premiumTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Vera Premium'**
+  String get premiumTitle;
+
+  /// No description provided for @premiumHeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'An ad-free Vera'**
+  String get premiumHeadline;
+
+  /// No description provided for @premiumSubhead.
+  ///
+  /// In en, this message translates to:
+  /// **'Every tracking feature stays free forever. Premium simply removes the ads and supports development.'**
+  String get premiumSubhead;
+
+  /// No description provided for @premiumBenefitNoAds.
+  ///
+  /// In en, this message translates to:
+  /// **'No ads, anywhere in the app'**
+  String get premiumBenefitNoAds;
+
+  /// No description provided for @premiumBenefitSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Supports an independent, privacy-first app'**
+  String get premiumBenefitSupport;
+
+  /// No description provided for @premiumBenefitFuture.
+  ///
+  /// In en, this message translates to:
+  /// **'Includes future Premium comfort features'**
+  String get premiumBenefitFuture;
+
+  /// No description provided for @premiumMonthly.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get premiumMonthly;
+
+  /// No description provided for @premiumYearly.
+  ///
+  /// In en, this message translates to:
+  /// **'Yearly'**
+  String get premiumYearly;
+
+  /// No description provided for @premiumYearlyNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Billed once a year'**
+  String get premiumYearlyNote;
+
+  /// No description provided for @premiumSubscribeCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get premiumSubscribeCta;
+
+  /// No description provided for @premiumRestore.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore purchase'**
+  String get premiumRestore;
+
+  /// No description provided for @premiumCancelNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel anytime in your app store account. No countdowns, no pressure — if now isn\'t the time, the free version keeps working exactly as it does today.'**
+  String get premiumCancelNote;
+
+  /// No description provided for @premiumActiveBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium is active'**
+  String get premiumActiveBadge;
+
+  /// No description provided for @premiumDevToggle.
+  ///
+  /// In en, this message translates to:
+  /// **'Simulate Premium (development)'**
+  String get premiumDevToggle;
+
+  /// No description provided for @settingsPremiumEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'Vera Premium'**
+  String get settingsPremiumEntry;
+
+  /// No description provided for @adTestNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Test ad — not a real placement yet'**
+  String get adTestNotice;
+
+  /// No description provided for @settingsPregnancyModeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Pregnancy mode'**
+  String get settingsPregnancyModeLabel;
+
+  /// No description provided for @pregnancyLmpLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'First day of last period'**
+  String get pregnancyLmpLabel;
+
+  /// No description provided for @pregnancyWeekLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Week {weeks}, day {days}'**
+  String pregnancyWeekLabel(int weeks, int days);
+
+  /// No description provided for @pregnancyDueDateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated due date'**
+  String get pregnancyDueDateLabel;
+
+  /// No description provided for @pregnancyDaysLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'About {days} days to go'**
+  String pregnancyDaysLeft(int days);
+
+  /// No description provided for @pregnancyTrimesterLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Trimester {n}'**
+  String pregnancyTrimesterLabel(int n);
+
+  /// No description provided for @pregnancyDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Dates are estimated from your last period using the standard 280-day rule. An ultrasound gives a more accurate date, and late ovulation shifts these numbers — this is information, not medical care.'**
+  String get pregnancyDisclaimer;
+
+  /// No description provided for @pregnancyWeeklyNoteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'This week'**
+  String get pregnancyWeeklyNoteTitle;
+
+  /// No description provided for @pregnancyNeedsLmp.
+  ///
+  /// In en, this message translates to:
+  /// **'Add the first day of your last period to start tracking.'**
+  String get pregnancyNeedsLmp;
+
+  /// No description provided for @pregnancyOutOfRange.
+  ///
+  /// In en, this message translates to:
+  /// **'That date is more than 42 weeks ago — update it or turn pregnancy mode off.'**
+  String get pregnancyOutOfRange;
+
+  /// No description provided for @partnerShareTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Share a summary with a partner'**
+  String get partnerShareTitle;
+
+  /// No description provided for @partnerShareBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Creates a short text summary — your current phase and estimated window — that you send yourself through any app. There\'s no live sync and no partner account: nothing is shared unless you send it.'**
+  String get partnerShareBody;
+
+  /// No description provided for @partnerShareCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Create summary'**
+  String get partnerShareCta;
+
+  /// No description provided for @partnerSummaryHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Cycle summary from Vera'**
+  String get partnerSummaryHeader;
 }
 
 class _AppLocalizationsDelegate

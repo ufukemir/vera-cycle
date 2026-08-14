@@ -18,7 +18,7 @@
   "navInsights": "洞察",
   "navSettings": "设置",
   "onboardingPrivacyTitle": "欢迎",
-  "onboardingPrivacyBody": "你的数据只保存在这台设备上。没有账号、没有云端、不向任何地方发送 — 应用甚至没有联网权限，你可以在手机设置中亲自验证。",
+  "onboardingPrivacyBody": "你的周期数据仅加密保存在这台设备上。没有账号，也没有云同步——你记录的内容不会被上传。免费版会显示广告，广告会使用网络，但绝不会获取你的健康数据。",
   "onboardingLastPeriodTitle": "上次月经是什么时候开始的？",
   "onboardingPickDate": "选择日期",
   "onboardingCycleLengthTitle": "你的周期通常多长？",

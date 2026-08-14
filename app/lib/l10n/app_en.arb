@@ -37,7 +37,7 @@
   "lockScreenEraseBody": "This permanently deletes everything on this device. There's no account and no server backup, so this can't be undone.",
   "lockScreenEraseConfirm": "Erase everything",
   "onboardingPrivacyTitle": "Welcome",
-  "onboardingPrivacyBody": "Your data stays only on this device. There's no account, no cloud, nothing sent anywhere — the app doesn't even have permission to use the internet, and you can check that yourself in your phone's settings.",
+  "onboardingPrivacyBody": "Your cycle data stays only on this device, encrypted. There's no account and no cloud sync — nothing you log is ever uploaded. The free version shows ads, which do use the internet, but they never receive your health data.",
   "onboardingLastPeriodTitle": "When did your last period start?",
   "onboardingLastPeriodBody": "This helps us get started — you can always correct it later from the calendar.",
   "onboardingPickDate": "Choose a date",
@@ -213,8 +213,8 @@
   "privacyScreenTitle": "Privacy",
   "privacyScreenIntro": "Here's exactly what happens to your data, in plain language.",
   "privacyScreenStorage": "Everything you log is encrypted and stored only on this device, in a single file. The encryption key lives in your phone's secure hardware — Keychain on iOS, Keystore on Android — not in the file itself.",
-  "privacyScreenNoNetwork": "This app has no server. It doesn't have permission to use the internet at all — you can check that yourself in your phone's app settings.",
-  "privacyScreenNoThirdParty": "There's no analytics, no crash reporting, and no third-party SDK of any kind.",
+  "privacyScreenNoNetwork": "This app has no server of its own and no account system — your logs are never uploaded. The free version does include Google ads, which connect to the internet; they never receive anything you log.",
+  "privacyScreenNoThirdParty": "There's no analytics, no crash reporting, and no tracking SDK. The only third-party component is Google's ad SDK in the free version — Premium removes it entirely.",
   "privacyScreenExport": "The only way your data ever leaves this device is if you export it yourself, and that export is encrypted with a password only you know.",
   "privacyScreenDelete": "Deleting your data is real and immediate. There's no account and no backup on our end — once it's gone, it's gone.",
   "adPlaceholderLabel": "Ad space",
@@ -399,5 +399,59 @@
       }
     }
   },
-  "assistantTyping": "Vera is typing…"
+  "assistantTyping": "Vera is typing…",
+  "premiumTitle": "Vera Premium",
+  "premiumHeadline": "An ad-free Vera",
+  "premiumSubhead": "Every tracking feature stays free forever. Premium simply removes the ads and supports development.",
+  "premiumBenefitNoAds": "No ads, anywhere in the app",
+  "premiumBenefitSupport": "Supports an independent, privacy-first app",
+  "premiumBenefitFuture": "Includes future Premium comfort features",
+  "premiumMonthly": "Monthly",
+  "premiumYearly": "Yearly",
+  "premiumYearlyNote": "Billed once a year",
+  "premiumSubscribeCta": "Continue",
+  "premiumRestore": "Restore purchase",
+  "premiumCancelNote": "Cancel anytime in your app store account. No countdowns, no pressure — if now isn't the time, the free version keeps working exactly as it does today.",
+  "premiumActiveBadge": "Premium is active",
+  "premiumDevToggle": "Simulate Premium (development)",
+  "settingsPremiumEntry": "Vera Premium",
+  "adTestNotice": "Test ad — not a real placement yet",
+  "settingsPregnancyModeLabel": "Pregnancy mode",
+  "pregnancyLmpLabel": "First day of last period",
+  "pregnancyWeekLabel": "Week {weeks}, day {days}",
+  "@pregnancyWeekLabel": {
+    "placeholders": {
+      "weeks": {
+        "type": "int"
+      },
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "pregnancyDueDateLabel": "Estimated due date",
+  "pregnancyDaysLeft": "About {days} days to go",
+  "@pregnancyDaysLeft": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "pregnancyTrimesterLabel": "Trimester {n}",
+  "@pregnancyTrimesterLabel": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "pregnancyDisclaimer": "Dates are estimated from your last period using the standard 280-day rule. An ultrasound gives a more accurate date, and late ovulation shifts these numbers — this is information, not medical care.",
+  "pregnancyWeeklyNoteTitle": "This week",
+  "pregnancyNeedsLmp": "Add the first day of your last period to start tracking.",
+  "pregnancyOutOfRange": "That date is more than 42 weeks ago — update it or turn pregnancy mode off.",
+  "partnerShareTitle": "Share a summary with a partner",
+  "partnerShareBody": "Creates a short text summary — your current phase and estimated window — that you send yourself through any app. There's no live sync and no partner account: nothing is shared unless you send it.",
+  "partnerShareCta": "Create summary",
+  "partnerSummaryHeader": "Cycle summary from Vera"
 }
