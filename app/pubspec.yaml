@@ -1,5 +1,5 @@
 name: cycle_app
-description: "A new Flutter project."
+description: "Vera — a privacy-first period and cycle tracker."
 publish_to: 'none'
 version: 0.1.0+1
 
@@ -23,7 +23,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_secure_storage: ^10.3.1
-  flutter_svg: ^2.3.0
   intl: ^0.20.2
   local_auth: ^3.0.2
   path_provider: ^2.1.6

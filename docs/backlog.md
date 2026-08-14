@@ -10,10 +10,11 @@ edilmesi zor olduğuna göre (pazar araştırmasından, bkz. `03-rakip-analizi.m
    sunucuya hiç gitmeden. Rakiplerin "AI" özellikleri (GlowGPT, Maven
    Intelligence) hep buluta dayalı; gerçekten cihaz-üstü olan bir asistan
    parite değil gerçek bir farklılaşma olur.
-2. **Döngü-senkronlu fitness/beslenme ipuçları** — Wild.AI/FitrWoman
-   modeli. Eklemesi ucuz, regülasyon riski sıfır, "hesapsız/sunucusuz"
-   konumlanmayla iyi örtüşüyor (Oura/Whoop bunu asla eşleyemez, onlar
-   hesap+bulut gerektiriyor).
+2. ~~**Döngü-senkronlu fitness/beslenme ipuçları**~~ — **v1'e eklendi
+   (2026-08-14)**, bkz. `docs/01-mvp-spec.md` #6 ve
+   `lib/screens/insights/widgets/phase_tips_section.dart`. Wild.AI/FitrWoman
+   modelinden ilham, ama tamamen yerel/statik içerik — sunucu/üçüncü taraf
+   API yok.
 3. **Hamilelik içerik/takip modu** — en büyük hazır içerik kütüphanesi
    fırsatı, düşük regülasyon riski, mevcut kullanıcılar için doğal sonraki
    yaşam evresi.

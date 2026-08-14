@@ -741,6 +741,55 @@ class AppLocalizationsEs extends AppLocalizations {
       'La duración del ciclo varía mucho de una persona a otra — entre 21 y 35 días se considera típico.';
 
   @override
+  String get insightsPhaseTipsTitle => 'Puede sentarte bien en esta fase';
+
+  @override
+  String get tipFitnessLabel => 'Movimiento';
+
+  @override
+  String get tipNutritionLabel => 'Nutrición';
+
+  @override
+  String get tipFitnessMenstrual =>
+      'El movimiento suave — caminar, estirar o yoga restaurativo — puede sentar mejor que un entrenamiento intenso ahora mismo.';
+
+  @override
+  String get tipFitnessFollicular =>
+      'La energía suele aumentar en esta fase — un buen momento para probar un entrenamiento nuevo o esforzarte un poco más.';
+
+  @override
+  String get tipFitnessFertile =>
+      'Muchas personas se sienten más enérgicas aquí — una buena fase para entrenamiento de mayor intensidad si te apetece.';
+
+  @override
+  String get tipFitnessLuteal =>
+      'Si la energía baja hacia el final de esta fase, el trabajo de fuerza de baja intensidad o nadar puede sentirse más sostenible.';
+
+  @override
+  String get tipFitnessUnknown =>
+      'El movimiento que te siente bien hoy es una buena elección — no hay una única rutina \"correcta\" para cada día.';
+
+  @override
+  String get tipNutritionMenstrual =>
+      'Los alimentos ricos en hierro como verduras de hoja verde, lentejas y carne roja pueden ayudar a compensar lo que tu cuerpo pierde esta semana.';
+
+  @override
+  String get tipNutritionFollicular =>
+      'Las comidas más ligeras y frescas suelen sentar bien cuando sube la energía — pero no hay una única forma \"correcta\" de comer en esta fase.';
+
+  @override
+  String get tipNutritionFertile =>
+      'Mantenerte hidratada y llevar comidas equilibradas apoya tu energía en esta fase que se siente más activa.';
+
+  @override
+  String get tipNutritionLuteal =>
+      'Los antojos pueden cambiar aquí — los carbohidratos complejos y alimentos ricos en magnesio como frutos secos y chocolate negro son opciones habituales.';
+
+  @override
+  String get tipNutritionUnknown =>
+      'Las comidas equilibradas y regulares son una buena opción por defecto cuando tu fase aún no está clara.';
+
+  @override
   String get predictionSettingsEntry => 'Ajustes de predicción';
 
   @override

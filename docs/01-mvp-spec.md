@@ -83,6 +83,9 @@ Adet döngünü, verin telefonundan hiç çıkmadan takip et — ve tahminlerin 
 ### 6. İçgörüler
 - Ortalama döngü uzunluğu, değişkenlik, ortalama adet süresi, kayıtlı döngü sayısı.
 - Basit semptom örüntüsü: "kramplar en çok 1-2. günlerde".
+- Döngü evresine göre hareket/beslenme önerileri (bkz. `docs/backlog.md`
+  madde 2) — tamamen yerel/statik içerik, hedge'lenmiş dille ("genelde",
+  "bazı kişiler"), asla kişiselleştirilmiş tıbbi tavsiye gibi sunulmaz.
 
 ### 7. Mahremiyet özellikleri (ürünün kalbi)
 - Uygulama kilidi: biyometrik + PIN yedeği.

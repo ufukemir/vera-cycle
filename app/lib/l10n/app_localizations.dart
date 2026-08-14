@@ -1464,6 +1464,84 @@ abstract class AppLocalizations {
   /// **'Cycle lengths vary a lot from person to person — anywhere from 21 to 35 days is considered typical.'**
   String get insightUnknown1;
 
+  /// No description provided for @insightsPhaseTipsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'May feel good in this phase'**
+  String get insightsPhaseTipsTitle;
+
+  /// No description provided for @tipFitnessLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Movement'**
+  String get tipFitnessLabel;
+
+  /// No description provided for @tipNutritionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Nutrition'**
+  String get tipNutritionLabel;
+
+  /// No description provided for @tipFitnessMenstrual.
+  ///
+  /// In en, this message translates to:
+  /// **'Gentle movement — walking, stretching, or restorative yoga — can feel better than intense workouts right now.'**
+  String get tipFitnessMenstrual;
+
+  /// No description provided for @tipFitnessFollicular.
+  ///
+  /// In en, this message translates to:
+  /// **'Energy often climbs in this phase — a good window to try a new workout or push a bit harder.'**
+  String get tipFitnessFollicular;
+
+  /// No description provided for @tipFitnessFertile.
+  ///
+  /// In en, this message translates to:
+  /// **'Many people feel at their most energetic here — a good phase for higher-intensity training if that appeals to you.'**
+  String get tipFitnessFertile;
+
+  /// No description provided for @tipFitnessLuteal.
+  ///
+  /// In en, this message translates to:
+  /// **'If energy dips later in this phase, lower-intensity strength work or swimming can feel more sustainable.'**
+  String get tipFitnessLuteal;
+
+  /// No description provided for @tipFitnessUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Whatever movement feels good today is a good choice — there\'s no single \"right\" routine for every day.'**
+  String get tipFitnessUnknown;
+
+  /// No description provided for @tipNutritionMenstrual.
+  ///
+  /// In en, this message translates to:
+  /// **'Iron-rich foods like leafy greens, lentils, and red meat can help offset what your body loses this week.'**
+  String get tipNutritionMenstrual;
+
+  /// No description provided for @tipNutritionFollicular.
+  ///
+  /// In en, this message translates to:
+  /// **'Lighter, fresh meals often sit well as energy rises — but there\'s no single \"right\" way to eat in this phase.'**
+  String get tipNutritionFollicular;
+
+  /// No description provided for @tipNutritionFertile.
+  ///
+  /// In en, this message translates to:
+  /// **'Staying hydrated and keeping meals balanced supports energy through this more active-feeling phase.'**
+  String get tipNutritionFertile;
+
+  /// No description provided for @tipNutritionLuteal.
+  ///
+  /// In en, this message translates to:
+  /// **'Cravings can shift here — complex carbs and magnesium-rich foods like nuts and dark chocolate are common go-tos.'**
+  String get tipNutritionLuteal;
+
+  /// No description provided for @tipNutritionUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Balanced, regular meals are a solid default whenever your phase isn\'t clear yet.'**
+  String get tipNutritionUnknown;
+
   /// No description provided for @predictionSettingsEntry.
   ///
   /// In en, this message translates to:

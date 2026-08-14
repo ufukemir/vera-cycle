@@ -738,6 +738,55 @@ class AppLocalizationsTr extends AppLocalizations {
       'Döngü uzunlukları kişiden kişiye çok değişir — 21 ila 35 gün arası tipik kabul edilir.';
 
   @override
+  String get insightsPhaseTipsTitle => 'Bu evrede sana iyi gelebilir';
+
+  @override
+  String get tipFitnessLabel => 'Hareket';
+
+  @override
+  String get tipNutritionLabel => 'Beslenme';
+
+  @override
+  String get tipFitnessMenstrual =>
+      'Yürüyüş, esneme veya onarıcı yoga gibi hafif hareketler şu an yoğun antrenmandan daha iyi hissettirebilir.';
+
+  @override
+  String get tipFitnessFollicular =>
+      'Bu evrede enerji genelde artar — yeni bir egzersiz denemek veya biraz daha zorlamak için iyi bir pencere.';
+
+  @override
+  String get tipFitnessFertile =>
+      'Birçok kişi burada kendini en enerjik hisseder — ilgini çekiyorsa daha yüksek yoğunluklu antrenman için uygun bir evre.';
+
+  @override
+  String get tipFitnessLuteal =>
+      'Bu evrenin sonlarına doğru enerjin düşerse, düşük yoğunluklu kuvvet çalışması veya yüzme daha sürdürülebilir hissettirebilir.';
+
+  @override
+  String get tipFitnessUnknown =>
+      'Bugün ne iyi hissettiriyorsa o hareket iyi bir seçimdir — her gün için tek bir \"doğru\" rutin yok.';
+
+  @override
+  String get tipNutritionMenstrual =>
+      'Yeşil yapraklı sebzeler, mercimek ve kırmızı et gibi demir açısından zengin besinler bu hafta kaybettiklerini dengelemene yardımcı olabilir.';
+
+  @override
+  String get tipNutritionFollicular =>
+      'Enerji arttıkça daha hafif, taze yemekler genelde iyi gelir — ama bu evrede tek bir \"doğru\" beslenme şekli yok.';
+
+  @override
+  String get tipNutritionFertile =>
+      'Bol su içmek ve dengeli beslenmek, bu daha hareketli hissettiren evrede enerjini destekler.';
+
+  @override
+  String get tipNutritionLuteal =>
+      'Burada canın farklı şeyler çekebilir — kompleks karbonhidratlar ve kuruyemiş, bitter çikolata gibi magnezyum açısından zengin besinler yaygın tercihlerdir.';
+
+  @override
+  String get tipNutritionUnknown =>
+      'Evren henüz netleşmediğinde dengeli, düzenli öğünler sağlam bir varsayılan seçimdir.';
+
+  @override
   String get predictionSettingsEntry => 'Tahmin ayarları';
 
   @override

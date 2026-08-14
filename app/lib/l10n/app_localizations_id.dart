@@ -741,6 +741,55 @@ class AppLocalizationsId extends AppLocalizations {
       'Panjang siklus sangat bervariasi antar orang — sekitar 21 hingga 35 hari dianggap umum.';
 
   @override
+  String get insightsPhaseTipsTitle => 'Mungkin terasa baik di fase ini';
+
+  @override
+  String get tipFitnessLabel => 'Gerak tubuh';
+
+  @override
+  String get tipNutritionLabel => 'Nutrisi';
+
+  @override
+  String get tipFitnessMenstrual =>
+      'Gerakan ringan — jalan kaki, peregangan, atau yoga pemulihan — mungkin terasa lebih baik daripada olahraga intens saat ini.';
+
+  @override
+  String get tipFitnessFollicular =>
+      'Energi biasanya meningkat di fase ini — waktu yang baik untuk mencoba latihan baru atau mendorong diri sedikit lebih keras.';
+
+  @override
+  String get tipFitnessFertile =>
+      'Banyak orang merasa paling berenergi di sini — fase yang baik untuk latihan intensitas lebih tinggi jika kamu menyukainya.';
+
+  @override
+  String get tipFitnessLuteal =>
+      'Jika energi menurun menjelang akhir fase ini, latihan kekuatan intensitas rendah atau berenang bisa terasa lebih berkelanjutan.';
+
+  @override
+  String get tipFitnessUnknown =>
+      'Gerakan apa pun yang terasa baik hari ini adalah pilihan yang baik — tidak ada satu rutinitas \"benar\" untuk setiap hari.';
+
+  @override
+  String get tipNutritionMenstrual =>
+      'Makanan kaya zat besi seperti sayuran hijau, lentil, dan daging merah dapat membantu mengganti apa yang hilang dari tubuhmu minggu ini.';
+
+  @override
+  String get tipNutritionFollicular =>
+      'Makanan yang lebih ringan dan segar sering terasa cocok saat energi meningkat — tapi tidak ada satu cara makan yang \"benar\" di fase ini.';
+
+  @override
+  String get tipNutritionFertile =>
+      'Tetap terhidrasi dan menjaga makanan seimbang mendukung energimu selama fase yang terasa lebih aktif ini.';
+
+  @override
+  String get tipNutritionLuteal =>
+      'Keinginan makan bisa berubah di sini — karbohidrat kompleks dan makanan kaya magnesium seperti kacang-kacangan dan cokelat hitam jadi pilihan umum.';
+
+  @override
+  String get tipNutritionUnknown =>
+      'Makanan seimbang dan teratur adalah pilihan default yang baik selama fasemu belum jelas.';
+
+  @override
   String get predictionSettingsEntry => 'Pengaturan prediksi';
 
   @override

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../../services/cycle_insights.dart';
 import '../../state/cycle_controller.dart';
+import 'widgets/phase_tips_section.dart';
 import 'widgets/symptom_frequency_bar_row.dart';
 
 class InsightsScreen extends StatelessWidget {
@@ -59,6 +60,8 @@ class InsightsScreen extends StatelessWidget {
                 frequencyByCycleDay: insights.symptomFrequencyByCycleDay,
                 maxCycleDay: CycleInsights.maxCycleDay,
               ),
+            const SizedBox(height: 28),
+            PhaseTipsSection(phase: controller.todayStatus.phase),
           ],
         ),
       ),

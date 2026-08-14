@@ -734,6 +734,55 @@ class AppLocalizationsEn extends AppLocalizations {
       'Cycle lengths vary a lot from person to person — anywhere from 21 to 35 days is considered typical.';
 
   @override
+  String get insightsPhaseTipsTitle => 'May feel good in this phase';
+
+  @override
+  String get tipFitnessLabel => 'Movement';
+
+  @override
+  String get tipNutritionLabel => 'Nutrition';
+
+  @override
+  String get tipFitnessMenstrual =>
+      'Gentle movement — walking, stretching, or restorative yoga — can feel better than intense workouts right now.';
+
+  @override
+  String get tipFitnessFollicular =>
+      'Energy often climbs in this phase — a good window to try a new workout or push a bit harder.';
+
+  @override
+  String get tipFitnessFertile =>
+      'Many people feel at their most energetic here — a good phase for higher-intensity training if that appeals to you.';
+
+  @override
+  String get tipFitnessLuteal =>
+      'If energy dips later in this phase, lower-intensity strength work or swimming can feel more sustainable.';
+
+  @override
+  String get tipFitnessUnknown =>
+      'Whatever movement feels good today is a good choice — there\'s no single \"right\" routine for every day.';
+
+  @override
+  String get tipNutritionMenstrual =>
+      'Iron-rich foods like leafy greens, lentils, and red meat can help offset what your body loses this week.';
+
+  @override
+  String get tipNutritionFollicular =>
+      'Lighter, fresh meals often sit well as energy rises — but there\'s no single \"right\" way to eat in this phase.';
+
+  @override
+  String get tipNutritionFertile =>
+      'Staying hydrated and keeping meals balanced supports energy through this more active-feeling phase.';
+
+  @override
+  String get tipNutritionLuteal =>
+      'Cravings can shift here — complex carbs and magnesium-rich foods like nuts and dark chocolate are common go-tos.';
+
+  @override
+  String get tipNutritionUnknown =>
+      'Balanced, regular meals are a solid default whenever your phase isn\'t clear yet.';
+
+  @override
   String get predictionSettingsEntry => 'Prediction settings';
 
   @override

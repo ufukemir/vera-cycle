@@ -751,6 +751,55 @@ class AppLocalizationsFr extends AppLocalizations {
       'La durée du cycle varie beaucoup d\'une personne à l\'autre — entre 21 et 35 jours est considéré comme habituel.';
 
   @override
+  String get insightsPhaseTipsTitle => 'Peut faire du bien dans cette phase';
+
+  @override
+  String get tipFitnessLabel => 'Mouvement';
+
+  @override
+  String get tipNutritionLabel => 'Nutrition';
+
+  @override
+  String get tipFitnessMenstrual =>
+      'Un mouvement doux — marche, étirements ou yoga restauratif — peut faire plus de bien qu\'un entraînement intense en ce moment.';
+
+  @override
+  String get tipFitnessFollicular =>
+      'L\'énergie augmente souvent dans cette phase — un bon moment pour essayer un nouvel entraînement ou pousser un peu plus.';
+
+  @override
+  String get tipFitnessFertile =>
+      'Beaucoup de personnes se sentent au maximum de leur énergie ici — une phase propice à un entraînement plus intense si ça te tente.';
+
+  @override
+  String get tipFitnessLuteal =>
+      'Si l\'énergie baisse vers la fin de cette phase, un travail de force à faible intensité ou la natation peut sembler plus durable.';
+
+  @override
+  String get tipFitnessUnknown =>
+      'Le mouvement qui te fait du bien aujourd\'hui est un bon choix — il n\'existe pas de routine \"parfaite\" unique pour chaque jour.';
+
+  @override
+  String get tipNutritionMenstrual =>
+      'Les aliments riches en fer comme les légumes verts, les lentilles et la viande rouge peuvent aider à compenser ce que ton corps perd cette semaine.';
+
+  @override
+  String get tipNutritionFollicular =>
+      'Des repas plus légers et frais sont souvent bien tolérés quand l\'énergie augmente — mais il n\'y a pas de façon \"parfaite\" unique de manger dans cette phase.';
+
+  @override
+  String get tipNutritionFertile =>
+      'Rester hydratée et garder des repas équilibrés soutient ton énergie durant cette phase qui se sent plus active.';
+
+  @override
+  String get tipNutritionLuteal =>
+      'Les envies peuvent changer ici — les glucides complexes et les aliments riches en magnésium comme les noix et le chocolat noir sont des choix courants.';
+
+  @override
+  String get tipNutritionUnknown =>
+      'Des repas équilibrés et réguliers sont un bon choix par défaut tant que ta phase n\'est pas encore claire.';
+
+  @override
   String get predictionSettingsEntry => 'Réglages de prédiction';
 
   @override

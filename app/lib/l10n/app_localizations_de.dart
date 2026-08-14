@@ -749,6 +749,55 @@ class AppLocalizationsDe extends AppLocalizations {
       'Die Zykluslänge variiert von Person zu Person stark — 21 bis 35 Tage gelten als typisch.';
 
   @override
+  String get insightsPhaseTipsTitle => 'Kann in dieser Phase guttun';
+
+  @override
+  String get tipFitnessLabel => 'Bewegung';
+
+  @override
+  String get tipNutritionLabel => 'Ernährung';
+
+  @override
+  String get tipFitnessMenstrual =>
+      'Sanfte Bewegung — Spazierengehen, Dehnen oder restauratives Yoga — kann sich gerade besser anfühlen als intensives Training.';
+
+  @override
+  String get tipFitnessFollicular =>
+      'Die Energie steigt in dieser Phase oft — ein guter Zeitpunkt, um ein neues Workout auszuprobieren oder dich etwas mehr zu fordern.';
+
+  @override
+  String get tipFitnessFertile =>
+      'Viele Menschen fühlen sich hier am energiegeladensten — eine gute Phase für intensiveres Training, falls dir das zusagt.';
+
+  @override
+  String get tipFitnessLuteal =>
+      'Wenn die Energie gegen Ende dieser Phase nachlässt, können leichteres Krafttraining oder Schwimmen sich nachhaltiger anfühlen.';
+
+  @override
+  String get tipFitnessUnknown =>
+      'Welche Bewegung sich heute gut anfühlt, ist eine gute Wahl — es gibt keine einzige \"richtige\" Routine für jeden Tag.';
+
+  @override
+  String get tipNutritionMenstrual =>
+      'Eisenreiche Lebensmittel wie Blattgemüse, Linsen und rotes Fleisch können helfen, den Verlust dieser Woche auszugleichen.';
+
+  @override
+  String get tipNutritionFollicular =>
+      'Leichtere, frische Mahlzeiten tun oft gut, wenn die Energie steigt — aber es gibt keine einzige \"richtige\" Art, in dieser Phase zu essen.';
+
+  @override
+  String get tipNutritionFertile =>
+      'Ausreichend Flüssigkeit und ausgewogene Mahlzeiten unterstützen deine Energie in dieser aktiver wirkenden Phase.';
+
+  @override
+  String get tipNutritionLuteal =>
+      'Heißhunger kann sich hier verändern — komplexe Kohlenhydrate und magnesiumreiche Lebensmittel wie Nüsse und dunkle Schokolade sind gängige Optionen.';
+
+  @override
+  String get tipNutritionUnknown =>
+      'Ausgewogene, regelmäßige Mahlzeiten sind eine solide Standardwahl, solange deine Phase noch nicht klar ist.';
+
+  @override
   String get predictionSettingsEntry => 'Vorhersage-Einstellungen';
 
   @override

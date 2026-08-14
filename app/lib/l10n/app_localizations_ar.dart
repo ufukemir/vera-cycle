@@ -734,6 +734,55 @@ class AppLocalizationsAr extends AppLocalizations {
       'تتفاوت مدة الدورة كثيرًا من شخص لآخر — يُعتبر ما بين 21 و35 يومًا أمرًا معتادًا.';
 
   @override
+  String get insightsPhaseTipsTitle => 'قد يكون مفيدًا في هذه المرحلة';
+
+  @override
+  String get tipFitnessLabel => 'الحركة';
+
+  @override
+  String get tipNutritionLabel => 'التغذية';
+
+  @override
+  String get tipFitnessMenstrual =>
+      'الحركة الخفيفة — كالمشي أو التمدد أو اليوغا التصالحية — قد تكون أفضل من التمارين الشاقة الآن.';
+
+  @override
+  String get tipFitnessFollicular =>
+      'غالبًا ما ترتفع الطاقة في هذه المرحلة — وقت جيد لتجربة تمرين جديد أو بذل مجهود أكبر قليلًا.';
+
+  @override
+  String get tipFitnessFertile =>
+      'يشعر كثيرون بأقصى نشاطهم هنا — مرحلة جيدة لتمارين أعلى كثافة إذا كان ذلك يناسبك.';
+
+  @override
+  String get tipFitnessLuteal =>
+      'إذا انخفضت طاقتك قرب نهاية هذه المرحلة، فقد يكون تمرين القوة منخفض الكثافة أو السباحة أكثر استدامة.';
+
+  @override
+  String get tipFitnessUnknown =>
+      'أي حركة تشعرك بالرضا اليوم هي خيار جيد — لا يوجد روتين \"صحيح\" واحد لكل يوم.';
+
+  @override
+  String get tipNutritionMenstrual =>
+      'الأطعمة الغنية بالحديد كالخضروات الورقية والعدس واللحوم الحمراء يمكن أن تساعد في تعويض ما يفقده جسمك هذا الأسبوع.';
+
+  @override
+  String get tipNutritionFollicular =>
+      'الوجبات الأخف والطازجة غالبًا ما تناسبك مع ارتفاع الطاقة — لكن لا توجد طريقة \"صحيحة\" واحدة للأكل في هذه المرحلة.';
+
+  @override
+  String get tipNutritionFertile =>
+      'الحفاظ على الترطيب وتناول وجبات متوازنة يدعم طاقتك خلال هذه المرحلة الأكثر نشاطًا.';
+
+  @override
+  String get tipNutritionLuteal =>
+      'قد تتغير الرغبات الشديدة هنا — الكربوهيدرات المعقدة والأطعمة الغنية بالمغنيسيوم كالمكسرات والشوكولاتة الداكنة خيارات شائعة.';
+
+  @override
+  String get tipNutritionUnknown =>
+      'الوجبات المتوازنة والمنتظمة خيار افتراضي جيد ما دامت مرحلتك غير واضحة بعد.';
+
+  @override
   String get predictionSettingsEntry => 'إعدادات التقدير';
 
   @override
