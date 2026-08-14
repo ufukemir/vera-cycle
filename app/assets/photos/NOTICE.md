@@ -7,7 +7,7 @@ app assets — never fetched at runtime (the app has no network permission).
 
 | File | Source |
 |---|---|
-| friends_trio.jpg | https://www.pexels.com/photo/5254676/ |
+| garden_friends.jpg | https://www.pexels.com/photo/4834142/ |
 | seaside_smile.jpg | https://www.pexels.com/photo/15485740/ |
 | greenery_smile.jpg | https://www.pexels.com/photo/32222185/ |
 | cheerful_bangs.jpg | https://www.pexels.com/photo/18428647/ |

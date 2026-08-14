@@ -35,7 +35,7 @@ class WelcomePrivacyStep extends StatelessWidget {
                     child: Opacity(opacity: t.clamp(0, 1), child: child),
                   ),
                   child: const PhotoHero(
-                    asset: 'assets/photos/friends_trio.jpg',
+                    asset: 'assets/photos/garden_friends.jpg',
                     height: 210,
                   ),
                 ),
