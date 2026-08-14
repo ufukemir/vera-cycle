@@ -1238,4 +1238,22 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get partnerSummaryHeader => 'Vera\'dan döngü özeti';
+
+  @override
+  String get settingsHomeThemeLabel => 'Ana sayfa teması';
+
+  @override
+  String get homeThemeWheat => 'Buğday';
+
+  @override
+  String get homeThemeSky => 'Gökyüzü';
+
+  @override
+  String get homeThemeField => 'Tarla';
+
+  @override
+  String get homeThemeBlossom => 'Çiçek';
+
+  @override
+  String get homeThemePlain => 'Düz';
 }

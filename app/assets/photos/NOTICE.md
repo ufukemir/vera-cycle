@@ -22,5 +22,9 @@ app assets — never fetched at runtime (the app has no network permission).
 | kitchen_salad.jpg | https://www.pexels.com/photo/36697445/ |
 | kitchen_apron.jpg | https://www.pexels.com/photo/9475258/ |
 | sunny_smile.jpg | https://www.pexels.com/photo/1890033/ |
+| theme_wheat.jpg | https://www.pexels.com/photo/12981951/ |
+| theme_sky.jpg | https://www.pexels.com/photo/18501117/ |
+| theme_field.jpg | https://www.pexels.com/photo/544555/ |
+| theme_blossom.jpg | https://www.pexels.com/photo/5312872/ |
 
 Downloaded 2026-08-14 at w=900 via the images.pexels.com CDN.

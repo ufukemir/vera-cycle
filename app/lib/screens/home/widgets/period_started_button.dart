@@ -44,9 +44,17 @@ class _PeriodStartedButtonState extends State<PeriodStartedButton>
     await controller.markPeriodStartedToday();
     if (!context.mounted) return;
 
-    ScaffoldMessenger.of(context).showSnackBar(
+    final messenger = ScaffoldMessenger.of(context);
+    // Replace rather than queue: tapping twice used to stack snackbars, and
+    // since each waits out its own duration the toast looked like it never
+    // went away.
+    messenger.hideCurrentSnackBar();
+    messenger.showSnackBar(
       SnackBar(
         content: Text(l10n.homePeriodStartedSnackbar),
+        duration: const Duration(seconds: 3),
+        behavior: SnackBarBehavior.floating,
+        margin: const EdgeInsets.all(16),
         action: SnackBarAction(
           label: l10n.actionUndo,
           onPressed: () {

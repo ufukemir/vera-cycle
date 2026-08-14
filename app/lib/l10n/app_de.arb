@@ -374,5 +374,11 @@
   "partnerShareTitle": "Zusammenfassung mit Partner teilen",
   "partnerShareBody": "Erstellt eine kurze Textzusammenfassung — deine aktuelle Phase und dein geschätztes Fenster — die du selbst über eine beliebige App verschickst. Keine Live-Synchronisierung, kein Partnerkonto: Nichts wird geteilt, außer du sendest es.",
   "partnerShareCta": "Zusammenfassung erstellen",
-  "partnerSummaryHeader": "Zyklus-Zusammenfassung von Vera"
+  "partnerSummaryHeader": "Zyklus-Zusammenfassung von Vera",
+  "settingsHomeThemeLabel": "Startseiten-Design",
+  "homeThemeWheat": "Weizen",
+  "homeThemeSky": "Himmel",
+  "homeThemeField": "Feld",
+  "homeThemeBlossom": "Blüte",
+  "homeThemePlain": "Schlicht"
 }

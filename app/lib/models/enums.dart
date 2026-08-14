@@ -79,6 +79,10 @@ enum CervixOpening { closed, medium, open }
 /// Cervix firmness (fertility-awareness method). Advanced/opt-in tracker.
 enum CervixFirmness { soft, medium, firm }
 
+/// Scenic background for the home screen hero — the reference app's
+/// photo-themed home. Assets are openly licensed (assets/photos/NOTICE.md).
+enum HomeTheme { wheat, sky, field, blossom, plain }
+
 /// Home-screen companion mascot — hand-drawn vector characters (see
 /// `illustrations.dart`), a playful reference-app pattern rebuilt with
 /// original art. `none` hides it entirely; purely decorative.

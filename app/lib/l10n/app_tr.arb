@@ -374,5 +374,11 @@
   "partnerShareTitle": "Partnerinle özet paylaş",
   "partnerShareBody": "Kısa bir metin özeti oluşturur — mevcut evren ve tahmini pencere — ve istediğin uygulamayla sen gönderirsin. Canlı senkron ve partner hesabı yok: sen göndermedikçe hiçbir şey paylaşılmaz.",
   "partnerShareCta": "Özet oluştur",
-  "partnerSummaryHeader": "Vera'dan döngü özeti"
+  "partnerSummaryHeader": "Vera'dan döngü özeti",
+  "settingsHomeThemeLabel": "Ana sayfa teması",
+  "homeThemeWheat": "Buğday",
+  "homeThemeSky": "Gökyüzü",
+  "homeThemeField": "Tarla",
+  "homeThemeBlossom": "Çiçek",
+  "homeThemePlain": "Düz"
 }

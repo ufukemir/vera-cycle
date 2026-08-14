@@ -1249,4 +1249,22 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get partnerSummaryHeader => 'Zyklus-Zusammenfassung von Vera';
+
+  @override
+  String get settingsHomeThemeLabel => 'Startseiten-Design';
+
+  @override
+  String get homeThemeWheat => 'Weizen';
+
+  @override
+  String get homeThemeSky => 'Himmel';
+
+  @override
+  String get homeThemeField => 'Feld';
+
+  @override
+  String get homeThemeBlossom => 'Blüte';
+
+  @override
+  String get homeThemePlain => 'Schlicht';
 }

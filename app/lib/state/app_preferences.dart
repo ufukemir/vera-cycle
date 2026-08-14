@@ -47,6 +47,7 @@ class AppPreferences extends ChangeNotifier {
   static const _kOvulationTestTracking = 'track_ovulation_test';
   static const _kOvulationRemindersEnabled = 'ovulation_reminders_enabled';
   static const _kMascot = 'mascot';
+  static const _kHomeTheme = 'home_theme';
   static const _kPremiumActive = 'premium_active';
   static const _kPregnancyMode = 'pregnancy_mode';
   static const _kPregnancyLmp = 'pregnancy_lmp';
@@ -331,6 +332,20 @@ class AppPreferences extends ChangeNotifier {
       (m) => m.name == raw,
       orElse: () => Mascot.droplet,
     );
+  }
+
+  /// Scenic photo behind the home hero. See [HomeTheme].
+  HomeTheme get homeTheme {
+    final raw = _prefs.getString(_kHomeTheme);
+    return HomeTheme.values.firstWhere(
+      (t) => t.name == raw,
+      orElse: () => HomeTheme.wheat,
+    );
+  }
+
+  Future<void> setHomeTheme(HomeTheme value) async {
+    await _prefs.setString(_kHomeTheme, value.name);
+    notifyListeners();
   }
 
   Future<void> setMascot(Mascot value) async {

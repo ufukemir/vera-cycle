@@ -374,5 +374,11 @@
   "partnerShareTitle": "Compartir un resumen con tu pareja",
   "partnerShareBody": "Crea un resumen de texto corto — tu fase actual y ventana estimada — que envías tú por la app que quieras. No hay sincronización en vivo ni cuenta de pareja: nada se comparte salvo que lo envíes.",
   "partnerShareCta": "Crear resumen",
-  "partnerSummaryHeader": "Resumen de ciclo de Vera"
+  "partnerSummaryHeader": "Resumen de ciclo de Vera",
+  "settingsHomeThemeLabel": "Tema de inicio",
+  "homeThemeWheat": "Trigo",
+  "homeThemeSky": "Cielo",
+  "homeThemeField": "Campo",
+  "homeThemeBlossom": "Flor",
+  "homeThemePlain": "Liso"
 }

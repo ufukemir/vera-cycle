@@ -2373,6 +2373,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cycle summary from Vera'**
   String get partnerSummaryHeader;
+
+  /// No description provided for @settingsHomeThemeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Home theme'**
+  String get settingsHomeThemeLabel;
+
+  /// No description provided for @homeThemeWheat.
+  ///
+  /// In en, this message translates to:
+  /// **'Wheat'**
+  String get homeThemeWheat;
+
+  /// No description provided for @homeThemeSky.
+  ///
+  /// In en, this message translates to:
+  /// **'Sky'**
+  String get homeThemeSky;
+
+  /// No description provided for @homeThemeField.
+  ///
+  /// In en, this message translates to:
+  /// **'Field'**
+  String get homeThemeField;
+
+  /// No description provided for @homeThemeBlossom.
+  ///
+  /// In en, this message translates to:
+  /// **'Blossom'**
+  String get homeThemeBlossom;
+
+  /// No description provided for @homeThemePlain.
+  ///
+  /// In en, this message translates to:
+  /// **'Plain'**
+  String get homeThemePlain;
 }
 
 class _AppLocalizationsDelegate

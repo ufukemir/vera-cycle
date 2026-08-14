@@ -1242,4 +1242,22 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get partnerSummaryHeader => 'Resumen de ciclo de Vera';
+
+  @override
+  String get settingsHomeThemeLabel => 'Tema de inicio';
+
+  @override
+  String get homeThemeWheat => 'Trigo';
+
+  @override
+  String get homeThemeSky => 'Cielo';
+
+  @override
+  String get homeThemeField => 'Campo';
+
+  @override
+  String get homeThemeBlossom => 'Flor';
+
+  @override
+  String get homeThemePlain => 'Liso';
 }

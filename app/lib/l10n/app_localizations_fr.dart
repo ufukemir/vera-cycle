@@ -1253,4 +1253,22 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get partnerSummaryHeader => 'Résumé de cycle depuis Vera';
+
+  @override
+  String get settingsHomeThemeLabel => 'Thème d\'accueil';
+
+  @override
+  String get homeThemeWheat => 'Blé';
+
+  @override
+  String get homeThemeSky => 'Ciel';
+
+  @override
+  String get homeThemeField => 'Champ';
+
+  @override
+  String get homeThemeBlossom => 'Fleur';
+
+  @override
+  String get homeThemePlain => 'Uni';
 }

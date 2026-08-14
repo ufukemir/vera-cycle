@@ -1233,4 +1233,22 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get partnerSummaryHeader => 'Cycle summary from Vera';
+
+  @override
+  String get settingsHomeThemeLabel => 'Home theme';
+
+  @override
+  String get homeThemeWheat => 'Wheat';
+
+  @override
+  String get homeThemeSky => 'Sky';
+
+  @override
+  String get homeThemeField => 'Field';
+
+  @override
+  String get homeThemeBlossom => 'Blossom';
+
+  @override
+  String get homeThemePlain => 'Plain';
 }

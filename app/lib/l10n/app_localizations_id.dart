@@ -1241,4 +1241,22 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get partnerSummaryHeader => 'Ringkasan siklus dari Vera';
+
+  @override
+  String get settingsHomeThemeLabel => 'Tema beranda';
+
+  @override
+  String get homeThemeWheat => 'Gandum';
+
+  @override
+  String get homeThemeSky => 'Langit';
+
+  @override
+  String get homeThemeField => 'Ladang';
+
+  @override
+  String get homeThemeBlossom => 'Bunga';
+
+  @override
+  String get homeThemePlain => 'Polos';
 }

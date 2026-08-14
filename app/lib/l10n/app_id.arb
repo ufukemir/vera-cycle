@@ -374,5 +374,11 @@
   "partnerShareTitle": "Bagikan ringkasan dengan pasangan",
   "partnerShareBody": "Membuat ringkasan teks singkat — fase saat ini dan perkiraan jendelamu — yang kamu kirim sendiri lewat aplikasi apa pun. Tidak ada sinkronisasi langsung dan akun pasangan: tidak ada yang dibagikan kecuali kamu mengirimnya.",
   "partnerShareCta": "Buat ringkasan",
-  "partnerSummaryHeader": "Ringkasan siklus dari Vera"
+  "partnerSummaryHeader": "Ringkasan siklus dari Vera",
+  "settingsHomeThemeLabel": "Tema beranda",
+  "homeThemeWheat": "Gandum",
+  "homeThemeSky": "Langit",
+  "homeThemeField": "Ladang",
+  "homeThemeBlossom": "Bunga",
+  "homeThemePlain": "Polos"
 }

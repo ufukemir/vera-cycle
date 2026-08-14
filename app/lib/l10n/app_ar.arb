@@ -374,5 +374,11 @@
   "partnerShareTitle": "مشاركة ملخص مع الشريك",
   "partnerShareBody": "ينشئ ملخصًا نصيًا قصيرًا — مرحلتك الحالية ونافذتك المقدَّرة — ترسلينه بنفسك عبر أي تطبيق. لا مزامنة حية ولا حساب شريك: لا يُشارَك شيء إلا إذا أرسلتِه.",
   "partnerShareCta": "إنشاء ملخص",
-  "partnerSummaryHeader": "ملخص الدورة من فيرا"
+  "partnerSummaryHeader": "ملخص الدورة من فيرا",
+  "settingsHomeThemeLabel": "سمة الصفحة الرئيسية",
+  "homeThemeWheat": "قمح",
+  "homeThemeSky": "سماء",
+  "homeThemeField": "حقل",
+  "homeThemeBlossom": "زهر",
+  "homeThemePlain": "سادة"
 }

@@ -2,22 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../models/enums.dart';
+import '../../services/pregnancy_info.dart';
 import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
-import '../../services/pregnancy_info.dart';
 import '../../util/day.dart';
-import '../../widgets/illustrations.dart';
 import '../day_log/day_log_screen.dart';
 import 'widgets/ad_placeholder_banner.dart';
-import 'widgets/cycle_day_badge.dart';
 import 'widgets/cycle_ring.dart';
 import 'widgets/daily_insight_card.dart';
-import 'widgets/period_started_button.dart';
+import 'widgets/home_hero.dart';
 import 'widgets/phase_timeline_bar.dart';
 import 'widgets/pregnancy_card.dart';
 import 'widgets/prediction_range_card.dart';
 import 'widgets/quick_log_sheet.dart';
 
+/// Home: a scenic photo hero followed by a stack of cards — the reference
+/// app's layout language, with our own palette, typography, illustrations,
+/// and (crucially) our own honesty rules about what the numbers claim.
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -28,10 +30,6 @@ class HomeScreen extends StatelessWidget {
     final prefs = context.watch<AppPreferences>();
     final status = controller.todayStatus;
     final prediction = controller.prediction;
-    // The ring's scale is purely decorative framing, so falling back to the
-    // user's own declared estimate (Settings → Prediction settings) is fine
-    // even though `PredictionRangeCard` would never treat that estimate as a
-    // real prediction — see CycleRing's doc comment.
     final ringLength =
         prediction.meanLength?.round() ?? prefs.estimatedCycleLengthDays;
 
@@ -51,100 +49,137 @@ class HomeScreen extends StatelessWidget {
       if (d > 0) daysToOvulation = d;
     }
 
+    final phaseLabel = switch (status.phase) {
+      CyclePhase.menstrual => l10n.homePhaseMenstrual,
+      CyclePhase.follicular => l10n.homePhaseFollicular,
+      CyclePhase.fertileWindow => l10n.homePhaseFertileWindow,
+      CyclePhase.luteal => l10n.homePhaseLuteal,
+      CyclePhase.unknown => l10n.homePhaseUnknown,
+    };
+
+    // The hero headline prefers an honest countdown, falls back to the
+    // plain cycle day, and finally to the no-data state.
+    final String heroHeadline;
+    final String heroEyebrow;
+    if (daysToWindow != null) {
+      heroHeadline = l10n.homeWindowCountdown(daysToWindow);
+      heroEyebrow = phaseLabel;
+    } else if (status.cycleDay != null) {
+      heroHeadline = l10n.homeCycleDayLabel(status.cycleDay!);
+      heroEyebrow = phaseLabel;
+    } else {
+      heroHeadline = l10n.homeNoCycleYet;
+      heroEyebrow = l10n.appTitle;
+    }
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.appTitle),
-        actions: [
-          IconButton(
-            tooltip: l10n.homeOpenTodayLog,
-            icon: const Icon(Icons.edit_note_outlined),
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute(builder: (_) => DayLogScreen(date: today())),
-            ),
-          ),
-        ],
-      ),
       body: SafeArea(
+        top: false,
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              const SizedBox(height: 8),
-              if (pregnancyInfo != null) ...[
-                PregnancyCard(info: pregnancyInfo),
-                const SizedBox(height: 24),
-                DailyInsightCard(phase: status.phase),
-                const SizedBox(height: 24),
-                const AdPlaceholderBanner(),
-              ] else ...[
-              DoodleFrame(
-                child: Stack(
-                  clipBehavior: Clip.none,
-                  alignment: Alignment.center,
+              if (pregnancyInfo == null)
+                HomeHero(
+                  theme: prefs.homeTheme,
+                  status: status,
+                  eyebrow: heroEyebrow,
+                  headline: heroHeadline,
+                  secondary: daysToOvulation != null
+                      ? l10n.homeOvulationCountdown(daysToOvulation)
+                      : null,
+                  ctaLabel: l10n.homePeriodStartedButton,
+                  onCtaPressed: () =>
+                      context.read<CycleController>().markPeriodStartedToday(),
+                  mascot: prefs.mascot,
+                ),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
                   children: [
-                    CycleRing(
-                      cycleDay: status.cycleDay,
-                      cycleLength: ringLength,
-                      child: CycleDayBadge(
-                          cycleDay: status.cycleDay, phase: status.phase),
-                    ),
-                    Positioned(
-                      right: -18,
-                      bottom: -6,
-                      child: MascotAvatar(mascot: prefs.mascot),
-                    ),
+                    if (pregnancyInfo != null) ...[
+                      const SizedBox(height: 20),
+                      PregnancyCard(info: pregnancyInfo),
+                    ] else ...[
+                      PhaseTimelineBar(
+                        status: status,
+                        cycleLength: ringLength,
+                        periodLength: prefs.estimatedPeriodLengthDays,
+                      ),
+                      const SizedBox(height: 20),
+                      _QuickActionsRow(
+                        onQuickLog: () => showQuickLogSheet(context),
+                        onOpenDetails: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (_) => DayLogScreen(date: today())),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      // The ring stays as the detailed, animated view of the
+                      // same cycle the hero summarises.
+                      CycleRing(
+                        cycleDay: status.cycleDay,
+                        cycleLength: ringLength,
+                        child: Text(
+                          status.cycleDay == null
+                              ? '—'
+                              : '${status.cycleDay}',
+                          style: Theme.of(context).textTheme.displayMedium,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      PredictionRangeCard(prediction: prediction),
+                      if (status.hasFertileEstimate) ...[
+                        const SizedBox(height: 12),
+                        Text(
+                          l10n.homeFertileWindowDisclaimer,
+                          style: Theme.of(context).textTheme.bodySmall,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ],
+                    const SizedBox(height: 20),
+                    DailyInsightCard(phase: status.phase),
+                    const SizedBox(height: 24),
+                    const AdPlaceholderBanner(),
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
-              PhaseTimelineBar(
-                status: status,
-                cycleLength: ringLength,
-                periodLength: prefs.estimatedPeriodLengthDays,
-              ),
-              if (daysToWindow != null) ...[
-                const SizedBox(height: 10),
-                Text(
-                  l10n.homeWindowCountdown(daysToWindow),
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  textAlign: TextAlign.center,
-                ),
-              ],
-              if (daysToOvulation != null) ...[
-                const SizedBox(height: 4),
-                Text(
-                  l10n.homeOvulationCountdown(daysToOvulation),
-                  style: Theme.of(context).textTheme.bodySmall,
-                  textAlign: TextAlign.center,
-                ),
-              ],
-              const SizedBox(height: 20),
-              OutlinedButton.icon(
-                onPressed: () => showQuickLogSheet(context),
-                icon: const Icon(Icons.add_reaction_outlined),
-                label: Text(l10n.homeQuickLogTitle),
-              ),
-              const SizedBox(height: 20),
-              PredictionRangeCard(prediction: prediction),
-              if (status.hasFertileEstimate) ...[
-                const SizedBox(height: 12),
-                Text(
-                  l10n.homeFertileWindowDisclaimer,
-                  style: Theme.of(context).textTheme.bodySmall,
-                  textAlign: TextAlign.center,
-                ),
-              ],
-              const SizedBox(height: 20),
-              DailyInsightCard(phase: status.phase),
-              const SizedBox(height: 24),
-              const PeriodStartedButton(),
-              const SizedBox(height: 24),
-              const AdPlaceholderBanner(),
-              ],
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class _QuickActionsRow extends StatelessWidget {
+  const _QuickActionsRow({
+    required this.onQuickLog,
+    required this.onOpenDetails,
+  });
+
+  final VoidCallback onQuickLog;
+  final VoidCallback onOpenDetails;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return Row(
+      children: [
+        Expanded(
+          child: FilledButton.tonalIcon(
+            onPressed: onQuickLog,
+            icon: const Icon(Icons.add_reaction_outlined),
+            label: Text(l10n.homeQuickLogTitle, overflow: TextOverflow.ellipsis),
+          ),
+        ),
+        const SizedBox(width: 10),
+        IconButton.filledTonal(
+          tooltip: l10n.homeOpenTodayLog,
+          onPressed: onOpenDetails,
+          icon: const Icon(Icons.edit_note_outlined),
+        ),
+      ],
     );
   }
 }

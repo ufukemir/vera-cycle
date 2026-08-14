@@ -18,6 +18,19 @@ import '../../widgets/illustrations.dart';
 class PremiumScreen extends StatelessWidget {
   const PremiumScreen({super.key});
 
+  /// Replaces any visible snackbar instead of queueing behind it — two
+  /// taps used to mean two sequential toasts.
+  void _showComingSoon(BuildContext context, AppLocalizations l10n) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(
+        content: Text(l10n.comingSoon),
+        duration: const Duration(seconds: 3),
+        behavior: SnackBarBehavior.floating,
+        margin: const EdgeInsets.all(16),
+      ));
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -71,15 +84,11 @@ class PremiumScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             FilledButton(
-              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(l10n.comingSoon)),
-              ),
+              onPressed: () => _showComingSoon(context, l10n),
               child: Text(l10n.premiumSubscribeCta),
             ),
             TextButton(
-              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(l10n.comingSoon)),
-              ),
+              onPressed: () => _showComingSoon(context, l10n),
               child: Text(l10n.premiumRestore),
             ),
             const SizedBox(height: 8),

@@ -374,5 +374,11 @@
   "partnerShareTitle": "Partager un résumé avec ton/ta partenaire",
   "partnerShareBody": "Crée un court résumé texte — ta phase actuelle et ta fenêtre estimée — que tu envoies toi-même via l'app de ton choix. Pas de synchronisation en direct ni de compte partenaire : rien n'est partagé sauf si tu l'envoies.",
   "partnerShareCta": "Créer un résumé",
-  "partnerSummaryHeader": "Résumé de cycle depuis Vera"
+  "partnerSummaryHeader": "Résumé de cycle depuis Vera",
+  "settingsHomeThemeLabel": "Thème d'accueil",
+  "homeThemeWheat": "Blé",
+  "homeThemeSky": "Ciel",
+  "homeThemeField": "Champ",
+  "homeThemeBlossom": "Fleur",
+  "homeThemePlain": "Uni"
 }

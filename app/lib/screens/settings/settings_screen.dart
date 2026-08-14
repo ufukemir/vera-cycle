@@ -8,6 +8,7 @@ import '../../services/reminder_service.dart';
 import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
 import '../export/export_screen.dart';
+import '../home/widgets/home_hero.dart';
 import '../premium/premium_screen.dart';
 import 'prediction_settings_screen.dart';
 import 'privacy_screen.dart';
@@ -289,6 +290,32 @@ class SettingsScreen extends StatelessWidget {
                 onSelectionChanged: (s) => prefs.setThemeMode(s.first),
               ),
             ),
+            _sectionHeading(context, l10n.settingsHomeThemeLabel),
+            SizedBox(
+              height: 96,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                children: [
+                  for (final entry in {
+                    HomeTheme.wheat: l10n.homeThemeWheat,
+                    HomeTheme.sky: l10n.homeThemeSky,
+                    HomeTheme.field: l10n.homeThemeField,
+                    HomeTheme.blossom: l10n.homeThemeBlossom,
+                    HomeTheme.plain: l10n.homeThemePlain,
+                  }.entries)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: _ThemeSwatch(
+                        label: entry.value,
+                        theme: entry.key,
+                        selected: prefs.homeTheme == entry.key,
+                        onTap: () => prefs.setHomeTheme(entry.key),
+                      ),
+                    ),
+                ],
+              ),
+            ),
             _sectionHeading(context, l10n.settingsMascotLabel),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -554,4 +581,48 @@ class SettingsScreen extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
         child: Text(text, style: Theme.of(context).textTheme.titleMedium),
       );
+}
+
+class _ThemeSwatch extends StatelessWidget {
+  const _ThemeSwatch({
+    required this.label,
+    required this.theme,
+    required this.selected,
+    required this.onTap,
+  });
+
+  final String label;
+  final HomeTheme theme;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    final asset = homeThemeAsset(theme);
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Container(
+            width: 62,
+            height: 62,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: selected ? scheme.primary : scheme.outlineVariant,
+                width: selected ? 3 : 1,
+              ),
+              image: asset == null
+                  ? null
+                  : DecorationImage(image: AssetImage(asset), fit: BoxFit.cover),
+              gradient: asset == null ? const AppPaletteGradient() : null,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(label, style: Theme.of(context).textTheme.labelSmall),
+        ],
+      ),
+    );
+  }
 }

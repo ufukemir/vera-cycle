@@ -453,5 +453,11 @@
   "partnerShareTitle": "Share a summary with a partner",
   "partnerShareBody": "Creates a short text summary — your current phase and estimated window — that you send yourself through any app. There's no live sync and no partner account: nothing is shared unless you send it.",
   "partnerShareCta": "Create summary",
-  "partnerSummaryHeader": "Cycle summary from Vera"
+  "partnerSummaryHeader": "Cycle summary from Vera",
+  "settingsHomeThemeLabel": "Home theme",
+  "homeThemeWheat": "Wheat",
+  "homeThemeSky": "Sky",
+  "homeThemeField": "Field",
+  "homeThemeBlossom": "Blossom",
+  "homeThemePlain": "Plain"
 }

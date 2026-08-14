@@ -1231,4 +1231,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get partnerSummaryHeader => 'ملخص الدورة من فيرا';
+
+  @override
+  String get settingsHomeThemeLabel => 'سمة الصفحة الرئيسية';
+
+  @override
+  String get homeThemeWheat => 'قمح';
+
+  @override
+  String get homeThemeSky => 'سماء';
+
+  @override
+  String get homeThemeField => 'حقل';
+
+  @override
+  String get homeThemeBlossom => 'زهر';
+
+  @override
+  String get homeThemePlain => 'سادة';
 }
