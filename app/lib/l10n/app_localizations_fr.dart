@@ -1146,4 +1146,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String trackerEntriesCount(int count) {
     return '$count entrées';
   }
+
+  @override
+  String get assistantTyping => 'Vera écrit…';
 }

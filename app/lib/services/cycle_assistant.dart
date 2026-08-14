@@ -49,10 +49,58 @@ class CycleAssistant {
         .toList();
   }
 
+  /// Conversational niceties get a friendly reply instead of the topic
+  /// fallback — a chatbot that answers "merhaba" with "I didn't catch
+  /// that" feels broken.
+  String? _smallTalk(String normalized, String lang) {
+    bool hasAny(List<String> words) =>
+        words.any((w) => normalized.contains(w));
+    if (hasAny(['merhaba', 'selam', 'hello', 'hi ', 'hey']) &&
+        normalized.length < 25) {
+      return lang == 'tr'
+          ? 'Merhaba! 👋 Regl, döngü veya Vera hakkında ne merak ediyorsun?'
+          : 'Hi! 👋 What would you like to know about periods, cycles, or Vera?';
+    }
+    if (hasAny(['tesekkur', 'sagol', 'thank', 'thx'])) {
+      return lang == 'tr'
+          ? 'Rica ederim! Başka bir sorun olursa buradayım. 💛'
+          : "You're welcome! I'm here if anything else comes up. 💛";
+    }
+    if (hasAny(['kimsin', 'nesin sen', 'who are you', 'what are you'])) {
+      return lang == 'tr'
+          ? 'Ben Vera Asistan — tamamen bu telefonda çalışan bir yardımcıyım. Cevaplarım uzman gözetiminde hazırlanmış bir bilgi tabanından gelir ve kendi kayıtlarınla kişiselleşir; hiçbir şey internete gitmez.'
+          : "I'm the Vera Assistant — a helper that runs entirely on this phone. My answers come from a curated knowledge base and get personalized with your own logs; nothing ever goes to the internet.";
+    }
+    return null;
+  }
+
+  /// Follow-up questions to offer after an answer — the next-tap
+  /// suggestions a chat UI shows under the reply.
+  List<String> followUps(String languageCode, String lastQuestion,
+      {int count = 3}) {
+    final lang = _lang(languageCode);
+    final normalized = _normalize(lastQuestion);
+    final out = <String>[];
+    for (final topic in _topics) {
+      final sample = topic.sampleQuestion[lang]!;
+      if (_normalize(sample) == normalized) continue;
+      if (topic.keywords.any((k) => !k.contains(' ') &&
+          normalized.split(RegExp(r'[^a-z0-9]+')).any((t) => t.startsWith(k)))) {
+        continue; // skip the topic we just answered
+      }
+      out.add(sample);
+      if (out.length == count) break;
+    }
+    return out;
+  }
+
   String answer(String question, AssistantContext ctx, String languageCode) {
     final lang = _lang(languageCode);
     final normalized = _normalize(question);
     if (normalized.trim().isEmpty) return _fallback(ctx, lang);
+
+    final smallTalk = _smallTalk(normalized, lang);
+    if (smallTalk != null) return smallTalk;
 
     // Single-word keywords match as token *prefixes* ("gecik" → "gecikti",
     // "pregnan" → "pregnancy") — never as bare substrings, which once made

@@ -1134,4 +1134,7 @@ class AppLocalizationsId extends AppLocalizations {
   String trackerEntriesCount(int count) {
     return '$count catatan';
   }
+
+  @override
+  String get assistantTyping => 'Vera sedang mengetik…';
 }

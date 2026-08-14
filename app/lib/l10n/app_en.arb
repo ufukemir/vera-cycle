@@ -398,5 +398,6 @@
         "type": "int"
       }
     }
-  }
+  },
+  "assistantTyping": "Vera is typing…"
 }

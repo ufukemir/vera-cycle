@@ -1127,4 +1127,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String trackerEntriesCount(int count) {
     return '$count إدخالات';
   }
+
+  @override
+  String get assistantTyping => 'فيرا تكتب…';
 }

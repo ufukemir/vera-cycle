@@ -343,5 +343,6 @@
   "settingsRemindersOvulationLabel": "Hinweis aufs fruchtbare Fenster",
   "reminderOvulationTitle": "Geschätztes fruchtbares Fenster naht",
   "reminderOvulationBody": "Basierend auf deinen Zyklen könnte dein geschätztes fruchtbares Fenster bald beginnen.",
-  "trackerEntriesCount": "{count} Einträge"
+  "trackerEntriesCount": "{count} Einträge",
+  "assistantTyping": "Vera schreibt…"
 }

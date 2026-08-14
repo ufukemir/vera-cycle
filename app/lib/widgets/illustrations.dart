@@ -36,6 +36,68 @@ class HeroIllustration extends StatelessWidget {
   }
 }
 
+/// The assistant's friendly robot face — original flat vector art shown
+/// beside chat bubbles and in the assistant's empty state.
+class RobotAvatar extends StatelessWidget {
+  const RobotAvatar({super.key, this.size = 34});
+
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(
+      size: Size.square(size),
+      painter: _RobotPainter(),
+    );
+  }
+}
+
+class _RobotPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final c = size.center(Offset.zero);
+    final r = size.width / 2;
+    // Head circle
+    canvas.drawCircle(c, r * 0.82, Paint()..color = AppPalette.rose);
+    // Antenna
+    final antenna = Paint()
+      ..color = AppPalette.gold
+      ..strokeWidth = r * 0.12
+      ..strokeCap = StrokeCap.round;
+    canvas.drawLine(
+        c.translate(0, -r * 0.8), c.translate(0, -r * 1.05), antenna);
+    canvas.drawCircle(
+        c.translate(0, -r * 1.12), r * 0.14, Paint()..color = AppPalette.gold);
+    // Visor
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromCenter(
+            center: c.translate(0, -r * 0.08),
+            width: r * 1.1,
+            height: r * 0.62),
+        Radius.circular(r * 0.3),
+      ),
+      Paint()..color = Colors.white,
+    );
+    // Eyes
+    final eye = Paint()..color = AppPalette.plum;
+    canvas.drawCircle(c.translate(-r * 0.26, -r * 0.08), r * 0.11, eye);
+    canvas.drawCircle(c.translate(r * 0.26, -r * 0.08), r * 0.11, eye);
+    // Smile
+    final smile = Paint()
+      ..color = Colors.white
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = r * 0.1
+      ..strokeCap = StrokeCap.round;
+    canvas.drawArc(
+        Rect.fromCircle(center: c.translate(0, r * 0.34), radius: r * 0.24),
+        math.pi * 0.15, math.pi * 0.7, false, smile);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
 /// A small hand-drawn companion character (see [Mascot]) — original kawaii
 /// vector art with a gentle bobbing animation. Purely decorative; renders
 /// nothing for [Mascot.none].

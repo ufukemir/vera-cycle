@@ -343,5 +343,6 @@
   "settingsRemindersOvulationLabel": "Alerte fenêtre fertile",
   "reminderOvulationTitle": "La fenêtre fertile estimée approche",
   "reminderOvulationBody": "D'après tes cycles enregistrés, ta fenêtre fertile estimée pourrait bientôt commencer.",
-  "trackerEntriesCount": "{count} entrées"
+  "trackerEntriesCount": "{count} entrées",
+  "assistantTyping": "Vera écrit…"
 }

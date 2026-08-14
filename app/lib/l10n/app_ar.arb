@@ -343,5 +343,6 @@
   "settingsRemindersOvulationLabel": "تنبيه اقتراب نافذة الخصوبة",
   "reminderOvulationTitle": "نافذة الخصوبة المقدرة تقترب",
   "reminderOvulationBody": "بناءً على دوراتك المسجلة، قد تبدأ نافذة الخصوبة المقدرة قريبًا.",
-  "trackerEntriesCount": "{count} إدخالات"
+  "trackerEntriesCount": "{count} إدخالات",
+  "assistantTyping": "فيرا تكتب…"
 }

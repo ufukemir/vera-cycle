@@ -2187,6 +2187,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count} entries'**
   String trackerEntriesCount(int count);
+
+  /// No description provided for @assistantTyping.
+  ///
+  /// In en, this message translates to:
+  /// **'Vera is typing…'**
+  String get assistantTyping;
 }
 
 class _AppLocalizationsDelegate

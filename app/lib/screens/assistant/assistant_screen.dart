@@ -31,6 +31,8 @@ class _AssistantScreenState extends State<AssistantScreen> {
   final _messages = <_Message>[];
   final _input = TextEditingController();
   final _scroll = ScrollController();
+  bool _typing = false;
+  List<String> _followUps = const [];
 
   AssistantContext _buildContext(BuildContext context) {
     final controller = context.read<CycleController>();
@@ -53,16 +55,31 @@ class _AssistantScreenState extends State<AssistantScreen> {
     );
   }
 
-  void _send(String text) {
+  Future<void> _send(String text) async {
     final trimmed = text.trim();
-    if (trimmed.isEmpty) return;
+    if (trimmed.isEmpty || _typing) return;
     final lang = Localizations.localeOf(context).languageCode;
     final reply = _assistant.answer(trimmed, _buildContext(context), lang);
     setState(() {
       _messages.add(_Message(trimmed, fromUser: true));
-      _messages.add(_Message(reply, fromUser: false));
+      _typing = true;
+      _followUps = const [];
     });
     _input.clear();
+    _scrollDown();
+    // A brief "typing" beat so replies read as conversation, not a lookup
+    // table — bounded and short, never long enough to hide information.
+    await Future<void>.delayed(const Duration(milliseconds: 650));
+    if (!mounted) return;
+    setState(() {
+      _typing = false;
+      _messages.add(_Message(reply, fromUser: false));
+      _followUps = _assistant.followUps(lang, trimmed);
+    });
+    _scrollDown();
+  }
+
+  void _scrollDown() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_scroll.hasClients) {
         _scroll.animateTo(
@@ -99,11 +116,27 @@ class _AssistantScreenState extends State<AssistantScreen> {
                       suggestions: _assistant.suggestions(lang),
                       onSuggestionTap: _send,
                     )
-                  : ListView.builder(
+                  : ListView(
                       controller: _scroll,
                       padding: const EdgeInsets.all(16),
-                      itemCount: _messages.length,
-                      itemBuilder: (context, i) => _Bubble(message: _messages[i]),
+                      children: [
+                        for (final m in _messages) _Bubble(message: m),
+                        if (_typing) _TypingBubble(label: l10n.assistantTyping),
+                        if (!_typing && _followUps.isNotEmpty)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Wrap(
+                              spacing: 8,
+                              runSpacing: 8,
+                              children: [
+                                for (final q in _followUps)
+                                  ActionChip(
+                                      label: Text(q),
+                                      onPressed: () => _send(q)),
+                              ],
+                            ),
+                          ),
+                      ],
                     ),
             ),
             Container(
@@ -177,6 +210,77 @@ class _EmptyState extends StatelessWidget {
   }
 }
 
+class _TypingBubble extends StatefulWidget {
+  const _TypingBubble({required this.label});
+
+  final String label;
+
+  @override
+  State<_TypingBubble> createState() => _TypingBubbleState();
+}
+
+class _TypingBubbleState extends State<_TypingBubble>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 900),
+  )..repeat();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const RobotAvatar(),
+          const SizedBox(width: 8),
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            decoration: BoxDecoration(
+              color: scheme.surfaceContainerHigh,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: AnimatedBuilder(
+              animation: _controller,
+              builder: (context, _) {
+                final phase = (_controller.value * 3).floor() % 3;
+                return Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    for (var i = 0; i < 3; i++)
+                      Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 2),
+                        width: 7,
+                        height: 7,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: scheme.onSurface
+                              .withValues(alpha: i == phase ? 0.8 : 0.3),
+                        ),
+                      ),
+                    const SizedBox(width: 8),
+                    Text(widget.label,
+                        style: Theme.of(context).textTheme.bodySmall),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _Bubble extends StatelessWidget {
   const _Bubble({required this.message});
 
@@ -186,9 +290,25 @@ class _Bubble extends StatelessWidget {
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     final fromUser = message.fromUser;
+    if (!fromUser) {
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          const RobotAvatar(),
+          const SizedBox(width: 8),
+          Flexible(child: _bubbleBody(context, scheme, fromUser)),
+        ],
+      );
+    }
     return Align(
-      alignment: fromUser ? Alignment.centerRight : Alignment.centerLeft,
-      child: Container(
+      alignment: Alignment.centerRight,
+      child: _bubbleBody(context, scheme, fromUser),
+    );
+  }
+
+  Widget _bubbleBody(
+      BuildContext context, ColorScheme scheme, bool fromUser) {
+    return Container(
         margin: const EdgeInsets.symmetric(vertical: 4),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         constraints: BoxConstraints(
@@ -208,7 +328,6 @@ class _Bubble extends StatelessWidget {
                 color: fromUser ? scheme.onPrimary : scheme.onSurface,
               ),
         ),
-      ),
     );
   }
 }

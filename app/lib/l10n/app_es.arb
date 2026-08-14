@@ -343,5 +343,6 @@
   "settingsRemindersOvulationLabel": "Aviso de ventana fértil",
   "reminderOvulationTitle": "Se acerca la ventana fértil estimada",
   "reminderOvulationBody": "Según tus ciclos registrados, tu ventana fértil estimada podría empezar pronto.",
-  "trackerEntriesCount": "{count} registros"
+  "trackerEntriesCount": "{count} registros",
+  "assistantTyping": "Vera está escribiendo…"
 }

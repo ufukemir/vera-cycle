@@ -343,5 +343,6 @@
   "settingsRemindersOvulationLabel": "Doğurgan pencere yaklaşınca haber ver",
   "reminderOvulationTitle": "Tahmini doğurgan pencere yaklaşıyor",
   "reminderOvulationBody": "Kaydettiğin döngülere göre tahmini doğurgan penceren yakında başlayabilir.",
-  "trackerEntriesCount": "{count} kayıt"
+  "trackerEntriesCount": "{count} kayıt",
+  "assistantTyping": "Vera yazıyor…"
 }

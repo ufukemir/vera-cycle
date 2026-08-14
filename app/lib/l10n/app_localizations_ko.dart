@@ -1124,4 +1124,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String trackerEntriesCount(int count) {
     return '$count entries';
   }
+
+  @override
+  String get assistantTyping => 'Vera is typing…';
 }

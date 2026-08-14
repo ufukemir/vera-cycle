@@ -54,6 +54,18 @@ void main() {
     expect(answer, contains('•'));
   });
 
+  test('greets back instead of falling back on small talk', () {
+    expect(assistant.answer('merhaba', ctx, 'tr'), contains('Merhaba'));
+    expect(assistant.answer('hello', ctx, 'en'), contains('Hi'));
+    expect(assistant.answer('kimsin sen', ctx, 'tr'), contains('Vera Asistan'));
+  });
+
+  test('follow-ups exclude the topic just answered', () {
+    final followUps = assistant.followUps('tr', 'Reglim gecikti, normal mi?');
+    expect(followUps, isNotEmpty);
+    expect(followUps, isNot(contains('Reglim gecikti, normal mi?')));
+  });
+
   test('suggestions come back in the requested language', () {
     expect(assistant.suggestions('tr').first, contains('Reglim'));
     expect(assistant.suggestions('en').first, contains('period'));

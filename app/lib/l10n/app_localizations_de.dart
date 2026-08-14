@@ -1142,4 +1142,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String trackerEntriesCount(int count) {
     return '$count Einträge';
   }
+
+  @override
+  String get assistantTyping => 'Vera schreibt…';
 }

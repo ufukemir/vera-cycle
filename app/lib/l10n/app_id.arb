@@ -343,5 +343,6 @@
   "settingsRemindersOvulationLabel": "Pemberitahuan masa subur",
   "reminderOvulationTitle": "Perkiraan masa subur mendekat",
   "reminderOvulationBody": "Berdasarkan siklus yang kamu catat, perkiraan masa suburmu mungkin segera dimulai.",
-  "trackerEntriesCount": "{count} catatan"
+  "trackerEntriesCount": "{count} catatan",
+  "assistantTyping": "Vera sedang mengetik…"
 }
