@@ -31,40 +31,49 @@ class QuickStatsRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Expanded(
-          child: _StatCard(
-            icon: Icons.water_drop_outlined,
-            label: l10n.dayLogWaterLabel,
-            value: waterIntakeMl == null ? '—' : '${waterIntakeMl}ml',
-            onTap: () {
-              final next = (waterIntakeMl ?? 0) + _waterStepMl;
-              onWaterChanged(next > _waterMaxMl ? _waterMaxMl : next);
-            },
-            onLongPress: waterIntakeMl == null ? null : () => onWaterChanged(null),
+    // IntrinsicHeight, not CrossAxisAlignment.stretch: this row lives in a
+    // ListView, where the cross axis is unbounded — stretching there asks
+    // for infinite height and throws before the screen ever paints.
+    return IntrinsicHeight(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: _StatCard(
+              icon: Icons.water_drop_outlined,
+              label: l10n.dayLogWaterLabel,
+              value: waterIntakeMl == null ? '—' : '${waterIntakeMl}ml',
+              onTap: () {
+                final next = (waterIntakeMl ?? 0) + _waterStepMl;
+                onWaterChanged(next > _waterMaxMl ? _waterMaxMl : next);
+              },
+              onLongPress: waterIntakeMl == null
+                  ? null
+                  : () => onWaterChanged(null),
+            ),
           ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: _StatCard(
-            icon: Icons.bedtime_outlined,
-            label: l10n.dayLogSleepLabel,
-            value: sleepMinutes == null ? '—' : _formatSleep(sleepMinutes!),
-            onTap: () => _pickSleep(context),
+          const SizedBox(width: 12),
+          Expanded(
+            child: _StatCard(
+              icon: Icons.bedtime_outlined,
+              label: l10n.dayLogSleepLabel,
+              value: sleepMinutes == null ? '—' : _formatSleep(sleepMinutes!),
+              onTap: () => _pickSleep(context),
+            ),
           ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: _StatCard(
-            icon: Icons.monitor_weight_outlined,
-            label: l10n.dayLogWeightLabel,
-            value: weightKg == null ? '—' : '${weightKg!.toStringAsFixed(1)}kg',
-            onTap: () => _pickWeight(context),
+          const SizedBox(width: 12),
+          Expanded(
+            child: _StatCard(
+              icon: Icons.monitor_weight_outlined,
+              label: l10n.dayLogWeightLabel,
+              value: weightKg == null
+                  ? '—'
+                  : '${weightKg!.toStringAsFixed(1)}kg',
+              onTap: () => _pickWeight(context),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -107,11 +116,16 @@ class QuickStatsRow extends StatelessWidget {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(dialogContext),
-                child: Text(MaterialLocalizations.of(dialogContext).cancelButtonLabel),
+                child: Text(
+                  MaterialLocalizations.of(dialogContext).cancelButtonLabel,
+                ),
               ),
               FilledButton(
-                onPressed: () => Navigator.pop(dialogContext, hours * 60 + minutes),
-                child: Text(MaterialLocalizations.of(dialogContext).okButtonLabel),
+                onPressed: () =>
+                    Navigator.pop(dialogContext, hours * 60 + minutes),
+                child: Text(
+                  MaterialLocalizations.of(dialogContext).okButtonLabel,
+                ),
               ),
             ],
           ),
@@ -141,7 +155,9 @@ class QuickStatsRow extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialogContext),
-            child: Text(MaterialLocalizations.of(dialogContext).cancelButtonLabel),
+            child: Text(
+              MaterialLocalizations.of(dialogContext).cancelButtonLabel,
+            ),
           ),
           FilledButton(
             onPressed: () => Navigator.pop(dialogContext, controller.text),

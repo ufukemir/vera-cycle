@@ -4,7 +4,9 @@ import '../../../models/prediction.dart';
 import '../../../util/day.dart';
 
 /// A horizontal segmented bar of the current cycle — period days, estimated
-/// fertile window, and the rest — with a marker on today. The reference
+/// fertile window, and the rest — with a marker on today. Uses
+/// [PositionedDirectional] throughout so the whole bar mirrors in RTL
+/// locales (ar, ur) instead of running backwards. The reference
 /// app's "Bugün — Döngü Günü N" strip, honesty-adjusted: fertile-window
 /// styling matches the calendar's estimate colors and every segment scales
 /// off the same decorative cycle length the ring uses (nothing here claims
@@ -65,8 +67,8 @@ class PhaseTimelineBar extends StatelessWidget {
                 ),
               ),
               // Period segment
-              Positioned(
-                left: 0,
+              PositionedDirectional(
+                start: 0,
                 top: 9,
                 child: Container(
                   width: x(periodLength + 1),
@@ -79,8 +81,8 @@ class PhaseTimelineBar extends StatelessWidget {
               ),
               // Fertile estimate segment
               if (fertileStartDay != null && fertileEndDay != null)
-                Positioned(
-                  left: x(fertileStartDay),
+                PositionedDirectional(
+                  start: x(fertileStartDay),
                   top: 9,
                   child: Container(
                     width: (x(fertileEndDay + 1) - x(fertileStartDay))
@@ -93,8 +95,8 @@ class PhaseTimelineBar extends StatelessWidget {
                   ),
                 ),
               // Today marker
-              Positioned(
-                left: (x(day) + dayWidth / 2 - 6).clamp(0, width - 12),
+              PositionedDirectional(
+                start: (x(day) + dayWidth / 2 - 6).clamp(0, width - 12),
                 top: 3,
                 child: Container(
                   width: 12,

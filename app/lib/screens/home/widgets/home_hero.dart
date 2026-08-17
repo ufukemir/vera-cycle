@@ -134,8 +134,8 @@ class HomeHero extends StatelessWidget {
                 ),
               ),
             ),
-            Positioned(
-              right: 16,
+            PositionedDirectional(
+              end: 16,
               bottom: 12,
               child: MascotAvatar(mascot: mascot, size: 64),
             ),
