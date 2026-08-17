@@ -17,13 +17,13 @@ kırılgan ve hataya açık olurdu. Aşağıdaki adımlar bir kere yapılır:
    - "Include Live Activity" ve "Include Configuration Intent": **kapalı**
 3. Hem `Runner` hem `VeraWidget` target'ına **App Group** ekle:
    - Signing & Capabilities → + Capability → App Groups
-   - Grup adı: `group.com.ufukemir.cycleApp`
+   - Grup adı: `group.com.ufukemir.vera`
      (kodda `HomeWidgetService.iOSAppGroupId` ile birebir aynı olmalı)
 4. `VeraWidget` target'ına Swift Package olarak `home_widget` ekle
    (Package Dependencies → home_widget → VeraWidget target'ını işaretle)
 5. Oluşan `VeraWidget.swift` içinde veriyi şu anahtarlarla oku:
    `vera_eyebrow`, `vera_headline`, `vera_secondary`
-   (`UserDefaults(suiteName: "group.com.ufukemir.cycleApp")`)
+   (`UserDefaults(suiteName: "group.com.ufukemir.vera")`)
 
 ## Neden bu üç anahtar
 

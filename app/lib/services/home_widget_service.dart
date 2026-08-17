@@ -14,7 +14,7 @@ class HomeWidgetService {
 
   /// iOS App Group / Android provider names. The iOS one must match the
   /// App Group configured in Xcode once the widget extension is added.
-  static const iOSAppGroupId = 'group.com.ufukemir.cycleApp';
+  static const iOSAppGroupId = 'group.com.ufukemir.vera';
   static const androidProviderName = 'VeraWidgetProvider';
   static const iOSWidgetName = 'VeraWidget';
 
