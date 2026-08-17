@@ -1328,4 +1328,14 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get insightsCycleHistoryEntry => 'Ciclos anteriores';
+
+  @override
+  String get homeEmptyTitle => 'Empecemos por tu último periodo';
+
+  @override
+  String get homeEmptyBody =>
+      'Toca el botón de arriba el día que empiece tu periodo. Tras dos ciclos completos Vera podrá estimar — hasta entonces no fingirá saberlo.';
+
+  @override
+  String get homeEmptyBackdate => 'Ya empezó antes';
 }

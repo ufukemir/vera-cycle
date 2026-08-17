@@ -106,8 +106,10 @@ class _TipCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(14),
+            // cacheWidth caps decode size: without it a 72px-wide
+            // thumbnail still decodes the full-resolution bitmap.
             child: Image.asset(photoAsset,
-                width: 72, height: 88, fit: BoxFit.cover),
+                width: 72, height: 88, fit: BoxFit.cover, cacheWidth: 216),
           ),
           const SizedBox(width: 12),
           Expanded(

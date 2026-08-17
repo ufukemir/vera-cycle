@@ -399,5 +399,8 @@
   "cycleHistoryLength": "Ciclo de {days} días",
   "cycleHistoryPeriodLength": "{days} días de sangrado",
   "cycleHistoryVsAverage": "{diff} respecto a tu media",
-  "insightsCycleHistoryEntry": "Ciclos anteriores"
+  "insightsCycleHistoryEntry": "Ciclos anteriores",
+  "homeEmptyTitle": "Empecemos por tu último periodo",
+  "homeEmptyBody": "Toca el botón de arriba el día que empiece tu periodo. Tras dos ciclos completos Vera podrá estimar — hasta entonces no fingirá saberlo.",
+  "homeEmptyBackdate": "Ya empezó antes"
 }

@@ -399,5 +399,8 @@
   "cycleHistoryLength": "{days} günlük döngü",
   "cycleHistoryPeriodLength": "{days} gün kanama",
   "cycleHistoryVsAverage": "ortalamana göre {diff}",
-  "insightsCycleHistoryEntry": "Geçmiş döngüler"
+  "insightsCycleHistoryEntry": "Geçmiş döngüler",
+  "homeEmptyTitle": "Son reglinle başlayalım",
+  "homeEmptyBody": "Reglin başladığı gün yukarıdaki butona dokun. İki tam döngüden sonra Vera tahmin etmeye başlayabilir — o zamana kadar biliyormuş gibi yapmaz.",
+  "homeEmptyBackdate": "Zaten daha önce başladı"
 }

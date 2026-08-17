@@ -2523,6 +2523,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Past cycles'**
   String get insightsCycleHistoryEntry;
+
+  /// No description provided for @homeEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s start with your last period'**
+  String get homeEmptyTitle;
+
+  /// No description provided for @homeEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the button above on the day your period starts. After two full cycles Vera can start estimating — until then it won\'t pretend to know.'**
+  String get homeEmptyBody;
+
+  /// No description provided for @homeEmptyBackdate.
+  ///
+  /// In en, this message translates to:
+  /// **'It already started earlier'**
+  String get homeEmptyBackdate;
 }
 
 class _AppLocalizationsDelegate

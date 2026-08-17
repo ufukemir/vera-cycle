@@ -399,5 +399,8 @@
   "cycleHistoryLength": "Siklus {days} hari",
   "cycleHistoryPeriodLength": "{days} hari pendarahan",
   "cycleHistoryVsAverage": "{diff} dibanding rata-ratamu",
-  "insightsCycleHistoryEntry": "Siklus sebelumnya"
+  "insightsCycleHistoryEntry": "Siklus sebelumnya",
+  "homeEmptyTitle": "Mari mulai dari haid terakhirmu",
+  "homeEmptyBody": "Ketuk tombol di atas pada hari haidmu dimulai. Setelah dua siklus penuh Vera bisa mulai memperkirakan — sampai saat itu ia tidak akan berpura-pura tahu.",
+  "homeEmptyBackdate": "Sudah dimulai sebelumnya"
 }

@@ -1339,4 +1339,14 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get insightsCycleHistoryEntry => 'Cycles passés';
+
+  @override
+  String get homeEmptyTitle => 'Commençons par tes dernières règles';
+
+  @override
+  String get homeEmptyBody =>
+      'Appuie sur le bouton ci-dessus le jour où tes règles commencent. Après deux cycles complets, Vera pourra estimer — d\'ici là, elle ne fera pas semblant de savoir.';
+
+  @override
+  String get homeEmptyBackdate => 'Elles ont déjà commencé avant';
 }

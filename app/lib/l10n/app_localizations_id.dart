@@ -1327,4 +1327,14 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get insightsCycleHistoryEntry => 'Siklus sebelumnya';
+
+  @override
+  String get homeEmptyTitle => 'Mari mulai dari haid terakhirmu';
+
+  @override
+  String get homeEmptyBody =>
+      'Ketuk tombol di atas pada hari haidmu dimulai. Setelah dua siklus penuh Vera bisa mulai memperkirakan — sampai saat itu ia tidak akan berpura-pura tahu.';
+
+  @override
+  String get homeEmptyBackdate => 'Sudah dimulai sebelumnya';
 }

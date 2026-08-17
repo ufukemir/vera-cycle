@@ -1319,4 +1319,14 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get insightsCycleHistoryEntry => 'Past cycles';
+
+  @override
+  String get homeEmptyTitle => 'Let\'s start with your last period';
+
+  @override
+  String get homeEmptyBody =>
+      'Tap the button above on the day your period starts. After two full cycles Vera can start estimating — until then it won\'t pretend to know.';
+
+  @override
+  String get homeEmptyBackdate => 'It already started earlier';
 }

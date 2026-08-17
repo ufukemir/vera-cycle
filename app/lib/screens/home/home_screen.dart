@@ -13,6 +13,7 @@ import 'widgets/ad_placeholder_banner.dart';
 import 'widgets/backup_nudge_card.dart';
 import 'widgets/cycle_ring.dart';
 import 'widgets/daily_insight_card.dart';
+import 'widgets/first_run_card.dart';
 import 'widgets/home_hero.dart';
 import 'widgets/phase_timeline_bar.dart';
 import 'widgets/pregnancy_card.dart';
@@ -112,6 +113,7 @@ class HomeScreen extends StatelessWidget {
                       const SizedBox(height: 20),
                       PregnancyCard(info: pregnancyInfo),
                     ] else ...[
+                      const FirstRunCard(),
                       PhaseTimelineBar(
                         status: status,
                         cycleLength: ringLength,

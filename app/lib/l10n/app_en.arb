@@ -506,5 +506,8 @@
       }
     }
   },
-  "insightsCycleHistoryEntry": "Past cycles"
+  "insightsCycleHistoryEntry": "Past cycles",
+  "homeEmptyTitle": "Let's start with your last period",
+  "homeEmptyBody": "Tap the button above on the day your period starts. After two full cycles Vera can start estimating — until then it won't pretend to know.",
+  "homeEmptyBackdate": "It already started earlier"
 }

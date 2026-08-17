@@ -1316,4 +1316,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get insightsCycleHistoryEntry => 'الدورات السابقة';
+
+  @override
+  String get homeEmptyTitle => 'لنبدأ بآخر دورة لك';
+
+  @override
+  String get homeEmptyBody =>
+      'اضغطي الزر أعلاه في اليوم الذي تبدأ فيه دورتك. بعد دورتين كاملتين يمكن لفيرا أن تبدأ التقدير — وحتى ذلك الحين لن تتظاهر بالمعرفة.';
+
+  @override
+  String get homeEmptyBackdate => 'لقد بدأت بالفعل قبل ذلك';
 }

@@ -647,7 +647,10 @@ class _ThemeSwatch extends StatelessWidget {
               ),
               image: asset == null
                   ? null
-                  : DecorationImage(image: AssetImage(asset), fit: BoxFit.cover),
+                  : DecorationImage(
+                      image: ResizeImage(AssetImage(asset), width: 186),
+                      fit: BoxFit.cover,
+                    ),
               gradient: asset == null ? const AppPaletteGradient() : null,
             ),
           ),

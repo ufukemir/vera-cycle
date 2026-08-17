@@ -1324,4 +1324,14 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get insightsCycleHistoryEntry => 'Geçmiş döngüler';
+
+  @override
+  String get homeEmptyTitle => 'Son reglinle başlayalım';
+
+  @override
+  String get homeEmptyBody =>
+      'Reglin başladığı gün yukarıdaki butona dokun. İki tam döngüden sonra Vera tahmin etmeye başlayabilir — o zamana kadar biliyormuş gibi yapmaz.';
+
+  @override
+  String get homeEmptyBackdate => 'Zaten daha önce başladı';
 }
