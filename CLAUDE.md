@@ -55,10 +55,12 @@ Premium reklamları kaldırır.
 - Depolama: şifreli yerel dosya deposu; repository arayüzü arkasında (sonradan SQLCipher'a
   geçiş UI'a dokunmadan mümkün olsun).
 - Bildirimler yereldir (`flutter_local_notifications`), sunucu push YOK.
-- UI dili: sistem dilini takip eder, kullanıcı ayarlardan değiştirebilir. Desteklenen diller
-  büyüyor (bkz. `lib/l10n/`) — her yeni dil gerçek çeviri kalitesi iddiası taşımaz, MVP
-  hızında makine/LLM çevirisiyle başlar; yayın öncesi anadili konuşan gözden geçirmesi
-  önerilir. Kod/commit dili: İngilizce. Ufuk'la konuşma: Türkçe.
+- UI dili: sistem dilini takip eder, kullanıcı ayarlardan değiştirebilir. **Yalnızca
+  %100 çevrilmiş diller listelenir** (`lib/l10n/`); kısmen çevrilmiş olanlar
+  `l10n_pending/`'de bekler. Yarım çeviri = kullanıcıya karışık dilli ekran, bu
+  yüzden "önce ekle sonra tamamla" yapılmaz. Sağlık terimlerinde makine çevirisi
+  yanıltıcı olabilir; yeni dil için anadili konuşan gözden geçirme şart.
+- Kod/commit dili: İngilizce. Ufuk'la konuşma: Türkçe.
 - Fontlar (Quicksand, Fraunces) `assets/fonts/`'ta yerel paketlenir, `google_fonts`
   paketinin çalışma zamanı ağ indirmesi KULLANILMAZ — ilke 2'yi ihlal eder.
 - Test: tahmin motoru, şifreleme katmanı ve saf servisler için test zorunlu.

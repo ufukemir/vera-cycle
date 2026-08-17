@@ -111,9 +111,11 @@ sana dürüst olsun.
 - Paylaşım daima kullanıcının başlattığı sistem paylaşım sayfası üzerinden.
 
 ### 9. Ayarlar
-- Dil (15 dil: EN/TR/AR/ES/FR/DE/ID tam; PT/IT/RU/HI/JA/KO/ZH/UR çekirdek
-  ekranlar çevrili, kalanı İngilizceye düşer — varsayılan sistem dili),
-  hafta başlangıcı, sıcaklık birimi.
+- Dil: **tamamen çevrilmiş 7 dil** (EN/TR/AR/ES/FR/DE/ID), varsayılan
+  sistem dili. Sekiz dil daha (%15 çeviriyle) `l10n_pending/`'de bekliyor
+  — yarım çevrilmiş dili listelemek, o dili hiç sunmamaktan kötü bir
+  deneyim olduğu için listeden çıkarıldılar (bkz. o klasördeki README).
+- Hafta başlangıcı, sıcaklık birimi.
 - Şeffaf "Tahmin Ayarları" ekranı: kullanıcının kendi bildirdiği regl/döngü
   uzunluğu (sadece süs — CycleRing'i ölçekler, tahmine karışmaz) ile luteal
   faz uzunluğu (gerçek girdi — PredictionEngine'in doğurgan pencereyi
