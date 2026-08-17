@@ -1331,4 +1331,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get homeEmptyBackdate => 'It already started earlier';
+
+  @override
+  String get settingsAdPrivacyEntry => 'Ad privacy options';
 }

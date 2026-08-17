@@ -1334,4 +1334,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get homeEmptyBackdate => 'Zaten daha önce başladı';
+
+  @override
+  String get settingsAdPrivacyEntry => 'Reklam gizlilik seçenekleri';
 }

@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 
 import '../../../l10n/app_localizations.dart';
+import '../../../services/ad_consent_service.dart';
 import '../../../services/ad_ids.dart';
 import '../../../state/app_preferences.dart';
 import '../../premium/premium_screen.dart';
@@ -32,6 +35,16 @@ class _AdPlaceholderBannerState extends State<AdPlaceholderBanner> {
   }
 
   Future<void> _load() async {
+    // Ads exist on Android and iOS only; elsewhere (including tests) the
+    // widget just renders its upgrade row.
+    if (!Platform.isAndroid && !Platform.isIOS) return;
+    // Consent first, always: loading an ad before the UMP flow says we
+    // may is exactly the EEA/UK violation AdConsentService guards.
+    const consent = AdConsentService();
+    await consent.requestAppTrackingIfNeeded();
+    if (!await consent.ensureConsent()) return;
+    if (!mounted) return;
+
     final ad = BannerAd(
       adUnitId: AdIds.banner,
       size: AdSize.banner,

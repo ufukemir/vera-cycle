@@ -1326,4 +1326,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get homeEmptyBackdate => 'لقد بدأت بالفعل قبل ذلك';
+
+  @override
+  String get settingsAdPrivacyEntry => 'خيارات خصوصية الإعلانات';
 }

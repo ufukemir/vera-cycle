@@ -2541,6 +2541,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'It already started earlier'**
   String get homeEmptyBackdate;
+
+  /// No description provided for @settingsAdPrivacyEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'Ad privacy options'**
+  String get settingsAdPrivacyEntry;
 }
 
 class _AppLocalizationsDelegate

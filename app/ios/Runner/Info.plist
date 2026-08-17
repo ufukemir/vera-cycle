@@ -31,6 +31,8 @@
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<!-- Google's public sample app id; swap for the real one before release. -->
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Vera never tracks your cycle data. This only lets ads in the free version stay relevant; declining simply shows less relevant ads.</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3940256099942544~1458002511</string>
 	<key>UIApplicationSceneManifest</key>

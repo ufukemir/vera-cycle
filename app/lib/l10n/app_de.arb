@@ -402,5 +402,6 @@
   "insightsCycleHistoryEntry": "Frühere Zyklen",
   "homeEmptyTitle": "Beginnen wir mit deiner letzten Periode",
   "homeEmptyBody": "Tippe am Tag deines Periodenbeginns auf den Button oben. Nach zwei vollständigen Zyklen kann Vera schätzen — bis dahin tut sie nicht so, als wüsste sie es.",
-  "homeEmptyBackdate": "Sie hat schon früher begonnen"
+  "homeEmptyBackdate": "Sie hat schon früher begonnen",
+  "settingsAdPrivacyEntry": "Datenschutzoptionen für Werbung"
 }

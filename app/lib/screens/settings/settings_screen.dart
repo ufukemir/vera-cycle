@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/enums.dart';
+import '../../services/ad_consent_service.dart';
 import '../../services/pin_vault.dart';
 import '../../services/reminder_service.dart';
 import '../../state/app_preferences.dart';
@@ -582,6 +583,14 @@ class SettingsScreen extends StatelessWidget {
               onTap: () => Navigator.of(context).push(
                 MaterialPageRoute(builder: (_) => const PredictionSettingsScreen()),
               ),
+            ),
+            // Required to stay reachable wherever the user's region
+            // mandates it, so it is rendered unconditionally rather than
+            // hidden behind an async region check.
+            ListTile(
+              title: Text(l10n.settingsAdPrivacyEntry),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => const AdConsentService().showPrivacyOptions(),
             ),
             ListTile(
               title: Text(l10n.settingsPrivacyEntry),

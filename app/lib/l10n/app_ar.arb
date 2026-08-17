@@ -402,5 +402,6 @@
   "insightsCycleHistoryEntry": "الدورات السابقة",
   "homeEmptyTitle": "لنبدأ بآخر دورة لك",
   "homeEmptyBody": "اضغطي الزر أعلاه في اليوم الذي تبدأ فيه دورتك. بعد دورتين كاملتين يمكن لفيرا أن تبدأ التقدير — وحتى ذلك الحين لن تتظاهر بالمعرفة.",
-  "homeEmptyBackdate": "لقد بدأت بالفعل قبل ذلك"
+  "homeEmptyBackdate": "لقد بدأت بالفعل قبل ذلك",
+  "settingsAdPrivacyEntry": "خيارات خصوصية الإعلانات"
 }

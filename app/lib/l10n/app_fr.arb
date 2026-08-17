@@ -402,5 +402,6 @@
   "insightsCycleHistoryEntry": "Cycles passés",
   "homeEmptyTitle": "Commençons par tes dernières règles",
   "homeEmptyBody": "Appuie sur le bouton ci-dessus le jour où tes règles commencent. Après deux cycles complets, Vera pourra estimer — d'ici là, elle ne fera pas semblant de savoir.",
-  "homeEmptyBackdate": "Elles ont déjà commencé avant"
+  "homeEmptyBackdate": "Elles ont déjà commencé avant",
+  "settingsAdPrivacyEntry": "Options de confidentialité des publicités"
 }

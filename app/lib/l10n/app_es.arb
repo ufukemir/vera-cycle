@@ -402,5 +402,6 @@
   "insightsCycleHistoryEntry": "Ciclos anteriores",
   "homeEmptyTitle": "Empecemos por tu último periodo",
   "homeEmptyBody": "Toca el botón de arriba el día que empiece tu periodo. Tras dos ciclos completos Vera podrá estimar — hasta entonces no fingirá saberlo.",
-  "homeEmptyBackdate": "Ya empezó antes"
+  "homeEmptyBackdate": "Ya empezó antes",
+  "settingsAdPrivacyEntry": "Opciones de privacidad de anuncios"
 }

@@ -402,5 +402,6 @@
   "insightsCycleHistoryEntry": "Geçmiş döngüler",
   "homeEmptyTitle": "Son reglinle başlayalım",
   "homeEmptyBody": "Reglin başladığı gün yukarıdaki butona dokun. İki tam döngüden sonra Vera tahmin etmeye başlayabilir — o zamana kadar biliyormuş gibi yapmaz.",
-  "homeEmptyBackdate": "Zaten daha önce başladı"
+  "homeEmptyBackdate": "Zaten daha önce başladı",
+  "settingsAdPrivacyEntry": "Reklam gizlilik seçenekleri"
 }

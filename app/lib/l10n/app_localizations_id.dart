@@ -1337,4 +1337,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get homeEmptyBackdate => 'Sudah dimulai sebelumnya';
+
+  @override
+  String get settingsAdPrivacyEntry => 'Opsi privasi iklan';
 }
