@@ -1414,4 +1414,21 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get healthSyncDenied => 'İzin verilmedi, aktarım kapalı kalıyor.';
+
+  @override
+  String get settingsDiagnosticsEntry => 'Tanılama';
+
+  @override
+  String get diagnosticsBody =>
+      'Uygulama hata verirse teknik ayrıntılar burada kaydedilir — yalnızca bu cihazda. Sen göndermeyi seçmedikçe hiçbir yere gitmez ve göndereceğin şeyi önce olduğu gibi okuyabilirsin.';
+
+  @override
+  String get diagnosticsEmpty =>
+      'Kayıt yok — herhangi bir sorun tespit edilmedi.';
+
+  @override
+  String get diagnosticsShare => 'Geliştiriciye gönder';
+
+  @override
+  String get diagnosticsClear => 'Temizle';
 }

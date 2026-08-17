@@ -1418,4 +1418,21 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get healthSyncDenied =>
       'Izin tidak diberikan, jadi sinkronisasi tetap mati.';
+
+  @override
+  String get settingsDiagnosticsEntry => 'Diagnostik';
+
+  @override
+  String get diagnosticsBody =>
+      'Jika aplikasi bermasalah, detail teknis dicatat di sini — hanya di perangkat ini. Tidak ada yang dikirim kecuali kamu memilih mengirimnya, dan kamu bisa membaca dulu persis apa yang akan dikirim.';
+
+  @override
+  String get diagnosticsEmpty =>
+      'Tidak ada catatan — tidak ada masalah terdeteksi.';
+
+  @override
+  String get diagnosticsShare => 'Kirim ke pengembang';
+
+  @override
+  String get diagnosticsClear => 'Hapus';
 }

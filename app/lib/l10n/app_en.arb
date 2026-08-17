@@ -600,5 +600,10 @@
       }
     }
   },
-  "healthSyncDenied": "Permission wasn't granted, so sync stays off."
+  "healthSyncDenied": "Permission wasn't granted, so sync stays off.",
+  "settingsDiagnosticsEntry": "Diagnostics",
+  "diagnosticsBody": "If the app misbehaves, the technical details are recorded here — on this device only. Nothing is sent anywhere unless you choose to send it, and you can read exactly what you'd be sending first.",
+  "diagnosticsEmpty": "Nothing recorded — no problems have been detected.",
+  "diagnosticsShare": "Send to the developer",
+  "diagnosticsClear": "Clear"
 }

@@ -1408,4 +1408,21 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get healthSyncDenied =>
       'Permission wasn\'t granted, so sync stays off.';
+
+  @override
+  String get settingsDiagnosticsEntry => 'Diagnostics';
+
+  @override
+  String get diagnosticsBody =>
+      'If the app misbehaves, the technical details are recorded here — on this device only. Nothing is sent anywhere unless you choose to send it, and you can read exactly what you\'d be sending first.';
+
+  @override
+  String get diagnosticsEmpty =>
+      'Nothing recorded — no problems have been detected.';
+
+  @override
+  String get diagnosticsShare => 'Send to the developer';
+
+  @override
+  String get diagnosticsClear => 'Clear';
 }

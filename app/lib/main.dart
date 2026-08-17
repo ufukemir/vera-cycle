@@ -9,6 +9,7 @@ import 'screens/root/app_root.dart';
 import 'services/day_log_repository.dart';
 import 'services/file_day_log_repository.dart';
 import 'services/pin_vault.dart';
+import 'services/crash_log.dart';
 import 'services/health_sync_service.dart';
 import 'services/prediction_engine.dart';
 import 'services/reminder_service.dart';
@@ -19,6 +20,9 @@ import 'theme/app_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Local-only: records crashes to a file the user can read and choose to
+  // send. See CrashLog for why there's no third-party reporter.
+  CrashLog.instance.install();
   // Ad SDK init is fire-and-forget: a slow or failed init must never delay
   // or block the app, which works entirely offline apart from ads.
   unawaited(MobileAds.instance.initialize());

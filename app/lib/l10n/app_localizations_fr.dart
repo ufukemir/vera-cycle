@@ -1432,4 +1432,20 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get healthSyncDenied =>
       'L\'autorisation n\'a pas été accordée, la synchronisation reste désactivée.';
+
+  @override
+  String get settingsDiagnosticsEntry => 'Diagnostic';
+
+  @override
+  String get diagnosticsBody =>
+      'Si l\'app dysfonctionne, les détails techniques sont enregistrés ici — sur cet appareil uniquement. Rien n\'est envoyé sauf si tu le décides, et tu peux lire d\'abord exactement ce que tu enverrais.';
+
+  @override
+  String get diagnosticsEmpty => 'Rien d\'enregistré — aucun problème détecté.';
+
+  @override
+  String get diagnosticsShare => 'Envoyer au développeur';
+
+  @override
+  String get diagnosticsClear => 'Effacer';
 }

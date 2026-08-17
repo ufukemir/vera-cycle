@@ -13,6 +13,7 @@ import '../export/export_screen.dart';
 import '../export/import_screen.dart';
 import '../home/widgets/home_hero.dart';
 import '../premium/premium_screen.dart';
+import 'diagnostics_screen.dart';
 import 'prediction_settings_screen.dart';
 import 'privacy_screen.dart';
 import 'widgets/language_picker_tile.dart';
@@ -660,6 +661,13 @@ class SettingsScreen extends StatelessWidget {
               trailing: const Icon(Icons.chevron_right),
               onTap: () => Navigator.of(context).push(
                 MaterialPageRoute(builder: (_) => const ExportScreen()),
+              ),
+            ),
+            ListTile(
+              title: Text(l10n.settingsDiagnosticsEntry),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const DiagnosticsScreen()),
               ),
             ),
             ListTile(

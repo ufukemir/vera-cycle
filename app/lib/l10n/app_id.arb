@@ -422,5 +422,10 @@
   "settingsHealthSyncLabel": "Sinkronkan ke Apple Health / Health Connect",
   "settingsHealthSyncBody": "Hanya menulis aliran haid, berat, dan suhu basal ke aplikasi kesehatan ponselmu. Gejala, suasana hati, dan catatan tetap di Vera. Tidak ada yang dibaca kembali.",
   "healthSyncBackfilled": "{count} hari dikirim ke aplikasi kesehatanmu",
-  "healthSyncDenied": "Izin tidak diberikan, jadi sinkronisasi tetap mati."
+  "healthSyncDenied": "Izin tidak diberikan, jadi sinkronisasi tetap mati.",
+  "settingsDiagnosticsEntry": "Diagnostik",
+  "diagnosticsBody": "Jika aplikasi bermasalah, detail teknis dicatat di sini — hanya di perangkat ini. Tidak ada yang dikirim kecuali kamu memilih mengirimnya, dan kamu bisa membaca dulu persis apa yang akan dikirim.",
+  "diagnosticsEmpty": "Tidak ada catatan — tidak ada masalah terdeteksi.",
+  "diagnosticsShare": "Kirim ke pengembang",
+  "diagnosticsClear": "Hapus"
 }

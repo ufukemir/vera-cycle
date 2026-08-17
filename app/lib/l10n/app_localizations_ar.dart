@@ -1406,4 +1406,20 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get healthSyncDenied => 'لم يتم منح الإذن، لذا تبقى المزامنة متوقفة.';
+
+  @override
+  String get settingsDiagnosticsEntry => 'التشخيص';
+
+  @override
+  String get diagnosticsBody =>
+      'إذا حدث خلل في التطبيق، تُسجَّل التفاصيل التقنية هنا — على هذا الجهاز فقط. لا يُرسل شيء ما لم تختاري إرساله، ويمكنك قراءة ما سترسلينه أولًا.';
+
+  @override
+  String get diagnosticsEmpty => 'لا توجد سجلات — لم تُكتشف أي مشكلات.';
+
+  @override
+  String get diagnosticsShare => 'إرسال إلى المطوّر';
+
+  @override
+  String get diagnosticsClear => 'مسح';
 }

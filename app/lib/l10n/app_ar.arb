@@ -422,5 +422,10 @@
   "settingsHealthSyncLabel": "المزامنة مع Apple Health / Health Connect",
   "settingsHealthSyncBody": "يكتب فقط تدفق الدورة والوزن ودرجة الحرارة القاعدية في تطبيق الصحة بهاتفك. تبقى الأعراض والمزاج والملاحظات في فيرا. ولا يُقرأ أي شيء.",
   "healthSyncBackfilled": "تم إرسال {count} يومًا إلى تطبيق الصحة",
-  "healthSyncDenied": "لم يتم منح الإذن، لذا تبقى المزامنة متوقفة."
+  "healthSyncDenied": "لم يتم منح الإذن، لذا تبقى المزامنة متوقفة.",
+  "settingsDiagnosticsEntry": "التشخيص",
+  "diagnosticsBody": "إذا حدث خلل في التطبيق، تُسجَّل التفاصيل التقنية هنا — على هذا الجهاز فقط. لا يُرسل شيء ما لم تختاري إرساله، ويمكنك قراءة ما سترسلينه أولًا.",
+  "diagnosticsEmpty": "لا توجد سجلات — لم تُكتشف أي مشكلات.",
+  "diagnosticsShare": "إرسال إلى المطوّر",
+  "diagnosticsClear": "مسح"
 }

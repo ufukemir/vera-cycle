@@ -422,5 +422,10 @@
   "settingsHealthSyncLabel": "Synchroniser avec Apple Health / Health Connect",
   "settingsHealthSyncBody": "N'écrit que le flux, le poids et la température basale dans l'app santé de ton téléphone. Symptômes, humeurs et notes restent dans Vera. Rien n'est lu en retour.",
   "healthSyncBackfilled": "{count} jours envoyés à ton app santé",
-  "healthSyncDenied": "L'autorisation n'a pas été accordée, la synchronisation reste désactivée."
+  "healthSyncDenied": "L'autorisation n'a pas été accordée, la synchronisation reste désactivée.",
+  "settingsDiagnosticsEntry": "Diagnostic",
+  "diagnosticsBody": "Si l'app dysfonctionne, les détails techniques sont enregistrés ici — sur cet appareil uniquement. Rien n'est envoyé sauf si tu le décides, et tu peux lire d'abord exactement ce que tu enverrais.",
+  "diagnosticsEmpty": "Rien d'enregistré — aucun problème détecté.",
+  "diagnosticsShare": "Envoyer au développeur",
+  "diagnosticsClear": "Effacer"
 }

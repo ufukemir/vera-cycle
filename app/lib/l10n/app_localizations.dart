@@ -2645,6 +2645,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Permission wasn\'t granted, so sync stays off.'**
   String get healthSyncDenied;
+
+  /// No description provided for @settingsDiagnosticsEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'Diagnostics'**
+  String get settingsDiagnosticsEntry;
+
+  /// No description provided for @diagnosticsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'If the app misbehaves, the technical details are recorded here — on this device only. Nothing is sent anywhere unless you choose to send it, and you can read exactly what you\'d be sending first.'**
+  String get diagnosticsBody;
+
+  /// No description provided for @diagnosticsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing recorded — no problems have been detected.'**
+  String get diagnosticsEmpty;
+
+  /// No description provided for @diagnosticsShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Send to the developer'**
+  String get diagnosticsShare;
+
+  /// No description provided for @diagnosticsClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get diagnosticsClear;
 }
 
 class _AppLocalizationsDelegate

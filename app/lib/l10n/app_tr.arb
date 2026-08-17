@@ -422,5 +422,10 @@
   "settingsHealthSyncLabel": "Apple Health / Health Connect'e aktar",
   "settingsHealthSyncBody": "Telefonunun sağlık uygulamasına yalnızca regl akışı, kilo ve bazal sıcaklık yazar. Semptomlar, ruh hali ve notlar Vera'da kalır. Hiçbir şey geri okunmaz.",
   "healthSyncBackfilled": "{count} gün sağlık uygulamana gönderildi",
-  "healthSyncDenied": "İzin verilmedi, aktarım kapalı kalıyor."
+  "healthSyncDenied": "İzin verilmedi, aktarım kapalı kalıyor.",
+  "settingsDiagnosticsEntry": "Tanılama",
+  "diagnosticsBody": "Uygulama hata verirse teknik ayrıntılar burada kaydedilir — yalnızca bu cihazda. Sen göndermeyi seçmedikçe hiçbir yere gitmez ve göndereceğin şeyi önce olduğu gibi okuyabilirsin.",
+  "diagnosticsEmpty": "Kayıt yok — herhangi bir sorun tespit edilmedi.",
+  "diagnosticsShare": "Geliştiriciye gönder",
+  "diagnosticsClear": "Temizle"
 }

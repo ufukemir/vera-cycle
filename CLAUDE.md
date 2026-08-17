@@ -36,7 +36,12 @@ Premium reklamları kaldırır.
    için vardır. Uygulamanın kendi kodu ağ çağrısı YAPMAZ; bunun regresyon testi
    `android_manifest_test.dart`'ta izin listesi sabitlemesiyle sürer.
 3. ~~Üçüncü taraf SDK yok~~ **(REVİZE)** Tek istisna: Google Mobile Ads. Analitik,
-   çökme raporlama, attribution SDK'sı hâlâ YASAK. Yeni bağımlılık eklemeden önce aynı
+   **çökme raporlama** ve attribution SDK'sı hâlâ YASAK — 2026-08-17'de yeniden
+   değerlendirildi ve reddedildi: reklamı kullanıcı görür, çökme raporlayıcı
+   görünmezdir; sağlık uygulamasının arka planda sessizce veri göndermesi
+   "verin cihazından çıkmaz" sözünü doğrulanamaz hale getirir. Yerine yerel
+   çökme günlüğü + kullanıcı onaylı paylaşım var (`crash_log.dart`), ve asıl
+   koruma her ekranı açan duman testi (`all_screens_smoke_test.dart`). Yeni bağımlılık eklemeden önce aynı
    soru sorulur: ağ açar mı, telemetri gönderir mi?
 4. **Diskte şifreli.** Tüm döngü verisi AES-GCM ile şifrelenir; anahtar Keychain/Keystore'da
    (donanım destekli). Cihaz yedeklerine düz metin sızmaz.

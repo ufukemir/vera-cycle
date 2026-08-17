@@ -422,5 +422,10 @@
   "settingsHealthSyncLabel": "Mit Apple Health / Health Connect synchronisieren",
   "settingsHealthSyncBody": "Schreibt nur Blutungsstärke, Gewicht und Basaltemperatur in die Health-App deines Telefons. Symptome, Stimmungen und Notizen bleiben in Vera. Es wird nichts zurückgelesen.",
   "healthSyncBackfilled": "{count} Tage an deine Health-App gesendet",
-  "healthSyncDenied": "Die Berechtigung wurde nicht erteilt, die Synchronisierung bleibt aus."
+  "healthSyncDenied": "Die Berechtigung wurde nicht erteilt, die Synchronisierung bleibt aus.",
+  "settingsDiagnosticsEntry": "Diagnose",
+  "diagnosticsBody": "Wenn die App sich falsch verhält, werden technische Details hier aufgezeichnet — nur auf diesem Gerät. Nichts wird gesendet, außer du entscheidest dich dafür, und du kannst vorher genau lesen, was du senden würdest.",
+  "diagnosticsEmpty": "Nichts aufgezeichnet — es wurden keine Probleme festgestellt.",
+  "diagnosticsShare": "An die Entwickler senden",
+  "diagnosticsClear": "Löschen"
 }
