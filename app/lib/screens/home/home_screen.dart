@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,8 +25,36 @@ import 'widgets/quick_log_sheet.dart';
 /// Home: a scenic photo hero followed by a stack of cards — the reference
 /// app's layout language, with our own palette, typography, illustrations,
 /// and (crucially) our own honesty rules about what the numbers claim.
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  /// Last payload sent to the OS widget. Home rebuilds on every provider
+  /// notification — scrolling, a theme tap, any save — and pushing an
+  /// unchanged payload each time means a platform-channel write and an OS
+  /// widget refresh for nothing.
+  String? _lastWidgetPayload;
+
+  void _syncHomeWidget({
+    required String eyebrow,
+    required String headline,
+    String? secondary,
+  }) {
+    final payload = '$eyebrow|$headline|${secondary ?? ''}';
+    if (payload == _lastWidgetPayload) return;
+    _lastWidgetPayload = payload;
+    // Fire-and-forget by design; HomeWidgetService swallows platform
+    // failures, and a missing widget must never affect this screen.
+    unawaited(const HomeWidgetService().update(
+      eyebrow: eyebrow,
+      headline: headline,
+      secondary: secondary,
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,9 +105,9 @@ class HomeScreen extends StatelessWidget {
       heroEyebrow = l10n.appTitle;
     }
 
-    // Keep the OS widget in step with what Home shows. Fire-and-forget:
-    // HomeWidgetService swallows platform failures by design.
-    const HomeWidgetService().update(
+    // Keep the OS widget in step with what Home shows, but only when the
+    // text actually changed — see [_syncHomeWidget].
+    _syncHomeWidget(
       eyebrow: heroEyebrow,
       headline: heroHeadline,
       secondary: daysToOvulation != null
