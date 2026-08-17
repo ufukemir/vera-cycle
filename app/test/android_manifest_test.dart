@@ -29,13 +29,19 @@ void main() {
         reason: 'expected to find the manifest relative to the app/ '
             'directory — run flutter test from app/, not the repo root');
 
-    // Only <uses-permission> counts as "the app asks for this". An
-    // android:permission attribute elsewhere is the opposite — a
-    // restriction on who may invoke a component.
+    // Only <uses-permission> counts as "the app asks for this", and only
+    // when it isn't a tools:node="remove" directive — those exist to take
+    // a permission a dependency added back out again, so counting them
+    // would flag the very thing that removes them. An android:permission
+    // attribute elsewhere is also excluded: that's a restriction on who
+    // may invoke a component, the opposite of a request.
     final declared = RegExp(
-      r'<uses-permission\s+android:name="([^"]+)"',
+      r'<uses-permission\s+android:name="([^"]+)"([^>]*)>',
+      multiLine: true,
+      dotAll: true,
     )
         .allMatches(manifest.readAsStringSync())
+        .where((m) => !m.group(2)!.contains('tools:node="remove"'))
         .map((m) => m.group(1)!)
         .toSet();
 
@@ -44,6 +50,19 @@ void main() {
       isEmpty,
       reason: 'a dependency requested a permission nobody reviewed; add it to '
           'allowedPermissions here only after deciding it is genuinely needed',
+    );
+  });
+
+  test('the advertising id stays removed', () {
+    final contents =
+        File('android/app/src/main/AndroidManifest.xml').readAsStringSync();
+    // Personalization is off (tagForUnderAgeOfConsent), so the ad id is
+    // never used. If a dependency bump quietly reintroduces it, Play's
+    // Data Safety answer stops being true.
+    expect(
+      RegExp(r'AD_ID"\s+tools:node="remove"').hasMatch(contents),
+      isTrue,
+      reason: 'AD_ID must stay explicitly removed',
     );
   });
 

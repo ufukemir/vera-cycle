@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 /// Runs Google's User Messaging Platform consent flow before any ad loads.
@@ -22,6 +21,11 @@ class AdConsentService {
   /// possibly under the age of consent stops Google serving personalized
   /// ads to minors — a policy requirement and the right default for this
   /// audience. It costs some ad revenue; that trade is deliberate.
+  ///
+  /// It also decides the rest of the ad stack: with personalization off,
+  /// the advertising identifier is never used, so the app declares no
+  /// AD_ID permission and never shows iOS's tracking prompt. Asking to
+  /// track and then not tracking would be a scarier dialog for no gain.
   static const _tagForUnderAgeOfConsent = true;
 
   /// Guards against a callback that never fires (no network, SDK absent
@@ -102,19 +106,4 @@ class AdConsentService {
     }
   }
 
-  /// iOS asks about tracking separately from the consent form. Ads still
-  /// work if this is declined (non-personalised); what isn't allowed is
-  /// reaching for the IDFA without asking first.
-  Future<void> requestAppTrackingIfNeeded() async {
-    if (!Platform.isIOS) return;
-    try {
-      final status =
-          await AppTrackingTransparency.trackingAuthorizationStatus;
-      if (status == TrackingStatus.notDetermined) {
-        await AppTrackingTransparency.requestTrackingAuthorization();
-      }
-    } on Object {
-      // Older iOS, or a platform without ATT.
-    }
-  }
 }

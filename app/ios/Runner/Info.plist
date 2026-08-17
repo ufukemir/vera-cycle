@@ -35,8 +35,6 @@
 	<string>Vera does not read from Health. This entry is required by iOS even for write-only access.</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Lets Vera save your period flow, weight, and basal temperature to Apple Health, so your data isn't locked inside one app. Symptoms, moods, and notes are never shared.</string>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>Vera never tracks your cycle data. This only lets ads in the free version stay relevant; declining simply shows less relevant ads.</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3940256099942544~1458002511</string>
 	<key>UIApplicationSceneManifest</key>

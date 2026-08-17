@@ -40,9 +40,7 @@ class _AdPlaceholderBannerState extends State<AdPlaceholderBanner> {
     if (!Platform.isAndroid && !Platform.isIOS) return;
     // Consent first, always: loading an ad before the UMP flow says we
     // may is exactly the EEA/UK violation AdConsentService guards.
-    const consent = AdConsentService();
-    await consent.requestAppTrackingIfNeeded();
-    if (!await consent.ensureConsent()) return;
+    if (!await const AdConsentService().ensureConsent()) return;
     if (!mounted) return;
 
     final ad = BannerAd(
