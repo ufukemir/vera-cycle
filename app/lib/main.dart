@@ -9,6 +9,7 @@ import 'screens/root/app_root.dart';
 import 'services/day_log_repository.dart';
 import 'services/file_day_log_repository.dart';
 import 'services/pin_vault.dart';
+import 'services/health_sync_service.dart';
 import 'services/prediction_engine.dart';
 import 'services/reminder_service.dart';
 import 'state/app_lock_controller.dart';
@@ -51,6 +52,8 @@ class MainApp extends StatelessWidget {
             repository: repository ?? FileDayLogRepository(),
             predictionEngine:
                 PredictionEngine(lutealPhaseDays: preferences.lutealPhaseDays),
+            healthSync:
+                preferences.healthSyncEnabled ? HealthSyncService() : null,
           )..load(),
         ),
         ChangeNotifierProvider<AppLockController>(

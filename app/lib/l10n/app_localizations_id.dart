@@ -1401,4 +1401,21 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get settingsImportEntry => 'Impor dari aplikasi lain';
+
+  @override
+  String get settingsHealthSyncLabel =>
+      'Sinkronkan ke Apple Health / Health Connect';
+
+  @override
+  String get settingsHealthSyncBody =>
+      'Hanya menulis aliran haid, berat, dan suhu basal ke aplikasi kesehatan ponselmu. Gejala, suasana hati, dan catatan tetap di Vera. Tidak ada yang dibaca kembali.';
+
+  @override
+  String healthSyncBackfilled(int count) {
+    return '$count hari dikirim ke aplikasi kesehatanmu';
+  }
+
+  @override
+  String get healthSyncDenied =>
+      'Izin tidak diberikan, jadi sinkronisasi tetap mati.';
 }

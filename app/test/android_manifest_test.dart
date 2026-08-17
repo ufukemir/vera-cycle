@@ -16,6 +16,11 @@ void main() {
     'android.permission.RECEIVE_BOOT_COMPLETED',
     // Ad SDK only. The app's own code makes no network calls.
     'android.permission.INTERNET',
+    // Health Connect, write-only and opt-in. No read permissions: the
+    // app never asks to see the rest of someone's health record.
+    'android.permission.health.WRITE_MENSTRUATION',
+    'android.permission.health.WRITE_WEIGHT',
+    'android.permission.health.WRITE_BODY_TEMPERATURE',
   };
 
   test('the main Android manifest requests only the permissions we vetted', () {
@@ -24,9 +29,14 @@ void main() {
         reason: 'expected to find the manifest relative to the app/ '
             'directory — run flutter test from app/, not the repo root');
 
-    final declared = RegExp(r'android\.permission\.[A-Z_]+')
+    // Only <uses-permission> counts as "the app asks for this". An
+    // android:permission attribute elsewhere is the opposite — a
+    // restriction on who may invoke a component.
+    final declared = RegExp(
+      r'<uses-permission\s+android:name="([^"]+)"',
+    )
         .allMatches(manifest.readAsStringSync())
-        .map((m) => m.group(0)!)
+        .map((m) => m.group(1)!)
         .toSet();
 
     expect(
@@ -35,6 +45,14 @@ void main() {
       reason: 'a dependency requested a permission nobody reviewed; add it to '
           'allowedPermissions here only after deciding it is genuinely needed',
     );
+  });
+
+  test('no health READ permissions are ever requested', () {
+    final contents =
+        File('android/app/src/main/AndroidManifest.xml').readAsStringSync();
+    expect(contents.contains('permission.health.READ'), isFalse,
+        reason: 'health sync is deliberately write-only — reading would '
+            'mean asking for access to the whole health record');
   });
 
   test('location and contacts permissions stay out', () {

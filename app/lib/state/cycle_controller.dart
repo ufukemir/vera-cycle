@@ -6,6 +6,7 @@ import '../models/enums.dart';
 import '../models/prediction.dart';
 import '../services/cycle_analyzer.dart';
 import '../services/day_log_repository.dart';
+import '../services/health_sync_service.dart';
 import '../services/prediction_engine.dart';
 import '../util/day.dart';
 
@@ -26,9 +27,17 @@ class CycleController extends ChangeNotifier {
     required DayLogRepository repository,
     CycleAnalyzer analyzer = const CycleAnalyzer(),
     PredictionEngine predictionEngine = const PredictionEngine(),
+    HealthSyncService? healthSync,
   })  : _repository = repository,
         _analyzer = analyzer,
-        _predictionEngine = predictionEngine;
+        _predictionEngine = predictionEngine,
+        _healthSync = healthSync;
+
+  /// Set only when the user has opted into health export. Null keeps the
+  /// controller free of platform channels, which is what tests rely on.
+  HealthSyncService? _healthSync;
+
+  set healthSync(HealthSyncService? value) => _healthSync = value;
 
   final DayLogRepository _repository;
   final CycleAnalyzer _analyzer;
@@ -75,6 +84,9 @@ class CycleController extends ChangeNotifier {
     _recompute();
     notifyListeners();
     await _repository.replaceAll(_logs);
+    // After the local write, never before: the encrypted store is the
+    // source of truth and a health-export failure must not affect it.
+    await _healthSync?.writeDay(log);
   }
 
   Future<void> deleteDay(DateTime date) async {

@@ -418,5 +418,9 @@
   "importDone": "{count} hari diimpor",
   "importErrorEmpty": "File itu tampak kosong.",
   "importErrorNoDate": "Tidak menemukan kolom tanggal di file itu.",
-  "settingsImportEntry": "Impor dari aplikasi lain"
+  "settingsImportEntry": "Impor dari aplikasi lain",
+  "settingsHealthSyncLabel": "Sinkronkan ke Apple Health / Health Connect",
+  "settingsHealthSyncBody": "Hanya menulis aliran haid, berat, dan suhu basal ke aplikasi kesehatan ponselmu. Gejala, suasana hati, dan catatan tetap di Vera. Tidak ada yang dibaca kembali.",
+  "healthSyncBackfilled": "{count} hari dikirim ke aplikasi kesehatanmu",
+  "healthSyncDenied": "Izin tidak diberikan, jadi sinkronisasi tetap mati."
 }

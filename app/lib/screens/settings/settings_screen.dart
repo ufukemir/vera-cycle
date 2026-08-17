@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/enums.dart';
 import '../../services/ad_consent_service.dart';
+import '../../services/health_sync_service.dart';
 import '../../services/pin_vault.dart';
 import '../../services/reminder_service.dart';
 import '../../state/app_preferences.dart';
@@ -205,6 +206,45 @@ class SettingsScreen extends StatelessWidget {
       title: l10n.reminderAppointmentTitle,
       body: l10n.reminderAppointmentBody,
     );
+  }
+
+  /// Turning this on asks for permission first and only sticks if it's
+  /// granted — a toggle that looks on while writes silently fail would be
+  /// worse than one that refuses to move.
+  Future<void> _toggleHealthSync(BuildContext context, bool enable) async {
+    final prefs = context.read<AppPreferences>();
+    final l10n = AppLocalizations.of(context)!;
+    final controller = context.read<CycleController>();
+
+    if (!enable) {
+      await prefs.setHealthSyncEnabled(false);
+      return;
+    }
+
+    final service = HealthSyncService();
+    final granted = await service.requestPermissions();
+    if (!context.mounted) return;
+    if (!granted) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(SnackBar(
+          content: Text(l10n.healthSyncDenied),
+          behavior: SnackBarBehavior.floating,
+          margin: const EdgeInsets.all(16),
+        ));
+      return;
+    }
+
+    await prefs.setHealthSyncEnabled(true);
+    final count = await service.writeAll(controller.logs);
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(
+        content: Text(l10n.healthSyncBackfilled(count)),
+        behavior: SnackBarBehavior.floating,
+        margin: const EdgeInsets.all(16),
+      ));
   }
 
   Future<void> _pickLmp(BuildContext context, AppPreferences prefs) async {
@@ -600,6 +640,14 @@ class SettingsScreen extends StatelessWidget {
                 MaterialPageRoute(builder: (_) => const PrivacyScreen()),
               ),
             ),
+            if (HealthSyncService.isSupported) ...[
+              SwitchListTile(
+                title: Text(l10n.settingsHealthSyncLabel),
+                subtitle: Text(l10n.settingsHealthSyncBody),
+                value: prefs.healthSyncEnabled,
+                onChanged: (v) => _toggleHealthSync(context, v),
+              ),
+            ],
             ListTile(
               title: Text(l10n.settingsImportEntry),
               trailing: const Icon(Icons.chevron_right),

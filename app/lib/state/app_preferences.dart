@@ -48,6 +48,7 @@ class AppPreferences extends ChangeNotifier {
   static const _kOvulationRemindersEnabled = 'ovulation_reminders_enabled';
   static const _kMascot = 'mascot';
   static const _kHomeTheme = 'home_theme';
+  static const _kHealthSyncEnabled = 'health_sync_enabled';
   static const _kLastBackupAt = 'last_backup_at';
   static const _kBackupRemindersEnabled = 'backup_reminders_enabled';
   static const _kPremiumActive = 'premium_active';
@@ -334,6 +335,15 @@ class AppPreferences extends ChangeNotifier {
       (m) => m.name == raw,
       orElse: () => Mascot.droplet,
     );
+  }
+
+  /// Off by default: handing cycle data to the OS health record is the
+  /// user's call, not ours.
+  bool get healthSyncEnabled => _prefs.getBool(_kHealthSyncEnabled) ?? false;
+
+  Future<void> setHealthSyncEnabled(bool value) async {
+    await _prefs.setBool(_kHealthSyncEnabled, value);
+    notifyListeners();
   }
 
   /// When the user last created an encrypted backup, or `null` if never.

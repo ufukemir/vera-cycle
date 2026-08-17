@@ -1390,4 +1390,20 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get settingsImportEntry => 'استيراد من تطبيق آخر';
+
+  @override
+  String get settingsHealthSyncLabel =>
+      'المزامنة مع Apple Health / Health Connect';
+
+  @override
+  String get settingsHealthSyncBody =>
+      'يكتب فقط تدفق الدورة والوزن ودرجة الحرارة القاعدية في تطبيق الصحة بهاتفك. تبقى الأعراض والمزاج والملاحظات في فيرا. ولا يُقرأ أي شيء.';
+
+  @override
+  String healthSyncBackfilled(int count) {
+    return 'تم إرسال $count يومًا إلى تطبيق الصحة';
+  }
+
+  @override
+  String get healthSyncDenied => 'لم يتم منح الإذن، لذا تبقى المزامنة متوقفة.';
 }

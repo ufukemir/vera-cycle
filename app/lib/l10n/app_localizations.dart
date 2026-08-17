@@ -2637,6 +2637,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Import from another app'**
   String get settingsImportEntry;
+
+  /// No description provided for @settingsHealthSyncLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync to Apple Health / Health Connect'**
+  String get settingsHealthSyncLabel;
+
+  /// No description provided for @settingsHealthSyncBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Writes only period flow, weight, and basal temperature to your phone\'s health app. Symptoms, moods, and notes stay in Vera. Nothing is read back.'**
+  String get settingsHealthSyncBody;
+
+  /// No description provided for @healthSyncBackfilled.
+  ///
+  /// In en, this message translates to:
+  /// **'Sent {count} days to your health app'**
+  String healthSyncBackfilled(int count);
+
+  /// No description provided for @healthSyncDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Permission wasn\'t granted, so sync stays off.'**
+  String get healthSyncDenied;
 }
 
 class _AppLocalizationsDelegate

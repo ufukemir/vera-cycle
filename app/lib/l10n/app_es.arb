@@ -418,5 +418,9 @@
   "importDone": "Se importaron {count} días",
   "importErrorEmpty": "Ese archivo parece vacío.",
   "importErrorNoDate": "No se encontró una columna de fecha en ese archivo.",
-  "settingsImportEntry": "Importar de otra app"
+  "settingsImportEntry": "Importar de otra app",
+  "settingsHealthSyncLabel": "Sincronizar con Apple Health / Health Connect",
+  "settingsHealthSyncBody": "Escribe solo el flujo, el peso y la temperatura basal en la app de salud de tu teléfono. Síntomas, ánimo y notas se quedan en Vera. No se lee nada de vuelta.",
+  "healthSyncBackfilled": "Se enviaron {count} días a tu app de salud",
+  "healthSyncDenied": "No se concedió el permiso, así que la sincronización sigue desactivada."
 }

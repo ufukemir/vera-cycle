@@ -418,5 +418,9 @@
   "importDone": "{count} Tage importiert",
   "importErrorEmpty": "Diese Datei scheint leer zu sein.",
   "importErrorNoDate": "In dieser Datei wurde keine Datumsspalte gefunden.",
-  "settingsImportEntry": "Aus anderer App importieren"
+  "settingsImportEntry": "Aus anderer App importieren",
+  "settingsHealthSyncLabel": "Mit Apple Health / Health Connect synchronisieren",
+  "settingsHealthSyncBody": "Schreibt nur Blutungsstärke, Gewicht und Basaltemperatur in die Health-App deines Telefons. Symptome, Stimmungen und Notizen bleiben in Vera. Es wird nichts zurückgelesen.",
+  "healthSyncBackfilled": "{count} Tage an deine Health-App gesendet",
+  "healthSyncDenied": "Die Berechtigung wurde nicht erteilt, die Synchronisierung bleibt aus."
 }

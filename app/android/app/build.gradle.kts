@@ -22,7 +22,10 @@ android {
         applicationId = "com.ufukemir.vera"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
+        // Health Connect needs 26 (Android 8.0, 2017). Flutter's default
+        // is 24; Android 7 is a fraction of a percent of devices now, and
+        // the health integration is worth more than that tail.
+        minSdk = 26
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName

@@ -418,5 +418,9 @@
   "importDone": "تم استيراد {count} يومًا",
   "importErrorEmpty": "يبدو أن الملف فارغ.",
   "importErrorNoDate": "تعذّر العثور على عمود التاريخ في هذا الملف.",
-  "settingsImportEntry": "استيراد من تطبيق آخر"
+  "settingsImportEntry": "استيراد من تطبيق آخر",
+  "settingsHealthSyncLabel": "المزامنة مع Apple Health / Health Connect",
+  "settingsHealthSyncBody": "يكتب فقط تدفق الدورة والوزن ودرجة الحرارة القاعدية في تطبيق الصحة بهاتفك. تبقى الأعراض والمزاج والملاحظات في فيرا. ولا يُقرأ أي شيء.",
+  "healthSyncBackfilled": "تم إرسال {count} يومًا إلى تطبيق الصحة",
+  "healthSyncDenied": "لم يتم منح الإذن، لذا تبقى المزامنة متوقفة."
 }

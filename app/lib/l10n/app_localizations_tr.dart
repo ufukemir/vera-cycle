@@ -1398,4 +1398,20 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get settingsImportEntry => 'Başka uygulamadan aktar';
+
+  @override
+  String get settingsHealthSyncLabel =>
+      'Apple Health / Health Connect\'e aktar';
+
+  @override
+  String get settingsHealthSyncBody =>
+      'Telefonunun sağlık uygulamasına yalnızca regl akışı, kilo ve bazal sıcaklık yazar. Semptomlar, ruh hali ve notlar Vera\'da kalır. Hiçbir şey geri okunmaz.';
+
+  @override
+  String healthSyncBackfilled(int count) {
+    return '$count gün sağlık uygulamana gönderildi';
+  }
+
+  @override
+  String get healthSyncDenied => 'İzin verilmedi, aktarım kapalı kalıyor.';
 }

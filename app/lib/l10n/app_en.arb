@@ -589,5 +589,16 @@
   },
   "importErrorEmpty": "That file looks empty.",
   "importErrorNoDate": "Couldn't find a date column in that file.",
-  "settingsImportEntry": "Import from another app"
+  "settingsImportEntry": "Import from another app",
+  "settingsHealthSyncLabel": "Sync to Apple Health / Health Connect",
+  "settingsHealthSyncBody": "Writes only period flow, weight, and basal temperature to your phone's health app. Symptoms, moods, and notes stay in Vera. Nothing is read back.",
+  "healthSyncBackfilled": "Sent {count} days to your health app",
+  "@healthSyncBackfilled": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "healthSyncDenied": "Permission wasn't granted, so sync stays off."
 }

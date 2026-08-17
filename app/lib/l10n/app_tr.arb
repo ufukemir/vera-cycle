@@ -418,5 +418,9 @@
   "importDone": "{count} gün aktarıldı",
   "importErrorEmpty": "Bu dosya boş görünüyor.",
   "importErrorNoDate": "Bu dosyada tarih sütunu bulunamadı.",
-  "settingsImportEntry": "Başka uygulamadan aktar"
+  "settingsImportEntry": "Başka uygulamadan aktar",
+  "settingsHealthSyncLabel": "Apple Health / Health Connect'e aktar",
+  "settingsHealthSyncBody": "Telefonunun sağlık uygulamasına yalnızca regl akışı, kilo ve bazal sıcaklık yazar. Semptomlar, ruh hali ve notlar Vera'da kalır. Hiçbir şey geri okunmaz.",
+  "healthSyncBackfilled": "{count} gün sağlık uygulamana gönderildi",
+  "healthSyncDenied": "İzin verilmedi, aktarım kapalı kalıyor."
 }

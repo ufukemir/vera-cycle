@@ -1393,4 +1393,20 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get settingsImportEntry => 'Import from another app';
+
+  @override
+  String get settingsHealthSyncLabel => 'Sync to Apple Health / Health Connect';
+
+  @override
+  String get settingsHealthSyncBody =>
+      'Writes only period flow, weight, and basal temperature to your phone\'s health app. Symptoms, moods, and notes stay in Vera. Nothing is read back.';
+
+  @override
+  String healthSyncBackfilled(int count) {
+    return 'Sent $count days to your health app';
+  }
+
+  @override
+  String get healthSyncDenied =>
+      'Permission wasn\'t granted, so sync stays off.';
 }

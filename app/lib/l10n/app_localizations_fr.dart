@@ -1415,4 +1415,21 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get settingsImportEntry => 'Importer depuis une autre app';
+
+  @override
+  String get settingsHealthSyncLabel =>
+      'Synchroniser avec Apple Health / Health Connect';
+
+  @override
+  String get settingsHealthSyncBody =>
+      'N\'écrit que le flux, le poids et la température basale dans l\'app santé de ton téléphone. Symptômes, humeurs et notes restent dans Vera. Rien n\'est lu en retour.';
+
+  @override
+  String healthSyncBackfilled(int count) {
+    return '$count jours envoyés à ton app santé';
+  }
+
+  @override
+  String get healthSyncDenied =>
+      'L\'autorisation n\'a pas été accordée, la synchronisation reste désactivée.';
 }
