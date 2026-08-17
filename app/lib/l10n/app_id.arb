@@ -407,5 +407,16 @@
   "a11yCycleRing": "Hari ke-{day} dari sekitar {length}",
   "a11yChartSummary": "Grafik dengan {count} entri, dari {min} sampai {max}",
   "a11yPhaseBar": "Kemajuan siklus: hari ke-{day} dari sekitar {length}",
-  "a11yFrequencyItem": "{label}: {count} kali"
+  "a11yFrequencyItem": "{label}: {count} kali",
+  "importTitle": "Impor dari aplikasi lain",
+  "importBody": "Ekspor riwayatmu dari aplikasi lama sebagai CSV, lalu pilih file di sini. Hanya tanggal dan aliran yang diimpor — istilah gejala dan suasana hati berbeda antar aplikasi, dan Vera tidak akan menebak.",
+  "importPickFile": "Pilih file CSV",
+  "importPreview": "Ditemukan {count} hari riwayat",
+  "importSkipped": "{count} baris tidak terbaca dan akan dilewati",
+  "importConfirm": "Tambahkan ke riwayatku",
+  "importMergeNote": "Hari yang diimpor digabungkan. Hari yang sudah kamu catat di Vera tetap seperti semula.",
+  "importDone": "{count} hari diimpor",
+  "importErrorEmpty": "File itu tampak kosong.",
+  "importErrorNoDate": "Tidak menemukan kolom tanggal di file itu.",
+  "settingsImportEntry": "Impor dari aplikasi lain"
 }

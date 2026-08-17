@@ -1360,4 +1360,45 @@ class AppLocalizationsId extends AppLocalizations {
   String a11yFrequencyItem(String label, int count) {
     return '$label: $count kali';
   }
+
+  @override
+  String get importTitle => 'Impor dari aplikasi lain';
+
+  @override
+  String get importBody =>
+      'Ekspor riwayatmu dari aplikasi lama sebagai CSV, lalu pilih file di sini. Hanya tanggal dan aliran yang diimpor — istilah gejala dan suasana hati berbeda antar aplikasi, dan Vera tidak akan menebak.';
+
+  @override
+  String get importPickFile => 'Pilih file CSV';
+
+  @override
+  String importPreview(int count) {
+    return 'Ditemukan $count hari riwayat';
+  }
+
+  @override
+  String importSkipped(int count) {
+    return '$count baris tidak terbaca dan akan dilewati';
+  }
+
+  @override
+  String get importConfirm => 'Tambahkan ke riwayatku';
+
+  @override
+  String get importMergeNote =>
+      'Hari yang diimpor digabungkan. Hari yang sudah kamu catat di Vera tetap seperti semula.';
+
+  @override
+  String importDone(int count) {
+    return '$count hari diimpor';
+  }
+
+  @override
+  String get importErrorEmpty => 'File itu tampak kosong.';
+
+  @override
+  String get importErrorNoDate => 'Tidak menemukan kolom tanggal di file itu.';
+
+  @override
+  String get settingsImportEntry => 'Impor dari aplikasi lain';
 }

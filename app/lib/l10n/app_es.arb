@@ -407,5 +407,16 @@
   "a11yCycleRing": "Día {day} de un ciclo de unos {length}",
   "a11yChartSummary": "Gráfico con {count} registros, de {min} a {max}",
   "a11yPhaseBar": "Progreso del ciclo: día {day} de unos {length}",
-  "a11yFrequencyItem": "{label}: {count} veces"
+  "a11yFrequencyItem": "{label}: {count} veces",
+  "importTitle": "Importar de otra app",
+  "importBody": "Exporta tu historial de tu app anterior en CSV y elige el archivo aquí. Solo se importan fechas y flujo — los términos de síntomas y ánimo difieren entre apps y Vera no adivinará lo que querías decir.",
+  "importPickFile": "Elegir archivo CSV",
+  "importPreview": "Se encontraron {count} días de historial",
+  "importSkipped": "No se pudieron leer {count} filas y quedarán fuera",
+  "importConfirm": "Añadir a mi historial",
+  "importMergeNote": "Los días importados se combinan. Los días que ya registraste en Vera se mantienen igual.",
+  "importDone": "Se importaron {count} días",
+  "importErrorEmpty": "Ese archivo parece vacío.",
+  "importErrorNoDate": "No se encontró una columna de fecha en ese archivo.",
+  "settingsImportEntry": "Importar de otra app"
 }

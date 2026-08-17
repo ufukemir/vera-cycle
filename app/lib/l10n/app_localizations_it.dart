@@ -1354,4 +1354,45 @@ class AppLocalizationsIt extends AppLocalizations {
   String a11yFrequencyItem(String label, int count) {
     return '$label: $count times';
   }
+
+  @override
+  String get importTitle => 'Import from another app';
+
+  @override
+  String get importBody =>
+      'Export your history from your old tracker as a CSV, then pick the file here. Only dates and flow are imported — symptom and mood wording differs between apps, and Vera won\'t guess what you meant.';
+
+  @override
+  String get importPickFile => 'Choose CSV file';
+
+  @override
+  String importPreview(int count) {
+    return 'Found $count days of history';
+  }
+
+  @override
+  String importSkipped(int count) {
+    return '$count rows couldn\'t be read and will be left out';
+  }
+
+  @override
+  String get importConfirm => 'Add to my history';
+
+  @override
+  String get importMergeNote =>
+      'Imported days are merged in. Days you already logged in Vera are kept as they are.';
+
+  @override
+  String importDone(int count) {
+    return 'Imported $count days';
+  }
+
+  @override
+  String get importErrorEmpty => 'That file looks empty.';
+
+  @override
+  String get importErrorNoDate => 'Couldn\'t find a date column in that file.';
+
+  @override
+  String get settingsImportEntry => 'Import from another app';
 }

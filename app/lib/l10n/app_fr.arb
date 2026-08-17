@@ -407,5 +407,16 @@
   "a11yCycleRing": "Jour {day} d'un cycle d'environ {length}",
   "a11yChartSummary": "Graphique de {count} entrées, de {min} à {max}",
   "a11yPhaseBar": "Progression du cycle : jour {day} sur environ {length}",
-  "a11yFrequencyItem": "{label} : {count} fois"
+  "a11yFrequencyItem": "{label} : {count} fois",
+  "importTitle": "Importer depuis une autre app",
+  "importBody": "Exporte ton historique depuis ton ancienne app en CSV, puis choisis le fichier ici. Seules les dates et le flux sont importés — le vocabulaire des symptômes diffère d'une app à l'autre et Vera ne devinera pas.",
+  "importPickFile": "Choisir un fichier CSV",
+  "importPreview": "{count} jours d'historique trouvés",
+  "importSkipped": "{count} lignes illisibles seront ignorées",
+  "importConfirm": "Ajouter à mon historique",
+  "importMergeNote": "Les jours importés sont fusionnés. Les jours déjà notés dans Vera restent inchangés.",
+  "importDone": "{count} jours importés",
+  "importErrorEmpty": "Ce fichier semble vide.",
+  "importErrorNoDate": "Impossible de trouver une colonne de date dans ce fichier.",
+  "settingsImportEntry": "Importer depuis une autre app"
 }

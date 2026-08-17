@@ -1357,4 +1357,45 @@ class AppLocalizationsTr extends AppLocalizations {
   String a11yFrequencyItem(String label, int count) {
     return '$label: $count kez';
   }
+
+  @override
+  String get importTitle => 'Başka uygulamadan aktar';
+
+  @override
+  String get importBody =>
+      'Eski uygulamandan geçmişini CSV olarak dışa aktar, sonra dosyayı burada seç. Yalnızca tarih ve akış aktarılır — semptom ve ruh hali kelimeleri uygulamalar arasında farklıdır, Vera ne demek istediğini tahmin etmez.';
+
+  @override
+  String get importPickFile => 'CSV dosyası seç';
+
+  @override
+  String importPreview(int count) {
+    return '$count günlük geçmiş bulundu';
+  }
+
+  @override
+  String importSkipped(int count) {
+    return '$count satır okunamadı ve dışarıda bırakılacak';
+  }
+
+  @override
+  String get importConfirm => 'Geçmişime ekle';
+
+  @override
+  String get importMergeNote =>
+      'Aktarılan günler birleştirilir. Vera\'da zaten kaydettiğin günler olduğu gibi kalır.';
+
+  @override
+  String importDone(int count) {
+    return '$count gün aktarıldı';
+  }
+
+  @override
+  String get importErrorEmpty => 'Bu dosya boş görünüyor.';
+
+  @override
+  String get importErrorNoDate => 'Bu dosyada tarih sütunu bulunamadı.';
+
+  @override
+  String get settingsImportEntry => 'Başka uygulamadan aktar';
 }

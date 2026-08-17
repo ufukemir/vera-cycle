@@ -557,5 +557,37 @@
         "type": "int"
       }
     }
-  }
+  },
+  "importTitle": "Import from another app",
+  "importBody": "Export your history from your old tracker as a CSV, then pick the file here. Only dates and flow are imported — symptom and mood wording differs between apps, and Vera won't guess what you meant.",
+  "importPickFile": "Choose CSV file",
+  "importPreview": "Found {count} days of history",
+  "@importPreview": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "importSkipped": "{count} rows couldn't be read and will be left out",
+  "@importSkipped": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "importConfirm": "Add to my history",
+  "importMergeNote": "Imported days are merged in. Days you already logged in Vera are kept as they are.",
+  "importDone": "Imported {count} days",
+  "@importDone": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "importErrorEmpty": "That file looks empty.",
+  "importErrorNoDate": "Couldn't find a date column in that file.",
+  "settingsImportEntry": "Import from another app"
 }

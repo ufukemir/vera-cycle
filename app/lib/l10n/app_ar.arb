@@ -407,5 +407,16 @@
   "a11yCycleRing": "اليوم {day} من دورة مدتها نحو {length} يومًا",
   "a11yChartSummary": "رسم بياني به {count} إدخالات، من {min} إلى {max}",
   "a11yPhaseBar": "تقدّم الدورة: اليوم {day} من نحو {length}",
-  "a11yFrequencyItem": "{label}: {count} مرات"
+  "a11yFrequencyItem": "{label}: {count} مرات",
+  "importTitle": "استيراد من تطبيق آخر",
+  "importBody": "صدّري سجلك من تطبيقك القديم بصيغة CSV ثم اختاري الملف هنا. تُستورد التواريخ والتدفق فقط — فصياغة الأعراض والمزاج تختلف بين التطبيقات، ولن تخمّن فيرا ما تقصدينه.",
+  "importPickFile": "اختاري ملف CSV",
+  "importPreview": "تم العثور على {count} يومًا من السجل",
+  "importSkipped": "تعذّرت قراءة {count} صفوف وسيتم استبعادها",
+  "importConfirm": "أضيفي إلى سجلي",
+  "importMergeNote": "تُدمج الأيام المستوردة. وتبقى الأيام التي سجّلتِها في فيرا كما هي.",
+  "importDone": "تم استيراد {count} يومًا",
+  "importErrorEmpty": "يبدو أن الملف فارغ.",
+  "importErrorNoDate": "تعذّر العثور على عمود التاريخ في هذا الملف.",
+  "settingsImportEntry": "استيراد من تطبيق آخر"
 }

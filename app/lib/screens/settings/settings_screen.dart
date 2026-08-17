@@ -9,6 +9,7 @@ import '../../services/reminder_service.dart';
 import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
 import '../export/export_screen.dart';
+import '../export/import_screen.dart';
 import '../home/widgets/home_hero.dart';
 import '../premium/premium_screen.dart';
 import 'prediction_settings_screen.dart';
@@ -597,6 +598,13 @@ class SettingsScreen extends StatelessWidget {
               trailing: const Icon(Icons.chevron_right),
               onTap: () => Navigator.of(context).push(
                 MaterialPageRoute(builder: (_) => const PrivacyScreen()),
+              ),
+            ),
+            ListTile(
+              title: Text(l10n.settingsImportEntry),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const ImportScreen()),
               ),
             ),
             ListTile(

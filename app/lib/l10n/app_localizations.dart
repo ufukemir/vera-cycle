@@ -2571,6 +2571,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{label}: {count} times'**
   String a11yFrequencyItem(String label, int count);
+
+  /// No description provided for @importTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Import from another app'**
+  String get importTitle;
+
+  /// No description provided for @importBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Export your history from your old tracker as a CSV, then pick the file here. Only dates and flow are imported — symptom and mood wording differs between apps, and Vera won\'t guess what you meant.'**
+  String get importBody;
+
+  /// No description provided for @importPickFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose CSV file'**
+  String get importPickFile;
+
+  /// No description provided for @importPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Found {count} days of history'**
+  String importPreview(int count);
+
+  /// No description provided for @importSkipped.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} rows couldn\'t be read and will be left out'**
+  String importSkipped(int count);
+
+  /// No description provided for @importConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to my history'**
+  String get importConfirm;
+
+  /// No description provided for @importMergeNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Imported days are merged in. Days you already logged in Vera are kept as they are.'**
+  String get importMergeNote;
+
+  /// No description provided for @importDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Imported {count} days'**
+  String importDone(int count);
+
+  /// No description provided for @importErrorEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'That file looks empty.'**
+  String get importErrorEmpty;
+
+  /// No description provided for @importErrorNoDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t find a date column in that file.'**
+  String get importErrorNoDate;
+
+  /// No description provided for @settingsImportEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'Import from another app'**
+  String get settingsImportEntry;
 }
 
 class _AppLocalizationsDelegate

@@ -1349,4 +1349,45 @@ class AppLocalizationsAr extends AppLocalizations {
   String a11yFrequencyItem(String label, int count) {
     return '$label: $count مرات';
   }
+
+  @override
+  String get importTitle => 'استيراد من تطبيق آخر';
+
+  @override
+  String get importBody =>
+      'صدّري سجلك من تطبيقك القديم بصيغة CSV ثم اختاري الملف هنا. تُستورد التواريخ والتدفق فقط — فصياغة الأعراض والمزاج تختلف بين التطبيقات، ولن تخمّن فيرا ما تقصدينه.';
+
+  @override
+  String get importPickFile => 'اختاري ملف CSV';
+
+  @override
+  String importPreview(int count) {
+    return 'تم العثور على $count يومًا من السجل';
+  }
+
+  @override
+  String importSkipped(int count) {
+    return 'تعذّرت قراءة $count صفوف وسيتم استبعادها';
+  }
+
+  @override
+  String get importConfirm => 'أضيفي إلى سجلي';
+
+  @override
+  String get importMergeNote =>
+      'تُدمج الأيام المستوردة. وتبقى الأيام التي سجّلتِها في فيرا كما هي.';
+
+  @override
+  String importDone(int count) {
+    return 'تم استيراد $count يومًا';
+  }
+
+  @override
+  String get importErrorEmpty => 'يبدو أن الملف فارغ.';
+
+  @override
+  String get importErrorNoDate => 'تعذّر العثور على عمود التاريخ في هذا الملف.';
+
+  @override
+  String get settingsImportEntry => 'استيراد من تطبيق آخر';
 }

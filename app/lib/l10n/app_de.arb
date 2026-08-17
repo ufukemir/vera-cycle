@@ -407,5 +407,16 @@
   "a11yCycleRing": "Tag {day} von etwa {length}",
   "a11yChartSummary": "Diagramm mit {count} Einträgen, von {min} bis {max}",
   "a11yPhaseBar": "Zyklusfortschritt: Tag {day} von etwa {length}",
-  "a11yFrequencyItem": "{label}: {count} Mal"
+  "a11yFrequencyItem": "{label}: {count} Mal",
+  "importTitle": "Aus anderer App importieren",
+  "importBody": "Exportiere deine Historie aus deiner alten App als CSV und wähle die Datei hier. Nur Datum und Blutungsstärke werden importiert — Symptom- und Stimmungsbegriffe unterscheiden sich zwischen Apps, und Vera rät nicht.",
+  "importPickFile": "CSV-Datei wählen",
+  "importPreview": "{count} Tage Historie gefunden",
+  "importSkipped": "{count} Zeilen konnten nicht gelesen werden und bleiben außen vor",
+  "importConfirm": "Zu meiner Historie hinzufügen",
+  "importMergeNote": "Importierte Tage werden zusammengeführt. Bereits in Vera erfasste Tage bleiben unverändert.",
+  "importDone": "{count} Tage importiert",
+  "importErrorEmpty": "Diese Datei scheint leer zu sein.",
+  "importErrorNoDate": "In dieser Datei wurde keine Datumsspalte gefunden.",
+  "settingsImportEntry": "Aus anderer App importieren"
 }
