@@ -1248,4 +1248,35 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get homeThemePlain => 'Plain';
+
+  @override
+  String get backupNudgeTitle => 'Keep a copy of your data';
+
+  @override
+  String get backupNudgeBody =>
+      'Everything lives only on this phone. If it\'s lost, broken, or reset, your history goes with it — an encrypted backup takes a moment and only you can open it.';
+
+  @override
+  String get backupNudgeCta => 'Back up now';
+
+  @override
+  String get backupNudgeDismiss => 'Later';
+
+  @override
+  String backupLastDone(String date) {
+    return 'Last backup: $date';
+  }
+
+  @override
+  String get backupNever => 'No backup yet';
+
+  @override
+  String get settingsRemindersBackupLabel => 'Remind me to back up';
+
+  @override
+  String get reminderBackupTitle => 'Time to back up Vera';
+
+  @override
+  String get reminderBackupBody =>
+      'Your history only exists on this phone. A quick encrypted backup keeps it safe.';
 }

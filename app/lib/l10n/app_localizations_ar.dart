@@ -1249,4 +1249,35 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get homeThemePlain => 'سادة';
+
+  @override
+  String get backupNudgeTitle => 'احتفظي بنسخة من بياناتك';
+
+  @override
+  String get backupNudgeBody =>
+      'كل شيء موجود على هذا الهاتف فقط. إذا فُقد أو تعطّل أو أُعيد ضبطه، سيذهب سجلك معه — النسخة الاحتياطية المشفّرة تستغرق لحظة ولا يفتحها سواك.';
+
+  @override
+  String get backupNudgeCta => 'انسخي احتياطيًا الآن';
+
+  @override
+  String get backupNudgeDismiss => 'لاحقًا';
+
+  @override
+  String backupLastDone(String date) {
+    return 'آخر نسخة احتياطية: $date';
+  }
+
+  @override
+  String get backupNever => 'لا توجد نسخة احتياطية بعد';
+
+  @override
+  String get settingsRemindersBackupLabel => 'ذكّريني بالنسخ الاحتياطي';
+
+  @override
+  String get reminderBackupTitle => 'حان وقت النسخ الاحتياطي لفيرا';
+
+  @override
+  String get reminderBackupBody =>
+      'سجلك موجود على هذا الهاتف فقط. نسخة احتياطية مشفّرة سريعة تحافظ عليه.';
 }

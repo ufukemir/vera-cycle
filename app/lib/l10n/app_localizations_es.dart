@@ -1260,4 +1260,35 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get homeThemePlain => 'Liso';
+
+  @override
+  String get backupNudgeTitle => 'Guarda una copia de tus datos';
+
+  @override
+  String get backupNudgeBody =>
+      'Todo vive solo en este teléfono. Si se pierde, se rompe o se restablece, tu historial se va con él — una copia cifrada lleva un momento y solo tú puedes abrirla.';
+
+  @override
+  String get backupNudgeCta => 'Hacer copia ahora';
+
+  @override
+  String get backupNudgeDismiss => 'Más tarde';
+
+  @override
+  String backupLastDone(String date) {
+    return 'Última copia: $date';
+  }
+
+  @override
+  String get backupNever => 'Aún sin copia';
+
+  @override
+  String get settingsRemindersBackupLabel => 'Recordarme hacer copia';
+
+  @override
+  String get reminderBackupTitle => 'Hora de hacer copia de Vera';
+
+  @override
+  String get reminderBackupBody =>
+      'Tu historial solo existe en este teléfono. Una copia cifrada rápida lo mantiene a salvo.';
 }

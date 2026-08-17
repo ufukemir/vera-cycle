@@ -15,6 +15,7 @@ import '../../services/backup_service.dart';
 import '../../services/cycle_insights.dart';
 import '../../services/doctor_report_csv.dart';
 import '../../services/doctor_report_pdf.dart';
+import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
 import '../../util/day.dart';
 
@@ -57,6 +58,8 @@ class _ExportScreenState extends State<ExportScreen> {
           ),
         ],
       ));
+      if (!mounted) return;
+      await context.read<AppPreferences>().markBackedUpNow();
       if (!mounted) return;
       _showSnack(l10n.exportBackupCreated);
     } finally {

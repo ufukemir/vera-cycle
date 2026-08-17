@@ -1267,4 +1267,35 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get homeThemePlain => 'Schlicht';
+
+  @override
+  String get backupNudgeTitle => 'Bewahre eine Kopie deiner Daten auf';
+
+  @override
+  String get backupNudgeBody =>
+      'Alles liegt nur auf diesem Telefon. Geht es verloren, kaputt oder wird zurückgesetzt, ist deine Historie weg — ein verschlüsseltes Backup dauert einen Moment und nur du kannst es öffnen.';
+
+  @override
+  String get backupNudgeCta => 'Jetzt sichern';
+
+  @override
+  String get backupNudgeDismiss => 'Später';
+
+  @override
+  String backupLastDone(String date) {
+    return 'Letztes Backup: $date';
+  }
+
+  @override
+  String get backupNever => 'Noch kein Backup';
+
+  @override
+  String get settingsRemindersBackupLabel => 'Ans Backup erinnern';
+
+  @override
+  String get reminderBackupTitle => 'Zeit für ein Vera-Backup';
+
+  @override
+  String get reminderBackupBody =>
+      'Deine Historie existiert nur auf diesem Telefon. Ein schnelles verschlüsseltes Backup schützt sie.';
 }

@@ -1271,4 +1271,35 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get homeThemePlain => 'Uni';
+
+  @override
+  String get backupNudgeTitle => 'Garde une copie de tes données';
+
+  @override
+  String get backupNudgeBody =>
+      'Tout est uniquement sur ce téléphone. S\'il est perdu, cassé ou réinitialisé, ton historique disparaît avec lui — une sauvegarde chiffrée prend un instant et toi seule peux l\'ouvrir.';
+
+  @override
+  String get backupNudgeCta => 'Sauvegarder maintenant';
+
+  @override
+  String get backupNudgeDismiss => 'Plus tard';
+
+  @override
+  String backupLastDone(String date) {
+    return 'Dernière sauvegarde : $date';
+  }
+
+  @override
+  String get backupNever => 'Pas encore de sauvegarde';
+
+  @override
+  String get settingsRemindersBackupLabel => 'Me rappeler de sauvegarder';
+
+  @override
+  String get reminderBackupTitle => 'Il est temps de sauvegarder Vera';
+
+  @override
+  String get reminderBackupBody =>
+      'Ton historique n\'existe que sur ce téléphone. Une sauvegarde chiffrée rapide le met à l\'abri.';
 }

@@ -1256,4 +1256,35 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get homeThemePlain => 'Düz';
+
+  @override
+  String get backupNudgeTitle => 'Verilerinin bir kopyasını sakla';
+
+  @override
+  String get backupNudgeBody =>
+      'Her şey yalnızca bu telefonda duruyor. Telefon kaybolur, bozulur veya sıfırlanırsa geçmişin de gider — şifreli yedek bir dakika sürer ve yalnızca sen açabilirsin.';
+
+  @override
+  String get backupNudgeCta => 'Şimdi yedekle';
+
+  @override
+  String get backupNudgeDismiss => 'Sonra';
+
+  @override
+  String backupLastDone(String date) {
+    return 'Son yedek: $date';
+  }
+
+  @override
+  String get backupNever => 'Henüz yedek yok';
+
+  @override
+  String get settingsRemindersBackupLabel => 'Yedekleme hatırlatıcısı';
+
+  @override
+  String get reminderBackupTitle => 'Vera\'yı yedekleme zamanı';
+
+  @override
+  String get reminderBackupBody =>
+      'Geçmişin yalnızca bu telefonda var. Hızlı bir şifreli yedek onu güvende tutar.';
 }

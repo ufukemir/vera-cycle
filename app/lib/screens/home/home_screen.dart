@@ -9,6 +9,7 @@ import '../../state/cycle_controller.dart';
 import '../../util/day.dart';
 import '../day_log/day_log_screen.dart';
 import 'widgets/ad_placeholder_banner.dart';
+import 'widgets/backup_nudge_card.dart';
 import 'widgets/cycle_ring.dart';
 import 'widgets/daily_insight_card.dart';
 import 'widgets/home_hero.dart';
@@ -137,6 +138,8 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ],
                     ],
+                    const SizedBox(height: 20),
+                    const BackupNudgeCard(),
                     const SizedBox(height: 20),
                     DailyInsightCard(phase: status.phase),
                     const SizedBox(height: 24),

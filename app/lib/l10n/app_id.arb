@@ -380,5 +380,14 @@
   "homeThemeSky": "Langit",
   "homeThemeField": "Ladang",
   "homeThemeBlossom": "Bunga",
-  "homeThemePlain": "Polos"
+  "homeThemePlain": "Polos",
+  "backupNudgeTitle": "Simpan salinan datamu",
+  "backupNudgeBody": "Semuanya hanya ada di ponsel ini. Kalau hilang, rusak, atau direset, riwayatmu ikut hilang — cadangan terenkripsi hanya butuh sebentar dan hanya kamu yang bisa membukanya.",
+  "backupNudgeCta": "Cadangkan sekarang",
+  "backupNudgeDismiss": "Nanti",
+  "backupLastDone": "Cadangan terakhir: {date}",
+  "backupNever": "Belum ada cadangan",
+  "settingsRemindersBackupLabel": "Ingatkan untuk mencadangkan",
+  "reminderBackupTitle": "Waktunya mencadangkan Vera",
+  "reminderBackupBody": "Riwayatmu hanya ada di ponsel ini. Cadangan terenkripsi cepat menjaganya tetap aman."
 }

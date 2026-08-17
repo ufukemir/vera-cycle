@@ -380,5 +380,14 @@
   "homeThemeSky": "Himmel",
   "homeThemeField": "Feld",
   "homeThemeBlossom": "Blüte",
-  "homeThemePlain": "Schlicht"
+  "homeThemePlain": "Schlicht",
+  "backupNudgeTitle": "Bewahre eine Kopie deiner Daten auf",
+  "backupNudgeBody": "Alles liegt nur auf diesem Telefon. Geht es verloren, kaputt oder wird zurückgesetzt, ist deine Historie weg — ein verschlüsseltes Backup dauert einen Moment und nur du kannst es öffnen.",
+  "backupNudgeCta": "Jetzt sichern",
+  "backupNudgeDismiss": "Später",
+  "backupLastDone": "Letztes Backup: {date}",
+  "backupNever": "Noch kein Backup",
+  "settingsRemindersBackupLabel": "Ans Backup erinnern",
+  "reminderBackupTitle": "Zeit für ein Vera-Backup",
+  "reminderBackupBody": "Deine Historie existiert nur auf diesem Telefon. Ein schnelles verschlüsseltes Backup schützt sie."
 }

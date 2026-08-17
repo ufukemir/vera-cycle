@@ -380,5 +380,14 @@
   "homeThemeSky": "Gökyüzü",
   "homeThemeField": "Tarla",
   "homeThemeBlossom": "Çiçek",
-  "homeThemePlain": "Düz"
+  "homeThemePlain": "Düz",
+  "backupNudgeTitle": "Verilerinin bir kopyasını sakla",
+  "backupNudgeBody": "Her şey yalnızca bu telefonda duruyor. Telefon kaybolur, bozulur veya sıfırlanırsa geçmişin de gider — şifreli yedek bir dakika sürer ve yalnızca sen açabilirsin.",
+  "backupNudgeCta": "Şimdi yedekle",
+  "backupNudgeDismiss": "Sonra",
+  "backupLastDone": "Son yedek: {date}",
+  "backupNever": "Henüz yedek yok",
+  "settingsRemindersBackupLabel": "Yedekleme hatırlatıcısı",
+  "reminderBackupTitle": "Vera'yı yedekleme zamanı",
+  "reminderBackupBody": "Geçmişin yalnızca bu telefonda var. Hızlı bir şifreli yedek onu güvende tutar."
 }

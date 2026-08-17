@@ -380,5 +380,14 @@
   "homeThemeSky": "سماء",
   "homeThemeField": "حقل",
   "homeThemeBlossom": "زهر",
-  "homeThemePlain": "سادة"
+  "homeThemePlain": "سادة",
+  "backupNudgeTitle": "احتفظي بنسخة من بياناتك",
+  "backupNudgeBody": "كل شيء موجود على هذا الهاتف فقط. إذا فُقد أو تعطّل أو أُعيد ضبطه، سيذهب سجلك معه — النسخة الاحتياطية المشفّرة تستغرق لحظة ولا يفتحها سواك.",
+  "backupNudgeCta": "انسخي احتياطيًا الآن",
+  "backupNudgeDismiss": "لاحقًا",
+  "backupLastDone": "آخر نسخة احتياطية: {date}",
+  "backupNever": "لا توجد نسخة احتياطية بعد",
+  "settingsRemindersBackupLabel": "ذكّريني بالنسخ الاحتياطي",
+  "reminderBackupTitle": "حان وقت النسخ الاحتياطي لفيرا",
+  "reminderBackupBody": "سجلك موجود على هذا الهاتف فقط. نسخة احتياطية مشفّرة سريعة تحافظ عليه."
 }

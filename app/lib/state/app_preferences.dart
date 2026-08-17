@@ -48,6 +48,8 @@ class AppPreferences extends ChangeNotifier {
   static const _kOvulationRemindersEnabled = 'ovulation_reminders_enabled';
   static const _kMascot = 'mascot';
   static const _kHomeTheme = 'home_theme';
+  static const _kLastBackupAt = 'last_backup_at';
+  static const _kBackupRemindersEnabled = 'backup_reminders_enabled';
   static const _kPremiumActive = 'premium_active';
   static const _kPregnancyMode = 'pregnancy_mode';
   static const _kPregnancyLmp = 'pregnancy_lmp';
@@ -332,6 +334,30 @@ class AppPreferences extends ChangeNotifier {
       (m) => m.name == raw,
       orElse: () => Mascot.droplet,
     );
+  }
+
+  /// When the user last created an encrypted backup, or `null` if never.
+  /// Drives the home nudge — everything lives on this device, so a lost
+  /// phone means lost history unless a copy exists.
+  DateTime? get lastBackupAt {
+    final millis = _prefs.getInt(_kLastBackupAt);
+    return millis == null ? null : DateTime.fromMillisecondsSinceEpoch(millis);
+  }
+
+  Future<void> markBackedUpNow() async {
+    await _prefs.setInt(_kLastBackupAt, DateTime.now().millisecondsSinceEpoch);
+    notifyListeners();
+  }
+
+  /// Default ON — unlike every other reminder. Losing all your data is a
+  /// different class of harm from missing a convenience notification, and
+  /// the nudge is quiet and dismissible.
+  bool get backupRemindersEnabled =>
+      _prefs.getBool(_kBackupRemindersEnabled) ?? true;
+
+  Future<void> setBackupRemindersEnabled(bool value) async {
+    await _prefs.setBool(_kBackupRemindersEnabled, value);
+    notifyListeners();
   }
 
   /// Scenic photo behind the home hero. See [HomeTheme].

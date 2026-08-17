@@ -380,5 +380,14 @@
   "homeThemeSky": "Cielo",
   "homeThemeField": "Campo",
   "homeThemeBlossom": "Flor",
-  "homeThemePlain": "Liso"
+  "homeThemePlain": "Liso",
+  "backupNudgeTitle": "Guarda una copia de tus datos",
+  "backupNudgeBody": "Todo vive solo en este teléfono. Si se pierde, se rompe o se restablece, tu historial se va con él — una copia cifrada lleva un momento y solo tú puedes abrirla.",
+  "backupNudgeCta": "Hacer copia ahora",
+  "backupNudgeDismiss": "Más tarde",
+  "backupLastDone": "Última copia: {date}",
+  "backupNever": "Aún sin copia",
+  "settingsRemindersBackupLabel": "Recordarme hacer copia",
+  "reminderBackupTitle": "Hora de hacer copia de Vera",
+  "reminderBackupBody": "Tu historial solo existe en este teléfono. Una copia cifrada rápida lo mantiene a salvo."
 }

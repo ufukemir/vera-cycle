@@ -162,6 +162,30 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
+  /// A monthly nudge, scheduled from "now + 30 days" each time the user
+  /// touches the toggle. Deliberately coarse: this is a safety net, not a
+  /// precise schedule.
+  Future<void> _rescheduleBackupReminder(BuildContext context) async {
+    final prefs = context.read<AppPreferences>();
+    final reminders = context.read<ReminderService>();
+
+    if (!prefs.backupRemindersEnabled) {
+      await reminders.cancel(ReminderCategory.backup);
+      return;
+    }
+    final l10n = AppLocalizations.of(context)!;
+    await reminders.requestPermission();
+    final time = prefs.reminderTime;
+    final fire = DateTime.now().add(const Duration(days: 30));
+    await reminders.scheduleOneOff(
+      category: ReminderCategory.backup,
+      fireAtLocalWallClock: DateTime(
+          fire.year, fire.month, fire.day, time.hour, time.minute),
+      title: l10n.reminderBackupTitle,
+      body: l10n.reminderBackupBody,
+    );
+  }
+
   Future<void> _rescheduleAppointmentReminder(BuildContext context) async {
     final prefs = context.read<AppPreferences>();
     final reminders = context.read<ReminderService>();
@@ -425,6 +449,14 @@ class SettingsScreen extends StatelessWidget {
                   if (context.mounted) await _rescheduleWaterReminder(context);
                 },
               ),
+            SwitchListTile(
+              title: Text(l10n.settingsRemindersBackupLabel),
+              value: prefs.backupRemindersEnabled,
+              onChanged: (v) async {
+                await prefs.setBackupRemindersEnabled(v);
+                if (context.mounted) await _rescheduleBackupReminder(context);
+              },
+            ),
             SwitchListTile(
               title: Text(l10n.settingsRemindersOvulationLabel),
               value: prefs.ovulationRemindersEnabled,

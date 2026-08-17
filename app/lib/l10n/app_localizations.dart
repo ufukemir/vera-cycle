@@ -2409,6 +2409,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Plain'**
   String get homeThemePlain;
+
+  /// No description provided for @backupNudgeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep a copy of your data'**
+  String get backupNudgeTitle;
+
+  /// No description provided for @backupNudgeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything lives only on this phone. If it\'s lost, broken, or reset, your history goes with it — an encrypted backup takes a moment and only you can open it.'**
+  String get backupNudgeBody;
+
+  /// No description provided for @backupNudgeCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Back up now'**
+  String get backupNudgeCta;
+
+  /// No description provided for @backupNudgeDismiss.
+  ///
+  /// In en, this message translates to:
+  /// **'Later'**
+  String get backupNudgeDismiss;
+
+  /// No description provided for @backupLastDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Last backup: {date}'**
+  String backupLastDone(String date);
+
+  /// No description provided for @backupNever.
+  ///
+  /// In en, this message translates to:
+  /// **'No backup yet'**
+  String get backupNever;
+
+  /// No description provided for @settingsRemindersBackupLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Remind me to back up'**
+  String get settingsRemindersBackupLabel;
+
+  /// No description provided for @reminderBackupTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Time to back up Vera'**
+  String get reminderBackupTitle;
+
+  /// No description provided for @reminderBackupBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your history only exists on this phone. A quick encrypted backup keeps it safe.'**
+  String get reminderBackupBody;
 }
 
 class _AppLocalizationsDelegate

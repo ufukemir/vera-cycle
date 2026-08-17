@@ -12,7 +12,8 @@ enum ReminderCategory {
   medication(3, 'medication', 'Medication'),
   water(4, 'water', 'Water'),
   appointment(5, 'appointment', 'Appointment'),
-  ovulation(6, 'ovulation', 'Fertile window');
+  ovulation(6, 'ovulation', 'Fertile window'),
+  backup(7, 'backup', 'Backup reminder');
 
   const ReminderCategory(this.notificationId, this.channelId, this.channelName);
 

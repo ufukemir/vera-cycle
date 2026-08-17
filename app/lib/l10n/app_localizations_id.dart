@@ -1259,4 +1259,35 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get homeThemePlain => 'Polos';
+
+  @override
+  String get backupNudgeTitle => 'Simpan salinan datamu';
+
+  @override
+  String get backupNudgeBody =>
+      'Semuanya hanya ada di ponsel ini. Kalau hilang, rusak, atau direset, riwayatmu ikut hilang — cadangan terenkripsi hanya butuh sebentar dan hanya kamu yang bisa membukanya.';
+
+  @override
+  String get backupNudgeCta => 'Cadangkan sekarang';
+
+  @override
+  String get backupNudgeDismiss => 'Nanti';
+
+  @override
+  String backupLastDone(String date) {
+    return 'Cadangan terakhir: $date';
+  }
+
+  @override
+  String get backupNever => 'Belum ada cadangan';
+
+  @override
+  String get settingsRemindersBackupLabel => 'Ingatkan untuk mencadangkan';
+
+  @override
+  String get reminderBackupTitle => 'Waktunya mencadangkan Vera';
+
+  @override
+  String get reminderBackupBody =>
+      'Riwayatmu hanya ada di ponsel ini. Cadangan terenkripsi cepat menjaganya tetap aman.';
 }
