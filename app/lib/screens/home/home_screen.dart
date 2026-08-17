@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/enums.dart';
+import '../../services/home_widget_service.dart';
 import '../../services/pregnancy_info.dart';
 import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
@@ -72,6 +73,16 @@ class HomeScreen extends StatelessWidget {
       heroHeadline = l10n.homeNoCycleYet;
       heroEyebrow = l10n.appTitle;
     }
+
+    // Keep the OS widget in step with what Home shows. Fire-and-forget:
+    // HomeWidgetService swallows platform failures by design.
+    const HomeWidgetService().update(
+      eyebrow: heroEyebrow,
+      headline: heroHeadline,
+      secondary: daysToOvulation != null
+          ? l10n.homeOvulationCountdown(daysToOvulation)
+          : null,
+    );
 
     return Scaffold(
       body: SafeArea(
