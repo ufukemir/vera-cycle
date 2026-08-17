@@ -1298,4 +1298,41 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get reminderBackupBody =>
       'Deine Historie existiert nur auf diesem Telefon. Ein schnelles verschlüsseltes Backup schützt sie.';
+
+  @override
+  String get calendarDayDetailTitle => 'Dieser Tag';
+
+  @override
+  String get calendarDayNothingLogged => 'Für diesen Tag noch nichts erfasst';
+
+  @override
+  String get calendarDayOpenLog => 'Tagesprotokoll öffnen';
+
+  @override
+  String get cycleHistoryTitle => 'Frühere Zyklen';
+
+  @override
+  String get cycleHistoryEmpty =>
+      'Erfasse ein paar Perioden, dann erscheint hier deine Historie.';
+
+  @override
+  String get cycleHistoryOngoing => 'Läuft';
+
+  @override
+  String cycleHistoryLength(int days) {
+    return '$days-Tage-Zyklus';
+  }
+
+  @override
+  String cycleHistoryPeriodLength(int days) {
+    return '$days Tage Blutung';
+  }
+
+  @override
+  String cycleHistoryVsAverage(String diff) {
+    return '$diff gegenüber deinem Durchschnitt';
+  }
+
+  @override
+  String get insightsCycleHistoryEntry => 'Frühere Zyklen';
 }

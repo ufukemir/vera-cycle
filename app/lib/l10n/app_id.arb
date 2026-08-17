@@ -389,5 +389,15 @@
   "backupNever": "Belum ada cadangan",
   "settingsRemindersBackupLabel": "Ingatkan untuk mencadangkan",
   "reminderBackupTitle": "Waktunya mencadangkan Vera",
-  "reminderBackupBody": "Riwayatmu hanya ada di ponsel ini. Cadangan terenkripsi cepat menjaganya tetap aman."
+  "reminderBackupBody": "Riwayatmu hanya ada di ponsel ini. Cadangan terenkripsi cepat menjaganya tetap aman.",
+  "calendarDayDetailTitle": "Hari ini",
+  "calendarDayNothingLogged": "Belum ada catatan untuk hari ini",
+  "calendarDayOpenLog": "Buka catatan harian",
+  "cycleHistoryTitle": "Siklus sebelumnya",
+  "cycleHistoryEmpty": "Catat beberapa haid dan riwayat siklusmu akan muncul di sini.",
+  "cycleHistoryOngoing": "Berlangsung",
+  "cycleHistoryLength": "Siklus {days} hari",
+  "cycleHistoryPeriodLength": "{days} hari pendarahan",
+  "cycleHistoryVsAverage": "{diff} dibanding rata-ratamu",
+  "insightsCycleHistoryEntry": "Siklus sebelumnya"
 }

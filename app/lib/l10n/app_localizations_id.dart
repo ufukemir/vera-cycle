@@ -1290,4 +1290,41 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get reminderBackupBody =>
       'Riwayatmu hanya ada di ponsel ini. Cadangan terenkripsi cepat menjaganya tetap aman.';
+
+  @override
+  String get calendarDayDetailTitle => 'Hari ini';
+
+  @override
+  String get calendarDayNothingLogged => 'Belum ada catatan untuk hari ini';
+
+  @override
+  String get calendarDayOpenLog => 'Buka catatan harian';
+
+  @override
+  String get cycleHistoryTitle => 'Siklus sebelumnya';
+
+  @override
+  String get cycleHistoryEmpty =>
+      'Catat beberapa haid dan riwayat siklusmu akan muncul di sini.';
+
+  @override
+  String get cycleHistoryOngoing => 'Berlangsung';
+
+  @override
+  String cycleHistoryLength(int days) {
+    return 'Siklus $days hari';
+  }
+
+  @override
+  String cycleHistoryPeriodLength(int days) {
+    return '$days hari pendarahan';
+  }
+
+  @override
+  String cycleHistoryVsAverage(String diff) {
+    return '$diff dibanding rata-ratamu';
+  }
+
+  @override
+  String get insightsCycleHistoryEntry => 'Siklus sebelumnya';
 }

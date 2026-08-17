@@ -389,5 +389,15 @@
   "backupNever": "Henüz yedek yok",
   "settingsRemindersBackupLabel": "Yedekleme hatırlatıcısı",
   "reminderBackupTitle": "Vera'yı yedekleme zamanı",
-  "reminderBackupBody": "Geçmişin yalnızca bu telefonda var. Hızlı bir şifreli yedek onu güvende tutar."
+  "reminderBackupBody": "Geçmişin yalnızca bu telefonda var. Hızlı bir şifreli yedek onu güvende tutar.",
+  "calendarDayDetailTitle": "Bu gün",
+  "calendarDayNothingLogged": "Bu gün için henüz kayıt yok",
+  "calendarDayOpenLog": "Gün kaydını aç",
+  "cycleHistoryTitle": "Geçmiş döngüler",
+  "cycleHistoryEmpty": "Birkaç regl kaydet, döngü geçmişin burada görünsün.",
+  "cycleHistoryOngoing": "Devam ediyor",
+  "cycleHistoryLength": "{days} günlük döngü",
+  "cycleHistoryPeriodLength": "{days} gün kanama",
+  "cycleHistoryVsAverage": "ortalamana göre {diff}",
+  "insightsCycleHistoryEntry": "Geçmiş döngüler"
 }

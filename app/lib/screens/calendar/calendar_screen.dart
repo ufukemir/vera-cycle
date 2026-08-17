@@ -6,9 +6,9 @@ import '../../l10n/app_localizations.dart';
 import '../../models/prediction.dart';
 import '../../state/cycle_controller.dart';
 import '../../util/day.dart';
-import '../day_log/day_log_screen.dart';
 import 'widgets/calendar_day_cell.dart';
 import 'widgets/calendar_legend.dart';
+import 'widgets/day_detail_sheet.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
@@ -56,8 +56,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
   void _openDay(DateTime day) {
     final date = dateOnly(day);
     if (date.isAfter(today())) return;
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (_) => DayLogScreen(date: date)));
+    // A peek first — the full editor is one more tap from the sheet.
+    showDayDetailSheet(context, date);
   }
 
   @override

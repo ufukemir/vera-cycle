@@ -1280,4 +1280,40 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get reminderBackupBody =>
       'سجلك موجود على هذا الهاتف فقط. نسخة احتياطية مشفّرة سريعة تحافظ عليه.';
+
+  @override
+  String get calendarDayDetailTitle => 'هذا اليوم';
+
+  @override
+  String get calendarDayNothingLogged => 'لا توجد تسجيلات لهذا اليوم بعد';
+
+  @override
+  String get calendarDayOpenLog => 'فتح سجل اليوم';
+
+  @override
+  String get cycleHistoryTitle => 'الدورات السابقة';
+
+  @override
+  String get cycleHistoryEmpty => 'سجّلي بضع دورات وسيظهر سجل دوراتك هنا.';
+
+  @override
+  String get cycleHistoryOngoing => 'مستمرة';
+
+  @override
+  String cycleHistoryLength(int days) {
+    return 'دورة من $days يومًا';
+  }
+
+  @override
+  String cycleHistoryPeriodLength(int days) {
+    return '$days أيام نزيف';
+  }
+
+  @override
+  String cycleHistoryVsAverage(String diff) {
+    return '$diff مقارنة بمتوسطك';
+  }
+
+  @override
+  String get insightsCycleHistoryEntry => 'الدورات السابقة';
 }

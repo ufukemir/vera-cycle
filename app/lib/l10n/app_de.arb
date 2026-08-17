@@ -389,5 +389,15 @@
   "backupNever": "Noch kein Backup",
   "settingsRemindersBackupLabel": "Ans Backup erinnern",
   "reminderBackupTitle": "Zeit für ein Vera-Backup",
-  "reminderBackupBody": "Deine Historie existiert nur auf diesem Telefon. Ein schnelles verschlüsseltes Backup schützt sie."
+  "reminderBackupBody": "Deine Historie existiert nur auf diesem Telefon. Ein schnelles verschlüsseltes Backup schützt sie.",
+  "calendarDayDetailTitle": "Dieser Tag",
+  "calendarDayNothingLogged": "Für diesen Tag noch nichts erfasst",
+  "calendarDayOpenLog": "Tagesprotokoll öffnen",
+  "cycleHistoryTitle": "Frühere Zyklen",
+  "cycleHistoryEmpty": "Erfasse ein paar Perioden, dann erscheint hier deine Historie.",
+  "cycleHistoryOngoing": "Läuft",
+  "cycleHistoryLength": "{days}-Tage-Zyklus",
+  "cycleHistoryPeriodLength": "{days} Tage Blutung",
+  "cycleHistoryVsAverage": "{diff} gegenüber deinem Durchschnitt",
+  "insightsCycleHistoryEntry": "Frühere Zyklen"
 }

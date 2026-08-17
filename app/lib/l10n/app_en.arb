@@ -475,5 +475,36 @@
   "backupNever": "No backup yet",
   "settingsRemindersBackupLabel": "Remind me to back up",
   "reminderBackupTitle": "Time to back up Vera",
-  "reminderBackupBody": "Your history only exists on this phone. A quick encrypted backup keeps it safe."
+  "reminderBackupBody": "Your history only exists on this phone. A quick encrypted backup keeps it safe.",
+  "calendarDayDetailTitle": "This day",
+  "calendarDayNothingLogged": "Nothing logged for this day yet",
+  "calendarDayOpenLog": "Open day log",
+  "cycleHistoryTitle": "Past cycles",
+  "cycleHistoryEmpty": "Log a couple of periods and your cycle history shows up here.",
+  "cycleHistoryOngoing": "Ongoing",
+  "cycleHistoryLength": "{days} day cycle",
+  "@cycleHistoryLength": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "cycleHistoryPeriodLength": "{days} days of bleeding",
+  "@cycleHistoryPeriodLength": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "cycleHistoryVsAverage": "{diff} vs your average",
+  "@cycleHistoryVsAverage": {
+    "placeholders": {
+      "diff": {
+        "type": "String"
+      }
+    }
+  },
+  "insightsCycleHistoryEntry": "Past cycles"
 }

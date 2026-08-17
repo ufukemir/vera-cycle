@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../../services/cycle_insights.dart';
 import '../../state/cycle_controller.dart';
+import 'cycle_history_screen.dart';
 import 'tracker_history_screen.dart';
 import 'widgets/phase_tips_section.dart';
 import 'widgets/symptom_frequency_bar_row.dart';
@@ -61,6 +62,17 @@ class InsightsScreen extends StatelessWidget {
                 frequencyByCycleDay: insights.symptomFrequencyByCycleDay,
                 maxCycleDay: CycleInsights.maxCycleDay,
               ),
+            const SizedBox(height: 20),
+            Card(
+              child: ListTile(
+                leading: Icon(Icons.history,
+                    color: Theme.of(context).colorScheme.primary),
+                title: Text(l10n.insightsCycleHistoryEntry),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) => const CycleHistoryScreen())),
+              ),
+            ),
             const SizedBox(height: 28),
             Text(l10n.insightsTrackerHubTitle,
                 style: Theme.of(context).textTheme.titleMedium),

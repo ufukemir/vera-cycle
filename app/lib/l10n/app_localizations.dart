@@ -2463,6 +2463,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your history only exists on this phone. A quick encrypted backup keeps it safe.'**
   String get reminderBackupBody;
+
+  /// No description provided for @calendarDayDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'This day'**
+  String get calendarDayDetailTitle;
+
+  /// No description provided for @calendarDayNothingLogged.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing logged for this day yet'**
+  String get calendarDayNothingLogged;
+
+  /// No description provided for @calendarDayOpenLog.
+  ///
+  /// In en, this message translates to:
+  /// **'Open day log'**
+  String get calendarDayOpenLog;
+
+  /// No description provided for @cycleHistoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Past cycles'**
+  String get cycleHistoryTitle;
+
+  /// No description provided for @cycleHistoryEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Log a couple of periods and your cycle history shows up here.'**
+  String get cycleHistoryEmpty;
+
+  /// No description provided for @cycleHistoryOngoing.
+  ///
+  /// In en, this message translates to:
+  /// **'Ongoing'**
+  String get cycleHistoryOngoing;
+
+  /// No description provided for @cycleHistoryLength.
+  ///
+  /// In en, this message translates to:
+  /// **'{days} day cycle'**
+  String cycleHistoryLength(int days);
+
+  /// No description provided for @cycleHistoryPeriodLength.
+  ///
+  /// In en, this message translates to:
+  /// **'{days} days of bleeding'**
+  String cycleHistoryPeriodLength(int days);
+
+  /// No description provided for @cycleHistoryVsAverage.
+  ///
+  /// In en, this message translates to:
+  /// **'{diff} vs your average'**
+  String cycleHistoryVsAverage(String diff);
+
+  /// No description provided for @insightsCycleHistoryEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'Past cycles'**
+  String get insightsCycleHistoryEntry;
 }
 
 class _AppLocalizationsDelegate

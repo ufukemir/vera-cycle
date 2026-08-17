@@ -389,5 +389,15 @@
   "backupNever": "لا توجد نسخة احتياطية بعد",
   "settingsRemindersBackupLabel": "ذكّريني بالنسخ الاحتياطي",
   "reminderBackupTitle": "حان وقت النسخ الاحتياطي لفيرا",
-  "reminderBackupBody": "سجلك موجود على هذا الهاتف فقط. نسخة احتياطية مشفّرة سريعة تحافظ عليه."
+  "reminderBackupBody": "سجلك موجود على هذا الهاتف فقط. نسخة احتياطية مشفّرة سريعة تحافظ عليه.",
+  "calendarDayDetailTitle": "هذا اليوم",
+  "calendarDayNothingLogged": "لا توجد تسجيلات لهذا اليوم بعد",
+  "calendarDayOpenLog": "فتح سجل اليوم",
+  "cycleHistoryTitle": "الدورات السابقة",
+  "cycleHistoryEmpty": "سجّلي بضع دورات وسيظهر سجل دوراتك هنا.",
+  "cycleHistoryOngoing": "مستمرة",
+  "cycleHistoryLength": "دورة من {days} يومًا",
+  "cycleHistoryPeriodLength": "{days} أيام نزيف",
+  "cycleHistoryVsAverage": "{diff} مقارنة بمتوسطك",
+  "insightsCycleHistoryEntry": "الدورات السابقة"
 }

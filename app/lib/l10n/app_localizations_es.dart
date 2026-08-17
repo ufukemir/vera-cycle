@@ -1291,4 +1291,41 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get reminderBackupBody =>
       'Tu historial solo existe en este teléfono. Una copia cifrada rápida lo mantiene a salvo.';
+
+  @override
+  String get calendarDayDetailTitle => 'Este día';
+
+  @override
+  String get calendarDayNothingLogged => 'Aún no hay registros para este día';
+
+  @override
+  String get calendarDayOpenLog => 'Abrir registro del día';
+
+  @override
+  String get cycleHistoryTitle => 'Ciclos anteriores';
+
+  @override
+  String get cycleHistoryEmpty =>
+      'Registra un par de periodos y tu historial aparecerá aquí.';
+
+  @override
+  String get cycleHistoryOngoing => 'En curso';
+
+  @override
+  String cycleHistoryLength(int days) {
+    return 'Ciclo de $days días';
+  }
+
+  @override
+  String cycleHistoryPeriodLength(int days) {
+    return '$days días de sangrado';
+  }
+
+  @override
+  String cycleHistoryVsAverage(String diff) {
+    return '$diff respecto a tu media';
+  }
+
+  @override
+  String get insightsCycleHistoryEntry => 'Ciclos anteriores';
 }

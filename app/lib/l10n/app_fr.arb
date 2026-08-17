@@ -389,5 +389,15 @@
   "backupNever": "Pas encore de sauvegarde",
   "settingsRemindersBackupLabel": "Me rappeler de sauvegarder",
   "reminderBackupTitle": "Il est temps de sauvegarder Vera",
-  "reminderBackupBody": "Ton historique n'existe que sur ce téléphone. Une sauvegarde chiffrée rapide le met à l'abri."
+  "reminderBackupBody": "Ton historique n'existe que sur ce téléphone. Une sauvegarde chiffrée rapide le met à l'abri.",
+  "calendarDayDetailTitle": "Ce jour",
+  "calendarDayNothingLogged": "Rien d'enregistré pour ce jour",
+  "calendarDayOpenLog": "Ouvrir le journal du jour",
+  "cycleHistoryTitle": "Cycles passés",
+  "cycleHistoryEmpty": "Enregistre quelques règles et ton historique apparaîtra ici.",
+  "cycleHistoryOngoing": "En cours",
+  "cycleHistoryLength": "Cycle de {days} jours",
+  "cycleHistoryPeriodLength": "{days} jours de saignement",
+  "cycleHistoryVsAverage": "{diff} par rapport à ta moyenne",
+  "insightsCycleHistoryEntry": "Cycles passés"
 }

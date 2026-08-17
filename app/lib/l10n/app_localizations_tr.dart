@@ -1287,4 +1287,41 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get reminderBackupBody =>
       'Geçmişin yalnızca bu telefonda var. Hızlı bir şifreli yedek onu güvende tutar.';
+
+  @override
+  String get calendarDayDetailTitle => 'Bu gün';
+
+  @override
+  String get calendarDayNothingLogged => 'Bu gün için henüz kayıt yok';
+
+  @override
+  String get calendarDayOpenLog => 'Gün kaydını aç';
+
+  @override
+  String get cycleHistoryTitle => 'Geçmiş döngüler';
+
+  @override
+  String get cycleHistoryEmpty =>
+      'Birkaç regl kaydet, döngü geçmişin burada görünsün.';
+
+  @override
+  String get cycleHistoryOngoing => 'Devam ediyor';
+
+  @override
+  String cycleHistoryLength(int days) {
+    return '$days günlük döngü';
+  }
+
+  @override
+  String cycleHistoryPeriodLength(int days) {
+    return '$days gün kanama';
+  }
+
+  @override
+  String cycleHistoryVsAverage(String diff) {
+    return 'ortalamana göre $diff';
+  }
+
+  @override
+  String get insightsCycleHistoryEntry => 'Geçmiş döngüler';
 }

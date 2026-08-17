@@ -389,5 +389,15 @@
   "backupNever": "Aún sin copia",
   "settingsRemindersBackupLabel": "Recordarme hacer copia",
   "reminderBackupTitle": "Hora de hacer copia de Vera",
-  "reminderBackupBody": "Tu historial solo existe en este teléfono. Una copia cifrada rápida lo mantiene a salvo."
+  "reminderBackupBody": "Tu historial solo existe en este teléfono. Una copia cifrada rápida lo mantiene a salvo.",
+  "calendarDayDetailTitle": "Este día",
+  "calendarDayNothingLogged": "Aún no hay registros para este día",
+  "calendarDayOpenLog": "Abrir registro del día",
+  "cycleHistoryTitle": "Ciclos anteriores",
+  "cycleHistoryEmpty": "Registra un par de periodos y tu historial aparecerá aquí.",
+  "cycleHistoryOngoing": "En curso",
+  "cycleHistoryLength": "Ciclo de {days} días",
+  "cycleHistoryPeriodLength": "{days} días de sangrado",
+  "cycleHistoryVsAverage": "{diff} respecto a tu media",
+  "insightsCycleHistoryEntry": "Ciclos anteriores"
 }
