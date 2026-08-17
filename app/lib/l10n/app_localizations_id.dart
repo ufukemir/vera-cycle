@@ -1340,4 +1340,24 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get settingsAdPrivacyEntry => 'Opsi privasi iklan';
+
+  @override
+  String a11yCycleRing(int day, int length) {
+    return 'Hari ke-$day dari sekitar $length';
+  }
+
+  @override
+  String a11yChartSummary(int count, String min, String max) {
+    return 'Grafik dengan $count entri, dari $min sampai $max';
+  }
+
+  @override
+  String a11yPhaseBar(int day, int length) {
+    return 'Kemajuan siklus: hari ke-$day dari sekitar $length';
+  }
+
+  @override
+  String a11yFrequencyItem(String label, int count) {
+    return '$label: $count kali';
+  }
 }

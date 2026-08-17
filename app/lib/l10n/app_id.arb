@@ -403,5 +403,9 @@
   "homeEmptyTitle": "Mari mulai dari haid terakhirmu",
   "homeEmptyBody": "Ketuk tombol di atas pada hari haidmu dimulai. Setelah dua siklus penuh Vera bisa mulai memperkirakan — sampai saat itu ia tidak akan berpura-pura tahu.",
   "homeEmptyBackdate": "Sudah dimulai sebelumnya",
-  "settingsAdPrivacyEntry": "Opsi privasi iklan"
+  "settingsAdPrivacyEntry": "Opsi privasi iklan",
+  "a11yCycleRing": "Hari ke-{day} dari sekitar {length}",
+  "a11yChartSummary": "Grafik dengan {count} entri, dari {min} sampai {max}",
+  "a11yPhaseBar": "Kemajuan siklus: hari ke-{day} dari sekitar {length}",
+  "a11yFrequencyItem": "{label}: {count} kali"
 }

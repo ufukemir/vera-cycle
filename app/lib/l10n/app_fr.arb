@@ -403,5 +403,9 @@
   "homeEmptyTitle": "Commençons par tes dernières règles",
   "homeEmptyBody": "Appuie sur le bouton ci-dessus le jour où tes règles commencent. Après deux cycles complets, Vera pourra estimer — d'ici là, elle ne fera pas semblant de savoir.",
   "homeEmptyBackdate": "Elles ont déjà commencé avant",
-  "settingsAdPrivacyEntry": "Options de confidentialité des publicités"
+  "settingsAdPrivacyEntry": "Options de confidentialité des publicités",
+  "a11yCycleRing": "Jour {day} d'un cycle d'environ {length}",
+  "a11yChartSummary": "Graphique de {count} entrées, de {min} à {max}",
+  "a11yPhaseBar": "Progression du cycle : jour {day} sur environ {length}",
+  "a11yFrequencyItem": "{label} : {count} fois"
 }

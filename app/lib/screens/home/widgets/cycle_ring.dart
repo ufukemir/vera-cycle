@@ -2,6 +2,8 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import '../../../l10n/app_localizations.dart';
+
 /// A circular progress ring showing how far through the estimated cycle
 /// length the current day sits, with a warm rose→terracotta gradient sweep.
 ///
@@ -70,7 +72,15 @@ class _CycleRingState extends State<CycleRing> with SingleTickerProviderStateMix
         ? 0.0
         : (widget.cycleDay! / widget.cycleLength).clamp(0.0, 1.0);
 
-    return AnimatedBuilder(
+    final l10n = AppLocalizations.of(context)!;
+    // The arc carries no information a screen reader can use, so the
+    // whole thing is announced as one sentence instead.
+    return Semantics(
+      container: true,
+      label: widget.cycleDay == null
+          ? null
+          : l10n.a11yCycleRing(widget.cycleDay!, widget.cycleLength),
+      child: AnimatedBuilder(
       animation: _reveal,
       builder: (context, _) {
         return CustomPaint(
@@ -86,6 +96,7 @@ class _CycleRingState extends State<CycleRing> with SingleTickerProviderStateMix
           ),
         );
       },
+      ),
     );
   }
 }

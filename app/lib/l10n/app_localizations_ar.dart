@@ -1329,4 +1329,24 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get settingsAdPrivacyEntry => 'خيارات خصوصية الإعلانات';
+
+  @override
+  String a11yCycleRing(int day, int length) {
+    return 'اليوم $day من دورة مدتها نحو $length يومًا';
+  }
+
+  @override
+  String a11yChartSummary(int count, String min, String max) {
+    return 'رسم بياني به $count إدخالات، من $min إلى $max';
+  }
+
+  @override
+  String a11yPhaseBar(int day, int length) {
+    return 'تقدّم الدورة: اليوم $day من نحو $length';
+  }
+
+  @override
+  String a11yFrequencyItem(String label, int count) {
+    return '$label: $count مرات';
+  }
 }

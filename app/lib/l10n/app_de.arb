@@ -403,5 +403,9 @@
   "homeEmptyTitle": "Beginnen wir mit deiner letzten Periode",
   "homeEmptyBody": "Tippe am Tag deines Periodenbeginns auf den Button oben. Nach zwei vollständigen Zyklen kann Vera schätzen — bis dahin tut sie nicht so, als wüsste sie es.",
   "homeEmptyBackdate": "Sie hat schon früher begonnen",
-  "settingsAdPrivacyEntry": "Datenschutzoptionen für Werbung"
+  "settingsAdPrivacyEntry": "Datenschutzoptionen für Werbung",
+  "a11yCycleRing": "Tag {day} von etwa {length}",
+  "a11yChartSummary": "Diagramm mit {count} Einträgen, von {min} bis {max}",
+  "a11yPhaseBar": "Zyklusfortschritt: Tag {day} von etwa {length}",
+  "a11yFrequencyItem": "{label}: {count} Mal"
 }

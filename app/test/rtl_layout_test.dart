@@ -82,6 +82,24 @@ void main() {
     );
   });
 
+  testWidgets('charts and the ring expose labels to screen readers',
+      (tester) async {
+    final handle = tester.ensureSemantics();
+    await tester.pumpWidget(
+        await _wrap(const HomeScreen(), locale: const Locale('en')));
+    for (var i = 0; i < 6; i++) {
+      await tester.pump(const Duration(milliseconds: 200));
+    }
+
+    // The ring and phase bar are painted, so without these labels a
+    // screen-reader user gets nothing from them at all.
+    expect(find.bySemanticsLabel(RegExp(r'Cycle day \d+ of about')),
+        findsWidgets);
+    expect(find.bySemanticsLabel(RegExp(r'Cycle progress: day \d+')),
+        findsOneWidget);
+    handle.dispose();
+  });
+
   testWidgets('home survives a large text scale', (tester) async {
     tester.platformDispatcher.textScaleFactorTestValue = 1.6;
     addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);

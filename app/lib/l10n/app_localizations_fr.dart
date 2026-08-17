@@ -1353,4 +1353,24 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get settingsAdPrivacyEntry =>
       'Options de confidentialité des publicités';
+
+  @override
+  String a11yCycleRing(int day, int length) {
+    return 'Jour $day d\'un cycle d\'environ $length';
+  }
+
+  @override
+  String a11yChartSummary(int count, String min, String max) {
+    return 'Graphique de $count entrées, de $min à $max';
+  }
+
+  @override
+  String a11yPhaseBar(int day, int length) {
+    return 'Progression du cycle : jour $day sur environ $length';
+  }
+
+  @override
+  String a11yFrequencyItem(String label, int count) {
+    return '$label : $count fois';
+  }
 }

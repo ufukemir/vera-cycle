@@ -510,5 +510,52 @@
   "homeEmptyTitle": "Let's start with your last period",
   "homeEmptyBody": "Tap the button above on the day your period starts. After two full cycles Vera can start estimating — until then it won't pretend to know.",
   "homeEmptyBackdate": "It already started earlier",
-  "settingsAdPrivacyEntry": "Ad privacy options"
+  "settingsAdPrivacyEntry": "Ad privacy options",
+  "a11yCycleRing": "Cycle day {day} of about {length}",
+  "@a11yCycleRing": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      },
+      "length": {
+        "type": "int"
+      }
+    }
+  },
+  "a11yChartSummary": "Chart with {count} entries, from {min} to {max}",
+  "@a11yChartSummary": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yPhaseBar": "Cycle progress: day {day} of about {length}",
+  "@a11yPhaseBar": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      },
+      "length": {
+        "type": "int"
+      }
+    }
+  },
+  "a11yFrequencyItem": "{label}: {count} times",
+  "@a11yFrequencyItem": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

@@ -403,5 +403,9 @@
   "homeEmptyTitle": "Empecemos por tu último periodo",
   "homeEmptyBody": "Toca el botón de arriba el día que empiece tu periodo. Tras dos ciclos completos Vera podrá estimar — hasta entonces no fingirá saberlo.",
   "homeEmptyBackdate": "Ya empezó antes",
-  "settingsAdPrivacyEntry": "Opciones de privacidad de anuncios"
+  "settingsAdPrivacyEntry": "Opciones de privacidad de anuncios",
+  "a11yCycleRing": "Día {day} de un ciclo de unos {length}",
+  "a11yChartSummary": "Gráfico con {count} registros, de {min} a {max}",
+  "a11yPhaseBar": "Progreso del ciclo: día {day} de unos {length}",
+  "a11yFrequencyItem": "{label}: {count} veces"
 }

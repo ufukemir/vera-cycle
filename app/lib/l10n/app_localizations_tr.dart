@@ -1337,4 +1337,24 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get settingsAdPrivacyEntry => 'Reklam gizlilik seçenekleri';
+
+  @override
+  String a11yCycleRing(int day, int length) {
+    return 'Yaklaşık $length günlük döngünün $day. günü';
+  }
+
+  @override
+  String a11yChartSummary(int count, String min, String max) {
+    return '$count kayıtlı grafik, $min ile $max arasında';
+  }
+
+  @override
+  String a11yPhaseBar(int day, int length) {
+    return 'Döngü ilerlemesi: yaklaşık $length günün $day. günü';
+  }
+
+  @override
+  String a11yFrequencyItem(String label, int count) {
+    return '$label: $count kez';
+  }
 }

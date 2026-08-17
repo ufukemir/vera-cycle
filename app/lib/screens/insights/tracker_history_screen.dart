@@ -242,16 +242,32 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
     ];
     if (points.isEmpty) return [_empty(l10n)];
     final fmt = DateFormat.MMMd(Localizations.localeOf(context).toString());
+    final values = [for (final p in points) p.value];
+    final lo = values.reduce((a, b) => a < b ? a : b);
+    final hi = values.reduce((a, b) => a > b ? a : b);
+
     return [
-      SizedBox(
-        height: 160,
-        child: CustomPaint(
-          size: const Size(double.infinity, 160),
-          painter: _SeriesPainter(
-            values: [for (final p in points) p.value],
-            color: Theme.of(context).colorScheme.primary,
-            trackColor: Theme.of(context).colorScheme.outlineVariant,
-            bars: bars,
+      // A painted chart is invisible to a screen reader, so it gets a
+      // spoken summary and the per-entry list below carries the detail.
+      Semantics(
+        container: true,
+        label: l10n.a11yChartSummary(
+          values.length,
+          '${lo.toStringAsFixed(decimals)} $unit',
+          '${hi.toStringAsFixed(decimals)} $unit',
+        ),
+        child: ExcludeSemantics(
+          child: SizedBox(
+            height: 160,
+            child: CustomPaint(
+              size: const Size(double.infinity, 160),
+              painter: _SeriesPainter(
+                values: values,
+                color: Theme.of(context).colorScheme.primary,
+                trackColor: Theme.of(context).colorScheme.outlineVariant,
+                bars: bars,
+              ),
+            ),
           ),
         ),
       ),
@@ -279,7 +295,10 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
       for (final entry in sorted)
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 6),
-          child: Row(
+          child: Semantics(
+            container: true,
+            label: l10n.a11yFrequencyItem(entry.key, entry.value),
+            child: Row(
             children: [
               SizedBox(
                   width: 140,
@@ -302,6 +321,7 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
               Text('${entry.value}×',
                   style: Theme.of(context).textTheme.titleSmall),
             ],
+            ),
           ),
         ),
     ];

@@ -2547,6 +2547,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Ad privacy options'**
   String get settingsAdPrivacyEntry;
+
+  /// No description provided for @a11yCycleRing.
+  ///
+  /// In en, this message translates to:
+  /// **'Cycle day {day} of about {length}'**
+  String a11yCycleRing(int day, int length);
+
+  /// No description provided for @a11yChartSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Chart with {count} entries, from {min} to {max}'**
+  String a11yChartSummary(int count, String min, String max);
+
+  /// No description provided for @a11yPhaseBar.
+  ///
+  /// In en, this message translates to:
+  /// **'Cycle progress: day {day} of about {length}'**
+  String a11yPhaseBar(int day, int length);
+
+  /// No description provided for @a11yFrequencyItem.
+  ///
+  /// In en, this message translates to:
+  /// **'{label}: {count} times'**
+  String a11yFrequencyItem(String label, int count);
 }
 
 class _AppLocalizationsDelegate

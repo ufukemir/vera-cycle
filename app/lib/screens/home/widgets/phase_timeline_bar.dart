@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../l10n/app_localizations.dart';
 import '../../../models/prediction.dart';
 import '../../../util/day.dart';
 
@@ -42,7 +43,10 @@ class PhaseTimelineBar extends StatelessWidget {
           daysBetween(status.currentCycleStart!, status.fertileWindowEnd!) + 1;
     }
 
-    return SizedBox(
+    return Semantics(
+      container: true,
+      label: AppLocalizations.of(context)!.a11yPhaseBar(day, cycleLength),
+      child: SizedBox(
       height: 26,
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -111,6 +115,7 @@ class PhaseTimelineBar extends StatelessWidget {
             ],
           );
         },
+      ),
       ),
     );
   }

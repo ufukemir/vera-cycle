@@ -1329,4 +1329,24 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get settingsAdPrivacyEntry => 'Ad privacy options';
+
+  @override
+  String a11yCycleRing(int day, int length) {
+    return 'Cycle day $day of about $length';
+  }
+
+  @override
+  String a11yChartSummary(int count, String min, String max) {
+    return 'Chart with $count entries, from $min to $max';
+  }
+
+  @override
+  String a11yPhaseBar(int day, int length) {
+    return 'Cycle progress: day $day of about $length';
+  }
+
+  @override
+  String a11yFrequencyItem(String label, int count) {
+    return '$label: $count times';
+  }
 }

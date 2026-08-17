@@ -403,5 +403,9 @@
   "homeEmptyTitle": "Son reglinle başlayalım",
   "homeEmptyBody": "Reglin başladığı gün yukarıdaki butona dokun. İki tam döngüden sonra Vera tahmin etmeye başlayabilir — o zamana kadar biliyormuş gibi yapmaz.",
   "homeEmptyBackdate": "Zaten daha önce başladı",
-  "settingsAdPrivacyEntry": "Reklam gizlilik seçenekleri"
+  "settingsAdPrivacyEntry": "Reklam gizlilik seçenekleri",
+  "a11yCycleRing": "Yaklaşık {length} günlük döngünün {day}. günü",
+  "a11yChartSummary": "{count} kayıtlı grafik, {min} ile {max} arasında",
+  "a11yPhaseBar": "Döngü ilerlemesi: yaklaşık {length} günün {day}. günü",
+  "a11yFrequencyItem": "{label}: {count} kez"
 }

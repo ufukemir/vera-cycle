@@ -127,15 +127,18 @@ class _MascotAvatarState extends State<MascotAvatar>
   @override
   Widget build(BuildContext context) {
     if (widget.mascot == Mascot.none) return const SizedBox.shrink();
-    return AnimatedBuilder(
+    // Decorative only — nothing for a screen reader to read out.
+    return ExcludeSemantics(
+      child: AnimatedBuilder(
       animation: _controller,
       builder: (context, child) => Transform.translate(
         offset: Offset(0, -3 * Curves.easeInOut.transform(_controller.value)),
         child: child,
       ),
-      child: CustomPaint(
-        size: Size.square(widget.size),
-        painter: _MascotPainter(widget.mascot),
+        child: CustomPaint(
+          size: Size.square(widget.size),
+          painter: _MascotPainter(widget.mascot),
+        ),
       ),
     );
   }

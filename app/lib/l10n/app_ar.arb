@@ -403,5 +403,9 @@
   "homeEmptyTitle": "لنبدأ بآخر دورة لك",
   "homeEmptyBody": "اضغطي الزر أعلاه في اليوم الذي تبدأ فيه دورتك. بعد دورتين كاملتين يمكن لفيرا أن تبدأ التقدير — وحتى ذلك الحين لن تتظاهر بالمعرفة.",
   "homeEmptyBackdate": "لقد بدأت بالفعل قبل ذلك",
-  "settingsAdPrivacyEntry": "خيارات خصوصية الإعلانات"
+  "settingsAdPrivacyEntry": "خيارات خصوصية الإعلانات",
+  "a11yCycleRing": "اليوم {day} من دورة مدتها نحو {length} يومًا",
+  "a11yChartSummary": "رسم بياني به {count} إدخالات، من {min} إلى {max}",
+  "a11yPhaseBar": "تقدّم الدورة: اليوم {day} من نحو {length}",
+  "a11yFrequencyItem": "{label}: {count} مرات"
 }
