@@ -154,7 +154,10 @@ class _OnboardingFlowState extends State<OnboardingFlow> {
         );
       case _Step.cramps:
         return ThreeChoiceQuestionStep(
-          photoAsset: 'assets/photos/joyful_laugh.jpg',
+          // A calm resting photo, not a laughing one: this step asks about
+          // pain, and celebratory imagery over that question reads as
+          // tone-deaf.
+          photoAsset: 'assets/photos/tea_blanket_rest.jpg',
           title: l10n.onboardingCrampsTitle,
           body: l10n.onboardingCrampsBody,
           onAnswer: () => setState(() => _step = _Step.notifications),

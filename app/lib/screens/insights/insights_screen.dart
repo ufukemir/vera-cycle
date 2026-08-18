@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../../services/cycle_insights.dart';
 import '../../state/cycle_controller.dart';
+import '../../widgets/premium_lock.dart';
+import 'advanced_insights_screen.dart';
 import 'cycle_history_screen.dart';
 import 'tracker_history_screen.dart';
 import 'widgets/phase_tips_section.dart';
@@ -71,6 +73,24 @@ class InsightsScreen extends StatelessWidget {
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(
                     builder: (_) => const CycleHistoryScreen())),
+              ),
+            ),
+            const SizedBox(height: 12),
+            // Premium sits next to the free stats rather than on top of
+            // them: the basic averages above stay free forever, and this
+            // adds a second, deeper view instead of locking the first.
+            PremiumLock(
+              title: l10n.advancedInsightsEntry,
+              description: l10n.premiumBenefitAdvancedInsights,
+              child: Card(
+                child: ListTile(
+                  leading: Icon(Icons.insights_outlined,
+                      color: Theme.of(context).colorScheme.primary),
+                  title: Text(l10n.advancedInsightsEntry),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => const AdvancedInsightsScreen())),
+                ),
               ),
             ),
             const SizedBox(height: 28),

@@ -68,6 +68,7 @@ class MainApp extends StatelessWidget {
         builder: (context, prefs, _) {
           return MaterialApp(
             onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
+            debugShowCheckedModeBanner: false,
             theme: buildAppTheme(),
             darkTheme: buildDarkAppTheme(),
             themeMode: prefs.themeMode,

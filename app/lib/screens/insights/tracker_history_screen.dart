@@ -136,15 +136,15 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
         );
       case TrackerType.weight:
         return _numericSeries(l10n, logs, (log) => log.weightKg,
-            unit: 'kg', decimals: 1);
+            unit: l10n.unitKilograms, decimals: 1);
       case TrackerType.sleep:
         return _numericSeries(
             l10n, logs, (log) => log.sleepMinutes?.toDouble(),
-            unit: 'min', decimals: 0, bars: true);
+            unit: l10n.unitMinutesShort, decimals: 0, bars: true);
       case TrackerType.water:
         return _numericSeries(
             l10n, logs, (log) => log.waterIntakeMl?.toDouble(),
-            unit: 'ml', decimals: 0, bars: true);
+            unit: l10n.unitMilliliters, decimals: 0, bars: true);
       case TrackerType.symptoms:
         final labels = <Symptom, String>{
           Symptom.cramps: l10n.symptomCramps,

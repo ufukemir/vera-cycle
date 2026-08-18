@@ -97,7 +97,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get onboardingPrivacyBody =>
-      'Deine Zyklusdaten bleiben verschlüsselt nur auf diesem Gerät. Kein Konto, keine Cloud-Synchronisierung — nichts, was du erfasst, wird hochgeladen. Die kostenlose Version zeigt Werbung, die das Internet nutzt, aber deine Gesundheitsdaten nie erhält.';
+      'Deine Zyklusdaten bleiben verschlüsselt nur auf diesem Gerät. Kein Konto, keine Cloud-Synchronisierung — nichts, was du erfasst, wird hochgeladen. Der Schlüssel liegt in der sicheren Hardware deines Handys, und du kannst alles jederzeit exportieren oder löschen.';
 
   @override
   String get onboardingLastPeriodTitle =>
@@ -1150,11 +1150,11 @@ class AppLocalizationsDe extends AppLocalizations {
   String get premiumTitle => 'Vera Premium';
 
   @override
-  String get premiumHeadline => 'Ein werbefreies Vera';
+  String get premiumHeadline => 'Vera Premium';
 
   @override
   String get premiumSubhead =>
-      'Alle Tracking-Funktionen bleiben für immer kostenlos. Premium entfernt lediglich die Werbung und unterstützt die Entwicklung.';
+      'Alle Tracking-Funktionen bleiben für immer kostenlos — dein Verlauf wird nie weggesperrt. Premium ergänzt eigene Tracker, tiefere Auswertungen, eigene Erinnerungen und zusätzliche Looks und entfernt die Werbung.';
 
   @override
   String get premiumBenefitNoAds => 'Keine Werbung, nirgendwo in der App';
@@ -1162,10 +1162,6 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get premiumBenefitSupport =>
       'Unterstützt eine unabhängige, datenschutzorientierte App';
-
-  @override
-  String get premiumBenefitFuture =>
-      'Enthält künftige Premium-Komfortfunktionen';
 
   @override
   String get premiumMonthly => 'Monatlich';
@@ -1251,7 +1247,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get partnerSummaryHeader => 'Zyklus-Zusammenfassung von Vera';
 
   @override
-  String get settingsHomeThemeLabel => 'Startseiten-Design';
+  String get settingsHomeThemeLabel => 'Startbildschirm-Hintergrund';
 
   @override
   String get homeThemeWheat => 'Weizen';
@@ -1325,7 +1321,13 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String cycleHistoryPeriodLength(int days) {
-    return '$days Tage Blutung';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Periode dauerte $days Tage',
+      one: 'Periode dauerte 1 Tag',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1444,4 +1446,265 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get diagnosticsClear => 'Löschen';
+
+  @override
+  String get unitHoursShort => 'Std';
+
+  @override
+  String get unitMinutesShort => 'Min';
+
+  @override
+  String get unitHoursLong => 'Stunden';
+
+  @override
+  String get unitMinutesLong => 'Minuten';
+
+  @override
+  String get unitMilliliters => 'ml';
+
+  @override
+  String get unitKilograms => 'kg';
+
+  @override
+  String get calendarJumpTitle => 'Zu Monat springen';
+
+  @override
+  String get calendarJumpYearLabel => 'Jahr';
+
+  @override
+  String get settingsAdPrivacyUnavailable =>
+      'In deiner Region werden keine Auswahlmöglichkeiten zur Werbepersonalisierung angeboten — die Werbung hier ist ohnehin nicht personalisiert.';
+
+  @override
+  String get settingsGroupAppearance => 'Darstellung';
+
+  @override
+  String get settingsGroupTracking => 'Tracking-Einstellungen';
+
+  @override
+  String get dayLogCustomTagsLabel => 'Meine eigenen Tracker';
+
+  @override
+  String get customTagAddButton => 'Tracker hinzufügen';
+
+  @override
+  String get customTagDialogTitle => 'Neuer Tracker';
+
+  @override
+  String get customTagDialogHint => 'z. B. Migräne, Sport, Schlaflosigkeit';
+
+  @override
+  String get customTagManageEntry => 'Meine Tracker verwalten';
+
+  @override
+  String get customTagRenameTitle => 'Tracker umbenennen';
+
+  @override
+  String get customTagDeleteTitle => 'Diesen Tracker löschen?';
+
+  @override
+  String get customTagDeleteBody =>
+      'Er wird von jedem Tag entfernt, an dem du ihn genutzt hast. Deine übrigen Einträge bleiben unverändert.';
+
+  @override
+  String get customTagEmpty => 'Noch keine eigenen Tracker.';
+
+  @override
+  String get premiumLockedTitle => 'Premium-Funktion';
+
+  @override
+  String get premiumLockedAction => 'Premium ansehen';
+
+  @override
+  String get premiumBenefitCustomTrackers =>
+      'Verfolge alles, was du willst — in deinen Worten';
+
+  @override
+  String get premiumBenefitAdvancedInsights =>
+      'Erweiterte Auswertungen: was wann passiert';
+
+  @override
+  String get premiumBenefitPersonalisation =>
+      'Zusätzliche Hintergründe und Begleiter';
+
+  @override
+  String get premiumBenefitAdvancedReminders =>
+      'Erinnerungen nach deinem eigenen Rhythmus';
+
+  @override
+  String get advancedInsightsTitle => 'Erweiterte Auswertungen';
+
+  @override
+  String get advancedInsightsEntry => 'Erweiterte Auswertungen';
+
+  @override
+  String get advancedInsightsNotEnough =>
+      'Erfasse drei vollständige Zyklen, dann erscheinen deine Muster hier. Bei weniger wäre jedes „Muster\" reiner Zufall.';
+
+  @override
+  String get advancedInsightsPatternsTitle =>
+      'Wann etwas typischerweise auftritt';
+
+  @override
+  String advancedInsightsPatternLine(String label, String segment) {
+    return '$label — meist $segment';
+  }
+
+  @override
+  String advancedInsightsPatternDetail(int count, int day) {
+    return '$count Tage erfasst, etwa an Zyklustag $day';
+  }
+
+  @override
+  String advancedInsightsNoPattern(String label) {
+    return '$label — noch kein klarer Zeitpunkt';
+  }
+
+  @override
+  String get advancedInsightsTrendTitle => 'Zykluslänge im Verlauf';
+
+  @override
+  String advancedInsightsDriftLonger(String days, String cycles) {
+    return 'Verglichen mit deinen ersten $cycles Zyklen sind deine letzten $cycles etwa $days Tage länger.';
+  }
+
+  @override
+  String advancedInsightsDriftShorter(String days, String cycles) {
+    return 'Verglichen mit deinen ersten $cycles Zyklen sind deine letzten $cycles etwa $days Tage kürzer.';
+  }
+
+  @override
+  String advancedInsightsDriftStable(String cycles) {
+    return 'Verglichen mit deinen ersten $cycles Zyklen und deinen letzten $cycles ist deine Zykluslänge etwa gleich geblieben.';
+  }
+
+  @override
+  String get advancedInsightsDriftNotEnough =>
+      'Sobald du sechs vollständige Zyklen hast, können wir deine frühesten mit deinen neuesten vergleichen und sehen, ob sich deine Zykluslänge verändert.';
+
+  @override
+  String get advancedInsightsMoodTitle => 'Stimmung nach Zyklusabschnitt';
+
+  @override
+  String get advancedInsightsDisclaimer =>
+      'Das sind Zählungen dessen, was du erfasst hast — mehr nicht. Keine Diagnose, und ein Muster hier ist keine Ursache.';
+
+  @override
+  String get segmentPeriod => 'während deiner Periode';
+
+  @override
+  String get segmentAfterPeriod => 'nach deiner Periode';
+
+  @override
+  String get segmentMidCycle => 'in der Zyklusmitte';
+
+  @override
+  String get segmentBeforePeriod => 'vor deiner Periode';
+
+  @override
+  String get customRemindersEntry => 'Meine eigenen Erinnerungen';
+
+  @override
+  String get customRemindersTitle => 'Meine eigenen Erinnerungen';
+
+  @override
+  String get customRemindersEmpty => 'Noch keine eigenen Erinnerungen.';
+
+  @override
+  String get customRemindersAdd => 'Erinnerung hinzufügen';
+
+  @override
+  String get customReminderLabelHint => 'z. B. Pille nehmen, Wasser trinken';
+
+  @override
+  String get customReminderLockScreenNote =>
+      'Der Text erscheint auf deinem Sperrbildschirm — formuliere ihn so privat, wie du möchtest.';
+
+  @override
+  String get customReminderDelete => 'Erinnerung löschen';
+
+  @override
+  String get homeThemeDusk => 'Dämmerung';
+
+  @override
+  String get homeThemeMeadow => 'Wiese';
+
+  @override
+  String get homeThemePetal => 'Blütenblatt';
+
+  @override
+  String get homeThemeBloom => 'Blüte';
+
+  @override
+  String get mascotStar => 'Stern';
+
+  @override
+  String get mascotLeaf => 'Blatt';
+
+  @override
+  String get tipDetailWhatsHappening => 'Was gerade in deinem Körper passiert';
+
+  @override
+  String get tipDetailDisclaimer =>
+      'Das sind allgemeine Informationen, keine persönliche medizinische Beratung. Jeder Körper reagiert anders, und wie du dich tatsächlich fühlst, zählt mehr als alles hier Vorgeschlagene. Wenn dich etwas beunruhigt, sprich mit einer Ärztin oder einem Arzt.';
+
+  @override
+  String get phaseExplainerMenstrual =>
+      'Du blutest, weil sich die Gebärmutterschleimhaut ablöst. Östrogen und Progesteron sind auf dem tiefsten Stand des Zyklus — deshalb fühlen sich viele in den ersten Tagen müder und nach innen gekehrt. Krämpfe entstehen durch das Zusammenziehen der Gebärmutter. Mit der Blutung verlierst du außerdem Eisen, was einen Teil der Erschöpfung erklärt.';
+
+  @override
+  String get phaseExplainerFollicular =>
+      'Nach dem Ende der Blutung steigt Östrogen wieder an. Die meisten merken, wie Energie, Stimmung und Ausdauer zurückkommen. In den Eierstöcken reifen Follikel heran; der Körper bereitet den nächsten Eisprung vor.';
+
+  @override
+  String get phaseExplainerFertile =>
+      'Östrogen nähert sich dem Höhepunkt, und der Eisprung wird um diese Tage erwartet. Der Zervixschleim wird typischerweise klar und gleitfähig, manche bemerken mehr Lust, manche ein kurzes Ziehen auf einer Seite. Die Energie ist oft am höchsten im ganzen Zyklus.';
+
+  @override
+  String get phaseExplainerLuteal =>
+      'Nach dem Eisprung steigt Progesteron und fällt vor der Periode wieder deutlich ab. Dieser Abfall kann PMS-Symptome auslösen: Blähbauch, Spannen in der Brust, Appetitveränderungen, unruhigen Schlaf und Stimmungsschwankungen. Deine Körpertemperatur liegt etwas höher.';
+
+  @override
+  String get phaseExplainerUnknown =>
+      'Es ist noch nicht genug erfasst, um zu sagen, in welcher Phase du bist. Vera sagt das lieber, als eine Phase zu erfinden. Nach ein paar erfassten Zyklen füllt sich dieser Abschnitt mit deinen eigenen Daten — bis dahin sind die Vorschläge unten allgemein gültig.';
+
+  @override
+  String get tipFitnessDetailMenstrual =>
+      'Hartes Training passt in den ersten Tagen für die meisten nicht, und das ist keine Frage der Disziplin — deine Energie ist tatsächlich niedriger. Spazierengehen, sanftes Dehnen, ruhiges Yoga und Atemübungen fördern die Durchblutung und können Krämpfe abmildern. Wenn es dir gut geht, spricht nichts gegen intensive Einheiten: Blutung ist kein Grund, mit Sport aufzuhören. Ein praktischer Hinweis: lange, fordernde Einheiten an starken Tagen können die Müdigkeit verstärken — richte dich danach, wie sich dein Körper anfühlt.';
+
+  @override
+  String get tipFitnessDetailFollicular =>
+      'Mit steigendem Östrogen fühlen sich die meisten kräftiger und belastbarer; das ist meist der beste Abschnitt im Zyklus, um etwas Neues zu beginnen, Gewicht zu erhöhen oder das Tempo anzuziehen. Auch die Muskelregeneration läuft hier vergleichsweise gut. Steigere trotzdem schrittweise: viel Energie heißt nicht null Verletzungsrisiko.';
+
+  @override
+  String get tipFitnessDetailFertile =>
+      'Energie und Motivation sind meist am höchsten, fordernde Einheiten passen also gut. Bei manchen sind die Gelenke rund um den Eisprung etwas lockerer — bei Sportarten mit abrupten Richtungswechseln lohnt sich ein längeres Aufwärmen. Ein kurzes Ziehen auf einer Bauchseite ist häufig; ist es stark oder hält es an, ruh dich aus und lass es ärztlich abklären.';
+
+  @override
+  String get tipFitnessDetailLuteal =>
+      'Vor der Periode kann die Energie sinken, der Puls bei gleicher Belastung höher liegen und die Erholung länger dauern. Das ist eine erwartbare Schwankung, kein Rückschritt. Moderate Einheiten, etwas leichteres Krafttraining und Spaziergänge sind hier meist tragfähiger. Bei Blähbauch und Spannen in der Brust machen ein guter Sport-BH und ein längeres Aufwärmen einen spürbaren Unterschied.';
+
+  @override
+  String get tipFitnessDetailUnknown =>
+      'Auch ohne bekannte Phase hilft Bewegung immer: moderate Aktivität an den meisten Tagen der Woche bringt mehr als gelegentliche sehr harte Einheiten. Richte dich danach, wie du dich fühlst — an müden Tagen zählt auch ein Spaziergang. Nach ein paar erfassten Zyklen siehst du hier phasenspezifische Vorschläge.';
+
+  @override
+  String get tipNutritionDetailMenstrual =>
+      'Mit der Blutung verlierst du Eisen; rotes Fleisch, Linsen, Kichererbsen, dunkles Blattgemüse und Melasse helfen, es zu ersetzen. Pflanzliches Eisen wird zusammen mit Vitamin C deutlich besser aufgenommen — Zitrone über das Linsengericht ist die praktischste Form davon. Tee und Kaffee zur Mahlzeit senken die Eisenaufnahme; eine Stunde Abstand genügt. Viel Wasser kann Müdigkeit und Kopfschmerzen während der Blutung lindern.';
+
+  @override
+  String get tipNutritionDetailFollicular =>
+      'Während sich die Energie erholt, ist der Körper im Aufbaumodus: genug Eiweiß, Vollkorn und Gemüse unterstützen das. Es ist auch sinnvoll, die Eisenspeicher nach der Blutung weiter aufzufüllen. Mahlzeiten nicht auszulassen fällt in dieser Phase meist leichter — und du gehst ausgeglichener in die Appetitschwankungen der nächsten.';
+
+  @override
+  String get tipNutritionDetailFertile =>
+      'Eine spezielle Ernährung ist hier nicht nötig; ausgewogene Mahlzeiten und genug Wasser bringen am meisten. Manche fühlen sich aufgebläht, das ist meist hormonell und vorübergehend. Wenn du eine Schwangerschaft planst, ist das ein guter Zeitpunkt, ärztlich nach Folsäure zu fragen — aber das ist ein Gespräch dort, kein Rat, den eine App geben sollte.';
+
+  @override
+  String get tipNutritionDetailLuteal =>
+      'Mehr Appetit und Lust auf Süßes bei steigendem Progesteron sind sehr häufig; das ist eine hormonelle Verschiebung, kein Willensproblem. Eiweiß und Ballaststoffe in den Mahlzeiten halten den Blutzucker stabiler und mildern das Verlangen. Weniger Salz und mehr Wasser können den Blähbauch lindern. Magnesiumreiche Lebensmittel (Mandeln, Walnüsse, dunkles Blattgemüse, Zartbitterschokolade) reduzieren bei manchen Krämpfe und Anspannung. Weniger Koffein hilft dem unruhigen Schlaf dieser Phase.';
+
+  @override
+  String get tipNutritionDetailUnknown =>
+      'Unabhängig von der Phase hilft dasselbe am meisten: regelmäßige Mahlzeiten, genug Eiweiß, viel Gemüse, genug Wasser und eisenreiche Lebensmittel. Da die Blutung Eisen kostet, reicht es, an diesen Tagen etwas mehr darauf zu achten. Nach ein paar erfassten Zyklen siehst du hier phasenspezifische Vorschläge.';
 }

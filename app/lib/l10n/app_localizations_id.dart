@@ -95,7 +95,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get onboardingPrivacyBody =>
-      'Data siklusmu hanya tersimpan di perangkat ini, terenkripsi. Tidak ada akun dan tidak ada sinkronisasi cloud — tidak ada yang kamu catat diunggah. Versi gratis menampilkan iklan yang memang memakai internet, tapi tidak pernah menerima data kesehatanmu.';
+      'Data siklusmu hanya tersimpan di perangkat ini, terenkripsi. Tidak ada akun dan tidak ada sinkronisasi cloud — tidak ada yang kamu catat diunggah. Kuncinya tersimpan di perangkat keras aman ponselmu, dan kamu bisa mengekspor atau menghapus semuanya kapan saja.';
 
   @override
   String get onboardingLastPeriodTitle => 'Kapan haid terakhirmu mulai?';
@@ -1142,11 +1142,11 @@ class AppLocalizationsId extends AppLocalizations {
   String get premiumTitle => 'Vera Premium';
 
   @override
-  String get premiumHeadline => 'Vera tanpa iklan';
+  String get premiumHeadline => 'Vera Premium';
 
   @override
   String get premiumSubhead =>
-      'Semua fitur pelacakan tetap gratis selamanya. Premium hanya menghapus iklan dan mendukung pengembangan.';
+      'Semua fitur pelacakan tetap gratis selamanya — riwayatmu tidak pernah dikunci. Premium menambahkan pelacak milikmu, wawasan lebih dalam, pengingat sendiri, dan tampilan ekstra, serta menghapus iklan.';
 
   @override
   String get premiumBenefitNoAds => 'Tanpa iklan di mana pun dalam aplikasi';
@@ -1154,10 +1154,6 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get premiumBenefitSupport =>
       'Mendukung aplikasi independen yang mengutamakan privasi';
-
-  @override
-  String get premiumBenefitFuture =>
-      'Termasuk fitur kenyamanan Premium mendatang';
 
   @override
   String get premiumMonthly => 'Bulanan';
@@ -1243,7 +1239,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get partnerSummaryHeader => 'Ringkasan siklus dari Vera';
 
   @override
-  String get settingsHomeThemeLabel => 'Tema beranda';
+  String get settingsHomeThemeLabel => 'Latar beranda';
 
   @override
   String get homeThemeWheat => 'Gandum';
@@ -1317,7 +1313,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String cycleHistoryPeriodLength(int days) {
-    return '$days hari pendarahan';
+    return 'Haid berlangsung $days hari';
   }
 
   @override
@@ -1435,4 +1431,263 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get diagnosticsClear => 'Hapus';
+
+  @override
+  String get unitHoursShort => 'j';
+
+  @override
+  String get unitMinutesShort => 'mnt';
+
+  @override
+  String get unitHoursLong => 'jam';
+
+  @override
+  String get unitMinutesLong => 'menit';
+
+  @override
+  String get unitMilliliters => 'ml';
+
+  @override
+  String get unitKilograms => 'kg';
+
+  @override
+  String get calendarJumpTitle => 'Lompat ke bulan';
+
+  @override
+  String get calendarJumpYearLabel => 'Tahun';
+
+  @override
+  String get settingsAdPrivacyUnavailable =>
+      'Pilihan personalisasi iklan tidak tersedia di wilayahmu — iklan di sini memang sudah tidak dipersonalisasi.';
+
+  @override
+  String get settingsGroupAppearance => 'Tampilan';
+
+  @override
+  String get settingsGroupTracking => 'Preferensi pelacakan';
+
+  @override
+  String get dayLogCustomTagsLabel => 'Pelacak milikku';
+
+  @override
+  String get customTagAddButton => 'Tambah pelacak';
+
+  @override
+  String get customTagDialogTitle => 'Pelacak baru';
+
+  @override
+  String get customTagDialogHint => 'mis. migrain, olahraga, susah tidur';
+
+  @override
+  String get customTagManageEntry => 'Kelola pelacakku';
+
+  @override
+  String get customTagRenameTitle => 'Ganti nama pelacak';
+
+  @override
+  String get customTagDeleteTitle => 'Hapus pelacak ini?';
+
+  @override
+  String get customTagDeleteBody =>
+      'Pelacak ini akan dihapus dari semua hari yang memakainya. Catatanmu yang lain tetap sama.';
+
+  @override
+  String get customTagEmpty => 'Belum ada pelacak milikmu.';
+
+  @override
+  String get premiumLockedTitle => 'Fitur Premium';
+
+  @override
+  String get premiumLockedAction => 'Lihat Premium';
+
+  @override
+  String get premiumBenefitCustomTrackers =>
+      'Lacak apa pun, dengan kata-katamu sendiri';
+
+  @override
+  String get premiumBenefitAdvancedInsights =>
+      'Wawasan lanjutan: apa yang biasa terjadi, dan kapan';
+
+  @override
+  String get premiumBenefitPersonalisation => 'Latar dan teman tambahan';
+
+  @override
+  String get premiumBenefitAdvancedReminders =>
+      'Pengingat sesuai ritmemu sendiri';
+
+  @override
+  String get advancedInsightsTitle => 'Wawasan lanjutan';
+
+  @override
+  String get advancedInsightsEntry => 'Wawasan lanjutan';
+
+  @override
+  String get advancedInsightsNotEnough =>
+      'Catat tiga siklus penuh, lalu polamu akan muncul di sini. Kurang dari itu, \"pola\" apa pun hanyalah kebetulan.';
+
+  @override
+  String get advancedInsightsPatternsTitle => 'Kapan sesuatu biasanya muncul';
+
+  @override
+  String advancedInsightsPatternLine(String label, String segment) {
+    return '$label — paling sering $segment';
+  }
+
+  @override
+  String advancedInsightsPatternDetail(int count, int day) {
+    return '$count hari tercatat, sekitar hari ke-$day siklusmu';
+  }
+
+  @override
+  String advancedInsightsNoPattern(String label) {
+    return '$label — belum ada waktu yang jelas';
+  }
+
+  @override
+  String get advancedInsightsTrendTitle => 'Panjang siklus dari waktu ke waktu';
+
+  @override
+  String advancedInsightsDriftLonger(String days, String cycles) {
+    return 'Membandingkan $cycles siklus pertamamu dengan $cycles siklus terakhir, yang terakhir kira-kira $days hari lebih panjang.';
+  }
+
+  @override
+  String advancedInsightsDriftShorter(String days, String cycles) {
+    return 'Membandingkan $cycles siklus pertamamu dengan $cycles siklus terakhir, yang terakhir kira-kira $days hari lebih pendek.';
+  }
+
+  @override
+  String advancedInsightsDriftStable(String cycles) {
+    return 'Membandingkan $cycles siklus pertamamu dengan $cycles siklus terakhir, panjang siklusmu kurang lebih tetap sama.';
+  }
+
+  @override
+  String get advancedInsightsDriftNotEnough =>
+      'Setelah kamu punya enam siklus penuh, kami bisa membandingkan siklus paling awal dengan yang terbaru untuk melihat apakah panjang siklusmu berubah.';
+
+  @override
+  String get advancedInsightsMoodTitle => 'Suasana hati per bagian siklus';
+
+  @override
+  String get advancedInsightsDisclaimer =>
+      'Ini hanya hitungan dari apa yang kamu catat. Bukan diagnosis, dan pola di sini bukan penyebab.';
+
+  @override
+  String get segmentPeriod => 'saat haid';
+
+  @override
+  String get segmentAfterPeriod => 'setelah haid';
+
+  @override
+  String get segmentMidCycle => 'pertengahan siklus';
+
+  @override
+  String get segmentBeforePeriod => 'sebelum haid';
+
+  @override
+  String get customRemindersEntry => 'Pengingat milikku';
+
+  @override
+  String get customRemindersTitle => 'Pengingat milikku';
+
+  @override
+  String get customRemindersEmpty => 'Belum ada pengingat milikmu.';
+
+  @override
+  String get customRemindersAdd => 'Tambah pengingat';
+
+  @override
+  String get customReminderLabelHint => 'mis. minum pil, minum air';
+
+  @override
+  String get customReminderLockScreenNote =>
+      'Teks pengingat tampil di layar kuncimu, jadi tulis seprivat yang kamu mau.';
+
+  @override
+  String get customReminderDelete => 'Hapus pengingat';
+
+  @override
+  String get homeThemeDusk => 'Senja';
+
+  @override
+  String get homeThemeMeadow => 'Padang';
+
+  @override
+  String get homeThemePetal => 'Kelopak';
+
+  @override
+  String get homeThemeBloom => 'Mekar';
+
+  @override
+  String get mascotStar => 'Bintang';
+
+  @override
+  String get mascotLeaf => 'Daun';
+
+  @override
+  String get tipDetailWhatsHappening => 'Apa yang sedang terjadi di tubuhmu';
+
+  @override
+  String get tipDetailDisclaimer =>
+      'Ini informasi umum, bukan saran medis pribadi. Setiap tubuh merespons berbeda, dan apa yang kamu rasakan lebih penting daripada saran mana pun di sini. Kalau ada yang mengkhawatirkanmu, bicaralah dengan tenaga kesehatan.';
+
+  @override
+  String get phaseExplainerMenstrual =>
+      'Kamu berdarah karena lapisan rahim luruh. Estrogen dan progesteron berada di titik terendah siklus, itulah sebabnya banyak orang merasa lebih lelah dan lebih menarik diri di hari-hari awal. Kram berasal dari kontraksi rahim. Pendarahan juga membuatmu kehilangan zat besi — ini menjelaskan sebagian rasa lelahnya.';
+
+  @override
+  String get phaseExplainerFollicular =>
+      'Setelah pendarahan berhenti, estrogen mulai naik lagi. Kebanyakan orang merasakan energi, suasana hati, dan daya tahannya pulih. Folikel sedang matang di ovarium; tubuh bersiap untuk ovulasi berikutnya.';
+
+  @override
+  String get phaseExplainerFertile =>
+      'Estrogen mendekati puncaknya dan ovulasi diperkirakan terjadi di sekitar hari-hari ini. Lendir serviks biasanya menjadi bening dan licin, sebagian orang merasakan gairah meningkat, sebagian merasakan nyeri singkat di satu sisi. Energi sering berada di titik tertinggi dalam siklus.';
+
+  @override
+  String get phaseExplainerLuteal =>
+      'Setelah ovulasi, progesteron naik lalu turun tajam menjelang haid. Penurunan itu bisa memicu gejala pramenstruasi: kembung, payudara nyeri, perubahan nafsu makan, tidur terganggu, dan suasana hati naik-turun. Suhu tubuhmu sedikit lebih tinggi.';
+
+  @override
+  String get phaseExplainerUnknown =>
+      'Catatanmu belum cukup untuk menentukan kamu sedang di fase mana. Vera lebih memilih mengatakannya daripada mengarang fase. Setelah kamu mencatat beberapa siklus, bagian ini akan terisi dengan datamu sendiri — sampai saat itu, saran di bawah berlaku kapan saja.';
+
+  @override
+  String get tipFitnessDetailMenstrual =>
+      'Latihan berat tidak cocok untuk kebanyakan orang di hari-hari awal, dan itu bukan soal disiplin — energimu memang sedang lebih rendah. Jalan kaki, peregangan ringan, yoga pemulihan, dan latihan napas melancarkan aliran darah dan bisa meredakan kram. Kalau kamu merasa baik, tidak ada alasan menghindari sesi berat: haid bukan alasan berhenti berolahraga. Satu catatan praktis: sesi panjang dan berat di hari deras bisa menambah lelah, jadi sesuaikan dengan yang tubuhmu rasakan.';
+
+  @override
+  String get tipFitnessDetailFollicular =>
+      'Saat estrogen naik, kebanyakan orang merasa lebih kuat dan lebih tahan; ini biasanya bagian terbaik siklus untuk memulai sesuatu yang baru, menambah beban, atau menaikkan tempo. Pemulihan otot juga relatif efisien di sini. Tetap tingkatkan bertahap: energi tinggi bukan berarti risiko cedera nol.';
+
+  @override
+  String get tipFitnessDetailFertile =>
+      'Energi dan motivasi biasanya di puncak, jadi sesi berat terasa pas. Pada sebagian orang sendi sedikit lebih longgar di sekitar ovulasi, jadi pemanasan lebih lama masuk akal untuk olahraga dengan perubahan arah mendadak. Nyeri singkat di satu sisi perut itu umum — tapi kalau berat atau berlanjut, istirahat dan periksakan.';
+
+  @override
+  String get tipFitnessDetailLuteal =>
+      'Menjelang haid, energi bisa turun, denyut jantung bisa lebih tinggi untuk usaha yang sama, dan pemulihan bisa lebih lama. Itu ayunan yang wajar, bukan kemunduran. Sesi sedang, latihan kekuatan versi sedikit lebih ringan, dan jalan kaki biasanya lebih berkelanjutan di sini. Kalau kembung dan payudara nyeri, bra yang menopang dan pemanasan lebih lama terasa bedanya.';
+
+  @override
+  String get tipFitnessDetailUnknown =>
+      'Meski fasemu belum diketahui, bergerak selalu membantu: aktivitas sedang yang tersebar di sebagian besar hari lebih baik daripada sesi sangat berat sesekali. Sesuaikan dengan perasaanmu — di hari lelah, jalan kaki pun dihitung. Setelah beberapa siklus tercatat, kamu akan melihat saran khusus fasemu di sini.';
+
+  @override
+  String get tipNutritionDetailMenstrual =>
+      'Pendarahan membuatmu kehilangan zat besi; daging merah, lentil, buncis, sayuran hijau gelap, dan molase membantu menggantinya. Zat besi nabati jauh lebih mudah diserap bersama vitamin C — memeras lemon di atas masakan lentil adalah versi paling praktisnya. Teh dan kopi saat makan menurunkan penyerapan zat besi, jadi beri jarak satu jam saja cukup. Minum cukup air bisa meredakan lelah dan sakit kepala saat haid.';
+
+  @override
+  String get tipNutritionDetailFollicular =>
+      'Saat energi pulih, tubuh sedang dalam mode membangun: protein yang cukup, biji-bijian utuh, dan sayuran mendukung itu. Melanjutkan pengisian cadangan zat besi setelah haid juga masuk akal. Tidak melewatkan makan biasanya lebih mudah di fase ini, dan membuatmu masuk ke naik-turunnya nafsu makan di fase berikutnya dengan lebih seimbang.';
+
+  @override
+  String get tipNutritionDetailFertile =>
+      'Tidak ada pola makan khusus yang diperlukan di sini; makan seimbang dan minum cukup air paling berpengaruh. Sebagian orang merasa kembung, biasanya hormonal dan sementara. Kalau kamu merencanakan kehamilan, ini waktu yang tepat untuk bertanya soal asam folat ke tenaga kesehatan — tapi itu percakapan dengan mereka, bukan saran yang seharusnya diberikan aplikasi.';
+
+  @override
+  String get tipNutritionDetailLuteal =>
+      'Nafsu makan meningkat dan ingin yang manis saat progesteron naik sangat umum; itu pergeseran hormonal, bukan soal kemauan. Menambahkan protein dan serat ke makanan menjaga gula darah lebih stabil dan meredam keinginan itu. Kurangi garam dan perbanyak air untuk meringankan kembung. Makanan kaya magnesium (almond, kenari, sayuran hijau gelap, cokelat hitam) mengurangi kram dan ketegangan pada sebagian orang. Mengurangi kafein membantu tidur yang terganggu di fase ini.';
+
+  @override
+  String get tipNutritionDetailUnknown =>
+      'Apa pun fasenya, hal yang sama paling membantu: makan teratur, protein cukup, banyak sayur, air cukup, dan makanan kaya zat besi. Karena haid menguras zat besi, cukup beri sedikit perhatian lebih di hari-hari itu. Setelah beberapa siklus tercatat, kamu akan melihat saran khusus fasemu di sini.';
 }

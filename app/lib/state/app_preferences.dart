@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/custom_reminder.dart';
 import '../models/enums.dart';
 
 /// Temperature unit for basal body temperature entries.
@@ -20,6 +23,8 @@ class AppPreferences extends ChangeNotifier {
   static Future<AppPreferences> load() async =>
       AppPreferences(await SharedPreferences.getInstance());
 
+  static const _kCustomReminders = 'custom_reminders';
+  static const _kCustomReminderNextId = 'custom_reminder_next_id';
   static const _kOnboardingComplete = 'onboarding_complete';
   static const _kLocale = 'locale';
   static const _kWeekStartMonday = 'week_start_monday';
@@ -273,6 +278,74 @@ class AppPreferences extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Premium: reminders the user wrote themselves.
+  ///
+  /// These live here, unencrypted, unlike cycle data — because the label is
+  /// about to be handed to the OS scheduler and shown on the lock screen
+  /// anyway. Encrypting our copy would protect nothing the notification
+  /// itself does not already reveal, so the honest move is to say so in the
+  /// UI rather than to imply a secrecy that cannot hold.
+  List<CustomReminder> get customReminders {
+    final raw = _prefs.getStringList(_kCustomReminders) ?? const [];
+    return [for (final entry in raw) ?_decodeReminder(entry)];
+  }
+
+  static CustomReminder? _decodeReminder(String entry) {
+    try {
+      final decoded = jsonDecode(entry);
+      if (decoded is! Map<String, dynamic>) return null;
+      return CustomReminder.fromJson(decoded);
+    } on FormatException {
+      return null;
+    }
+  }
+
+  Future<CustomReminder> addCustomReminder({
+    required String label,
+    required TimeOfDay time,
+  }) async {
+    final id = _prefs.getInt(_kCustomReminderNextId) ?? 1;
+    final reminder = CustomReminder(
+      id: id,
+      label: label.trim(),
+      minuteOfDay: time.hour * 60 + time.minute,
+    );
+    await _prefs.setInt(_kCustomReminderNextId, id + 1);
+    await _writeCustomReminders([...customReminders, reminder]);
+    return reminder;
+  }
+
+  Future<void> updateCustomReminder(CustomReminder reminder) =>
+      _writeCustomReminders([
+        for (final existing in customReminders)
+          if (existing.id == reminder.id) reminder else existing,
+      ]);
+
+  Future<void> removeCustomReminder(int id) => _writeCustomReminders([
+        for (final existing in customReminders)
+          if (existing.id != id) existing,
+      ]);
+
+  /// Wipes every user-authored reminder, label and all.
+  ///
+  /// "Erase everything" cleared logs, the PIN and onboarding but left this
+  /// key untouched, so free text the user had written about themselves
+  /// ("take my pill") survived the erase in plaintext. Anything the user
+  /// typed has to go when they ask for everything to go.
+  Future<void> clearCustomReminders() async {
+    await _prefs.remove(_kCustomReminders);
+    await _prefs.remove(_kCustomReminderNextId);
+    notifyListeners();
+  }
+
+  Future<void> _writeCustomReminders(List<CustomReminder> reminders) async {
+    await _prefs.setStringList(
+      _kCustomReminders,
+      [for (final r in reminders) jsonEncode(r.toJson())],
+    );
+    notifyListeners();
+  }
+
   bool get waterRemindersEnabled => _prefs.getBool(_kWaterRemindersEnabled) ?? false;
 
   Future<void> setWaterRemindersEnabled(bool value) async {
@@ -328,13 +401,21 @@ class AppPreferences extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Which companion mascot decorates the home screen. See [Mascot].
-  Mascot get mascot {
+  /// The mascot as the user chose it. See [mascot] for what is rendered.
+  Mascot get selectedMascot {
     final raw = _prefs.getString(_kMascot);
     return Mascot.values.firstWhere(
       (m) => m.name == raw,
       orElse: () => Mascot.droplet,
     );
+  }
+
+  /// Which companion mascot decorates the home screen, with the same
+  /// lapse fallback as [homeTheme].
+  Mascot get mascot {
+    final selected = selectedMascot;
+    if (selected.premium && !premiumActive) return Mascot.droplet;
+    return selected;
   }
 
   /// Off by default: handing cycle data to the OS health record is the
@@ -370,13 +451,31 @@ class AppPreferences extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Scenic photo behind the home hero. See [HomeTheme].
-  HomeTheme get homeTheme {
+  /// Scenic photo behind the home hero, as the user chose it — including a
+  /// Premium one while the subscription is lapsed.
+  ///
+  /// Prefer [homeTheme] for display. This raw value exists so the settings
+  /// picker can keep showing the user's actual choice, and so resubscribing
+  /// restores it instead of silently forgetting it.
+  HomeTheme get selectedHomeTheme {
     final raw = _prefs.getString(_kHomeTheme);
     return HomeTheme.values.firstWhere(
       (t) => t.name == raw,
       orElse: () => HomeTheme.wheat,
     );
+  }
+
+  /// The theme actually rendered: a Premium background falls back to a free
+  /// one when the subscription is not active.
+  ///
+  /// CLAUDE.md principle 6 and `enums.dart` both promised this ("abonelik
+  /// biterse kullanıcı ücretsiz bir arka plana düşer, hiçbir kaydını
+  /// kaybetmez") and nothing implemented it. The choice is remembered, not
+  /// erased — only its rendering is deferred until Premium is back.
+  HomeTheme get homeTheme {
+    final selected = selectedHomeTheme;
+    if (selected.premium && !premiumActive) return HomeTheme.wheat;
+    return selected;
   }
 
   Future<void> setHomeTheme(HomeTheme value) async {

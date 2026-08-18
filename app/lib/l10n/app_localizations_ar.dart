@@ -95,7 +95,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get onboardingPrivacyBody =>
-      'تبقى بيانات دورتك على هذا الجهاز فقط ومشفّرة. لا يوجد حساب ولا مزامنة سحابية — لا يُرفع أي شيء تسجّلينه. النسخة المجانية تعرض إعلانات تستخدم الإنترنت، لكنها لا تصل أبدًا إلى بياناتك الصحية.';
+      'تبقى بيانات دورتك على هذا الجهاز فقط ومشفّرة. لا يوجد حساب ولا مزامنة سحابية — لا يُرفع أي شيء تسجّلينه. مفتاح التشفير محفوظ في العتاد الآمن داخل هاتفك، ويمكنك تصدير كل شيء أو حذفه متى شئت.';
 
   @override
   String get onboardingLastPeriodTitle => 'متى بدأت آخر دورة شهرية لك؟';
@@ -1135,20 +1135,17 @@ class AppLocalizationsAr extends AppLocalizations {
   String get premiumTitle => 'فيرا بريميوم';
 
   @override
-  String get premiumHeadline => 'فيرا بلا إعلانات';
+  String get premiumHeadline => 'Vera Premium';
 
   @override
   String get premiumSubhead =>
-      'تبقى جميع ميزات التتبع مجانية إلى الأبد. بريميوم يزيل الإعلانات فقط ويدعم التطوير.';
+      'تبقى كل ميزات التتبع مجانية إلى الأبد — لا يُقفل سجلك أبدًا. تضيف Premium متتبعاتك الخاصة وتحليلات أعمق وتذكيراتك الخاصة ومظاهر إضافية، وتزيل الإعلانات.';
 
   @override
   String get premiumBenefitNoAds => 'لا إعلانات في أي مكان بالتطبيق';
 
   @override
   String get premiumBenefitSupport => 'يدعم تطبيقًا مستقلاً يضع الخصوصية أولاً';
-
-  @override
-  String get premiumBenefitFuture => 'يشمل ميزات بريميوم المستقبلية';
 
   @override
   String get premiumMonthly => 'شهري';
@@ -1233,7 +1230,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get partnerSummaryHeader => 'ملخص الدورة من فيرا';
 
   @override
-  String get settingsHomeThemeLabel => 'سمة الصفحة الرئيسية';
+  String get settingsHomeThemeLabel => 'خلفية الشاشة الرئيسية';
 
   @override
   String get homeThemeWheat => 'قمح';
@@ -1306,7 +1303,15 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String cycleHistoryPeriodLength(int days) {
-    return '$days أيام نزيف';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'استمر الحيض $days يومًا',
+      few: 'استمر الحيض $days أيام',
+      two: 'استمر الحيض يومين',
+      one: 'استمر الحيض يومًا واحدًا',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1422,4 +1427,261 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get diagnosticsClear => 'مسح';
+
+  @override
+  String get unitHoursShort => 'س';
+
+  @override
+  String get unitMinutesShort => 'د';
+
+  @override
+  String get unitHoursLong => 'ساعات';
+
+  @override
+  String get unitMinutesLong => 'دقائق';
+
+  @override
+  String get unitMilliliters => 'مل';
+
+  @override
+  String get unitKilograms => 'كغ';
+
+  @override
+  String get calendarJumpTitle => 'الانتقال إلى شهر';
+
+  @override
+  String get calendarJumpYearLabel => 'السنة';
+
+  @override
+  String get settingsAdPrivacyUnavailable =>
+      'لا تتوفر خيارات تخصيص الإعلانات في منطقتك — الإعلانات هنا غير مخصّصة أصلًا.';
+
+  @override
+  String get settingsGroupAppearance => 'المظهر';
+
+  @override
+  String get settingsGroupTracking => 'تفضيلات التتبع';
+
+  @override
+  String get dayLogCustomTagsLabel => 'متتبعاتي الخاصة';
+
+  @override
+  String get customTagAddButton => 'إضافة متتبع';
+
+  @override
+  String get customTagDialogTitle => 'متتبع جديد';
+
+  @override
+  String get customTagDialogHint => 'مثل: الصداع النصفي، الرياضة، الأرق';
+
+  @override
+  String get customTagManageEntry => 'إدارة متتبعاتي';
+
+  @override
+  String get customTagRenameTitle => 'إعادة تسمية المتتبع';
+
+  @override
+  String get customTagDeleteTitle => 'حذف هذا المتتبع؟';
+
+  @override
+  String get customTagDeleteBody =>
+      'سيُزال من كل يوم استخدمته فيه. تبقى بقية سجلاتك كما هي.';
+
+  @override
+  String get customTagEmpty => 'لا توجد متتبعات خاصة بك بعد.';
+
+  @override
+  String get premiumLockedTitle => 'ميزة Premium';
+
+  @override
+  String get premiumLockedAction => 'عرض Premium';
+
+  @override
+  String get premiumBenefitCustomTrackers => 'تتبّعي ما تشائين، بكلماتك أنت';
+
+  @override
+  String get premiumBenefitAdvancedInsights =>
+      'تحليلات متقدمة: ما الذي يحدث عادةً ومتى';
+
+  @override
+  String get premiumBenefitPersonalisation => 'خلفيات ورفاق إضافيون';
+
+  @override
+  String get premiumBenefitAdvancedReminders => 'تذكيرات على إيقاعك الخاص';
+
+  @override
+  String get advancedInsightsTitle => 'تحليلات متقدمة';
+
+  @override
+  String get advancedInsightsEntry => 'تحليلات متقدمة';
+
+  @override
+  String get advancedInsightsNotEnough =>
+      'سجّلي ثلاث دورات كاملة وستظهر أنماطك هنا. أقل من ذلك، وأي «نمط» سيكون مجرد مصادفة.';
+
+  @override
+  String get advancedInsightsPatternsTitle => 'متى يظهر كل شيء عادةً';
+
+  @override
+  String advancedInsightsPatternLine(String label, String segment) {
+    return '$label — غالبًا $segment';
+  }
+
+  @override
+  String advancedInsightsPatternDetail(int count, int day) {
+    return '$count يومًا مسجّلًا، قرابة اليوم $day من دورتك';
+  }
+
+  @override
+  String advancedInsightsNoPattern(String label) {
+    return '$label — لا يوجد توقيت واضح بعد';
+  }
+
+  @override
+  String get advancedInsightsTrendTitle => 'طول الدورة عبر الزمن';
+
+  @override
+  String advancedInsightsDriftLonger(String days, String cycles) {
+    return 'بمقارنة أقدم $cycles دورات لديكِ بأحدث $cycles دورات، تبدو الأخيرة أطول بنحو $days يوم.';
+  }
+
+  @override
+  String advancedInsightsDriftShorter(String days, String cycles) {
+    return 'بمقارنة أقدم $cycles دورات لديكِ بأحدث $cycles دورات، تبدو الأخيرة أقصر بنحو $days يوم.';
+  }
+
+  @override
+  String advancedInsightsDriftStable(String cycles) {
+    return 'بمقارنة أقدم $cycles دورات لديكِ بأحدث $cycles دورات، بقي طول دورتك كما هو تقريبًا.';
+  }
+
+  @override
+  String get advancedInsightsDriftNotEnough =>
+      'عندما تسجّلين ست دورات كاملة، يمكننا مقارنة أقدم دوراتك بأحدثها لمعرفة ما إذا كان طول دورتك يتغيّر.';
+
+  @override
+  String get advancedInsightsMoodTitle => 'المزاج حسب جزء الدورة';
+
+  @override
+  String get advancedInsightsDisclaimer =>
+      'هذه مجرد إحصاءات لما سجّلتِه، لا أكثر. ليست تشخيصًا، ووجود نمط هنا ليس سببًا.';
+
+  @override
+  String get segmentPeriod => 'أثناء الدورة';
+
+  @override
+  String get segmentAfterPeriod => 'بعد الدورة';
+
+  @override
+  String get segmentMidCycle => 'منتصف الدورة';
+
+  @override
+  String get segmentBeforePeriod => 'قبل الدورة';
+
+  @override
+  String get customRemindersEntry => 'تذكيراتي الخاصة';
+
+  @override
+  String get customRemindersTitle => 'تذكيراتي الخاصة';
+
+  @override
+  String get customRemindersEmpty => 'لا توجد تذكيرات خاصة بك بعد.';
+
+  @override
+  String get customRemindersAdd => 'إضافة تذكير';
+
+  @override
+  String get customReminderLabelHint => 'مثل: تناول حبوبي، شرب الماء';
+
+  @override
+  String get customReminderLockScreenNote =>
+      'يظهر نص التذكير على شاشة القفل، فاكتبيه بالخصوصية التي تريدينها.';
+
+  @override
+  String get customReminderDelete => 'حذف التذكير';
+
+  @override
+  String get homeThemeDusk => 'الغسق';
+
+  @override
+  String get homeThemeMeadow => 'مرج';
+
+  @override
+  String get homeThemePetal => 'بتلة';
+
+  @override
+  String get homeThemeBloom => 'إزهار';
+
+  @override
+  String get mascotStar => 'نجمة';
+
+  @override
+  String get mascotLeaf => 'ورقة';
+
+  @override
+  String get tipDetailWhatsHappening => 'ما الذي يحدث في جسمك الآن';
+
+  @override
+  String get tipDetailDisclaimer =>
+      'هذه معلومات عامة، وليست نصيحة طبية شخصية. كل جسم يستجيب بشكل مختلف، وما تشعرين به فعلًا أهم من أي اقتراح هنا. إذا كان هناك ما يقلقك، تحدّثي مع مختص صحي.';
+
+  @override
+  String get phaseExplainerMenstrual =>
+      'ينزل الدم لأن بطانة الرحم تتساقط. الإستروجين والبروجسترون في أدنى مستوى لهما في الدورة، ولهذا يشعر كثيرون بتعب أكبر وانطواء في الأيام الأولى. التقلصات تأتي من انقباض الرحم. النزيف يكلّفك حديدًا أيضًا، وهذا يفسّر جزءًا من الإرهاق.';
+
+  @override
+  String get phaseExplainerFollicular =>
+      'بعد توقف النزيف يبدأ الإستروجين بالارتفاع من جديد. يلاحظ معظم الناس عودة الطاقة والمزاج والقدرة على التحمل. تنضج الحويصلات في المبيضين؛ الجسم يستعد للإباضة التالية.';
+
+  @override
+  String get phaseExplainerFertile =>
+      'يقترب الإستروجين من ذروته، والإباضة متوقعة في هذه الأيام. يصبح مخاط عنق الرحم عادةً صافيًا وزلقًا، ويلاحظ بعض الأشخاص ارتفاع الرغبة، وبعضهم وخزة قصيرة في أحد الجانبين. الطاقة غالبًا في أعلى نقطة لها في الدورة.';
+
+  @override
+  String get phaseExplainerLuteal =>
+      'بعد الإباضة يرتفع البروجسترون ثم ينخفض بحدة مع اقتراب الدورة. هذا الانخفاض قد يثير أعراض ما قبل الدورة: انتفاخ، حساسية في الثديين، تغيّر الشهية، تقطّع النوم، وتقلبات المزاج. تبقى حرارة جسمك أعلى قليلًا.';
+
+  @override
+  String get phaseExplainerUnknown =>
+      'لا توجد سجلات كافية بعد لتحديد المرحلة التي أنت فيها. تفضّل Vera قول ذلك بدل اختلاق مرحلة. بعد تسجيل بضع دورات سيمتلئ هذا القسم ببياناتك أنت — وحتى ذلك الحين، الاقتراحات أدناه صالحة في أي وقت.';
+
+  @override
+  String get tipFitnessDetailMenstrual =>
+      'التمرين الشاق لا يناسب معظم الناس في الأيام الأولى، وهذه ليست مسألة انضباط — طاقتك فعلًا أقل. المشي والتمدد اللطيف واليوغا التجديدية وتمارين التنفس تحسّن تدفق الدم وقد تخفف التقلصات. وإذا كنت تشعرين بحال جيدة فلا سبب لتجنّب الجلسات الشاقة: النزيف ليس سببًا للتوقف عن الرياضة. ملاحظة عملية: الجلسات الطويلة والمرهقة في أيام النزيف الغزير قد تزيد التعب، فاضبطيها حسب ما يقوله جسمك.';
+
+  @override
+  String get tipFitnessDetailFollicular =>
+      'مع ارتفاع الإستروجين يشعر معظم الناس بقوة أكبر وقدرة أعلى على التحمل؛ هذه عادةً أفضل فترة في الدورة لبدء شيء جديد أو زيادة الأوزان أو رفع الإيقاع. تعافي العضلات أيضًا جيد نسبيًا هنا. ومع ذلك تدرّجي في الزيادة: الطاقة العالية لا تعني انعدام خطر الإصابة.';
+
+  @override
+  String get tipFitnessDetailFertile =>
+      'الطاقة والحافز في أعلى مستوى عادةً، لذا تناسب الجلسات الشاقة هذه الأيام. عند بعض الأشخاص تكون المفاصل أكثر ارتخاءً قليلًا حول الإباضة، لذا يُستحسن إطالة الإحماء في الرياضات ذات تغيّر الاتجاه المفاجئ. الوخزة القصيرة في أحد جانبي البطن شائعة، لكن إن كانت شديدة أو مستمرة فاستريحي واستشيري مختصًا.';
+
+  @override
+  String get tipFitnessDetailLuteal =>
+      'مع اقتراب الدورة قد تنخفض الطاقة، ويرتفع النبض لنفس المجهود، ويطول التعافي. هذا تذبذب متوقع وليس تراجعًا. الجلسات المعتدلة، ونسخة أخف قليلًا من تمارين القوة، والمشي، عادةً أكثر استدامة هنا. ومع الانتفاخ وحساسية الثديين، حمّالة صدر داعمة وإحماء أطول يصنعان فرقًا ملموسًا.';
+
+  @override
+  String get tipFitnessDetailUnknown =>
+      'حتى دون معرفة مرحلتك، الحركة تفيد دائمًا: نشاط معتدل موزّع على معظم أيام الأسبوع أفضل من جلسات شديدة متفرقة. اضبطي حسب شعورك — في الأيام المتعبة، المشي يُحتسب أيضًا. وبعد تسجيل بضع دورات سترين هنا اقتراحات خاصة بمرحلتك.';
+
+  @override
+  String get tipNutritionDetailMenstrual =>
+      'النزيف يكلّفك حديدًا؛ اللحوم الحمراء والعدس والحمص والورقيات الداكنة والدبس تساعد على تعويضه. الحديد النباتي يُمتص بشكل أفضل بكثير مع فيتامين C — وعصر الليمون على طبق العدس هو أبسط تطبيق لذلك. أما الشاي والقهوة مع الوجبة فيقللان امتصاص الحديد، ويكفي ترك ساعة بينهما. وشرب ماء كافٍ قد يخفف التعب والصداع المصاحبين للنزيف.';
+
+  @override
+  String get tipNutritionDetailFollicular =>
+      'مع عودة الطاقة يكون الجسم في وضع البناء: بروتين كافٍ وحبوب كاملة وخضروات تدعم ذلك. ومن المنطقي مواصلة تعويض مخزون الحديد بعد النزيف. عدم تفويت الوجبات أسهل عادةً في هذه المرحلة، ويجعلك تدخلين تقلبات الشهية في المرحلة التالية بتوازن أكبر.';
+
+  @override
+  String get tipNutritionDetailFertile =>
+      'لا حاجة لنظام غذائي خاص هنا؛ وجبات متوازنة وماء كافٍ هما الأكثر فائدة. يشعر بعض الأشخاص بالانتفاخ، وهو غالبًا هرموني وعابر. وإذا كنت تخططين للحمل فهذا وقت مناسب لسؤال مختص عن حمض الفوليك — لكنه حديث معه، لا نصيحة يجدر بتطبيق أن يقدمها.';
+
+  @override
+  String get tipNutritionDetailLuteal =>
+      'ازدياد الشهية والرغبة في الحلويات مع ارتفاع البروجسترون شائع جدًا؛ إنه تحوّل هرموني لا مسألة إرادة. إضافة البروتين والألياف إلى الوجبات تُبقي سكر الدم أكثر ثباتًا وتلطّف الرغبة. تقليل الملح وزيادة الماء قد يخففان الانتفاخ. والأطعمة الغنية بالمغنيسيوم (اللوز والجوز والورقيات الداكنة والشوكولاتة الداكنة) تقلل التقلصات والتوتر عند بعض الأشخاص. وتقليل الكافيين يساعد على النوم المتقطع في هذه المرحلة.';
+
+  @override
+  String get tipNutritionDetailUnknown =>
+      'أيًّا كانت المرحلة، الأمور نفسها هي الأكثر فائدة: وجبات منتظمة، بروتين كافٍ، خضروات كثيرة، ماء كافٍ، وأطعمة غنية بالحديد. ولأن النزيف يستهلك الحديد، يكفي الانتباه أكثر قليلًا في تلك الأيام. وبعد تسجيل بضع دورات سترين هنا اقتراحات خاصة بمرحلتك.';
 }

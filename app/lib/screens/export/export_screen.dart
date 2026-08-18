@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../l10n/enum_labels.dart';
 import '../../models/enums.dart';
 import '../../services/backup_service.dart';
 import '../../services/cycle_insights.dart';
@@ -176,6 +177,17 @@ class _ExportScreenState extends State<ExportScreen> {
       timelineLegendPeriod: l10n.doctorReportTimelineLegendPeriod,
       timelineLegendCycle: l10n.doctorReportTimelineLegendCycle,
       timelineOngoing: l10n.doctorReportTimelineOngoing,
+      // The table cells, in the reader's language — the headers already
+      // were, and printing `breastTenderness` underneath a translated
+      // header is worse than not translating either.
+      flowNames: {
+        for (final flow in FlowIntensity.values) flow: flowLabel(l10n, flow),
+      },
+      symptomNames: {
+        for (final symptom in Symptom.values)
+          symptom: symptomLabel(l10n, symptom),
+      },
+      moodNames: {for (final mood in Mood.values) mood: moodLabel(l10n, mood)},
     );
 
     final bytes = await _pdfBuilder.build(

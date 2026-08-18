@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../services/launch_intent.dart';
+import '../../services/reminder_service.dart';
 import '../../state/app_lock_controller.dart';
 import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
@@ -28,17 +30,58 @@ class AppRoot extends StatefulWidget {
 class _AppRootState extends State<AppRoot> {
   LaunchAction? _launchAction;
   bool _launchActionHandled = false;
+  bool _remindersReconciled = false;
 
   @override
   void initState() {
     super.initState();
     _readLaunchAction();
+    // After the first frame, so AppLocalizations is available for the
+    // notification channel name.
+    WidgetsBinding.instance.addPostFrameCallback((_) => _reconcileReminders());
   }
 
   Future<void> _readLaunchAction() async {
     final action = await const LaunchIntent().take();
     if (!mounted || action == null) return;
     setState(() => _launchAction = action);
+  }
+
+  /// Re-hands the user's own reminders to the OS on every launch.
+  ///
+  /// They used to be scheduled only at the moment of create/edit/toggle, so
+  /// anything that cleared pending notifications behind the user's back
+  /// left the list saying ON with nothing scheduled. This also cancels
+  /// reminders that should no longer fire — the ones disabled, deleted, or
+  /// left over from a lapsed subscription, which the user otherwise had no
+  /// in-app way to silence.
+  Future<void> _reconcileReminders() async {
+    if (_remindersReconciled || !mounted) return;
+    _remindersReconciled = true;
+
+    final prefs = context.read<AppPreferences>();
+    final reminders = context.read<ReminderService>();
+    final l10n = AppLocalizations.of(context)!;
+    final stored = prefs.customReminders;
+
+    try {
+      await reminders.reconcileCustomReminders(
+        wanted: [
+          for (final r in stored)
+            if (r.enabled && prefs.premiumActive)
+              (
+                notificationId: r.notificationId,
+                time: TimeOfDay(hour: r.hour, minute: r.minute),
+                title: r.label,
+              ),
+        ],
+        knownIds: [for (final r in stored) r.notificationId],
+        channelName: l10n.customRemindersTitle,
+      );
+    } catch (_) {
+      // Best-effort: a notification plugin that fails to initialize must
+      // never keep the app off the home screen.
+    }
   }
 
   @override

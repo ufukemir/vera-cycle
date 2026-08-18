@@ -12,6 +12,7 @@ class NumberStepper extends StatelessWidget {
     required this.max,
     required this.onChanged,
     this.unitLabel,
+    this.step = 1,
   });
 
   final int value;
@@ -20,13 +21,17 @@ class NumberStepper extends StatelessWidget {
   final ValueChanged<int> onChanged;
   final String? unitLabel;
 
+  /// Increment per tap. Minutes step by 5 — reaching 55 one tap at a time
+  /// would be eleven taps of pure friction for no extra precision.
+  final int step;
+
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         IconButton.filledTonal(
-          onPressed: value > min ? () => onChanged(value - 1) : null,
+          onPressed: value - step >= min ? () => onChanged(value - step) : null,
           icon: const Icon(Icons.remove),
         ),
         SizedBox(
@@ -39,7 +44,7 @@ class NumberStepper extends StatelessWidget {
           ),
         ),
         IconButton.filledTonal(
-          onPressed: value < max ? () => onChanged(value + 1) : null,
+          onPressed: value + step <= max ? () => onChanged(value + step) : null,
           icon: const Icon(Icons.add),
         ),
       ],

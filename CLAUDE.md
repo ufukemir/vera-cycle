@@ -49,8 +49,23 @@ Premium reklamları kaldırır.
    ("28–31 Ağustos arası", tek bir gün değil). Veri azsa/döngü düzensizse bunu açıkça söyleriz.
 6. **Sömürücü paywall yok.** Premium ekranı vardır (2026-08-14) ama karanlık desen yok:
    sahte geri sayım yok, sahte indirim yok, sahte kullanıcı sayısı yok, iptali
-   zorlaştırma yok. Çekirdek takip özellikleri daima ücretsiz kalır; Premium = reklamsız
-   deneyim + gelecekteki ek konfor özellikleri.
+   zorlaştırma yok. Çekirdek takip özellikleri daima ücretsiz kalır.
+   **Premium kapsamı (2026-08-17'de genişletildi, Ufuk'un kararı):** reklamsız
+   deneyim + özel takip alanları + gelişmiş içgörüler + kendi hatırlatıcıların +
+   ek arka planlar/maskotlar. Test edilebilir kural: *Premium bir şey EKLER,
+   asla var olanı geri almaz.* Kullanıcının geçmiş verisi ve onun temel
+   istatistikleri (ortalama döngü/regl uzunluğu, takvim, dışa aktarma) hiçbir
+   koşulda paywall arkasına konmaz — kategorinin en büyük güven kırıcısı budur
+   (bkz. `docs/03-rakip-analizi.md`). Abonelik biterse kullanıcı ücretsiz bir
+   arka plana düşer, hiçbir kaydını kaybetmez. Bunu `premium_gating_test.dart`
+   sabitler.
+   **Kilitli durumun kuralı (2026-08-18 denetiminde eklendi):** `PremiumLock`
+   kilitliyken `child`'ı hiç kurmaz, bu yüzden kullanıcının KENDİ yazdığı veri
+   o ağacın içindeyse görünmez olur. Premium'a bağlanan her bölüm, kullanıcının
+   zaten kaydettiği şeyi salt-okunur gösteren bir `lockedPreview` vermek
+   zorundadır; kendi verisini yönetme (silme/yeniden adlandırma/kapatma) yolu
+   da açık kalır — Premium sadece YENİ ekleme yeteneğidir. "Ekler, geri almaz"
+   kuralı görünürlüğü de kapsar.
 7. **Tıbbi teşhis değil.** Uygulama tanı koymaz, gebeliği önleme yöntemi olarak sunulmaz.
    Gebelik modu (2026-08-14) bilgilendirme amaçlıdır: gebelik yaşı/tahmini doğum tarihi
    SAT'a dayalı kaba hesaptır ve bunu açıkça söyler; tıbbi takip yerine geçmez.
@@ -60,6 +75,21 @@ Premium reklamları kaldırır.
 - Depolama: şifreli yerel dosya deposu; repository arayüzü arkasında (sonradan SQLCipher'a
   geçiş UI'a dokunmadan mümkün olsun).
 - Bildirimler yereldir (`flutter_local_notifications`), sunucu push YOK.
+  **Saat kuralı (2026-08-18):** `tz.local`, `flutter_timezone` ile cihazın
+  gerçek IANA saat dilimine ayarlanır; lookup başarısız olursa UTC'ye düşer ve
+  hatırlatıcı yine doğru anda çalar (sadece yaz saati takibini kaybeder).
+  Ateşleme anı buna rağmen ASLA doğrudan `tz.TZDateTime(tz.local, ...)` ile
+  kurulmaz — önce düz bir yerel `DateTime`, sonra `.toUtc()`
+  (`nextOccurrenceOf`); bu, UTC'ye düşülen durumda da doğru kalan tek kuruluş.
+  Bunu ihlal eden günlük planlama yolları Türkiye'de hatırlatıcıyı 3 saat geç
+  çalıştırıyordu (`reminder_service_test.dart` sabitler).
+  **`flutter_timezone` istisnası:** ilke 3'e karşı tartılıp kabul edildi —
+  soket açmıyor, telemetri göndermiyor, işletim sisteminden tek bir string
+  okuyor. Analitik/çökme-raporlama SDK'sıyla aynı sınıfta değildir.
+- Kullanıcının yazdığı serbest metin (hatırlatıcı etiketleri) `shared_preferences`'ta
+  ŞİFRESİZ durur. Bu kabul edilebilir çünkü OS yedeği hem bulut hem cihaz-transferi
+  için tamamen kapalıdır (`data_extraction_rules.xml`, `android_manifest_test.dart`
+  sabitler). "Her şeyi sil" bu metinleri de siler.
 - UI dili: sistem dilini takip eder, kullanıcı ayarlardan değiştirebilir. **Yalnızca
   %100 çevrilmiş diller listelenir** (`lib/l10n/`); kısmen çevrilmiş olanlar
   `l10n_pending/`'de bekler. Yarım çeviri = kullanıcıya karışık dilli ekran, bu

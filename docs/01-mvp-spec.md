@@ -86,13 +86,24 @@ sana dürüst olsun.
   soru-cevap (~22 konu; TR+EN tam içerik, diğer diller İngilizceye düşer).
 - Cevaplar kullanıcının kendi verisiyle kişiselleşir (döngü günü, ortalama,
   tahmin penceresi) ama asla tanı koymaz; sohbet geçmişi bilerek KAYDEDİLMEZ.
+- **Kişiselleştirme kuralı (2026-08-18):** her yer tutucu kendi birimini ve
+  gerekirse kendi yan cümlesini taşır; "veri yok" hâli de tam bir cümle olarak
+  okunmalıdır. Ayrıca ovülasyon penceresi regl penceresinden AYRI bir alandır
+  (`ovulationRangeLabel`) — ikisi ~14 gün arayla olduğu için birini diğerinin
+  yerine göstermek kullanıcıya yanlış tarihi tam bir güvenle söylemek olur.
 - Bulut LLM (Gemini vb.) bilinçli olarak KULLANILMAZ: sağlık sorularını
   üçüncü tarafa göndermek, döngü verisinin cihazdan çıkmaması sözünü bozar
   (uygulamada INTERNET izni artık var ama yalnızca reklam SDK'sı için).
 
 ### 6. İçgörüler
 - Ortalama döngü uzunluğu, değişkenlik, ortalama adet süresi, kayıtlı döngü sayısı.
-- Basit semptom örüntüsü: "kramplar en çok 1-2. günlerde".
+- Basit semptom örüntüsü: "kramplar en çok 1-2. günlerde". Bir şeyin "örüntü"
+  sayılması için en az 2 AYRI döngüde tekrar etmesi gerekir (2026-08-18):
+  tek bir döngüde arka arkaya 4 gün kaydedilen şey bir olaydır, örüntü değil.
+- Döngü uzunluğu eğilimi ancak 6 tam döngüden sonra raporlanır (her üçte bir
+  grubunda en az 2 döngü olsun diye) ve karşılaştırılan grup büyüklüğü metinde
+  açıkça yazılır. Yeterli veri yokken "aynı kaldı" DENMEZ — bu ikisi ayrı
+  cümledir.
 - Döngü evresine göre hareket/beslenme önerileri (bkz. `docs/backlog.md`
   madde 2) — tamamen yerel/statik içerik, hedge'lenmiş dille ("genelde",
   "bazı kişiler"), asla kişiselleştirilmiş tıbbi tavsiye gibi sunulmaz.
@@ -128,9 +139,27 @@ sana dürüst olsun.
 - **Reklam destekli ücretsiz sürüm**: Google AdMob banner'ı ana ekranın altında.
   Uygulamanın kendi kodu ağ çağrısı yapmaz; reklam SDK'sına sağlık verisi
   ASLA verilmez. `INTERNET` izni yalnızca bunun için vardır.
-- **Vera Premium**: reklamları kaldırır. Fiyat kartları, "iptal her zaman
-  serbest" notu. Sahte geri sayım/indirim/kullanıcı sayısı YASAK olmaya devam
-  eder (ilke 6). Faturalandırma SDK'sı henüz bağlı değil.
+- **Vera Premium** (kapsam 2026-08-17'de genişletildi): reklamları kaldırır
+  ve dört özellik ekler:
+  1. **Özel takip alanları** — kullanıcının kendi adlandırdığı etiketler.
+     Etiket listesi ayrı saklanmaz, şifreli günlüklerden türetilir (ilke 4:
+     kullanıcının yazdığı sağlık terimi `shared_preferences`'a yazılmaz).
+     Ayarlar'dan yeniden adlandırma/silme; ikisi de geçmişi yeniden yazar.
+  2. **Gelişmiş içgörüler** (`advanced_insights.dart`) — semptomun döngünün
+     hangi bölümünde yoğunlaştığı, uzunluk trendi ve kayma, bölüme göre
+     baskın ruh hali. İki dürüstlük kuralı: 3 tam döngüden önce hiçbir şey
+     söylenmez, ve berabere kalan bölümlerde "belirgin zamanlaması yok" denir.
+  3. **Kendi hatırlatıcıların** — kullanıcı metni + saat. Bildirim kimliği
+     silinen hatırlatıcıdan devralınmaz. Metin kilit ekranında görüneceği
+     için şifresiz saklanır ve bu ekranda açıkça söylenir.
+  4. **Kişiselleştirme** — 4 ek arka plan, 2 ek maskot.
+- Fiyat kartları, "iptal her zaman serbest" notu. Sahte geri
+  sayım/indirim/kullanıcı sayısı YASAK olmaya devam eder (ilke 6).
+  Faturalandırma SDK'sı henüz bağlı değil.
+- **Test edilebilir sınır**: Premium EKLER, geri almaz. Kullanıcının geçmişi
+  ve temel istatistikleri (ortalamalar, takvim, dışa aktarma) paywall arkasına
+  konmaz; abonelik biterse ücretsiz arka plana dönülür, veri kaybı olmaz.
+  `premium_gating_test.dart` bunu sabitler.
 - **Gebelik modu**: SAT'a dayalı gebelik haftası, tahmini doğum tarihi
   (280 gün), trimester, haftalık bilgilendirme notu. Ultrason daha doğrudur
   ve bunu ekranda söyler.

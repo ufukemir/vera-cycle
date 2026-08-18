@@ -93,16 +93,21 @@ class AdConsentService {
   }
 
   /// Reopens the consent form so a user can change their mind later.
-  Future<void> showPrivacyOptions() async {
-    if (!_adsSupported) return;
+  ///
+  /// Returns whether a form actually appeared. It often won't — outside the
+  /// regions that mandate a consent choice, Google simply has no form to
+  /// show. Swallowing that silently made the Settings entry look broken, so
+  /// the caller is told and can explain instead.
+  Future<bool> showPrivacyOptions() async {
+    if (!_adsSupported) return false;
     try {
-      final completer = Completer<void>();
+      final completer = Completer<bool>();
       ConsentForm.showPrivacyOptionsForm((error) {
-        if (!completer.isCompleted) completer.complete();
+        if (!completer.isCompleted) completer.complete(error == null);
       });
-      await completer.future.timeout(_timeout, onTimeout: () {});
+      return await completer.future.timeout(_timeout, onTimeout: () => false);
     } on Object {
-      // Nothing to do — the entry just won't open.
+      return false;
     }
   }
 

@@ -16,6 +16,14 @@ String? homeThemeAsset(HomeTheme theme) {
       return 'assets/photos/theme_blossom.jpg';
     case HomeTheme.plain:
       return null;
+    case HomeTheme.dusk:
+      return 'assets/photos/theme_dusk.jpg';
+    case HomeTheme.meadow:
+      return 'assets/photos/theme_meadow.jpg';
+    case HomeTheme.petal:
+      return 'assets/photos/theme_petal.jpg';
+    case HomeTheme.bloom:
+      return 'assets/photos/theme_bloom.jpg';
   }
 }
 

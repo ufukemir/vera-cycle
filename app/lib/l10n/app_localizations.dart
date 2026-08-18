@@ -273,7 +273,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingPrivacyBody.
   ///
   /// In en, this message translates to:
-  /// **'Your cycle data stays only on this device, encrypted. There\'s no account and no cloud sync — nothing you log is ever uploaded. The free version shows ads, which do use the internet, but they never receive your health data.'**
+  /// **'Your cycle data stays only on this device, encrypted. There\'s no account and no cloud sync — nothing you log is ever uploaded. The key lives in your phone\'s secure hardware, and you can export or erase everything whenever you want.'**
   String get onboardingPrivacyBody;
 
   /// No description provided for @onboardingLastPeriodTitle.
@@ -2187,13 +2187,13 @@ abstract class AppLocalizations {
   /// No description provided for @premiumHeadline.
   ///
   /// In en, this message translates to:
-  /// **'An ad-free Vera'**
+  /// **'Vera Premium'**
   String get premiumHeadline;
 
   /// No description provided for @premiumSubhead.
   ///
   /// In en, this message translates to:
-  /// **'Every tracking feature stays free forever. Premium simply removes the ads and supports development.'**
+  /// **'Every tracking feature stays free forever — your history is never locked away. Premium adds your own trackers, deeper insights, your own reminders and extra looks, and removes the ads.'**
   String get premiumSubhead;
 
   /// No description provided for @premiumBenefitNoAds.
@@ -2207,12 +2207,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Supports an independent, privacy-first app'**
   String get premiumBenefitSupport;
-
-  /// No description provided for @premiumBenefitFuture.
-  ///
-  /// In en, this message translates to:
-  /// **'Includes future Premium comfort features'**
-  String get premiumBenefitFuture;
 
   /// No description provided for @premiumMonthly.
   ///
@@ -2361,7 +2355,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsHomeThemeLabel.
   ///
   /// In en, this message translates to:
-  /// **'Home theme'**
+  /// **'Home background'**
   String get settingsHomeThemeLabel;
 
   /// No description provided for @homeThemeWheat.
@@ -2493,7 +2487,7 @@ abstract class AppLocalizations {
   /// No description provided for @cycleHistoryPeriodLength.
   ///
   /// In en, this message translates to:
-  /// **'{days} days of bleeding'**
+  /// **'{days, plural, =1{Period lasted 1 day} other{Period lasted {days} days}}'**
   String cycleHistoryPeriodLength(int days);
 
   /// No description provided for @cycleHistoryVsAverage.
@@ -2675,6 +2669,450 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Clear'**
   String get diagnosticsClear;
+
+  /// Short hour suffix used inside a compact value like "7h 30m"
+  ///
+  /// In en, this message translates to:
+  /// **'h'**
+  String get unitHoursShort;
+
+  /// Short minute suffix used inside a compact value like "7h 30m"
+  ///
+  /// In en, this message translates to:
+  /// **'m'**
+  String get unitMinutesShort;
+
+  /// Word for hours, labelling a stepper
+  ///
+  /// In en, this message translates to:
+  /// **'hours'**
+  String get unitHoursLong;
+
+  /// Word for minutes, labelling a stepper
+  ///
+  /// In en, this message translates to:
+  /// **'minutes'**
+  String get unitMinutesLong;
+
+  /// Millilitre unit symbol
+  ///
+  /// In en, this message translates to:
+  /// **'ml'**
+  String get unitMilliliters;
+
+  /// Kilogram unit symbol
+  ///
+  /// In en, this message translates to:
+  /// **'kg'**
+  String get unitKilograms;
+
+  /// Title of the month/year picker sheet on the calendar
+  ///
+  /// In en, this message translates to:
+  /// **'Jump to month'**
+  String get calendarJumpTitle;
+
+  /// Label above the year selector in the month picker
+  ///
+  /// In en, this message translates to:
+  /// **'Year'**
+  String get calendarJumpYearLabel;
+
+  /// Shown when the ad consent form cannot be opened because the region does not require it
+  ///
+  /// In en, this message translates to:
+  /// **'Ad personalisation choices aren\'t offered in your region — ads here are already non-personalised.'**
+  String get settingsAdPrivacyUnavailable;
+
+  /// Settings group header for look-and-feel options
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get settingsGroupAppearance;
+
+  /// Settings group header for tracking-related preferences
+  ///
+  /// In en, this message translates to:
+  /// **'Tracking preferences'**
+  String get settingsGroupTracking;
+
+  /// No description provided for @dayLogCustomTagsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'My own trackers'**
+  String get dayLogCustomTagsLabel;
+
+  /// No description provided for @customTagAddButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a tracker'**
+  String get customTagAddButton;
+
+  /// No description provided for @customTagDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New tracker'**
+  String get customTagDialogTitle;
+
+  /// No description provided for @customTagDialogHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. migraine, gym, insomnia'**
+  String get customTagDialogHint;
+
+  /// No description provided for @customTagManageEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage my trackers'**
+  String get customTagManageEntry;
+
+  /// No description provided for @customTagRenameTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Rename tracker'**
+  String get customTagRenameTitle;
+
+  /// No description provided for @customTagDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this tracker?'**
+  String get customTagDeleteTitle;
+
+  /// No description provided for @customTagDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'It will be removed from every day you used it. Your other entries stay as they are.'**
+  String get customTagDeleteBody;
+
+  /// No description provided for @customTagEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No trackers of your own yet.'**
+  String get customTagEmpty;
+
+  /// No description provided for @premiumLockedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium feature'**
+  String get premiumLockedTitle;
+
+  /// No description provided for @premiumLockedAction.
+  ///
+  /// In en, this message translates to:
+  /// **'See Premium'**
+  String get premiumLockedAction;
+
+  /// No description provided for @premiumBenefitCustomTrackers.
+  ///
+  /// In en, this message translates to:
+  /// **'Track anything you want, in your own words'**
+  String get premiumBenefitCustomTrackers;
+
+  /// No description provided for @premiumBenefitAdvancedInsights.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced insights: what tends to happen, and when'**
+  String get premiumBenefitAdvancedInsights;
+
+  /// No description provided for @premiumBenefitPersonalisation.
+  ///
+  /// In en, this message translates to:
+  /// **'Extra backgrounds and companions'**
+  String get premiumBenefitPersonalisation;
+
+  /// No description provided for @premiumBenefitAdvancedReminders.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders on your own schedule'**
+  String get premiumBenefitAdvancedReminders;
+
+  /// No description provided for @advancedInsightsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced insights'**
+  String get advancedInsightsTitle;
+
+  /// No description provided for @advancedInsightsEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced insights'**
+  String get advancedInsightsEntry;
+
+  /// No description provided for @advancedInsightsNotEnough.
+  ///
+  /// In en, this message translates to:
+  /// **'Log three full cycles and your patterns will appear here. Fewer than that and any \"pattern\" would just be coincidence.'**
+  String get advancedInsightsNotEnough;
+
+  /// No description provided for @advancedInsightsPatternsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'When things tend to show up'**
+  String get advancedInsightsPatternsTitle;
+
+  /// No description provided for @advancedInsightsPatternLine.
+  ///
+  /// In en, this message translates to:
+  /// **'{label} — most often {segment}'**
+  String advancedInsightsPatternLine(String label, String segment);
+
+  /// No description provided for @advancedInsightsPatternDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} days logged, around day {day} of your cycle'**
+  String advancedInsightsPatternDetail(int count, int day);
+
+  /// No description provided for @advancedInsightsNoPattern.
+  ///
+  /// In en, this message translates to:
+  /// **'{label} — no clear timing yet'**
+  String advancedInsightsNoPattern(String label);
+
+  /// No description provided for @advancedInsightsTrendTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cycle length over time'**
+  String get advancedInsightsTrendTitle;
+
+  /// No description provided for @advancedInsightsDriftLonger.
+  ///
+  /// In en, this message translates to:
+  /// **'Comparing your earliest {cycles} cycles with your latest {cycles}, the recent ones run about {days} days longer.'**
+  String advancedInsightsDriftLonger(String days, String cycles);
+
+  /// No description provided for @advancedInsightsDriftShorter.
+  ///
+  /// In en, this message translates to:
+  /// **'Comparing your earliest {cycles} cycles with your latest {cycles}, the recent ones run about {days} days shorter.'**
+  String advancedInsightsDriftShorter(String days, String cycles);
+
+  /// No description provided for @advancedInsightsDriftStable.
+  ///
+  /// In en, this message translates to:
+  /// **'Comparing your earliest {cycles} cycles with your latest {cycles}, your cycle length has stayed about the same.'**
+  String advancedInsightsDriftStable(String cycles);
+
+  /// No description provided for @advancedInsightsDriftNotEnough.
+  ///
+  /// In en, this message translates to:
+  /// **'Once you have six full cycles, Vera can compare your earliest ones with your most recent to see whether your cycle length is drifting.'**
+  String get advancedInsightsDriftNotEnough;
+
+  /// No description provided for @advancedInsightsMoodTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Mood by part of the cycle'**
+  String get advancedInsightsMoodTitle;
+
+  /// No description provided for @advancedInsightsDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'These are counts of what you logged, nothing more. They are not a diagnosis, and a pattern here is not a cause.'**
+  String get advancedInsightsDisclaimer;
+
+  /// No description provided for @segmentPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'during your period'**
+  String get segmentPeriod;
+
+  /// No description provided for @segmentAfterPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'after your period'**
+  String get segmentAfterPeriod;
+
+  /// No description provided for @segmentMidCycle.
+  ///
+  /// In en, this message translates to:
+  /// **'mid-cycle'**
+  String get segmentMidCycle;
+
+  /// No description provided for @segmentBeforePeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'before your period'**
+  String get segmentBeforePeriod;
+
+  /// No description provided for @customRemindersEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'My own reminders'**
+  String get customRemindersEntry;
+
+  /// No description provided for @customRemindersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My own reminders'**
+  String get customRemindersTitle;
+
+  /// No description provided for @customRemindersEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No reminders of your own yet.'**
+  String get customRemindersEmpty;
+
+  /// No description provided for @customRemindersAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a reminder'**
+  String get customRemindersAdd;
+
+  /// No description provided for @customReminderLabelHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. take my pill, drink water'**
+  String get customReminderLabelHint;
+
+  /// No description provided for @customReminderLockScreenNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminder text appears on your lock screen, so keep it as private as you want it to be.'**
+  String get customReminderLockScreenNote;
+
+  /// No description provided for @customReminderDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete reminder'**
+  String get customReminderDelete;
+
+  /// No description provided for @homeThemeDusk.
+  ///
+  /// In en, this message translates to:
+  /// **'Dusk'**
+  String get homeThemeDusk;
+
+  /// No description provided for @homeThemeMeadow.
+  ///
+  /// In en, this message translates to:
+  /// **'Meadow'**
+  String get homeThemeMeadow;
+
+  /// No description provided for @homeThemePetal.
+  ///
+  /// In en, this message translates to:
+  /// **'Petal'**
+  String get homeThemePetal;
+
+  /// No description provided for @homeThemeBloom.
+  ///
+  /// In en, this message translates to:
+  /// **'Bloom'**
+  String get homeThemeBloom;
+
+  /// No description provided for @mascotStar.
+  ///
+  /// In en, this message translates to:
+  /// **'Star'**
+  String get mascotStar;
+
+  /// No description provided for @mascotLeaf.
+  ///
+  /// In en, this message translates to:
+  /// **'Leaf'**
+  String get mascotLeaf;
+
+  /// No description provided for @tipDetailWhatsHappening.
+  ///
+  /// In en, this message translates to:
+  /// **'What\'s happening in your body'**
+  String get tipDetailWhatsHappening;
+
+  /// No description provided for @tipDetailDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'This is general information, not personal medical advice. Every body responds differently, and how you actually feel matters more than anything suggested here. If something worries you, talk to a clinician.'**
+  String get tipDetailDisclaimer;
+
+  /// No description provided for @phaseExplainerMenstrual.
+  ///
+  /// In en, this message translates to:
+  /// **'You are bleeding as the uterine lining sheds. Estrogen and progesterone are at their lowest point of the cycle, which is why many people feel more tired and more inward in the first days. Cramps come from the uterus contracting. Bleeding also costs you iron — which explains part of the fatigue.'**
+  String get phaseExplainerMenstrual;
+
+  /// No description provided for @phaseExplainerFollicular.
+  ///
+  /// In en, this message translates to:
+  /// **'After bleeding ends, estrogen starts climbing again. Most people notice energy, mood and stamina picking back up. Follicles are maturing in the ovaries; the body is preparing for the next ovulation.'**
+  String get phaseExplainerFollicular;
+
+  /// No description provided for @phaseExplainerFertile.
+  ///
+  /// In en, this message translates to:
+  /// **'Estrogen is near its peak and ovulation is expected around these days. Cervical mucus typically turns clear and slippery, some people notice higher libido, and some feel a brief twinge on one side. Energy is often at its highest point in the cycle.'**
+  String get phaseExplainerFertile;
+
+  /// No description provided for @phaseExplainerLuteal.
+  ///
+  /// In en, this message translates to:
+  /// **'After ovulation progesterone rises, then drops sharply as your period approaches. That drop can trigger PMS symptoms: bloating, breast tenderness, appetite changes, broken sleep and mood swings. Your body temperature runs slightly higher.'**
+  String get phaseExplainerLuteal;
+
+  /// No description provided for @phaseExplainerUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'There is not enough logged yet to say which phase you are in. Vera would rather say so than invent a phase. Once you have logged a few cycles this section fills in with your own data — until then, the suggestions below are general ones that apply at any point.'**
+  String get phaseExplainerUnknown;
+
+  /// No description provided for @tipFitnessDetailMenstrual.
+  ///
+  /// In en, this message translates to:
+  /// **'Hard training does not suit most people in the first days, and that is not a discipline problem — your energy genuinely is lower. Walking, gentle stretching, restorative yoga and breathwork improve blood flow and can take the edge off cramps. If you feel good, there is no reason to avoid hard sessions: bleeding is not a reason to stop exercising. One practical note: long, demanding sessions on heavy days can deepen the fatigue, so adjust by how your body actually feels.'**
+  String get tipFitnessDetailMenstrual;
+
+  /// No description provided for @tipFitnessDetailFollicular.
+  ///
+  /// In en, this message translates to:
+  /// **'As estrogen rises most people feel stronger and more durable; this is usually the best stretch of the cycle to start something new, add weight, or push the pace. Muscle repair is relatively efficient here too. Still, build up gradually: high energy does not mean zero injury risk.'**
+  String get tipFitnessDetailFollicular;
+
+  /// No description provided for @tipFitnessDetailFertile.
+  ///
+  /// In en, this message translates to:
+  /// **'Energy and motivation are usually at their peak, so demanding sessions tend to land well. Some people have slightly looser joints around ovulation, so a longer warm-up makes sense for sports with sharp changes of direction. A brief twinge on one side of the abdomen is common — but if it is severe or lasts, rest and check with a clinician.'**
+  String get tipFitnessDetailFertile;
+
+  /// No description provided for @tipFitnessDetailLuteal.
+  ///
+  /// In en, this message translates to:
+  /// **'As your period approaches, energy can drop, your heart rate can sit higher for the same effort, and recovery can take longer. That is an expected swing, not a decline. Moderate sessions, a slightly lighter version of your strength work, and walking are usually more sustainable here. With bloating and breast tenderness, a supportive bra and a longer warm-up make a real difference.'**
+  String get tipFitnessDetailLuteal;
+
+  /// No description provided for @tipFitnessDetailUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Even without knowing your phase, movement helps at any point: moderate activity spread across most days of the week beats occasional very intense sessions. Adjust to how you feel — on tired days, a walk counts. Once you have logged a few cycles you will see phase-specific suggestions here.'**
+  String get tipFitnessDetailUnknown;
+
+  /// No description provided for @tipNutritionDetailMenstrual.
+  ///
+  /// In en, this message translates to:
+  /// **'Bleeding costs you iron; red meat, lentils, chickpeas, dark leafy greens and molasses help replace it. Plant iron absorbs markedly better alongside vitamin C — squeezing lemon over a lentil dish is the most practical version of that. Tea and coffee with a meal reduce iron absorption, so leaving an hour between them is enough. Drinking plenty of water can ease the fatigue and headaches that come with bleeding.'**
+  String get tipNutritionDetailMenstrual;
+
+  /// No description provided for @tipNutritionDetailFollicular.
+  ///
+  /// In en, this message translates to:
+  /// **'With energy recovering, the body is in rebuild mode: enough protein, whole grains and vegetables support that. It also makes sense to keep refilling iron stores after bleeding. Not skipping meals is usually easier in this phase, and it sets you up to enter the appetite swings of the next one more evenly.'**
+  String get tipNutritionDetailFollicular;
+
+  /// No description provided for @tipNutritionDetailFertile.
+  ///
+  /// In en, this message translates to:
+  /// **'No special diet is needed here; balanced meals and enough water do the most work. Some people feel bloated, which is usually hormonal and passing. If you are planning a pregnancy, this is a sensible time to ask a clinician about folic acid — but that is a conversation with them, not advice an app should give.'**
+  String get tipNutritionDetailFertile;
+
+  /// No description provided for @tipNutritionDetailLuteal.
+  ///
+  /// In en, this message translates to:
+  /// **'Increased appetite and sugar cravings as progesterone rises are very common; that is a hormonal shift, not a willpower problem. Adding protein and fibre to meals keeps blood sugar steadier and softens the craving. Less salt and more water can ease bloating. Magnesium-rich foods (almonds, walnuts, dark greens, dark chocolate) reduce cramps and tension for some people. Cutting back on caffeine helps the broken sleep of this phase.'**
+  String get tipNutritionDetailLuteal;
+
+  /// No description provided for @tipNutritionDetailUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Whatever the phase, the same things help most: regular meals, enough protein, plenty of vegetables, enough water, and iron-rich foods. Since bleeding costs iron, paying a little more attention on those days is enough. Once you have logged a few cycles you will see phase-specific suggestions here.'**
+  String get tipNutritionDetailUnknown;
 }
 
 class _AppLocalizationsDelegate

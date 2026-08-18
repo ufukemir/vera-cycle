@@ -13,6 +13,9 @@ import '../export/export_screen.dart';
 import '../export/import_screen.dart';
 import '../home/widgets/home_hero.dart';
 import '../premium/premium_screen.dart';
+import '../../widgets/premium_lock.dart';
+import 'custom_reminders_screen.dart';
+import 'custom_tags_screen.dart';
 import 'diagnostics_screen.dart';
 import 'prediction_settings_screen.dart';
 import 'privacy_screen.dart';
@@ -290,7 +293,11 @@ class SettingsScreen extends StatelessWidget {
     if (!context.mounted) return;
     await context.read<ReminderService>().cancelAll();
     if (!context.mounted) return;
-    await context.read<AppPreferences>().setOnboardingComplete(false);
+    final prefs = context.read<AppPreferences>();
+    // The user wrote these labels themselves; they are as much "their data"
+    // as a logged symptom is.
+    await prefs.clearCustomReminders();
+    await prefs.setOnboardingComplete(false);
   }
 
   @override
@@ -304,40 +311,12 @@ class SettingsScreen extends StatelessWidget {
       body: SafeArea(
         child: ListView(
           children: [
+            // Grouped by what the user is actually deciding: everything
+            // that changes how the app looks sits together, and the two
+            // measurement choices sit together, rather than alternating
+            // heading/control/divider down the whole screen.
+            _groupHeading(context, l10n.settingsGroupAppearance),
             const LanguagePickerTile(),
-            const Divider(),
-            _sectionHeading(context, l10n.settingsWeekStartLabel),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SegmentedButton<bool>(
-                segments: [
-                  ButtonSegment(value: true, label: Text(l10n.settingsWeekStartMonday)),
-                  ButtonSegment(value: false, label: Text(l10n.settingsWeekStartSunday)),
-                ],
-                selected: {prefs.weekStartsMonday},
-                onSelectionChanged: (s) => prefs.setWeekStartsMonday(s.first),
-              ),
-            ),
-            const Divider(),
-            _sectionHeading(context, l10n.settingsTemperatureUnitLabel),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SegmentedButton<TemperatureUnit>(
-                segments: [
-                  ButtonSegment(
-                    value: TemperatureUnit.celsius,
-                    label: Text(l10n.settingsTemperatureCelsius),
-                  ),
-                  ButtonSegment(
-                    value: TemperatureUnit.fahrenheit,
-                    label: Text(l10n.settingsTemperatureFahrenheit),
-                  ),
-                ],
-                selected: {prefs.temperatureUnit},
-                onSelectionChanged: (s) => prefs.setTemperatureUnit(s.first),
-              ),
-            ),
-            const Divider(),
             _sectionHeading(context, l10n.settingsThemeLabel),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -370,14 +349,27 @@ class SettingsScreen extends StatelessWidget {
                     HomeTheme.field: l10n.homeThemeField,
                     HomeTheme.blossom: l10n.homeThemeBlossom,
                     HomeTheme.plain: l10n.homeThemePlain,
+                    HomeTheme.dusk: l10n.homeThemeDusk,
+                    HomeTheme.meadow: l10n.homeThemeMeadow,
+                    HomeTheme.petal: l10n.homeThemePetal,
+                    HomeTheme.bloom: l10n.homeThemeBloom,
                   }.entries)
                     Padding(
                       padding: const EdgeInsets.only(right: 10),
                       child: _ThemeSwatch(
                         label: entry.value,
                         theme: entry.key,
-                        selected: prefs.homeTheme == entry.key,
-                        onTap: () => prefs.setHomeTheme(entry.key),
+                        // The user's actual choice, not the one currently
+                        // rendered: a lapsed Premium theme stays ticked
+                        // here so resubscribing restores it, and so the
+                        // picker never shows two swatches as selected.
+                        selected: prefs.selectedHomeTheme == entry.key,
+                        // Locked swatches are shown, not hidden: seeing what
+                        // Premium adds is the honest version of an upsell.
+                        locked: entry.key.premium && !prefs.premiumActive,
+                        onTap: () => entry.key.premium && !prefs.premiumActive
+                            ? _openPremium(context)
+                            : prefs.setHomeTheme(entry.key),
                       ),
                     ),
                 ],
@@ -393,17 +385,60 @@ class SettingsScreen extends StatelessWidget {
                     Mascot.droplet: l10n.mascotDroplet,
                     Mascot.flower: l10n.mascotFlower,
                     Mascot.moon: l10n.mascotMoon,
+                    Mascot.star: l10n.mascotStar,
+                    Mascot.leaf: l10n.mascotLeaf,
                     Mascot.none: l10n.mascotNone,
                   }.entries)
                     ChoiceChip(
+                      avatar: entry.key.premium && !prefs.premiumActive
+                          ? const Icon(Icons.lock_outline, size: 16)
+                          : null,
                       label: Text(entry.value),
-                      selected: prefs.mascot == entry.key,
-                      onSelected: (_) => prefs.setMascot(entry.key),
+                      selected: prefs.selectedMascot == entry.key,
+                      onSelected: (_) =>
+                          entry.key.premium && !prefs.premiumActive
+                              ? _openPremium(context)
+                              : prefs.setMascot(entry.key),
                     ),
                 ],
               ),
             ),
-            const Divider(),
+            const Divider(height: 32),
+            _groupHeading(context, l10n.settingsGroupTracking),
+            _sectionHeading(context, l10n.settingsWeekStartLabel),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: SegmentedButton<bool>(
+                segments: [
+                  ButtonSegment(
+                      value: true, label: Text(l10n.settingsWeekStartMonday)),
+                  ButtonSegment(
+                      value: false, label: Text(l10n.settingsWeekStartSunday)),
+                ],
+                selected: {prefs.weekStartsMonday},
+                onSelectionChanged: (s) => prefs.setWeekStartsMonday(s.first),
+              ),
+            ),
+            _sectionHeading(context, l10n.settingsTemperatureUnitLabel),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: SegmentedButton<TemperatureUnit>(
+                segments: [
+                  ButtonSegment(
+                    value: TemperatureUnit.celsius,
+                    label: Text(l10n.settingsTemperatureCelsius),
+                  ),
+                  ButtonSegment(
+                    value: TemperatureUnit.fahrenheit,
+                    label: Text(l10n.settingsTemperatureFahrenheit),
+                  ),
+                ],
+                selected: {prefs.temperatureUnit},
+                onSelectionChanged: (s) => prefs.setTemperatureUnit(s.first),
+              ),
+            ),
+            const SizedBox(height: 8),
+            const Divider(height: 32),
             SwitchListTile(
               title: Text(l10n.settingsRemindersLabel),
               value: prefs.remindersEnabled,
@@ -507,6 +542,66 @@ class SettingsScreen extends StatelessWidget {
                 await prefs.setOvulationRemindersEnabled(v);
                 if (context.mounted) await _rescheduleOvulationReminder(context);
               },
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: PremiumLock(
+                title: l10n.customTagManageEntry,
+                description: l10n.premiumBenefitCustomTrackers,
+                // Still reachable without Premium: renaming and deleting
+                // your own trackers is managing your own data, and locking
+                // the door on it would strand whatever you recorded before
+                // the subscription lapsed.
+                lockedPreview: context.watch<CycleController>().customTags.isEmpty
+                    ? null
+                    : Card(
+                        child: ListTile(
+                          title: Text(l10n.customTagManageEntry),
+                          trailing: const Icon(Icons.chevron_right),
+                          onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (_) => const CustomTagsScreen())),
+                        ),
+                      ),
+                child: Card(
+                  child: ListTile(
+                    title: Text(l10n.customTagManageEntry),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) => const CustomTagsScreen())),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: PremiumLock(
+                title: l10n.customRemindersEntry,
+                description: l10n.premiumBenefitAdvancedReminders,
+                // Same reasoning, with teeth: a lapsed user whose reminders
+                // were stored but unreachable had no in-app way to delete
+                // them at all.
+                lockedPreview: prefs.customReminders.isEmpty
+                    ? null
+                    : Card(
+                        child: ListTile(
+                          title: Text(l10n.customRemindersEntry),
+                          trailing: const Icon(Icons.chevron_right),
+                          onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (_) =>
+                                      const CustomRemindersScreen())),
+                        ),
+                      ),
+                child: Card(
+                  child: ListTile(
+                    title: Text(l10n.customRemindersEntry),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) => const CustomRemindersScreen())),
+                  ),
+                ),
+              ),
             ),
             ListTile(
               title: Text(l10n.settingsRemindersAppointmentLabel),
@@ -632,7 +727,18 @@ class SettingsScreen extends StatelessWidget {
             ListTile(
               title: Text(l10n.settingsAdPrivacyEntry),
               trailing: const Icon(Icons.chevron_right),
-              onTap: () => const AdConsentService().showPrivacyOptions(),
+              onTap: () async {
+                final messenger = ScaffoldMessenger.of(context);
+                final shown =
+                    await const AdConsentService().showPrivacyOptions();
+                if (shown) return;
+                messenger.hideCurrentSnackBar();
+                messenger.showSnackBar(SnackBar(
+                  content: Text(l10n.settingsAdPrivacyUnavailable),
+                  behavior: SnackBarBehavior.floating,
+                  duration: const Duration(seconds: 5),
+                ));
+              },
             ),
             ListTile(
               title: Text(l10n.settingsPrivacyEntry),
@@ -682,9 +788,28 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
+  void _openPremium(BuildContext context) => Navigator.of(context).push(
+        MaterialPageRoute(builder: (_) => const PremiumScreen()),
+      );
+
   Widget _sectionHeading(BuildContext context, String text) => Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
         child: Text(text, style: Theme.of(context).textTheme.titleMedium),
+      );
+
+  /// One level above [_sectionHeading]: names a whole group of related
+  /// settings, in the accent colour so the two tiers read as a hierarchy
+  /// rather than as identical repeated labels.
+  Widget _groupHeading(BuildContext context, String text) => Padding(
+        padding: const EdgeInsets.fromLTRB(16, 20, 16, 4),
+        child: Text(
+          text.toUpperCase(),
+          style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                color: Theme.of(context).colorScheme.primary,
+                letterSpacing: 1.1,
+                fontWeight: FontWeight.w700,
+              ),
+        ),
       );
 }
 
@@ -694,12 +819,14 @@ class _ThemeSwatch extends StatelessWidget {
     required this.theme,
     required this.selected,
     required this.onTap,
+    this.locked = false,
   });
 
   final String label;
   final HomeTheme theme;
   final bool selected;
   final VoidCallback onTap;
+  final bool locked;
 
   @override
   Widget build(BuildContext context) {
@@ -712,6 +839,7 @@ class _ThemeSwatch extends StatelessWidget {
           Container(
             width: 62,
             height: 62,
+            alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
@@ -723,9 +851,15 @@ class _ThemeSwatch extends StatelessWidget {
                   : DecorationImage(
                       image: ResizeImage(AssetImage(asset), width: 186),
                       fit: BoxFit.cover,
+                      // Dimmed rather than blurred out: the point is to show
+                      // what it looks like, not to tease it.
+                      opacity: locked ? 0.45 : 1,
                     ),
               gradient: asset == null ? const AppPaletteGradient() : null,
             ),
+            child: locked
+                ? Icon(Icons.lock_outline, size: 20, color: scheme.primary)
+                : null,
           ),
           const SizedBox(height: 4),
           Text(label, style: Theme.of(context).textTheme.labelSmall),

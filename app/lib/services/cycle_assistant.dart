@@ -10,6 +10,7 @@ class AssistantContext {
     this.meanCycleLength,
     this.cyclesLogged = 0,
     this.predictionRangeLabel,
+    this.ovulationRangeLabel,
   });
 
   final int? cycleDay;
@@ -17,9 +18,16 @@ class AssistantContext {
   final double? meanCycleLength;
   final int cyclesLogged;
 
-  /// Already-localized "12 – 15 May" style range, or null when no
-  /// prediction exists yet.
+  /// Already-localized "12 – 15 May" style range for the next PERIOD, or
+  /// null when no prediction exists yet.
   final String? predictionRangeLabel;
+
+  /// Already-localized range for the estimated OVULATION window — roughly
+  /// the period window shifted back by a luteal phase. Kept separate from
+  /// [predictionRangeLabel] deliberately: the two are ~14 days apart, and
+  /// showing the period window under an ovulation question told the user a
+  /// wrong date with full confidence.
+  final String? ovulationRangeLabel;
 }
 
 /// On-device Q&A over a curated, clinician-reviewable knowledge base —
@@ -53,25 +61,133 @@ class CycleAssistant {
   /// fallback — a chatbot that answers "merhaba" with "I didn't catch
   /// that" feels broken.
   String? _smallTalk(String normalized, String lang) {
-    bool hasAny(List<String> words) =>
-        words.any((w) => normalized.contains(w));
-    if (hasAny(['merhaba', 'selam', 'hello', 'hi ', 'hey']) &&
-        normalized.length < 25) {
+    // Whole-word matching, not bare `contains`. As substrings, 'hey' fired
+    // inside "are they normal?" and 'sup' inside "should I take
+    // supplements?" and "hamile miyim şüpheliyim" — real health questions
+    // answered with "Hi! 👋". Every phrase below is matched as a complete
+    // word or word sequence.
+    final padded =
+        ' ${normalized.replaceAll(RegExp(r'[^a-z0-9]+'), ' ').trim()} ';
+    bool hasAny(List<String> phrases) =>
+        phrases.any((p) => padded.contains(' $p '));
+    final short = normalized.length < 30;
+
+    if (short && hasAny(['merhaba', 'selam', 'selamlar', 'hello', 'hi', 'hey'])) {
       return lang == 'tr'
           ? 'Merhaba! 👋 Regl, döngü veya Vera hakkında ne merak ediyorsun?'
           : 'Hi! 👋 What would you like to know about periods, cycles, or Vera?';
     }
-    if (hasAny(['tesekkur', 'sagol', 'thank', 'thx'])) {
+    // "naber" and friends: these were falling through to "I didn't catch
+    // that", which reads as broken for the most casual thing a user can
+    // type. Answer briefly, then steer back to what this assistant is for.
+    if (short &&
+        hasAny([
+          'naber',
+          'nabersin',
+          'nasilsin',
+          'ne haber',
+          'nasil gidiyor',
+          'iyi misin',
+          'how are you',
+          'whats up',
+          'what s up',
+          'sup',
+        ])) {
+      return lang == 'tr'
+          ? 'İyiyim, sorduğun için teşekkürler! 🙂 Ben buradaki işimi seviyorum: döngün, semptomların veya Vera\'nın nasıl çalıştığı hakkında ne sormak istersen sor.'
+          : "Doing well, thanks for asking! 🙂 I'm here for the useful part: ask me anything about your cycle, your symptoms, or how Vera works.";
+    }
+    if (short && hasAny(['gunaydin', 'good morning'])) {
+      return lang == 'tr'
+          ? 'Günaydın! ☀️ Bugün nasıl hissediyorsun? Kaydetmek istediğin bir şey varsa gün kaydına ekleyebilirsin.'
+          : 'Good morning! ☀️ How are you feeling today? Anything you want to note goes in your day log.';
+    }
+    if (short && hasAny(['iyi geceler', 'good night'])) {
+      return lang == 'tr'
+          ? 'İyi geceler! 🌙 Uyku düzeni döngüyü de etkiler; dilersen uykunu da kaydedebilirsin.'
+          : 'Good night! 🌙 Sleep affects your cycle too — you can log it if you like.';
+    }
+    // Whole words, so "thanks, is heavy bleeding normal?" reaches the
+    // topic matcher instead of being answered with "You're welcome!".
+    if (short &&
+        hasAny([
+          'tesekkurler',
+          'tesekkur ederim',
+          'tesekkurr',
+          'sagol',
+          'sag ol',
+          'sagolun',
+          'thanks',
+          'thank you',
+          'thx',
+        ])) {
       return lang == 'tr'
           ? 'Rica ederim! Başka bir sorun olursa buradayım. 💛'
           : "You're welcome! I'm here if anything else comes up. 💛";
+    }
+    if (short &&
+        hasAny(['gorusuruz', 'hoscakal', 'bye', 'goodbye', 'see you'])) {
+      return lang == 'tr'
+          ? 'Görüşürüz! İhtiyacın olursa buradayım. 👋'
+          : "See you! I'm here whenever you need me. 👋";
     }
     if (hasAny(['kimsin', 'nesin sen', 'who are you', 'what are you'])) {
       return lang == 'tr'
           ? 'Ben Vera Asistan — tamamen bu telefonda çalışan bir yardımcıyım. Cevaplarım özenle hazırlanmış bir bilgi tabanından gelir ve kendi kayıtlarınla kişiselleşir; sorduklarının hiçbiri cihazdan çıkmaz.'
           : "I'm the Vera Assistant — a helper that runs entirely on this phone. My answers come from a curated knowledge base and get personalized with your own logs; your questions never leave the device.";
     }
+    if (hasAny([
+      'yapay zeka misin',
+      'robot musun',
+      'chatgpt',
+      'are you ai',
+      'are you a bot',
+      'are you a robot',
+    ])) {
+      return lang == 'tr'
+          ? 'Bulut tabanlı bir yapay zeka değilim — internete soru göndermiyorum. Elimde özenle yazılmış bir bilgi tabanı var; sorunu onunla eşleştirip cevabı senin kendi kayıtlarınla kişiselleştiriyorum. Bu yüzden bazen bilmediğim bir şey çıkabilir, ama uydurmam ve verini dışarı vermem.'
+          : "I'm not a cloud AI — I never send your questions to the internet. I match what you ask against a hand-written knowledge base and personalize the answer with your own logs. That means I sometimes won't know something, but I won't make things up and I won't hand your data to anyone.";
+    }
     return null;
+  }
+
+  /// "What else can I ask?" — this was hitting the generic fallback, which
+  /// answered a question about the assistant's range with three examples
+  /// and no sense of the range. Answer it with the actual list.
+  String? _capabilities(String normalized, String lang) {
+    // Unambiguous — these can only be a question about the assistant's
+    // range, so they match anywhere in the message.
+    const asks = [
+      'baska ne sor',
+      'neler sorabil',
+      'ne sorabilirim',
+      'ne sorabiliyorum',
+      'nelerden anliyorsun',
+      'ne biliyorsun',
+      'neler biliyorsun',
+      'ne yapabilirsin',
+      'what else can i ask',
+      'what can i ask',
+      'what do you know',
+      'what can you do',
+    ];
+    // Generic pleas for help. On their own they mean "what can you do?",
+    // but inside "help me with cramps" they are just filler — answering
+    // those with a topic list instead of the cramps answer is a
+    // regression, so they only count when they are the whole message.
+    const asksAlone = ['yardim et', 'yardim', 'help me', 'help'];
+
+    final stripped = normalized.replaceAll(RegExp(r'[^a-z0-9 ]'), ' ').trim();
+    final collapsed = stripped.replaceAll(RegExp(r'\s+'), ' ');
+
+    if (!asks.any(normalized.contains) && !asksAlone.contains(collapsed)) {
+      return null;
+    }
+
+    final lines = _topics.map((t) => '• ${t.sampleQuestion[lang]!}').join('\n');
+    return lang == 'tr'
+        ? 'Şunların hepsini sorabilirsin — kendi cümlelerinle sorman da yeterli:\n$lines'
+        : 'You can ask about any of these — your own wording is fine:\n$lines';
   }
 
   /// Follow-up questions to offer after an answer — the next-tap
@@ -97,15 +213,30 @@ class CycleAssistant {
   String answer(String question, AssistantContext ctx, String languageCode) {
     final lang = _lang(languageCode);
     final normalized = _normalize(question);
-    if (normalized.trim().isEmpty) return _fallback(ctx, lang);
+    if (normalized.trim().isEmpty) return _fallback(normalized, lang);
 
     final smallTalk = _smallTalk(normalized, lang);
     if (smallTalk != null) return smallTalk;
 
+    final capabilities = _capabilities(normalized, lang);
+    if (capabilities != null) return capabilities;
+
+    final best = _bestTopic(normalized, lang);
+    if (best == null) return _fallback(normalized, lang);
+    return _personalize(best.answer[lang]!, ctx, lang);
+  }
+
+  /// Scores every topic and returns the winner, or `null` if nothing came
+  /// close enough to be worth answering with.
+  _Topic? _bestTopic(String normalized, String lang) {
     // Single-word keywords match as token *prefixes* ("gecik" → "gecikti",
     // "pregnan" → "pregnancy") — never as bare substrings, which once made
     // "late" match inside "ovulate". Multi-word keywords use plain contains.
-    final tokens = normalized.split(RegExp(r'[^a-z0-9]+'));
+    final tokens = normalized
+        .split(RegExp(r'[^a-z0-9]+'))
+        .where((t) => t.isNotEmpty)
+        .toList();
+
     _Topic? best;
     var bestScore = 0;
     for (final topic in _topics) {
@@ -114,44 +245,162 @@ class CycleAssistant {
         final hit = keyword.contains(' ')
             ? normalized.contains(keyword)
             : tokens.any((t) => t.startsWith(keyword));
-        if (hit) score += keyword.length >= 6 ? 2 : 1;
+        if (hit) {
+          score += keyword.length >= 6 ? 2 : 1;
+          continue;
+        }
+        // Typo tolerance, single-word keywords only, and only for words
+        // long enough that one edit can't turn them into a different word.
+        if (!keyword.contains(' ') &&
+            keyword.length >= 5 &&
+            tokens.any((t) => _nearlyStartsWith(t, keyword))) {
+          score += 1;
+        }
       }
+      // Words shared with the topic's own sample question, so phrasing the
+      // question the way the app itself phrases it always lands.
+      final sampleTokens = _normalize(topic.sampleQuestion[lang]!)
+          .split(RegExp(r'[^a-z0-9]+'))
+          .where((t) => t.length >= 5)
+          .toSet();
+      score += tokens.where(sampleTokens.contains).length;
+
       if (score > bestScore) {
         bestScore = score;
         best = topic;
       }
     }
-    if (best == null) return _fallback(ctx, lang);
-    return _personalize(best.answer[lang]!, ctx, lang);
+    return best;
   }
 
-  String _fallback(AssistantContext ctx, String lang) {
-    final examples =
-        _topics.where((t) => t.suggested).take(3).map((t) => '• ${t.sampleQuestion[lang]!}').join('\n');
+  /// Whether [token] starts with something within one typo of [keyword].
+  ///
+  /// Comparing the whole token would be wrong: keywords are prefixes
+  /// ("kramp" is meant to match "kramplar"), so a suffix the keyword never
+  /// covers would count as a pile of edits. Only the leading window of the
+  /// token is compared, at the three lengths a single edit can produce.
+  static bool _nearlyStartsWith(String token, String keyword) {
+    if (token.length < 4) return false;
+    for (final length in [keyword.length - 1, keyword.length, keyword.length + 1]) {
+      if (length < 4 || length > token.length) continue;
+      if (_withinOneEdit(token.substring(0, length), keyword)) return true;
+    }
+    return false;
+  }
+
+  /// Damerau-Levenshtein distance ≤ 1, answered without the full matrix:
+  /// one substitution, one insertion/deletion, or one adjacent swap.
+  static bool _withinOneEdit(String a, String b) {
+    if (a == b) return true;
+    if ((a.length - b.length).abs() > 1) return false;
+
+    if (a.length == b.length) {
+      final diffs = <int>[];
+      for (var i = 0; i < a.length; i++) {
+        if (a[i] != b[i]) {
+          diffs.add(i);
+          if (diffs.length > 2) return false;
+        }
+      }
+      if (diffs.length <= 1) return true;
+      // Two differences are only forgivable as a swapped pair — "crmap"
+      // for "cramp" is one slip of the fingers, not two errors.
+      final [first, second] = diffs;
+      return second == first + 1 &&
+          a[first] == b[second] &&
+          a[second] == b[first];
+    }
+
+    final shorter = a.length < b.length ? a : b;
+    final longer = a.length < b.length ? b : a;
+    var i = 0;
+    var j = 0;
+    var skipped = false;
+    while (i < shorter.length && j < longer.length) {
+      if (shorter[i] == longer[j]) {
+        i++;
+        j++;
+        continue;
+      }
+      if (skipped) return false;
+      skipped = true;
+      j++;
+    }
+    return true;
+  }
+
+  /// Said when nothing matched. Names the limit plainly rather than
+  /// implying the user asked badly, and offers a wider set of starting
+  /// points than the three suggested ones — the old version answered every
+  /// unmatched question with the same three lines, which made the assistant
+  /// look like it only knew three things.
+  String _fallback(String normalized, String lang) {
+    final examples = _topics
+        .where((t) => t.suggested)
+        .take(6)
+        .map((t) => '• ${t.sampleQuestion[lang]!}')
+        .join('\n');
     return lang == 'tr'
-        ? 'Bunu tam anlayamadım. Şunlar gibi sorular sorabilirsin:\n$examples'
-        : "I didn't quite catch that. You can ask things like:\n$examples";
+        ? 'Bunun cevabı bilgi tabanımda yok — uydurmaktansa bilmediğimi söylerim. '
+            'Tıbbi bir konuysa bir sağlık profesyoneline sormak en doğrusu. '
+            'Bana şunları sorabilirsin:\n$examples\n\n'
+            'Neleri bildiğimin tam listesi için "neler sorabilirim" yazabilirsin.'
+        : "That one isn't in my knowledge base — I'd rather say so than invent an answer. "
+            'If it is a medical question, a clinician is the right place to ask. '
+            'Here is what I can help with:\n$examples\n\n'
+            'Type "what can I ask" for the full list.';
   }
 
+  /// Substitutes the user's own numbers into an answer template.
+  ///
+  /// Every placeholder carries its own unit and, where the surrounding
+  /// sentence would otherwise break, its own clause. An earlier version
+  /// substituted bare fallbacks into fixed sentences and produced
+  /// "Your average cycle is not known yet days" for every new user — the
+  /// unknown case has to read as a sentence too, not just fill a slot.
   String _personalize(String template, AssistantContext ctx, String lang) {
+    final tr = lang == 'tr';
     var out = template;
-    final unknownDay = lang == 'tr' ? 'henüz kayıt yok' : 'not logged yet';
-    out = out.replaceAll('{cycleDay}', ctx.cycleDay?.toString() ?? unknownDay);
+
+    // "28.4 gün" / "28.4 days", or a phrase that stands alone.
     out = out.replaceAll(
         '{meanLength}',
         ctx.meanCycleLength != null
-            ? ctx.meanCycleLength!.toStringAsFixed(1)
-            : (lang == 'tr' ? 'henüz bilinmiyor' : 'not known yet'));
+            ? (tr
+                ? '${ctx.meanCycleLength!.toStringAsFixed(1)} gün'
+                : '${ctx.meanCycleLength!.toStringAsFixed(1)} days')
+            : (tr ? 'henüz bilinmiyor' : 'not known yet'));
+
+    // A full clause: the day number alone cannot be dropped into
+    // "you are on day ___" when it is unknown.
+    out = out.replaceAll(
+        '{cycleDayClause}',
+        ctx.cycleDay != null
+            ? (tr
+                ? 'şu an döngünün ${ctx.cycleDay}. günündesin'
+                : 'you are on cycle day ${ctx.cycleDay}')
+            : (tr
+                ? 'bu döngü için henüz kayıt girmemişsin'
+                : "you haven't logged this cycle yet"));
+
     out = out.replaceAll('{cyclesLogged}', ctx.cyclesLogged.toString());
-    if (out.contains('{prediction}')) {
-      final p = ctx.predictionRangeLabel;
-      out = out.replaceAll(
-          '{prediction}',
-          p ??
-              (lang == 'tr'
-                  ? 'henüz tahmin için yeterli veri yok (en az 2 tam döngü gerekir)'
-                  : 'there is not enough data for a prediction yet (at least 2 full cycles needed)'));
-    }
+
+    out = out.replaceAll(
+        '{prediction}',
+        ctx.predictionRangeLabel ??
+            (tr
+                ? 'henüz tahmin için yeterli veri yok (en az 2 tam döngü gerekir)'
+                : 'there is not enough data for a prediction yet (at least 2 full cycles needed)'));
+
+    // The ovulation window is NOT the period window — see
+    // [AssistantContext.ovulationRangeLabel].
+    out = out.replaceAll(
+        '{ovulation}',
+        ctx.ovulationRangeLabel ??
+            (tr
+                ? 'henüz tahmin için yeterli veri yok (en az 2 tam döngü gerekir)'
+                : 'there is not enough data for an estimate yet (at least 2 full cycles needed)'));
+
     return out;
   }
 
@@ -191,9 +440,9 @@ const _topics = <_Topic>[
     },
     answer: {
       'tr':
-          'Ara sıra gecikme çok yaygındır: stres, seyahat, hastalık, uyku düzeni ve kilo değişimi ovülasyonu kaydırabilir — regl de onunla birlikte kayar. Ortalama döngün {meanLength} gün ve şu an döngünün {cycleDay}. günündesin. Tahmini penceren: {prediction}. Gecikme birkaç haftayı bulur, tekrarlar ya da seni endişelendirirse bir sağlık profesyoneline danışmak iyi bir fikirdir.',
+          'Ara sıra gecikme çok yaygındır: stres, seyahat, hastalık, uyku düzeni ve kilo değişimi ovülasyonu kaydırabilir — regl de onunla birlikte kayar. Ortalama döngün {meanLength} ve {cycleDayClause}. Tahmini penceren: {prediction}. Gecikme birkaç haftayı bulur, tekrarlar ya da seni endişelendirirse bir sağlık profesyoneline danışmak iyi bir fikirdir.',
       'en':
-          'An occasional late period is very common: stress, travel, illness, sleep changes, and weight shifts can move ovulation — and your period moves with it. Your average cycle is {meanLength} days and you are on day {cycleDay}. Your estimated window: {prediction}. If a delay stretches to weeks, keeps repeating, or worries you, checking in with a clinician is a good idea.',
+          'An occasional late period is very common: stress, travel, illness, sleep changes, and weight shifts can move ovulation — and your period moves with it. Your average cycle is {meanLength} and {cycleDayClause}. Your estimated window: {prediction}. If a delay stretches to weeks, keeps repeating, or worries you, checking in with a clinician is a good idea.',
     },
   ),
   _Topic(
@@ -219,9 +468,9 @@ const _topics = <_Topic>[
     },
     answer: {
       'tr':
-          'Ovülasyon genelde bir sonraki reglden yaklaşık 14 gün önce olur — döngü başından itibaren değil, sondan geriye sayılır. Şu an döngünün {cycleDay}. günündesin; tahmini pencerene göre hesaplıyorum: {prediction}. Bunlar tahmindir, kesin gün vermek dürüst olmaz — vücut belirtileri (servikal mukus, bazal sıcaklık) tabloyu netleştirebilir.',
+          'Ovülasyon genelde bir sonraki reglden yaklaşık 14 gün önce olur — döngü başından itibaren değil, sondan geriye sayılır. {cycleDayClause}. Regl tahminin {prediction} olduğuna göre ovülasyon penceren kabaca {ovulation} aralığına denk gelir. Bunlar tahmindir, kesin gün vermek dürüst olmaz — vücut belirtileri (servikal mukus, bazal sıcaklık) tabloyu netleştirebilir.',
       'en':
-          'Ovulation typically happens about 14 days *before* your next period — counted back from the end, not forward from the start. You are on cycle day {cycleDay}; based on your estimated window: {prediction}. These are estimates — naming an exact day would be false precision. Body signs (cervical mucus, basal temperature) can sharpen the picture.',
+          'Ovulation typically happens about 14 days *before* your next period — counted back from the end, not forward from the start. {cycleDayClause}. Since your period is estimated for {prediction}, your ovulation window works out to roughly {ovulation}. These are estimates — naming an exact day would be false precision. Body signs (cervical mucus, basal temperature) can sharpen the picture.',
     },
   ),
   _Topic(
@@ -246,9 +495,9 @@ const _topics = <_Topic>[
     },
     answer: {
       'tr':
-          '21–35 gün arası döngüler tipik kabul edilir ve döngüden döngüye birkaç günlük fark tamamen normaldir. Şu ana kadar {cyclesLogged} döngü kaydettin; ortalaman {meanLength} gün. Döngülerin sürekli 21 günden kısa, 35 günden uzunsa ya da düzen aniden değiştiyse, bir hekimle konuşmak iyi olur — bu bir teşhis değil, sadece makul bir sonraki adımdır.',
+          '21–35 gün arası döngüler tipik kabul edilir ve döngüden döngüye birkaç günlük fark tamamen normaldir. Şu ana kadar {cyclesLogged} döngü kaydettin; ortalaman {meanLength}. Döngülerin sürekli 21 günden kısa, 35 günden uzunsa ya da düzen aniden değiştiyse, bir hekimle konuşmak iyi olur — bu bir teşhis değil, sadece makul bir sonraki adımdır.',
       'en':
-          'Cycles between 21–35 days are considered typical, and a few days of variation cycle-to-cycle is completely normal. You have logged {cyclesLogged} cycles so far; your average is {meanLength} days. If cycles are consistently shorter than 21 or longer than 35 days, or the pattern changed suddenly, talking to a clinician is sensible — not a diagnosis, just a reasonable next step.',
+          'Cycles between 21–35 days are considered typical, and a few days of variation cycle-to-cycle is completely normal. You have logged {cyclesLogged} cycles so far; your average is {meanLength}. If cycles are consistently shorter than 21 or longer than 35 days, or the pattern changed suddenly, talking to a clinician is sensible — not a diagnosis, just a reasonable next step.',
     },
   ),
   _Topic(
@@ -470,6 +719,209 @@ const _topics = <_Topic>[
           'Hızlı kilo kaybı, çok düşük vücut yağı veya yoğun diyet ovülasyonu durdurabilir; belirgin kilo artışı da hormon dengesini etkileyebilir. Regl sırasında 1-2 kiloluk geçici su tutulumu ise tamamen normaldir ve gerçek kilo değişimi değildir.',
       'en':
           'Rapid weight loss, very low body fat, or intense dieting can stop ovulation; significant weight gain can also affect hormonal balance. Meanwhile, 1–2 kg of temporary water retention around your period is completely normal and is not real weight change.',
+    },
+  ),
+
+  // ---------------------------------------------------------------------
+  // Using the app itself. These were missing entirely, which is an odd gap
+  // for an assistant sitting inside the app: "how do I log a day" is the
+  // single most likely question a new user has, and it used to fall through
+  // to "I didn't catch that".
+  // ---------------------------------------------------------------------
+  _Topic(
+    keywords: ['nasil kaydet', 'kayit ekle', 'gun kaydi', 'how do i log',
+      'add a log', 'log a day', 'kaydetmek'],
+    sampleQuestion: {
+      'tr': 'Günlük kaydı nasıl eklerim?',
+      'en': 'How do I log a day?',
+    },
+    answer: {
+      'tr':
+          'Takvim\'den istediğin güne dokun, açılan özetten gün kaydına geç — ya da Ana Sayfa\'daki "Bugüne detay ekle" düğmesini kullan. Akış, semptom, ruh hali, enerji, su, uyku, kilo ve notunu oradan girersin. Kaydet düğmesi yok: her dokunuş anında kaydedilir, üstteki "Kaydedildi" yazısı bunu doğrular. Gelecekteki günler kilitlidir, çünkü henüz yaşanmadılar.',
+      'en':
+          'Tap any day in the Calendar and open its day log from the summary sheet — or use "Add details for today" on Home. Flow, symptoms, mood, energy, water, sleep, weight and your note all live there. There is no Save button: every tap is saved immediately, and the "Saved" note at the top confirms it. Future days are not tappable, because they have not happened yet.',
+    },
+  ),
+  _Topic(
+    keywords: ['disa aktar', 'export', 'doktora goster', 'rapor', 'pdf',
+      'csv', 'yedek', 'backup'],
+    sampleQuestion: {
+      'tr': 'Verimi doktoruma nasıl gösteririm?',
+      'en': 'How do I share my data with my doctor?',
+    },
+    answer: {
+      'tr':
+          'Ayarlar → Dışa aktar\'dan iki seçeneğin var: hekim için okunaklı bir PDF/CSV raporu, ve parolayla şifrelenmiş tam yedek. Notların rapora varsayılan olarak girmez — istersen kutucuğu işaretleyerek eklersin. Bu, verinin cihazından çıktığı tek yoldur ve her seferinde sen başlatırsın.',
+      'en':
+          'Settings → Export gives you two things: a readable PDF/CSV report for a clinician, and a full backup encrypted with a password you choose. Your free-text notes are left out of the report by default — tick the box if you want them in. This is the only way your data ever leaves the device, and you start it every time.',
+    },
+  ),
+  _Topic(
+    keywords: ['premium', 'abonelik', 'subscription', 'ucretli', 'para',
+      'satin al', 'reklamsiz'],
+    sampleQuestion: {
+      'tr': 'Premium ne veriyor?',
+      'en': 'What does Premium give me?',
+    },
+    answer: {
+      'tr':
+          'Premium reklamları kaldırır ve şunları ekler: kendi adını verdiğin takip alanları, gelişmiş içgörüler (neyin döngünün hangi bölümünde yoğunlaştığı), kendi hatırlatıcıların ve ek arka planlar/maskotlar. Takibin kendisi — akış, semptom, takvim, tahmin, dışa aktarma — sonsuza dek ücretsiz. Aboneliğin biterse tek bir kaydını bile kaybetmezsin; sadece ücretsiz bir arka plana dönersin.',
+      'en':
+          'Premium removes the ads and adds: trackers you name yourself, advanced insights (what clusters where in your cycle), your own reminders, and extra backgrounds and companions. Tracking itself — flow, symptoms, calendar, predictions, export — stays free forever. If your subscription ends you lose no entries at all; you just go back to a free background.',
+    },
+  ),
+  _Topic(
+    keywords: ['hatirlatici', 'bildirim', 'reminder', 'notification',
+      'alarm'],
+    sampleQuestion: {
+      'tr': 'Hatırlatıcıları nasıl açarım?',
+      'en': 'How do I turn on reminders?',
+    },
+    answer: {
+      'tr':
+          'Ayarlar → Hatırlatıcılar\'dan aç. Yaklaşan regl, regl bitişi, ilaç, su, ovülasyon ve yedekleme için ayrı ayrı açılır, her birinin kendi saati vardır. Premium ile kendi metnini yazdığın hatırlatıcılar da ekleyebilirsin. Hepsi telefonunda kurulur — sunucu yok, push yok. Bildirim metni kilit ekranında görüneceği için, ne kadar mahrem olmasını istiyorsan ona göre yaz.',
+      'en':
+          'Settings → Reminders. Upcoming period, period end, medication, water, ovulation and backup each toggle separately with their own time. With Premium you can add reminders you write yourself. All of them are scheduled on your phone — no server, no push. Reminder text shows on your lock screen, so word it as privately as you want it.',
+    },
+  ),
+  _Topic(
+    keywords: ['telefonu kaybet', 'yeni telefon', 'lost my phone',
+      'new phone', 'aktarim', 'transfer', 'geri yukle', 'restore'],
+    sampleQuestion: {
+      'tr': 'Telefonumu değiştirirsem verim ne olur?',
+      'en': 'What happens to my data if I change phones?',
+    },
+    answer: {
+      'tr':
+          'Bulut senkronu olmadığı için veri kendi kendine yeni telefona geçmez — bu, mahremiyet sözünün doğrudan bedeli ve sana açıkça söylüyoruz. Aktarmanın yolu: eski telefonda Ayarlar → Dışa aktar\'dan parolalı yedek al, yeni telefonda İçe aktar\'dan geri yükle. Parolayı unutursan yedeği kimse açamaz, biz de açamayız. Bu yüzden ara ara yedek almak iyi bir alışkanlıktır.',
+      'en':
+          'There is no cloud sync, so your data does not follow you automatically — that is the direct cost of the privacy promise, and we would rather say it plainly. To move it: on the old phone take a password-protected backup from Settings → Export, then restore it on the new phone from Import. If you forget the password nobody can open that backup, us included. Which is why taking one occasionally is a good habit.',
+    },
+  ),
+  _Topic(
+    keywords: ['pin', 'kilit', 'sifre', 'passcode', 'biyometrik', 'biometric',
+      'parmak izi', 'face id'],
+    sampleQuestion: {
+      'tr': 'Uygulamayı nasıl kilitlerim?',
+      'en': 'How do I lock the app?',
+    },
+    answer: {
+      'tr':
+          'Kurulumda 6 haneli bir PIN belirlersin; istersen parmak izi/yüz tanımayı da açabilirsin, PIN yedek olarak kalır. Uygulama arka plana her alındığında anında kilitlenir ve uygulama değiştiricide içeriğin görünmez. PIN\'i unutursan tek çıkış yolu tüm veriyi silmektir — sunucu tarafında kurtarma yok, çünkü sunucu yok.',
+      'en':
+          'You set a 6-digit PIN during setup, and can add fingerprint/face unlock on top — the PIN stays as the fallback. The app re-locks the instant it goes to the background, and your content is hidden in the app switcher. If you forget the PIN the only way out is erasing everything: there is no server-side recovery, because there is no server.',
+    },
+  ),
+
+  // ---------------------------------------------------------------------
+  // Common health questions that were missing.
+  // ---------------------------------------------------------------------
+  _Topic(
+    keywords: ['menopoz', 'menopause', 'perimenopoz', 'perimenopause',
+      '40 yas'],
+    sampleQuestion: {
+      'tr': 'Menopoza yaklaştığımı nasıl anlarım?',
+      'en': 'How do I know if I am approaching menopause?',
+    },
+    answer: {
+      'tr':
+          'Perimenopozda en tipik değişim düzenin bozulmasıdır: döngüler kısalır ya da uzar, kanama miktarı değişir, aralar açılır. Sıcak basması, uyku bölünmesi ve ruh hali dalgalanmaları eşlik edebilir. Genellikle 40\'lı yaşlarda başlar ama daha erken de olabilir. Vera bunu teşhis edemez; kaydettiğin döngü uzunlukları hekiminle konuşurken en işe yarar veridir.',
+      'en':
+          'The most typical change in perimenopause is the pattern breaking up: cycles get shorter or longer, bleeding changes, gaps widen. Hot flushes, broken sleep and mood swings can come with it. It usually starts in the 40s but can be earlier. Vera cannot diagnose this; the cycle lengths you have logged are the most useful thing to bring to a clinician.',
+    },
+  ),
+  _Topic(
+    keywords: ['pcos', 'polikistik', 'endometriozis', 'endometriosis',
+      'adenomyoz', 'miyom', 'fibroid'],
+    sampleQuestion: {
+      'tr': 'PCOS veya endometriozis olabilir miyim?',
+      'en': 'Could I have PCOS or endometriosis?',
+    },
+    answer: {
+      'tr':
+          'Bu soruya bir uygulama cevap veremez ve vermemeli — ikisi de muayene ve tetkik gerektiren tanılar. Ama hekime gitmeye değer işaretler bellidir: çok uzun veya çok düzensiz döngüler, günlük hayatını aksatan ağrı, ilişkide ağrı, çok yoğun kanama, tüylenme veya ciltte belirgin değişim. Vera\'nın işi burada tanı koymak değil, hekime götüreceğin somut kaydı hazırlamak: Ayarlar → Dışa aktar\'dan rapor alabilirsin.',
+      'en':
+          'An app cannot answer this, and should not try — both are diagnoses that need examination and tests. But the signals worth taking to a clinician are clear: very long or very irregular cycles, pain that disrupts your day, pain during sex, very heavy bleeding, or marked hair or skin changes. Vera\'s job here is not to diagnose but to give you something concrete to bring: Settings → Export produces a report.',
+    },
+  ),
+  _Topic(
+    keywords: ['ped', 'tampon', 'kap', 'kupa', 'pad', 'menstrual cup',
+      'kullanmali'],
+    sampleQuestion: {
+      'tr': 'Ped, tampon ve kap arasında ne fark var?',
+      'en': 'What is the difference between pads, tampons and cups?',
+    },
+    answer: {
+      'tr':
+          'Ped dışarıdan kullanılır, en basit seçenektir. Tampon içeriden emer; 4–8 saatte bir değiştirilmesi gerekir. Adet kabı içeride kan toplar, 8–12 saate kadar kalabilir ve yıkanıp tekrar kullanılır. Hiçbiri diğerinden "daha doğru" değil — rahat ettiğin hangisiyse odur. Tek kesin kural: tampon ve kabı önerilen süreden uzun bırakma.',
+      'en':
+          'Pads sit outside and are the simplest option. Tampons absorb internally and need changing every 4–8 hours. A menstrual cup collects internally, can stay up to 8–12 hours, and is washed and reused. None is more "correct" than another — the right one is whichever you are comfortable with. The one firm rule: do not leave a tampon or cup in longer than recommended.',
+    },
+  ),
+  _Topic(
+    keywords: ['baş agri', 'bas agri', 'migren', 'migraine', 'headache'],
+    sampleQuestion: {
+      'tr': 'Regl öncesi başım ağrıyor, neden?',
+      'en': 'Why do I get headaches before my period?',
+    },
+    answer: {
+      'tr':
+          'Regl öncesi ve ilk günlerinde östrojenin hızlı düşüşü bazı kişilerde baş ağrısını veya migreni tetikler — buna "menstrüel migren" denir ve yaygındır. Düzenli uyku, su, öğün atlamamak ve tetikleyicileri not etmek yardımcı olur. Ağrı çok şiddetliyse, görme değişikliği eşlik ediyorsa veya her ay işini aksatıyorsa hekime söylemeye değer; bunun tedavisi var.',
+      'en':
+          'The sharp drop in estrogen just before and during your period triggers headaches or migraine in some people — "menstrual migraine", and it is common. Regular sleep, hydration, not skipping meals and noting your triggers all help. If the pain is severe, comes with vision changes, or disrupts your month every month, it is worth telling a clinician: this is treatable.',
+    },
+  ),
+  _Topic(
+    keywords: ['cinsel iliski', 'seks', 'sex during', 'iliskiye gir'],
+    sampleQuestion: {
+      'tr': 'Regl sırasında ilişkiye girilir mi?',
+      'en': 'Is it OK to have sex during my period?',
+    },
+    answer: {
+      'tr':
+          'Tıbbi bir sakıncası yoktur; tamamen ikinizin tercihine kalmış bir konudur. İki pratik not: kanama olduğu için enfeksiyon geçişi riski biraz artar, bu yüzden bariyer yöntemi mantıklıdır — ve regl sırasında gebelik ihtimali düşük olsa da sıfır değildir, özellikle kısa döngülerde. Vera doğum kontrol yöntemi değildir.',
+      'en':
+          'There is no medical reason not to; it is entirely a matter of what you both want. Two practical notes: with bleeding, the risk of passing an infection is slightly higher, so a barrier method makes sense — and while pregnancy is less likely during your period, it is not impossible, especially with short cycles. Vera is not a method of contraception.',
+    },
+  ),
+  _Topic(
+    keywords: ['oruc', 'ramazan', 'fasting', 'ramadan'],
+    sampleQuestion: {
+      'tr': 'Oruç döngümü etkiler mi?',
+      'en': 'Does fasting affect my cycle?',
+    },
+    answer: {
+      'tr':
+          'Uzun süreli veya sert kalori kısıtlaması ovülasyonu geciktirebilir, dolayısıyla döngüyü uzatabilir; kısa süreli oruçların çoğu kişide belirgin etkisi olmaz. Sahur ve iftarda yeterli protein, demir ve su almak, uykuyu bölmemek farkı azaltır. Döngünde belirgin bir değişiklik olursa kaydet — birkaç döngü sonra İçgörüler\'de kendi örüntünü görürsün.',
+      'en':
+          'Prolonged or harsh calorie restriction can delay ovulation and so lengthen the cycle; shorter fasts have no clear effect for most people. Enough protein, iron and water at your meals, and protecting your sleep, reduce the difference. If your cycle shifts noticeably, log it — after a few cycles your own pattern shows up in Insights.',
+    },
+  ),
+  _Topic(
+    keywords: ['seyahat', 'ucak', 'travel', 'jet lag', 'tatil'],
+    sampleQuestion: {
+      'tr': 'Seyahat reglimi geciktirir mi?',
+      'en': 'Can travel delay my period?',
+    },
+    answer: {
+      'tr':
+          'Evet, olabilir. Saat dilimi değişimi, bozulan uyku, yolculuk stresi ve rutin değişikliği ovülasyonu birkaç gün kaydırabilir; regl de onunla kayar. Bu geçicidir ve genelde bir sonraki döngüde düzelir. Tekrarlayan ya da haftalarca süren gecikmeler başka bir nedene işaret edebilir.',
+      'en':
+          'Yes, it can. A time-zone shift, disrupted sleep, travel stress and a changed routine can move ovulation by a few days — and your period moves with it. This is temporary and usually settles by the next cycle. Delays that keep repeating or stretch to weeks point at something else.',
+    },
+  ),
+  _Topic(
+    keywords: ['kokusu', 'koku', 'smell', 'kasinti', 'itch', 'yanma',
+      'enfeksiyon', 'infection', 'mantar'],
+    sampleQuestion: {
+      'tr': 'Akıntının kokusu veya kaşıntı normal mi?',
+      'en': 'Is unusual discharge smell or itching normal?',
+    },
+    answer: {
+      'tr':
+          'Akıntının döngü boyunca miktar ve kıvam değiştirmesi normaldir. Normal olmayan: keskin/kötü koku, kaşıntı, yanma, yeşilimsi veya köpüklü görünüm, idrar yaparken acı. Bunlar genelde tedavisi kolay bir enfeksiyona işaret eder ama kendi kendine geçmesini beklemek doğru değil — hekime görünmek gerekir. Bu, Vera\'nın yorumlayabileceği bir şey değil.',
+      'en':
+          'Discharge changing in amount and texture across the cycle is normal. What is not: a sharp or bad smell, itching, burning, a greenish or frothy look, or pain when peeing. These usually point at an infection that is easy to treat — but waiting it out is the wrong move; see a clinician. This is not something Vera can interpret for you.',
     },
   ),
 ];

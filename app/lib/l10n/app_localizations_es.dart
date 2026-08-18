@@ -96,7 +96,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get onboardingPrivacyBody =>
-      'Los datos de tu ciclo se quedan solo en este dispositivo, cifrados. No hay cuenta ni sincronización en la nube — nada de lo que registras se sube. La versión gratuita muestra anuncios, que sí usan internet, pero nunca reciben tus datos de salud.';
+      'Los datos de tu ciclo se quedan solo en este dispositivo, cifrados. No hay cuenta ni sincronización en la nube — nada de lo que registras se sube. La clave vive en el hardware seguro de tu teléfono, y puedes exportar o borrar todo cuando quieras.';
 
   @override
   String get onboardingLastPeriodTitle => '¿Cuándo comenzó tu último periodo?';
@@ -1143,11 +1143,11 @@ class AppLocalizationsEs extends AppLocalizations {
   String get premiumTitle => 'Vera Premium';
 
   @override
-  String get premiumHeadline => 'Una Vera sin anuncios';
+  String get premiumHeadline => 'Vera Premium';
 
   @override
   String get premiumSubhead =>
-      'Todas las funciones de registro siguen siendo gratis para siempre. Premium solo quita los anuncios y apoya el desarrollo.';
+      'Todas las funciones de seguimiento siguen siendo gratuitas para siempre: tu historial nunca queda bloqueado. Premium añade tus propios registros, estadísticas más profundas, tus propios recordatorios y estilos extra, y quita los anuncios.';
 
   @override
   String get premiumBenefitNoAds => 'Sin anuncios en ninguna parte de la app';
@@ -1155,10 +1155,6 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get premiumBenefitSupport =>
       'Apoya una app independiente que prioriza la privacidad';
-
-  @override
-  String get premiumBenefitFuture =>
-      'Incluye futuras funciones de confort Premium';
 
   @override
   String get premiumMonthly => 'Mensual';
@@ -1244,7 +1240,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get partnerSummaryHeader => 'Resumen de ciclo de Vera';
 
   @override
-  String get settingsHomeThemeLabel => 'Tema de inicio';
+  String get settingsHomeThemeLabel => 'Fondo de inicio';
 
   @override
   String get homeThemeWheat => 'Trigo';
@@ -1318,7 +1314,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String cycleHistoryPeriodLength(int days) {
-    return '$days días de sangrado';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'El periodo duró $days días',
+      one: 'El periodo duró 1 día',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1437,4 +1439,263 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get diagnosticsClear => 'Borrar';
+
+  @override
+  String get unitHoursShort => 'h';
+
+  @override
+  String get unitMinutesShort => 'min';
+
+  @override
+  String get unitHoursLong => 'horas';
+
+  @override
+  String get unitMinutesLong => 'minutos';
+
+  @override
+  String get unitMilliliters => 'ml';
+
+  @override
+  String get unitKilograms => 'kg';
+
+  @override
+  String get calendarJumpTitle => 'Ir a un mes';
+
+  @override
+  String get calendarJumpYearLabel => 'Año';
+
+  @override
+  String get settingsAdPrivacyUnavailable =>
+      'En tu región no se ofrecen opciones de personalización de anuncios — aquí los anuncios ya no son personalizados.';
+
+  @override
+  String get settingsGroupAppearance => 'Apariencia';
+
+  @override
+  String get settingsGroupTracking => 'Preferencias de seguimiento';
+
+  @override
+  String get dayLogCustomTagsLabel => 'Mis propios registros';
+
+  @override
+  String get customTagAddButton => 'Añadir registro';
+
+  @override
+  String get customTagDialogTitle => 'Nuevo registro';
+
+  @override
+  String get customTagDialogHint => 'p. ej. migraña, gimnasio, insomnio';
+
+  @override
+  String get customTagManageEntry => 'Gestionar mis registros';
+
+  @override
+  String get customTagRenameTitle => 'Renombrar registro';
+
+  @override
+  String get customTagDeleteTitle => '¿Eliminar este registro?';
+
+  @override
+  String get customTagDeleteBody =>
+      'Se quitará de todos los días en que lo usaste. El resto de tus datos se mantiene igual.';
+
+  @override
+  String get customTagEmpty => 'Aún no tienes registros propios.';
+
+  @override
+  String get premiumLockedTitle => 'Función Premium';
+
+  @override
+  String get premiumLockedAction => 'Ver Premium';
+
+  @override
+  String get premiumBenefitCustomTrackers =>
+      'Registra lo que quieras, con tus palabras';
+
+  @override
+  String get premiumBenefitAdvancedInsights =>
+      'Estadísticas avanzadas: qué suele pasar y cuándo';
+
+  @override
+  String get premiumBenefitPersonalisation => 'Fondos y compañeros adicionales';
+
+  @override
+  String get premiumBenefitAdvancedReminders =>
+      'Recordatorios a tu propio ritmo';
+
+  @override
+  String get advancedInsightsTitle => 'Estadísticas avanzadas';
+
+  @override
+  String get advancedInsightsEntry => 'Estadísticas avanzadas';
+
+  @override
+  String get advancedInsightsNotEnough =>
+      'Registra tres ciclos completos y tus patrones aparecerán aquí. Con menos, cualquier \"patrón\" sería solo casualidad.';
+
+  @override
+  String get advancedInsightsPatternsTitle => 'Cuándo suele aparecer cada cosa';
+
+  @override
+  String advancedInsightsPatternLine(String label, String segment) {
+    return '$label — sobre todo $segment';
+  }
+
+  @override
+  String advancedInsightsPatternDetail(int count, int day) {
+    return '$count días registrados, alrededor del día $day de tu ciclo';
+  }
+
+  @override
+  String advancedInsightsNoPattern(String label) {
+    return '$label — todavía sin un momento claro';
+  }
+
+  @override
+  String get advancedInsightsTrendTitle => 'Duración del ciclo con el tiempo';
+
+  @override
+  String advancedInsightsDriftLonger(String days, String cycles) {
+    return 'Comparando tus primeros $cycles ciclos con los últimos $cycles, los recientes duran unos $days días más.';
+  }
+
+  @override
+  String advancedInsightsDriftShorter(String days, String cycles) {
+    return 'Comparando tus primeros $cycles ciclos con los últimos $cycles, los recientes duran unos $days días menos.';
+  }
+
+  @override
+  String advancedInsightsDriftStable(String cycles) {
+    return 'Comparando tus primeros $cycles ciclos con los últimos $cycles, la duración de tu ciclo se ha mantenido más o menos igual.';
+  }
+
+  @override
+  String get advancedInsightsDriftNotEnough =>
+      'Cuando tengas seis ciclos completos, podremos comparar los primeros con los más recientes para ver si la duración de tu ciclo está cambiando.';
+
+  @override
+  String get advancedInsightsMoodTitle => 'Ánimo por parte del ciclo';
+
+  @override
+  String get advancedInsightsDisclaimer =>
+      'Esto es solo un recuento de lo que registraste. No es un diagnóstico, y un patrón aquí no es una causa.';
+
+  @override
+  String get segmentPeriod => 'durante tu periodo';
+
+  @override
+  String get segmentAfterPeriod => 'después de tu periodo';
+
+  @override
+  String get segmentMidCycle => 'a mitad del ciclo';
+
+  @override
+  String get segmentBeforePeriod => 'antes de tu periodo';
+
+  @override
+  String get customRemindersEntry => 'Mis propios recordatorios';
+
+  @override
+  String get customRemindersTitle => 'Mis propios recordatorios';
+
+  @override
+  String get customRemindersEmpty => 'Aún no tienes recordatorios propios.';
+
+  @override
+  String get customRemindersAdd => 'Añadir recordatorio';
+
+  @override
+  String get customReminderLabelHint => 'p. ej. tomar la pastilla, beber agua';
+
+  @override
+  String get customReminderLockScreenNote =>
+      'El texto aparece en tu pantalla de bloqueo, así que escríbelo tan privado como quieras.';
+
+  @override
+  String get customReminderDelete => 'Eliminar recordatorio';
+
+  @override
+  String get homeThemeDusk => 'Atardecer';
+
+  @override
+  String get homeThemeMeadow => 'Pradera';
+
+  @override
+  String get homeThemePetal => 'Pétalo';
+
+  @override
+  String get homeThemeBloom => 'Floración';
+
+  @override
+  String get mascotStar => 'Estrella';
+
+  @override
+  String get mascotLeaf => 'Hoja';
+
+  @override
+  String get tipDetailWhatsHappening => 'Qué está pasando en tu cuerpo';
+
+  @override
+  String get tipDetailDisclaimer =>
+      'Esto es información general, no un consejo médico personal. Cada cuerpo responde distinto, y cómo te sientes realmente importa más que cualquier sugerencia de aquí. Si algo te preocupa, habla con un profesional de la salud.';
+
+  @override
+  String get phaseExplainerMenstrual =>
+      'Estás sangrando porque el endometrio se desprende. El estrógeno y la progesterona están en su punto más bajo del ciclo, por eso muchas personas se sienten más cansadas y más hacia adentro los primeros días. Los cólicos vienen de las contracciones del útero. El sangrado también te cuesta hierro, lo que explica parte del agotamiento.';
+
+  @override
+  String get phaseExplainerFollicular =>
+      'Cuando termina el sangrado, el estrógeno vuelve a subir. La mayoría nota que la energía, el ánimo y la resistencia se recuperan. En los ovarios maduran folículos; el cuerpo se prepara para la siguiente ovulación.';
+
+  @override
+  String get phaseExplainerFertile =>
+      'El estrógeno se acerca a su pico y se espera la ovulación en estos días. El moco cervical suele volverse transparente y resbaladizo, algunas personas notan más deseo y otras una punzada breve de un lado. La energía suele estar en su punto más alto del ciclo.';
+
+  @override
+  String get phaseExplainerLuteal =>
+      'Tras la ovulación sube la progesterona y luego cae con fuerza al acercarse la regla. Esa caída puede desencadenar síntomas premenstruales: hinchazón, sensibilidad en los senos, cambios de apetito, sueño interrumpido y altibajos de ánimo. Tu temperatura corporal se mantiene algo más alta.';
+
+  @override
+  String get phaseExplainerUnknown =>
+      'Todavía no hay suficientes registros para decir en qué fase estás. Vera prefiere decirlo antes que inventar una fase. Cuando registres unos cuantos ciclos, esta sección se llenará con tus propios datos; hasta entonces, las sugerencias de abajo sirven en cualquier momento.';
+
+  @override
+  String get tipFitnessDetailMenstrual =>
+      'El entrenamiento duro no le sienta bien a la mayoría los primeros días, y no es un problema de disciplina: tu energía realmente está más baja. Caminar, estirar suave, yoga restaurativo y respiración mejoran la circulación y pueden aliviar los cólicos. Si te sientes bien, no hay motivo para evitar sesiones intensas: sangrar no es razón para dejar de moverte. Un apunte práctico: en los días de sangrado abundante, las sesiones largas y exigentes pueden aumentar el cansancio, así que ajústalo según cómo te sientas.';
+
+  @override
+  String get tipFitnessDetailFollicular =>
+      'Con el estrógeno subiendo, la mayoría se siente más fuerte y resistente; suele ser el mejor tramo del ciclo para empezar algo nuevo, subir peso o apretar el ritmo. La recuperación muscular también es relativamente eficiente aquí. Aun así, progresa de forma gradual: tener energía no significa riesgo cero de lesión.';
+
+  @override
+  String get tipFitnessDetailFertile =>
+      'La energía y la motivación suelen estar en su punto máximo, así que las sesiones exigentes encajan bien. En algunas personas las articulaciones están algo más laxas alrededor de la ovulación: en deportes con cambios bruscos de dirección conviene calentar más. Una punzada breve en un lado del abdomen es común, pero si es fuerte o dura, descansa y consúltalo.';
+
+  @override
+  String get tipFitnessDetailLuteal =>
+      'Al acercarse la regla la energía puede bajar, el pulso subir para el mismo esfuerzo y la recuperación alargarse. Es una oscilación esperable, no un retroceso. Las sesiones moderadas, una versión algo más ligera de tu trabajo de fuerza y caminar suelen ser más sostenibles aquí. Con hinchazón y sensibilidad en los senos, un buen sujetador deportivo y un calentamiento más largo marcan la diferencia.';
+
+  @override
+  String get tipFitnessDetailUnknown =>
+      'Aunque no sepamos tu fase, moverse ayuda siempre: actividad moderada repartida en la mayoría de los días de la semana rinde más que sesiones muy intensas ocasionales. Ajusta según cómo te sientas: en los días de cansancio, caminar también cuenta. Cuando registres unos ciclos verás aquí sugerencias específicas de tu fase.';
+
+  @override
+  String get tipNutritionDetailMenstrual =>
+      'El sangrado te cuesta hierro; la carne roja, las lentejas, los garbanzos, las verduras de hoja oscura y la melaza ayudan a reponerlo. El hierro vegetal se absorbe bastante mejor junto con vitamina C: exprimir limón sobre un plato de lentejas es la versión más práctica de eso. El té y el café con la comida reducen la absorción de hierro, así que basta con dejar una hora entre medias. Beber suficiente agua puede aliviar el cansancio y el dolor de cabeza del sangrado.';
+
+  @override
+  String get tipNutritionDetailFollicular =>
+      'Con la energía recuperándose, el cuerpo está en modo reconstrucción: suficiente proteína, cereales integrales y verduras lo apoyan. También tiene sentido seguir reponiendo las reservas de hierro tras el sangrado. No saltarse comidas suele ser más fácil en esta fase, y te deja mejor preparada para los altibajos de apetito de la siguiente.';
+
+  @override
+  String get tipNutritionDetailFertile =>
+      'Aquí no hace falta ninguna dieta especial; comer equilibrado y beber suficiente agua es lo que más ayuda. Algunas personas se sienten hinchadas, algo normalmente hormonal y pasajero. Si estás planeando un embarazo, es un buen momento para preguntar por el ácido fólico a un profesional, pero esa es una conversación con quien te atiende, no un consejo que deba dar una app.';
+
+  @override
+  String get tipNutritionDetailLuteal =>
+      'Que aumente el apetito y las ganas de dulce cuando sube la progesterona es muy común; es un cambio hormonal, no un problema de fuerza de voluntad. Añadir proteína y fibra a las comidas mantiene el azúcar en sangre más estable y suaviza el antojo. Menos sal y más agua pueden aliviar la hinchazón. Los alimentos ricos en magnesio (almendras, nueces, hojas verdes oscuras, chocolate negro) reducen los cólicos y la tensión en algunas personas. Bajar la cafeína ayuda con el sueño interrumpido de esta fase.';
+
+  @override
+  String get tipNutritionDetailUnknown =>
+      'Sea cual sea la fase, ayudan las mismas cosas: comidas regulares, suficiente proteína, muchas verduras, suficiente agua y alimentos ricos en hierro. Como el sangrado cuesta hierro, basta con prestar un poco más de atención esos días. Cuando registres unos ciclos verás aquí sugerencias específicas de tu fase.';
 }

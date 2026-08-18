@@ -30,12 +30,14 @@ class DayLog {
     this.sleepMinutes,
     this.weightKg,
     List<String>? medications,
+    Set<String>? customTags,
   })  : date = dateOnly(date),
         symptoms = Set.unmodifiable(symptoms ?? const <Symptom>{}),
         skinHair = Set.unmodifiable(skinHair ?? const <SkinHairSymptom>{}),
         breastExam =
             Set.unmodifiable(breastExam ?? const <BreastExamFinding>{}),
-        medications = List.unmodifiable(medications ?? const <String>[]);
+        medications = List.unmodifiable(medications ?? const <String>[]),
+        customTags = Set.unmodifiable(customTags ?? const <String>{});
 
   final DateTime date;
 
@@ -69,6 +71,13 @@ class DayLog {
   final double? weightKg;
   final List<String> medications;
 
+  /// User-defined tracker labels (Premium). Stored on the day itself rather
+  /// than in a separate definitions list, so the set of available tags is
+  /// simply everything the user has ever used — which keeps these
+  /// user-authored health words inside the encrypted store instead of in
+  /// plaintext preferences.
+  final Set<String> customTags;
+
   /// `true` when this day carries no information, so the store can drop it
   /// instead of persisting empty rows the user did not create.
   bool get isEmpty =>
@@ -89,7 +98,8 @@ class DayLog {
       waterIntakeMl == null &&
       sleepMinutes == null &&
       weightKg == null &&
-      medications.isEmpty;
+      medications.isEmpty &&
+      customTags.isEmpty;
 
   /// Any bleeding at all, including spotting.
   bool get hasBleeding => flow != null;
@@ -133,6 +143,7 @@ class DayLog {
     double? weightKg,
     bool clearWeight = false,
     List<String>? medications,
+    Set<String>? customTags,
   }) {
     return DayLog(
       date: date,
@@ -165,6 +176,7 @@ class DayLog {
           clearSleepMinutes ? null : (sleepMinutes ?? this.sleepMinutes),
       weightKg: clearWeight ? null : (weightKg ?? this.weightKg),
       medications: medications ?? this.medications,
+      customTags: customTags ?? this.customTags,
     );
   }
 
@@ -191,6 +203,8 @@ class DayLog {
         if (sleepMinutes != null) 'sleepMinutes': sleepMinutes,
         if (weightKg != null) 'weightKg': weightKg,
         if (medications.isNotEmpty) 'medications': medications,
+        if (customTags.isNotEmpty)
+          'customTags': customTags.toList()..sort(),
       };
 
   /// Unknown enum values decode to `null` rather than throwing: a log written by
@@ -231,6 +245,10 @@ class DayLog {
         for (final raw in (json['medications'] as List<dynamic>? ?? const []))
           if (raw is String) raw,
       ],
+      customTags: <String>{
+        for (final raw in (json['customTags'] as List<dynamic>? ?? const []))
+          if (raw is String && raw.trim().isNotEmpty) raw,
+      },
     );
   }
 

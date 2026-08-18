@@ -8,9 +8,12 @@ import 'package:cycle_app/screens/export/export_screen.dart';
 import 'package:cycle_app/screens/export/import_screen.dart';
 import 'package:cycle_app/screens/home/home_screen.dart';
 import 'package:cycle_app/screens/insights/cycle_history_screen.dart';
+import 'package:cycle_app/screens/insights/advanced_insights_screen.dart';
 import 'package:cycle_app/screens/insights/insights_screen.dart';
 import 'package:cycle_app/screens/insights/tracker_history_screen.dart';
 import 'package:cycle_app/screens/premium/premium_screen.dart';
+import 'package:cycle_app/screens/settings/custom_reminders_screen.dart';
+import 'package:cycle_app/screens/settings/custom_tags_screen.dart';
 import 'package:cycle_app/screens/settings/prediction_settings_screen.dart';
 import 'package:cycle_app/screens/settings/privacy_screen.dart';
 import 'package:cycle_app/screens/settings/settings_screen.dart';
@@ -88,6 +91,9 @@ void main() {
     'privacy': () => const PrivacyScreen(),
     'prediction settings': () => const PredictionSettingsScreen(),
     'cycle history': () => const CycleHistoryScreen(),
+    'advanced insights': () => const AdvancedInsightsScreen(),
+    'custom reminders': () => const CustomRemindersScreen(),
+    'custom tags': () => const CustomTagsScreen(),
   };
 
   for (final entry in screens.entries) {
@@ -102,7 +108,17 @@ void main() {
 
   // Empty state is its own risk: dashes, nulls and "no data yet" paths
   // take different branches than the populated ones above.
-  for (final key in ['home', 'insights', 'day log', 'cycle history']) {
+  for (final key in [
+    'home',
+    'insights',
+    'day log',
+    'cycle history',
+    'advanced insights',
+    'custom tags',
+    'custom reminders',
+    'settings',
+    'premium',
+  ]) {
     testWidgets('$key renders with no data at all', (tester) async {
       await tester.pumpWidget(await _app(screens[key]!(), withData: false));
       for (var i = 0; i < 5; i++) {

@@ -59,8 +59,11 @@ class PremiumScreen extends StatelessWidget {
                 ),
               ),
             _Benefit(text: l10n.premiumBenefitNoAds),
+            _Benefit(text: l10n.premiumBenefitCustomTrackers),
+            _Benefit(text: l10n.premiumBenefitAdvancedInsights),
+            _Benefit(text: l10n.premiumBenefitAdvancedReminders),
+            _Benefit(text: l10n.premiumBenefitPersonalisation),
             _Benefit(text: l10n.premiumBenefitSupport),
-            _Benefit(text: l10n.premiumBenefitFuture),
             const SizedBox(height: 20),
             Row(
               children: [

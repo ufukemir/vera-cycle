@@ -163,9 +163,51 @@ class _MascotPainter extends CustomPainter {
         scene._moon(canvas, c, size.height * 0.4);
         _face(canvas, c.translate(-size.width * 0.12, 0), size.height * 0.32,
             Colors.white);
+      case Mascot.star:
+        _star(canvas, c, size.height * 0.34);
+        _face(canvas, c, size.height * 0.26, AppPalette.plum);
+      case Mascot.leaf:
+        _leaf(canvas, c, size.height * 0.38);
+        _face(canvas, c.translate(0, size.height * 0.04), size.height * 0.26,
+            Colors.white);
       case Mascot.none:
         break;
     }
+  }
+
+  /// A five-pointed star with softly rounded tips, drawn from alternating
+  /// outer/inner radii — the same construction as the sparkle stickers, so
+  /// the companion looks like it came from the same hand.
+  void _star(Canvas canvas, Offset c, double r) {
+    final path = Path();
+    for (var i = 0; i < 10; i++) {
+      final radius = i.isEven ? r : r * 0.45;
+      final angle = -math.pi / 2 + i * math.pi / 5;
+      final point = Offset(
+        c.dx + radius * math.cos(angle),
+        c.dy + radius * math.sin(angle),
+      );
+      i == 0 ? path.moveTo(point.dx, point.dy) : path.lineTo(point.dx, point.dy);
+    }
+    path.close();
+    canvas.drawPath(path, Paint()..color = AppPalette.gold);
+  }
+
+  void _leaf(Canvas canvas, Offset c, double r) {
+    final path = Path()
+      ..moveTo(c.dx, c.dy - r)
+      ..quadraticBezierTo(c.dx + r * 0.75, c.dy - r * 0.1, c.dx, c.dy + r)
+      ..quadraticBezierTo(c.dx - r * 0.75, c.dy - r * 0.1, c.dx, c.dy - r)
+      ..close();
+    canvas.drawPath(path, Paint()..color = AppPalette.mintSoftText);
+    canvas.drawLine(
+      Offset(c.dx, c.dy - r * 0.8),
+      Offset(c.dx, c.dy + r * 0.8),
+      Paint()
+        ..color = Colors.white.withValues(alpha: 0.5)
+        ..strokeWidth = r * 0.06
+        ..strokeCap = StrokeCap.round,
+    );
   }
 
   void _face(Canvas canvas, Offset c, double r, Color color) {

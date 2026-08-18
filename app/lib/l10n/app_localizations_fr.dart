@@ -96,7 +96,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get onboardingPrivacyBody =>
-      'Les données de ton cycle restent uniquement sur cet appareil, chiffrées. Pas de compte, pas de synchronisation cloud — rien de ce que tu notes n\'est envoyé. La version gratuite affiche des publicités qui utilisent internet, mais elles ne reçoivent jamais tes données de santé.';
+      'Les données de ton cycle restent uniquement sur cet appareil, chiffrées. Pas de compte, pas de synchronisation cloud — rien de ce que tu notes n\'est envoyé. La clé est conservée dans le matériel sécurisé de ton téléphone, et tu peux tout exporter ou tout effacer quand tu veux.';
 
   @override
   String get onboardingLastPeriodTitle =>
@@ -1154,11 +1154,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String get premiumTitle => 'Vera Premium';
 
   @override
-  String get premiumHeadline => 'Une Vera sans publicité';
+  String get premiumHeadline => 'Vera Premium';
 
   @override
   String get premiumSubhead =>
-      'Toutes les fonctions de suivi restent gratuites pour toujours. Premium supprime simplement les publicités et soutient le développement.';
+      'Toutes les fonctions de suivi restent gratuites pour toujours — ton historique n\'est jamais verrouillé. Premium ajoute tes propres suivis, des analyses plus poussées, tes propres rappels et des habillages en plus, et retire les publicités.';
 
   @override
   String get premiumBenefitNoAds => 'Aucune publicité, nulle part dans l\'app';
@@ -1166,10 +1166,6 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get premiumBenefitSupport =>
       'Soutient une app indépendante axée sur la vie privée';
-
-  @override
-  String get premiumBenefitFuture =>
-      'Inclut les futures fonctions de confort Premium';
 
   @override
   String get premiumMonthly => 'Mensuel';
@@ -1255,7 +1251,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get partnerSummaryHeader => 'Résumé de cycle depuis Vera';
 
   @override
-  String get settingsHomeThemeLabel => 'Thème d\'accueil';
+  String get settingsHomeThemeLabel => 'Fond de l\'accueil';
 
   @override
   String get homeThemeWheat => 'Blé';
@@ -1329,7 +1325,13 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String cycleHistoryPeriodLength(int days) {
-    return '$days jours de saignement';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Règles de $days jours',
+      one: 'Règles de 1 jour',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1448,4 +1450,266 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get diagnosticsClear => 'Effacer';
+
+  @override
+  String get unitHoursShort => 'h';
+
+  @override
+  String get unitMinutesShort => 'min';
+
+  @override
+  String get unitHoursLong => 'heures';
+
+  @override
+  String get unitMinutesLong => 'minutes';
+
+  @override
+  String get unitMilliliters => 'ml';
+
+  @override
+  String get unitKilograms => 'kg';
+
+  @override
+  String get calendarJumpTitle => 'Aller à un mois';
+
+  @override
+  String get calendarJumpYearLabel => 'Année';
+
+  @override
+  String get settingsAdPrivacyUnavailable =>
+      'Les choix de personnalisation des publicités ne sont pas proposés dans ta région — ici, les publicités ne sont déjà pas personnalisées.';
+
+  @override
+  String get settingsGroupAppearance => 'Apparence';
+
+  @override
+  String get settingsGroupTracking => 'Préférences de suivi';
+
+  @override
+  String get dayLogCustomTagsLabel => 'Mes propres suivis';
+
+  @override
+  String get customTagAddButton => 'Ajouter un suivi';
+
+  @override
+  String get customTagDialogTitle => 'Nouveau suivi';
+
+  @override
+  String get customTagDialogHint => 'p. ex. migraine, sport, insomnie';
+
+  @override
+  String get customTagManageEntry => 'Gérer mes suivis';
+
+  @override
+  String get customTagRenameTitle => 'Renommer le suivi';
+
+  @override
+  String get customTagDeleteTitle => 'Supprimer ce suivi ?';
+
+  @override
+  String get customTagDeleteBody =>
+      'Il sera retiré de tous les jours où tu l\'as utilisé. Le reste de tes données ne change pas.';
+
+  @override
+  String get customTagEmpty => 'Pas encore de suivi personnel.';
+
+  @override
+  String get premiumLockedTitle => 'Fonction Premium';
+
+  @override
+  String get premiumLockedAction => 'Voir Premium';
+
+  @override
+  String get premiumBenefitCustomTrackers =>
+      'Suis ce que tu veux, avec tes propres mots';
+
+  @override
+  String get premiumBenefitAdvancedInsights =>
+      'Analyses avancées : ce qui arrive, et quand';
+
+  @override
+  String get premiumBenefitPersonalisation =>
+      'Fonds et compagnons supplémentaires';
+
+  @override
+  String get premiumBenefitAdvancedReminders =>
+      'Des rappels à ton propre rythme';
+
+  @override
+  String get advancedInsightsTitle => 'Analyses avancées';
+
+  @override
+  String get advancedInsightsEntry => 'Analyses avancées';
+
+  @override
+  String get advancedInsightsNotEnough =>
+      'Note trois cycles complets et tes tendances apparaîtront ici. En dessous, toute « tendance » ne serait qu\'une coïncidence.';
+
+  @override
+  String get advancedInsightsPatternsTitle =>
+      'Quand les choses arrivent en général';
+
+  @override
+  String advancedInsightsPatternLine(String label, String segment) {
+    return '$label — surtout $segment';
+  }
+
+  @override
+  String advancedInsightsPatternDetail(int count, int day) {
+    return '$count jours notés, vers le jour $day de ton cycle';
+  }
+
+  @override
+  String advancedInsightsNoPattern(String label) {
+    return '$label — pas encore de moment net';
+  }
+
+  @override
+  String get advancedInsightsTrendTitle => 'Durée du cycle dans le temps';
+
+  @override
+  String advancedInsightsDriftLonger(String days, String cycles) {
+    return 'En comparant tes $cycles premiers cycles à tes $cycles derniers, les récents durent environ $days jours de plus.';
+  }
+
+  @override
+  String advancedInsightsDriftShorter(String days, String cycles) {
+    return 'En comparant tes $cycles premiers cycles à tes $cycles derniers, les récents durent environ $days jours de moins.';
+  }
+
+  @override
+  String advancedInsightsDriftStable(String cycles) {
+    return 'En comparant tes $cycles premiers cycles à tes $cycles derniers, la durée de ton cycle est restée à peu près la même.';
+  }
+
+  @override
+  String get advancedInsightsDriftNotEnough =>
+      'Dès que tu auras six cycles complets, nous pourrons comparer tes premiers cycles aux plus récents pour voir si la durée de ton cycle évolue.';
+
+  @override
+  String get advancedInsightsMoodTitle => 'Humeur selon la phase du cycle';
+
+  @override
+  String get advancedInsightsDisclaimer =>
+      'Ce sont des comptages de ce que tu as noté, rien de plus. Ce n\'est pas un diagnostic, et une tendance ici n\'est pas une cause.';
+
+  @override
+  String get segmentPeriod => 'pendant tes règles';
+
+  @override
+  String get segmentAfterPeriod => 'après tes règles';
+
+  @override
+  String get segmentMidCycle => 'en milieu de cycle';
+
+  @override
+  String get segmentBeforePeriod => 'avant tes règles';
+
+  @override
+  String get customRemindersEntry => 'Mes propres rappels';
+
+  @override
+  String get customRemindersTitle => 'Mes propres rappels';
+
+  @override
+  String get customRemindersEmpty => 'Pas encore de rappel personnel.';
+
+  @override
+  String get customRemindersAdd => 'Ajouter un rappel';
+
+  @override
+  String get customReminderLabelHint =>
+      'p. ex. prendre ma pilule, boire de l\'eau';
+
+  @override
+  String get customReminderLockScreenNote =>
+      'Le texte s\'affiche sur ton écran de verrouillage : écris-le aussi discrètement que tu le souhaites.';
+
+  @override
+  String get customReminderDelete => 'Supprimer le rappel';
+
+  @override
+  String get homeThemeDusk => 'Crépuscule';
+
+  @override
+  String get homeThemeMeadow => 'Prairie';
+
+  @override
+  String get homeThemePetal => 'Pétale';
+
+  @override
+  String get homeThemeBloom => 'Floraison';
+
+  @override
+  String get mascotStar => 'Étoile';
+
+  @override
+  String get mascotLeaf => 'Feuille';
+
+  @override
+  String get tipDetailWhatsHappening => 'Ce qui se passe dans ton corps';
+
+  @override
+  String get tipDetailDisclaimer =>
+      'Ce sont des informations générales, pas un avis médical personnalisé. Chaque corps réagit différemment, et ce que tu ressens vraiment compte plus que tout ce qui est suggéré ici. Si quelque chose t\'inquiète, parles-en à un professionnel de santé.';
+
+  @override
+  String get phaseExplainerMenstrual =>
+      'Tu saignes parce que la muqueuse utérine se détache. Les œstrogènes et la progestérone sont au plus bas du cycle : c\'est pourquoi beaucoup se sentent plus fatiguées et plus tournées vers l\'intérieur les premiers jours. Les crampes viennent des contractions de l\'utérus. Le saignement te coûte aussi du fer, ce qui explique une partie de la fatigue.';
+
+  @override
+  String get phaseExplainerFollicular =>
+      'Une fois le saignement terminé, les œstrogènes remontent. La plupart des personnes sentent l\'énergie, l\'humeur et l\'endurance revenir. Des follicules mûrissent dans les ovaires ; le corps prépare la prochaine ovulation.';
+
+  @override
+  String get phaseExplainerFertile =>
+      'Les œstrogènes approchent de leur pic et l\'ovulation est attendue autour de ces jours. La glaire cervicale devient typiquement claire et glissante, certaines personnes notent plus de désir, d\'autres une brève pointe d\'un côté. L\'énergie est souvent au plus haut du cycle.';
+
+  @override
+  String get phaseExplainerLuteal =>
+      'Après l\'ovulation, la progestérone monte puis chute nettement à l\'approche des règles. Cette chute peut déclencher des symptômes prémenstruels : ballonnements, seins sensibles, changements d\'appétit, sommeil haché et variations d\'humeur. Ta température corporelle reste un peu plus élevée.';
+
+  @override
+  String get phaseExplainerUnknown =>
+      'Il n\'y a pas encore assez de données pour dire dans quelle phase tu es. Vera préfère le dire plutôt que d\'inventer une phase. Après quelques cycles notés, cette section se remplira avec tes propres données ; d\'ici là, les suggestions ci-dessous valent à tout moment.';
+
+  @override
+  String get tipFitnessDetailMenstrual =>
+      'L\'entraînement intense ne convient pas à la plupart des gens les premiers jours, et ce n\'est pas une question de discipline : ton énergie est réellement plus basse. Marcher, s\'étirer doucement, faire du yoga réparateur et respirer améliorent la circulation et peuvent atténuer les crampes. Si tu te sens bien, rien n\'interdit les séances dures : saigner n\'est pas une raison d\'arrêter le sport. Une note pratique : les séances longues et exigeantes les jours de flux abondant peuvent accentuer la fatigue — ajuste selon ce que ton corps te dit.';
+
+  @override
+  String get tipFitnessDetailFollicular =>
+      'Avec la montée des œstrogènes, la plupart se sentent plus fortes et plus résistantes ; c\'est en général la meilleure période du cycle pour commencer quelque chose, augmenter les charges ou accélérer. La récupération musculaire y est aussi relativement efficace. Progresse quand même par étapes : beaucoup d\'énergie ne veut pas dire zéro risque de blessure.';
+
+  @override
+  String get tipFitnessDetailFertile =>
+      'L\'énergie et la motivation sont souvent au maximum, les séances exigeantes passent donc bien. Chez certaines, les articulations sont un peu plus lâches autour de l\'ovulation : pour les sports à changements de direction brusques, un échauffement plus long est judicieux. Une brève pointe d\'un côté du ventre est fréquente ; si elle est forte ou persiste, repose-toi et consulte.';
+
+  @override
+  String get tipFitnessDetailLuteal =>
+      'À l\'approche des règles, l\'énergie peut baisser, le cœur monter plus haut pour le même effort et la récupération s\'allonger. C\'est une oscillation attendue, pas un recul. Des séances modérées, une version un peu allégée de ton travail de force et la marche sont souvent plus tenables ici. En cas de ballonnements et de seins sensibles, une bonne brassière et un échauffement plus long changent vraiment les choses.';
+
+  @override
+  String get tipFitnessDetailUnknown =>
+      'Même sans connaître ta phase, bouger aide toujours : une activité modérée répartie sur la plupart des jours de la semaine vaut mieux que des séances très intenses occasionnelles. Ajuste selon ton ressenti — les jours de fatigue, une marche compte aussi. Après quelques cycles notés, tu verras ici des suggestions propres à ta phase.';
+
+  @override
+  String get tipNutritionDetailMenstrual =>
+      'Le saignement te coûte du fer ; viande rouge, lentilles, pois chiches, légumes à feuilles foncées et mélasse aident à le remplacer. Le fer végétal s\'absorbe nettement mieux avec de la vitamine C — presser du citron sur un plat de lentilles en est la version la plus pratique. Le thé et le café pendant le repas réduisent l\'absorption du fer : une heure d\'écart suffit. Boire assez d\'eau peut atténuer la fatigue et les maux de tête liés au saignement.';
+
+  @override
+  String get tipNutritionDetailFollicular =>
+      'Pendant que l\'énergie revient, le corps est en mode reconstruction : assez de protéines, des céréales complètes et des légumes soutiennent cela. Continuer à refaire les réserves de fer après le saignement a aussi du sens. Ne pas sauter de repas est en général plus facile dans cette phase, et tu abordes plus sereinement les variations d\'appétit de la suivante.';
+
+  @override
+  String get tipNutritionDetailFertile =>
+      'Aucun régime particulier n\'est nécessaire ici ; des repas équilibrés et assez d\'eau font le plus gros du travail. Certaines personnes se sentent ballonnées, ce qui est généralement hormonal et passager. Si tu envisages une grossesse, c\'est un bon moment pour interroger un professionnel sur l\'acide folique — mais c\'est une conversation avec lui, pas un conseil qu\'une application devrait donner.';
+
+  @override
+  String get tipNutritionDetailLuteal =>
+      'L\'appétit qui augmente et l\'envie de sucre quand la progestérone monte sont très courants : c\'est un changement hormonal, pas un manque de volonté. Ajouter des protéines et des fibres aux repas stabilise la glycémie et adoucit l\'envie. Moins de sel et plus d\'eau peuvent soulager les ballonnements. Les aliments riches en magnésium (amandes, noix, légumes verts foncés, chocolat noir) réduisent crampes et tension chez certaines. Réduire la caféine aide le sommeil haché de cette phase.';
+
+  @override
+  String get tipNutritionDetailUnknown =>
+      'Quelle que soit la phase, ce sont les mêmes choses qui aident : des repas réguliers, assez de protéines, beaucoup de légumes, assez d\'eau et des aliments riches en fer. Comme le saignement coûte du fer, il suffit d\'y prêter un peu plus attention ces jours-là. Après quelques cycles notés, tu verras ici des suggestions propres à ta phase.';
 }

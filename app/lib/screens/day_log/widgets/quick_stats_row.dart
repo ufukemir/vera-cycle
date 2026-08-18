@@ -42,7 +42,9 @@ class QuickStatsRow extends StatelessWidget {
             child: _StatCard(
               icon: Icons.water_drop_outlined,
               label: l10n.dayLogWaterLabel,
-              value: waterIntakeMl == null ? '—' : '${waterIntakeMl}ml',
+              value: waterIntakeMl == null
+                  ? '—'
+                  : '$waterIntakeMl${l10n.unitMilliliters}',
               onTap: () {
                 final next = (waterIntakeMl ?? 0) + _waterStepMl;
                 onWaterChanged(next > _waterMaxMl ? _waterMaxMl : next);
@@ -57,7 +59,8 @@ class QuickStatsRow extends StatelessWidget {
             child: _StatCard(
               icon: Icons.bedtime_outlined,
               label: l10n.dayLogSleepLabel,
-              value: sleepMinutes == null ? '—' : _formatSleep(sleepMinutes!),
+              value:
+                  sleepMinutes == null ? '—' : formatSleep(l10n, sleepMinutes!),
               onTap: () => _pickSleep(context),
             ),
           ),
@@ -68,7 +71,7 @@ class QuickStatsRow extends StatelessWidget {
               label: l10n.dayLogWeightLabel,
               value: weightKg == null
                   ? '—'
-                  : '${weightKg!.toStringAsFixed(1)}kg',
+                  : '${weightKg!.toStringAsFixed(1)}${l10n.unitKilograms}',
               onTap: () => _pickWeight(context),
             ),
           ),
@@ -77,10 +80,14 @@ class QuickStatsRow extends StatelessWidget {
     );
   }
 
-  static String _formatSleep(int minutes) {
+  /// Hour/minute suffixes are localized: "h"/"m" are English abbreviations,
+  /// and a Turkish reader parses "7h30m" as neither.
+  static String formatSleep(AppLocalizations l10n, int minutes) {
     final h = minutes ~/ 60;
     final m = minutes % 60;
-    return m == 0 ? '${h}h' : '${h}h${m}m';
+    if (h == 0) return '$m${l10n.unitMinutesShort}';
+    if (m == 0) return '$h${l10n.unitHoursShort}';
+    return '$h${l10n.unitHoursShort} $m${l10n.unitMinutesShort}';
   }
 
   Future<void> _pickSleep(BuildContext context) async {
@@ -94,21 +101,26 @@ class QuickStatsRow extends StatelessWidget {
         return StatefulBuilder(
           builder: (dialogContext, setState) => AlertDialog(
             title: Text(l10n.dayLogSleepLabel),
-            content: Row(
+            // Stacked, not side by side: two steppers in a row need ~384dp
+            // and an AlertDialog gives about 280, which overflowed by
+            // exactly the difference on every phone.
+            content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 NumberStepper(
                   value: hours,
                   min: 0,
                   max: 16,
-                  unitLabel: 'h',
+                  unitLabel: l10n.unitHoursLong,
                   onChanged: (v) => setState(() => hours = v),
                 ),
+                const SizedBox(height: 8),
                 NumberStepper(
                   value: minutes,
                   min: 0,
                   max: 59,
-                  unitLabel: 'm',
+                  step: 5,
+                  unitLabel: l10n.unitMinutesLong,
                   onChanged: (v) => setState(() => minutes = v),
                 ),
               ],
@@ -150,7 +162,7 @@ class QuickStatsRow extends StatelessWidget {
           controller: controller,
           autofocus: true,
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
-          decoration: const InputDecoration(suffixText: 'kg'),
+          decoration: InputDecoration(suffixText: l10n.unitKilograms),
         ),
         actions: [
           TextButton(

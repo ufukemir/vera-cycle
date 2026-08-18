@@ -4,11 +4,13 @@ import 'package:table_calendar/table_calendar.dart' hide isSameDay;
 
 import '../../l10n/app_localizations.dart';
 import '../../models/prediction.dart';
+import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
 import '../../util/day.dart';
 import 'widgets/calendar_day_cell.dart';
 import 'widgets/calendar_legend.dart';
 import 'widgets/day_detail_sheet.dart';
+import 'widgets/month_jump_sheet.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
@@ -19,6 +21,17 @@ class CalendarScreen extends StatefulWidget {
 
 class _CalendarScreenState extends State<CalendarScreen> {
   DateTime _focusedDay = today();
+
+  static final _firstDay = DateTime(2015);
+
+  Future<void> _jumpToMonth() async {
+    final picked = await showMonthJumpSheet(
+      context,
+      focused: _focusedDay,
+      firstDay: _firstDay,
+    );
+    if (picked != null && mounted) setState(() => _focusedDay = picked);
+  }
 
   CalendarDayMark _markFor(
     DateTime day,
@@ -72,10 +85,18 @@ class _CalendarScreenState extends State<CalendarScreen> {
         child: Column(
           children: [
             TableCalendar(
-              firstDay: DateTime(2015),
+              firstDay: _firstDay,
               lastDay: today(),
               focusedDay: _focusedDay,
               currentDay: today(),
+              // Without these two the calendar silently ignores the app's
+              // language and the week-start setting, rendering "August /
+              // Sun Mon" to a Turkish user who picked Monday.
+              locale: Localizations.localeOf(context).toString(),
+              startingDayOfWeek: context.watch<AppPreferences>().weekStartsMonday
+                  ? StartingDayOfWeek.monday
+                  : StartingDayOfWeek.sunday,
+              onHeaderTapped: (_) => _jumpToMonth(),
               // Future months simply don't exist to scroll into — this is
               // the page-level half of "future dates not tappable"; the day
               // level half is `_openDay`'s own guard, kept even though it's
@@ -86,7 +107,17 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 setState(() => _focusedDay = focused);
                 _openDay(selected);
               },
-              headerStyle: const HeaderStyle(formatButtonVisible: false),
+              headerStyle: HeaderStyle(
+                formatButtonVisible: false,
+                titleCentered: true,
+                // Coloured like a link, because it is one — this is the
+                // only cue that the month name opens the jump sheet.
+                titleTextStyle:
+                    Theme.of(context).textTheme.titleMedium?.copyWith(
+                              color: Theme.of(context).colorScheme.primary,
+                            ) ??
+                        const TextStyle(),
+              ),
               calendarBuilders: CalendarBuilders(
                 defaultBuilder: (context, day, focusedDay) => CalendarDayCell(
                   day: day,

@@ -48,10 +48,101 @@ void main() {
     expect(answer, contains('yeterli veri yok'));
   });
 
-  test('nonsense input gets the fallback with example questions', () {
+  test('nonsense input admits the gap instead of guessing', () {
     final answer = assistant.answer('asdf qwerty zzz', ctx, 'en');
-    expect(answer, contains('You can ask things like'));
+    expect(answer, contains("isn't in my knowledge base"));
     expect(answer, contains('•'));
+    // It must point somewhere useful rather than dead-ending.
+    expect(answer, contains('what can I ask'));
+  });
+
+  test('casual small talk gets an answer, not the fallback', () {
+    for (final greeting in ['naber', 'nasılsın', 'günaydın', 'iyi geceler']) {
+      final answer = assistant.answer(greeting, ctx, 'tr');
+      expect(answer, isNot(contains('bilgi tabanımda yok')),
+          reason: 'small talk "$greeting" fell through to the fallback');
+    }
+    expect(assistant.answer('how are you', ctx, 'en'),
+        isNot(contains("isn't in my knowledge base")));
+  });
+
+  test('"what else can I ask" lists the whole range, not three examples', () {
+    final tr = assistant.answer('başka ne sorabilirim', ctx, 'tr');
+    final en = assistant.answer('what else can i ask', ctx, 'en');
+
+    // Every topic is offered, so the count comfortably exceeds the handful
+    // the fallback shows.
+    expect('•'.allMatches(tr).length, greaterThan(10));
+    expect('•'.allMatches(en).length, greaterThan(10));
+    expect(tr, isNot(contains('bilgi tabanımda yok')));
+  });
+
+  test('a typo still finds the topic', () {
+    // "kramlar" — one missing letter from "kramplar".
+    expect(assistant.answer('kramlar için ne yapmalıyım', ctx, 'tr'),
+        isNot(contains('bilgi tabanımda yok')));
+    expect(assistant.answer('what helps with crmaps', ctx, 'en'),
+        isNot(contains("isn't in my knowledge base")));
+  });
+
+  test('asking whether it is an AI is answered honestly', () {
+    final tr = assistant.answer('sen yapay zeka mısın', ctx, 'tr');
+    expect(tr, contains('uydurmam'));
+    final en = assistant.answer('are you ai', ctx, 'en');
+    expect(en, contains('never send your questions to the internet'));
+  });
+
+  test('questions about using the app are answered, not deflected', () {
+    final cases = {
+      'günlük kaydı nasıl eklerim': 'Takvim',
+      'verimi doktoruma nasıl gösteririm': 'Dışa aktar',
+      'premium ne veriyor': 'ücretsiz',
+      'hatırlatıcıları nasıl açarım': 'Hatırlatıcılar',
+      'telefonumu değiştirsem verim ne olur': 'yedek',
+      'uygulamayı nasıl kilitlerim': 'PIN',
+    };
+    cases.forEach((question, expected) {
+      expect(assistant.answer(question, ctx, 'tr'), contains(expected),
+          reason: 'failed on "$question"');
+    });
+  });
+
+  test('health questions outside the old list now land somewhere', () {
+    final questions = [
+      'menopoza yaklaştığımı nasıl anlarım',
+      'pcos olabilir miyim',
+      'tampon mu ped mi kullanmalıyım',
+      'regl öncesi başım ağrıyor',
+      'oruç reglimi etkiler mi',
+      'seyahat reglimi geciktirir mi',
+      'akıntımda kaşıntı var',
+    ];
+    for (final question in questions) {
+      expect(assistant.answer(question, ctx, 'tr'),
+          isNot(contains('bilgi tabanımda yok')),
+          reason: 'failed on "$question"');
+    }
+  });
+
+  test('a PCOS question refuses to diagnose', () {
+    final answer = assistant.answer('pcos olabilir miyim', ctx, 'tr');
+    expect(answer, contains('uygulama cevap veremez'));
+  });
+
+  test('every suggested question the app offers is answerable', () {
+    for (final lang in ['tr', 'en']) {
+      for (final question in assistant.suggestions(lang)) {
+        final answer = assistant.answer(question, ctx, lang);
+        expect(
+          answer,
+          isNot(anyOf(
+            contains('bilgi tabanımda yok'),
+            contains("isn't in my knowledge base"),
+          )),
+          reason: 'the app suggests "$question" but cannot answer it',
+        );
+      }
+    }
   });
 
   test('greets back instead of falling back on small talk', () {
@@ -70,5 +161,84 @@ void main() {
     expect(assistant.suggestions('tr').first, contains('Reglim'));
     expect(assistant.suggestions('en').first, contains('period'));
     expect(assistant.suggestions('fr'), equals(assistant.suggestions('en')));
+  });
+
+  group('regressions', () {
+    const ovulationCtx = AssistantContext(
+      cycleDay: 12,
+      phase: CyclePhase.follicular,
+      meanCycleLength: 28.4,
+      cyclesLogged: 3,
+      predictionRangeLabel: 'May 12 – May 15',
+      ovulationRangeLabel: 'Apr 28 – May 1',
+    );
+
+    test('the ovulation answer gives the ovulation window, not the period one',
+        () {
+      // The answer used to splice the *period* prediction in after "based
+      // on your estimated window", so someone asking when they ovulate read
+      // dates roughly two weeks off as the answer to their question.
+      for (final lang in ['en', 'tr']) {
+        final answer = assistant.answer(
+          lang == 'en' ? 'when do I ovulate?' : 'ovulasyonum ne zaman',
+          ovulationCtx,
+          lang,
+        );
+        expect(answer, contains('Apr 28 – May 1'),
+            reason: 'the ovulation window must be the one attributed to '
+                'ovulation ($lang)');
+      }
+    });
+
+    test('an empty context never produces a broken sentence', () {
+      // "Your average cycle is not known yet days and you are on day not
+      // logged yet." — the fallbacks were dropped into fixed sentences.
+      const empty = AssistantContext();
+      for (final entry in {
+        'en': ['not known yet days', 'on day not logged yet'],
+        'tr': ['bilinmiyor gün', 'henüz kayıt yok. günündesin'],
+      }.entries) {
+        for (final question in ['reglim gecikti', 'my period is late']) {
+          final answer = assistant.answer(question, empty, entry.key);
+          for (final broken in entry.value) {
+            expect(answer, isNot(contains(broken)),
+                reason: 'ungrammatical fallback leaked into ${entry.key}');
+          }
+        }
+      }
+    });
+
+    test('a health question containing a greeting substring is not small talk',
+        () {
+      // 'hey' inside "are they normal?", 'sup' inside "supplements" and
+      // "şüpheliyim": bare `contains` answered real questions with "Hi! 👋".
+      final cases = {
+        'are they normal?': 'en',
+        'why are they irregular': 'en',
+        'should I take supplements?': 'en',
+        'hamile miyim şüpheliyim': 'tr',
+      };
+      for (final entry in cases.entries) {
+        final answer = assistant.answer(entry.key, ctx, entry.value);
+        expect(answer, isNot(contains('👋')),
+            reason: '"${entry.key}" was answered with a greeting');
+        expect(answer, isNot(contains('Doing well, thanks')),
+            reason: '"${entry.key}" was answered with small talk');
+      }
+    });
+
+    test('a thank-you attached to a real question answers the question', () {
+      final answer =
+          assistant.answer('thanks, is heavy bleeding normal?', ctx, 'en');
+      expect(answer, isNot(contains("You're welcome")));
+    });
+
+    test('"help me with X" answers X rather than listing topics', () {
+      final answer = assistant.answer('help me with cramps', ctx, 'en');
+      expect(answer.toLowerCase(), contains('heat'));
+
+      // Bare "help me" is still a request for the topic list.
+      expect(assistant.answer('help me', ctx, 'en'), contains('•'));
+    });
   });
 }

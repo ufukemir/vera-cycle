@@ -4,7 +4,9 @@ import 'package:provider/provider.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../services/cycle_assistant.dart';
+import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
+import '../../util/day.dart';
 import '../../widgets/illustrations.dart';
 
 class _Message {
@@ -40,10 +42,21 @@ class _AssistantScreenState extends State<AssistantScreen> {
     final prediction = controller.prediction;
 
     String? rangeLabel;
+    String? ovulationLabel;
     if (prediction.hasPrediction) {
       final fmt = DateFormat.MMMd(Localizations.localeOf(context).toString());
       rangeLabel =
           '${fmt.format(prediction.earliestStart!)} – ${fmt.format(prediction.latestStart!)}';
+
+      // Ovulation is counted back from the next period, using the same
+      // luteal length the prediction engine itself uses (PredictionEngine
+      // in main.dart) so the assistant can never contradict the rest of
+      // the app. Shifting the whole window keeps the honest uncertainty:
+      // a range in, a range out.
+      final luteal = context.read<AppPreferences>().lutealPhaseDays;
+      ovulationLabel =
+          '${fmt.format(addDays(prediction.earliestStart!, -luteal))} – '
+          '${fmt.format(addDays(prediction.latestStart!, -luteal))}';
     }
 
     return AssistantContext(
@@ -52,6 +65,7 @@ class _AssistantScreenState extends State<AssistantScreen> {
       meanCycleLength: prediction.meanLength,
       cyclesLogged: controller.cycles.where((c) => c.isComplete).length,
       predictionRangeLabel: rangeLabel,
+      ovulationRangeLabel: ovulationLabel,
     );
   }
 

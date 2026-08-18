@@ -81,12 +81,43 @@ enum CervixFirmness { soft, medium, firm }
 
 /// Scenic background for the home screen hero — the reference app's
 /// photo-themed home. Assets are openly licensed (assets/photos/NOTICE.md).
-enum HomeTheme { wheat, sky, field, blossom, plain }
+enum HomeTheme {
+  wheat,
+  sky,
+  field,
+  blossom,
+  plain,
+
+  // Premium. Gated on look alone: picking one of these never changes what
+  // the app records or predicts, so a lapsed subscription falls back to a
+  // free background and loses nothing else.
+  dusk(premium: true),
+  meadow(premium: true),
+  petal(premium: true),
+  bloom(premium: true);
+
+  const HomeTheme({this.premium = false});
+
+  final bool premium;
+}
 
 /// Home-screen companion mascot — hand-drawn vector characters (see
 /// `illustrations.dart`), a playful reference-app pattern rebuilt with
 /// original art. `none` hides it entirely; purely decorative.
-enum Mascot { droplet, flower, moon, none }
+enum Mascot {
+  droplet,
+  flower,
+  moon,
+  none,
+
+  // Premium, same reasoning as the premium [HomeTheme] values.
+  star(premium: true),
+  leaf(premium: true);
+
+  const Mascot({this.premium = false});
+
+  final bool premium;
+}
 
 /// Optional ovulation (LH) test result for a day. Opt-in tracker, default
 /// off. The app records the result, it never interprets it — see CLAUDE.md

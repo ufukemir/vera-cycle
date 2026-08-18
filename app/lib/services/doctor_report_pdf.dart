@@ -5,6 +5,7 @@ import 'package:pdf/widgets.dart' as pw;
 
 import '../models/cycle.dart';
 import '../models/day_log.dart';
+import '../models/enums.dart';
 import '../services/cycle_insights.dart';
 import '../util/day.dart';
 
@@ -82,9 +83,12 @@ class DoctorReportPdf {
               for (final log in logs)
                 [
                   dayKey(log.date),
-                  log.flow?.name ?? '',
-                  log.symptoms.map((s) => s.name).join(', '),
-                  log.mood?.name ?? '',
+                  log.flow == null ? '' : (labels.flowNames[log.flow] ?? ''),
+                  log.symptoms
+                      .map((s) => labels.symptomNames[s] ?? '')
+                      .where((s) => s.isNotEmpty)
+                      .join(', '),
+                  log.mood == null ? '' : (labels.moodNames[log.mood] ?? ''),
                 ],
             ],
             cellStyle: const pw.TextStyle(fontSize: 9),
@@ -187,7 +191,22 @@ class DoctorReportPdfLabels {
     required this.timelineLegendPeriod,
     required this.timelineLegendCycle,
     required this.timelineOngoing,
+    required this.flowNames,
+    required this.symptomNames,
+    required this.moodNames,
   });
+
+  /// Localized cell values.
+  ///
+  /// The column headers were translated while the cells underneath printed
+  /// raw Dart identifiers, so a Turkish user handed her doctor a table
+  /// headed "Ruh hali" whose entries read `breastTenderness`. Unlike the
+  /// CSV — which is machine-readable on purpose, English end to end — the
+  /// PDF is meant to be read by a person, so every visible string in it
+  /// has to be in the reader's language.
+  final Map<FlowIntensity, String> flowNames;
+  final Map<Symptom, String> symptomNames;
+  final Map<Mood, String> moodNames;
 
   final String title;
   final String generatedOn;

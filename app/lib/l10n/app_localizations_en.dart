@@ -95,7 +95,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboardingPrivacyBody =>
-      'Your cycle data stays only on this device, encrypted. There\'s no account and no cloud sync — nothing you log is ever uploaded. The free version shows ads, which do use the internet, but they never receive your health data.';
+      'Your cycle data stays only on this device, encrypted. There\'s no account and no cloud sync — nothing you log is ever uploaded. The key lives in your phone\'s secure hardware, and you can export or erase everything whenever you want.';
 
   @override
   String get onboardingLastPeriodTitle => 'When did your last period start?';
@@ -1134,11 +1134,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get premiumTitle => 'Vera Premium';
 
   @override
-  String get premiumHeadline => 'An ad-free Vera';
+  String get premiumHeadline => 'Vera Premium';
 
   @override
   String get premiumSubhead =>
-      'Every tracking feature stays free forever. Premium simply removes the ads and supports development.';
+      'Every tracking feature stays free forever — your history is never locked away. Premium adds your own trackers, deeper insights, your own reminders and extra looks, and removes the ads.';
 
   @override
   String get premiumBenefitNoAds => 'No ads, anywhere in the app';
@@ -1146,9 +1146,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get premiumBenefitSupport =>
       'Supports an independent, privacy-first app';
-
-  @override
-  String get premiumBenefitFuture => 'Includes future Premium comfort features';
 
   @override
   String get premiumMonthly => 'Monthly';
@@ -1234,7 +1231,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get partnerSummaryHeader => 'Cycle summary from Vera';
 
   @override
-  String get settingsHomeThemeLabel => 'Home theme';
+  String get settingsHomeThemeLabel => 'Home background';
 
   @override
   String get homeThemeWheat => 'Wheat';
@@ -1308,7 +1305,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String cycleHistoryPeriodLength(int days) {
-    return '$days days of bleeding';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Period lasted $days days',
+      one: 'Period lasted 1 day',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1425,4 +1428,264 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get diagnosticsClear => 'Clear';
+
+  @override
+  String get unitHoursShort => 'h';
+
+  @override
+  String get unitMinutesShort => 'm';
+
+  @override
+  String get unitHoursLong => 'hours';
+
+  @override
+  String get unitMinutesLong => 'minutes';
+
+  @override
+  String get unitMilliliters => 'ml';
+
+  @override
+  String get unitKilograms => 'kg';
+
+  @override
+  String get calendarJumpTitle => 'Jump to month';
+
+  @override
+  String get calendarJumpYearLabel => 'Year';
+
+  @override
+  String get settingsAdPrivacyUnavailable =>
+      'Ad personalisation choices aren\'t offered in your region — ads here are already non-personalised.';
+
+  @override
+  String get settingsGroupAppearance => 'Appearance';
+
+  @override
+  String get settingsGroupTracking => 'Tracking preferences';
+
+  @override
+  String get dayLogCustomTagsLabel => 'My own trackers';
+
+  @override
+  String get customTagAddButton => 'Add a tracker';
+
+  @override
+  String get customTagDialogTitle => 'New tracker';
+
+  @override
+  String get customTagDialogHint => 'e.g. migraine, gym, insomnia';
+
+  @override
+  String get customTagManageEntry => 'Manage my trackers';
+
+  @override
+  String get customTagRenameTitle => 'Rename tracker';
+
+  @override
+  String get customTagDeleteTitle => 'Delete this tracker?';
+
+  @override
+  String get customTagDeleteBody =>
+      'It will be removed from every day you used it. Your other entries stay as they are.';
+
+  @override
+  String get customTagEmpty => 'No trackers of your own yet.';
+
+  @override
+  String get premiumLockedTitle => 'Premium feature';
+
+  @override
+  String get premiumLockedAction => 'See Premium';
+
+  @override
+  String get premiumBenefitCustomTrackers =>
+      'Track anything you want, in your own words';
+
+  @override
+  String get premiumBenefitAdvancedInsights =>
+      'Advanced insights: what tends to happen, and when';
+
+  @override
+  String get premiumBenefitPersonalisation =>
+      'Extra backgrounds and companions';
+
+  @override
+  String get premiumBenefitAdvancedReminders =>
+      'Reminders on your own schedule';
+
+  @override
+  String get advancedInsightsTitle => 'Advanced insights';
+
+  @override
+  String get advancedInsightsEntry => 'Advanced insights';
+
+  @override
+  String get advancedInsightsNotEnough =>
+      'Log three full cycles and your patterns will appear here. Fewer than that and any \"pattern\" would just be coincidence.';
+
+  @override
+  String get advancedInsightsPatternsTitle => 'When things tend to show up';
+
+  @override
+  String advancedInsightsPatternLine(String label, String segment) {
+    return '$label — most often $segment';
+  }
+
+  @override
+  String advancedInsightsPatternDetail(int count, int day) {
+    return '$count days logged, around day $day of your cycle';
+  }
+
+  @override
+  String advancedInsightsNoPattern(String label) {
+    return '$label — no clear timing yet';
+  }
+
+  @override
+  String get advancedInsightsTrendTitle => 'Cycle length over time';
+
+  @override
+  String advancedInsightsDriftLonger(String days, String cycles) {
+    return 'Comparing your earliest $cycles cycles with your latest $cycles, the recent ones run about $days days longer.';
+  }
+
+  @override
+  String advancedInsightsDriftShorter(String days, String cycles) {
+    return 'Comparing your earliest $cycles cycles with your latest $cycles, the recent ones run about $days days shorter.';
+  }
+
+  @override
+  String advancedInsightsDriftStable(String cycles) {
+    return 'Comparing your earliest $cycles cycles with your latest $cycles, your cycle length has stayed about the same.';
+  }
+
+  @override
+  String get advancedInsightsDriftNotEnough =>
+      'Once you have six full cycles, Vera can compare your earliest ones with your most recent to see whether your cycle length is drifting.';
+
+  @override
+  String get advancedInsightsMoodTitle => 'Mood by part of the cycle';
+
+  @override
+  String get advancedInsightsDisclaimer =>
+      'These are counts of what you logged, nothing more. They are not a diagnosis, and a pattern here is not a cause.';
+
+  @override
+  String get segmentPeriod => 'during your period';
+
+  @override
+  String get segmentAfterPeriod => 'after your period';
+
+  @override
+  String get segmentMidCycle => 'mid-cycle';
+
+  @override
+  String get segmentBeforePeriod => 'before your period';
+
+  @override
+  String get customRemindersEntry => 'My own reminders';
+
+  @override
+  String get customRemindersTitle => 'My own reminders';
+
+  @override
+  String get customRemindersEmpty => 'No reminders of your own yet.';
+
+  @override
+  String get customRemindersAdd => 'Add a reminder';
+
+  @override
+  String get customReminderLabelHint => 'e.g. take my pill, drink water';
+
+  @override
+  String get customReminderLockScreenNote =>
+      'Reminder text appears on your lock screen, so keep it as private as you want it to be.';
+
+  @override
+  String get customReminderDelete => 'Delete reminder';
+
+  @override
+  String get homeThemeDusk => 'Dusk';
+
+  @override
+  String get homeThemeMeadow => 'Meadow';
+
+  @override
+  String get homeThemePetal => 'Petal';
+
+  @override
+  String get homeThemeBloom => 'Bloom';
+
+  @override
+  String get mascotStar => 'Star';
+
+  @override
+  String get mascotLeaf => 'Leaf';
+
+  @override
+  String get tipDetailWhatsHappening => 'What\'s happening in your body';
+
+  @override
+  String get tipDetailDisclaimer =>
+      'This is general information, not personal medical advice. Every body responds differently, and how you actually feel matters more than anything suggested here. If something worries you, talk to a clinician.';
+
+  @override
+  String get phaseExplainerMenstrual =>
+      'You are bleeding as the uterine lining sheds. Estrogen and progesterone are at their lowest point of the cycle, which is why many people feel more tired and more inward in the first days. Cramps come from the uterus contracting. Bleeding also costs you iron — which explains part of the fatigue.';
+
+  @override
+  String get phaseExplainerFollicular =>
+      'After bleeding ends, estrogen starts climbing again. Most people notice energy, mood and stamina picking back up. Follicles are maturing in the ovaries; the body is preparing for the next ovulation.';
+
+  @override
+  String get phaseExplainerFertile =>
+      'Estrogen is near its peak and ovulation is expected around these days. Cervical mucus typically turns clear and slippery, some people notice higher libido, and some feel a brief twinge on one side. Energy is often at its highest point in the cycle.';
+
+  @override
+  String get phaseExplainerLuteal =>
+      'After ovulation progesterone rises, then drops sharply as your period approaches. That drop can trigger PMS symptoms: bloating, breast tenderness, appetite changes, broken sleep and mood swings. Your body temperature runs slightly higher.';
+
+  @override
+  String get phaseExplainerUnknown =>
+      'There is not enough logged yet to say which phase you are in. Vera would rather say so than invent a phase. Once you have logged a few cycles this section fills in with your own data — until then, the suggestions below are general ones that apply at any point.';
+
+  @override
+  String get tipFitnessDetailMenstrual =>
+      'Hard training does not suit most people in the first days, and that is not a discipline problem — your energy genuinely is lower. Walking, gentle stretching, restorative yoga and breathwork improve blood flow and can take the edge off cramps. If you feel good, there is no reason to avoid hard sessions: bleeding is not a reason to stop exercising. One practical note: long, demanding sessions on heavy days can deepen the fatigue, so adjust by how your body actually feels.';
+
+  @override
+  String get tipFitnessDetailFollicular =>
+      'As estrogen rises most people feel stronger and more durable; this is usually the best stretch of the cycle to start something new, add weight, or push the pace. Muscle repair is relatively efficient here too. Still, build up gradually: high energy does not mean zero injury risk.';
+
+  @override
+  String get tipFitnessDetailFertile =>
+      'Energy and motivation are usually at their peak, so demanding sessions tend to land well. Some people have slightly looser joints around ovulation, so a longer warm-up makes sense for sports with sharp changes of direction. A brief twinge on one side of the abdomen is common — but if it is severe or lasts, rest and check with a clinician.';
+
+  @override
+  String get tipFitnessDetailLuteal =>
+      'As your period approaches, energy can drop, your heart rate can sit higher for the same effort, and recovery can take longer. That is an expected swing, not a decline. Moderate sessions, a slightly lighter version of your strength work, and walking are usually more sustainable here. With bloating and breast tenderness, a supportive bra and a longer warm-up make a real difference.';
+
+  @override
+  String get tipFitnessDetailUnknown =>
+      'Even without knowing your phase, movement helps at any point: moderate activity spread across most days of the week beats occasional very intense sessions. Adjust to how you feel — on tired days, a walk counts. Once you have logged a few cycles you will see phase-specific suggestions here.';
+
+  @override
+  String get tipNutritionDetailMenstrual =>
+      'Bleeding costs you iron; red meat, lentils, chickpeas, dark leafy greens and molasses help replace it. Plant iron absorbs markedly better alongside vitamin C — squeezing lemon over a lentil dish is the most practical version of that. Tea and coffee with a meal reduce iron absorption, so leaving an hour between them is enough. Drinking plenty of water can ease the fatigue and headaches that come with bleeding.';
+
+  @override
+  String get tipNutritionDetailFollicular =>
+      'With energy recovering, the body is in rebuild mode: enough protein, whole grains and vegetables support that. It also makes sense to keep refilling iron stores after bleeding. Not skipping meals is usually easier in this phase, and it sets you up to enter the appetite swings of the next one more evenly.';
+
+  @override
+  String get tipNutritionDetailFertile =>
+      'No special diet is needed here; balanced meals and enough water do the most work. Some people feel bloated, which is usually hormonal and passing. If you are planning a pregnancy, this is a sensible time to ask a clinician about folic acid — but that is a conversation with them, not advice an app should give.';
+
+  @override
+  String get tipNutritionDetailLuteal =>
+      'Increased appetite and sugar cravings as progesterone rises are very common; that is a hormonal shift, not a willpower problem. Adding protein and fibre to meals keeps blood sugar steadier and softens the craving. Less salt and more water can ease bloating. Magnesium-rich foods (almonds, walnuts, dark greens, dark chocolate) reduce cramps and tension for some people. Cutting back on caffeine helps the broken sleep of this phase.';
+
+  @override
+  String get tipNutritionDetailUnknown =>
+      'Whatever the phase, the same things help most: regular meals, enough protein, plenty of vegetables, enough water, and iron-rich foods. Since bleeding costs iron, paying a little more attention on those days is enough. Once you have logged a few cycles you will see phase-specific suggestions here.';
 }

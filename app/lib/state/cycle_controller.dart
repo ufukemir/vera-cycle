@@ -61,6 +61,53 @@ class CycleController extends ChangeNotifier {
 
   CycleStatus get todayStatus => statusOn(today());
 
+  /// Every custom tracker label the user has ever used, alphabetically.
+  ///
+  /// Derived rather than stored: a tag exists because it appears on a day,
+  /// so there is no second list to keep in sync — and no user-authored
+  /// health word sitting outside the encrypted store.
+  List<String> get customTags {
+    final tags = <String>{};
+    for (final log in _logs) {
+      tags.addAll(log.customTags);
+    }
+    return tags.toList()
+      ..sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
+  }
+
+  /// Removes a custom tag everywhere it appears. Renaming is delete + add
+  /// from the caller's side; both rewrite history, which is why they live
+  /// here rather than in a widget.
+  Future<void> deleteCustomTag(String tag) async {
+    final touched = _logs.where((l) => l.customTags.contains(tag)).toList();
+    if (touched.isEmpty) return;
+    for (final log in touched) {
+      _logs = applyUpsert(
+        _logs,
+        log.copyWith(customTags: {...log.customTags}..remove(tag)),
+      );
+    }
+    _recompute();
+    notifyListeners();
+    await _repository.replaceAll(_logs);
+  }
+
+  Future<void> renameCustomTag(String from, String to) async {
+    final target = to.trim();
+    if (target.isEmpty || target == from) return;
+    final touched = _logs.where((l) => l.customTags.contains(from)).toList();
+    for (final log in touched) {
+      final tags = {...log.customTags}
+        ..remove(from)
+        ..add(target);
+      _logs = applyUpsert(_logs, log.copyWith(customTags: tags));
+    }
+    if (touched.isEmpty) return;
+    _recompute();
+    notifyListeners();
+    await _repository.replaceAll(_logs);
+  }
+
   DayLog? logFor(DateTime date) {
     for (final log in _logs) {
       if (isSameDay(log.date, date)) return log;

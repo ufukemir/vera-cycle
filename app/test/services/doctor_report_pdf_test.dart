@@ -24,6 +24,24 @@ const _labels = DoctorReportPdfLabels(
   timelineLegendPeriod: 'Period',
   timelineLegendCycle: 'Rest of cycle',
   timelineOngoing: 'Ongoing',
+  // The PDF is read by a person, so these are passed in localized. Only the
+  // values actually used by the fixtures below need to be present; a missing
+  // key renders as an empty cell rather than throwing, which is what the
+  // "unknown value" path in the builder is for.
+  flowNames: {
+    FlowIntensity.spotting: 'Spotting',
+    FlowIntensity.light: 'Light',
+    FlowIntensity.medium: 'Medium',
+    FlowIntensity.heavy: 'Heavy',
+  },
+  symptomNames: {
+    Symptom.cramps: 'Cramps',
+    Symptom.headache: 'Headache',
+  },
+  moodNames: {
+    Mood.calm: 'Calm',
+    Mood.irritable: 'Irritable',
+  },
 );
 
 void main() {
