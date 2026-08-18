@@ -7,6 +7,7 @@ import '../../services/cycle_assistant.dart';
 import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
 import '../../util/day.dart';
+import '../../util/number_format.dart';
 import '../../widgets/illustrations.dart';
 
 class _Message {
@@ -62,7 +63,9 @@ class _AssistantScreenState extends State<AssistantScreen> {
     return AssistantContext(
       cycleDay: status.cycleDay,
       phase: status.phase,
-      meanCycleLength: prediction.meanLength,
+      meanCycleLengthLabel: prediction.meanLength == null
+          ? null
+          : formatDecimal(context, prediction.meanLength!),
       cyclesLogged: controller.cycles.where((c) => c.isComplete).length,
       predictionRangeLabel: rangeLabel,
       ovulationRangeLabel: ovulationLabel,
@@ -249,8 +252,11 @@ class _TypingBubbleState extends State<_TypingBubble>
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    // Directional, not left: in Arabic the assistant speaks from the
+    // start edge, which is the RIGHT. Hard-pinning to left put the
+    // assistant on the wrong side of an RTL conversation.
     return Align(
-      alignment: Alignment.centerLeft,
+      alignment: AlignmentDirectional.centerStart,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -314,8 +320,11 @@ class _Bubble extends StatelessWidget {
         ],
       );
     }
+    // The user's own bubble hugs the END edge — right in LTR, left in
+    // RTL. With Alignment.centerRight the whole chat read as an LTR
+    // conversation dropped into an RTL screen.
     return Align(
-      alignment: Alignment.centerRight,
+      alignment: AlignmentDirectional.centerEnd,
       child: _bubbleBody(context, scheme, fromUser),
     );
   }
@@ -329,11 +338,13 @@ class _Bubble extends StatelessWidget {
             maxWidth: MediaQuery.sizeOf(context).width * 0.78),
         decoration: BoxDecoration(
           color: fromUser ? scheme.primary : scheme.surfaceContainerHigh,
-          borderRadius: BorderRadius.only(
-            topLeft: const Radius.circular(20),
-            topRight: const Radius.circular(20),
-            bottomLeft: Radius.circular(fromUser ? 20 : 6),
-            bottomRight: Radius.circular(fromUser ? 6 : 20),
+          // Directional so the 6px "tail" corner stays on the speaker's
+          // own side after mirroring.
+          borderRadius: BorderRadiusDirectional.only(
+            topStart: const Radius.circular(20),
+            topEnd: const Radius.circular(20),
+            bottomStart: Radius.circular(fromUser ? 20 : 6),
+            bottomEnd: Radius.circular(fromUser ? 6 : 20),
           ),
         ),
         child: Text(

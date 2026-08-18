@@ -159,11 +159,15 @@
   "insightsCyclesLoggedLabel": "Cycles logged",
   "insightsAveragePeriodLengthLabel": "Average period length",
   "insightsAverageCycleLengthLabel": "Average cycle length",
-  "insightsVariabilityLabel": "Varies by about {days} days",
+  "insightsVariabilityLabel": "{days, plural, =1{Varies by about 1 day} other{Varies by about {days} days}}",
   "@insightsVariabilityLabel": {
     "placeholders": {
       "days": {
-        "type": "String"
+        "type": "num",
+        "format": "decimalPatternDigits",
+        "optionalParameters": {
+          "decimalDigits": 1
+        }
       }
     }
   },
@@ -361,7 +365,7 @@
   "mascotFlower": "Flower",
   "mascotMoon": "Moon",
   "mascotNone": "None",
-  "homeWindowCountdown": "Predicted window starts in about {days} days",
+  "homeWindowCountdown": "{days, plural, =1{Predicted window starts in about 1 day} other{Predicted window starts in about {days} days}}",
   "@homeWindowCountdown": {
     "placeholders": {
       "days": {
@@ -369,7 +373,7 @@
       }
     }
   },
-  "homeOvulationCountdown": "Estimated ovulation in about {days} days",
+  "homeOvulationCountdown": "{days, plural, =1{Estimated ovulation in about 1 day} other{Estimated ovulation in about {days} days}}",
   "@homeOvulationCountdown": {
     "placeholders": {
       "days": {
@@ -391,7 +395,7 @@
   "settingsRemindersOvulationLabel": "Fertile window heads-up",
   "reminderOvulationTitle": "Estimated fertile window approaching",
   "reminderOvulationBody": "Based on your logged cycles, your estimated fertile window may start soon.",
-  "trackerEntriesCount": "{count} entries",
+  "trackerEntriesCount": "{count, plural, =1{1 entry} other{{count} entries}}",
   "@trackerEntriesCount": {
     "placeholders": {
       "count": {
@@ -429,7 +433,7 @@
     }
   },
   "pregnancyDueDateLabel": "Estimated due date",
-  "pregnancyDaysLeft": "About {days} days to go",
+  "pregnancyDaysLeft": "{days, plural, =1{About 1 day to go} other{About {days} days to go}}",
   "@pregnancyDaysLeft": {
     "placeholders": {
       "days": {
@@ -446,6 +450,14 @@
     }
   },
   "pregnancyDisclaimer": "Dates are estimated from your last period using the standard 280-day rule. An ultrasound gives a more accurate date, and late ovulation shifts these numbers — this is information, not medical care.",
+  "pregnancyNoteUnder5": "Most people notice nothing yet — because gestational age counts from your last period, the first two weeks are actually before conception.",
+  "pregnancyNoteUnder9": "Nausea, breast tenderness, and fatigue are common right now. A good time to arrange a first appointment.",
+  "pregnancyNoteUnder13": "You are nearing the end of the first trimester; for many people nausea starts easing around now.",
+  "pregnancyNoteUnder20": "Energy often returns in this stretch. First movements can be felt anywhere between weeks 16 and 22.",
+  "pregnancyNoteUnder28": "Movements get distinct and start forming a pattern. Back pain and heartburn are common in this stretch.",
+  "pregnancyNoteUnder34": "You're in the third trimester. Shortness of breath, frequent urination, and Braxton-Hicks contractions are common.",
+  "pregnancyNoteUnder38": "Baby is getting ready for birth. A good time for a hospital bag and a birth plan.",
+  "pregnancyNoteTerm": "You're at term — birth can happen any time between weeks 37 and 42; week 40 is an average, not a deadline.",
   "pregnancyWeeklyNoteTitle": "This week",
   "pregnancyNeedsLmp": "Add the first day of your last period to start tracking.",
   "pregnancyOutOfRange": "That date is more than 42 weeks ago — update it or turn pregnancy mode off.",
@@ -475,13 +487,20 @@
   "settingsRemindersBackupLabel": "Remind me to back up",
   "reminderBackupTitle": "Time to back up Vera",
   "reminderBackupBody": "Your history only exists on this phone. A quick encrypted backup keeps it safe.",
+  "notificationChannelPeriodStart": "Upcoming period",
+  "notificationChannelPeriodEnd": "Period end check-in",
+  "notificationChannelMedication": "Medication",
+  "notificationChannelWater": "Water",
+  "notificationChannelAppointment": "Appointment",
+  "notificationChannelOvulation": "Fertile window",
+  "notificationChannelBackup": "Backup reminder",
   "calendarDayDetailTitle": "This day",
   "calendarDayNothingLogged": "Nothing logged for this day yet",
   "calendarDayOpenLog": "Open day log",
   "cycleHistoryTitle": "Past cycles",
   "cycleHistoryEmpty": "Log a couple of periods and your cycle history shows up here.",
   "cycleHistoryOngoing": "Ongoing",
-  "cycleHistoryLength": "{days} day cycle",
+  "cycleHistoryLength": "{days, plural, =1{1 day cycle} other{{days} day cycle}}",
   "@cycleHistoryLength": {
     "placeholders": {
       "days": {
@@ -521,7 +540,7 @@
       }
     }
   },
-  "a11yChartSummary": "Chart with {count} entries, from {min} to {max}",
+  "a11yChartSummary": "{count, plural, =1{Chart with 1 entry, from {min} to {max}} other{Chart with {count} entries, from {min} to {max}}}",
   "@a11yChartSummary": {
     "placeholders": {
       "count": {
@@ -546,7 +565,7 @@
       }
     }
   },
-  "a11yFrequencyItem": "{label}: {count} times",
+  "a11yFrequencyItem": "{label}: {count, plural, =1{1 time} other{{count} times}}",
   "@a11yFrequencyItem": {
     "placeholders": {
       "label": {
@@ -560,7 +579,7 @@
   "importTitle": "Import from another app",
   "importBody": "Export your history from your old tracker as a CSV, then pick the file here. Only dates and flow are imported — symptom and mood wording differs between apps, and Vera won't guess what you meant.",
   "importPickFile": "Choose CSV file",
-  "importPreview": "Found {count} days of history",
+  "importPreview": "{count, plural, =1{Found 1 day of history} other{Found {count} days of history}}",
   "@importPreview": {
     "placeholders": {
       "count": {
@@ -568,7 +587,7 @@
       }
     }
   },
-  "importSkipped": "{count} rows couldn't be read and will be left out",
+  "importSkipped": "{count, plural, =1{1 row couldn't be read and will be left out} other{{count} rows couldn't be read and will be left out}}",
   "@importSkipped": {
     "placeholders": {
       "count": {
@@ -578,7 +597,7 @@
   },
   "importConfirm": "Add to my history",
   "importMergeNote": "Imported days are merged in. Days you already logged in Vera are kept as they are.",
-  "importDone": "Imported {count} days",
+  "importDone": "{count, plural, =1{Imported 1 day} other{Imported {count} days}}",
   "@importDone": {
     "placeholders": {
       "count": {
@@ -591,7 +610,7 @@
   "settingsImportEntry": "Import from another app",
   "settingsHealthSyncLabel": "Sync to Apple Health / Health Connect",
   "settingsHealthSyncBody": "Writes only period flow, weight, and basal temperature to your phone's health app. Symptoms, moods, and notes stay in Vera. Nothing is read back.",
-  "healthSyncBackfilled": "Sent {count} days to your health app",
+  "healthSyncBackfilled": "{count, plural, =1{Sent 1 day to your health app} other{Sent {count} days to your health app}}",
   "@healthSyncBackfilled": {
     "placeholders": {
       "count": {
@@ -669,7 +688,7 @@
   "advancedInsightsNotEnough": "Log three full cycles and your patterns will appear here. Fewer than that and any \"pattern\" would just be coincidence.",
   "advancedInsightsPatternsTitle": "When things tend to show up",
   "advancedInsightsPatternLine": "{label} — most often {segment}",
-  "advancedInsightsPatternDetail": "{count} days logged, around day {day} of your cycle",
+  "advancedInsightsPatternDetail": "{count, plural, =1{1 day logged, around day {day} of your cycle} other{{count} days logged, around day {day} of your cycle}}",
   "advancedInsightsNoPattern": "{label} — no clear timing yet",
   "advancedInsightsTrendTitle": "Cycle length over time",
   "advancedInsightsDriftLonger": "Comparing your earliest {cycles} cycles with your latest {cycles}, the recent ones run about {days} days longer.",

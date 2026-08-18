@@ -122,6 +122,10 @@ class _BasalTempFieldState extends State<_BasalTempField> {
 
   String _displayText() {
     if (widget.valueC == null) return '';
+    // Deliberately NOT locale-formatted: this seeds a TextField whose
+    // text is parsed back with double.tryParse (after a comma->period
+    // swap). Formatting it as "36,5" for an Arabic locale would seed the
+    // field with Arabic-Indic digits that the parser cannot read back.
     return _toDisplayUnit(widget.valueC!).toStringAsFixed(1);
   }
 

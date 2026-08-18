@@ -430,8 +430,21 @@ class AppLocalizationsEs extends AppLocalizations {
   String get insightsAverageCycleLengthLabel => 'Duración media del ciclo';
 
   @override
-  String insightsVariabilityLabel(String days) {
-    return 'Varía en unos $days días';
+  String insightsVariabilityLabel(num days) {
+    final intl.NumberFormat daysNumberFormat =
+        intl.NumberFormat.decimalPatternDigits(
+          locale: localeName,
+          decimalDigits: 1,
+        );
+    final String daysString = daysNumberFormat.format(days);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Varía en unos $daysString días',
+      one: 'Varía en un día',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1080,12 +1093,24 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String homeWindowCountdown(int days) {
-    return 'La ventana prevista empieza en unos $days días';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'La ventana prevista empieza en unos $days días',
+      one: 'La ventana prevista empieza en un día',
+    );
+    return '$_temp0';
   }
 
   @override
   String homeOvulationCountdown(int days) {
-    return 'Ovulación estimada en unos $days días';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Ovulación estimada en unos $days días',
+      one: 'Ovulación estimada en un día',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1133,7 +1158,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String trackerEntriesCount(int count) {
-    return '$count registros';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count registros',
+      one: '$count registro',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1203,7 +1234,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String pregnancyDaysLeft(int days) {
-    return 'Faltan unos $days días';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Faltan unos $days días',
+      one: 'Falta un día',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1214,6 +1251,38 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get pregnancyDisclaimer =>
       'Las fechas se estiman desde tu última regla con la regla estándar de 280 días. Una ecografía da una fecha más precisa y una ovulación tardía desplaza estos números — esto es información, no atención médica.';
+
+  @override
+  String get pregnancyNoteUnder5 =>
+      'La mayoría de las personas aún no nota nada — como la edad gestacional se cuenta desde tu última regla, las dos primeras semanas son en realidad anteriores a la concepción.';
+
+  @override
+  String get pregnancyNoteUnder9 =>
+      'Las náuseas, la sensibilidad en los senos y la fatiga son frecuentes en estas semanas. Un buen momento para concertar una primera cita.';
+
+  @override
+  String get pregnancyNoteUnder13 =>
+      'Se acerca el final del primer trimestre; en muchas personas las náuseas empiezan a aliviarse por estas fechas.';
+
+  @override
+  String get pregnancyNoteUnder20 =>
+      'La energía suele volver en esta etapa. Los primeros movimientos pueden sentirse en cualquier momento entre las semanas 16 y 22.';
+
+  @override
+  String get pregnancyNoteUnder28 =>
+      'Los movimientos se vuelven más definidos y empiezan a formar un patrón. El dolor de espalda y la acidez son frecuentes en esta etapa.';
+
+  @override
+  String get pregnancyNoteUnder34 =>
+      'Estás en el tercer trimestre. La falta de aire, la micción frecuente y las contracciones de Braxton-Hicks son frecuentes.';
+
+  @override
+  String get pregnancyNoteUnder38 =>
+      'El bebé se prepara para el nacimiento. Un buen momento para la bolsa del hospital y un plan de parto.';
+
+  @override
+  String get pregnancyNoteTerm =>
+      'Estás a término — el parto puede producirse en cualquier momento entre las semanas 37 y 42; la semana 40 es un promedio, no una fecha límite.';
 
   @override
   String get pregnancyWeeklyNoteTitle => 'Esta semana';
@@ -1289,6 +1358,27 @@ class AppLocalizationsEs extends AppLocalizations {
       'Tu historial solo existe en este teléfono. Una copia cifrada rápida lo mantiene a salvo.';
 
   @override
+  String get notificationChannelPeriodStart => 'Próximo periodo';
+
+  @override
+  String get notificationChannelPeriodEnd => 'Aviso de fin de periodo';
+
+  @override
+  String get notificationChannelMedication => 'Medicación';
+
+  @override
+  String get notificationChannelWater => 'Agua';
+
+  @override
+  String get notificationChannelAppointment => 'Cita';
+
+  @override
+  String get notificationChannelOvulation => 'Ventana fértil';
+
+  @override
+  String get notificationChannelBackup => 'Recordatorio de copia de seguridad';
+
+  @override
   String get calendarDayDetailTitle => 'Este día';
 
   @override
@@ -1309,7 +1399,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String cycleHistoryLength(int days) {
-    return 'Ciclo de $days días';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Ciclo de $days días',
+      one: 'Ciclo de un día',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1351,7 +1447,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String a11yChartSummary(int count, String min, String max) {
-    return 'Gráfico con $count registros, de $min a $max';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Gráfico con $count registros, de $min a $max',
+      one: 'Gráfico con $count registro, de $min a $max',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1361,7 +1463,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String a11yFrequencyItem(String label, int count) {
-    return '$label: $count veces';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count veces',
+      one: '$count vez',
+    );
+    return '$label: $_temp0';
   }
 
   @override
@@ -1376,12 +1484,24 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String importPreview(int count) {
-    return 'Se encontraron $count días de historial';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Se encontraron $count días de historial',
+      one: 'Se encontró $count día de historial',
+    );
+    return '$_temp0';
   }
 
   @override
   String importSkipped(int count) {
-    return 'No se pudieron leer $count filas y quedarán fuera';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'No se pudieron leer $count filas y quedarán fuera',
+      one: 'No se pudo leer $count fila y quedará fuera',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1393,7 +1513,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String importDone(int count) {
-    return 'Se importaron $count días';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Se importaron $count días',
+      one: 'Se importó $count día',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1416,7 +1542,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String healthSyncBackfilled(int count) {
-    return 'Se enviaron $count días a tu app de salud';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Se enviaron $count días a tu app de salud',
+      one: 'Se envió $count día a tu app de salud',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1543,7 +1675,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String advancedInsightsPatternDetail(int count, int day) {
-    return '$count días registrados, alrededor del día $day de tu ciclo';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count días registrados, alrededor del día $day de tu ciclo',
+      one: '$count día registrado, alrededor del día $day de tu ciclo',
+    );
+    return '$_temp0';
   }
 
   @override

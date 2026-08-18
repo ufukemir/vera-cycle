@@ -1,0 +1,3 @@
+"NSFaceIDUsageDescription" = "Pakai Face ID untuk membuka Vera lebih cepat. PIN-mu tetap bisa dipakai kapan saja.";
+"NSHealthShareUsageDescription" = "Vera TIDAK membaca data apa pun dari Health. Teks ini tetap diwajibkan iOS meski aksesnya hanya untuk menulis.";
+"NSHealthUpdateUsageDescription" = "Mengizinkan Vera menyimpan aliran haid, berat badan, dan suhu basalmu ke Apple Health, supaya datamu tidak terkunci di satu aplikasi saja. Gejala, suasana hati, dan catatan tidak pernah dibagikan.";

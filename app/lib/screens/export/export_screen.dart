@@ -4,7 +4,9 @@ import 'dart:typed_data';
 import 'package:cryptography/cryptography.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:intl/intl.dart';
+import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -153,6 +155,23 @@ class _ExportScreenState extends State<ExportScreen> {
     ));
   }
 
+  /// Loads the report font from the app bundle.
+  ///
+  /// The `pdf` package does not use system fonts: whatever is not in the
+  /// embedded face prints as a crossed box, silently. Quicksand is already
+  /// bundled and covers the whole Latin range, which fixes Turkish (ğ ş ı),
+  /// Vietnamese, Polish, Czech, Romanian and Hungarian.
+  ///
+  /// It does NOT cover Arabic, Cyrillic, Greek, CJK or Indic — those still
+  /// print boxes and need an extra face bundled here as a fallback. That is
+  /// a deliberate open gap, tracked by `doctor_report_pdf_font_test.dart`,
+  /// not an oversight.
+  Future<DoctorReportFonts> _loadReportFonts() async {
+    final data = await rootBundle.load('assets/fonts/Quicksand-Variable.ttf');
+    final font = pw.Font.ttf(data);
+    return DoctorReportFonts(base: font, bold: font);
+  }
+
   Future<void> _printPdf() async {
     final l10n = AppLocalizations.of(context)!;
     final controller = context.read<CycleController>();
@@ -188,6 +207,7 @@ class _ExportScreenState extends State<ExportScreen> {
           symptom: symptomLabel(l10n, symptom),
       },
       moodNames: {for (final mood in Mood.values) mood: moodLabel(l10n, mood)},
+      localeName: Localizations.localeOf(context).toString(),
     );
 
     final bytes = await _pdfBuilder.build(
@@ -196,6 +216,7 @@ class _ExportScreenState extends State<ExportScreen> {
       generatedAt: today(),
       labels: labels,
       cycles: controller.cycles,
+      fonts: await _loadReportFonts(),
     );
 
     await Printing.layoutPdf(onLayout: (_) async => bytes);

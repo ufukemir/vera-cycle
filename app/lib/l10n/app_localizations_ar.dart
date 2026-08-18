@@ -426,8 +426,25 @@ class AppLocalizationsAr extends AppLocalizations {
   String get insightsAverageCycleLengthLabel => 'متوسط طول الدورة';
 
   @override
-  String insightsVariabilityLabel(String days) {
-    return 'يتفاوت بمقدار $days أيام تقريبًا';
+  String insightsVariabilityLabel(num days) {
+    final intl.NumberFormat daysNumberFormat =
+        intl.NumberFormat.decimalPatternDigits(
+          locale: localeName,
+          decimalDigits: 1,
+        );
+    final String daysString = daysNumberFormat.format(days);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'يتفاوت بمقدار $daysString يوم تقريبًا',
+      many: 'يتفاوت بمقدار $daysString يومًا تقريبًا',
+      few: 'يتفاوت بمقدار $daysString أيام تقريبًا',
+      two: 'يتفاوت بمقدار يومين تقريبًا',
+      one: 'يتفاوت بمقدار يوم واحد تقريبًا',
+      zero: 'يتفاوت بمقدار $daysString يوم تقريبًا',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1072,12 +1089,32 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String homeWindowCountdown(int days) {
-    return 'تبدأ النافذة المتوقعة بعد نحو $days أيام';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'تبدأ النافذة المتوقعة بعد نحو $days يوم',
+      many: 'تبدأ النافذة المتوقعة بعد نحو $days يومًا',
+      few: 'تبدأ النافذة المتوقعة بعد نحو $days أيام',
+      two: 'تبدأ النافذة المتوقعة بعد نحو يومين',
+      one: 'تبدأ النافذة المتوقعة بعد نحو يوم واحد',
+      zero: 'تبدأ النافذة المتوقعة بعد نحو $days يوم',
+    );
+    return '$_temp0';
   }
 
   @override
   String homeOvulationCountdown(int days) {
-    return 'الإباضة المقدرة بعد نحو $days أيام';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'الإباضة المقدرة بعد نحو $days يوم',
+      many: 'الإباضة المقدرة بعد نحو $days يومًا',
+      few: 'الإباضة المقدرة بعد نحو $days أيام',
+      two: 'الإباضة المقدرة بعد نحو يومين',
+      one: 'الإباضة المقدرة بعد نحو يوم واحد',
+      zero: 'الإباضة المقدرة بعد نحو $days يوم',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1125,7 +1162,17 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String trackerEntriesCount(int count) {
-    return '$count إدخالات';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count إدخال',
+      many: '$count إدخالًا',
+      few: '$count إدخالات',
+      two: 'إدخالان',
+      one: 'إدخال واحد',
+      zero: '$count إدخال',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1194,7 +1241,17 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String pregnancyDaysLeft(int days) {
-    return 'يتبقى نحو $days يومًا';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'يتبقى نحو $days يوم',
+      many: 'يتبقى نحو $days يومًا',
+      few: 'يتبقى نحو $days أيام',
+      two: 'يتبقى نحو يومين',
+      one: 'يتبقى نحو يوم واحد',
+      zero: 'يتبقى نحو $days يوم',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1205,6 +1262,38 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get pregnancyDisclaimer =>
       'تُقدَّر التواريخ من آخر دورة وفق قاعدة الـ280 يومًا المعتادة. تعطي الموجات فوق الصوتية تاريخًا أدق، والإباضة المتأخرة تزيح هذه الأرقام — هذه معلومات وليست رعاية طبية.';
+
+  @override
+  String get pregnancyNoteUnder5 =>
+      'لا يلاحظ معظم الناس شيئًا بعد — فعمر الحمل يُحسب من آخر دورة، لذا فإن الأسبوعين الأولين يسبقان الإخصاب فعليًا.';
+
+  @override
+  String get pregnancyNoteUnder9 =>
+      'الغثيان وألم الثدي والإرهاق أعراض شائعة في هذه المرحلة. وقت مناسب لتحديد أول موعد طبي.';
+
+  @override
+  String get pregnancyNoteUnder13 =>
+      'اقتربت نهاية الثلث الأول من الحمل؛ ولدى كثير من الناس يبدأ الغثيان بالتراجع في هذه الفترة.';
+
+  @override
+  String get pregnancyNoteUnder20 =>
+      'غالبًا ما تعود الطاقة في هذه الفترة. ويمكن الشعور بالحركات الأولى في أي وقت بين الأسبوعين 16 و22.';
+
+  @override
+  String get pregnancyNoteUnder28 =>
+      'تصبح الحركات أوضح وتبدأ في تكوين نمط. وألم الظهر وحرقة المعدة شائعان في هذه الفترة.';
+
+  @override
+  String get pregnancyNoteUnder34 =>
+      'بدأ الثلث الثالث من الحمل. ضيق النفس وكثرة التبول وانقباضات براكستون-هيكس (Braxton-Hicks) أمور شائعة.';
+
+  @override
+  String get pregnancyNoteUnder38 =>
+      'الجنين يستعد للولادة. وقت مناسب لتجهيز حقيبة المستشفى ووضع خطة الولادة.';
+
+  @override
+  String get pregnancyNoteTerm =>
+      'الحمل الآن مكتمل المدة — يمكن أن تحدث الولادة في أي وقت بين الأسبوعين 37 و42؛ والأسبوع 40 متوسط وليس موعدًا نهائيًا.';
 
   @override
   String get pregnancyWeeklyNoteTitle => 'هذا الأسبوع';
@@ -1279,6 +1368,27 @@ class AppLocalizationsAr extends AppLocalizations {
       'سجلك موجود على هذا الهاتف فقط. نسخة احتياطية مشفّرة سريعة تحافظ عليه.';
 
   @override
+  String get notificationChannelPeriodStart => 'الدورة القادمة';
+
+  @override
+  String get notificationChannelPeriodEnd => 'متابعة انتهاء الدورة';
+
+  @override
+  String get notificationChannelMedication => 'الدواء';
+
+  @override
+  String get notificationChannelWater => 'شرب الماء';
+
+  @override
+  String get notificationChannelAppointment => 'الموعد';
+
+  @override
+  String get notificationChannelOvulation => 'نافذة الخصوبة';
+
+  @override
+  String get notificationChannelBackup => 'تذكير بالنسخ الاحتياطي';
+
+  @override
   String get calendarDayDetailTitle => 'هذا اليوم';
 
   @override
@@ -1298,7 +1408,17 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String cycleHistoryLength(int days) {
-    return 'دورة من $days يومًا';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'دورة من $days يوم',
+      many: 'دورة من $days يومًا',
+      few: 'دورة من $days أيام',
+      two: 'دورة من يومين',
+      one: 'دورة من يوم واحد',
+      zero: 'دورة من $days يوم',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1342,7 +1462,17 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String a11yChartSummary(int count, String min, String max) {
-    return 'رسم بياني به $count إدخالات، من $min إلى $max';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'رسم بياني به $count إدخال، من $min إلى $max',
+      many: 'رسم بياني به $count إدخالًا، من $min إلى $max',
+      few: 'رسم بياني به $count إدخالات، من $min إلى $max',
+      two: 'رسم بياني به إدخالان، من $min إلى $max',
+      one: 'رسم بياني به إدخال واحد، من $min إلى $max',
+      zero: 'رسم بياني به $count إدخال، من $min إلى $max',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1352,7 +1482,17 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String a11yFrequencyItem(String label, int count) {
-    return '$label: $count مرات';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count مرة',
+      many: '$count مرة',
+      few: '$count مرات',
+      two: 'مرتان',
+      one: 'مرة واحدة',
+      zero: '$count مرة',
+    );
+    return '$label: $_temp0';
   }
 
   @override
@@ -1367,12 +1507,32 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String importPreview(int count) {
-    return 'تم العثور على $count يومًا من السجل';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'تم العثور على $count يوم من السجل',
+      many: 'تم العثور على $count يومًا من السجل',
+      few: 'تم العثور على $count أيام من السجل',
+      two: 'تم العثور على يومين من السجل',
+      one: 'تم العثور على يوم واحد من السجل',
+      zero: 'تم العثور على $count يوم من السجل',
+    );
+    return '$_temp0';
   }
 
   @override
   String importSkipped(int count) {
-    return 'تعذّرت قراءة $count صفوف وسيتم استبعادها';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'تعذّرت قراءة $count صف وسيتم استبعادها',
+      many: 'تعذّرت قراءة $count صفًا وسيتم استبعادها',
+      few: 'تعذّرت قراءة $count صفوف وسيتم استبعادها',
+      two: 'تعذّرت قراءة صفين وسيتم استبعادهما',
+      one: 'تعذّرت قراءة صف واحد وسيتم استبعاده',
+      zero: 'تعذّرت قراءة $count صف وسيتم استبعادها',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1384,7 +1544,17 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String importDone(int count) {
-    return 'تم استيراد $count يومًا';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'تم استيراد $count يوم',
+      many: 'تم استيراد $count يومًا',
+      few: 'تم استيراد $count أيام',
+      two: 'تم استيراد يومين',
+      one: 'تم استيراد يوم واحد',
+      zero: 'تم استيراد $count يوم',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1406,7 +1576,17 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String healthSyncBackfilled(int count) {
-    return 'تم إرسال $count يومًا إلى تطبيق الصحة';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'تم إرسال $count يوم إلى تطبيق الصحة',
+      many: 'تم إرسال $count يومًا إلى تطبيق الصحة',
+      few: 'تم إرسال $count أيام إلى تطبيق الصحة',
+      two: 'تم إرسال يومين إلى تطبيق الصحة',
+      one: 'تم إرسال يوم واحد إلى تطبيق الصحة',
+      zero: 'تم إرسال $count يوم إلى تطبيق الصحة',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1529,7 +1709,17 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String advancedInsightsPatternDetail(int count, int day) {
-    return '$count يومًا مسجّلًا، قرابة اليوم $day من دورتك';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count يوم مسجّل، قرابة اليوم $day من دورتك',
+      many: '$count يومًا مسجّلًا، قرابة اليوم $day من دورتك',
+      few: '$count أيام مسجّلة، قرابة اليوم $day من دورتك',
+      two: 'يومان مسجّلان، قرابة اليوم $day من دورتك',
+      one: 'يوم واحد مسجّل، قرابة اليوم $day من دورتك',
+      zero: '$count يوم مسجّل، قرابة اليوم $day من دورتك',
+    );
+    return '$_temp0';
   }
 
   @override

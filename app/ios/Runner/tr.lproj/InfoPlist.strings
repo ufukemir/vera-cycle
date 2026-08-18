@@ -1,0 +1,3 @@
+"NSFaceIDUsageDescription" = "Vera'yı Face ID ile daha hızlı aç. PIN'in her zaman çalışmaya devam eder.";
+"NSHealthShareUsageDescription" = "Vera, Sağlık'tan veri OKUMAZ. Bu izin metni, yalnızca yazma erişimi için bile iOS tarafından zorunlu tutulur.";
+"NSHealthUpdateUsageDescription" = "Vera'nın regl akışını, kilonu ve bazal sıcaklığını Apple Health'e kaydetmesini sağlar; böylece verin tek bir uygulamaya hapsolmaz. Semptomlar, ruh hali ve notlar asla paylaşılmaz.";

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../l10n/enum_labels.dart';
 import '../../models/enums.dart';
 import '../../services/ad_consent_service.dart';
 import '../../services/health_sync_service.dart';
@@ -20,6 +22,25 @@ import 'diagnostics_screen.dart';
 import 'prediction_settings_screen.dart';
 import 'privacy_screen.dart';
 import 'widgets/language_picker_tile.dart';
+
+/// Localized weekday name, e.g. "Monday" / "Pazartesi" / "السبت".
+///
+/// Taken from `intl` rather than from ARB keys: adding Saturday as an
+/// option would otherwise have meant one more string to translate into
+/// every language, for a word every locale database already knows.
+String _weekdayName(BuildContext context, int weekday) {
+  // Any week works; 2024-01-01 was a Monday, so +offset lands on the day.
+  final date = DateTime(2024, 1, 1).add(Duration(days: weekday - 1));
+  return DateFormat.EEEE(Localizations.localeOf(context).toString())
+      .format(date);
+}
+
+int _localeFirstWeekday(BuildContext context) =>
+    switch (MaterialLocalizations.of(context).firstDayOfWeekIndex) {
+      0 => DateTime.sunday,
+      6 => DateTime.saturday,
+      _ => DateTime.monday,
+    };
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -59,6 +80,7 @@ class SettingsScreen extends StatelessWidget {
     );
     await reminders.scheduleOneOff(
       category: ReminderCategory.periodStart,
+      channelName: reminderChannelName(l10n, ReminderCategory.periodStart),
       fireAtLocalWallClock: fireDate,
       title: l10n.reminderNotificationTitle,
       body: l10n.reminderNotificationBody,
@@ -100,6 +122,7 @@ class SettingsScreen extends StatelessWidget {
     );
     await reminders.scheduleOneOff(
       category: ReminderCategory.periodEnd,
+      channelName: reminderChannelName(l10n, ReminderCategory.periodEnd),
       fireAtLocalWallClock: fireDate,
       title: l10n.reminderPeriodEndTitle,
       body: l10n.reminderPeriodEndBody,
@@ -126,6 +149,7 @@ class SettingsScreen extends StatelessWidget {
     final start = status.fertileWindowStart!;
     await reminders.scheduleOneOff(
       category: ReminderCategory.ovulation,
+      channelName: reminderChannelName(l10n, ReminderCategory.ovulation),
       fireAtLocalWallClock: DateTime(
           start.year, start.month, start.day, time.hour, time.minute),
       title: l10n.reminderOvulationTitle,
@@ -145,6 +169,7 @@ class SettingsScreen extends StatelessWidget {
     await reminders.requestPermission();
     await reminders.scheduleDaily(
       category: ReminderCategory.medication,
+      channelName: reminderChannelName(l10n, ReminderCategory.medication),
       time: prefs.medicationReminderTime,
       title: l10n.reminderMedicationTitle,
       body: l10n.reminderMedicationBody,
@@ -163,6 +188,7 @@ class SettingsScreen extends StatelessWidget {
     await reminders.requestPermission();
     await reminders.scheduleDaily(
       category: ReminderCategory.water,
+      channelName: reminderChannelName(l10n, ReminderCategory.water),
       time: prefs.waterReminderTime,
       title: l10n.reminderWaterTitle,
       body: l10n.reminderWaterBody,
@@ -186,6 +212,7 @@ class SettingsScreen extends StatelessWidget {
     final fire = DateTime.now().add(const Duration(days: 30));
     await reminders.scheduleOneOff(
       category: ReminderCategory.backup,
+      channelName: reminderChannelName(l10n, ReminderCategory.backup),
       fireAtLocalWallClock: DateTime(
           fire.year, fire.month, fire.day, time.hour, time.minute),
       title: l10n.reminderBackupTitle,
@@ -206,6 +233,7 @@ class SettingsScreen extends StatelessWidget {
     await reminders.requestPermission();
     await reminders.scheduleOneOff(
       category: ReminderCategory.appointment,
+      channelName: reminderChannelName(l10n, ReminderCategory.appointment),
       fireAtLocalWallClock: at,
       title: l10n.reminderAppointmentTitle,
       body: l10n.reminderAppointmentBody,
@@ -355,7 +383,9 @@ class SettingsScreen extends StatelessWidget {
                     HomeTheme.bloom: l10n.homeThemeBloom,
                   }.entries)
                     Padding(
-                      padding: const EdgeInsets.only(right: 10),
+                      // Directional: in RTL the gap belongs after the
+                      // swatch in reading order, not on its physical right.
+                      padding: const EdgeInsetsDirectional.only(end: 10),
                       child: _ThemeSwatch(
                         label: entry.value,
                         theme: entry.key,
@@ -408,15 +438,33 @@ class SettingsScreen extends StatelessWidget {
             _sectionHeading(context, l10n.settingsWeekStartLabel),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SegmentedButton<bool>(
+              // Three options now, not two: ar, fa and ur conventionally
+              // start the week on Saturday, which the old Monday/Sunday
+              // switch could not express at all.
+              //
+              // The labels come from `intl` rather than from ARB keys, so
+              // they are correct in all 36 languages for free and no new
+              // string has to be translated 36 times to add a weekday.
+              child: SegmentedButton<int>(
                 segments: [
-                  ButtonSegment(
-                      value: true, label: Text(l10n.settingsWeekStartMonday)),
-                  ButtonSegment(
-                      value: false, label: Text(l10n.settingsWeekStartSunday)),
+                  for (final weekday in const [
+                    DateTime.monday,
+                    DateTime.sunday,
+                    DateTime.saturday,
+                  ])
+                    ButtonSegment(
+                      value: weekday,
+                      label: Text(_weekdayName(context, weekday)),
+                    ),
                 ],
-                selected: {prefs.weekStartsMonday},
-                onSelectionChanged: (s) => prefs.setWeekStartsMonday(s.first),
+                // Unset means "follow the locale", so show what the locale
+                // actually does rather than a hardcoded Monday. Touching
+                // the control pins the choice.
+                selected: {
+                  prefs.weekStartWeekday ?? _localeFirstWeekday(context),
+                },
+                onSelectionChanged: (s) =>
+                    prefs.setWeekStartWeekday(s.first),
               ),
             ),
             _sectionHeading(context, l10n.settingsTemperatureUnitLabel),

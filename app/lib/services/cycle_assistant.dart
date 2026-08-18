@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import '../models/enums.dart';
 
 /// A snapshot of the user's own logged state, used to personalize answers.
@@ -7,7 +9,7 @@ class AssistantContext {
   const AssistantContext({
     this.cycleDay,
     this.phase = CyclePhase.unknown,
-    this.meanCycleLength,
+    this.meanCycleLengthLabel,
     this.cyclesLogged = 0,
     this.predictionRangeLabel,
     this.ovulationRangeLabel,
@@ -15,7 +17,12 @@ class AssistantContext {
 
   final int? cycleDay;
   final CyclePhase phase;
-  final double? meanCycleLength;
+  /// Already locale-formatted ("28,4" in tr/de/fr, "٢٨٫٤" in ar).
+  ///
+  /// The assistant used to receive a raw double and render it with
+  /// `toStringAsFixed`, which always emits a period — so the Turkish answer
+  /// was a Turkish sentence built around an English decimal point.
+  final String? meanCycleLengthLabel;
   final int cyclesLogged;
 
   /// Already-localized "12 – 15 May" style range for the next PERIOD, or
@@ -67,7 +74,7 @@ class CycleAssistant {
     // answered with "Hi! 👋". Every phrase below is matched as a complete
     // word or word sequence.
     final padded =
-        ' ${normalized.replaceAll(RegExp(r'[^a-z0-9]+'), ' ').trim()} ';
+        ' ${_tokenize(normalized).join(' ')} ';
     bool hasAny(List<String> phrases) =>
         phrases.any((p) => padded.contains(' $p '));
     final short = normalized.length < 30;
@@ -232,10 +239,7 @@ class CycleAssistant {
     // Single-word keywords match as token *prefixes* ("gecik" → "gecikti",
     // "pregnan" → "pregnancy") — never as bare substrings, which once made
     // "late" match inside "ovulate". Multi-word keywords use plain contains.
-    final tokens = normalized
-        .split(RegExp(r'[^a-z0-9]+'))
-        .where((t) => t.isNotEmpty)
-        .toList();
+    final tokens = _tokenize(normalized);
 
     _Topic? best;
     var bestScore = 0;
@@ -259,8 +263,7 @@ class CycleAssistant {
       }
       // Words shared with the topic's own sample question, so phrasing the
       // question the way the app itself phrases it always lands.
-      final sampleTokens = _normalize(topic.sampleQuestion[lang]!)
-          .split(RegExp(r'[^a-z0-9]+'))
+      final sampleTokens = _tokenize(_normalize(topic.sampleQuestion[lang]!))
           .where((t) => t.length >= 5)
           .toSet();
       score += tokens.where(sampleTokens.contains).length;
@@ -365,10 +368,10 @@ class CycleAssistant {
     // "28.4 gün" / "28.4 days", or a phrase that stands alone.
     out = out.replaceAll(
         '{meanLength}',
-        ctx.meanCycleLength != null
+        ctx.meanCycleLengthLabel != null
             ? (tr
-                ? '${ctx.meanCycleLength!.toStringAsFixed(1)} gün'
-                : '${ctx.meanCycleLength!.toStringAsFixed(1)} days')
+                ? '${ctx.meanCycleLengthLabel} gün'
+                : '${ctx.meanCycleLengthLabel} days')
             : (tr ? 'henüz bilinmiyor' : 'not known yet'));
 
     // A full clause: the day number alone cannot be dropped into
@@ -404,14 +407,111 @@ class CycleAssistant {
     return out;
   }
 
-  String _normalize(String s) => s
-      .toLowerCase()
-      .replaceAll('ı', 'i')
-      .replaceAll('ğ', 'g')
-      .replaceAll('ü', 'u')
-      .replaceAll('ş', 's')
-      .replaceAll('ö', 'o')
-      .replaceAll('ç', 'c');
+  /// Latin diacritic folding, so "Verspätung", "período" and "spóźnienie"
+  /// reduce to the same shape their keywords are written in.
+  ///
+  /// This used to strip exactly six Turkish characters. Everything else
+  /// survived and then hit an ASCII-only tokenizer, which shattered words
+  /// at every accent: "Verspätung" became ["verspa", "tung"], "período"
+  /// became ["per", "odo"]. Turkish `ş` (U+015F, cedilla) was folded while
+  /// Czech `š` (U+0161, caron) was not — they are different codepoints, and
+  /// only one was listed.
+  ///
+  /// Non-Latin scripts are deliberately left untouched: folding Arabic or
+  /// Cyrillic would be wrong, and [_tokenize] no longer needs it.
+  static const _fold = {
+    'à': 'a', 'á': 'a', 'â': 'a', 'ã': 'a', 'ä': 'a', 'å': 'a', 'ā': 'a',
+    'ă': 'a', 'ą': 'a',
+    'ç': 'c', 'ć': 'c', 'č': 'c',
+    'ď': 'd', 'đ': 'd',
+    'è': 'e', 'é': 'e', 'ê': 'e', 'ë': 'e', 'ē': 'e', 'ė': 'e', 'ę': 'e',
+    'ě': 'e',
+    'ğ': 'g', 'ģ': 'g',
+    'ì': 'i', 'í': 'i', 'î': 'i', 'ï': 'i', 'ī': 'i', 'į': 'i', 'ı': 'i',
+    'ł': 'l', 'ļ': 'l',
+    'ñ': 'n', 'ń': 'n', 'ň': 'n', 'ņ': 'n',
+    'ò': 'o', 'ó': 'o', 'ô': 'o', 'õ': 'o', 'ö': 'o', 'ø': 'o', 'ō': 'o',
+    'ő': 'o',
+    'ř': 'r',
+    'ś': 's', 'š': 's', 'ş': 's', 'ș': 's',
+    'ť': 't', 'ţ': 't', 'ț': 't',
+    'ù': 'u', 'ú': 'u', 'û': 'u', 'ü': 'u', 'ū': 'u', 'ů': 'u', 'ű': 'u',
+    'ų': 'u',
+    'ý': 'y', 'ÿ': 'y',
+    'ź': 'z', 'ż': 'z', 'ž': 'z',
+    'æ': 'ae', 'œ': 'oe', 'ß': 'ss', 'þ': 'th', 'ð': 'd',
+  };
+
+  String _normalize(String s) {
+    final lower = s.toLowerCase();
+    final out = StringBuffer();
+    // Rune-wise rather than grapheme-wise: every folded character is a
+    // single codepoint, and runes avoid a dependency on `characters`.
+    for (final rune in lower.runes) {
+      final ranged = _foldVietnamese(rune);
+      if (ranged != null) {
+        out.write(ranged);
+        continue;
+      }
+      final ch = String.fromCharCode(rune);
+      out.write(_fold[ch] ?? ch);
+    }
+    return out.toString();
+  }
+
+  /// Folds the Latin Extended Additional block (U+1EA0–U+1EF9).
+  ///
+  /// Vietnamese stacks a tone mark on an already-accented vowel, producing
+  /// ~90 precomposed codepoints. Listing them individually would be noise;
+  /// the block is laid out in contiguous runs per base vowel, so a range
+  /// check is both shorter and less error-prone. Tone is dropped on
+  /// purpose: people routinely type Vietnamese without diacritics, and the
+  /// keyword side is folded identically.
+  static String? _foldVietnamese(int rune) {
+    if (rune < 0x1EA0 || rune > 0x1EF9) return null;
+    if (rune <= 0x1EB7) return 'a';
+    if (rune <= 0x1EC7) return 'e';
+    if (rune <= 0x1ECB) return 'i';
+    if (rune <= 0x1EE3) return 'o';
+    if (rune <= 0x1EF1) return 'u';
+    return 'y';
+  }
+
+  /// Splits on anything that is not a letter or a digit, in ANY script.
+  ///
+  /// The old pattern was `[^a-z0-9]+`. For Arabic, Cyrillic, Greek, Thai,
+  /// Devanagari, Hebrew and CJK that matches the entire input, so the token
+  /// list came back empty, every topic scored zero, and the assistant told
+  /// the user their question "isn't in my knowledge base" — for every
+  /// question. Arabic ships today, so this was live.
+  ///
+  /// Note this makes matching *possible* for those scripts; it does not by
+  /// itself make it *work*, because the keyword lists are still only tr/en.
+  /// See `assistantContentLanguages`.
+  /// `\p{M}` (combining marks) matters as much as `\p{L}` here: Devanagari,
+  /// Bengali, Tamil, Telugu, Thai and Arabic write vowels as marks, so
+  /// omitting them splits every word at its own vowels — "मेरा" came apart
+  /// into ['म','र'].
+  static final _tokenBoundary =
+      RegExp(r'[^\p{L}\p{N}\p{M}]+', unicode: true);
+
+  List<String> _tokenize(String normalized) =>
+      normalized.split(_tokenBoundary).where((t) => t.isNotEmpty).toList();
+
+  /// The normalize + tokenize pipeline, exposed for tests.
+  ///
+  /// Worth exposing because the failure it guards is invisible from the
+  /// outside: a shattered or empty token list still produces a polite
+  /// answer, just always the wrong one.
+  @visibleForTesting
+  List<String> debugTokens(String input) => _tokenize(_normalize(input));
+
+  /// Languages the curated knowledge base actually has answers for.
+  ///
+  /// Everything else falls back to English content. Exposed so a test can
+  /// assert that no UI language is offered while silently getting another
+  /// language's assistant.
+  static const assistantContentLanguages = {'en', 'tr'};
 }
 
 class _Topic {

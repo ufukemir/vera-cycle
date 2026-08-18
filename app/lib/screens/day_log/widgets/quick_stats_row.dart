@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../widgets/number_stepper.dart';
+import '../../../util/number_format.dart';
 
 /// Water/sleep/weight — lifestyle stats shown to everyone, unlike the
 /// fertility-awareness/intimate trackers in [OptionalTrackersSection]. Water
@@ -71,7 +72,7 @@ class QuickStatsRow extends StatelessWidget {
               label: l10n.dayLogWeightLabel,
               value: weightKg == null
                   ? '—'
-                  : '${weightKg!.toStringAsFixed(1)}${l10n.unitKilograms}',
+                  : '${formatDecimal(context, weightKg!)}${l10n.unitKilograms}',
               onTap: () => _pickWeight(context),
             ),
           ),

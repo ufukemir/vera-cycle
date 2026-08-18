@@ -1,0 +1,3 @@
+"NSFaceIDUsageDescription" = "Usa Face ID para desbloquear Vera más rápido. Tu PIN sigue funcionando siempre.";
+"NSHealthShareUsageDescription" = "Vera NO lee datos de Salud. iOS exige este texto incluso cuando el permiso es solo de escritura.";
+"NSHealthUpdateUsageDescription" = "Permite que Vera guarde tu flujo menstrual, tu peso y tu temperatura basal en Apple Salud, para que tus datos no queden encerrados en una sola app. Los síntomas, el estado de ánimo y las notas nunca se comparten.";

@@ -106,4 +106,42 @@ void main() {
     expect(result.isEmpty, isTrue);
     expect(result.detectedFlowHeader, isNull);
   });
+
+  group('exports from other languages', () {
+    // The header vocabularies covered only English and Turkish, so a German
+    // user exporting from a German tracker hit `noDateColumn` and the import
+    // failed outright — with a localized error that gave no hint why. Every
+    // language the app ships in has to be able to get its data in.
+    final cases = <String, String>{
+      'German': 'Datum,Blutung\n2026-03-01,stark\n',
+      'Spanish': 'Fecha,Flujo\n2026-03-01,abundante\n',
+      'French': 'Date,Saignement\n2026-03-01,abondant\n',
+      'Indonesian': 'Tanggal,Aliran\n2026-03-01,banyak\n',
+      'Italian': 'Giorno,Flusso\n2026-03-01,intenso\n',
+      'Dutch': 'Datum,Bloeding\n2026-03-01,zwaar\n',
+      'Polish': 'Data,Krwawienie\n2026-03-01,obfite\n',
+      'Russian': 'Дата,Кровотечение\n2026-03-01,обильные\n',
+      'Arabic': 'التاريخ,التدفق\n2026-03-01,غزير\n',
+      'Japanese': '日付,経血量\n2026-03-01,多い\n',
+    };
+
+    cases.forEach((language, csv) {
+      test('$language headers import instead of failing', () {
+        final result = importer.parse(csv);
+        expect(result.logs, hasLength(1), reason: '$language row was dropped');
+        expect(result.logs.single.flow, FlowIntensity.heavy,
+            reason: '$language flow value was not understood');
+      });
+    });
+  });
+
+  test('accented headers fold beyond the six Turkish characters', () {
+    // Only ı ğ ü ş ö ç were folded, so Czech š (U+0161, caron) — a different
+    // codepoint from Turkish ş (U+015F, cedilla) — never matched.
+    for (final header in ['Datum', 'DATUM', 'Fecha', 'Début', 'Data']) {
+      final result = importer.parse('$header\n2026-03-01\n');
+      expect(result.detectedDateHeader, header,
+          reason: '"$header" was not recognised as a date column');
+    }
+  });
 }

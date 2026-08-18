@@ -903,8 +903,8 @@ abstract class AppLocalizations {
   /// No description provided for @insightsVariabilityLabel.
   ///
   /// In en, this message translates to:
-  /// **'Varies by about {days} days'**
-  String insightsVariabilityLabel(String days);
+  /// **'{days, plural, =1{Varies by about 1 day} other{Varies by about {days} days}}'**
+  String insightsVariabilityLabel(num days);
 
   /// No description provided for @insightsNotEnoughDataTitle.
   ///
@@ -2073,13 +2073,13 @@ abstract class AppLocalizations {
   /// No description provided for @homeWindowCountdown.
   ///
   /// In en, this message translates to:
-  /// **'Predicted window starts in about {days} days'**
+  /// **'{days, plural, =1{Predicted window starts in about 1 day} other{Predicted window starts in about {days} days}}'**
   String homeWindowCountdown(int days);
 
   /// No description provided for @homeOvulationCountdown.
   ///
   /// In en, this message translates to:
-  /// **'Estimated ovulation in about {days} days'**
+  /// **'{days, plural, =1{Estimated ovulation in about 1 day} other{Estimated ovulation in about {days} days}}'**
   String homeOvulationCountdown(int days);
 
   /// No description provided for @homeQuickLogTitle.
@@ -2169,7 +2169,7 @@ abstract class AppLocalizations {
   /// No description provided for @trackerEntriesCount.
   ///
   /// In en, this message translates to:
-  /// **'{count} entries'**
+  /// **'{count, plural, =1{1 entry} other{{count} entries}}'**
   String trackerEntriesCount(int count);
 
   /// No description provided for @assistantTyping.
@@ -2295,7 +2295,7 @@ abstract class AppLocalizations {
   /// No description provided for @pregnancyDaysLeft.
   ///
   /// In en, this message translates to:
-  /// **'About {days} days to go'**
+  /// **'{days, plural, =1{About 1 day to go} other{About {days} days to go}}'**
   String pregnancyDaysLeft(int days);
 
   /// No description provided for @pregnancyTrimesterLabel.
@@ -2309,6 +2309,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Dates are estimated from your last period using the standard 280-day rule. An ultrasound gives a more accurate date, and late ovulation shifts these numbers — this is information, not medical care.'**
   String get pregnancyDisclaimer;
+
+  /// No description provided for @pregnancyNoteUnder5.
+  ///
+  /// In en, this message translates to:
+  /// **'Most people notice nothing yet — because gestational age counts from your last period, the first two weeks are actually before conception.'**
+  String get pregnancyNoteUnder5;
+
+  /// No description provided for @pregnancyNoteUnder9.
+  ///
+  /// In en, this message translates to:
+  /// **'Nausea, breast tenderness, and fatigue are common right now. A good time to arrange a first appointment.'**
+  String get pregnancyNoteUnder9;
+
+  /// No description provided for @pregnancyNoteUnder13.
+  ///
+  /// In en, this message translates to:
+  /// **'You are nearing the end of the first trimester; for many people nausea starts easing around now.'**
+  String get pregnancyNoteUnder13;
+
+  /// No description provided for @pregnancyNoteUnder20.
+  ///
+  /// In en, this message translates to:
+  /// **'Energy often returns in this stretch. First movements can be felt anywhere between weeks 16 and 22.'**
+  String get pregnancyNoteUnder20;
+
+  /// No description provided for @pregnancyNoteUnder28.
+  ///
+  /// In en, this message translates to:
+  /// **'Movements get distinct and start forming a pattern. Back pain and heartburn are common in this stretch.'**
+  String get pregnancyNoteUnder28;
+
+  /// No description provided for @pregnancyNoteUnder34.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re in the third trimester. Shortness of breath, frequent urination, and Braxton-Hicks contractions are common.'**
+  String get pregnancyNoteUnder34;
+
+  /// No description provided for @pregnancyNoteUnder38.
+  ///
+  /// In en, this message translates to:
+  /// **'Baby is getting ready for birth. A good time for a hospital bag and a birth plan.'**
+  String get pregnancyNoteUnder38;
+
+  /// No description provided for @pregnancyNoteTerm.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re at term — birth can happen any time between weeks 37 and 42; week 40 is an average, not a deadline.'**
+  String get pregnancyNoteTerm;
 
   /// No description provided for @pregnancyWeeklyNoteTitle.
   ///
@@ -2442,6 +2490,48 @@ abstract class AppLocalizations {
   /// **'Your history only exists on this phone. A quick encrypted backup keeps it safe.'**
   String get reminderBackupBody;
 
+  /// No description provided for @notificationChannelPeriodStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming period'**
+  String get notificationChannelPeriodStart;
+
+  /// No description provided for @notificationChannelPeriodEnd.
+  ///
+  /// In en, this message translates to:
+  /// **'Period end check-in'**
+  String get notificationChannelPeriodEnd;
+
+  /// No description provided for @notificationChannelMedication.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication'**
+  String get notificationChannelMedication;
+
+  /// No description provided for @notificationChannelWater.
+  ///
+  /// In en, this message translates to:
+  /// **'Water'**
+  String get notificationChannelWater;
+
+  /// No description provided for @notificationChannelAppointment.
+  ///
+  /// In en, this message translates to:
+  /// **'Appointment'**
+  String get notificationChannelAppointment;
+
+  /// No description provided for @notificationChannelOvulation.
+  ///
+  /// In en, this message translates to:
+  /// **'Fertile window'**
+  String get notificationChannelOvulation;
+
+  /// No description provided for @notificationChannelBackup.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup reminder'**
+  String get notificationChannelBackup;
+
   /// No description provided for @calendarDayDetailTitle.
   ///
   /// In en, this message translates to:
@@ -2481,7 +2571,7 @@ abstract class AppLocalizations {
   /// No description provided for @cycleHistoryLength.
   ///
   /// In en, this message translates to:
-  /// **'{days} day cycle'**
+  /// **'{days, plural, =1{1 day cycle} other{{days} day cycle}}'**
   String cycleHistoryLength(int days);
 
   /// No description provided for @cycleHistoryPeriodLength.
@@ -2535,7 +2625,7 @@ abstract class AppLocalizations {
   /// No description provided for @a11yChartSummary.
   ///
   /// In en, this message translates to:
-  /// **'Chart with {count} entries, from {min} to {max}'**
+  /// **'{count, plural, =1{Chart with 1 entry, from {min} to {max}} other{Chart with {count} entries, from {min} to {max}}}'**
   String a11yChartSummary(int count, String min, String max);
 
   /// No description provided for @a11yPhaseBar.
@@ -2547,7 +2637,7 @@ abstract class AppLocalizations {
   /// No description provided for @a11yFrequencyItem.
   ///
   /// In en, this message translates to:
-  /// **'{label}: {count} times'**
+  /// **'{label}: {count, plural, =1{1 time} other{{count} times}}'**
   String a11yFrequencyItem(String label, int count);
 
   /// No description provided for @importTitle.
@@ -2571,13 +2661,13 @@ abstract class AppLocalizations {
   /// No description provided for @importPreview.
   ///
   /// In en, this message translates to:
-  /// **'Found {count} days of history'**
+  /// **'{count, plural, =1{Found 1 day of history} other{Found {count} days of history}}'**
   String importPreview(int count);
 
   /// No description provided for @importSkipped.
   ///
   /// In en, this message translates to:
-  /// **'{count} rows couldn\'t be read and will be left out'**
+  /// **'{count, plural, =1{1 row couldn\'t be read and will be left out} other{{count} rows couldn\'t be read and will be left out}}'**
   String importSkipped(int count);
 
   /// No description provided for @importConfirm.
@@ -2595,7 +2685,7 @@ abstract class AppLocalizations {
   /// No description provided for @importDone.
   ///
   /// In en, this message translates to:
-  /// **'Imported {count} days'**
+  /// **'{count, plural, =1{Imported 1 day} other{Imported {count} days}}'**
   String importDone(int count);
 
   /// No description provided for @importErrorEmpty.
@@ -2631,7 +2721,7 @@ abstract class AppLocalizations {
   /// No description provided for @healthSyncBackfilled.
   ///
   /// In en, this message translates to:
-  /// **'Sent {count} days to your health app'**
+  /// **'{count, plural, =1{Sent 1 day to your health app} other{Sent {count} days to your health app}}'**
   String healthSyncBackfilled(int count);
 
   /// No description provided for @healthSyncDenied.
@@ -2859,7 +2949,7 @@ abstract class AppLocalizations {
   /// No description provided for @advancedInsightsPatternDetail.
   ///
   /// In en, this message translates to:
-  /// **'{count} days logged, around day {day} of your cycle'**
+  /// **'{count, plural, =1{1 day logged, around day {day} of your cycle} other{{count} days logged, around day {day} of your cycle}}'**
   String advancedInsightsPatternDetail(int count, int day);
 
   /// No description provided for @advancedInsightsNoPattern.

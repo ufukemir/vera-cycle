@@ -28,6 +28,7 @@ class AppPreferences extends ChangeNotifier {
   static const _kOnboardingComplete = 'onboarding_complete';
   static const _kLocale = 'locale';
   static const _kWeekStartMonday = 'week_start_monday';
+  static const _kWeekStartWeekday = 'week_start_weekday';
   static const _kTemperatureUnit = 'temperature_unit';
   static const _kRemindersEnabled = 'reminders_enabled';
   static const _kReminderMinuteOfDay = 'reminder_minute_of_day';
@@ -70,25 +71,108 @@ class AppPreferences extends ChangeNotifier {
   /// `null` means "follow the system language" — the default. Only set once
   /// the user explicitly picks a language in Settings; `MaterialApp` resolves
   /// `null` against the device's own locale list automatically.
+  ///
+  /// Stored as a BCP-47-style tag rather than a bare language code. Only the
+  /// language code used to be kept, which silently discarded script and
+  /// region — so `zh-Hans` vs `zh-Hant` and `pt-BR` vs `pt-PT` could not be
+  /// represented at all. Those are exactly the distinctions the parked
+  /// Chinese and Portuguese translations will need, and migrating a stored
+  /// preference key after the fact is uglier than widening it now.
+  ///
+  /// Old values are bare language codes, which [_parseLocale] reads
+  /// unchanged — no migration step is needed.
   Locale? get locale {
-    final code = _prefs.getString(_kLocale);
-    return code == null ? null : Locale(code);
+    final tag = _prefs.getString(_kLocale);
+    return tag == null ? null : _parseLocale(tag);
   }
 
   Future<void> setLocale(Locale? value) async {
     if (value == null) {
       await _prefs.remove(_kLocale);
     } else {
-      await _prefs.setString(_kLocale, value.languageCode);
+      await _prefs.setString(_kLocale, _localeTag(value));
     }
     notifyListeners();
   }
 
-  /// `true` = weeks start Monday, `false` = Sunday.
-  bool get weekStartsMonday => _prefs.getBool(_kWeekStartMonday) ?? true;
+  /// `en`, `zh-Hans`, `pt-BR`, `zh-Hant-TW`.
+  @visibleForTesting
+  static String localeTag(Locale value) => _localeTag(value);
 
-  Future<void> setWeekStartsMonday(bool value) async {
-    await _prefs.setBool(_kWeekStartMonday, value);
+  static String _localeTag(Locale value) => [
+        value.languageCode,
+        if (value.scriptCode != null) value.scriptCode,
+        if (value.countryCode != null && value.countryCode!.isNotEmpty)
+          value.countryCode,
+      ].join('-');
+
+  @visibleForTesting
+  static Locale parseLocale(String tag) => _parseLocale(tag);
+
+  /// Inverse of [_localeTag].
+  ///
+  /// Subtags are identified by shape rather than position, which is how
+  /// BCP-47 itself does it: a 4-letter subtag is a script, a 2-letter or
+  /// 3-digit one is a region. That keeps `zh-Hans` and `zh-TW` apart
+  /// without needing to know which is present.
+  static Locale _parseLocale(String tag) {
+    final parts = tag.split(RegExp(r'[-_]'));
+    final language = parts.first;
+    String? script;
+    String? country;
+
+    for (final part in parts.skip(1)) {
+      if (part.length == 4 && RegExp(r'^[A-Za-z]{4}$').hasMatch(part)) {
+        script = part[0].toUpperCase() + part.substring(1).toLowerCase();
+      } else if (RegExp(r'^([A-Za-z]{2}|\d{3})$').hasMatch(part)) {
+        country = part.toUpperCase();
+      }
+      // Anything else (variants, extensions) is deliberately dropped:
+      // Flutter's Locale cannot represent it, and silently keeping a tag
+      // we cannot resolve would be worse than losing it.
+    }
+
+    return Locale.fromSubtags(
+      languageCode: language.toLowerCase(),
+      scriptCode: script,
+      countryCode: country,
+    );
+  }
+
+  /// First day of the week as a [DateTime] weekday constant
+  /// (1 = Monday … 7 = Sunday), or `null` to follow the device locale.
+  ///
+  /// This was a bool — Monday or Sunday — defaulting to Monday for
+  /// everyone. Two problems. Monday is wrong for a large share of the
+  /// app's languages (en-US, ja, ko, pt-BR and hi all start on Sunday),
+  /// and a two-valued setting cannot express Saturday at all, which is the
+  /// convention in ar, fa and ur. An Arabic user could not select their own
+  /// week start.
+  ///
+  /// `null` resolves through [MaterialLocalizations.firstDayOfWeekIndex],
+  /// so the default is right everywhere without the user touching it.
+  int? get weekStartWeekday {
+    final stored = _prefs.getInt(_kWeekStartWeekday);
+    if (stored != null) return stored;
+    // Migration: the old boolean key. Read once, translated, and left in
+    // place — rewriting it here would mean a write on every read.
+    if (_prefs.containsKey(_kWeekStartMonday)) {
+      return (_prefs.getBool(_kWeekStartMonday) ?? true)
+          ? DateTime.monday
+          : DateTime.sunday;
+    }
+    return null;
+  }
+
+  Future<void> setWeekStartWeekday(int? value) async {
+    if (value == null) {
+      await _prefs.remove(_kWeekStartWeekday);
+      await _prefs.remove(_kWeekStartMonday);
+    } else {
+      await _prefs.setInt(_kWeekStartWeekday, value);
+      // Drop the superseded key so the two can never disagree.
+      await _prefs.remove(_kWeekStartMonday);
+    }
     notifyListeners();
   }
 

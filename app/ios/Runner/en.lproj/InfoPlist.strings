@@ -1,0 +1,6 @@
+/* iOS shows these in the system permission dialogs. They were English-only
+   for every language, and two of them ARE the app's privacy promise —
+   exactly the copy that most needs to be understood. */
+"NSFaceIDUsageDescription" = "Use Face ID to unlock Vera faster. Your PIN always works too.";
+"NSHealthShareUsageDescription" = "Vera does not read from Health. This entry is required by iOS even for write-only access.";
+"NSHealthUpdateUsageDescription" = "Lets Vera save your period flow, weight, and basal temperature to Apple Health, so your data isn't locked inside one app. Symptoms, moods, and notes are never shared.";

@@ -1,4 +1,5 @@
 import '../models/enums.dart';
+import '../services/reminder_service.dart';
 import '../services/advanced_insights.dart';
 import 'app_localizations.dart';
 
@@ -56,4 +57,20 @@ String cycleSegmentLabel(AppLocalizations l10n, CycleSegment segment) =>
       CycleSegment.afterPeriod => l10n.segmentAfterPeriod,
       CycleSegment.midCycle => l10n.segmentMidCycle,
       CycleSegment.beforePeriod => l10n.segmentBeforePeriod,
+    };
+
+/// Name shown for a reminder category in the OS notification settings.
+///
+/// Android displays this in Settings → Apps → Vera → Notifications, so it
+/// has to be in the user's language like everything else. It previously
+/// came from an English literal on the enum.
+String reminderChannelName(AppLocalizations l10n, ReminderCategory category) =>
+    switch (category) {
+      ReminderCategory.periodStart => l10n.notificationChannelPeriodStart,
+      ReminderCategory.periodEnd => l10n.notificationChannelPeriodEnd,
+      ReminderCategory.medication => l10n.notificationChannelMedication,
+      ReminderCategory.water => l10n.notificationChannelWater,
+      ReminderCategory.appointment => l10n.notificationChannelAppointment,
+      ReminderCategory.ovulation => l10n.notificationChannelOvulation,
+      ReminderCategory.backup => l10n.notificationChannelBackup,
     };

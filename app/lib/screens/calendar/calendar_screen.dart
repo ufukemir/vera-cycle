@@ -12,6 +12,35 @@ import 'widgets/calendar_legend.dart';
 import 'widgets/day_detail_sheet.dart';
 import 'widgets/month_jump_sheet.dart';
 
+/// Resolves the stored week-start preference for `table_calendar`.
+///
+/// [weekday] is a [DateTime] weekday constant, or `null` for "follow the
+/// locale" — in which case [MaterialLocalizations.firstDayOfWeekIndex]
+/// decides (0 = Sunday … 6 = Saturday). Following the locale is what makes
+/// Saturday-first languages (ar, fa, ur) correct by default.
+StartingDayOfWeek startingDayFor(int? weekday, BuildContext context) {
+  final effective = weekday ??
+      switch (MaterialLocalizations.of(context).firstDayOfWeekIndex) {
+        0 => DateTime.sunday,
+        2 => DateTime.tuesday,
+        3 => DateTime.wednesday,
+        4 => DateTime.thursday,
+        5 => DateTime.friday,
+        6 => DateTime.saturday,
+        _ => DateTime.monday,
+      };
+
+  return switch (effective) {
+    DateTime.sunday => StartingDayOfWeek.sunday,
+    DateTime.tuesday => StartingDayOfWeek.tuesday,
+    DateTime.wednesday => StartingDayOfWeek.wednesday,
+    DateTime.thursday => StartingDayOfWeek.thursday,
+    DateTime.friday => StartingDayOfWeek.friday,
+    DateTime.saturday => StartingDayOfWeek.saturday,
+    _ => StartingDayOfWeek.monday,
+  };
+}
+
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
 
@@ -93,9 +122,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
               // language and the week-start setting, rendering "August /
               // Sun Mon" to a Turkish user who picked Monday.
               locale: Localizations.localeOf(context).toString(),
-              startingDayOfWeek: context.watch<AppPreferences>().weekStartsMonday
-                  ? StartingDayOfWeek.monday
-                  : StartingDayOfWeek.sunday,
+              // No explicit choice means "do what this locale does".
+              startingDayOfWeek: startingDayFor(
+                context.watch<AppPreferences>().weekStartWeekday,
+                context,
+              ),
               onHeaderTapped: (_) => _jumpToMonth(),
               // Future months simply don't exist to scroll into — this is
               // the page-level half of "future dates not tappable"; the day

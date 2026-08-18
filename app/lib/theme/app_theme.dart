@@ -189,7 +189,18 @@ class _GentleSlidePageTransitionsBuilder extends PageTransitionsBuilder {
 /// for everything read at length, so the warmth doesn't cost legibility.
 TextTheme _buildTextTheme(ColorScheme colorScheme) {
   const serif = 'Fraunces';
-  final base = Typography.material2021(colorScheme: colorScheme).black;
+  const sans = 'Quicksand';
+  // `.apply(fontFamily: sans)` is load-bearing, not tidiness.
+  //
+  // ThemeData carries `fontFamily: 'Quicksand'`, but supplying an explicit
+  // `textTheme` overrides it, and Typography's styles arrive with Roboto
+  // (SF on iOS) already set. So every body, label and title style resolved
+  // to the PLATFORM font: the app shipped using only half its typography,
+  // and nothing looked broken because Roboto is a perfectly nice font.
+  // It surfaced only when the screenshot harness loaded the real faces and
+  // the body text came out as tofu while the headlines rendered.
+  final base =
+      Typography.material2021(colorScheme: colorScheme).black.apply(fontFamily: sans);
   return base.copyWith(
     displayLarge: base.displayLarge?.copyWith(fontFamily: serif, fontWeight: FontWeight.w600),
     displayMedium: base.displayMedium?.copyWith(fontFamily: serif, fontWeight: FontWeight.w600),

@@ -16,11 +16,19 @@ enum ReminderCategory {
   ovulation(6, 'ovulation', 'Fertile window'),
   backup(7, 'backup', 'Backup reminder');
 
-  const ReminderCategory(this.notificationId, this.channelId, this.channelName);
+  const ReminderCategory(this.notificationId, this.channelId, this.fallbackName);
 
   final int notificationId;
   final String channelId;
-  final String channelName;
+
+  /// English name, used only if a caller cannot supply a localized one.
+  ///
+  /// Android shows the channel name in Settings → Apps → Vera →
+  /// Notifications. These literals used to be passed straight through, so
+  /// every user in every language read an English list there — while the
+  /// custom-reminder channel right beside it was correctly localized.
+  /// Callers now pass [channelName]; this stays as a last resort.
+  final String fallbackName;
 }
 
 /// Local-only notification scheduling — no push server exists, so
@@ -165,6 +173,7 @@ class ReminderService {
     required DateTime fireAtLocalWallClock,
     required String title,
     required String body,
+    String? channelName,
   }) async {
     await _ensureInitialized();
     final target = tz.TZDateTime.from(fireAtLocalWallClock.toUtc(), tz.local);
@@ -179,7 +188,8 @@ class ReminderService {
       body: body,
       scheduledDate: target,
       notificationDetails: NotificationDetails(
-        android: AndroidNotificationDetails(category.channelId, category.channelName),
+        android: AndroidNotificationDetails(
+            category.channelId, channelName ?? category.fallbackName),
         iOS: const DarwinNotificationDetails(),
       ),
       // Inexact rather than exact: firing within a rough window of the
@@ -198,6 +208,7 @@ class ReminderService {
     required TimeOfDay time,
     required String title,
     required String body,
+    String? channelName,
   }) async {
     await _ensureInitialized();
 
@@ -207,7 +218,8 @@ class ReminderService {
       body: body,
       scheduledDate: nextOccurrenceOf(time),
       notificationDetails: NotificationDetails(
-        android: AndroidNotificationDetails(category.channelId, category.channelName),
+        android: AndroidNotificationDetails(
+            category.channelId, channelName ?? category.fallbackName),
         iOS: const DarwinNotificationDetails(),
       ),
       androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,

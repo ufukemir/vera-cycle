@@ -40,8 +40,19 @@ class CalendarLegend extends StatelessWidget {
         ),
       );
 
+  /// One legend entry: a dot and its label.
+  ///
+  /// [Flexible] on the label because these sit inside a [Wrap] whose runs
+  /// are still bounded by the screen width — a single long label ("Geschätztes
+  /// fruchtbares Fenster") overflowed the row by 34px on a 360dp screen
+  /// rather than wrapping. `mainAxisSize.min` keeps the entry tight when it
+  /// does fit.
   Widget _entry(Widget dot, String label) => Row(
         mainAxisSize: MainAxisSize.min,
-        children: [dot, const SizedBox(width: 6), Text(label)],
+        children: [
+          dot,
+          const SizedBox(width: 6),
+          Flexible(child: Text(label)),
+        ],
       );
 }

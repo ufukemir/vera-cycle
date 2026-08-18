@@ -84,14 +84,18 @@ class _BackupNudgeCardState extends State<BackupNudgeCard> {
             style: theme.textTheme.labelSmall,
           ),
           const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+          // Wrap rather than Row: two buttons whose labels are sentences in
+          // German and Finnish do not fit side by side on a narrow screen,
+          // and a Row overflows instead of reflowing.
+          Wrap(
+            alignment: WrapAlignment.end,
+            spacing: 8,
+            runSpacing: 4,
             children: [
               TextButton(
                 onPressed: () => setState(() => _dismissed = true),
                 child: Text(l10n.backupNudgeDismiss),
               ),
-              const SizedBox(width: 8),
               FilledButton(
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(builder: (_) => const ExportScreen()),

@@ -8,6 +8,7 @@ import '../../models/enums.dart';
 import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
 import '../../util/day.dart';
+import '../../util/number_format.dart';
 
 /// Which per-tracker history the screen shows — the reference app's
 /// "Benimki" hub, one generic screen instead of ten bespoke ones.
@@ -253,8 +254,8 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
         container: true,
         label: l10n.a11yChartSummary(
           values.length,
-          '${lo.toStringAsFixed(decimals)} $unit',
-          '${hi.toStringAsFixed(decimals)} $unit',
+          '${formatDecimal(context, lo, decimals: decimals)} $unit',
+          '${formatDecimal(context, hi, decimals: decimals)} $unit',
         ),
         child: ExcludeSemantics(
           child: SizedBox(
@@ -280,7 +281,7 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
           dense: true,
           contentPadding: EdgeInsets.zero,
           title: Text(fmt.format(p.key)),
-          trailing: Text('${p.value.toStringAsFixed(decimals)} $unit',
+          trailing: Text('${formatDecimal(context, p.value, decimals: decimals)} $unit',
               style: Theme.of(context).textTheme.titleSmall),
         ),
     ];

@@ -1,9 +1,17 @@
 import 'package:cycle_app/l10n/app_localizations.dart';
 import 'package:cycle_app/models/day_log.dart';
 import 'package:cycle_app/models/enums.dart';
+import 'package:cycle_app/screens/assistant/assistant_screen.dart';
+import 'package:cycle_app/screens/calendar/calendar_screen.dart';
+import 'package:cycle_app/screens/insights/cycle_history_screen.dart';
+import 'package:cycle_app/screens/insights/insights_screen.dart';
+import 'package:cycle_app/screens/premium/premium_screen.dart';
+import 'package:cycle_app/screens/settings/settings_screen.dart';
 import 'package:cycle_app/screens/day_log/day_log_screen.dart';
 import 'package:cycle_app/screens/home/home_screen.dart';
 import 'package:cycle_app/services/in_memory_day_log_repository.dart';
+import 'package:cycle_app/services/pin_vault.dart';
+import 'package:cycle_app/services/reminder_service.dart';
 import 'package:cycle_app/state/app_preferences.dart';
 import 'package:cycle_app/state/cycle_controller.dart';
 import 'package:cycle_app/theme/app_theme.dart';
@@ -38,6 +46,8 @@ Future<Widget> _wrap(Widget child, {required Locale locale}) async {
     providers: [
       ChangeNotifierProvider<AppPreferences>.value(value: prefs),
       ChangeNotifierProvider<CycleController>.value(value: controller),
+      Provider<PinVault>(create: (_) => PinVault()),
+      Provider<ReminderService>(create: (_) => ReminderService()),
     ],
     child: MaterialApp(
       theme: buildAppTheme(),
@@ -98,6 +108,65 @@ void main() {
     expect(find.bySemanticsLabel(RegExp(r'Cycle progress: day \d+')),
         findsOneWidget);
     handle.dispose();
+  });
+
+  testWidgets('the chat mirrors: assistant at start, user at end',
+      (tester) async {
+    // The bubbles were pinned with Alignment.centerLeft/centerRight, so in
+    // Arabic the whole conversation read as an LTR chat dropped into an RTL
+    // screen — the assistant on the right, the user on the left, each on
+    // the other's side. Nothing overflowed, so no existing test noticed.
+    await tester.pumpWidget(
+        await _wrap(const AssistantScreen(), locale: const Locale('ar')));
+    for (var i = 0; i < 6; i++) {
+      await tester.pump(const Duration(milliseconds: 200));
+    }
+
+    await tester.enterText(find.byType(TextField), 'مرحبا');
+    await tester.testTextInput.receiveAction(TextInputAction.send);
+    for (var i = 0; i < 8; i++) {
+      await tester.pump(const Duration(milliseconds: 200));
+    }
+
+    expect(tester.takeException(), isNull);
+
+    // Both bubbles must use directional alignment. A physical
+    // Alignment.centerLeft/Right here is the bug returning.
+    final aligns = tester
+        .widgetList<Align>(find.descendant(
+          of: find.byType(ListView),
+          matching: find.byType(Align),
+        ))
+        .where((a) =>
+            a.alignment == Alignment.centerLeft ||
+            a.alignment == Alignment.centerRight);
+    expect(aligns, isEmpty,
+        reason: 'chat bubbles must align with AlignmentDirectional so they '
+            'mirror in RTL');
+  });
+
+  testWidgets('every screen builds in Arabic without overflow',
+      (tester) async {
+    // The previous RTL coverage was Home and Day Log only; the four real
+    // RTL bugs found in review were all on screens no test ever opened.
+    final screens = <String, Widget Function()>{
+      'assistant': () => const AssistantScreen(),
+      'calendar': () => const CalendarScreen(),
+      'insights': () => const InsightsScreen(),
+      'settings': () => const SettingsScreen(),
+      'premium': () => const PremiumScreen(),
+      'cycle history': () => const CycleHistoryScreen(),
+    };
+
+    for (final entry in screens.entries) {
+      await tester.pumpWidget(
+          await _wrap(entry.value(), locale: const Locale('ar')));
+      for (var i = 0; i < 6; i++) {
+        await tester.pump(const Duration(milliseconds: 200));
+      }
+      expect(tester.takeException(), isNull,
+          reason: '${entry.key} threw in Arabic');
+    }
   });
 
   testWidgets('home survives a large text scale', (tester) async {

@@ -42,6 +42,7 @@ const _labels = DoctorReportPdfLabels(
     Mood.calm: 'Calm',
     Mood.irritable: 'Irritable',
   },
+  localeName: 'en',
 );
 
 void main() {

@@ -8,6 +8,7 @@ import '../models/day_log.dart';
 import '../models/enums.dart';
 import '../services/cycle_insights.dart';
 import '../util/day.dart';
+import '../util/number_format.dart';
 
 /// Matches [AppPalette.rose]/[AppPalette.roseSoft] — the PDF is built
 /// without any Flutter dependency (see class doc), so the brand colors are
@@ -29,8 +30,15 @@ class DoctorReportPdf {
     required DateTime generatedAt,
     required DoctorReportPdfLabels labels,
     List<ObservedCycle> cycles = const [],
+    DoctorReportFonts? fonts,
   }) async {
-    final doc = pw.Document();
+    // Without an explicit font the `pdf` package falls back to the Type1
+    // base-14 Helvetica, which only maps U+0000–U+00FF. Anything above that
+    // is not an error — it silently draws a crossed box. A Turkish user got
+    // "Ak□□" for "Akış" and "Ba□ a□r□s□" for "Baş ağrısı" in the document
+    // she was handing to her doctor; an Arabic user got boxes for the whole
+    // report. Passing a real Unicode TTF is the entire fix.
+    final doc = pw.Document(theme: fonts?.toTheme());
 
     doc.addPage(
       pw.MultiPage(
@@ -51,13 +59,13 @@ class DoctorReportPdf {
           if (insights.hasPeriodLengthStats)
             pw.Text(
               '${labels.averagePeriodLength}: '
-              '${insights.averagePeriodLength!.toStringAsFixed(1)} ${labels.daysUnit}',
+              '${formatDecimalIn(labels.localeName, insights.averagePeriodLength!)} ${labels.daysUnit}',
             ),
           if (insights.hasCycleLengthStats)
             pw.Text(
               '${labels.averageCycleLength}: '
-              '${insights.averageCycleLength!.toStringAsFixed(1)} ${labels.daysUnit} '
-              '(± ${insights.cycleLengthStdDev!.toStringAsFixed(1)})',
+              '${formatDecimalIn(labels.localeName, insights.averageCycleLength!)} ${labels.daysUnit} '
+              '(± ${formatDecimalIn(labels.localeName, insights.cycleLengthStdDev!)})',
             ),
           if (cycles.isNotEmpty) ...[
             pw.Divider(height: 24),
@@ -168,6 +176,31 @@ class DoctorReportPdf {
   }
 }
 
+/// Fonts for the report, supplied by the caller.
+///
+/// Loaded from the app bundle by the caller rather than here, for the same
+/// reason the labels are: this service stays free of Flutter dependencies so
+/// it can be exercised in a plain unit test.
+///
+/// [fallbacks] exists because no single reasonable-sized font covers every
+/// script the app is translated into. Quicksand carries the whole Latin
+/// range (including Turkish ğ/ş/ı and Vietnamese), and anything outside it
+/// — Arabic, Cyrillic, Greek, CJK, Indic — needs a face appended here, or
+/// it prints as a crossed box.
+class DoctorReportFonts {
+  const DoctorReportFonts({required this.base, this.bold, this.fallbacks = const []});
+
+  final pw.Font base;
+  final pw.Font? bold;
+  final List<pw.Font> fallbacks;
+
+  pw.ThemeData toTheme() => pw.ThemeData.withFont(
+        base: base,
+        bold: bold ?? base,
+        fontFallback: fallbacks,
+      );
+}
+
 /// All display strings [DoctorReportPdf] needs, supplied by the caller so
 /// the PDF is localized without this service importing Flutter's l10n
 /// machinery.
@@ -194,7 +227,15 @@ class DoctorReportPdfLabels {
     required this.flowNames,
     required this.symptomNames,
     required this.moodNames,
+    required this.localeName,
   });
+
+  /// BCP-47 name used to format the decimal averages.
+  ///
+  /// The report printed "28.4" to every reader, including the ones whose
+  /// language writes "28,4" — a printed document handed to a clinician is
+  /// the last place for an English decimal point in a German sentence.
+  final String localeName;
 
   /// Localized cell values.
   ///

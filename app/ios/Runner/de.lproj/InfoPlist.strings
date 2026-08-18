@@ -1,0 +1,3 @@
+"NSFaceIDUsageDescription" = "Entsperre Vera schneller mit Face ID. Deine PIN funktioniert weiterhin.";
+"NSHealthShareUsageDescription" = "Vera liest KEINE Daten aus Health. iOS verlangt diesen Text auch dann, wenn die App nur schreiben darf.";
+"NSHealthUpdateUsageDescription" = "Erlaubt Vera, deine Blutungsstärke, dein Gewicht und deine Basaltemperatur in Apple Health zu speichern, damit deine Daten nicht in einer einzigen App eingeschlossen bleiben. Symptome, Stimmungen und Notizen werden nie geteilt.";

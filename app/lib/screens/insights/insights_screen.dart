@@ -10,12 +10,14 @@ import 'cycle_history_screen.dart';
 import 'tracker_history_screen.dart';
 import 'widgets/phase_tips_section.dart';
 import 'widgets/symptom_frequency_bar_row.dart';
+import '../../util/number_format.dart';
 
 class InsightsScreen extends StatelessWidget {
   const InsightsScreen({super.key});
 
-  String _daysLabel(AppLocalizations l10n, double value) =>
-      '${value.toStringAsFixed(1)} ${l10n.onboardingDaysUnit}';
+  String _daysLabel(
+          BuildContext context, AppLocalizations l10n, double value) =>
+      '${formatDecimal(context, value)} ${l10n.onboardingDaysUnit}';
 
   @override
   Widget build(BuildContext context) {
@@ -36,14 +38,14 @@ class InsightsScreen extends StatelessWidget {
             if (insights.hasPeriodLengthStats)
               _StatTile(
                 label: l10n.insightsAveragePeriodLengthLabel,
-                value: _daysLabel(l10n, insights.averagePeriodLength!),
+                value: _daysLabel(context, l10n, insights.averagePeriodLength!),
               ),
             if (insights.hasCycleLengthStats)
               _StatTile(
                 label: l10n.insightsAverageCycleLengthLabel,
-                value: _daysLabel(l10n, insights.averageCycleLength!),
-                subtitle: l10n.insightsVariabilityLabel(
-                    insights.cycleLengthStdDev!.toStringAsFixed(1)),
+                value: _daysLabel(context, l10n, insights.averageCycleLength!),
+                subtitle:
+                    l10n.insightsVariabilityLabel(insights.cycleLengthStdDev!),
               )
             else
               Padding(
@@ -180,14 +182,23 @@ class _StatTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(label, style: theme.textTheme.bodyMedium),
-              if (subtitle != null)
-                Text(subtitle!, style: theme.textTheme.bodySmall),
-            ],
+          // Expanded, not bare: the label is a full sentence in most
+          // languages ("Average cycle length" → "Durchschnittliche
+          // Zykluslänge") and this Row overflowed by up to 69px on a 360dp
+          // screen. A RenderFlex overflow is a red-striped bar, not an
+          // ellipsis — it had never been caught because every test ran at
+          // the default 800x600 surface.
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(label, style: theme.textTheme.bodyMedium),
+                if (subtitle != null)
+                  Text(subtitle!, style: theme.textTheme.bodySmall),
+              ],
+            ),
           ),
+          const SizedBox(width: 12),
           Text(value, style: theme.textTheme.titleMedium),
         ],
       ),

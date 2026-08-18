@@ -9,6 +9,7 @@ import '../../../state/cycle_controller.dart';
 import '../../day_log/day_log_screen.dart';
 import '../../day_log/widgets/fertility_status_banner.dart';
 import '../../day_log/widgets/quick_stats_row.dart';
+import '../../../util/number_format.dart';
 
 /// A peek at one day before committing to the full editor — tapping a
 /// calendar day used to jump straight into [DayLogScreen], which is a lot
@@ -158,7 +159,7 @@ class _DayDetailSheet extends StatelessWidget {
       add(
         Icons.monitor_weight_outlined,
         l10n.dayLogWeightLabel,
-        '${log.weightKg!.toStringAsFixed(1)}${l10n.unitKilograms}',
+        '${formatDecimal(context, log.weightKg!)}${l10n.unitKilograms}',
       );
     }
     if (log.note != null && log.note!.trim().isNotEmpty) {

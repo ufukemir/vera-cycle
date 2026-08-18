@@ -46,21 +46,104 @@ enum CsvImportFailure { empty, noDateColumn }
 class CsvCycleImporter {
   const CsvCycleImporter();
 
+  // Header vocabularies covered only English and Turkish, so a German user
+  // exporting from a German tracker ("Datum"/"Blutung"), or a Spanish one
+  // ("Fecha"/"Flujo"), hit `noDateColumn` and the import failed outright —
+  // with a localized error that gave no hint why. These lists cover every
+  // language the app ships in, plus the parked ones most likely to follow.
+  //
+  // Matching is done on the diacritic-folded, lower-cased header (see
+  // [_normalize]), so accented forms need no separate entry: "tarih" covers
+  // "Tarih", "fecha" covers "Fecha". Entries that differ by more than
+  // accents ("gun"/"gün") are listed once in folded form.
   static const _dateHeaders = {
+    // en
     'date', 'day', 'period start', 'start date', 'timestamp',
-    'tarih', 'gun', 'gün', 'baslangic', 'başlangıç',
+    // tr
+    'tarih', 'gun', 'baslangic',
+    // de
+    'datum', 'tag', 'beginn', 'startdatum',
+    // es / pt
+    'fecha', 'dia', 'inicio', 'data', 'data de inicio',
+    // fr
+    'jour', 'debut', 'date de debut',
+    // id / ms
+    'tanggal', 'hari', 'mulai', 'tarikh',
+    // it
+    'giorno', 'inizio',
+    // nl
+    'dag', 'begin', 'begindatum',
+    // pl / cs
+    'data poczatku', 'dzien', 'poczatek', 'datum zacatku', 'den',
+    // ru / uk — 'data' and 'den' are already listed above (es/pt, cs)
+    'nachalo', 'pochatok',
+    'дата', 'день', 'начало', 'початок',
+    // ar / fa / ur
+    'التاريخ', 'تاريخ', 'اليوم', 'يوم', 'بداية', 'شروع',
+    // ja / zh / ko
+    '日付', '日', '開始', '开始', '日期', '날짜', '시작',
   };
 
   static const _flowHeaders = {
+    // en
     'flow', 'period', 'bleeding', 'intensity', 'menstrual flow',
-    'akis', 'akış', 'regl', 'adet', 'kanama', 'yogunluk', 'yoğunluk',
+    // tr
+    'akis', 'regl', 'adet', 'kanama', 'yogunluk',
+    // de
+    'blutung', 'starke', 'periode', 'menstruation',
+    // es / pt
+    'flujo', 'sangrado', 'intensidad', 'regla', 'fluxo', 'sangramento',
+    // fr
+    'flux', 'saignement', 'regles', 'intensite',
+    // id / ms
+    'aliran', 'pendarahan', 'haid', 'menstruasi',
+    // it
+    'flusso', 'sanguinamento', 'mestruazioni',
+    // nl
+    'bloeding', 'menstruatie',
+    // pl / cs
+    'krwawienie', 'przeplyw', 'krvaceni',
+    // ru / uk
+    'выделения', 'кровотечение', 'месячные', 'виділення', 'місячні',
+    // ar / fa / ur
+    'التدفق', 'نزيف', 'الدورة', 'خونریزی', 'خون',
+    // ja / zh / ko
+    '経血量', '出血', '经量', '月经', '생리', '출혈',
   };
 
-  static const _heavy = {'heavy', 'strong', 'yogun', 'yoğun', 'cok', 'çok', '4', '3'};
-  static const _medium = {'medium', 'moderate', 'normal', 'orta', '2'};
-  static const _light = {'light', 'mild', 'hafif', '1'};
-  static const _spotting = {'spotting', 'spot', 'leke', 'lekelenme'};
-  static const _none = {'', 'none', 'no', 'false', '0', 'yok', 'hayir', 'hayır'};
+  static const _heavy = {
+    'heavy', 'strong', 'yogun', 'cok',
+    'stark', 'abundante', 'intenso', 'abondant', 'banyak', 'lebat',
+    'zwaar', 'hevig', 'obfite', 'silne', 'обильные', 'сильное',
+    'غزير', 'شدید', '多い', '多', '많음',
+    '4', '3',
+  };
+  static const _medium = {
+    'medium', 'moderate', 'normal', 'orta',
+    'mittel', 'moderado', 'medio', 'moyen', 'sedang', 'gemiddeld', 'matig',
+    'umiarkowane', 'srednie', 'умеренные', 'средние', 'помірні',
+    'متوسط', '普通', '中等', '보통',
+    '2',
+  };
+  static const _light = {
+    'light', 'mild', 'hafif',
+    'leicht', 'ligero', 'leve', 'leger', 'ringan', 'licht',
+    'lekkie', 'slabe', 'скудные', 'легкое', 'слабкі',
+    'خفيف', 'کم', '少ない', '少', '적음',
+    '1',
+  };
+  static const _spotting = {
+    'spotting', 'spot', 'leke', 'lekelenme',
+    'schmierblutung', 'manchado', 'goteo', 'bercak', 'flek',
+    'plamienie', 'spotting bloeding', 'мазня', 'мажущие', 'мазкі',
+    'تبقيع', 'لکه بینی', '少量出血', '点滴出血', '점상 출혈',
+  };
+  static const _none = {
+    '', 'none', 'no', 'false', '0', 'yok', 'hayir',
+    'keine', 'nein', 'ninguno', 'nenhum', 'aucun', 'tidak', 'tiada',
+    'nessuno', 'geen', 'brak', 'nie', 'нет', 'немає', '없음',
+    'لا', 'هیچ', 'なし', '无', '無',
+  };
 
   CsvImportResult parse(String csv) {
     final rows = _splitRows(csv);
@@ -166,16 +249,47 @@ class CsvCycleImporter {
     return null;
   }
 
-  String _normalize(String s) => s
-      .toLowerCase()
-      .trim()
-      .replaceAll('ı', 'i')
-      .replaceAll('ğ', 'g')
-      .replaceAll('ü', 'u')
-      .replaceAll('ş', 's')
-      .replaceAll('ö', 'o')
-      .replaceAll('ç', 'c')
-      .replaceAll('_', ' ');
+  /// Latin diacritic folding for header and value matching.
+  ///
+  /// This folded exactly six Turkish characters, which was fine while the
+  /// vocabularies were English + Turkish. With German, Spanish, French,
+  /// Polish and Czech headers in the mix it is not: `ä`, `ß`, `é`, `ą`, `ř`
+  /// all survived unfolded, and Czech `š` (U+0161) is a different codepoint
+  /// from Turkish `ş` (U+015F), so it was never covered at all.
+  ///
+  /// Non-Latin scripts pass through untouched — Cyrillic, Arabic and CJK
+  /// headers are matched as written, which is why those entries in the
+  /// vocabularies above are in their own script.
+  static const _fold = {
+    'à': 'a', 'á': 'a', 'â': 'a', 'ã': 'a', 'ä': 'a', 'å': 'a', 'ā': 'a',
+    'ă': 'a', 'ą': 'a',
+    'ç': 'c', 'ć': 'c', 'č': 'c',
+    'ď': 'd', 'đ': 'd',
+    'è': 'e', 'é': 'e', 'ê': 'e', 'ë': 'e', 'ē': 'e', 'ė': 'e', 'ę': 'e',
+    'ě': 'e',
+    'ğ': 'g',
+    'ì': 'i', 'í': 'i', 'î': 'i', 'ï': 'i', 'ī': 'i', 'į': 'i', 'ı': 'i',
+    'ł': 'l',
+    'ñ': 'n', 'ń': 'n', 'ň': 'n',
+    'ò': 'o', 'ó': 'o', 'ô': 'o', 'õ': 'o', 'ö': 'o', 'ø': 'o', 'ō': 'o',
+    'ő': 'o',
+    'ř': 'r',
+    'ś': 's', 'š': 's', 'ş': 's', 'ș': 's',
+    'ť': 't', 'ţ': 't', 'ț': 't',
+    'ù': 'u', 'ú': 'u', 'û': 'u', 'ü': 'u', 'ū': 'u', 'ů': 'u', 'ű': 'u',
+    'ý': 'y', 'ÿ': 'y',
+    'ź': 'z', 'ż': 'z', 'ž': 'z',
+    'æ': 'ae', 'œ': 'oe', 'ß': 'ss',
+  };
+
+  String _normalize(String s) {
+    final out = StringBuffer();
+    for (final rune in s.toLowerCase().trim().runes) {
+      final ch = String.fromCharCode(rune);
+      out.write(_fold[ch] ?? (ch == '_' ? ' ' : ch));
+    }
+    return out.toString();
+  }
 
   /// Accepts ISO (2026-03-14), slashed (14/03/2026, 2026/03/14) and dotted
   /// (14.03.2026) dates. Ambiguous day/month order resolves to

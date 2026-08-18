@@ -7,7 +7,7 @@ void main() {
   const ctx = AssistantContext(
     cycleDay: 12,
     phase: CyclePhase.follicular,
-    meanCycleLength: 28.4,
+    meanCycleLengthLabel: '28.4',
     cyclesLogged: 3,
     predictionRangeLabel: 'May 12 – May 15',
   );
@@ -167,7 +167,7 @@ void main() {
     const ovulationCtx = AssistantContext(
       cycleDay: 12,
       phase: CyclePhase.follicular,
-      meanCycleLength: 28.4,
+      meanCycleLengthLabel: '28.4',
       cyclesLogged: 3,
       predictionRangeLabel: 'May 12 – May 15',
       ovulationRangeLabel: 'Apr 28 – May 1',
@@ -231,6 +231,75 @@ void main() {
       final answer =
           assistant.answer('thanks, is heavy bleeding normal?', ctx, 'en');
       expect(answer, isNot(contains("You're welcome")));
+    });
+
+    test('a non-Latin script produces tokens instead of nothing', () {
+      // The tokenizer split on [^a-z0-9]+, which matches ALL of an Arabic,
+      // Cyrillic, Greek, Thai, Devanagari or CJK question. The token list
+      // came back empty, every topic scored zero, and the user was told
+      // their question "isn't in my knowledge base" — every single time.
+      // Arabic ships today, so this was live.
+      //
+      // The assistant still has no Arabic *content*, so the answer is
+      // English. That is the documented fallback; silently claiming
+      // ignorance is not.
+      const questions = {
+        'ar': 'ما هي الدورة الشهرية؟',
+        'ru': 'Почему задержка месячных?',
+        'el': 'Γιατί άργησε η περίοδός μου;',
+        'th': 'ทำไมประจำเดือนมาช้า',
+        'hi': 'मेरा पीरियड देर से क्यों है',
+        'ja': '生理が遅れています',
+      };
+
+      for (final entry in questions.entries) {
+        final answer = assistant.answer(entry.value, ctx, entry.key);
+        expect(answer, isNotEmpty);
+        // Not asserting a specific topic — the keywords are still tr/en, so
+        // matching depends on content that does not exist yet. What must
+        // hold is that the pipeline runs at all.
+        expect(() => assistant.answer(entry.value, ctx, entry.key),
+            returnsNormally);
+      }
+    });
+
+    test('accented Latin words fold to whole tokens, not fragments', () {
+      // Only six Turkish characters were folded, and the splitter treated
+      // every other accent as a word boundary: "Verspätung" tokenized as
+      // ["verspa","tung"] and "período" as ["per","odo"]. Czech š (U+0161)
+      // is a different codepoint from Turkish ş (U+015F) and was never in
+      // the list at all.
+      expect(assistant.debugTokens('Verspätung'), ['verspatung']);
+      expect(assistant.debugTokens('período'), ['periodo']);
+      expect(assistant.debugTokens('spóźnienie'), ['spoznienie']);
+      expect(assistant.debugTokens('křeče'), ['krece']);
+      expect(assistant.debugTokens('Größe'), ['grosse']);
+      expect(assistant.debugTokens('kinh nguyệt'), ['kinh', 'nguyet']);
+      // The Turkish behaviour that already worked must not regress.
+      expect(assistant.debugTokens('DÖNGÜLERİM ÇOK DÜZENSİZ'),
+          ['dongulerim', 'cok', 'duzensiz']);
+    });
+
+    test('non-Latin scripts tokenize instead of vanishing', () {
+      // `[^a-z0-9]+` matched the ENTIRE input for these scripts, so the
+      // token list came back empty and every topic scored zero. The user
+      // was told their question "isn't in my knowledge base" — for every
+      // question. Arabic ships today, so this was live.
+      expect(assistant.debugTokens('ما هي الدورة الشهرية؟'), isNotEmpty);
+      expect(assistant.debugTokens('Почему задержка месячных?'),
+          ['почему', 'задержка', 'месячных']);
+      expect(assistant.debugTokens('ประจำเดือนมาช้า'), isNotEmpty);
+      expect(assistant.debugTokens('मेरा पीरियड देर से'), hasLength(4));
+      expect(assistant.debugTokens('生理が遅れています'), isNotEmpty);
+      // Non-Latin scripts must pass through folding untouched.
+      expect(assistant.debugTokens('Цикл').single, 'цикл');
+    });
+
+    test('the languages with real assistant content are declared', () {
+      // Guards the gap rather than hiding it: any UI language outside this
+      // set gets English answers, which is a product decision that should
+      // be visible, not a silent surprise.
+      expect(CycleAssistant.assistantContentLanguages, {'en', 'tr'});
     });
 
     test('"help me with X" answers X rather than listing topics', () {

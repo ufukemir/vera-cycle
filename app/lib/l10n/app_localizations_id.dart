@@ -431,8 +431,20 @@ class AppLocalizationsId extends AppLocalizations {
   String get insightsAverageCycleLengthLabel => 'Rata-rata panjang siklus';
 
   @override
-  String insightsVariabilityLabel(String days) {
-    return 'Bervariasi sekitar $days hari';
+  String insightsVariabilityLabel(num days) {
+    final intl.NumberFormat daysNumberFormat =
+        intl.NumberFormat.decimalPatternDigits(
+          locale: localeName,
+          decimalDigits: 1,
+        );
+    final String daysString = daysNumberFormat.format(days);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Bervariasi sekitar $daysString hari',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1079,12 +1091,22 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String homeWindowCountdown(int days) {
-    return 'Perkiraan jendela dimulai sekitar $days hari lagi';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Perkiraan jendela dimulai sekitar $days hari lagi',
+    );
+    return '$_temp0';
   }
 
   @override
   String homeOvulationCountdown(int days) {
-    return 'Perkiraan ovulasi sekitar $days hari lagi';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Perkiraan ovulasi sekitar $days hari lagi',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1132,7 +1154,12 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String trackerEntriesCount(int count) {
-    return '$count catatan';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count catatan',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1202,7 +1229,12 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String pregnancyDaysLeft(int days) {
-    return 'Sekitar $days hari lagi';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Sekitar $days hari lagi',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1213,6 +1245,38 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get pregnancyDisclaimer =>
       'Tanggal diperkirakan dari haid terakhirmu memakai aturan standar 280 hari. USG memberi tanggal yang lebih akurat, dan ovulasi terlambat menggeser angka ini — ini informasi, bukan perawatan medis.';
+
+  @override
+  String get pregnancyNoteUnder5 =>
+      'Kebanyakan orang belum merasakan apa pun — karena usia kehamilan dihitung dari haid terakhir, dua minggu pertama sebenarnya terjadi sebelum pembuahan.';
+
+  @override
+  String get pregnancyNoteUnder9 =>
+      'Mual, payudara nyeri, dan kelelahan umum terjadi saat ini. Waktu yang baik untuk mengatur janji pemeriksaan pertama.';
+
+  @override
+  String get pregnancyNoteUnder13 =>
+      'Akhir trimester pertama sudah dekat; pada banyak orang mual mulai mereda sekitar waktu ini.';
+
+  @override
+  String get pregnancyNoteUnder20 =>
+      'Energi sering kembali pada rentang ini. Gerakan pertama bisa terasa kapan saja antara minggu 16 dan 22.';
+
+  @override
+  String get pregnancyNoteUnder28 =>
+      'Gerakan menjadi lebih jelas dan mulai membentuk pola. Sakit punggung dan nyeri ulu hati umum terjadi pada rentang ini.';
+
+  @override
+  String get pregnancyNoteUnder34 =>
+      'Kamu berada di trimester ketiga. Sesak napas, sering buang air kecil, dan kontraksi Braxton-Hicks umum terjadi.';
+
+  @override
+  String get pregnancyNoteUnder38 =>
+      'Bayi bersiap untuk kelahiran. Waktu yang baik untuk menyiapkan tas rumah sakit dan rencana persalinan.';
+
+  @override
+  String get pregnancyNoteTerm =>
+      'Kehamilan sudah cukup bulan — kelahiran bisa terjadi kapan saja antara minggu 37 dan 42; minggu 40 adalah rata-rata, bukan tenggat.';
 
   @override
   String get pregnancyWeeklyNoteTitle => 'Minggu ini';
@@ -1288,6 +1352,27 @@ class AppLocalizationsId extends AppLocalizations {
       'Riwayatmu hanya ada di ponsel ini. Cadangan terenkripsi cepat menjaganya tetap aman.';
 
   @override
+  String get notificationChannelPeriodStart => 'Haid mendatang';
+
+  @override
+  String get notificationChannelPeriodEnd => 'Cek akhir haid';
+
+  @override
+  String get notificationChannelMedication => 'Obat';
+
+  @override
+  String get notificationChannelWater => 'Minum air';
+
+  @override
+  String get notificationChannelAppointment => 'Janji temu';
+
+  @override
+  String get notificationChannelOvulation => 'Masa subur';
+
+  @override
+  String get notificationChannelBackup => 'Pengingat pencadangan';
+
+  @override
   String get calendarDayDetailTitle => 'Hari ini';
 
   @override
@@ -1308,7 +1393,12 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String cycleHistoryLength(int days) {
-    return 'Siklus $days hari';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Siklus $days hari',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1344,7 +1434,12 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String a11yChartSummary(int count, String min, String max) {
-    return 'Grafik dengan $count entri, dari $min sampai $max';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Grafik dengan $count entri, dari $min sampai $max',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1354,7 +1449,12 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String a11yFrequencyItem(String label, int count) {
-    return '$label: $count kali';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count kali',
+    );
+    return '$label: $_temp0';
   }
 
   @override
@@ -1369,12 +1469,22 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String importPreview(int count) {
-    return 'Ditemukan $count hari riwayat';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Ditemukan $count hari riwayat',
+    );
+    return '$_temp0';
   }
 
   @override
   String importSkipped(int count) {
-    return '$count baris tidak terbaca dan akan dilewati';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count baris tidak terbaca dan akan dilewati',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1386,7 +1496,12 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String importDone(int count) {
-    return '$count hari diimpor';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count hari diimpor',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1408,7 +1523,12 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String healthSyncBackfilled(int count) {
-    return '$count hari dikirim ke aplikasi kesehatanmu';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count hari dikirim ke aplikasi kesehatanmu',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1535,7 +1655,12 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String advancedInsightsPatternDetail(int count, int day) {
-    return '$count hari tercatat, sekitar hari ke-$day siklusmu';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count hari tercatat, sekitar hari ke-$day siklusmu',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1673,7 +1798,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get tipNutritionDetailMenstrual =>
-      'Pendarahan membuatmu kehilangan zat besi; daging merah, lentil, buncis, sayuran hijau gelap, dan molase membantu menggantinya. Zat besi nabati jauh lebih mudah diserap bersama vitamin C — memeras lemon di atas masakan lentil adalah versi paling praktisnya. Teh dan kopi saat makan menurunkan penyerapan zat besi, jadi beri jarak satu jam saja cukup. Minum cukup air bisa meredakan lelah dan sakit kepala saat haid.';
+      'Pendarahan membuatmu kehilangan zat besi; daging merah, lentil, kacang arab, sayuran hijau gelap, dan molase membantu menggantinya. Zat besi nabati jauh lebih mudah diserap bersama vitamin C — memeras lemon di atas masakan lentil adalah versi paling praktisnya. Teh dan kopi saat makan menurunkan penyerapan zat besi, jadi beri jarak satu jam saja cukup. Minum cukup air bisa meredakan lelah dan sakit kepala saat haid.';
 
   @override
   String get tipNutritionDetailFollicular =>

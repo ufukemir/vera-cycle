@@ -429,8 +429,20 @@ class AppLocalizationsTr extends AppLocalizations {
   String get insightsAverageCycleLengthLabel => 'Ortalama döngü uzunluğu';
 
   @override
-  String insightsVariabilityLabel(String days) {
-    return 'Yaklaşık $days gün değişkenlik';
+  String insightsVariabilityLabel(num days) {
+    final intl.NumberFormat daysNumberFormat =
+        intl.NumberFormat.decimalPatternDigits(
+          locale: localeName,
+          decimalDigits: 1,
+        );
+    final String daysString = daysNumberFormat.format(days);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Yaklaşık $daysString gün değişkenlik',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1075,12 +1087,22 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String homeWindowCountdown(int days) {
-    return 'Tahmini pencereye yaklaşık $days gün var';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Tahmini pencereye yaklaşık $days gün var',
+    );
+    return '$_temp0';
   }
 
   @override
   String homeOvulationCountdown(int days) {
-    return 'Tahmini ovülasyona yaklaşık $days gün var';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Tahmini ovülasyona yaklaşık $days gün var',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1129,7 +1151,12 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String trackerEntriesCount(int count) {
-    return '$count kayıt';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count kayıt',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1199,7 +1226,12 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String pregnancyDaysLeft(int days) {
-    return 'Yaklaşık $days gün kaldı';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Yaklaşık $days gün kaldı',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1210,6 +1242,38 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get pregnancyDisclaimer =>
       'Tarihler, son adetinden standart 280 günlük kurala göre tahmin edilir. Ultrason daha doğru tarih verir ve geç ovülasyon bu sayıları kaydırır — bu bilgilendirmedir, tıbbi takip değildir.';
+
+  @override
+  String get pregnancyNoteUnder5 =>
+      'Bu haftalarda çoğu kişi henüz bir değişiklik hissetmez — gebelik yaşı son adetten sayıldığı için ilk iki hafta aslında gebelik öncesidir.';
+
+  @override
+  String get pregnancyNoteUnder9 =>
+      'Bulantı, göğüs hassasiyeti ve yorgunluk bu dönemde yaygındır. İlk randevunu planlamak için iyi bir zaman.';
+
+  @override
+  String get pregnancyNoteUnder13 =>
+      'İlk trimesterin sonuna yaklaşıyorsun; birçok kişide bulantı bu haftalarda hafiflemeye başlar.';
+
+  @override
+  String get pregnancyNoteUnder20 =>
+      'Enerji genelde bu dönemde geri gelir. İlk hareketler 16–22. haftalar arasında hissedilebilir.';
+
+  @override
+  String get pregnancyNoteUnder28 =>
+      'Hareketler belirginleşir ve bir örüntü oluşmaya başlar. Sırt ağrısı ve mide yanması bu dönemde sık görülür.';
+
+  @override
+  String get pregnancyNoteUnder34 =>
+      'Üçüncü trimesterdesin. Nefes darlığı, sık idrara çıkma ve Braxton-Hicks kasılmaları yaygındır.';
+
+  @override
+  String get pregnancyNoteUnder38 =>
+      'Bebek doğuma hazırlanıyor. Doğum çantası ve doğum planı için iyi bir zaman.';
+
+  @override
+  String get pregnancyNoteTerm =>
+      'Term dönemindesin — doğum 37. ve 42. haftalar arasında herhangi bir zamanda olabilir; 40. hafta bir son tarih değil, ortalamadır.';
 
   @override
   String get pregnancyWeeklyNoteTitle => 'Bu hafta';
@@ -1285,6 +1349,27 @@ class AppLocalizationsTr extends AppLocalizations {
       'Geçmişin yalnızca bu telefonda var. Hızlı bir şifreli yedek onu güvende tutar.';
 
   @override
+  String get notificationChannelPeriodStart => 'Yaklaşan regl';
+
+  @override
+  String get notificationChannelPeriodEnd => 'Regl bitişi kontrolü';
+
+  @override
+  String get notificationChannelMedication => 'İlaç';
+
+  @override
+  String get notificationChannelWater => 'Su';
+
+  @override
+  String get notificationChannelAppointment => 'Randevu';
+
+  @override
+  String get notificationChannelOvulation => 'Doğurgan pencere';
+
+  @override
+  String get notificationChannelBackup => 'Yedekleme hatırlatıcısı';
+
+  @override
   String get calendarDayDetailTitle => 'Bu gün';
 
   @override
@@ -1305,7 +1390,12 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String cycleHistoryLength(int days) {
-    return '$days günlük döngü';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days günlük döngü',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1341,7 +1431,12 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String a11yChartSummary(int count, String min, String max) {
-    return '$count kayıtlı grafik, $min ile $max arasında';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count kayıtlı grafik, $min ile $max arasında',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1351,7 +1446,12 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String a11yFrequencyItem(String label, int count) {
-    return '$label: $count kez';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count kez',
+    );
+    return '$label: $_temp0';
   }
 
   @override
@@ -1366,12 +1466,22 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String importPreview(int count) {
-    return '$count günlük geçmiş bulundu';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count günlük geçmiş bulundu',
+    );
+    return '$_temp0';
   }
 
   @override
   String importSkipped(int count) {
-    return '$count satır okunamadı ve dışarıda bırakılacak';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count satır okunamadı ve dışarıda bırakılacak',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1383,7 +1493,12 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String importDone(int count) {
-    return '$count gün aktarıldı';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count gün aktarıldı',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1405,7 +1520,12 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String healthSyncBackfilled(int count) {
-    return '$count gün sağlık uygulamana gönderildi';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count gün sağlık uygulamana gönderildi',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1532,7 +1652,12 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String advancedInsightsPatternDetail(int count, int day) {
-    return '$count gün kaydedildi, döngünün yaklaşık $day. günü';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count gün kaydedildi, döngünün yaklaşık $day. günü',
+    );
+    return '$_temp0';
   }
 
   @override

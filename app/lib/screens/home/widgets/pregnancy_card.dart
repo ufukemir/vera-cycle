@@ -7,46 +7,20 @@ import '../../../services/pregnancy_info.dart';
 /// Weekly, non-diagnostic notes about a typical pregnancy. Deliberately
 /// descriptive ("many people notice…"), never personalized medical advice
 /// — CLAUDE.md principle 7 applies here as much as anywhere.
-String _weeklyNote(AppLocalizations l10n, int weeks, String lang) {
-  final tr = lang == 'tr';
-  if (weeks < 5) {
-    return tr
-        ? 'Bu haftalarda çoğu kişi henüz bir değişiklik hissetmez — gebelik yaşı son adetten sayıldığı için ilk iki hafta aslında gebelik öncesidir.'
-        : 'Most people notice nothing yet — because gestational age counts from your last period, the first two weeks are actually before conception.';
-  }
-  if (weeks < 9) {
-    return tr
-        ? 'Bulantı, göğüs hassasiyeti ve yorgunluk bu dönemde yaygındır. İlk randevunu planlamak için iyi bir zaman.'
-        : 'Nausea, breast tenderness, and fatigue are common right now. A good time to arrange a first appointment.';
-  }
-  if (weeks < 13) {
-    return tr
-        ? 'İlk trimesterin sonuna yaklaşıyorsun; birçok kişide bulantı bu haftalarda hafiflemeye başlar.'
-        : 'You are nearing the end of the first trimester; for many people nausea starts easing around now.';
-  }
-  if (weeks < 20) {
-    return tr
-        ? 'Enerji genelde bu dönemde geri gelir. İlk hareketler 16–22. haftalar arasında hissedilebilir.'
-        : 'Energy often returns in this stretch. First movements can be felt anywhere between weeks 16 and 22.';
-  }
-  if (weeks < 28) {
-    return tr
-        ? 'Hareketler belirginleşir ve bir örüntü oluşmaya başlar. Sırt ağrısı ve mide yanması bu dönemde sık görülür.'
-        : 'Movements get distinct and start forming a pattern. Back pain and heartburn are common in this stretch.';
-  }
-  if (weeks < 34) {
-    return tr
-        ? 'Üçüncü trimesterdesin. Nefes darlığı, sık idrara çıkma ve Braxton-Hicks kasılmaları yaygındır.'
-        : "You're in the third trimester. Shortness of breath, frequent urination, and Braxton-Hicks contractions are common.";
-  }
-  if (weeks < 38) {
-    return tr
-        ? 'Bebek doğuma hazırlanıyor. Doğum çantası ve doğum planı için iyi bir zaman.'
-        : 'Baby is getting ready for birth. A good time for a hospital bag and a birth plan.';
-  }
-  return tr
-      ? 'Term dönemindesin — doğum 37. ve 42. haftalar arasında herhangi bir zamanda olabilir; 40. hafta bir son tarih değil, ortalamadır.'
-      : "You're at term — birth can happen any time between weeks 37 and 42; week 40 is an average, not a deadline.";
+///
+/// These used to live here as Dart literals behind `lang == 'tr'`, with an
+/// English fallback — and the function took an [AppLocalizations] it never
+/// used. So every ar/es/fr/de/id user in pregnancy mode read English prose
+/// on the Home screen, inside an otherwise fully translated app.
+String _weeklyNote(AppLocalizations l10n, int weeks) {
+  if (weeks < 5) return l10n.pregnancyNoteUnder5;
+  if (weeks < 9) return l10n.pregnancyNoteUnder9;
+  if (weeks < 13) return l10n.pregnancyNoteUnder13;
+  if (weeks < 20) return l10n.pregnancyNoteUnder20;
+  if (weeks < 28) return l10n.pregnancyNoteUnder28;
+  if (weeks < 34) return l10n.pregnancyNoteUnder34;
+  if (weeks < 38) return l10n.pregnancyNoteUnder38;
+  return l10n.pregnancyNoteTerm;
 }
 
 /// Replaces the cycle prediction UI on Home while pregnancy mode is on.
@@ -104,7 +78,7 @@ class PregnancyCard extends StatelessWidget {
           Text(l10n.pregnancyWeeklyNoteTitle,
               style: theme.textTheme.labelLarge),
           const SizedBox(height: 4),
-          Text(_weeklyNote(l10n, info.weeks, locale.languageCode),
+          Text(_weeklyNote(l10n, info.weeks),
               style: theme.textTheme.bodyMedium),
           const SizedBox(height: 12),
           Text(
