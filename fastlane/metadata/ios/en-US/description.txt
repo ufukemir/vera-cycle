@@ -1,0 +1,46 @@
+Vera tracks your period and cycle without ever sending your health data anywhere.
+
+No account. No cloud sync. No server of ours for your data to sit on. What you log is encrypted on your phone, with the key held in your device's secure hardware — and the only way it leaves is if you export it yourself.
+
+HONEST PREDICTIONS, NOT FALSE CONFIDENCE
+
+Most trackers show you a single date. Bodies do not work that way. Vera always gives you a range — "28–31 August", with a confidence level — because a single date is a guess wearing a costume. When you have fewer than two complete cycles, Vera says so instead of inventing one. When your cycles are irregular, it tells you plainly rather than hiding it behind a tidy number.
+
+WHAT YOU CAN TRACK
+
+• Flow, symptoms, mood, energy, skin and hair
+• Sleep, water, weight, basal temperature
+• Cervical mucus, cervix position, breast self-exam, ovulation tests
+• Medications, and any tracker you name yourself
+• Notes, kept out of shared reports by default
+
+SEE YOUR OWN PATTERNS
+
+An animated cycle ring, a calendar with your history, average cycle and period length, variability, and where your symptoms actually cluster. Cycle-phase suggestions for movement and food, written as information — never as a prescription.
+
+AN ASSISTANT THAT RUNS ON YOUR PHONE
+
+Ask about cramps, late periods, or how the prediction works. Answers come from a hand-written, reviewable knowledge base on your device — not a cloud AI. Your questions are never uploaded, and the chat is never saved.
+
+A REPORT FOR YOUR DOCTOR
+
+Export a clean PDF or CSV of your history whenever you want, with a colour cycle timeline. Free-text notes are excluded unless you choose to include them.
+
+PRIVACY YOU CAN CHECK
+
+• PIN and biometric lock
+• Encrypted backups you control
+• Excluded from iCloud and Android device backups
+• No analytics SDK, no crash-reporting SDK, no tracking SDK
+• No advertising ID
+• Optional, write-only sync to Apple Health / Health Connect — off by default
+
+ABOUT ADS AND PREMIUM
+
+The free version is supported by Google AdMob banners, which is why the app requests internet access. The ad library never receives your cycle data, your symptoms, or anything derived from them — ads are requested non-personalised. Premium removes ads and adds your own trackers, deeper insights, your own reminders, and extra backgrounds.
+
+Premium only ever adds. Your history and your core statistics — averages, calendar, export — stay free forever. If a subscription lapses you keep every record. No countdowns, no fake discounts, no dark patterns.
+
+IMPORTANT
+
+Vera is not a medical device and does not diagnose anything. It must not be used as a method of contraception. For medical questions, talk to a clinician.

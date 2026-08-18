@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="ic_launcher_background">#FFF3EC</color>
+    <!-- AppPalette.cream / the dark ColorScheme surface. The splash used
+         @android:color/white, so every cold start flashed white before a
+         warm-palette app appeared — the first frame every reviewer and
+         every new user sees. -->
+    <color name="splash_background">#FFF8F5</color>
 </resources>

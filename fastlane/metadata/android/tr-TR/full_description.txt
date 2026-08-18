@@ -1,0 +1,46 @@
+Vera, regl ve döngünü sağlık verini hiçbir yere göndermeden takip eder.
+
+Hesap yok. Bulut senkronu yok. Verinin durabileceği bir sunucumuz yok. Kaydettiğin her şey telefonunda şifreli durur; anahtar cihazının güvenli donanımında tutulur. Dışarı çıkmasının tek yolu, senin kendi elinle dışa aktarman.
+
+DÜRÜST TAHMİN, SAHTE KESİNLİK DEĞİL
+
+Çoğu uygulama sana tek bir tarih gösterir. Beden öyle çalışmaz. Vera her zaman bir aralık verir — "28–31 Ağustos", güven seviyesiyle birlikte — çünkü tek bir tarih, kılık değiştirmiş bir tahmindir. İki tam döngün yoksa Vera bunu söyler, uydurmaz. Döngülerin düzensizse bunu düzgün bir sayının arkasına saklamak yerine açıkça belirtir.
+
+NELERİ TAKİP EDEBİLİRSİN
+
+• Akış, semptomlar, ruh hali, enerji, cilt ve saç
+• Uyku, su, kilo, bazal vücut sıcaklığı
+• Servikal mukus, serviks konumu, meme kendi kendine muayene, ovülasyon testi
+• İlaçlar ve kendi adını verdiğin takipler
+• Notlar — paylaşılan raporlara varsayılan olarak girmez
+
+KENDİ ÖRÜNTÜLERİNİ GÖR
+
+Animasyonlu döngü halkası, geçmişini gösteren takvim, ortalama döngü ve regl uzunluğu, değişkenlik ve semptomlarının gerçekte nerede yoğunlaştığı. Döngü evresine göre hareket ve beslenme önerileri — bilgi olarak yazıldı, reçete olarak değil.
+
+TELEFONUNDA ÇALIŞAN ASİSTAN
+
+Kramplar, geciken regl veya tahminin nasıl hesaplandığı hakkında soru sor. Cevaplar cihazındaki, elle yazılmış ve denetlenebilir bir bilgi tabanından gelir — bulut yapay zekâsından değil. Soruların hiçbir yere yüklenmez, sohbet kaydedilmez.
+
+DOKTORUN İÇİN RAPOR
+
+Geçmişini istediğin zaman temiz bir PDF veya CSV olarak dışa aktar; renkli döngü zaman çizelgesiyle birlikte. Serbest metin notların, sen seçmedikçe rapora girmez.
+
+DOĞRULAYABİLECEĞİN MAHREMİYET
+
+• PIN ve biyometrik kilit
+• Kontrolü sende olan şifreli yedekler
+• iCloud ve Android cihaz yedeklerinden hariç tutulur
+• Analitik SDK'sı yok, çökme raporlama SDK'sı yok, izleme SDK'sı yok
+• Reklam kimliği yok
+• Apple Health / Health Connect'e isteğe bağlı, yalnızca yazan senkron — varsayılan kapalı
+
+REKLAMLAR VE PREMIUM HAKKINDA
+
+Ücretsiz sürüm Google AdMob banner'larıyla desteklenir; uygulamanın internet izni istemesinin sebebi budur. Reklam kütüphanesi döngü verini, semptomlarını veya bunlardan türetilen hiçbir sinyali almaz — reklamlar kişiselleştirilmemiş olarak istenir. Premium reklamları kaldırır; üstüne kendi takiplerini, daha derin içgörüleri, kendi hatırlatıcılarını ve ek arka planları ekler.
+
+Premium yalnızca ekler. Geçmişin ve temel istatistiklerin — ortalamalar, takvim, dışa aktarma — sonsuza dek ücretsiz kalır. Abonelik biterse tek bir kaydını bile kaybetmezsin. Geri sayım yok, sahte indirim yok, karanlık desen yok.
+
+ÖNEMLİ
+
+Vera tıbbi bir cihaz değildir ve hiçbir tanı koymaz. Gebelikten korunma yöntemi olarak kullanılamaz. Tıbbi sorular için bir sağlık profesyoneline danış.

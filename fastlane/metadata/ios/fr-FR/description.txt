@@ -1,0 +1,46 @@
+Vera suit tes règles et ton cycle sans jamais envoyer tes données de santé où que ce soit.
+
+Pas de compte. Pas de synchronisation cloud. Aucun serveur à nous où tes données pourraient séjourner. Ce que tu notes est chiffré sur ton téléphone, la clé étant conservée dans le matériel sécurisé de l'appareil — et la seule façon pour ces données de sortir, c'est que tu les exportes toi-même.
+
+DES PRÉDICTIONS HONNÊTES, PAS UNE FAUSSE CERTITUDE
+
+La plupart des applis affichent une date unique. Le corps ne fonctionne pas comme ça. Vera donne toujours une fourchette — « 28-31 août », avec un niveau de confiance — parce qu'une date unique n'est qu'une supposition déguisée. Tant que tu n'as pas deux cycles complets, Vera le dit au lieu d'en inventer un. Si tes cycles sont irréguliers, il te le dit franchement plutôt que de le cacher derrière un chiffre bien net.
+
+CE QUE TU PEUX SUIVRE
+
+• Flux, symptômes, humeur, énergie, peau et cheveux
+• Sommeil, eau, poids, température basale
+• Glaire cervicale, position du col, autopalpation des seins, tests d'ovulation
+• Médicaments, et tout suivi que tu crées et nommes toi-même
+• Notes, exclues par défaut des rapports partagés
+
+VOIS TES PROPRES SCHÉMAS
+
+Un anneau de cycle animé, un calendrier avec ton historique, la durée moyenne du cycle et des règles, la variabilité, et les moments où tes symptômes se regroupent vraiment. Des suggestions de mouvement et d'alimentation selon la phase du cycle, écrites comme une information, jamais comme une ordonnance.
+
+UN ASSISTANT QUI TOURNE SUR TON TÉLÉPHONE
+
+Pose tes questions sur les douleurs, un retard de règles ou le calcul de la prédiction. Les réponses viennent d'une base de connaissances écrite à la main et vérifiable, présente sur ton appareil — pas d'une IA dans le cloud. Tes questions ne sont jamais envoyées et la conversation n'est jamais enregistrée.
+
+UN RAPPORT POUR TON MÉDECIN
+
+Exporte ton historique en PDF ou CSV quand tu veux, avec une frise chronologique du cycle en couleur. Les notes en texte libre en sont exclues, sauf si tu choisis de les inclure.
+
+UNE CONFIDENTIALITÉ VÉRIFIABLE
+
+• Verrouillage par code PIN et par biométrie
+• Sauvegardes chiffrées que tu contrôles
+• Exclue des sauvegardes iCloud et Android
+• Aucun SDK d'analyse, aucun SDK de rapport de plantage, aucun SDK de suivi
+• Aucun identifiant publicitaire
+• Synchronisation optionnelle en écriture seule vers Apple Santé / Health Connect — désactivée par défaut
+
+PUBLICITÉS ET PREMIUM
+
+La version gratuite est financée par des bannières Google AdMob : c'est pour cela que l'appli demande l'accès à internet. La bibliothèque publicitaire ne reçoit jamais tes données de cycle, tes symptômes ni quoi que ce soit qui en découle — les publicités sont demandées en mode non personnalisé. Premium retire les publicités et ajoute tes propres suivis, des analyses plus poussées, tes propres rappels et des habillages en plus.
+
+Premium ne fait qu'ajouter. Ton historique et tes statistiques essentielles — moyennes, calendrier, export — restent gratuits pour toujours. Si un abonnement s'arrête, tu gardes chaque enregistrement. Pas de compte à rebours, pas de fausses promotions, pas de dark patterns.
+
+IMPORTANT
+
+Vera n'est pas un dispositif médical et ne pose aucun diagnostic. L'appli ne doit pas être utilisée comme moyen de contraception. Pour toute question médicale, parles-en à un professionnel de santé.

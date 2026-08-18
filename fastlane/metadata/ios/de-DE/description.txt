@@ -1,0 +1,46 @@
+Vera begleitet deine Periode und deinen Zyklus, ohne deine Gesundheitsdaten jemals irgendwohin zu senden.
+
+Kein Konto. Keine Cloud-Synchronisierung. Kein Server von uns, auf dem deine Daten liegen könnten. Was du erfasst, wird auf deinem Handy verschlüsselt; der Schlüssel liegt in der sicheren Hardware des Geräts — und der einzige Weg nach draußen ist ein Export, den du selbst startest.
+
+EHRLICHE PROGNOSEN STATT SCHEINGENAUIGKEIT
+
+Die meisten Apps zeigen ein einzelnes Datum. So funktioniert der Körper nicht. Vera nennt immer einen Zeitraum — „28.-31. August“, mit Konfidenzstufe — denn ein einzelnes Datum ist eine Schätzung im Kostüm. Solange keine zwei vollständigen Zyklen vorliegen, sagt Vera das, statt eine Zahl zu erfinden. Sind deine Zyklen unregelmäßig, steht das klar da und verschwindet nicht hinter einer ordentlich aussehenden Zahl.
+
+WAS DU ERFASSEN KANNST
+
+• Blutung, Symptome, Stimmung, Energie, Haut und Haare
+• Schlaf, Wasser, Gewicht, Basaltemperatur
+• Zervixschleim, Muttermundposition, Brust-Selbstuntersuchung, Ovulationstests
+• Medikamente und jeder Tracker, den du selbst anlegst und benennst
+• Notizen — standardmäßig nicht Teil geteilter Berichte
+
+DEINE EIGENEN MUSTER SEHEN
+
+Ein animierter Zyklusring, ein Kalender mit deinem Verlauf, durchschnittliche Zyklus- und Periodenlänge, Schwankungsbreite und die Tage, an denen sich deine Symptome tatsächlich häufen. Vorschläge zu Bewegung und Ernährung passend zur Zyklusphase — als Information geschrieben, nie als Verordnung.
+
+EIN ASSISTENT, DER AUF DEINEM HANDY LÄUFT
+
+Frag nach Krämpfen, einer überfälligen Periode oder danach, wie die Prognose zustande kommt. Die Antworten stammen aus einer handgeschriebenen, nachprüfbaren Wissensbasis auf deinem Gerät — nicht aus einer Cloud-KI. Deine Fragen werden nie hochgeladen, der Chat wird nie gespeichert.
+
+EIN BERICHT FÜR DEINE ÄRZTIN ODER DEINEN ARZT
+
+Exportiere deinen Verlauf jederzeit als sauberes PDF oder CSV, mit farbiger Zyklus-Zeitleiste. Freitext-Notizen bleiben außen vor, außer du nimmst sie bewusst mit auf.
+
+DATENSCHUTZ ZUM NACHPRÜFEN
+
+• Sperre per PIN und Biometrie
+• Verschlüsselte Backups, die du kontrollierst
+• Von iCloud- und Android-Gerätesicherungen ausgenommen
+• Kein Analyse-SDK, kein Absturzbericht-SDK, kein Tracking-SDK
+• Keine Werbe-ID
+• Optionale Synchronisierung nur in Richtung Apple Health / Health Connect — standardmäßig aus
+
+ZU WERBUNG UND PREMIUM
+
+Die kostenlose Version finanziert sich über Google-AdMob-Banner; deshalb fragt die App Internetzugriff an. Die Werbebibliothek erhält nie deine Zyklusdaten, deine Symptome oder irgendetwas daraus Abgeleitetes — Anzeigen werden nicht personalisiert angefordert. Premium entfernt die Werbung und ergänzt eigene Tracker, tiefere Auswertungen, eigene Erinnerungen und zusätzliche Looks.
+
+Premium ergänzt nur. Dein Verlauf und deine Kernstatistiken — Durchschnittswerte, Kalender, Export — bleiben für immer kostenlos. Läuft ein Abo aus, behältst du jeden Eintrag. Keine Countdowns, keine erfundenen Rabatte, keine Dark Patterns.
+
+WICHTIG
+
+Vera ist kein Medizinprodukt und stellt keine Diagnosen. Die App darf nicht als Verhütungsmethode verwendet werden. Bei medizinischen Fragen wende dich an eine Ärztin oder einen Arzt.

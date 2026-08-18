@@ -1,0 +1,46 @@
+Vera mencatat haid dan siklusmu tanpa pernah mengirim data kesehatanmu ke mana pun.
+
+Tidak ada akun. Tidak ada sinkronisasi cloud. Tidak ada server milik kami tempat datamu bisa tersimpan. Apa pun yang kamu catat dienkripsi di ponselmu, dengan kuncinya tersimpan di perangkat keras aman milik ponsel — dan satu-satunya cara data itu keluar adalah kalau kamu sendiri mengekspornya.
+
+PREDIKSI JUJUR, BUKAN KEPASTIAN PALSU
+
+Kebanyakan aplikasi menampilkan satu tanggal. Tubuh tidak bekerja seperti itu. Vera selalu memberi rentang — "28-31 Agustus", lengkap dengan tingkat keyakinan — karena satu tanggal hanyalah tebakan yang menyamar. Kalau kamu belum punya dua siklus penuh, Vera mengatakannya apa adanya, bukan mengarang angka. Kalau siklusmu tidak teratur, Vera menyampaikannya terus terang, bukan menyembunyikannya di balik angka yang terlihat rapi.
+
+APA YANG BISA KAMU CATAT
+
+• Aliran darah, gejala, suasana hati, energi, kulit dan rambut
+• Tidur, air minum, berat badan, suhu basal tubuh
+• Lendir serviks, posisi serviks, periksa payudara sendiri, tes ovulasi
+• Obat-obatan, dan pelacak apa pun yang kamu buat dan beri nama sendiri
+• Catatan pribadi — secara bawaan tidak ikut ke laporan yang kamu bagikan
+
+LIHAT POLAMU SENDIRI
+
+Cincin siklus beranimasi, kalender berisi riwayatmu, rata-rata panjang siklus dan haid, tingkat variasinya, serta di titik mana gejalamu sebenarnya menumpuk. Saran gerak dan makanan sesuai fase siklus, ditulis sebagai informasi — bukan sebagai resep.
+
+ASISTEN YANG BERJALAN DI PONSELMU
+
+Tanyakan soal nyeri haid, haid yang telat, atau bagaimana prediksinya dihitung. Jawabannya berasal dari basis pengetahuan yang ditulis tangan dan bisa diperiksa, tersimpan di perangkatmu — bukan dari AI di cloud. Pertanyaanmu tidak pernah diunggah, dan percakapannya tidak pernah disimpan.
+
+LAPORAN UNTUK DOKTERMU
+
+Ekspor riwayatmu jadi PDF atau CSV yang rapi kapan saja, lengkap dengan lini masa siklus berwarna. Catatan teks bebas tidak disertakan kecuali kamu memilih untuk menyertakannya.
+
+PRIVASI YANG BISA KAMU PERIKSA
+
+• Kunci PIN dan biometrik
+• Cadangan terenkripsi yang kamu kendalikan sendiri
+• Dikecualikan dari cadangan iCloud dan Android
+• Tanpa SDK analitik, tanpa SDK pelaporan crash, tanpa SDK pelacakan
+• Tanpa ID iklan
+• Sinkronisasi opsional satu arah ke Apple Health / Health Connect — mati secara bawaan
+
+TENTANG IKLAN DAN PREMIUM
+
+Versi gratis didukung banner Google AdMob, dan itulah sebabnya aplikasi ini meminta akses internet. Pustaka iklannya tidak pernah menerima data siklusmu, gejalamu, atau apa pun yang diturunkan darinya — iklan diminta dalam mode non-personalisasi. Premium menghapus iklan dan menambahkan pelacak milikmu, wawasan lebih dalam, pengingat sendiri, dan tampilan ekstra.
+
+Premium hanya menambah. Riwayatmu dan statistik dasarmu — rata-rata, kalender, ekspor — tetap gratis selamanya. Kalau langganan berakhir, semua catatanmu tetap utuh. Tanpa hitung mundur, tanpa diskon palsu, tanpa pola gelap.
+
+PENTING
+
+Vera bukan alat medis dan tidak mendiagnosis apa pun. Aplikasi ini tidak boleh dipakai sebagai metode kontrasepsi. Untuk pertanyaan medis, bicaralah dengan tenaga kesehatan.

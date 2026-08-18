@@ -1,0 +1,1 @@
+regl,periyot,adet,döngü,yumurtlama,ovulasyon,adet takvimi,kadın sağlığı,mahremiyet

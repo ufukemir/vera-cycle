@@ -1,0 +1,9 @@
+# The store-screenshot generator is not a test — it renders marketing
+# images and writes them under fastlane/. Running it in the normal suite
+# would make `flutter test` slow and would fail on any harmless pixel
+# change. Produce the images deliberately:
+#
+#   flutter test --tags screenshots --update-goldens
+tags:
+  screenshots:
+    skip: "run explicitly: flutter test --tags screenshots --update-goldens"
