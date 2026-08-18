@@ -31,7 +31,7 @@ Xcode adımı (`docs/05-widget-kurulumu.md`).
 | Gebelik modu | SAT'a dayalı hafta/trimester/tahmini doğum tarihi, açıkça tahmin olduğu belirtilerek |
 | Dışa/içe aktarma | Şifreli yedek, doktor için CSV + görsel PDF, başka uygulamalardan CSV içe aktarma |
 | Gizlilik | PIN + biyometrik kilit, arka plana alınca anında kilitlenme, ekran görüntüsü engeli |
-| Diğer | 7 tam çevrilmiş dil, karanlık mod, ana ekran widget'ı, Health Connect / Apple Health'e yazma |
+| Diğer | 7 tam çevrilmiş dil (+29'u gözden geçirme bekliyor), karanlık mod, ana ekran widget'ı (**yalnızca Android**), Health Connect / Apple Health'e yazma |
 
 ## Mimari kararlar
 
