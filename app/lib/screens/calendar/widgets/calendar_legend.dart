@@ -3,13 +3,31 @@ import 'package:flutter/material.dart';
 import '../../../l10n/app_localizations.dart';
 
 class CalendarLegend extends StatelessWidget {
-  const CalendarLegend({super.key});
+  const CalendarLegend({
+    super.key,
+    required this.hasPredictedWindow,
+    required this.hasFertileEstimate,
+  });
+
+  /// Whether the prediction engine currently has a period-window estimate
+  /// to paint (needs at least two complete cycles).
+  final bool hasPredictedWindow;
+
+  /// Whether it currently has a fertile-window / ovulation estimate.
+  final bool hasFertileEstimate;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final scheme = Theme.of(context).colorScheme;
 
+    // This used to list all four entries unconditionally, so with fewer
+    // than two logged cycles — where the prediction engine deliberately
+    // stays silent rather than guess — the legend still promised three
+    // markers the grid never drew. Someone with one cycle logged saw
+    // "Predicted window" and "Ovulation" in the key and went looking for
+    // rings that could not exist yet. The engine's own honesty about
+    // insufficient data was being undercut by its own legend.
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Wrap(
@@ -17,9 +35,13 @@ class CalendarLegend extends StatelessWidget {
         runSpacing: 8,
         children: [
           _entry(_filledDot(scheme.primary), l10n.calendarLegendActual),
-          _entry(_ringDot(scheme.primary), l10n.calendarLegendPredicted),
-          _entry(_ringDot(scheme.tertiary), l10n.calendarLegendFertile),
-          _entry(_filledDot(scheme.tertiary, size: 8), l10n.calendarLegendOvulation),
+          if (hasPredictedWindow)
+            _entry(_ringDot(scheme.primary), l10n.calendarLegendPredicted),
+          if (hasFertileEstimate) ...[
+            _entry(_ringDot(scheme.tertiary), l10n.calendarLegendFertile),
+            _entry(_filledDot(scheme.tertiary, size: 8),
+                l10n.calendarLegendOvulation),
+          ],
         ],
       ),
     );

@@ -107,6 +107,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
     final l10n = AppLocalizations.of(context)!;
     final controller = context.watch<CycleController>();
     final prediction = controller.prediction;
+    // Whether the fertile-window / ovulation layer has anything to show
+    // anywhere in the visible history — checked against today's estimate
+    // since that's the same data source the grid itself paints from.
+    final hasFertileEstimate = controller.todayStatus.hasFertileEstimate;
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.navCalendar)),
@@ -163,7 +167,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 ),
               ),
             ),
-            const CalendarLegend(),
+            CalendarLegend(
+              hasPredictedWindow: prediction.hasPrediction,
+              hasFertileEstimate: hasFertileEstimate,
+            ),
           ],
         ),
       ),
