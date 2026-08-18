@@ -90,6 +90,14 @@ Premium reklamları kaldırır.
   ŞİFRESİZ durur. Bu kabul edilebilir çünkü OS yedeği hem bulut hem cihaz-transferi
   için tamamen kapalıdır (`data_extraction_rules.xml`, `android_manifest_test.dart`
   sabitler). "Her şeyi sil" bu metinleri de siler.
+- Yerelleştirme değişmezleri (2026-08-18 denetiminde eklendi, hepsi testli):
+  sayı ve ondalık ayracı `util/number_format.dart` üzerinden **yerele göre**
+  biçimlendirilir (`toStringAsFixed` doğrudan kullanılmaz — hep nokta basar);
+  sayı içeren metinler ICU çoğul olur (Arapça altı, Slav dilleri dört form);
+  hafta başlangıcı ve dil tercihi cihaz yereline düşer, dil tercihi tam
+  BCP-47 etiketi saklar (`zh-Hans`, `pt-BR` ayrılabilsin diye); doktor PDF'i
+  gömülü Unicode font kullanır (gömülü font yoksa `pdf` paketi sessizce
+  çarpı işaretli kutu çizer, hata fırlatmaz).
 - UI dili: sistem dilini takip eder, kullanıcı ayarlardan değiştirebilir. **Yalnızca
   %100 çevrilmiş diller listelenir** (`lib/l10n/`); kısmen çevrilmiş olanlar
   `l10n_pending/`'de bekler. Yarım çeviri = kullanıcıya karışık dilli ekran, bu
@@ -117,6 +125,17 @@ Premium reklamları kaldırır.
   (ilke 5) animasyonlu bir ekranda da geçerlidir.
 
 ## Ton ve içerik kuralları
+- **Asistanın cinsiyeti YOKTUR — kişiliği de yoktur (2026-08-18, Ufuk'un kararı).**
+  "Vera bir üründür, bir kişi değil." Dilbilgisel olarak cansız/nötr davranılır; dilin
+  nötr seçeneği yoksa kişisel olmayan yapı kullanılır. Gerekçe: (a) uygulama kullanıcının
+  kadın olduğunu varsaymamak için özel çaba harcıyor, asistana dişil kimlik vermek aynı
+  varsayımı bir kat yukarıda geri getirir; (b) asistanın en güçlü tarafı kendisi hakkında
+  doğruyu söylemesi ("bulut yapay zekâsı değilim, uydurmam") — üstüne kişilik kurgusu
+  eklemek bunu zayıflatır; (c) 36 dilde her cinsiyetli dil ayrı karar ve ayrı tutarsızlık
+  demektir. Sıcaklık kişilikten değil kelime seçiminden gelir.
+  Yanlış: `لستُ طبيبة`, `No soy médica`, `Vera-Assistentin`, `जवाब दे सकती हूँ`.
+  Doğru: "Bu tıbbi tavsiye değildir", "Vera yazıyor…", "Cevaplar cihazındaki bilgi
+  tabanından gelir". Yeni dil eklerken bu kural ajanlara bağlayıcı olarak verilir.
 - Kullanıcının neden takip ettiğine dair varsayım yapma. Gebe kalmaya çalıştığı varsayılmaz.
 - Beden imajı, "güzellik", utandırıcı dil yok. Sıcak ama saygılı; asla küçümseyici/çocuksu.
 - Cinsel içerikli sorular varsayılan olarak KAPALI; kullanıcı açarsa gelir.
