@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -97,13 +98,21 @@ class PremiumScreen extends StatelessWidget {
             const SizedBox(height: 8),
             Text(l10n.premiumCancelNote,
                 style: theme.textTheme.bodySmall, textAlign: TextAlign.center),
-            const Divider(height: 40),
             // Lets the ad-free state be exercised before billing exists.
-            SwitchListTile(
-              title: Text(l10n.premiumDevToggle),
-              value: prefs.premiumActive,
-              onChanged: prefs.setPremiumActive,
-            ),
+            //
+            // DEBUG ONLY. This shipped in release builds, where it was a
+            // switch that handed every user Premium for free — and, next to
+            // a paywall showing real prices behind a dead Subscribe button,
+            // a guaranteed store rejection. `kDebugMode` is compile-time
+            // const, so the whole subtree is tree-shaken out of release.
+            if (kDebugMode) ...[
+              const Divider(height: 40),
+              SwitchListTile(
+                title: Text(l10n.premiumDevToggle),
+                value: prefs.premiumActive,
+                onChanged: prefs.setPremiumActive,
+              ),
+            ],
           ],
         ),
       ),

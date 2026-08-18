@@ -15,7 +15,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>cycle_app</string>
+	<string>Vera</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -28,6 +28,16 @@
 	<true/>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Use Face ID to unlock Vera faster. Your PIN always works too.</string>
+	<!-- NEEDS A DELIBERATE DECISION BEFORE THE FIRST UPLOAD.
+	     This is currently `false`, i.e. "only exempt encryption". The app
+	     implements its own AES-GCM-256 over the user's diary
+	     (services/crypto/cycle_codec.dart) plus PBKDF2-derived encryption
+	     for password-protected exports. That is plausibly exempt — it
+	     protects the user's own data on their own device with standard
+	     algorithms — but it is NOT the automatic OS-provided exemption, and
+	     a wrong answer here is a compliance issue rather than a build
+	     failure. Confirm the classification (usually the 5D992 mass-market
+	     self-classification) rather than leaving this as a default. -->
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<!-- Google's public sample app id; swap for the real one before release. -->

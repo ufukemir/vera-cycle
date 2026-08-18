@@ -1,8 +1,16 @@
 import 'dart:io';
 
+import 'package:cycle_app/services/backup_exclusion.dart';
 import 'package:cycle_app/services/crash_log.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
+
+class _RecordingExclusion implements BackupExclusion {
+  final paths = <String>[];
+
+  @override
+  Future<void> exclude(String path) async => paths.add(path);
+}
 
 /// Serves a temp directory so the log writes somewhere real without
 /// touching a device path.
@@ -72,6 +80,26 @@ void main() {
     await CrashLog.instance.record(StateError('boom'), StackTrace.empty);
     await CrashLog.instance.clear();
     expect(await CrashLog.instance.read(), isNull);
+  });
+
+  test('the diagnostics file is kept out of device backups', () async {
+    // Documents is backed up by default on iOS exactly like Application
+    // Support, so the diary being excluded (backup_exclusion_test.dart)
+    // is only half the story — this file has to be excluded too.
+    final recorder = _RecordingExclusion();
+    CrashLog.instance.backupExclusion = recorder;
+    addTearDown(
+      () => CrashLog.instance.backupExclusion = const BackupExclusion(),
+    );
+
+    await CrashLog.instance.record(StateError('boom'), StackTrace.empty);
+    expect(recorder.paths.single, endsWith('vera_diagnostics.log'));
+    expect(File(recorder.paths.single).existsSync(), isTrue,
+        reason: 'the attribute is applied after the write, not before');
+
+    // Re-applied on every append, not only on the first one.
+    await CrashLog.instance.record(StateError('again'), StackTrace.empty);
+    expect(recorder.paths, hasLength(2));
   });
 
   test('a failure while recording never throws at the caller', () async {

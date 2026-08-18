@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'backup_exclusion.dart';
+
 /// Records crashes to a local file that only the user can send anywhere.
 ///
 /// The alternative — Sentry, Crashlytics — was considered and rejected.
@@ -20,6 +22,17 @@ class CrashLog {
   CrashLog._();
 
   static final instance = CrashLog._();
+
+  /// Kept out of iCloud alongside the diary itself.
+  ///
+  /// Documents is backed up by default on iOS just like Application
+  /// Support. The entries here are deliberately narrow — exception type,
+  /// message, stack, never a widget dump (see [record]) — but "narrow"
+  /// is not "none": an exception message can quote the input that broke,
+  /// and in this app that input is somebody's health data. Excluding the
+  /// file costs one call and removes the question entirely.
+  @visibleForTesting
+  BackupExclusion backupExclusion = const BackupExclusion();
 
   /// Keeps the file small and bounded — this is a debugging aid, not an
   /// archive, and an unbounded log on a phone is its own bug.
@@ -76,6 +89,10 @@ class CrashLog {
           : entries;
 
       await file.writeAsString(kept.join(_separator), flush: true);
+      // After the write, not before: the attribute needs the file to exist.
+      // Unlike the diary this path rewrites in place rather than renaming,
+      // but re-applying is free and survives a future switch to rename.
+      await backupExclusion.exclude(file.path);
     } on Object {
       // Diagnostics failing must never itself become a failure path.
     }

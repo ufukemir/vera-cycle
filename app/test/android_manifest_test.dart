@@ -74,6 +74,79 @@ void main() {
             'mean asking for access to the whole health record');
   });
 
+  test('the SHIPPED permission set is what the privacy policy claims', () {
+    // The other manifest tests read the SOURCE manifest. The APK declares
+    // whatever survives manifest merge, which is a longer list — plugins
+    // add their own. The published privacy policy says categorically
+    // "the complete set of permissions requested on Android is:" and then
+    // lists five. Anyone running `aapt dump permissions` finds more.
+    //
+    // For an app whose whole pitch is verifiable honesty, that is the one
+    // claim that must not be falsifiable. This pins the real list so the
+    // policy can be written against it and stay true.
+    final merged = Directory('build/app/intermediates/merged_manifests')
+        .existsSync()
+        ? Directory('build/app/intermediates/merged_manifests')
+            .listSync(recursive: true)
+            .whereType<File>()
+            .where((f) => f.path.endsWith('AndroidManifest.xml'))
+            .toList()
+        : <File>[];
+
+    if (merged.isEmpty) {
+      markTestSkipped('no merged manifest on disk — run a build first');
+      return;
+    }
+
+    final declared = <String>{};
+    for (final file in merged) {
+      for (final match in RegExp(
+              r'<uses-permission[^>]*android:name="([^"]+)"[^>]*/?>')
+          .allMatches(file.readAsStringSync())) {
+        final name = match.group(1)!;
+        // tools:node="remove" entries are removals, not requests.
+        if (match.group(0)!.contains('tools:node="remove"')) continue;
+        declared.add(name);
+      }
+    }
+
+    // Everything here is either ours (vetted, see the whitelist above) or
+    // added by a reviewed dependency: notifications, biometrics, the ads
+    // SDK's connectivity check. Adding to this list is a deliberate act
+    // that must be mirrored in the published policy.
+    const expected = {
+      'android.permission.ACCESS_NETWORK_STATE',
+      'android.permission.FOREGROUND_SERVICE',
+      'android.permission.INTERNET',
+      'android.permission.POST_NOTIFICATIONS',
+      'android.permission.RECEIVE_BOOT_COMPLETED',
+      'android.permission.USE_BIOMETRIC',
+      'android.permission.USE_FINGERPRINT',
+      'android.permission.VIBRATE',
+      'android.permission.WAKE_LOCK',
+      'android.permission.health.WRITE_MENSTRUATION',
+      'android.permission.health.WRITE_WEIGHT',
+      'android.permission.health.WRITE_BODY_TEMPERATURE',
+    };
+
+    final unexpected = declared
+        .where((p) => !expected.contains(p))
+        // The app's own dynamic-receiver permission is generated from the
+        // applicationId and is not a capability request.
+        .where((p) => !p.endsWith('DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'))
+        .toSet();
+
+    expect(unexpected, isEmpty,
+        reason: 'a dependency added a permission the privacy policy does '
+            'not disclose: $unexpected');
+
+    // The advertising id must stay OUT of the merged output, not just the
+    // source — that is what the Data Safety answer rests on.
+    expect(declared, isNot(contains('com.google.android.gms.permission.AD_ID')));
+    expect(declared.where((p) => p.contains('ACCESS_ADSERVICES')), isEmpty);
+    expect(declared.where((p) => p.contains('permission.health.READ')), isEmpty);
+  });
+
   test('OS backup and device transfer stay switched off', () {
     // Principle 4: "cihaz yedeklerine düz metin sızmaz". The cycle store is
     // encrypted, but shared_preferences is not — it holds, among other
