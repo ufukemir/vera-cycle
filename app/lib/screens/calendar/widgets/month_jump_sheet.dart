@@ -38,6 +38,14 @@ class _MonthJumpSheet extends StatefulWidget {
 class _MonthJumpSheetState extends State<_MonthJumpSheet> {
   late int _year = widget.focused.year;
 
+  /// Whether the grid is showing years instead of months.
+  ///
+  /// Stepping the year one arrow-tap at a time is fine for last month and
+  /// tedious for two years back, which is exactly when someone opens this
+  /// sheet. Tapping the year swaps the same grid to years, so the gesture
+  /// that already means "pick one of these" works at both levels.
+  bool _pickingYear = false;
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -63,66 +71,146 @@ class _MonthJumpSheetState extends State<_MonthJumpSheet> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
-                  onPressed: _year > widget.firstDay.year
-                      ? () => setState(() => _year--)
-                      : null,
+                  onPressed: _pickingYear || _year <= widget.firstDay.year
+                      ? null
+                      : () => setState(() => _year--),
                   icon: const Icon(Icons.chevron_left),
                 ),
                 SizedBox(
-                  width: 96,
+                  width: 120,
                   // A bare number between two chevrons says nothing to a
-                  // screen reader about what it steps through.
+                  // screen reader about what it steps through, and gives no
+                  // hint that it is tappable.
                   child: Semantics(
+                    button: true,
                     label: '${l10n.calendarJumpYearLabel}: $_year',
                     child: ExcludeSemantics(
-                      child: Text(
-                        '$_year',
-                        textAlign: TextAlign.center,
-                        style: theme.textTheme.headlineSmall,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(10),
+                        onTap: () =>
+                            setState(() => _pickingYear = !_pickingYear),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 4),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                '$_year',
+                                style: theme.textTheme.headlineSmall,
+                              ),
+                              Icon(
+                                _pickingYear
+                                    ? Icons.arrow_drop_up
+                                    : Icons.arrow_drop_down,
+                                color: theme.colorScheme.onSurfaceVariant,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
                 IconButton(
-                  onPressed:
-                      _year < now.year ? () => setState(() => _year++) : null,
+                  onPressed: _pickingYear || _year >= now.year
+                      ? null
+                      : () => setState(() => _year++),
                   icon: const Icon(Icons.chevron_right),
                 ),
               ],
             ),
             const SizedBox(height: 12),
-            GridView.count(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              crossAxisCount: 4,
-              childAspectRatio: 2.1,
-              mainAxisSpacing: 8,
-              crossAxisSpacing: 8,
-              children: List.generate(12, (i) {
-                final month = DateTime(_year, i + 1);
-                final enabled = !month.isAfter(DateTime(now.year, now.month)) &&
-                    !month
-                        .isBefore(DateTime(widget.firstDay.year, widget.firstDay.month));
-                final selected = _year == widget.focused.year &&
-                    i + 1 == widget.focused.month;
+            if (_pickingYear)
+              _YearGrid(
+                firstYear: widget.firstDay.year,
+                lastYear: now.year,
+                selected: _year,
+                onPick: (year) => setState(() {
+                  _year = year;
+                  _pickingYear = false;
+                }),
+              )
+            else
+              GridView.count(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                crossAxisCount: 4,
+                childAspectRatio: 2.1,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
+                children: List.generate(12, (i) {
+                  final month = DateTime(_year, i + 1);
+                  final enabled =
+                      !month.isAfter(DateTime(now.year, now.month)) &&
+                      !month.isBefore(
+                        DateTime(widget.firstDay.year, widget.firstDay.month),
+                      );
+                  final selected =
+                      _year == widget.focused.year &&
+                      i + 1 == widget.focused.month;
 
-                return _MonthChip(
-                  label: monthName.format(month),
-                  selected: selected,
-                  onTap: enabled
-                      ? () => Navigator.of(context).pop(
+                  return _MonthChip(
+                    label: monthName.format(month),
+                    selected: selected,
+                    onTap: enabled
+                        ? () => Navigator.of(context).pop(
                             // Day 1 unless it's the current month, where
                             // landing on today is what you actually wanted.
                             month.year == now.year && month.month == now.month
                                 ? now
                                 : month,
                           )
-                      : null,
-                );
-              }),
-            ),
+                        : null,
+                  );
+                }),
+              ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// The same chip grid as the months, one row of four per four years.
+///
+/// Newest first: someone jumping to a year almost always wants a recent
+/// one, and the list is bounded by the first day they ever logged, so it
+/// stays short for real users and does not need a scroll wheel.
+class _YearGrid extends StatelessWidget {
+  const _YearGrid({
+    required this.firstYear,
+    required this.lastYear,
+    required this.selected,
+    required this.onPick,
+  });
+
+  final int firstYear;
+  final int lastYear;
+  final int selected;
+  final ValueChanged<int> onPick;
+
+  @override
+  Widget build(BuildContext context) {
+    final years = [for (var year = lastYear; year >= firstYear; year--) year];
+
+    return ConstrainedBox(
+      // Bounded so a long history scrolls inside the sheet rather than
+      // pushing the sheet past the top of the screen.
+      constraints: const BoxConstraints(maxHeight: 260),
+      child: GridView.count(
+        shrinkWrap: true,
+        crossAxisCount: 4,
+        childAspectRatio: 2.1,
+        mainAxisSpacing: 8,
+        crossAxisSpacing: 8,
+        children: [
+          for (final year in years)
+            _MonthChip(
+              label: '$year',
+              selected: year == selected,
+              onTap: () => onPick(year),
+            ),
+        ],
       ),
     );
   }
@@ -154,12 +242,12 @@ class _MonthChip extends StatelessWidget {
           child: Text(
             label,
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color: selected
-                      ? scheme.onPrimary
-                      : disabled
-                          ? scheme.onSurfaceVariant.withValues(alpha: 0.4)
-                          : scheme.onSurface,
-                ),
+              color: selected
+                  ? scheme.onPrimary
+                  : disabled
+                  ? scheme.onSurfaceVariant.withValues(alpha: 0.4)
+                  : scheme.onSurface,
+            ),
           ),
         ),
       ),
