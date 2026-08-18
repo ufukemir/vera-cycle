@@ -18,7 +18,14 @@ class NotificationPrimingStep extends StatelessWidget {
   final VoidCallback onContinue;
 
   Future<void> _allow(BuildContext context) async {
-    final granted = await context.read<ReminderService>().requestPermission();
+    // Never let a failure strand the user on this step: onboarding has no
+    // way back, so an exception here used to look like a dead button.
+    var granted = false;
+    try {
+      granted = await context.read<ReminderService>().requestPermission();
+    } on Object {
+      granted = false;
+    }
     if (!context.mounted) return;
     if (granted) {
       await context.read<AppPreferences>().setRemindersEnabled(true);
@@ -41,7 +48,7 @@ class NotificationPrimingStep extends StatelessWidget {
             children: [
               const Spacer(),
               const PhotoHero(
-                  asset: 'assets/photos/hijabi_friends.jpg', height: 190),
+                  asset: 'assets/photos/two_friends_laugh.jpg', height: 190),
               const SizedBox(height: 24),
               Text(
                 l10n.onboardingNotificationTitle,
