@@ -42,5 +42,44 @@ import UIKit
 
   func didInitializeImplicitFlutterEngine(_ engineBridge: FlutterImplicitEngineBridge) {
     GeneratedPluginRegistrant.register(with: engineBridge.pluginRegistry)
+    registerBackupExclusionChannel(with: engineBridge)
+  }
+
+  /// Marks a file with NSURLIsExcludedFromBackupKey.
+  ///
+  /// iOS backs up everything under Application Support by default, so without
+  /// this the encrypted cycle diary would be copied into the user's iCloud
+  /// backup — which is exactly the thing the app promises does not happen.
+  /// There is no Info.plist equivalent; it has to be set per file, in code.
+  private func registerBackupExclusionChannel(with engineBridge: FlutterImplicitEngineBridge) {
+    let channel = FlutterMethodChannel(
+      name: "vera/backup_exclusion",
+      binaryMessenger: engineBridge.applicationRegistrar.messenger()
+    )
+
+    channel.setMethodCallHandler { call, result in
+      guard call.method == "exclude",
+            let args = call.arguments as? [String: Any],
+            let path = args["path"] as? String
+      else {
+        result(FlutterMethodNotImplemented)
+        return
+      }
+
+      var url = URL(fileURLWithPath: path)
+      guard FileManager.default.fileExists(atPath: path) else {
+        result(FlutterError(code: "missing", message: "No file at path", details: nil))
+        return
+      }
+
+      do {
+        var values = URLResourceValues()
+        values.isExcludedFromBackup = true
+        try url.setResourceValues(values)
+        result(nil)
+      } catch {
+        result(FlutterError(code: "failed", message: error.localizedDescription, details: nil))
+      }
+    }
   }
 }

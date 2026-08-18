@@ -28,9 +28,26 @@
         tools:node="remove" />
     <uses-permission android:name="android.permission.ACCESS_ADSERVICES_ATTRIBUTION"
         tools:node="remove" />
+    <!-- allowBackup="false" is load-bearing, not boilerplate.
+
+         Android's Auto Backup is on by default and would copy the app's
+         private files — including the encrypted cycle diary — to the user's
+         Google Drive. That alone makes "your health data never leaves this
+         device" false. It is also useless in practice: the AES key lives in
+         the hardware Keystore and cannot be exported, so a restored copy
+         would be an undecryptable blob on the new phone.
+
+         The honest trade-off is stated in the app: there is no automatic
+         transfer, and moving to a new phone means taking a
+         password-protected export yourself. dataExtractionRules covers the
+         API 31+ transfer paths (cloud backup and device-to-device) for the
+         same reason. -->
     <application
         android:label="Vera"
         android:name="${applicationName}"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

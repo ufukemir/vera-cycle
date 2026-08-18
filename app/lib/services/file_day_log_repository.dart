@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
 import '../models/day_log.dart';
+import 'backup_exclusion.dart';
 import 'crypto/cycle_codec.dart';
 import 'day_log_repository.dart';
 import 'secure_key_store.dart';
@@ -23,13 +24,16 @@ class FileDayLogRepository implements DayLogRepository {
   FileDayLogRepository({
     SecureKeyStore? keyStore,
     CycleCodec? codec,
+    BackupExclusion? backupExclusion,
   })  : _keyStore = keyStore ?? SecureKeyStore(),
-        _codec = codec ?? const CycleCodec();
+        _codec = codec ?? const CycleCodec(),
+        _backupExclusion = backupExclusion ?? const BackupExclusion();
 
   static const _fileName = 'cycle_data.enc';
 
   final SecureKeyStore _keyStore;
   final CycleCodec _codec;
+  final BackupExclusion _backupExclusion;
 
   Future<File> _file() async {
     // Application Support, not Documents: this file must never appear in the
@@ -62,6 +66,10 @@ class FileDayLogRepository implements DayLogRepository {
     final tmp = File('${file.path}.tmp');
     await tmp.writeAsBytes(bytes, flush: true);
     await tmp.rename(file.path);
+    // Re-applied on every write, not just at creation: the rename replaces
+    // the inode, and the exclusion attribute belongs to the file it was set
+    // on — setting it once would quietly stop applying after the first save.
+    await _backupExclusion.exclude(file.path);
   }
 
   @override

@@ -15,7 +15,20 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 /// disk.
 class SecureKeyStore {
   SecureKeyStore({FlutterSecureStorage? storage})
-      : _storage = storage ?? const FlutterSecureStorage();
+      : _storage = storage ?? const FlutterSecureStorage(iOptions: iosOptions);
+
+  /// `first_unlock_this_device` rather than the plugin's default.
+  ///
+  /// The default keychain accessibility migrates items to a new device
+  /// through an iCloud/encrypted backup. For a key that decrypts a health
+  /// diary, that quietly turns "your data never leaves this device" into a
+  /// claim the app cannot keep — the ciphertext travels in the same backup,
+  /// so the pair would be restorable off-device. `_this_device` pins the key
+  /// to this phone; `first_unlock` (not `unlocked`) is required so a
+  /// notification or widget refresh can still read data before the first
+  /// manual unlock after a reboot.
+  static const iosOptions =
+      IOSOptions(accessibility: KeychainAccessibility.first_unlock_this_device);
 
   static const _keyName = 'cycle_data_key_v1';
 

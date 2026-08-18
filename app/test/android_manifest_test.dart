@@ -74,6 +74,38 @@ void main() {
             'mean asking for access to the whole health record');
   });
 
+  test('OS backup and device transfer stay switched off', () {
+    // Principle 4: "cihaz yedeklerine düz metin sızmaz". The cycle store is
+    // encrypted, but shared_preferences is not — it holds, among other
+    // things, the reminder labels the user wrote themselves. Android's
+    // default is allowBackup=true, so this has to be turned off explicitly
+    // and stay off.
+    final contents =
+        File('android/app/src/main/AndroidManifest.xml').readAsStringSync();
+    expect(contents.contains('android:allowBackup="false"'), isTrue);
+    expect(contents.contains('android:fullBackupContent="false"'), isTrue);
+    expect(
+      contents.contains('android:dataExtractionRules="@xml/data_extraction_rules"'),
+      isTrue,
+    );
+
+    // API 31+ path: both cloud backup and device-to-device transfer must
+    // refuse every domain, sharedpref included.
+    final rules =
+        File('android/app/src/main/res/xml/data_extraction_rules.xml')
+            .readAsStringSync();
+    for (final section in ['cloud-backup', 'device-transfer']) {
+      final body = RegExp('<$section>(.*?)</$section>', dotAll: true)
+          .firstMatch(rules)
+          ?.group(1);
+      expect(body, isNotNull, reason: '<$section> must be declared');
+      for (final domain in ['root', 'file', 'database', 'sharedpref', 'external']) {
+        expect(body, contains('<exclude domain="$domain" />'),
+            reason: '$section must exclude $domain');
+      }
+    }
+  });
+
   test('location and contacts permissions stay out', () {
     final contents =
         File('android/app/src/main/AndroidManifest.xml').readAsStringSync();

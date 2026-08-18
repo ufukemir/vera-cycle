@@ -4,6 +4,8 @@ import 'dart:math';
 import 'package:cryptography/cryptography.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+import 'secure_key_store.dart';
+
 /// Owns the app-lock PIN, stored as a salted PBKDF2 hash — never plaintext.
 ///
 /// Mirrors [SecureKeyStore]'s pattern but under entirely different key names:
@@ -14,7 +16,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 /// weakening that separation.
 class PinVault {
   PinVault({FlutterSecureStorage? storage})
-      : _storage = storage ?? const FlutterSecureStorage();
+      : _storage =
+            storage ?? const FlutterSecureStorage(iOptions: SecureKeyStore.iosOptions);
 
   static const _hashKey = 'cycle_pin_hash_v1';
   static const _saltKey = 'cycle_pin_salt_v1';
