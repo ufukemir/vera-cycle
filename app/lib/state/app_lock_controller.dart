@@ -54,6 +54,26 @@ class AppLockController extends ChangeNotifier with WidgetsBindingObserver {
     }
   }
 
+  /// The icon that matches what the device actually offers.
+  ///
+  /// Both lock screens used a hardcoded fingerprint icon regardless of the
+  /// device, so a Face ID phone — the whole iPhone line since the X — showed
+  /// a fingerprint glyph for a feature the user unlocks by looking at their
+  /// phone. [getAvailableBiometrics] can return more than one type; face is
+  /// preferred when offered since it is the newer, camera-based method and
+  /// the one most likely to be what a modern iPhone actually has.
+  Future<IconData> biometricIcon() async {
+    try {
+      final types = await _auth.getAvailableBiometrics();
+      if (types.contains(BiometricType.face)) return Icons.face_outlined;
+      if (types.contains(BiometricType.iris)) return Icons.visibility_outlined;
+    } on Object {
+      // Falls through to the fingerprint default below — still correct for
+      // the common case, just not tailored to this specific device.
+    }
+    return Icons.fingerprint;
+  }
+
   /// [localizedReason] is supplied by the caller so this controller never
   /// hardcodes UI copy in one language.
   Future<bool> unlockWithBiometrics(String localizedReason) async {

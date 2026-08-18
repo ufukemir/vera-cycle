@@ -30,6 +30,7 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
   String? _firstEntry;
   String? _error;
   bool _canOfferBiometrics = false;
+  IconData _biometricIcon = Icons.fingerprint;
 
   Future<void> _onDigitsEntered(String pin) async {
     final l10n = AppLocalizations.of(context)!;
@@ -56,12 +57,19 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
     await context.read<PinVault>().setPin(pin);
     if (!mounted) return;
 
-    final canBiometrics = await context.read<AppLockController>().canUseBiometrics();
+    final lock = context.read<AppLockController>();
+    final canBiometrics = await lock.canUseBiometrics();
     if (!mounted) return;
 
     if (canBiometrics) {
+      // Same device-appropriate icon as the lock screen — a Face ID
+      // iPhone showing a fingerprint glyph here is the first thing this
+      // screen would ever show someone.
+      final icon = await lock.biometricIcon();
+      if (!mounted) return;
       setState(() {
         _canOfferBiometrics = true;
+        _biometricIcon = icon;
         _stage = _Stage.biometricOffer;
       });
     } else {
@@ -87,7 +95,7 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.fingerprint, size: 64),
+                  Icon(_biometricIcon, size: 64),
                   const SizedBox(height: 16),
                   Text(l10n.pinSetupBiometricTitle,
                       style: Theme.of(context).textTheme.headlineSmall,

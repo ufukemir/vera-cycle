@@ -129,13 +129,20 @@ class _LockScreenState extends State<LockScreen> {
                   onSubmit: _onPinEntered,
                 ),
                 const SizedBox(height: 16),
-                FutureBuilder<bool>(
-                  future: lock.canUseBiometrics(),
+                FutureBuilder<(bool, IconData)>(
+                  // Bundled into one future rather than a fingerprint icon
+                  // that used to be hardcoded regardless of device — an
+                  // iPhone with Face ID showed a fingerprint glyph for a
+                  // feature it unlocks by looking at the phone.
+                  future: (() async => (
+                        await lock.canUseBiometrics(),
+                        await lock.biometricIcon(),
+                      ))(),
                   builder: (context, snapshot) {
-                    if (snapshot.data != true) return const SizedBox.shrink();
+                    if (snapshot.data?.$1 != true) return const SizedBox.shrink();
                     return TextButton.icon(
                       onPressed: _tryBiometrics,
-                      icon: const Icon(Icons.fingerprint),
+                      icon: Icon(snapshot.data!.$2),
                       label: Text(l10n.lockScreenUseBiometrics),
                     );
                   },
