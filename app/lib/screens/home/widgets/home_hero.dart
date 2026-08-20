@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../l10n/app_localizations.dart';
 import '../../../models/enums.dart';
 import '../../../models/prediction.dart';
 import '../../../widgets/illustrations.dart';
@@ -46,6 +47,8 @@ class HomeHero extends StatelessWidget {
     required this.ctaLabel,
     required this.onCtaPressed,
     required this.mascot,
+    required this.isDark,
+    required this.onToggleTheme,
   });
 
   final HomeTheme theme;
@@ -63,6 +66,15 @@ class HomeHero extends StatelessWidget {
   final String ctaLabel;
   final VoidCallback onCtaPressed;
   final Mascot mascot;
+
+  /// Whether the app is currently rendering dark.
+  final bool isDark;
+
+  /// Flips between light and dark from here, rather than only from four
+  /// taps into Settings. Vera is used at night, in bed, in a dark room —
+  /// the moment someone wants the other mode is the moment they are
+  /// looking at this screen, not the moment they are in a settings list.
+  final VoidCallback onToggleTheme;
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +114,26 @@ class HomeHero extends StatelessWidget {
                 ),
               ),
             ),
+          PositionedDirectional(
+            top: topInset + 8,
+            end: 12,
+            child: Material(
+              color: Colors.black.withValues(alpha: onPhoto ? 0.28 : 0.06),
+              shape: const CircleBorder(),
+              clipBehavior: Clip.antiAlias,
+              child: IconButton(
+                onPressed: onToggleTheme,
+                tooltip: isDark
+                    ? AppLocalizations.of(context)!.settingsThemeLight
+                    : AppLocalizations.of(context)!.settingsThemeDark,
+                icon: Icon(
+                  isDark ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
+                  color: onPhoto ? Colors.white : scheme.onSurface,
+                  size: 20,
+                ),
+              ),
+            ),
+          ),
           // The mascot stands in the scene rather than floating in a corner
           // of it — it is part of the picture, which is the whole point of
           // having one.

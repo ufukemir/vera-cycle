@@ -8,6 +8,7 @@ import '../../models/day_log.dart';
 import '../../models/enums.dart';
 import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
+import '../../theme/app_theme.dart';
 import '../day_log/day_log_screen.dart';
 import '../../util/day.dart';
 import '../../util/number_format.dart';
@@ -74,6 +75,93 @@ IconData trackerIcon(TrackerType type) {
       return Icons.science_outlined;
     case TrackerType.breastExam:
       return Icons.self_improvement_outlined;
+  }
+}
+
+/// The colour family each tracker carries, so the hub grid reads as ten
+/// different things rather than ten identical pink squares — and so a
+/// tracker looks the same in the grid as it does on its own screen.
+({Color tint, Color ink}) trackerPalette(TrackerType type) => switch (type) {
+      TrackerType.bbt =>
+        (tint: AppPalette.terracottaSoft, ink: AppPalette.terracottaSoftText),
+      TrackerType.weight =>
+        (tint: AppPalette.lavenderSoft, ink: AppPalette.lavenderSoftText),
+      TrackerType.sleep =>
+        (tint: AppPalette.skySoft, ink: AppPalette.skySoftText),
+      TrackerType.water =>
+        (tint: AppPalette.skySoft, ink: AppPalette.skySoftText),
+      TrackerType.symptoms =>
+        (tint: AppPalette.lavenderSoft, ink: AppPalette.lavenderSoftText),
+      TrackerType.mood =>
+        (tint: AppPalette.goldSoft, ink: AppPalette.goldSoftText),
+      TrackerType.energy =>
+        (tint: AppPalette.goldSoft, ink: AppPalette.goldSoftText),
+      TrackerType.sexualActivity =>
+        (tint: AppPalette.roseSoft, ink: AppPalette.roseSoftText),
+      TrackerType.ovulationTest =>
+        (tint: AppPalette.mintSoft, ink: AppPalette.mintSoftText),
+      TrackerType.breastExam =>
+        (tint: AppPalette.mintSoft, ink: AppPalette.mintSoftText),
+    };
+
+/// The newest value for [type], formatted for the hub grid — or null when
+/// nothing has been logged.
+///
+/// Deliberately the *latest* rather than an average: the grid is a glance,
+/// and "what did I last put here" is the question a glance asks. Averages
+/// live one tap away, where they can be shown with the range they came
+/// from.
+String? trackerLatestLabel(BuildContext context, AppLocalizations l10n,
+    TrackerType type, List<DayLog> logs) {
+  final ordered = [...logs]..sort((a, b) => b.date.compareTo(a.date));
+
+  String? numeric(double? Function(DayLog) valueOf, String unit, int decimals) {
+    for (final log in ordered) {
+      final v = valueOf(log);
+      if (v != null) {
+        return '${formatDecimal(context, v, decimals: decimals)} $unit';
+      }
+    }
+    return null;
+  }
+
+  switch (type) {
+    case TrackerType.bbt:
+      final fahrenheit = context.watch<AppPreferences>().temperatureUnit ==
+          TemperatureUnit.fahrenheit;
+      return numeric(
+        (l) => l.basalTempC == null
+            ? null
+            : (fahrenheit ? l.basalTempC! * 9 / 5 + 32 : l.basalTempC!),
+        fahrenheit ? '°F' : '°C',
+        1,
+      );
+    case TrackerType.weight:
+      return numeric((l) => l.weightKg, l10n.unitKilograms, 1);
+    case TrackerType.sleep:
+      return numeric(
+          (l) => l.sleepMinutes?.toDouble(), l10n.unitMinutesShort, 0);
+    case TrackerType.water:
+      return numeric(
+          (l) => l.waterIntakeMl?.toDouble(), l10n.unitMilliliters, 0);
+    case TrackerType.symptoms:
+      final n = ordered.where((l) => l.symptoms.isNotEmpty).length;
+      return n == 0 ? null : l10n.trackerEntriesCount(n);
+    case TrackerType.mood:
+      final n = ordered.where((l) => l.mood != null).length;
+      return n == 0 ? null : l10n.trackerEntriesCount(n);
+    case TrackerType.energy:
+      final n = ordered.where((l) => l.energyLevel != null).length;
+      return n == 0 ? null : l10n.trackerEntriesCount(n);
+    case TrackerType.sexualActivity:
+      final n = ordered.where((l) => l.sexualActivity == true).length;
+      return n == 0 ? null : l10n.trackerEntriesCount(n);
+    case TrackerType.ovulationTest:
+      final n = ordered.where((l) => l.ovulationTest != null).length;
+      return n == 0 ? null : l10n.trackerEntriesCount(n);
+    case TrackerType.breastExam:
+      final n = ordered.where((l) => l.breastExam.isNotEmpty).length;
+      return n == 0 ? null : l10n.trackerEntriesCount(n);
   }
 }
 

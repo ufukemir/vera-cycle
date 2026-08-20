@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../services/pregnancy_info.dart';
@@ -32,10 +31,7 @@ class PregnancyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final locale = Localizations.localeOf(context);
     final theme = Theme.of(context);
-    final dateFmt = DateFormat.yMMMMd(locale.toString());
-    final daysLeft = info.daysUntilDue();
 
     return Container(
       width: double.infinity,
@@ -54,27 +50,9 @@ class PregnancyCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            l10n.pregnancyWeekLabel(info.weeks, info.daysIntoWeek),
-            style: theme.textTheme.headlineSmall,
-          ),
-          const SizedBox(height: 4),
-          Text(l10n.pregnancyTrimesterLabel(info.trimester),
-              style: theme.textTheme.bodyMedium),
-          const SizedBox(height: 16),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(6),
-            child: LinearProgressIndicator(value: info.progress, minHeight: 10),
-          ),
-          const SizedBox(height: 16),
-          Text('${l10n.pregnancyDueDateLabel}: ${dateFmt.format(info.dueDate)}',
-              style: theme.textTheme.titleSmall),
-          if (daysLeft > 0) ...[
-            const SizedBox(height: 4),
-            Text(l10n.pregnancyDaysLeft(daysLeft),
-                style: theme.textTheme.bodyMedium),
-          ],
-          const SizedBox(height: 16),
+          // Week, trimester, due date and progress all moved into the hero,
+          // where they are the first thing on the screen. Repeating them
+          // here made the card a second, smaller copy of the same facts.
           Text(l10n.pregnancyWeeklyNoteTitle,
               style: theme.textTheme.labelLarge),
           const SizedBox(height: 4),

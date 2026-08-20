@@ -120,6 +120,14 @@ class InsightsScreen extends StatelessWidget {
   }
 }
 
+/// One tracker in the hub grid.
+///
+/// The grid used to be ten identical pink squares whose only content was an
+/// icon and a word — decorative, and no reason to tap any particular one.
+/// Each tile now carries its tracker's own colour and, more usefully, its
+/// latest value: the grid answers "what do I weigh lately?" without opening
+/// anything, and an empty tracker says so plainly instead of looking the
+/// same as a full one.
 class _TrackerTile extends StatelessWidget {
   const _TrackerTile({required this.type});
 
@@ -128,34 +136,59 @@ class _TrackerTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final scheme = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final palette = trackerPalette(type);
+    final logs = context.watch<CycleController>().logs;
+    final latest = trackerLatestLabel(context, l10n, type, logs);
+
+    final panel = isDark
+        ? Color.alphaBlend(
+            palette.tint.withValues(alpha: 0.12), theme.colorScheme.surface)
+        : palette.tint.withValues(alpha: 0.5);
+    final ink = isDark ? palette.tint : palette.ink;
+
     return Material(
-      color: scheme.surfaceContainerHigh,
-      borderRadius: BorderRadius.circular(18),
+      color: panel,
+      borderRadius: BorderRadius.circular(20),
+      clipBehavior: Clip.antiAlias,
       child: InkWell(
-        borderRadius: BorderRadius.circular(18),
         onTap: () => Navigator.of(context).push(
           MaterialPageRoute(builder: (_) => TrackerHistoryScreen(type: type)),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                width: 40,
-                height: 40,
+                width: 38,
+                height: 38,
                 decoration: BoxDecoration(
-                    shape: BoxShape.circle, color: scheme.primaryContainer),
-                child: Icon(trackerIcon(type),
-                    size: 20, color: scheme.onPrimaryContainer),
+                  shape: BoxShape.circle,
+                  color: isDark
+                      ? palette.tint.withValues(alpha: 0.18)
+                      : palette.tint,
+                ),
+                child: Icon(trackerIcon(type), size: 19, color: ink),
               ),
               const SizedBox(height: 8),
               Text(
                 trackerTitle(l10n, type),
-                style: Theme.of(context).textTheme.labelMedium,
+                style: theme.textTheme.labelMedium?.copyWith(color: ink),
                 textAlign: TextAlign.center,
                 maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 2),
+              Text(
+                latest ?? '—',
+                style: theme.textTheme.labelSmall?.copyWith(
+                  color: ink.withValues(alpha: latest == null ? 0.5 : 0.85),
+                  fontWeight:
+                      latest == null ? FontWeight.w400 : FontWeight.w700,
+                ),
+                maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
             ],

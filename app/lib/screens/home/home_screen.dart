@@ -17,12 +17,12 @@ import 'fertility_detail_screen.dart';
 import '../day_log/day_log_screen.dart';
 import 'widgets/ad_placeholder_banner.dart';
 import 'widgets/backup_nudge_card.dart';
-import 'widgets/cycle_ring.dart';
 import 'widgets/daily_insight_card.dart';
 import 'widgets/first_run_card.dart';
 import 'widgets/home_hero.dart';
 import 'widgets/phase_timeline_bar.dart';
 import 'widgets/pregnancy_card.dart';
+import 'widgets/pregnancy_hero.dart';
 import 'widgets/prediction_range_card.dart';
 import 'widgets/quick_log_sheet.dart';
 
@@ -125,7 +125,17 @@ class _HomeScreenState extends State<HomeScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              if (pregnancyInfo == null)
+              if (pregnancyInfo != null)
+                PregnancyHero(
+                  info: pregnancyInfo,
+                  isDark: Theme.of(context).brightness == Brightness.dark,
+                  onToggleTheme: () => prefs.setThemeMode(
+                    Theme.of(context).brightness == Brightness.dark
+                        ? ThemeMode.light
+                        : ThemeMode.dark,
+                  ),
+                )
+              else
                 HomeHero(
                   theme: prefs.homeTheme,
                   status: status,
@@ -138,6 +148,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   onCtaPressed: () =>
                       context.read<CycleController>().markPeriodStartedToday(),
                   mascot: prefs.mascot,
+                  isDark: Theme.of(context).brightness == Brightness.dark,
+                  onToggleTheme: () => prefs.setThemeMode(
+                    Theme.of(context).brightness == Brightness.dark
+                        ? ThemeMode.light
+                        : ThemeMode.dark,
+                  ),
                 ),
               // The content rides up over the scene on a rounded sheet, so
               // the photo continues behind it instead of stopping at a hard
@@ -159,12 +175,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       PregnancyCard(info: pregnancyInfo),
                     ] else ...[
                       const FirstRunCard(),
-                      PhaseTimelineBar(
-                        status: status,
-                        cycleLength: ringLength,
-                        periodLength: prefs.estimatedPeriodLengthDays,
-                      ),
-                      const SizedBox(height: 20),
                       _QuickActionsRow(
                         onQuickLog: () => showQuickLogSheet(context),
                         onOpenDetails: () => Navigator.of(context).push(
@@ -195,20 +205,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                       ),
                       const SizedBox(height: 20),
-                      // The ring stays as the detailed, animated view of the
-                      // same cycle the hero summarises.
-                      CycleRing(
-                        cycleDay: status.cycleDay,
-                        cycleLength: ringLength,
-                        child: Text(
-                          status.cycleDay == null
-                              ? '—'
-                              : '${status.cycleDay}',
-                          style: Theme.of(context).textTheme.displayMedium,
-                        ),
-                      ),
-                      const SizedBox(height: 20),
                       PredictionRangeCard(prediction: prediction),
+                      const SizedBox(height: 16),
+                      PhaseTimelineBar(
+                        status: status,
+                        cycleLength: ringLength,
+                        periodLength: prefs.estimatedPeriodLengthDays,
+                      ),
                       if (status.hasFertileEstimate) ...[
                         const SizedBox(height: 12),
                         // Was a bare line of grey disclaimer text. The
@@ -225,8 +228,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                     const SizedBox(height: 20),
                     const BackupNudgeCard(),
-                    const SizedBox(height: 20),
-                    DailyInsightCard(phase: status.phase),
+                    if (pregnancyInfo == null) ...[
+                      const SizedBox(height: 20),
+                      // Cycle-phase facts, so only in cycle mode: this card
+                      // was explaining what period blood is to someone who
+                      // had just told the app she is pregnant.
+                      DailyInsightCard(phase: status.phase),
+                    ],
                     const SizedBox(height: 24),
                     const AdPlaceholderBanner(),
                     const SizedBox(height: 8),
@@ -242,6 +250,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
+/// The "how does today feel?" card.
+///
+/// This was a row: a pill whose label was truncated to "Bugün vücudun na…"
+/// squeezed beside two unlabelled icon buttons. It is the app's primary
+/// invitation and it read as a toolbar. Now it is a card that can say the
+/// whole sentence, with one obvious action and the two secondary ones
+/// beside it at a size that admits they are secondary.
 class _QuickActionsRow extends StatelessWidget {
   const _QuickActionsRow({
     required this.onQuickLog,
@@ -254,35 +269,60 @@ class _QuickActionsRow extends StatelessWidget {
 
   /// The assistant lost its tab when logging took the middle slot of the
   /// bottom bar. It lands here rather than in a menu: it is one of the few
-  /// things this app has that competitors do not, and burying it would be
-  /// the wrong trade for a bar slot.
+  /// things this app has that competitors do not.
   final VoidCallback onOpenAssistant;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    return Row(
-      children: [
-        Expanded(
-          child: FilledButton.tonalIcon(
-            onPressed: onQuickLog,
-            icon: const Icon(Icons.add_reaction_outlined),
-            label: Text(l10n.homeQuickLogTitle, overflow: TextOverflow.ellipsis),
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    final isDark = theme.brightness == Brightness.dark;
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: isDark
+            ? Color.alphaBlend(
+                AppPalette.roseSoft.withValues(alpha: 0.10), scheme.surface)
+            : AppPalette.roseSoft.withValues(alpha: 0.45),
+        borderRadius: BorderRadius.circular(24),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.homeQuickLogTitle,
+            style: theme.textTheme.titleMedium?.copyWith(
+                color: isDark ? AppPalette.roseSoft : AppPalette.roseSoftText),
           ),
-        ),
-        const SizedBox(width: 10),
-        IconButton.filledTonal(
-          tooltip: l10n.homeOpenTodayLog,
-          onPressed: onOpenDetails,
-          icon: const Icon(Icons.edit_note_outlined),
-        ),
-        const SizedBox(width: 10),
-        IconButton.filledTonal(
-          tooltip: l10n.navAssistant,
-          onPressed: onOpenAssistant,
-          icon: const Icon(Icons.chat_bubble_outline_rounded),
-        ),
-      ],
+          const SizedBox(height: 14),
+          Row(
+            children: [
+              Expanded(
+                child: FilledButton.icon(
+                  onPressed: onQuickLog,
+                  icon: const Icon(Icons.add_reaction_outlined),
+                  label: Text(l10n.navTrack, overflow: TextOverflow.ellipsis),
+                ),
+              ),
+              const SizedBox(width: 10),
+              IconButton.filledTonal(
+                tooltip: l10n.homeOpenTodayLog,
+                onPressed: onOpenDetails,
+                icon: const Icon(Icons.edit_note_outlined),
+              ),
+              const SizedBox(width: 6),
+              IconButton.filledTonal(
+                tooltip: l10n.navAssistant,
+                onPressed: onOpenAssistant,
+                icon: const Icon(Icons.chat_bubble_outline_rounded),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

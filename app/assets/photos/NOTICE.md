@@ -12,6 +12,7 @@ to keep a false claim.)
 
 | File | Source |
 |---|---|
+| pregnancy_shore.jpg | https://www.pexels.com/photo/3369464/ |
 | calendar_marking.jpg | https://www.pexels.com/photo/6170644/ |
 | phone_knit.jpg | https://www.pexels.com/photo/6788921/ |
 | morning_stretch.jpg | https://www.pexels.com/photo/7622509/ |

@@ -95,7 +95,7 @@ void main() {
     );
   });
 
-  testWidgets('charts and the ring expose labels to screen readers',
+  testWidgets('the painted phase bar exposes a label to screen readers',
       (tester) async {
     final handle = tester.ensureSemantics();
     await tester.pumpWidget(
@@ -104,10 +104,13 @@ void main() {
       await tester.pump(const Duration(milliseconds: 200));
     }
 
-    // The ring and phase bar are painted, so without these labels a
-    // screen-reader user gets nothing from them at all.
-    expect(find.bySemanticsLabel(RegExp(r'Cycle day \d+ of about')),
-        findsWidgets);
+    // The phase bar is painted, so without this label a screen-reader user
+    // gets nothing from it at all.
+    //
+    // The ring used to be asserted here too. It is gone from Home: it drew
+    // the same cycle-day number the hero already states, at twice the size,
+    // directly beneath it. The number is still exposed — as the hero's own
+    // text, which needs no Semantics wrapper because it is real text.
     expect(find.bySemanticsLabel(RegExp(r'Cycle progress: day \d+')),
         findsOneWidget);
     handle.dispose();
