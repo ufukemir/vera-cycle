@@ -87,9 +87,11 @@ void main() {
 
   test('asking whether it is an AI is answered honestly', () {
     final tr = assistant.answer('sen yapay zeka mısın', ctx, 'tr');
-    expect(tr, contains('uydurmam'));
+    // Phrased impersonally now (CLAUDE.md: the assistant is a product, not
+    // a person), but it must still say plainly that it does not invent.
+    expect(tr, contains('uydurulmaz'));
     final en = assistant.answer('are you ai', ctx, 'en');
-    expect(en, contains('never send your questions to the internet'));
+    expect(en, contains('never sent to the internet'));
   });
 
   test('questions about using the app are answered, not deflected', () {
@@ -147,7 +149,7 @@ void main() {
 
   test('greets back instead of falling back on small talk', () {
     expect(assistant.answer('merhaba', ctx, 'tr'), contains('Merhaba'));
-    expect(assistant.answer('hello', ctx, 'en'), contains('Hi'));
+    expect(assistant.answer('hello', ctx, 'en'), contains('Hello'));
     expect(assistant.answer('kimsin sen', ctx, 'tr'), contains('Vera Asistan'));
   });
 

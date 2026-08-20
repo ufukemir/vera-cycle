@@ -1,3 +1,7 @@
+// ignore_for_file: prefer_initializing_formals
+// The fields are private and the constructor parameters are not, so an
+// initializing formal would force every caller to write `_repository:`.
+// The lint has no way to express "same value, different name".
 import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';

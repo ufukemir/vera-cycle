@@ -21,6 +21,7 @@ import 'package:cycle_app/services/in_memory_day_log_repository.dart';
 import 'package:cycle_app/services/pin_vault.dart';
 import 'package:cycle_app/services/reminder_service.dart';
 import 'package:cycle_app/state/app_preferences.dart';
+import 'package:cycle_app/state/assistant_conversation.dart';
 import 'package:cycle_app/state/cycle_controller.dart';
 import 'package:cycle_app/theme/app_theme.dart';
 import 'package:cycle_app/util/day.dart';
@@ -63,6 +64,8 @@ Future<Widget> _app(Widget screen, {bool withData = true}) async {
   return MultiProvider(
     providers: [
       ChangeNotifierProvider<AppPreferences>.value(value: prefs),
+      ChangeNotifierProvider<AssistantConversation>(
+          create: (_) => AssistantConversation()),
       ChangeNotifierProvider<CycleController>.value(value: controller),
       Provider<PinVault>(create: (_) => PinVault()),
       Provider<ReminderService>(create: (_) => ReminderService()),
