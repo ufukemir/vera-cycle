@@ -43,6 +43,11 @@ class SecureKeyStore {
 
     final key = await AesGcm.with256bits().newSecretKey();
     final bytes = await key.extractBytes();
+    // Same reason as PinVault.setPin: a keychain entry survives the app's
+    // deletion, so a reinstall can find a stale item here that read() did
+    // not return, and the write would fail with errSecDuplicateItem rather
+    // than replacing it.
+    await _storage.delete(key: _keyName);
     await _storage.write(key: _keyName, value: base64Encode(bytes));
     return key;
   }

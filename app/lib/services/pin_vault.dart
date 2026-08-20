@@ -39,6 +39,16 @@ class PinVault {
   Future<void> setPin(String pin) async {
     final salt = _randomBytes(16);
     final hash = await _hash(pin, salt);
+    // Delete first, always. Keychain items outlive the app that wrote them:
+    // deleting the app does not delete them, so a reinstall arrives with the
+    // previous PIN's salt and hash still present. flutter_secure_storage's
+    // write then fails with errSecDuplicateItem (-25299) instead of
+    // overwriting, the exception escapes into the async callback, and PIN
+    // setup simply stops responding — leaving the user stuck in onboarding
+    // with no way into the app at all. This was reproducible on a real
+    // device the moment anyone reinstalled.
+    await _storage.delete(key: _saltKey);
+    await _storage.delete(key: _hashKey);
     await _storage.write(key: _saltKey, value: base64Encode(salt));
     await _storage.write(key: _hashKey, value: base64Encode(hash));
   }
