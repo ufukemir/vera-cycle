@@ -5,22 +5,21 @@ import 'package:provider/provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../../services/cycle_assistant.dart';
 import '../../state/app_preferences.dart';
+import '../../state/assistant_conversation.dart';
 import '../../state/cycle_controller.dart';
 import '../../util/day.dart';
 import '../../util/number_format.dart';
 import '../../widgets/illustrations.dart';
 
-class _Message {
-  const _Message(this.text, {required this.fromUser});
-
-  final String text;
-  final bool fromUser;
-}
-
 /// On-device chat with [CycleAssistant]. Conversation state is ephemeral by
-/// design — messages live only in this widget's memory and vanish when the
-/// tab is disposed, so a chat about a sensitive topic never becomes another
-/// stored artifact to protect.
+/// design — it lives in [AssistantConversation], in memory only, and is
+/// never written to disk, so a chat about a sensitive topic never becomes
+/// another stored artifact to protect.
+///
+/// Ephemeral no longer means *accidental*, though: the thread used to be
+/// held by this widget's state, so it was destroyed by the tab switch that
+/// disposes the screen. Ending the conversation is now the back button's
+/// job, and nothing else's.
 class AssistantScreen extends StatefulWidget {
   const AssistantScreen({super.key});
 
@@ -31,11 +30,8 @@ class AssistantScreen extends StatefulWidget {
 class _AssistantScreenState extends State<AssistantScreen> {
   static const _assistant = CycleAssistant();
 
-  final _messages = <_Message>[];
   final _input = TextEditingController();
   final _scroll = ScrollController();
-  bool _typing = false;
-  List<String> _followUps = const [];
 
   AssistantContext _buildContext(BuildContext context) {
     final controller = context.read<CycleController>();
@@ -74,26 +70,46 @@ class _AssistantScreenState extends State<AssistantScreen> {
 
   Future<void> _send(String text) async {
     final trimmed = text.trim();
-    if (trimmed.isEmpty || _typing) return;
+    final conversation = context.read<AssistantConversation>();
+    if (trimmed.isEmpty || conversation.typing) return;
     final lang = Localizations.localeOf(context).languageCode;
     final reply = _assistant.answer(trimmed, _buildContext(context), lang);
-    setState(() {
-      _messages.add(_Message(trimmed, fromUser: true));
-      _typing = true;
-      _followUps = const [];
-    });
+    conversation.addUserMessage(trimmed);
     _input.clear();
     _scrollDown();
     // A brief "typing" beat so replies read as conversation, not a lookup
     // table — bounded and short, never long enough to hide information.
     await Future<void>.delayed(const Duration(milliseconds: 650));
     if (!mounted) return;
-    setState(() {
-      _typing = false;
-      _messages.add(_Message(reply, fromUser: false));
-      _followUps = _assistant.followUps(lang, trimmed);
-    });
+    conversation.addReply(reply, _assistant.followUps(lang, trimmed));
     _scrollDown();
+  }
+
+  /// Ends the chat. Asks first — the thread cannot be recovered, and
+  /// reaching for a back arrow out of habit should not silently delete an
+  /// answer someone is still reading.
+  Future<void> _endChat() async {
+    final l10n = AppLocalizations.of(context)!;
+    final conversation = context.read<AssistantConversation>();
+    if (conversation.isEmpty) return;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.assistantEndChatTitle),
+        content: Text(l10n.assistantEndChatBody),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: Text(l10n.actionCancel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            child: Text(l10n.assistantEndChatConfirm),
+          ),
+        ],
+      ),
+    );
+    if (confirmed == true) conversation.clear();
   }
 
   void _scrollDown() {
@@ -120,14 +136,33 @@ class _AssistantScreenState extends State<AssistantScreen> {
     final l10n = AppLocalizations.of(context)!;
     final lang = Localizations.localeOf(context).languageCode;
     final scheme = Theme.of(context).colorScheme;
+    final conversation = context.watch<AssistantConversation>();
+    final hasChat = !conversation.isEmpty;
 
-    return Scaffold(
-      appBar: AppBar(title: Text(l10n.assistantTitle)),
+    return PopScope(
+      // The assistant is a tab, not a pushed route, so the system back
+      // gesture would otherwise leave the app mid-conversation. While a
+      // chat is open, back ends the chat instead.
+      canPop: !hasChat,
+      onPopInvokedWithResult: (didPop, _) {
+        if (!didPop) _endChat();
+      },
+      child: Scaffold(
+      appBar: AppBar(
+        title: Text(l10n.assistantTitle),
+        leading: hasChat
+            ? IconButton(
+                icon: const BackButtonIcon(),
+                tooltip: l10n.assistantEndChatConfirm,
+                onPressed: _endChat,
+              )
+            : null,
+      ),
       body: SafeArea(
         child: Column(
           children: [
             Expanded(
-              child: _messages.isEmpty
+              child: !hasChat
                   ? _EmptyState(
                       intro: l10n.assistantIntro,
                       suggestions: _assistant.suggestions(lang),
@@ -137,16 +172,19 @@ class _AssistantScreenState extends State<AssistantScreen> {
                       controller: _scroll,
                       padding: const EdgeInsets.all(16),
                       children: [
-                        for (final m in _messages) _Bubble(message: m),
-                        if (_typing) _TypingBubble(label: l10n.assistantTyping),
-                        if (!_typing && _followUps.isNotEmpty)
+                        for (final m in conversation.messages)
+                          _Bubble(message: m),
+                        if (conversation.typing)
+                          _TypingBubble(label: l10n.assistantTyping),
+                        if (!conversation.typing &&
+                            conversation.followUps.isNotEmpty)
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: Wrap(
                               spacing: 8,
                               runSpacing: 8,
                               children: [
-                                for (final q in _followUps)
+                                for (final q in conversation.followUps)
                                   ActionChip(
                                       label: Text(q),
                                       onPressed: () => _send(q)),
@@ -190,6 +228,7 @@ class _AssistantScreenState extends State<AssistantScreen> {
           ],
         ),
       ),
+    ),
     );
   }
 }
@@ -304,7 +343,7 @@ class _TypingBubbleState extends State<_TypingBubble>
 class _Bubble extends StatelessWidget {
   const _Bubble({required this.message});
 
-  final _Message message;
+  final AssistantMessage message;
 
   @override
   Widget build(BuildContext context) {

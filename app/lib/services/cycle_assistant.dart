@@ -56,12 +56,24 @@ class CycleAssistant {
   String _lang(String code) => (code == 'tr') ? 'tr' : _fallbackLang;
 
   /// Suggested tap-to-ask questions for the empty state.
-  List<String> suggestions(String languageCode) {
+  ///
+  /// The hand-picked `suggested` topics lead, then the list is topped up
+  /// from the rest in order. Only four topics carry the flag, and four
+  /// chips under a blank chat made a 37-topic knowledge base look like it
+  /// knew four things — the opening screen is the only place most people
+  /// ever learn what this assistant covers.
+  List<String> suggestions(String languageCode, {int count = 9}) {
     final lang = _lang(languageCode);
-    return _topics
-        .where((t) => t.suggested)
-        .map((t) => t.sampleQuestion[lang]!)
-        .toList();
+    final out = <String>[
+      for (final t in _topics)
+        if (t.suggested) t.sampleQuestion[lang]!,
+    ];
+    for (final t in _topics) {
+      if (out.length >= count) break;
+      final sample = t.sampleQuestion[lang]!;
+      if (!out.contains(sample)) out.add(sample);
+    }
+    return out.take(count).toList();
   }
 
   /// Conversational niceties get a friendly reply instead of the topic
@@ -81,8 +93,8 @@ class CycleAssistant {
 
     if (short && hasAny(['merhaba', 'selam', 'selamlar', 'hello', 'hi', 'hey'])) {
       return lang == 'tr'
-          ? 'Merhaba! 👋 Regl, döngü veya Vera hakkında ne merak ediyorsun?'
-          : 'Hi! 👋 What would you like to know about periods, cycles, or Vera?';
+          ? 'Merhaba. Regl, döngü veya Vera hakkında ne merak ediyorsun?'
+          : 'Hello. What would you like to know about periods, cycles, or Vera?';
     }
     // "naber" and friends: these were falling through to "I didn't catch
     // that", which reads as broken for the most casual thing a user can
@@ -101,18 +113,18 @@ class CycleAssistant {
           'sup',
         ])) {
       return lang == 'tr'
-          ? 'İyiyim, sorduğun için teşekkürler! 🙂 Ben buradaki işimi seviyorum: döngün, semptomların veya Vera\'nın nasıl çalıştığı hakkında ne sormak istersen sor.'
-          : "Doing well, thanks for asking! 🙂 I'm here for the useful part: ask me anything about your cycle, your symptoms, or how Vera works.";
+          ? 'Vera bir uygulama, o yüzden sorulacak bir hâli yok. Ama döngün, semptomların veya Vera\'nın nasıl çalıştığı hakkında ne istersen sorabilirsin.'
+          : "Vera is an app, so there's no how-are-you to report. Ask anything about your cycle, your symptoms, or how Vera works, though.";
     }
     if (short && hasAny(['gunaydin', 'good morning'])) {
       return lang == 'tr'
-          ? 'Günaydın! ☀️ Bugün nasıl hissediyorsun? Kaydetmek istediğin bir şey varsa gün kaydına ekleyebilirsin.'
-          : 'Good morning! ☀️ How are you feeling today? Anything you want to note goes in your day log.';
+          ? 'Günaydın. Bugün nasıl hissediyorsun? Kaydetmek istediğin bir şey varsa gün kaydına ekleyebilirsin.'
+          : 'Good morning. How are you feeling today? Anything you want to note goes in your day log.';
     }
     if (short && hasAny(['iyi geceler', 'good night'])) {
       return lang == 'tr'
-          ? 'İyi geceler! 🌙 Uyku düzeni döngüyü de etkiler; dilersen uykunu da kaydedebilirsin.'
-          : 'Good night! 🌙 Sleep affects your cycle too — you can log it if you like.';
+          ? 'İyi geceler. Uyku düzeni döngüyü de etkiler; dilersen uykunu da kaydedebilirsin.'
+          : 'Good night. Sleep affects your cycle too — you can log it if you like.';
     }
     // Whole words, so "thanks, is heavy bleeding normal?" reaches the
     // topic matcher instead of being answered with "You're welcome!".
@@ -129,19 +141,19 @@ class CycleAssistant {
           'thx',
         ])) {
       return lang == 'tr'
-          ? 'Rica ederim! Başka bir sorun olursa buradayım. 💛'
-          : "You're welcome! I'm here if anything else comes up. 💛";
+          ? 'Rica ederim. Başka bir sorun olduğunda yine yazabilirsin.'
+          : "You're welcome. Ask again whenever something else comes up.";
     }
     if (short &&
         hasAny(['gorusuruz', 'hoscakal', 'bye', 'goodbye', 'see you'])) {
       return lang == 'tr'
-          ? 'Görüşürüz! İhtiyacın olursa buradayım. 👋'
-          : "See you! I'm here whenever you need me. 👋";
+          ? 'Görüşürüz. Bu sekme ihtiyacın olduğunda yerinde duruyor.'
+          : 'See you. This tab stays here whenever you need it.';
     }
     if (hasAny(['kimsin', 'nesin sen', 'who are you', 'what are you'])) {
       return lang == 'tr'
-          ? 'Ben Vera Asistan — tamamen bu telefonda çalışan bir yardımcıyım. Cevaplarım özenle hazırlanmış bir bilgi tabanından gelir ve kendi kayıtlarınla kişiselleşir; sorduklarının hiçbiri cihazdan çıkmaz.'
-          : "I'm the Vera Assistant — a helper that runs entirely on this phone. My answers come from a curated knowledge base and get personalized with your own logs; your questions never leave the device.";
+          ? 'Vera Asistan, tamamen bu telefonda çalışan bir yardımcıdır. Cevaplar özenle yazılmış bir bilgi tabanından gelir ve senin kendi kayıtlarınla kişiselleşir; sorduklarının hiçbiri cihazdan çıkmaz.'
+          : 'The Vera Assistant is a helper that runs entirely on this phone. Answers come from a hand-written knowledge base and are personalized with your own logs; your questions never leave the device.';
     }
     if (hasAny([
       'yapay zeka misin',
@@ -152,8 +164,8 @@ class CycleAssistant {
       'are you a robot',
     ])) {
       return lang == 'tr'
-          ? 'Bulut tabanlı bir yapay zeka değilim — internete soru göndermiyorum. Elimde özenle yazılmış bir bilgi tabanı var; sorunu onunla eşleştirip cevabı senin kendi kayıtlarınla kişiselleştiriyorum. Bu yüzden bazen bilmediğim bir şey çıkabilir, ama uydurmam ve verini dışarı vermem.'
-          : "I'm not a cloud AI — I never send your questions to the internet. I match what you ask against a hand-written knowledge base and personalize the answer with your own logs. That means I sometimes won't know something, but I won't make things up and I won't hand your data to anyone.";
+          ? 'Bulut tabanlı bir yapay zeka değil. Soruların internete gönderilmez. Sorduğun şey, elle yazılmış bir bilgi tabanıyla eşleştirilir ve cevap senin kendi kayıtlarınla kişiselleştirilir. Bu yüzden bazı sorular kapsam dışında kalabilir — ama cevap uydurulmaz ve verin kimseye verilmez.'
+          : 'Not a cloud AI. Your questions are never sent to the internet. What you ask is matched against a hand-written knowledge base, and the answer is personalized with your own logs. Some questions therefore fall outside what it covers — but nothing is invented, and your data goes to no one.';
     }
     return null;
   }

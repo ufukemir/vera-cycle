@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../state/assistant_conversation.dart';
 import '../assistant/assistant_screen.dart';
 import '../calendar/calendar_screen.dart';
 import '../insights/insights_screen.dart';
@@ -13,6 +15,12 @@ import 'home_screen.dart';
 /// the index). This trades per-tab widget state for motion — screens derive
 /// everything important from the shared controllers, so the only real loss
 /// is trivia like the calendar's focused month resetting to today.
+///
+/// The one thing that was not trivia is the assistant chat, which the same
+/// mechanism silently deleted whenever the user looked at another tab. It
+/// now lives in [AssistantConversation], created here so that it outlives a
+/// tab switch and dies with the shell — which is what the app lock tears
+/// down.
 class HomeShell extends StatefulWidget {
   const HomeShell({super.key});
 
@@ -23,6 +31,13 @@ class HomeShell extends StatefulWidget {
 class _HomeShellState extends State<HomeShell> {
   int _index = 0;
   int _previousIndex = 0;
+  final _conversation = AssistantConversation();
+
+  @override
+  void dispose() {
+    _conversation.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +51,14 @@ class _HomeShellState extends State<HomeShell> {
     ];
     final movingRight = _index >= _previousIndex;
 
+    return ChangeNotifierProvider<AssistantConversation>.value(
+      value: _conversation,
+      child: _buildShell(context, l10n, tabs, movingRight),
+    );
+  }
+
+  Widget _buildShell(BuildContext context, AppLocalizations l10n,
+      List<Widget> tabs, bool movingRight) {
     return Scaffold(
       body: AnimatedSwitcher(
         duration: const Duration(milliseconds: 280),
