@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+// intl exports its own TextDirection; the painter needs the framework's.
+import 'package:intl/intl.dart' hide TextDirection;
 import 'package:provider/provider.dart';
 
 import '../../l10n/app_localizations.dart';
@@ -246,44 +247,98 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
     final values = [for (final p in points) p.value];
     final lo = values.reduce((a, b) => a < b ? a : b);
     final hi = values.reduce((a, b) => a > b ? a : b);
+    final mean = values.reduce((a, b) => a + b) / values.length;
+
+    String show(double v) =>
+        '${formatDecimal(context, v, decimals: decimals)} $unit';
 
     return [
-      // A painted chart is invisible to a screen reader, so it gets a
-      // spoken summary and the per-entry list below carries the detail.
-      Semantics(
-        container: true,
-        label: l10n.a11yChartSummary(
-          values.length,
-          '${formatDecimal(context, lo, decimals: decimals)} $unit',
-          '${formatDecimal(context, hi, decimals: decimals)} $unit',
-        ),
-        child: ExcludeSemantics(
-          child: SizedBox(
-            height: 160,
-            child: CustomPaint(
-              size: const Size(double.infinity, 160),
-              painter: _SeriesPainter(
-                values: values,
-                color: Theme.of(context).colorScheme.primary,
-                trackColor: Theme.of(context).colorScheme.outlineVariant,
-                bars: bars,
+      // The numbers first. Opening "Weight" used to show an unlabelled
+      // squiggle and a list of dates — everything needed to work out the
+      // average, and nothing that had worked it out.
+      _StatRow(stats: [
+        (label: l10n.trackerStatAverage, value: show(mean)),
+        (label: l10n.trackerStatLowest, value: show(lo)),
+        (label: l10n.trackerStatHighest, value: show(hi)),
+        (label: l10n.trackerStatLatest, value: show(points.last.value)),
+      ]),
+      const SizedBox(height: 16),
+      _Panel(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // A painted chart is invisible to a screen reader, so it gets a
+            // spoken summary and the per-entry list below carries the detail.
+            Semantics(
+              container: true,
+              label: l10n.a11yChartSummary(
+                values.length,
+                show(lo),
+                show(hi),
+              ),
+              child: ExcludeSemantics(
+                child: SizedBox(
+                  height: 170,
+                  child: CustomPaint(
+                    size: const Size(double.infinity, 170),
+                    painter: _SeriesPainter(
+                      values: values,
+                      color: Theme.of(context).colorScheme.primary,
+                      trackColor: Theme.of(context).colorScheme.outlineVariant,
+                      bars: bars,
+                      // Printed on the chart itself: a scale-free line can
+                      // be read as any trend at all, which is the false
+                      // precision this app exists to avoid.
+                      highLabel: show(hi),
+                      lowLabel: show(lo),
+                      labelStyle: Theme.of(context)
+                          .textTheme
+                          .labelSmall!
+                          .copyWith(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant),
+                      textDirection: Directionality.of(context),
+                    ),
+                  ),
+                ),
               ),
             ),
-          ),
+            const SizedBox(height: 6),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(fmt.format(points.first.key),
+                    style: Theme.of(context).textTheme.labelSmall),
+                Text(fmt.format(points.last.key),
+                    style: Theme.of(context).textTheme.labelSmall),
+              ],
+            ),
+          ],
         ),
       ),
-      const SizedBox(height: 12),
+      const SizedBox(height: 16),
       Text(l10n.trackerEntriesCount(points.length),
           style: Theme.of(context).textTheme.bodySmall),
       const SizedBox(height: 8),
-      for (final p in points.reversed.take(30))
-        ListTile(
-          dense: true,
-          contentPadding: EdgeInsets.zero,
-          title: Text(fmt.format(p.key)),
-          trailing: Text('${formatDecimal(context, p.value, decimals: decimals)} $unit',
-              style: Theme.of(context).textTheme.titleSmall),
+      _Panel(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        // Every entry, not the newest 30. The old cap was silent, so a
+        // six-month range quietly stopped a third of the way down and
+        // looked like missing data.
+        child: Column(
+          children: [
+            for (final p in points.reversed)
+              ListTile(
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                title: Text(fmt.format(p.key)),
+                trailing: Text(show(p.value),
+                    style: Theme.of(context).textTheme.titleSmall),
+              ),
+          ],
         ),
+      ),
     ];
   }
 
@@ -292,39 +347,65 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
     final sorted = counts.entries.toList()
       ..sort((a, b) => b.value.compareTo(a.value));
     final max = sorted.first.value;
+    final total = sorted.fold<int>(0, (a, e) => a + e.value);
+    final scheme = Theme.of(context).colorScheme;
     return [
-      for (final entry in sorted)
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 6),
-          child: Semantics(
-            container: true,
-            label: l10n.a11yFrequencyItem(entry.key, entry.value),
-            child: Row(
-            children: [
-              SizedBox(
-                  width: 140,
-                  child: Text(entry.key,
-                      style: Theme.of(context).textTheme.bodyMedium)),
-              Expanded(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(4),
-                  child: LinearProgressIndicator(
-                    value: entry.value / max,
-                    minHeight: 10,
-                    backgroundColor: Theme.of(context)
-                        .colorScheme
-                        .outlineVariant
-                        .withValues(alpha: 0.3),
+      Text(l10n.trackerEntriesCount(total),
+          style: Theme.of(context).textTheme.bodySmall),
+      const SizedBox(height: 8),
+      _Panel(
+        child: Column(
+          children: [
+            for (final entry in sorted)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 7),
+                child: Semantics(
+                  container: true,
+                  label: l10n.a11yFrequencyItem(entry.key, entry.value),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(entry.key,
+                                style:
+                                    Theme.of(context).textTheme.bodyMedium),
+                          ),
+                          const SizedBox(width: 8),
+                          // The share matters more than the raw count: "8
+                          // times" means nothing without knowing whether
+                          // that is most days or a handful.
+                          Text(
+                            formatPercent(context, entry.value / total),
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelMedium
+                                ?.copyWith(color: scheme.onSurfaceVariant),
+                          ),
+                          const SizedBox(width: 10),
+                          Text('${entry.value}×',
+                              style:
+                                  Theme.of(context).textTheme.titleSmall),
+                        ],
+                      ),
+                      const SizedBox(height: 6),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(6),
+                        child: LinearProgressIndicator(
+                          value: entry.value / max,
+                          minHeight: 8,
+                          backgroundColor:
+                              scheme.outlineVariant.withValues(alpha: 0.3),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-              const SizedBox(width: 8),
-              Text('${entry.value}×',
-                  style: Theme.of(context).textTheme.titleSmall),
-            ],
-            ),
-          ),
+          ],
         ),
+      ),
     ];
   }
 
@@ -336,13 +417,21 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
       Text(l10n.trackerEntriesCount(days.length),
           style: Theme.of(context).textTheme.bodySmall),
       const SizedBox(height: 8),
-      for (final log in days.reversed)
-        ListTile(
-          dense: true,
-          contentPadding: EdgeInsets.zero,
-          title: Text(fmt.format(log.date)),
-          subtitle: detail(log).isEmpty ? null : Text(detail(log)),
+      _Panel(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        child: Column(
+          children: [
+            for (final log in days.reversed)
+              ListTile(
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                title: Text(fmt.format(log.date)),
+                subtitle:
+                    detail(log).isEmpty ? null : Text(detail(log)),
+              ),
+          ],
         ),
+      ),
     ];
   }
 
@@ -352,18 +441,122 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
       );
 }
 
+/// The card the rest of the app uses, in one place so the tracker screen
+/// stops being a bare column of text on the scaffold background.
+class _Panel extends StatelessWidget {
+  const _Panel({required this.child, this.padding});
+
+  final Widget child;
+  final EdgeInsetsGeometry? padding;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return Container(
+      width: double.infinity,
+      padding: padding ?? const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: scheme.surfaceContainerLow,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: scheme.outlineVariant.withValues(alpha: 0.4)),
+      ),
+      child: child,
+    );
+  }
+}
+
+typedef _Stat = ({String label, String value});
+
+/// Average / lowest / highest / latest, as a two-by-two grid.
+///
+/// A row of four would squeeze "Basal body temperature"-sized values into a
+/// quarter of the screen and wrap them into unreadable columns; two by two
+/// leaves each number room at every text scale.
+class _StatRow extends StatelessWidget {
+  const _StatRow({required this.stats});
+
+  final List<_Stat> stats;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return _Panel(
+      child: Column(
+        children: [
+          for (var i = 0; i < stats.length; i += 2)
+            Padding(
+              padding: EdgeInsets.only(top: i == 0 ? 0 : 16),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  for (final stat in stats.skip(i).take(2))
+                    Expanded(
+                      child: Semantics(
+                        container: true,
+                        label: '${stat.label}: ${stat.value}',
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              stat.label,
+                              style: theme.textTheme.labelSmall?.copyWith(
+                                  color: theme.colorScheme.onSurfaceVariant),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              stat.value,
+                              style: theme.textTheme.titleMedium?.copyWith(
+                                  color: theme.colorScheme.primary,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
 class _SeriesPainter extends CustomPainter {
   _SeriesPainter({
     required this.values,
     required this.color,
     required this.trackColor,
     required this.bars,
+    required this.highLabel,
+    required this.lowLabel,
+    required this.labelStyle,
+    required this.textDirection,
   });
 
   final List<double> values;
   final Color color;
   final Color trackColor;
   final bool bars;
+  final String highLabel;
+  final String lowLabel;
+  final TextStyle labelStyle;
+  final TextDirection textDirection;
+
+  /// Room on the trailing edge for the value labels.
+  static const _gutter = 62.0;
+
+  void _label(Canvas canvas, Size size, String text, double y) {
+    final painter = TextPainter(
+      text: TextSpan(text: text, style: labelStyle),
+      textDirection: textDirection,
+      maxLines: 1,
+    )..layout(maxWidth: _gutter);
+    final x = textDirection == TextDirection.rtl
+        ? 0.0
+        : size.width - painter.width;
+    painter.paint(canvas, Offset(x, (y - painter.height / 2).clamp(0.0, size.height - painter.height)));
+  }
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -372,21 +565,34 @@ class _SeriesPainter extends CustomPainter {
     final max = values.reduce((a, b) => a > b ? a : b);
     final span = (max - min).abs() < 1e-9 ? 1.0 : max - min;
     double yFor(double v) => size.height - ((v - min) / span) * (size.height - 16) - 8;
-    final step = values.length == 1 ? 0.0 : size.width / (values.length - 1);
+
+    // The plot stops short of the trailing edge so the high/low labels have
+    // somewhere to live; the whole point of adding them is that a line with
+    // no scale can be read as any trend at all.
+    final plotLeft = textDirection == TextDirection.rtl ? _gutter : 0.0;
+    final plotRight =
+        textDirection == TextDirection.rtl ? size.width : size.width - _gutter;
+    final plotWidth = plotRight - plotLeft;
+    final step = values.length == 1 ? 0.0 : plotWidth / (values.length - 1);
+    double xFor(int i) =>
+        values.length == 1 ? plotLeft + plotWidth / 2 : plotLeft + i * step;
 
     final grid = Paint()
       ..color = trackColor.withValues(alpha: 0.4)
       ..strokeWidth = 1;
     for (var i = 1; i < 4; i++) {
       final y = size.height * i / 4;
-      canvas.drawLine(Offset(0, y), Offset(size.width, y), grid);
+      canvas.drawLine(Offset(plotLeft, y), Offset(plotRight, y), grid);
     }
 
+    _label(canvas, size, highLabel, yFor(max));
+    if ((max - min).abs() > 1e-9) _label(canvas, size, lowLabel, yFor(min));
+
     if (bars) {
-      final barWidth = (size.width / values.length) * 0.6;
+      final barWidth = (plotWidth / values.length) * 0.6;
       final paint = Paint()..color = color;
       for (var i = 0; i < values.length; i++) {
-        final x = values.length == 1 ? size.width / 2 : i * step;
+        final x = xFor(i);
         canvas.drawRRect(
           RRect.fromRectAndRadius(
             Rect.fromLTRB(x - barWidth / 2, yFor(values[i]), x + barWidth / 2,
@@ -406,22 +612,40 @@ class _SeriesPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round;
     final path = Path();
     for (var i = 0; i < values.length; i++) {
-      final p = Offset(values.length == 1 ? size.width / 2 : i * step,
-          yFor(values[i]));
+      final p = Offset(xFor(i), yFor(values[i]));
       i == 0 ? path.moveTo(p.dx, p.dy) : path.lineTo(p.dx, p.dy);
     }
     canvas.drawPath(path, line);
+
+    // A soft wash under the line. Decoration only — it encodes nothing the
+    // line does not already say, so it cannot mislead.
+    final area = Path.from(path)
+      ..lineTo(xFor(values.length - 1), size.height)
+      ..lineTo(xFor(0), size.height)
+      ..close();
+    canvas.drawPath(
+      area,
+      Paint()
+        ..shader = LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            color.withValues(alpha: 0.22),
+            color.withValues(alpha: 0.0),
+          ],
+        ).createShader(Rect.fromLTWH(plotLeft, 0, plotWidth, size.height)),
+    );
+
     final dot = Paint()..color = color;
     for (var i = 0; i < values.length; i++) {
-      canvas.drawCircle(
-          Offset(values.length == 1 ? size.width / 2 : i * step,
-              yFor(values[i])),
-          3,
-          dot);
+      canvas.drawCircle(Offset(xFor(i), yFor(values[i])), 3, dot);
     }
   }
 
   @override
   bool shouldRepaint(covariant _SeriesPainter oldDelegate) =>
-      oldDelegate.values != values || oldDelegate.bars != bars;
+      oldDelegate.values != values ||
+      oldDelegate.bars != bars ||
+      oldDelegate.highLabel != highLabel ||
+      oldDelegate.lowLabel != lowLabel;
 }

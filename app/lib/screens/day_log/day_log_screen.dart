@@ -19,6 +19,7 @@ import 'widgets/mucus_history_summary.dart';
 import 'widgets/note_field.dart';
 import 'widgets/optional_trackers_section.dart';
 import 'widgets/quick_stats_row.dart';
+import 'widgets/section_card.dart';
 import 'widgets/skin_hair_multiselect.dart';
 import 'widgets/symptom_multiselect.dart';
 
@@ -143,7 +144,7 @@ class _DayLogScreenState extends State<DayLogScreen> {
                   _save(_current.copyWith(weightKg: v, clearWeight: v == null)),
             ),
             const SizedBox(height: 24),
-            _SectionCard(
+            DayLogSectionCard(
               icon: Icons.water_drop_outlined,
               title: l10n.dayLogFlowLabel,
               background: AppPalette.roseSoft,
@@ -155,7 +156,7 @@ class _DayLogScreenState extends State<DayLogScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            _SectionCard(
+            DayLogSectionCard(
               icon: Icons.healing_outlined,
               title: l10n.dayLogSymptomsLabel,
               background: AppPalette.lavenderSoft,
@@ -166,7 +167,7 @@ class _DayLogScreenState extends State<DayLogScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            _SectionCard(
+            DayLogSectionCard(
               icon: Icons.sentiment_satisfied_outlined,
               title: l10n.dayLogMoodLabel,
               background: AppPalette.skySoft,
@@ -178,7 +179,7 @@ class _DayLogScreenState extends State<DayLogScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            _SectionCard(
+            DayLogSectionCard(
               icon: Icons.bolt_outlined,
               title: l10n.dayLogEnergyLabel,
               background: AppPalette.goldSoft,
@@ -190,7 +191,7 @@ class _DayLogScreenState extends State<DayLogScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            _SectionCard(
+            DayLogSectionCard(
               icon: Icons.face_retouching_natural_outlined,
               title: l10n.dayLogSkinHairLabel,
               background: AppPalette.mintSoft,
@@ -201,7 +202,7 @@ class _DayLogScreenState extends State<DayLogScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            _SectionCard(
+            DayLogSectionCard(
               icon: Icons.medication_outlined,
               title: l10n.dayLogMedicationsLabel,
               background: AppPalette.terracottaSoft,
@@ -290,61 +291,6 @@ class _SavedFlash extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-/// A pastel category card with a tinted icon badge — the reference app's
-/// colorful sectioned-log pattern, using [AppPalette]'s soft tones.
-class _SectionCard extends StatelessWidget {
-  const _SectionCard({
-    required this.icon,
-    required this.title,
-    required this.background,
-    required this.foreground,
-    required this.child,
-  });
-
-  final IconData icon;
-  final String title;
-  final Color background;
-  final Color foreground;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: background.withValues(alpha: 0.55),
-        borderRadius: BorderRadius.circular(24),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                width: 34,
-                height: 34,
-                decoration: BoxDecoration(shape: BoxShape.circle, color: background),
-                child: Icon(icon, size: 18, color: foreground),
-              ),
-              const SizedBox(width: 10),
-              Text(
-                title,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium
-                    ?.copyWith(color: foreground),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          child,
-        ],
       ),
     );
   }

@@ -4,11 +4,18 @@ import 'package:provider/provider.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../models/enums.dart';
 import '../../../state/app_preferences.dart';
+import '../../../theme/app_theme.dart';
+import 'section_card.dart';
 
 /// Sexual activity / BBT / cervical mucus fields — each gated independently
 /// by its own [AppPreferences] flag. "Default hidden" means the field is
 /// absent from the widget tree, not merely unchecked, until the user opts in
 /// from Settings.
+///
+/// Each enabled tracker gets the same coloured [DayLogSectionCard] as flow,
+/// symptoms and the rest. It used to be a flat column of grey labels and
+/// outline chips trailing off the end of the screen, which made the fields
+/// the user had deliberately switched on look like the leftovers.
 class OptionalTrackersSection extends StatelessWidget {
   const OptionalTrackersSection({
     super.key,
@@ -52,50 +59,91 @@ class OptionalTrackersSection extends StatelessWidget {
     final prefs = context.watch<AppPreferences>();
     final l10n = AppLocalizations.of(context)!;
 
-    final fields = <Widget>[
+    final cards = <Widget>[
       if (prefs.sexualActivityTrackingEnabled)
-        SwitchListTile(
-          contentPadding: EdgeInsets.zero,
-          title: Text(l10n.dayLogSexualActivityLabel),
-          value: sexualActivity ?? false,
-          onChanged: onSexualActivityChanged,
+        DayLogSectionCard(
+          icon: Icons.favorite_outline,
+          title: l10n.dayLogSexualActivityLabel,
+          background: AppPalette.roseSoft,
+          foreground: AppPalette.roseSoftText,
+          trailing: Switch(
+            value: sexualActivity ?? false,
+            onChanged: onSexualActivityChanged,
+          ),
         ),
       if (prefs.bbtTrackingEnabled)
-        _BasalTempField(
-          valueC: basalTempC,
-          unit: prefs.temperatureUnit,
-          onChangedC: onBasalTempChanged,
+        DayLogSectionCard(
+          icon: Icons.thermostat_outlined,
+          title: l10n.dayLogBbtLabel,
+          background: AppPalette.terracottaSoft,
+          foreground: AppPalette.terracottaSoftText,
+          child: _BasalTempField(
+            valueC: basalTempC,
+            unit: prefs.temperatureUnit,
+            onChangedC: onBasalTempChanged,
+          ),
         ),
       if (prefs.mucusTrackingEnabled)
-        _MucusSelector(value: mucus, onChanged: onMucusChanged),
+        DayLogSectionCard(
+          icon: Icons.water_outlined,
+          title: l10n.dayLogMucusLabel,
+          background: AppPalette.skySoft,
+          foreground: AppPalette.skySoftText,
+          child: _MucusSelector(value: mucus, onChanged: onMucusChanged),
+        ),
       if (prefs.ovulationTestTrackingEnabled)
-        _OvulationTestSelector(
-            value: ovulationTest, onChanged: onOvulationTestChanged),
+        DayLogSectionCard(
+          icon: Icons.science_outlined,
+          title: l10n.dayLogOvulationTestLabel,
+          background: AppPalette.goldSoft,
+          foreground: AppPalette.goldSoftText,
+          child: _OvulationTestSelector(
+              value: ovulationTest, onChanged: onOvulationTestChanged),
+        ),
       if (prefs.breastExamTrackingEnabled)
-        _BreastExamMultiselect(value: breastExam, onChanged: onBreastExamChanged),
+        DayLogSectionCard(
+          icon: Icons.spa_outlined,
+          title: l10n.dayLogBreastExamLabel,
+          background: AppPalette.mintSoft,
+          foreground: AppPalette.mintSoftText,
+          child: _BreastExamMultiselect(
+              value: breastExam, onChanged: onBreastExamChanged),
+        ),
       if (prefs.cervixTrackingEnabled)
-        _CervixSelectors(
-          position: cervixPosition,
-          onPositionChanged: onCervixPositionChanged,
-          opening: cervixOpening,
-          onOpeningChanged: onCervixOpeningChanged,
-          firmness: cervixFirmness,
-          onFirmnessChanged: onCervixFirmnessChanged,
+        DayLogSectionCard(
+          icon: Icons.donut_large_outlined,
+          // Three observations, one card, titled with the string Settings
+          // already uses for the whole group — position, opening and
+          // firmness are read together or not at all.
+          title: l10n.settingsCervixToggle,
+          background: AppPalette.lavenderSoft,
+          foreground: AppPalette.lavenderSoftText,
+          child: _CervixSelectors(
+            position: cervixPosition,
+            onPositionChanged: onCervixPositionChanged,
+            opening: cervixOpening,
+            onOpeningChanged: onCervixOpeningChanged,
+            firmness: cervixFirmness,
+            onFirmnessChanged: onCervixFirmnessChanged,
+          ),
         ),
     ];
 
-    if (fields.isEmpty) return const SizedBox.shrink();
+    if (cards.isEmpty) return const SizedBox.shrink();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(l10n.dayLogOptionalTrackersLabel,
-            style: Theme.of(context).textTheme.titleMedium),
-        const SizedBox(height: 8),
-        for (final field in fields) Padding(
+        Padding(
           padding: const EdgeInsets.only(bottom: 12),
-          child: field,
+          child: Text(l10n.dayLogOptionalTrackersLabel,
+              style: Theme.of(context).textTheme.titleMedium),
         ),
+        for (final card in cards)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: card,
+          ),
       ],
     );
   }
@@ -161,10 +209,33 @@ class _BasalTempFieldState extends State<_BasalTempField> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final suffix = widget.unit == TemperatureUnit.fahrenheit ? '°F' : '°C';
+    final scheme = Theme.of(context).colorScheme;
     return TextField(
       controller: _controller,
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
-      decoration: InputDecoration(labelText: l10n.dayLogBbtLabel, suffixText: suffix),
+      // The card header already names the field, so the decoration only
+      // has to say what unit the number is in.
+      decoration: InputDecoration(
+        hintText: l10n.dayLogBbtLabel,
+        suffixText: suffix,
+        filled: true,
+        fillColor: scheme.surface.withValues(alpha: 0.7),
+        isDense: true,
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide.none,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide(color: scheme.primary, width: 1.4),
+        ),
+      ),
       onChanged: _onChanged,
     );
   }
@@ -187,23 +258,16 @@ class _MucusSelector extends StatelessWidget {
       CervicalMucus.eggWhite: l10n.mucusEggWhite,
     };
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
       children: [
-        Text(l10n.dayLogMucusLabel, style: Theme.of(context).textTheme.bodyMedium),
-        const SizedBox(height: 8),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: [
-            for (final entry in labels.entries)
-              ChoiceChip(
-                label: Text(entry.value),
-                selected: value == entry.key,
-                onSelected: (selected) => onChanged(selected ? entry.key : null),
-              ),
-          ],
-        ),
+        for (final entry in labels.entries)
+          ChoiceChip(
+            label: Text(entry.value),
+            selected: value == entry.key,
+            onSelected: (selected) => onChanged(selected ? entry.key : null),
+          ),
       ],
     );
   }
@@ -222,24 +286,16 @@ class _OvulationTestSelector extends StatelessWidget {
       OvulationTestResult.negative: l10n.ovulationTestNegative,
       OvulationTestResult.positive: l10n.ovulationTestPositive,
     };
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
       children: [
-        Text(l10n.dayLogOvulationTestLabel,
-            style: Theme.of(context).textTheme.bodyMedium),
-        const SizedBox(height: 8),
-        Wrap(
-          spacing: 8,
-          children: [
-            for (final entry in labels.entries)
-              ChoiceChip(
-                label: Text(entry.value),
-                selected: value == entry.key,
-                onSelected: (selected) =>
-                    onChanged(selected ? entry.key : null),
-              ),
-          ],
-        ),
+        for (final entry in labels.entries)
+          ChoiceChip(
+            label: Text(entry.value),
+            selected: value == entry.key,
+            onSelected: (selected) => onChanged(selected ? entry.key : null),
+          ),
       ],
     );
   }
@@ -263,27 +319,20 @@ class _BreastExamMultiselect extends StatelessWidget {
       BreastExamFinding.discharge: l10n.breastExamDischarge,
     };
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
       children: [
-        Text(l10n.dayLogBreastExamLabel, style: Theme.of(context).textTheme.bodyMedium),
-        const SizedBox(height: 8),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: [
-            for (final entry in labels.entries)
-              FilterChip(
-                label: Text(entry.value),
-                selected: value.contains(entry.key),
-                onSelected: (selected) {
-                  final next = Set<BreastExamFinding>.of(value);
-                  selected ? next.add(entry.key) : next.remove(entry.key);
-                  onChanged(next);
-                },
-              ),
-          ],
-        ),
+        for (final entry in labels.entries)
+          FilterChip(
+            label: Text(entry.value),
+            selected: value.contains(entry.key),
+            onSelected: (selected) {
+              final next = Set<BreastExamFinding>.of(value);
+              selected ? next.add(entry.key) : next.remove(entry.key);
+              onChanged(next);
+            },
+          ),
       ],
     );
   }
@@ -329,8 +378,7 @@ class _CervixSelectors extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label, style: Theme.of(context).textTheme.bodyMedium),
-          const SizedBox(height: 8),
+          DayLogFieldLabel(label, color: AppPalette.lavenderSoftText),
           Wrap(
             spacing: 8,
             runSpacing: 8,

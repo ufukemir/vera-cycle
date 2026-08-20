@@ -27,3 +27,13 @@ String formatDecimalIn(String localeName, double value, {int decimals = 1}) {
   );
   return format.format(value);
 }
+
+/// A 0–1 ratio as a locale-aware percentage.
+///
+/// Via `NumberFormat` rather than `'${(v * 100).round()}%'` for the same
+/// reason as [formatDecimal]: the percent sign goes before the number in
+/// Turkish (`%42`), and Arabic wants both Arabic-Indic digits and its own
+/// percent sign (`٤٢٪`).
+String formatPercent(BuildContext context, double ratio) =>
+    NumberFormat.percentPattern(Localizations.localeOf(context).toString())
+        .format(ratio);
