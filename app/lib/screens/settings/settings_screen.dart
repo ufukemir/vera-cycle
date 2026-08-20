@@ -17,6 +17,7 @@ import '../export/export_screen.dart';
 import '../export/import_screen.dart';
 import '../home/widgets/home_hero.dart';
 import '../premium/premium_screen.dart';
+import '../../widgets/illustrations.dart';
 import '../../widgets/premium_lock.dart';
 import 'custom_reminders_screen.dart';
 import 'custom_tags_screen.dart';
@@ -413,6 +414,10 @@ class SettingsScreen extends StatelessWidget {
                       child: _ThemeSwatch(
                         label: entry.value,
                         theme: entry.key,
+                        // The companion previews inside the swatch, so
+                        // picking a background shows the scene you will
+                        // actually land on rather than an empty backdrop.
+                        mascot: prefs.mascot,
                         // The user's actual choice, not the one currently
                         // rendered: a lapsed Premium theme stays ticked
                         // here so resubscribing restores it, and so the
@@ -430,10 +435,16 @@ class SettingsScreen extends StatelessWidget {
               ),
             ),
             _sectionHeading(context, l10n.settingsMascotLabel),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Wrap(
-                spacing: 8,
+            // Characters, not words. The picker listed "Droplet", "Flower",
+            // "Moon" as text chips — you had to choose a companion you could
+            // not see, then leave Settings to find out what you picked. They
+            // are drawn characters; showing them is the whole point of
+            // having them.
+            SizedBox(
+              height: 108,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 children: [
                   for (final entry in {
                     Mascot.droplet: l10n.mascotDroplet,
@@ -443,16 +454,14 @@ class SettingsScreen extends StatelessWidget {
                     Mascot.leaf: l10n.mascotLeaf,
                     Mascot.none: l10n.mascotNone,
                   }.entries)
-                    ChoiceChip(
-                      avatar: entry.key.premium && !prefs.premiumActive
-                          ? const Icon(Icons.lock_outline, size: 16)
-                          : null,
-                      label: Text(entry.value),
+                    _MascotOption(
+                      mascot: entry.key,
+                      label: entry.value,
                       selected: prefs.selectedMascot == entry.key,
-                      onSelected: (_) =>
-                          entry.key.premium && !prefs.premiumActive
-                              ? _openPremium(context)
-                              : prefs.setMascot(entry.key),
+                      locked: entry.key.premium && !prefs.premiumActive,
+                      onTap: () => entry.key.premium && !prefs.premiumActive
+                          ? _openPremium(context)
+                          : prefs.setMascot(entry.key),
                     ),
                 ],
               ),
@@ -901,11 +910,13 @@ class _ThemeSwatch extends StatelessWidget {
     required this.theme,
     required this.selected,
     required this.onTap,
+    required this.mascot,
     this.locked = false,
   });
 
   final String label;
   final HomeTheme theme;
+  final Mascot mascot;
   final bool selected;
   final VoidCallback onTap;
   final bool locked;
@@ -941,11 +952,106 @@ class _ThemeSwatch extends StatelessWidget {
             ),
             child: locked
                 ? Icon(Icons.lock_outline, size: 20, color: scheme.primary)
+                : mascot != Mascot.none
+                    ? Align(
+                        alignment: AlignmentDirectional.bottomStart,
+                        child: Padding(
+                          padding: const EdgeInsets.all(4),
+                          child: MascotAvatar(mascot: mascot, size: 24),
+                        ),
+                      )
                 : null,
           ),
           const SizedBox(height: 4),
           Text(label, style: Theme.of(context).textTheme.labelSmall),
         ],
+      ),
+    );
+  }
+}
+
+/// One companion in the picker: the character itself, its name, and a lock
+/// when it is a Premium one.
+class _MascotOption extends StatelessWidget {
+  const _MascotOption({
+    required this.mascot,
+    required this.label,
+    required this.selected,
+    required this.locked,
+    required this.onTap,
+  });
+
+  final Mascot mascot;
+  final String label;
+  final bool selected;
+  final bool locked;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+
+    return Padding(
+      padding: const EdgeInsetsDirectional.only(end: 10),
+      child: Material(
+        color: selected
+            ? scheme.primary.withValues(alpha: 0.12)
+            : scheme.surfaceContainerLow,
+        borderRadius: BorderRadius.circular(20),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: onTap,
+          child: Container(
+            width: 86,
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: selected
+                    ? scheme.primary
+                    : scheme.outlineVariant.withValues(alpha: 0.5),
+                width: selected ? 1.6 : 1,
+              ),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 52,
+                  child: Center(
+                    child: mascot == Mascot.none
+                        ? Icon(Icons.do_not_disturb_alt,
+                            size: 30, color: scheme.onSurfaceVariant)
+                        : Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              MascotAvatar(mascot: mascot, size: 46),
+                              if (locked)
+                                Positioned(
+                                  right: 0,
+                                  bottom: 0,
+                                  child: Icon(Icons.lock,
+                                      size: 15, color: scheme.primary),
+                                ),
+                            ],
+                          ),
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    color: selected ? scheme.primary : scheme.onSurface,
+                    fontWeight: selected ? FontWeight.w700 : null,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
