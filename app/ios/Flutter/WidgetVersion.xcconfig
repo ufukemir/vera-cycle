@@ -1,0 +1,14 @@
+// Version numbers for the widget extension, and nothing else.
+//
+// The extension's Info.plist takes CFBundleShortVersionString and
+// CFBundleVersion from FLUTTER_BUILD_NAME/FLUTTER_BUILD_NUMBER, which are
+// defined in Generated.xcconfig — a file only the Runner target used to
+// include. So they expanded to empty for the extension, and iOS refuses to
+// install an app whose embedded extension carries no version:
+// "Invalid placeholder attributes". The app built fine and then failed at
+// install time, which is why it looked like a simulator problem.
+//
+// This includes Generated.xcconfig alone, deliberately not Debug/Release
+// .xcconfig: those also pull in Pods-Runner, which would link every Flutter
+// plugin into a widget extension that must not have them.
+#include "Generated.xcconfig"

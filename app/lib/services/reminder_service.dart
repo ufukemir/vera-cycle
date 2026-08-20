@@ -102,7 +102,19 @@ class ReminderService {
     await _adoptDeviceTimezone();
 
     const androidInit = AndroidInitializationSettings('@mipmap/ic_launcher');
-    const darwinInit = DarwinInitializationSettings();
+    // Explicitly off. DarwinInitializationSettings defaults all three to
+    // true, so merely initialising the plugin popped the iOS notification
+    // prompt — and AppRoot reconciles reminders on the first frame, which
+    // meant a fresh install asked for notifications before the user had
+    // seen a single screen. docs/01-mvp-spec.md requires the in-app
+    // preview to come first, and an out-of-nowhere prompt is the reliable
+    // way to be denied permanently. requestPermission() below still asks,
+    // at the moment the user has been told why.
+    const darwinInit = DarwinInitializationSettings(
+      requestAlertPermission: false,
+      requestBadgePermission: false,
+      requestSoundPermission: false,
+    );
     await _plugin.initialize(
       settings: const InitializationSettings(android: androidInit, iOS: darwinInit),
     );

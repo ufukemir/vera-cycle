@@ -7,10 +7,12 @@ import '../../l10n/app_localizations.dart';
 import '../../models/enums.dart';
 import '../../services/home_widget_service.dart';
 import '../../services/pregnancy_info.dart';
+import '../../theme/app_theme.dart';
 import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
 import '../../util/day.dart';
 import '../assistant/assistant_screen.dart';
+import 'fertility_detail_screen.dart';
 import '../day_log/day_log_screen.dart';
 import 'widgets/ad_placeholder_banner.dart';
 import 'widgets/backup_nudge_card.dart';
@@ -179,10 +181,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       PredictionRangeCard(prediction: prediction),
                       if (status.hasFertileEstimate) ...[
                         const SizedBox(height: 12),
-                        Text(
-                          l10n.homeFertileWindowDisclaimer,
-                          style: Theme.of(context).textTheme.bodySmall,
-                          textAlign: TextAlign.center,
+                        // Was a bare line of grey disclaimer text. The
+                        // fertile window is the estimate people most want
+                        // explained, so it now opens the screen that
+                        // explains it instead of only warning about it.
+                        _FertileWindowTile(
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (_) => const FertilityDetailScreen()),
+                          ),
                         ),
                       ],
                     ],
@@ -244,6 +251,69 @@ class _QuickActionsRow extends StatelessWidget {
           icon: const Icon(Icons.chat_bubble_outline_rounded),
         ),
       ],
+    );
+  }
+}
+
+class _FertileWindowTile extends StatelessWidget {
+  const _FertileWindowTile({required this.onTap});
+
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    final isDark = theme.brightness == Brightness.dark;
+
+    return Material(
+      color: isDark
+          ? Color.alphaBlend(
+              AppPalette.goldSoft.withValues(alpha: 0.10), scheme.surface)
+          : AppPalette.goldSoft.withValues(alpha: 0.45),
+      borderRadius: BorderRadius.circular(20),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Row(
+            children: [
+              Container(
+                width: 34,
+                height: 34,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: isDark
+                      ? AppPalette.goldSoft.withValues(alpha: 0.18)
+                      : AppPalette.goldSoft,
+                ),
+                child: Icon(Icons.adjust,
+                    size: 18,
+                    color: isDark
+                        ? AppPalette.goldSoft
+                        : AppPalette.goldSoftText),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(l10n.calendarLegendFertile,
+                        style: theme.textTheme.titleSmall),
+                    const SizedBox(height: 2),
+                    Text(l10n.homeFertileWindowDisclaimer,
+                        style: theme.textTheme.bodySmall),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
+              Icon(Icons.chevron_right, color: scheme.onSurfaceVariant),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
