@@ -60,6 +60,7 @@
   "navCalendar": "Calendario",
   "navInsights": "Estadísticas",
   "navSettings": "Ajustes",
+  "navTrack": "Registrar",
   "homeCycleDayLabel": "Día {day}",
   "homeNoCycleYet": "Aún no hay periodo registrado",
   "homePhaseMenstrual": "Periodo",

@@ -60,6 +60,7 @@
   "navCalendar": "캘린더",
   "navInsights": "인사이트",
   "navSettings": "설정",
+  "navTrack": "기록",
   "homeCycleDayLabel": "{day}일차",
   "homeNoCycleYet": "아직 기록된 생리가 없어요",
   "homePhaseMenstrual": "생리 중",

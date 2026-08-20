@@ -206,6 +206,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get navSettings => 'Ajustes';
 
   @override
+  String get navTrack => 'Registrar';
+
+  @override
   String homeCycleDayLabel(int day) {
     return 'Día $day';
   }

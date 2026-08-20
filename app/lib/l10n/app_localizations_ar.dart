@@ -202,6 +202,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get navSettings => 'الإعدادات';
 
   @override
+  String get navTrack => 'تتبّع';
+
+  @override
   String homeCycleDayLabel(int day) {
     return 'اليوم $day';
   }

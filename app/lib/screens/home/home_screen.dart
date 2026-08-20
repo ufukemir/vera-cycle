@@ -10,6 +10,7 @@ import '../../services/pregnancy_info.dart';
 import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
 import '../../util/day.dart';
+import '../assistant/assistant_screen.dart';
 import '../day_log/day_log_screen.dart';
 import 'widgets/ad_placeholder_banner.dart';
 import 'widgets/backup_nudge_card.dart';
@@ -156,6 +157,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           MaterialPageRoute(
                               builder: (_) => DayLogScreen(date: today())),
                         ),
+                        onOpenAssistant: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (_) => const AssistantScreen()),
+                        ),
                       ),
                       const SizedBox(height: 20),
                       // The ring stays as the detailed, animated view of the
@@ -202,10 +207,17 @@ class _QuickActionsRow extends StatelessWidget {
   const _QuickActionsRow({
     required this.onQuickLog,
     required this.onOpenDetails,
+    required this.onOpenAssistant,
   });
 
   final VoidCallback onQuickLog;
   final VoidCallback onOpenDetails;
+
+  /// The assistant lost its tab when logging took the middle slot of the
+  /// bottom bar. It lands here rather than in a menu: it is one of the few
+  /// things this app has that competitors do not, and burying it would be
+  /// the wrong trade for a bar slot.
+  final VoidCallback onOpenAssistant;
 
   @override
   Widget build(BuildContext context) {
@@ -224,6 +236,12 @@ class _QuickActionsRow extends StatelessWidget {
           tooltip: l10n.homeOpenTodayLog,
           onPressed: onOpenDetails,
           icon: const Icon(Icons.edit_note_outlined),
+        ),
+        const SizedBox(width: 10),
+        IconButton.filledTonal(
+          tooltip: l10n.navAssistant,
+          onPressed: onOpenAssistant,
+          icon: const Icon(Icons.chat_bubble_outline_rounded),
         ),
       ],
     );

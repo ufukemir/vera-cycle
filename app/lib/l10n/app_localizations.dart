@@ -468,6 +468,12 @@ abstract class AppLocalizations {
   /// **'Settings'**
   String get navSettings;
 
+  /// No description provided for @navTrack.
+  ///
+  /// In en, this message translates to:
+  /// **'Track'**
+  String get navTrack;
+
   /// No description provided for @homeCycleDayLabel.
   ///
   /// In en, this message translates to:

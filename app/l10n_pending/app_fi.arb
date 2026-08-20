@@ -60,6 +60,7 @@
   "navCalendar": "Kalenteri",
   "navInsights": "Havainnot",
   "navSettings": "Asetukset",
+  "navTrack": "Kirjaa",
   "homeCycleDayLabel": "Päivä {day}",
   "homeNoCycleYet": "Kuukautisia ei ole vielä kirjattu",
   "homePhaseMenstrual": "Kuukautiset",

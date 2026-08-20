@@ -206,6 +206,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get navSettings => 'Pengaturan';
 
   @override
+  String get navTrack => 'Lacak';
+
+  @override
   String homeCycleDayLabel(int day) {
     return 'Hari ke-$day';
   }

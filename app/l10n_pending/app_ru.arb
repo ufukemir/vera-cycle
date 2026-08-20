@@ -60,6 +60,7 @@
   "navCalendar": "Календарь",
   "navInsights": "Статистика",
   "navSettings": "Настройки",
+  "navTrack": "Записать",
   "homeCycleDayLabel": "День {day}",
   "homeNoCycleYet": "Менструация ещё не отмечена",
   "homePhaseMenstrual": "Менструация",

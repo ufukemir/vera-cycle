@@ -205,6 +205,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get navSettings => 'Ayarlar';
 
   @override
+  String get navTrack => 'Takip et';
+
+  @override
   String homeCycleDayLabel(int day) {
     return '$day. gün';
   }

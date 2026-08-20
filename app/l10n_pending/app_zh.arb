@@ -60,6 +60,7 @@
   "navCalendar": "日历",
   "navInsights": "洞察",
   "navSettings": "设置",
+  "navTrack": "记录",
   "homeCycleDayLabel": "第 {day} 天",
   "homeNoCycleYet": "还没有记录月经",
   "homePhaseMenstrual": "月经期",

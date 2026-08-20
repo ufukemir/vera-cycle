@@ -60,6 +60,7 @@
   "navCalendar": "Kalender",
   "navInsights": "Innsikt",
   "navSettings": "Innstillinger",
+  "navTrack": "Registrer",
   "homeCycleDayLabel": "Dag {day}",
   "homeNoCycleYet": "Ingen mens registrert ennå",
   "homePhaseMenstrual": "Mens",

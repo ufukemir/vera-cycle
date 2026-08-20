@@ -2,6 +2,7 @@ import 'package:cycle_app/l10n/app_localizations_en.dart';
 import 'package:cycle_app/main.dart';
 import 'package:cycle_app/services/in_memory_day_log_repository.dart';
 import 'package:cycle_app/state/app_preferences.dart';
+import 'package:cycle_app/screens/home/widgets/vera_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -159,7 +160,7 @@ void main() {
     }
 
     // 10. Home shell.
-    expect(find.byType(NavigationBar), findsOneWidget);
+    expect(find.byType(VeraBottomBar), findsOneWidget);
     await expectLater(
       find.byType(MaterialApp),
       matchesGoldenFile('goldens/onboarding_03_home.png'),

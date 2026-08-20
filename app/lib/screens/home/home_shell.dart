@@ -3,11 +3,13 @@ import 'package:provider/provider.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../state/assistant_conversation.dart';
-import '../assistant/assistant_screen.dart';
 import '../calendar/calendar_screen.dart';
+import '../day_log/day_log_screen.dart';
 import '../insights/insights_screen.dart';
 import '../settings/settings_screen.dart';
+import '../../util/day.dart';
 import 'home_screen.dart';
+import 'widgets/vera_bottom_bar.dart';
 
 /// The 5-tab shell shown once onboarding is done and the app is unlocked.
 ///
@@ -42,10 +44,12 @@ class _HomeShellState extends State<HomeShell> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    // Four destinations; logging is the raised centre action, not a tab.
+    // The assistant moved to the home screen's quick actions — see
+    // VeraBottomBar for why the middle slot is worth a destination.
     const tabs = [
       HomeScreen(),
       CalendarScreen(),
-      AssistantScreen(),
       InsightsScreen(),
       SettingsScreen(),
     ];
@@ -80,39 +84,15 @@ class _HomeShellState extends State<HomeShell> {
         },
         child: KeyedSubtree(key: ValueKey(_index), child: tabs[_index]),
       ),
-      bottomNavigationBar: NavigationBar(
+      bottomNavigationBar: VeraBottomBar(
         selectedIndex: _index,
-        onDestinationSelected: (i) => setState(() {
+        onSelected: (i) => setState(() {
           _previousIndex = _index;
           _index = i;
         }),
-        destinations: [
-          NavigationDestination(
-            icon: const Icon(Icons.home_outlined),
-            selectedIcon: const Icon(Icons.home),
-            label: l10n.navHome,
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.calendar_month_outlined),
-            selectedIcon: const Icon(Icons.calendar_month),
-            label: l10n.navCalendar,
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.chat_bubble_outline_rounded),
-            selectedIcon: const Icon(Icons.chat_bubble_rounded),
-            label: l10n.navAssistant,
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.insights_outlined),
-            selectedIcon: const Icon(Icons.insights),
-            label: l10n.navInsights,
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.settings_outlined),
-            selectedIcon: const Icon(Icons.settings),
-            label: l10n.navSettings,
-          ),
-        ],
+        onTrack: () => Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => DayLogScreen(date: today())),
+        ),
       ),
     );
   }

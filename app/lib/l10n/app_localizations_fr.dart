@@ -210,6 +210,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get navSettings => 'Réglages';
 
   @override
+  String get navTrack => 'Suivre';
+
+  @override
   String homeCycleDayLabel(int day) {
     return 'Jour $day';
   }

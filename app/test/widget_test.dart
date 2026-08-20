@@ -1,6 +1,7 @@
 import 'package:cycle_app/main.dart';
 import 'package:cycle_app/services/in_memory_day_log_repository.dart';
 import 'package:cycle_app/state/app_preferences.dart';
+import 'package:cycle_app/screens/home/widgets/vera_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,7 +26,7 @@ void main() {
     expect(find.byType(MaterialApp), findsOneWidget);
     // Onboarding's first screen shows a Continue button and no bottom nav —
     // proves AppRoot did not skip straight to the home shell.
-    expect(find.byType(NavigationBar), findsNothing);
+    expect(find.byType(VeraBottomBar), findsNothing);
   });
 
   testWidgets('onboardingComplete=true with no PIN set still does not crash '

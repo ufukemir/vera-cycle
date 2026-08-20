@@ -60,6 +60,7 @@
   "navCalendar": "Kalender",
   "navInsights": "Einblicke",
   "navSettings": "Einstellungen",
+  "navTrack": "Erfassen",
   "homeCycleDayLabel": "Tag {day}",
   "homeNoCycleYet": "Noch keine Periode erfasst",
   "homePhaseMenstrual": "Periode",

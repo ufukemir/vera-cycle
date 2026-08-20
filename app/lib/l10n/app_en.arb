@@ -70,6 +70,7 @@
   "navCalendar": "Calendar",
   "navInsights": "Insights",
   "navSettings": "Settings",
+  "navTrack": "Track",
   "homeCycleDayLabel": "Day {day}",
   "@homeCycleDayLabel": {
     "placeholders": {

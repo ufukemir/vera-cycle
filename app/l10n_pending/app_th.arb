@@ -60,6 +60,7 @@
   "navCalendar": "ปฏิทิน",
   "navInsights": "ข้อมูลเชิงลึก",
   "navSettings": "ตั้งค่า",
+  "navTrack": "บันทึก",
   "homeCycleDayLabel": "วันที่ {day} ของรอบ",
   "homeNoCycleYet": "ยังไม่มีบันทึกประจำเดือน",
   "homePhaseMenstrual": "ประจำเดือน",

@@ -60,6 +60,7 @@
   "navCalendar": "カレンダー",
   "navInsights": "インサイト",
   "navSettings": "設定",
+  "navTrack": "記録",
   "homeCycleDayLabel": "{day}日目",
   "homeNoCycleYet": "まだ生理が記録されていません",
   "homePhaseMenstrual": "生理中",
