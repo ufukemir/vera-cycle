@@ -210,6 +210,9 @@ class _DayLogScreenState extends State<DayLogScreen> {
               child: MedicationsSection(
                 value: _current.medications,
                 onChanged: (m) => _save(_current.copyWith(medications: m)),
+                birthControl: _current.birthControl,
+                onBirthControlChanged: (b) =>
+                    _save(_current.copyWith(birthControl: b)),
               ),
             ),
             const SizedBox(height: 16),

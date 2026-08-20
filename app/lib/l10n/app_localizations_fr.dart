@@ -1040,6 +1040,36 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dayLogMedicationNameHint => 'Nom du médicament';
 
   @override
+  String get dayLogBirthControlLabel => 'Contraception';
+
+  @override
+  String get dayLogOtherMedicationsLabel => 'Autres médicaments';
+
+  @override
+  String get birthControlPillTaken => 'Pilule prise';
+
+  @override
+  String get birthControlPillLate => 'Pilule prise en retard';
+
+  @override
+  String get birthControlPillMissed => 'Pilule oubliée';
+
+  @override
+  String get birthControlPatch => 'Patch';
+
+  @override
+  String get birthControlRing => 'Anneau';
+
+  @override
+  String get birthControlInjection => 'Injection';
+
+  @override
+  String get birthControlImplant => 'Implant';
+
+  @override
+  String get birthControlIud => 'DIU';
+
+  @override
   String get navAssistant => 'Assistant';
 
   @override

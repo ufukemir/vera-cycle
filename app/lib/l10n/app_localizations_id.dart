@@ -1028,6 +1028,36 @@ class AppLocalizationsId extends AppLocalizations {
   String get dayLogMedicationNameHint => 'Nama obat';
 
   @override
+  String get dayLogBirthControlLabel => 'Kontrasepsi';
+
+  @override
+  String get dayLogOtherMedicationsLabel => 'Obat lain';
+
+  @override
+  String get birthControlPillTaken => 'Pil diminum';
+
+  @override
+  String get birthControlPillLate => 'Pil telat diminum';
+
+  @override
+  String get birthControlPillMissed => 'Pil terlewat';
+
+  @override
+  String get birthControlPatch => 'Koyo';
+
+  @override
+  String get birthControlRing => 'Cincin';
+
+  @override
+  String get birthControlInjection => 'Suntik';
+
+  @override
+  String get birthControlImplant => 'Implan';
+
+  @override
+  String get birthControlIud => 'IUD';
+
+  @override
   String get navAssistant => 'Asisten';
 
   @override

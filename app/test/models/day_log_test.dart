@@ -65,4 +65,26 @@ void main() {
     expect(cleared.cervixPosition, isNull);
     expect(cleared.cervixFirmness, CervixFirmness.firm);
   });
+
+  test('birth-control entries round-trip through storage', () {
+    final log = DayLog(
+      date: DateTime(2026, 5, 1),
+      birthControl: {BirthControlEntry.pillTaken, BirthControlEntry.iud},
+    );
+
+    final restored = DayLog.fromJson(log.toJson());
+
+    expect(restored.birthControl,
+        {BirthControlEntry.pillTaken, BirthControlEntry.iud});
+    expect(restored.isEmpty, isFalse);
+  });
+
+  test('an unknown birth-control value decodes to nothing, not a crash', () {
+    final restored = DayLog.fromJson({
+      'date': '2026-05-01',
+      'birthControl': ['someFutureMethod', 'patch'],
+    });
+
+    expect(restored.birthControl, {BirthControlEntry.patch});
+  });
 }

@@ -1026,6 +1026,36 @@ class AppLocalizationsAr extends AppLocalizations {
   String get dayLogMedicationNameHint => 'اسم الدواء';
 
   @override
+  String get dayLogBirthControlLabel => 'منع الحمل';
+
+  @override
+  String get dayLogOtherMedicationsLabel => 'أدوية أخرى';
+
+  @override
+  String get birthControlPillTaken => 'تم أخذ الحبة';
+
+  @override
+  String get birthControlPillLate => 'تأخر أخذ الحبة';
+
+  @override
+  String get birthControlPillMissed => 'فات موعد الحبة';
+
+  @override
+  String get birthControlPatch => 'لصقة';
+
+  @override
+  String get birthControlRing => 'حلقة';
+
+  @override
+  String get birthControlInjection => 'حقنة';
+
+  @override
+  String get birthControlImplant => 'غرسة';
+
+  @override
+  String get birthControlIud => 'لولب';
+
+  @override
   String get navAssistant => 'المساعدة';
 
   @override

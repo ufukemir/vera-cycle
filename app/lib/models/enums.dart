@@ -87,6 +87,28 @@ enum SexLifeEntry {
   highDesire,
 }
 
+/// What was used, or missed, today.
+///
+/// Separate from the free-text medication list because contraception is the
+/// one medication most people track daily and by the same handful of names
+/// every time, and typing "pill" 365 times a year is not tracking. The
+/// three pill entries are mutually exclusive — the pill was taken, taken
+/// late, or missed — while the methods are not, because switching methods
+/// mid-cycle is ordinary.
+///
+/// Deliberately no evaluative wording: [pillMissed] is a fact worth
+/// recording, not a failure to confess.
+enum BirthControlEntry {
+  pillTaken,
+  pillLate,
+  pillMissed,
+  patch,
+  ring,
+  injection,
+  implant,
+  iud,
+}
+
 /// Cervix position (fertility-awareness method). Advanced/opt-in tracker.
 enum CervixPosition { low, medium, high }
 

@@ -1024,6 +1024,36 @@ class AppLocalizationsTr extends AppLocalizations {
   String get dayLogMedicationNameHint => 'İlaç adı';
 
   @override
+  String get dayLogBirthControlLabel => 'Doğum kontrolü';
+
+  @override
+  String get dayLogOtherMedicationsLabel => 'Diğer ilaçlar';
+
+  @override
+  String get birthControlPillTaken => 'Hap alındı';
+
+  @override
+  String get birthControlPillLate => 'Hap geç alındı';
+
+  @override
+  String get birthControlPillMissed => 'Hap atlandı';
+
+  @override
+  String get birthControlPatch => 'Bant';
+
+  @override
+  String get birthControlRing => 'Halka';
+
+  @override
+  String get birthControlInjection => 'İğne';
+
+  @override
+  String get birthControlImplant => 'İmplant';
+
+  @override
+  String get birthControlIud => 'Spiral';
+
+  @override
   String get navAssistant => 'Asistan';
 
   @override

@@ -75,6 +75,18 @@ String reminderChannelName(AppLocalizations l10n, ReminderCategory category) =>
       ReminderCategory.backup => l10n.notificationChannelBackup,
     };
 
+String birthControlLabel(AppLocalizations l10n, BirthControlEntry entry) =>
+    switch (entry) {
+      BirthControlEntry.pillTaken => l10n.birthControlPillTaken,
+      BirthControlEntry.pillLate => l10n.birthControlPillLate,
+      BirthControlEntry.pillMissed => l10n.birthControlPillMissed,
+      BirthControlEntry.patch => l10n.birthControlPatch,
+      BirthControlEntry.ring => l10n.birthControlRing,
+      BirthControlEntry.injection => l10n.birthControlInjection,
+      BirthControlEntry.implant => l10n.birthControlImplant,
+      BirthControlEntry.iud => l10n.birthControlIud,
+    };
+
 String sexLifeLabel(AppLocalizations l10n, SexLifeEntry entry) =>
     switch (entry) {
       SexLifeEntry.none => l10n.sexLifeNone,

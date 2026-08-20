@@ -28,6 +28,7 @@ class DayLog {
     this.cervixPosition,
     this.cervixOpening,
     this.cervixFirmness,
+    Set<BirthControlEntry>? birthControl,
     this.waterIntakeMl,
     this.sleepMinutes,
     this.weightKg,
@@ -38,6 +39,8 @@ class DayLog {
         skinHair = Set.unmodifiable(skinHair ?? const <SkinHairSymptom>{}),
         breastExam =
             Set.unmodifiable(breastExam ?? const <BreastExamFinding>{}),
+        birthControl =
+            Set.unmodifiable(birthControl ?? const <BirthControlEntry>{}),
         medications = List.unmodifiable(medications ?? const <String>[]),
         customTags = Set.unmodifiable(customTags ?? const <String>{});
 
@@ -72,6 +75,10 @@ class DayLog {
   final OvulationTestResult? ovulationTest;
   final PregnancyTestResult? pregnancyTest;
   final Set<BreastExamFinding> breastExam;
+  /// Contraception taken, or missed, today. Empty for anyone who does not
+  /// track it; it is not gated behind a preference because it lives inside
+  /// the medication card the user already opened.
+  final Set<BirthControlEntry> birthControl;
   final CervixPosition? cervixPosition;
   final CervixOpening? cervixOpening;
   final CervixFirmness? cervixFirmness;
@@ -109,6 +116,7 @@ class DayLog {
       cervixPosition == null &&
       cervixOpening == null &&
       cervixFirmness == null &&
+      birthControl.isEmpty &&
       waterIntakeMl == null &&
       sleepMinutes == null &&
       weightKg == null &&
@@ -152,6 +160,7 @@ class DayLog {
     CervixOpening? cervixOpening,
     bool clearCervixOpening = false,
     CervixFirmness? cervixFirmness,
+    Set<BirthControlEntry>? birthControl,
     bool clearCervixFirmness = false,
     int? waterIntakeMl,
     bool clearWaterIntake = false,
@@ -223,6 +232,8 @@ class DayLog {
         if (cervixPosition != null) 'cervixPosition': cervixPosition!.name,
         if (cervixOpening != null) 'cervixOpening': cervixOpening!.name,
         if (cervixFirmness != null) 'cervixFirmness': cervixFirmness!.name,
+        if (birthControl.isNotEmpty)
+          'birthControl': birthControl.map((e) => e.name).toList()..sort(),
         if (waterIntakeMl != null) 'waterIntakeMl': waterIntakeMl,
         if (sleepMinutes != null) 'sleepMinutes': sleepMinutes,
         if (weightKg != null) 'weightKg': weightKg,
@@ -268,6 +279,11 @@ class DayLog {
       cervixPosition: _byName(CervixPosition.values, json['cervixPosition']),
       cervixOpening: _byName(CervixOpening.values, json['cervixOpening']),
       cervixFirmness: _byName(CervixFirmness.values, json['cervixFirmness']),
+      birthControl: <BirthControlEntry>{
+        for (final raw in (json['birthControl'] as List<dynamic>? ?? const []))
+          ...[_byName(BirthControlEntry.values, raw)]
+              .whereType<BirthControlEntry>(),
+      },
       waterIntakeMl: (json['waterIntakeMl'] as num?)?.toInt(),
       sleepMinutes: (json['sleepMinutes'] as num?)?.toInt(),
       weightKg: (json['weightKg'] as num?)?.toDouble(),

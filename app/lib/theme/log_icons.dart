@@ -90,6 +90,17 @@ class LogIcons {
         SexLifeEntry.highDesire => Icons.local_fire_department,
       };
 
+  static IconData birthControl(BirthControlEntry value) => switch (value) {
+        BirthControlEntry.pillTaken => Icons.check_circle_outline,
+        BirthControlEntry.pillLate => Icons.schedule,
+        BirthControlEntry.pillMissed => Icons.remove_circle_outline,
+        BirthControlEntry.patch => Icons.crop_square,
+        BirthControlEntry.ring => Icons.circle_outlined,
+        BirthControlEntry.injection => Icons.vaccines_outlined,
+        BirthControlEntry.implant => Icons.horizontal_rule,
+        BirthControlEntry.iud => Icons.change_history,
+      };
+
   static IconData ovulationTest(OvulationTestResult value) => switch (value) {
         OvulationTestResult.negative => Icons.remove_circle_outline,
         OvulationTestResult.high => Icons.trending_up,

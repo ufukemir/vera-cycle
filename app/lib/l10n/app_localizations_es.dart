@@ -1030,6 +1030,36 @@ class AppLocalizationsEs extends AppLocalizations {
   String get dayLogMedicationNameHint => 'Nombre del medicamento';
 
   @override
+  String get dayLogBirthControlLabel => 'Anticoncepción';
+
+  @override
+  String get dayLogOtherMedicationsLabel => 'Otros medicamentos';
+
+  @override
+  String get birthControlPillTaken => 'Píldora tomada';
+
+  @override
+  String get birthControlPillLate => 'Píldora tomada tarde';
+
+  @override
+  String get birthControlPillMissed => 'Píldora olvidada';
+
+  @override
+  String get birthControlPatch => 'Parche';
+
+  @override
+  String get birthControlRing => 'Anillo';
+
+  @override
+  String get birthControlInjection => 'Inyección';
+
+  @override
+  String get birthControlImplant => 'Implante';
+
+  @override
+  String get birthControlIud => 'DIU';
+
+  @override
   String get navAssistant => 'Asistente';
 
   @override

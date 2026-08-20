@@ -1986,6 +1986,66 @@ abstract class AppLocalizations {
   /// **'Medication name'**
   String get dayLogMedicationNameHint;
 
+  /// No description provided for @dayLogBirthControlLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Birth control'**
+  String get dayLogBirthControlLabel;
+
+  /// No description provided for @dayLogOtherMedicationsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Other medication'**
+  String get dayLogOtherMedicationsLabel;
+
+  /// No description provided for @birthControlPillTaken.
+  ///
+  /// In en, this message translates to:
+  /// **'Pill taken'**
+  String get birthControlPillTaken;
+
+  /// No description provided for @birthControlPillLate.
+  ///
+  /// In en, this message translates to:
+  /// **'Pill taken late'**
+  String get birthControlPillLate;
+
+  /// No description provided for @birthControlPillMissed.
+  ///
+  /// In en, this message translates to:
+  /// **'Pill missed'**
+  String get birthControlPillMissed;
+
+  /// No description provided for @birthControlPatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Patch'**
+  String get birthControlPatch;
+
+  /// No description provided for @birthControlRing.
+  ///
+  /// In en, this message translates to:
+  /// **'Ring'**
+  String get birthControlRing;
+
+  /// No description provided for @birthControlInjection.
+  ///
+  /// In en, this message translates to:
+  /// **'Injection'**
+  String get birthControlInjection;
+
+  /// No description provided for @birthControlImplant.
+  ///
+  /// In en, this message translates to:
+  /// **'Implant'**
+  String get birthControlImplant;
+
+  /// No description provided for @birthControlIud.
+  ///
+  /// In en, this message translates to:
+  /// **'IUD'**
+  String get birthControlIud;
+
   /// No description provided for @navAssistant.
   ///
   /// In en, this message translates to:
