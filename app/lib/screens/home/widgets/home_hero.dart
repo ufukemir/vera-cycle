@@ -69,86 +69,99 @@ class HomeHero extends StatelessWidget {
     final asset = homeThemeAsset(theme);
     final scheme = Theme.of(context).colorScheme;
     final onPhoto = asset != null;
-    // Over a photo the text is white with a scrim; on the plain theme it
-    // uses normal surface colors so contrast holds in both light and dark.
     final textColor = onPhoto ? Colors.white : scheme.onSurface;
 
-    return ClipRRect(
-      borderRadius: const BorderRadius.vertical(bottom: Radius.circular(32)),
-      child: SizedBox(
-        height: 330,
-        width: double.infinity,
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            if (asset != null)
-              Image.asset(asset, fit: BoxFit.cover)
-            else
-              DecoratedBox(
-                decoration: const BoxDecoration(gradient: AppPaletteGradient()),
-              ),
-            if (onPhoto)
-              const DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [Color(0x33000000), Color(0x99000000)],
-                  ),
+    // Half the screen, not a fixed 330. The hero used to be a banner with a
+    // list of cards under it; it is now the screen you land on, so it has to
+    // hold the eye on its own. Clamped at both ends so a small phone still
+    // shows the card beneath and a tall one does not turn it into a poster.
+    final height =
+        (MediaQuery.sizeOf(context).height * 0.52).clamp(330.0, 480.0);
+    final topInset = MediaQuery.paddingOf(context).top;
+
+    return SizedBox(
+      height: height,
+      width: double.infinity,
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          if (asset != null)
+            Image.asset(asset, fit: BoxFit.cover)
+          else
+            const DecoratedBox(
+              decoration: BoxDecoration(gradient: AppPaletteGradient()),
+            ),
+          if (onPhoto)
+            const DecoratedBox(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  stops: [0, 0.45, 1],
+                  colors: [Color(0x40000000), Color(0x1A000000), Color(0xB3000000)],
                 ),
               ),
-            Positioned.fill(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(24, 24, 24, 20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+            ),
+          // The mascot stands in the scene rather than floating in a corner
+          // of it — it is part of the picture, which is the whole point of
+          // having one.
+          PositionedDirectional(
+            start: 20,
+            bottom: 24,
+            child: MascotAvatar(mascot: mascot, size: 92),
+          ),
+          Positioned.fill(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(24, topInset + 16, 24, 56),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    eyebrow,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: textColor.withValues(alpha: 0.92),
+                          letterSpacing: 0.4,
+                        ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    headline,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                          color: textColor,
+                          fontWeight: FontWeight.w600,
+                          height: 1.05,
+                        ),
+                  ),
+                  if (secondary != null) ...[
+                    const SizedBox(height: 6),
                     Text(
-                      eyebrow,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: textColor.withValues(alpha: 0.9),
-                          ),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      headline,
+                      secondary!,
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                            color: textColor,
-                            fontWeight: FontWeight.w600,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: textColor.withValues(alpha: 0.92),
                           ),
-                    ),
-                    if (secondary != null) ...[
-                      const SizedBox(height: 4),
-                      Text(
-                        secondary!,
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: textColor.withValues(alpha: 0.9),
-                            ),
-                      ),
-                    ],
-                    const SizedBox(height: 16),
-                    FilledButton(
-                      onPressed: onCtaPressed,
-                      style: FilledButton.styleFrom(
-                        backgroundColor: scheme.primary,
-                        foregroundColor: scheme.onPrimary,
-                      ),
-                      child: Text(ctaLabel),
                     ),
                   ],
-                ),
+                  const SizedBox(height: 20),
+                  FilledButton(
+                    onPressed: onCtaPressed,
+                    style: FilledButton.styleFrom(
+                      backgroundColor:
+                          onPhoto ? Colors.white : scheme.primary,
+                      foregroundColor:
+                          onPhoto ? scheme.primary : scheme.onPrimary,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 28, vertical: 16),
+                    ),
+                    child: Text(ctaLabel),
+                  ),
+                ],
               ),
             ),
-            PositionedDirectional(
-              end: 16,
-              bottom: 12,
-              child: MascotAvatar(mascot: mascot, size: 64),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

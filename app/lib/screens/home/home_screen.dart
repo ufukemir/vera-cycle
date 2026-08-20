@@ -138,10 +138,21 @@ class _HomeScreenState extends State<HomeScreen> {
                       context.read<CycleController>().markPeriodStartedToday(),
                   mascot: prefs.mascot,
                 ),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  children: [
+              // The content rides up over the scene on a rounded sheet, so
+              // the photo continues behind it instead of stopping at a hard
+              // edge. Home reads as one place rather than a banner with a
+              // list bolted underneath.
+              Transform.translate(
+                offset: const Offset(0, -28),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surface,
+                    borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(30)),
+                  ),
+                  padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
+                  child: Column(
+                    children: [
                     if (pregnancyInfo != null) ...[
                       const SizedBox(height: 20),
                       PregnancyCard(info: pregnancyInfo),
@@ -199,7 +210,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     DailyInsightCard(phase: status.phase),
                     const SizedBox(height: 24),
                     const AdPlaceholderBanner(),
+                    const SizedBox(height: 8),
                   ],
+                  ),
                 ),
               ),
             ],
