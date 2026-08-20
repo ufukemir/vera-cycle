@@ -587,6 +587,21 @@ class AppLocalizationsId extends AppLocalizations {
       'Berikut yang sebenarnya terjadi pada datamu, dengan bahasa sederhana.';
 
   @override
+  String get privacyScreenStorageTitle => 'Terenkripsi di perangkat ini';
+
+  @override
+  String get privacyScreenNoNetworkTitle => 'Tanpa server, tanpa akun';
+
+  @override
+  String get privacyScreenNoThirdPartyTitle => 'Tanpa pelacakan';
+
+  @override
+  String get privacyScreenExportTitle => 'Hanya kamu yang bisa mengekspor';
+
+  @override
+  String get privacyScreenDeleteTitle => 'Penghapusan bersifat permanen';
+
+  @override
   String get privacyScreenStorage =>
       'Semua yang kamu catat dienkripsi dan hanya disimpan di perangkat ini, dalam satu file. Kunci enkripsi tersimpan di perangkat keras aman ponselmu — Keychain di iOS, Keystore di Android — bukan di dalam file itu sendiri.';
 
@@ -980,6 +995,16 @@ class AppLocalizationsId extends AppLocalizations {
   String get assistantTitle => 'Asisten Vera';
 
   @override
+  String get assistantEndChatTitle => 'Akhiri obrolan ini?';
+
+  @override
+  String get assistantEndChatBody =>
+      'Pesan hanya ada di memori dan tidak disimpan di mana pun, jadi tidak bisa dikembalikan.';
+
+  @override
+  String get assistantEndChatConfirm => 'Akhiri obrolan';
+
+  @override
   String get assistantInputHint => 'Tanyakan tentang siklusmu…';
 
   @override
@@ -1120,6 +1145,18 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get trackerHistoryEmpty => 'Belum ada catatan dalam rentang ini';
+
+  @override
+  String get trackerStatAverage => 'Rata-rata';
+
+  @override
+  String get trackerStatLowest => 'Terendah';
+
+  @override
+  String get trackerStatHighest => 'Tertinggi';
+
+  @override
+  String get trackerStatLatest => 'Terbaru';
 
   @override
   String get rangeFilter1m => '1 bln';
@@ -1553,6 +1590,12 @@ class AppLocalizationsId extends AppLocalizations {
   String get diagnosticsClear => 'Hapus';
 
   @override
+  String get diagnosticsNoteLabel => 'Apa yang terjadi? (opsional)';
+
+  @override
+  String get diagnosticsTechnicalDetail => 'Detail teknis';
+
+  @override
   String get unitHoursShort => 'j';
 
   @override
@@ -1758,61 +1801,61 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get phaseExplainerMenstrual =>
-      'Kamu berdarah karena lapisan rahim luruh. Estrogen dan progesteron berada di titik terendah siklus, itulah sebabnya banyak orang merasa lebih lelah dan lebih menarik diri di hari-hari awal. Kram berasal dari kontraksi rahim. Pendarahan juga membuatmu kehilangan zat besi — ini menjelaskan sebagian rasa lelahnya.';
+      'Kamu sedang berdarah karena lapisan rahim meluruh. Estrogen dan progesteron berada di titik terendah dalam siklus, dan itulah sebabnya banyak orang merasa lebih lelah dan lebih menarik diri pada hari-hari pertama. Perdarahan biasanya berlangsung sekitar tiga sampai tujuh hari dan paling deras di awal. Kram berasal dari kontraksi rahim yang dipicu oleh prostaglandin — senyawa mirip hormon yang dilepaskan saat lapisan rahim luruh, dan itu juga sebabnya sebagian orang sekaligus mengalami nyeri punggung bawah atau buang air besar lebih sering. Perdarahan juga menguras zat besi, dan itu menjelaskan sebagian rasa lelahnya. Kehangatan, gerak, dan tidur biasanya membantu. Namun jika pembalut penuh setiap jam, perdarahan jelas melewati satu minggu, atau nyerinya menghalangi aktivitas biasa, sebaiknya bicarakan dengan tenaga kesehatan daripada menunggu berlalu.';
 
   @override
   String get phaseExplainerFollicular =>
-      'Setelah pendarahan berhenti, estrogen mulai naik lagi. Kebanyakan orang merasakan energi, suasana hati, dan daya tahannya pulih. Folikel sedang matang di ovarium; tubuh bersiap untuk ovulasi berikutnya.';
+      'Setelah perdarahan berhenti, estrogen mulai naik lagi. Di indung telur sekelompok folikel sedang matang, masing-masing berisi satu sel telur, dan biasanya hanya satu yang akhirnya dilepaskan. Estrogen membangun kembali lapisan rahim yang baru saja luruh, dan kebanyakan orang merasakan energi, suasana hati, kulit, dan daya tahan ikut pulih. Fase ini juga bagian siklus yang paling berbeda antarorang dan antarbulan — stres, sakit, perjalanan, dan kurang tidur biasanya muncul di sini, dengan memanjangkan atau memendekkannya. Itulah alasan jujur mengapa prakiraan berupa rentang, bukan tanggal: paruh kedua siklus cukup stabil, dan paruh inilah yang bergerak.';
 
   @override
   String get phaseExplainerFertile =>
-      'Estrogen mendekati puncaknya dan ovulasi diperkirakan terjadi di sekitar hari-hari ini. Lendir serviks biasanya menjadi bening dan licin, sebagian orang merasakan gairah meningkat, sebagian merasakan nyeri singkat di satu sisi. Energi sering berada di titik tertinggi dalam siklus.';
+      'Estrogen mendekati puncaknya dan ovulasi diperkirakan terjadi di sekitar hari-hari ini. Lonjakan hormon luteinizing memicu pelepasan sel telur kira-kira satu sampai satu setengah hari kemudian. Sel telurnya sendiri bertahan sekitar 12 sampai 24 jam, tetapi sperma bisa bertahan beberapa hari di dalam lendir serviks yang subur — itulah sebabnya jendela ini dihitung beberapa hari, bukan satu hari. Lendir biasanya menjadi bening, elastis, dan licin, agak mirip putih telur mentah; sebagian orang merasakan gairah meningkat, payudara nyeri, atau nyeri singkat di satu sisi. Energi sering berada di titik tertinggi dalam siklus. Ingat, jendela ini adalah perkiraan dari catatanmu sendiri, bukan hasil pengukuran, dan bukan metode kontrasepsi.';
 
   @override
   String get phaseExplainerLuteal =>
-      'Setelah ovulasi, progesteron naik lalu turun tajam menjelang haid. Penurunan itu bisa memicu gejala pramenstruasi: kembung, payudara nyeri, perubahan nafsu makan, tidur terganggu, dan suasana hati naik-turun. Suhu tubuhmu sedikit lebih tinggi.';
+      'Setelah ovulasi, folikel yang kosong menjadi korpus luteum dan mulai menghasilkan progesteron, yang menjaga lapisan rahim tetap stabil seandainya terjadi kehamilan. Jika tidak, progesteron dan estrogen turun tajam dan menstruasi dimulai. Paruh siklus ini yang lebih konsisten, biasanya sekitar 12 sampai 14 hari. Progesteron menaikkan suhu tubuh istirahat sedikit — perubahan itulah yang ditangkap termometer basal — dan bisa memperlambat pencernaan, yang menjadi bagian dari rasa kembung. Penurunan di akhir fase inilah yang memicu PMS pada banyak orang: payudara nyeri, perubahan nafsu makan, tidur terputus, sakit kepala, dan suasana hati naik turun, yang umumnya mereda begitu perdarahan dimulai. Jika gejala itu cukup berat sampai mengganggu pekerjaan atau hubungan hampir setiap bulan, itu layak dibicarakan dengan tenaga kesehatan.';
 
   @override
   String get phaseExplainerUnknown =>
-      'Catatanmu belum cukup untuk menentukan kamu sedang di fase mana. Vera lebih memilih mengatakannya daripada mengarang fase. Setelah kamu mencatat beberapa siklus, bagian ini akan terisi dengan datamu sendiri — sampai saat itu, saran di bawah berlaku kapan saja.';
+      'Catatanmu belum cukup untuk menentukan kamu sedang di fase mana. Vera memerlukan setidaknya dua siklus penuh — satu awal menstruasi, lalu berikutnya — untuk menghitung rata-rata dan variasimu sendiri, dan lebih memilih mengatakannya daripada mengarang sebuah fase. Sementara itu tidak ada yang terbuang: setiap hari yang kamu catat menjadi bagian dari perhitungan pertama itu, dan perkiraannya makin sempit seiring bertambahnya riwayat. Sampai saat itu, saran di bawah bersifat umum dan berlaku di titik mana pun dalam siklus.';
 
   @override
   String get tipFitnessDetailMenstrual =>
-      'Latihan berat tidak cocok untuk kebanyakan orang di hari-hari awal, dan itu bukan soal disiplin — energimu memang sedang lebih rendah. Jalan kaki, peregangan ringan, yoga pemulihan, dan latihan napas melancarkan aliran darah dan bisa meredakan kram. Kalau kamu merasa baik, tidak ada alasan menghindari sesi berat: haid bukan alasan berhenti berolahraga. Satu catatan praktis: sesi panjang dan berat di hari deras bisa menambah lelah, jadi sesuaikan dengan yang tubuhmu rasakan.';
+      'Latihan berat tidak cocok bagi kebanyakan orang di hari-hari pertama, dan itu bukan soal disiplin — energimu memang benar-benar lebih rendah, dan kehilangan zat besi lewat perdarahan membuat latihan daya tahan terasa lebih berat dibanding sesi yang sama minggu lalu. Jalan kaki, peregangan ringan, yoga restoratif, dan latihan napas memperbaiki aliran darah serta dapat meredakan kram; pada sebagian orang, gerak teratur sepanjang bulan menurunkan intensitas kram lebih banyak daripada apa pun yang dilakukan di hari itu sendiri. Kalau kamu merasa baik, tidak ada alasan menghindari sesi berat: menstruasi bukan alasan berhenti berolahraga, dan banyak atlet tetap bertanding saat menstruasi. Beberapa catatan praktis: sesi panjang dan berat di hari perdarahan deras bisa memperdalam rasa lelah, kompres hangat di perut bawah sebelum mulai membuat gerakan lebih nyaman, dan minum sedikit lebih banyak dari biasanya membantu mengatasi sakit kepala di hari-hari ini. Nilai sesimu dari bagaimana rasanya saat itu, bukan dari seperti apa minggu terbaikmu.';
 
   @override
   String get tipFitnessDetailFollicular =>
-      'Saat estrogen naik, kebanyakan orang merasa lebih kuat dan lebih tahan; ini biasanya bagian terbaik siklus untuk memulai sesuatu yang baru, menambah beban, atau menaikkan tempo. Pemulihan otot juga relatif efisien di sini. Tetap tingkatkan bertahap: energi tinggi bukan berarti risiko cedera nol.';
+      'Saat estrogen naik, kebanyakan orang merasa lebih kuat dan lebih tahan; ini biasanya bagian terbaik dari siklus untuk memulai sesuatu yang baru, menambah beban, atau menaikkan tempo. Perbaikan otot relatif efisien di sini, jadi sesi berat lebih mudah diserap dan meninggalkan pegal yang tidak berlarut. Ini juga jendela yang baik untuk hal-hal yang butuh kepala jernih selain badan kuat — mempelajari gerakan baru, memperbaiki teknik, atau menempuh jarak lebih jauh dari biasanya. Dua catatan yang perlu dipegang: naikkan beban bertahap, karena energi tinggi tidak berarti risiko cedera nol dan kebanyakan cedera akibat berlebihan justru bermula di minggu yang baik, bukan yang buruk. Dan jaga tidurmu, karena adaptasi terjadi saat pemulihan, bukan saat sesi berlangsung.';
 
   @override
   String get tipFitnessDetailFertile =>
-      'Energi dan motivasi biasanya di puncak, jadi sesi berat terasa pas. Pada sebagian orang sendi sedikit lebih longgar di sekitar ovulasi, jadi pemanasan lebih lama masuk akal untuk olahraga dengan perubahan arah mendadak. Nyeri singkat di satu sisi perut itu umum — tapi kalau berat atau berlanjut, istirahat dan periksakan.';
+      'Energi dan motivasi biasanya di puncak, jadi sesi berat terasa pas — rekor pribadi sering jatuh di sini. Beberapa penelitian menunjukkan sendi sedikit lebih longgar di sekitar ovulasi; efek praktisnya masih diperdebatkan, tetapi pemanasan yang lebih lama adalah pencegahan murah untuk olahraga dengan perubahan arah mendadak, lompatan, dan pendaratan. Suhu tubuh masih rendah dibanding paruh kedua siklus, jadi panas belum sebatas nanti dalam satu dua minggu. Nyeri singkat di satu sisi perut bawah saat ovulasi umum terjadi dan biasanya hilang dalam hitungan jam. Namun jika nyerinya hebat, satu sisi, dan menetap, disertai demam, atau kamu merasa mau pingsan, hentikan dan periksakan alih-alih memaksakan latihan.';
 
   @override
   String get tipFitnessDetailLuteal =>
-      'Menjelang haid, energi bisa turun, denyut jantung bisa lebih tinggi untuk usaha yang sama, dan pemulihan bisa lebih lama. Itu ayunan yang wajar, bukan kemunduran. Sesi sedang, latihan kekuatan versi sedikit lebih ringan, dan jalan kaki biasanya lebih berkelanjutan di sini. Kalau kembung dan payudara nyeri, bra yang menopang dan pemanasan lebih lama terasa bedanya.';
+      'Menjelang menstruasi, energi bisa menurun, denyut jantung bisa lebih tinggi untuk usaha yang sama, dan pemulihan bisa lebih lama. Itu ayunan yang wajar, bukan kemunduran, dan tidak menghapus kerja dua minggu terakhir. Progesteron menaikkan suhu istirahat sedikit dan menyulitkan tubuh melepas panas, sehingga sesi di cuaca panas atau lembap terasa jauh lebih berat di fase ini — berlatih di jam yang lebih sejuk dan minum lebih banyak dari yang terasa perlu, keduanya membantu. Sesi sedang, versi latihan kekuatan yang sedikit diringankan, dan jalan kaki biasanya lebih berkelanjutan. Jika ada kembung dan nyeri payudara, bra olahraga yang menopang baik dan pemanasan lebih panjang benar-benar terasa bedanya. Kalau suasana hati sedang turun, buat sesinya pendek dan ringan alih-alih melewatkannya sama sekali — ambang agar sesi itu dihitung lebih rendah dari yang kamu kira.';
 
   @override
   String get tipFitnessDetailUnknown =>
-      'Meski fasemu belum diketahui, bergerak selalu membantu: aktivitas sedang yang tersebar di sebagian besar hari lebih baik daripada sesi sangat berat sesekali. Sesuaikan dengan perasaanmu — di hari lelah, jalan kaki pun dihitung. Setelah beberapa siklus tercatat, kamu akan melihat saran khusus fasemu di sini.';
+      'Meski fasemu belum diketahui, bergerak tetap membantu kapan saja: anjuran umumnya sekitar 150 menit aktivitas sedang per minggu, tersebar di sebagian besar hari, ditambah latihan kekuatan dua kali seminggu — dan pola itu memberi hasil lebih baik bagi hampir semua orang dibanding sesi sangat berat sesekali. Konsistensi lebih penting daripada intensitas, dan sesi terbaik adalah sesi yang benar-benar akan kamu ulang minggu depan. Sesuaikan dengan perasaanmu: di hari lelah, jalan kaki pun dihitung, dan sesi pendek yang dikerjakan lebih berharga daripada sesi panjang yang dilewatkan. Setelah beberapa siklus tercatat, saran khusus per fase akan muncul di sini.';
 
   @override
   String get tipNutritionDetailMenstrual =>
-      'Pendarahan membuatmu kehilangan zat besi; daging merah, lentil, kacang arab, sayuran hijau gelap, dan molase membantu menggantinya. Zat besi nabati jauh lebih mudah diserap bersama vitamin C — memeras lemon di atas masakan lentil adalah versi paling praktisnya. Teh dan kopi saat makan menurunkan penyerapan zat besi, jadi beri jarak satu jam saja cukup. Minum cukup air bisa meredakan lelah dan sakit kepala saat haid.';
+      'Perdarahan menguras zat besi; daging merah, lentil, buncis kacang arab, sayuran hijau tua, dan molase membantu menggantinya. Zat besi nabati diserap jauh lebih baik bersama vitamin C — memeras jeruk nipis di atas masakan lentil adalah versi paling praktisnya, dan salad tomat di sampingnya berfungsi sama. Teh dan kopi bersamaan dengan makan menurunkan penyerapan zat besi karena taninnya, jadi memberi jeda sekitar satu jam sudah cukup; kamu tidak perlu berhenti meminum keduanya. Minum cukup air dapat meringankan rasa lelah dan sakit kepala yang menyertai perdarahan, dan makanan kaya magnesium seperti kacang-kacangan, biji-bijian, serta sayuran hijau tua membantu sebagian orang meredakan kram. Di hari-hari saat pencernaan terasa lambat, porsi kecil yang sering biasanya lebih nyaman daripada porsi besar. Jika saat menstruasi kamu sering merasa sesak napas, pusing, atau lelah luar biasa, sebaiknya sampaikan ke tenaga kesehatan — kekurangan zat besi itu umum, mudah diperiksa, dan bukan sesuatu yang boleh didiagnosis oleh sebuah aplikasi.';
 
   @override
   String get tipNutritionDetailFollicular =>
-      'Saat energi pulih, tubuh sedang dalam mode membangun: protein yang cukup, biji-bijian utuh, dan sayuran mendukung itu. Melanjutkan pengisian cadangan zat besi setelah haid juga masuk akal. Tidak melewatkan makan biasanya lebih mudah di fase ini, dan membuatmu masuk ke naik-turunnya nafsu makan di fase berikutnya dengan lebih seimbang.';
+      'Saat energi pulih, tubuh berada dalam mode membangun kembali: protein yang cukup, biji-bijian utuh, dan sayuran mendukung proses itu, dan di fase inilah nafsu makan biasanya paling stabil dan paling mudah diatur. Masuk akal juga untuk terus mengisi kembali cadangan zat besi setelah perdarahan, bukan menganggapnya urusan minggu menstruasi saja — cadangan terisi dalam hitungan minggu, bukan hari. Tidak melewatkan waktu makan biasanya lebih mudah di fase ini, dan itu membuatmu memasuki naik-turunnya nafsu makan di fase berikutnya dengan lebih seimbang. Kalau kamu berniat mengubah pola makan, fase ini umumnya lebih bersahabat untuk memulai dibanding minggu sebelum menstruasi, saat keinginan makan dan suasana hati yang turun membuat setiap kebiasaan baru terasa lebih sulit daripada sebenarnya.';
 
   @override
   String get tipNutritionDetailFertile =>
-      'Tidak ada pola makan khusus yang diperlukan di sini; makan seimbang dan minum cukup air paling berpengaruh. Sebagian orang merasa kembung, biasanya hormonal dan sementara. Kalau kamu merencanakan kehamilan, ini waktu yang tepat untuk bertanya soal asam folat ke tenaga kesehatan — tapi itu percakapan dengan mereka, bukan saran yang seharusnya diberikan aplikasi.';
+      'Di sini tidak diperlukan pola makan khusus; makanan seimbang dan air yang cukup sudah paling banyak berperan. Sebagian orang merasa kembung di sekitar ovulasi, yang umumnya bersifat hormonal dan sementara, bukan akibat sesuatu yang dimakan. Nafsu makan sedikit menurun pada sebagian orang dan meningkat pada sebagian lain — keduanya biasa. Menjaga protein dan serat dalam setiap makan membuat energi stabil sepanjang bagian bulan yang sering paling sibuk dan paling aktif ini. Kalau kamu sedang merencanakan kehamilan, ini waktu yang tepat untuk bertanya kepada tenaga kesehatan soal asam folat, yang umumnya dianjurkan sebelum pembuahan, bukan sesudahnya — tetapi itu percakapan dengan mereka, bukan saran yang pantas diberikan sebuah aplikasi.';
 
   @override
   String get tipNutritionDetailLuteal =>
-      'Nafsu makan meningkat dan ingin yang manis saat progesteron naik sangat umum; itu pergeseran hormonal, bukan soal kemauan. Menambahkan protein dan serat ke makanan menjaga gula darah lebih stabil dan meredam keinginan itu. Kurangi garam dan perbanyak air untuk meringankan kembung. Makanan kaya magnesium (almond, kenari, sayuran hijau gelap, cokelat hitam) mengurangi kram dan ketegangan pada sebagian orang. Mengurangi kafein membantu tidur yang terganggu di fase ini.';
+      'Nafsu makan yang meningkat dan keinginan makan manis saat progesteron naik sangat umum; itu pergeseran hormonal, bukan soal kemauan, dan tubuhmu memang memakai sedikit lebih banyak energi di fase ini. Menambahkan protein dan serat ke dalam makanan membuat gula darah lebih stabil dan meredakan keinginan itu jauh lebih baik daripada berusaha mengabaikannya — keinginan yang dijawab dengan sesuatu yang mengenyangkan biasanya berakhir lebih cepat daripada yang dilawan selama sejam. Mengurangi garam dan menambah air dapat meringankan kembung; terdengar terbalik, tetapi tidak: saat cairan cukup, tubuh justru menahan lebih sedikit. Makanan kaya magnesium (almond, kenari, sayuran hijau tua, cokelat hitam) mengurangi kram dan ketegangan pada sebagian orang. Mengurangi kafein setelah tengah hari membantu tidur yang terputus-putus di fase ini, dan alkohol juga perlu diperhatikan karena ia memecah tidur justru di titik siklus saat tidur sudah lebih ringan.';
 
   @override
   String get tipNutritionDetailUnknown =>
-      'Apa pun fasenya, hal yang sama paling membantu: makan teratur, protein cukup, banyak sayur, air cukup, dan makanan kaya zat besi. Karena haid menguras zat besi, cukup beri sedikit perhatian lebih di hari-hari itu. Setelah beberapa siklus tercatat, kamu akan melihat saran khusus fasemu di sini.';
+      'Apa pun fasenya, hal yang paling membantu tetap sama: makan teratur, protein cukup, banyak sayur, air cukup, dan makanan kaya zat besi. Karena perdarahan menguras zat besi, cukup memberi sedikit perhatian lebih di hari-hari itu — tidak perlu pola makan berbeda untuk tiap minggu dalam sebulan. Makan pada jam yang kurang lebih tetap lebih berpengaruh pada kestabilan energi dibanding satu jenis makanan mana pun, dan tidak ada bahan yang harus dihilangkan agar sebuah siklus menjadi sehat. Setelah beberapa siklus tercatat, saran khusus per fase akan muncul di sini.';
 }

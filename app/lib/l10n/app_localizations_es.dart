@@ -587,6 +587,21 @@ class AppLocalizationsEs extends AppLocalizations {
       'Esto es exactamente lo que ocurre con tus datos, en lenguaje sencillo.';
 
   @override
+  String get privacyScreenStorageTitle => 'Cifrado en este dispositivo';
+
+  @override
+  String get privacyScreenNoNetworkTitle => 'Sin servidor ni cuenta';
+
+  @override
+  String get privacyScreenNoThirdPartyTitle => 'Sin rastreo';
+
+  @override
+  String get privacyScreenExportTitle => 'Solo tú puedes exportarlo';
+
+  @override
+  String get privacyScreenDeleteTitle => 'El borrado es definitivo';
+
+  @override
   String get privacyScreenStorage =>
       'Todo lo que registras se cifra y se guarda solo en este dispositivo, en un único archivo. La clave de cifrado vive en el hardware seguro de tu teléfono — Keychain en iOS, Keystore en Android — no en el archivo en sí.';
 
@@ -982,6 +997,16 @@ class AppLocalizationsEs extends AppLocalizations {
   String get assistantTitle => 'Asistente Vera';
 
   @override
+  String get assistantEndChatTitle => '¿Terminar este chat?';
+
+  @override
+  String get assistantEndChatBody =>
+      'Los mensajes solo están en la memoria y no se guardan en ningún sitio, así que no se pueden recuperar.';
+
+  @override
+  String get assistantEndChatConfirm => 'Terminar chat';
+
+  @override
   String get assistantInputHint => 'Pregunta sobre tu ciclo…';
 
   @override
@@ -1124,6 +1149,18 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get trackerHistoryEmpty => 'Aún no hay registros en este rango';
+
+  @override
+  String get trackerStatAverage => 'Media';
+
+  @override
+  String get trackerStatLowest => 'Mínimo';
+
+  @override
+  String get trackerStatHighest => 'Máximo';
+
+  @override
+  String get trackerStatLatest => 'Último';
 
   @override
   String get rangeFilter1m => '1 mes';
@@ -1573,6 +1610,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get diagnosticsClear => 'Borrar';
 
   @override
+  String get diagnosticsNoteLabel => '¿Qué ocurrió? (opcional)';
+
+  @override
+  String get diagnosticsTechnicalDetail => 'Detalles técnicos';
+
+  @override
   String get unitHoursShort => 'h';
 
   @override
@@ -1779,61 +1822,61 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get phaseExplainerMenstrual =>
-      'Estás sangrando porque el endometrio se desprende. El estrógeno y la progesterona están en su punto más bajo del ciclo, por eso muchas personas se sienten más cansadas y más hacia adentro los primeros días. Los cólicos vienen de las contracciones del útero. El sangrado también te cuesta hierro, lo que explica parte del agotamiento.';
+      'Estás sangrando porque el endometrio se desprende. El estrógeno y la progesterona están en su punto más bajo del ciclo, y por eso muchas personas se sienten más cansadas y más hacia dentro en los primeros días. El sangrado suele durar entre tres y siete días y es más abundante al principio. Los cólicos vienen de las contracciones del útero, provocadas por las prostaglandinas — compuestos parecidos a hormonas que se liberan al desprenderse el endometrio, y también la razón por la que algunas personas tienen dolor lumbar o el intestino más suelto a la vez. El sangrado también cuesta hierro, lo que explica parte del cansancio. El calor, el movimiento y el sueño suelen ayudar. Si la protección se empapa cada hora, si el sangrado se alarga bastante más de una semana o si el dolor te impide hacer cosas normales, conviene consultarlo con un profesional en vez de esperar a que pase.';
 
   @override
   String get phaseExplainerFollicular =>
-      'Cuando termina el sangrado, el estrógeno vuelve a subir. La mayoría nota que la energía, el ánimo y la resistencia se recuperan. En los ovarios maduran folículos; el cuerpo se prepara para la siguiente ovulación.';
+      'Cuando termina el sangrado, el estrógeno vuelve a subir. En los ovarios madura un grupo de folículos, cada uno con un óvulo, y normalmente solo uno llega a liberarse. El estrógeno reconstruye el endometrio que acaba de desprenderse, y la mayoría nota que la energía, el ánimo, la piel y la resistencia se recuperan con él. Esta es también la parte del ciclo que más varía entre personas y entre meses: el estrés, una enfermedad, los viajes y el sueño suelen aparecer aquí, alargándola o acortándola. Esa es la razón honesta por la que una predicción es un intervalo y no una fecha: la segunda mitad del ciclo es bastante estable, y esta es la que se mueve.';
 
   @override
   String get phaseExplainerFertile =>
-      'El estrógeno se acerca a su pico y se espera la ovulación en estos días. El moco cervical suele volverse transparente y resbaladizo, algunas personas notan más deseo y otras una punzada breve de un lado. La energía suele estar en su punto más alto del ciclo.';
+      'El estrógeno está cerca de su pico y la ovulación se espera en torno a estos días. Un pico de hormona luteinizante desencadena la liberación del óvulo aproximadamente un día o día y medio después. El óvulo sobrevive unas 12 a 24 horas, pero los espermatozoides pueden vivir varios días en un moco cervical fértil — por eso la ventana se cuenta en varios días y no en uno. El moco suele volverse transparente, elástico y resbaladizo, parecido a la clara de huevo cruda; algunas personas notan más deseo, sensibilidad en el pecho o una punzada breve en un lado. La energía suele estar en su punto más alto del ciclo. Recuerda que esta ventana es una estimación hecha con tu propio historial, no una medición, y no es un método anticonceptivo.';
 
   @override
   String get phaseExplainerLuteal =>
-      'Tras la ovulación sube la progesterona y luego cae con fuerza al acercarse la regla. Esa caída puede desencadenar síntomas premenstruales: hinchazón, sensibilidad en los senos, cambios de apetito, sueño interrumpido y altibajos de ánimo. Tu temperatura corporal se mantiene algo más alta.';
+      'Tras la ovulación, el folículo vacío se convierte en cuerpo lúteo y empieza a producir progesterona, que mantiene estable el endometrio por si se implanta un embarazo. Si no ocurre, la progesterona y el estrógeno caen bruscamente y empieza la regla. Esta mitad del ciclo es la más constante, normalmente de unos 12 a 14 días. La progesterona sube ligeramente tu temperatura en reposo — el cambio que capta un termómetro basal — y puede enlentecer la digestión, lo que explica parte de la hinchazón. La caída del final es lo que desencadena el SPM en muchas personas: sensibilidad en el pecho, cambios de apetito, sueño interrumpido, dolor de cabeza y altibajos de ánimo, que suelen aliviarse al empezar el sangrado. Si esos síntomas te alteran el trabajo o las relaciones la mayoría de los meses, merece la pena hablarlo con un profesional.';
 
   @override
   String get phaseExplainerUnknown =>
-      'Todavía no hay suficientes registros para decir en qué fase estás. Vera prefiere decirlo antes que inventar una fase. Cuando registres unos cuantos ciclos, esta sección se llenará con tus propios datos; hasta entonces, las sugerencias de abajo sirven en cualquier momento.';
+      'Todavía no hay suficientes registros para decir en qué fase estás. Vera necesita al menos dos ciclos completos — un inicio de regla y luego el siguiente — para calcular tu propia media y tu variabilidad, y prefiere decirlo antes que inventarse una fase. Mientras tanto no se pierde nada: cada día que registras forma parte de ese primer cálculo, y la estimación se estrecha según crece tu historial. Hasta entonces, las sugerencias de abajo son generales y valen en cualquier punto del ciclo.';
 
   @override
   String get tipFitnessDetailMenstrual =>
-      'El entrenamiento duro no le sienta bien a la mayoría los primeros días, y no es un problema de disciplina: tu energía realmente está más baja. Caminar, estirar suave, yoga restaurativo y respiración mejoran la circulación y pueden aliviar los cólicos. Si te sientes bien, no hay motivo para evitar sesiones intensas: sangrar no es razón para dejar de moverte. Un apunte práctico: en los días de sangrado abundante, las sesiones largas y exigentes pueden aumentar el cansancio, así que ajústalo según cómo te sientas.';
+      'El entrenamiento duro no le sienta bien a la mayoría en los primeros días, y eso no es falta de disciplina: tu energía está realmente más baja, y perder hierro con el sangrado hace que el trabajo de resistencia se sienta más duro que la misma sesión la semana pasada. Caminar, estirar suave, yoga restaurativo y trabajo de respiración mejoran el flujo sanguíneo y pueden suavizar los cólicos; en algunas personas, moverse con regularidad durante todo el mes reduce la intensidad de los cólicos más que cualquier cosa que hagan ese día. Si te encuentras bien, no hay razón para evitar sesiones exigentes: sangrar no es motivo para dejar de entrenar, y muchas deportistas compiten durante la regla. Algunas notas prácticas: las sesiones largas y exigentes en los días de más sangrado pueden acentuar el cansancio, aplicar calor en el bajo vientre antes de empezar hace el movimiento más cómodo, y beber algo más de lo habitual ayuda con los dolores de cabeza de estos días. Juzga la sesión por cómo te sientes en ella, no por cómo era tu mejor semana.';
 
   @override
   String get tipFitnessDetailFollicular =>
-      'Con el estrógeno subiendo, la mayoría se siente más fuerte y resistente; suele ser el mejor tramo del ciclo para empezar algo nuevo, subir peso o apretar el ritmo. La recuperación muscular también es relativamente eficiente aquí. Aun así, progresa de forma gradual: tener energía no significa riesgo cero de lesión.';
+      'Con el estrógeno subiendo, la mayoría se siente más fuerte y más resistente; suele ser el mejor tramo del ciclo para empezar algo nuevo, subir peso o apretar el ritmo. La reparación muscular es relativamente eficiente aquí, así que las sesiones duras se asimilan mejor y dejan menos agujetas persistentes. También es una buena ventana para lo que pide cabeza clara además de cuerpo fuerte: aprender un movimiento nuevo, corregir la técnica o hacer una distancia más larga de lo habitual. Dos advertencias que conviene mantener: sube de forma gradual, porque tener mucha energía no significa riesgo cero de lesión y la mayoría de las lesiones por sobreuso empiezan en una buena semana, no en una mala. Y protege el sueño: la adaptación ocurre en la recuperación, no en la sesión.';
 
   @override
   String get tipFitnessDetailFertile =>
-      'La energía y la motivación suelen estar en su punto máximo, así que las sesiones exigentes encajan bien. En algunas personas las articulaciones están algo más laxas alrededor de la ovulación: en deportes con cambios bruscos de dirección conviene calentar más. Una punzada breve en un lado del abdomen es común, pero si es fuerte o dura, descansa y consúltalo.';
+      'La energía y la motivación suelen estar en su punto máximo, así que las sesiones exigentes caen bien — aquí es donde a menudo salen las marcas personales. Algunos estudios sugieren que las articulaciones están algo más laxas alrededor de la ovulación; el efecto práctico se discute, pero un calentamiento más largo es una precaución barata en deportes con cambios bruscos de dirección, saltos y aterrizajes. La temperatura corporal sigue siendo baja respecto a la segunda mitad del ciclo, así que el calor limita menos de lo que limitará en una o dos semanas. Una punzada breve en un lado del bajo vientre alrededor de la ovulación es frecuente y suele pasar en unas horas. Si el dolor es intenso, de un solo lado y persistente, si hay fiebre o te sientes mareada, para y consúltalo en vez de seguir entrenando.';
 
   @override
   String get tipFitnessDetailLuteal =>
-      'Al acercarse la regla la energía puede bajar, el pulso subir para el mismo esfuerzo y la recuperación alargarse. Es una oscilación esperable, no un retroceso. Las sesiones moderadas, una versión algo más ligera de tu trabajo de fuerza y caminar suelen ser más sostenibles aquí. Con hinchazón y sensibilidad en los senos, un buen sujetador deportivo y un calentamiento más largo marcan la diferencia.';
+      'Cuando se acerca la regla, la energía puede bajar, el pulso puede estar más alto para el mismo esfuerzo y la recuperación puede alargarse. Es una oscilación esperable, no un retroceso, y no borra el trabajo de las dos últimas semanas. La progesterona sube algo tu temperatura en reposo y dificulta soltar calor, así que las sesiones con calor o humedad se sienten desproporcionadamente duras aquí: entrenar más temprano o más tarde y beber más de lo que parece necesario ayudan. Las sesiones moderadas, una versión algo más ligera de tu trabajo de fuerza y caminar suelen ser más sostenibles. Con hinchazón y sensibilidad en el pecho, un sujetador deportivo con buen soporte y un calentamiento más largo marcan una diferencia real. Si el ánimo está bajo, haz la sesión corta y fácil en lugar de saltártela: el listón para que cuente está más bajo de lo que parece.';
 
   @override
   String get tipFitnessDetailUnknown =>
-      'Aunque no sepamos tu fase, moverse ayuda siempre: actividad moderada repartida en la mayoría de los días de la semana rinde más que sesiones muy intensas ocasionales. Ajusta según cómo te sientas: en los días de cansancio, caminar también cuenta. Cuando registres unos ciclos verás aquí sugerencias específicas de tu fase.';
+      'Aunque no sepamos tu fase, moverse ayuda en cualquier momento: la recomendación general son unos 150 minutos de actividad moderada a la semana, repartidos en la mayoría de los días, más trabajo de fuerza dos veces por semana — y ese patrón le funciona a casi todo el mundo mejor que las sesiones muy intensas ocasionales. La constancia importa más que la intensidad, y la mejor sesión es la que vas a repetir la semana que viene. Ajusta según cómo te sientas: en los días cansados, un paseo cuenta, y una sesión corta hecha vale más que una larga saltada. Cuando registres unos cuantos ciclos, aquí aparecerán sugerencias por fase.';
 
   @override
   String get tipNutritionDetailMenstrual =>
-      'El sangrado te cuesta hierro; la carne roja, las lentejas, los garbanzos, las verduras de hoja oscura y la melaza ayudan a reponerlo. El hierro vegetal se absorbe bastante mejor junto con vitamina C: exprimir limón sobre un plato de lentejas es la versión más práctica de eso. El té y el café con la comida reducen la absorción de hierro, así que basta con dejar una hora entre medias. Beber suficiente agua puede aliviar el cansancio y el dolor de cabeza del sangrado.';
+      'El sangrado te cuesta hierro; la carne roja, las lentejas, los garbanzos, las verduras de hoja verde oscura y la melaza ayudan a reponerlo. El hierro vegetal se absorbe bastante mejor junto a vitamina C — exprimir limón sobre un plato de lentejas es la versión más práctica, y una ensalada de tomate al lado hace lo mismo. El té y el café con la comida reducen la absorción de hierro por sus taninos, así que basta con dejar cerca de una hora entre medias; no hace falta renunciar a ninguno. Beber suficiente agua puede aliviar el cansancio y los dolores de cabeza del sangrado, y los alimentos ricos en magnesio como frutos secos, semillas y verduras de hoja oscura ayudan a algunas personas con los cólicos. En los días en que la digestión va lenta, las comidas pequeñas y frecuentes sientan mejor que las grandes. Si con la regla notas a menudo falta de aire, mareo o un cansancio inusual, conviene mencionarlo a un profesional: el hierro bajo es frecuente, se comprueba con facilidad y no es algo que una app deba diagnosticar.';
 
   @override
   String get tipNutritionDetailFollicular =>
-      'Con la energía recuperándose, el cuerpo está en modo reconstrucción: suficiente proteína, cereales integrales y verduras lo apoyan. También tiene sentido seguir reponiendo las reservas de hierro tras el sangrado. No saltarse comidas suele ser más fácil en esta fase, y te deja mejor preparada para los altibajos de apetito de la siguiente.';
+      'Con la energía recuperándose, el cuerpo está en modo reconstrucción: suficiente proteína, cereales integrales y verduras lo apoyan, y esta es la fase en la que el apetito suele ser más estable y fácil de manejar. También tiene sentido seguir rellenando las reservas de hierro después del sangrado en lugar de tratarlo como una tarea solo de la semana de la regla: las reservas se rehacen en semanas, no en días. No saltarse comidas suele ser más fácil aquí, y te deja entrar más equilibrada en los vaivenes de apetito de la fase siguiente. Si vas a cambiar tu forma de comer, este tramo suele ser más amable para empezar que la semana previa a la regla, cuando los antojos y el ánimo bajo hacen que cualquier rutina nueva parezca más difícil de lo que es.';
 
   @override
   String get tipNutritionDetailFertile =>
-      'Aquí no hace falta ninguna dieta especial; comer equilibrado y beber suficiente agua es lo que más ayuda. Algunas personas se sienten hinchadas, algo normalmente hormonal y pasajero. Si estás planeando un embarazo, es un buen momento para preguntar por el ácido fólico a un profesional, pero esa es una conversación con quien te atiende, no un consejo que deba dar una app.';
+      'Aquí no hace falta ninguna dieta especial; comidas equilibradas y suficiente agua hacen casi todo el trabajo. Algunas personas se sienten hinchadas alrededor de la ovulación, algo que suele ser hormonal y pasajero más que consecuencia de lo que has comido. El apetito baja un poco en unas y sube en otras: las dos cosas son normales. Mantener proteína y fibra en las comidas estabiliza la energía en lo que suele ser el tramo más activo del mes. Si estás planeando un embarazo, es un buen momento para preguntar a un profesional por el ácido fólico, que se aconseja generalmente antes de concebir y no después — pero esa es una conversación con esa persona, no un consejo que deba dar una app.';
 
   @override
   String get tipNutritionDetailLuteal =>
-      'Que aumente el apetito y las ganas de dulce cuando sube la progesterona es muy común; es un cambio hormonal, no un problema de fuerza de voluntad. Añadir proteína y fibra a las comidas mantiene el azúcar en sangre más estable y suaviza el antojo. Menos sal y más agua pueden aliviar la hinchazón. Los alimentos ricos en magnesio (almendras, nueces, hojas verdes oscuras, chocolate negro) reducen los cólicos y la tensión en algunas personas. Bajar la cafeína ayuda con el sueño interrumpido de esta fase.';
+      'Que aumente el apetito y el antojo de dulce mientras sube la progesterona es muy frecuente; es un cambio hormonal, no un problema de fuerza de voluntad, y tu cuerpo gasta de verdad algo más de energía en esta fase. Añadir proteína y fibra a las comidas mantiene la glucosa más estable y suaviza el antojo mucho mejor que intentar ignorarlo — un antojo atendido con algo sustancioso suele terminar antes que uno contra el que peleas una hora. Menos sal y más agua pueden aliviar la hinchazón; suena al revés pero no lo es: bien hidratado, el cuerpo retiene menos. Los alimentos ricos en magnesio (almendras, nueces, verduras de hoja oscura, chocolate negro) reducen los cólicos y la tensión en algunas personas. Bajar la cafeína después del mediodía ayuda con el sueño interrumpido de esta fase, y conviene vigilar también el alcohol, porque fragmenta el sueño justo en el punto del ciclo en que ya es más ligero.';
 
   @override
   String get tipNutritionDetailUnknown =>
-      'Sea cual sea la fase, ayudan las mismas cosas: comidas regulares, suficiente proteína, muchas verduras, suficiente agua y alimentos ricos en hierro. Como el sangrado cuesta hierro, basta con prestar un poco más de atención esos días. Cuando registres unos ciclos verás aquí sugerencias específicas de tu fase.';
+      'Sea cual sea la fase, lo que más ayuda es lo mismo: comidas regulares, suficiente proteína, muchas verduras, suficiente agua y alimentos ricos en hierro. Como el sangrado cuesta hierro, basta con prestar un poco más de atención esos días; no hace falta una dieta distinta cada semana del mes. Comer a horas más o menos constantes hace más por una energía estable que cualquier alimento concreto, y no hay que eliminar ningún ingrediente para que un ciclo sea sano. Cuando registres unos cuantos ciclos, aquí aparecerán sugerencias por fase.';
 }

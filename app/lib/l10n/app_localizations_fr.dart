@@ -594,6 +594,21 @@ class AppLocalizationsFr extends AppLocalizations {
       'Voici exactement ce qui arrive à tes données, en langage clair.';
 
   @override
+  String get privacyScreenStorageTitle => 'Chiffré sur cet appareil';
+
+  @override
+  String get privacyScreenNoNetworkTitle => 'Ni serveur ni compte';
+
+  @override
+  String get privacyScreenNoThirdPartyTitle => 'Aucun pistage';
+
+  @override
+  String get privacyScreenExportTitle => 'L\'export ne part que de vous';
+
+  @override
+  String get privacyScreenDeleteTitle => 'La suppression est définitive';
+
+  @override
   String get privacyScreenStorage =>
       'Tout ce que tu enregistres est chiffré et stocké uniquement sur cet appareil, dans un seul fichier. La clé de chiffrement se trouve dans le matériel sécurisé de ton téléphone — Trousseau (Keychain) sur iOS, Keystore sur Android — pas dans le fichier lui-même.';
 
@@ -992,6 +1007,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get assistantTitle => 'Assistant Vera';
 
   @override
+  String get assistantEndChatTitle => 'Terminer cette conversation ?';
+
+  @override
+  String get assistantEndChatBody =>
+      'Les messages ne sont qu\'en mémoire et ne sont enregistrés nulle part : ils ne pourront pas être récupérés.';
+
+  @override
+  String get assistantEndChatConfirm => 'Terminer';
+
+  @override
   String get assistantInputHint => 'Pose une question sur ton cycle…';
 
   @override
@@ -1135,6 +1160,18 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get trackerHistoryEmpty =>
       'Aucune entrée sur cette période pour l\'instant';
+
+  @override
+  String get trackerStatAverage => 'Moyenne';
+
+  @override
+  String get trackerStatLowest => 'Minimum';
+
+  @override
+  String get trackerStatHighest => 'Maximum';
+
+  @override
+  String get trackerStatLatest => 'Dernier';
 
   @override
   String get rangeFilter1m => '1 mois';
@@ -1584,6 +1621,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get diagnosticsClear => 'Effacer';
 
   @override
+  String get diagnosticsNoteLabel => 'Que s\'est-il passé ? (facultatif)';
+
+  @override
+  String get diagnosticsTechnicalDetail => 'Détails techniques';
+
+  @override
   String get unitHoursShort => 'h';
 
   @override
@@ -1793,61 +1836,61 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get phaseExplainerMenstrual =>
-      'Tu saignes parce que la muqueuse utérine se détache. Les œstrogènes et la progestérone sont au plus bas du cycle : c\'est pourquoi beaucoup se sentent plus fatiguées et plus tournées vers l\'intérieur les premiers jours. Les crampes viennent des contractions de l\'utérus. Le saignement te coûte aussi du fer, ce qui explique une partie de la fatigue.';
+      'Tu saignes parce que la muqueuse utérine se détache. Les œstrogènes et la progestérone sont au plus bas du cycle, ce qui explique pourquoi beaucoup de personnes se sentent plus fatiguées et plus repliées les premiers jours. Le saignement dure en général trois à sept jours et il est plus abondant au début. Les crampes viennent des contractions de l\'utérus, déclenchées par les prostaglandines — des composés proches des hormones libérés quand la muqueuse se détache, ce qui explique aussi les douleurs lombaires ou le transit accéléré que certaines personnes ressentent en même temps. Le saignement coûte aussi du fer, et cela explique une partie de la fatigue. La chaleur, le mouvement et le sommeil aident en général. Si la protection est saturée toutes les heures, si le saignement dépasse nettement une semaine ou si la douleur t\'empêche de faire les choses ordinaires, mieux vaut en parler à un professionnel de santé que d\'attendre que ça passe.';
 
   @override
   String get phaseExplainerFollicular =>
-      'Une fois le saignement terminé, les œstrogènes remontent. La plupart des personnes sentent l\'énergie, l\'humeur et l\'endurance revenir. Des follicules mûrissent dans les ovaires ; le corps prépare la prochaine ovulation.';
+      'Une fois le saignement terminé, les œstrogènes remontent. Dans les ovaires, un groupe de follicules mûrit, chacun contenant un ovule, et un seul est généralement libéré. Les œstrogènes reconstruisent la muqueuse qui vient d\'être évacuée, et la plupart des personnes sentent l\'énergie, l\'humeur, la peau et l\'endurance revenir avec eux. C\'est aussi la partie du cycle qui varie le plus d\'une personne à l\'autre et d\'un mois à l\'autre : le stress, une maladie, les voyages et le sommeil se manifestent surtout ici, en l\'allongeant ou en la raccourcissant. C\'est la raison honnête pour laquelle une prévision est un intervalle et non une date : la seconde moitié du cycle est assez stable, et c\'est celle-ci qui bouge.';
 
   @override
   String get phaseExplainerFertile =>
-      'Les œstrogènes approchent de leur pic et l\'ovulation est attendue autour de ces jours. La glaire cervicale devient typiquement claire et glissante, certaines personnes notent plus de désir, d\'autres une brève pointe d\'un côté. L\'énergie est souvent au plus haut du cycle.';
+      'Les œstrogènes approchent de leur pic et l\'ovulation est attendue autour de ces jours. Un pic d\'hormone lutéinisante déclenche la libération de l\'ovule environ un jour à un jour et demi plus tard. L\'ovule lui-même survit à peu près 12 à 24 heures, mais les spermatozoïdes peuvent vivre plusieurs jours dans une glaire cervicale fertile — c\'est pour cela que la fenêtre se compte en plusieurs jours et non en un seul. La glaire devient typiquement claire, filante et glissante, un peu comme du blanc d\'œuf cru ; certaines personnes remarquent plus de désir, des seins sensibles ou un bref tiraillement d\'un côté. L\'énergie est souvent au plus haut du cycle. Rappelle-toi que cette fenêtre est une estimation issue de ton propre historique, pas une mesure — et ce n\'est pas un moyen de contraception.';
 
   @override
   String get phaseExplainerLuteal =>
-      'Après l\'ovulation, la progestérone monte puis chute nettement à l\'approche des règles. Cette chute peut déclencher des symptômes prémenstruels : ballonnements, seins sensibles, changements d\'appétit, sommeil haché et variations d\'humeur. Ta température corporelle reste un peu plus élevée.';
+      'Après l\'ovulation, le follicule vidé devient le corps jaune et se met à produire de la progestérone, qui maintient la muqueuse stable au cas où une grossesse s\'implanterait. Si ce n\'est pas le cas, la progestérone et les œstrogènes chutent brutalement et les règles commencent. Cette moitié du cycle est la plus régulière, en général autour de 12 à 14 jours. La progestérone fait légèrement monter la température au repos — c\'est ce que capte un thermomètre basal — et peut ralentir la digestion, ce qui explique une partie des ballonnements. La chute de la fin est ce qui déclenche le SPM chez beaucoup : seins tendus, changements d\'appétit, sommeil haché, maux de tête et humeur en dents de scie, qui s\'apaisent en général au début du saignement. Si ces symptômes perturbent le travail ou les relations la plupart des mois, cela mérite d\'en parler à un professionnel de santé.';
 
   @override
   String get phaseExplainerUnknown =>
-      'Il n\'y a pas encore assez de données pour dire dans quelle phase tu es. Vera préfère le dire plutôt que d\'inventer une phase. Après quelques cycles notés, cette section se remplira avec tes propres données ; d\'ici là, les suggestions ci-dessous valent à tout moment.';
+      'Il n\'y a pas encore assez d\'enregistrements pour dire dans quelle phase tu es. Vera a besoin d\'au moins deux cycles complets — un début de règles, puis le suivant — pour calculer ta propre moyenne et ta variabilité, et préfère le dire plutôt que d\'inventer une phase. Rien n\'est perdu entre-temps : chaque jour enregistré fait partie de ce premier calcul, et l\'estimation se resserre à mesure que l\'historique s\'allonge. D\'ici là, les suggestions ci-dessous sont générales et valables à n\'importe quel moment du cycle.';
 
   @override
   String get tipFitnessDetailMenstrual =>
-      'L\'entraînement intense ne convient pas à la plupart des gens les premiers jours, et ce n\'est pas une question de discipline : ton énergie est réellement plus basse. Marcher, s\'étirer doucement, faire du yoga réparateur et respirer améliorent la circulation et peuvent atténuer les crampes. Si tu te sens bien, rien n\'interdit les séances dures : saigner n\'est pas une raison d\'arrêter le sport. Une note pratique : les séances longues et exigeantes les jours de flux abondant peuvent accentuer la fatigue — ajuste selon ce que ton corps te dit.';
+      'L\'entraînement intense ne convient pas à la plupart des personnes les premiers jours, et ce n\'est pas un problème de discipline : l\'énergie est réellement plus basse, et la perte de fer liée au saignement rend le travail d\'endurance plus dur que la même séance la semaine dernière. La marche, des étirements doux, le yoga restauratif et le travail respiratoire améliorent la circulation et peuvent atténuer les crampes ; chez certaines personnes, bouger régulièrement tout au long du mois réduit l\'intensité des crampes plus que tout ce qui est fait le jour même. Si tu te sens bien, rien n\'empêche les séances exigeantes : saigner n\'est pas une raison d\'arrêter le sport, et de nombreuses athlètes compètent pendant leurs règles. Quelques notes pratiques : les séances longues et exigeantes les jours de flux abondant peuvent accentuer la fatigue, appliquer de la chaleur sur le bas-ventre avant de commencer rend le mouvement plus confortable, et boire un peu plus que d\'habitude aide contre les maux de tête de ces jours-là. Juge la séance à ce que tu ressens pendant, pas à ce qu\'était ta meilleure semaine.';
 
   @override
   String get tipFitnessDetailFollicular =>
-      'Avec la montée des œstrogènes, la plupart se sentent plus fortes et plus résistantes ; c\'est en général la meilleure période du cycle pour commencer quelque chose, augmenter les charges ou accélérer. La récupération musculaire y est aussi relativement efficace. Progresse quand même par étapes : beaucoup d\'énergie ne veut pas dire zéro risque de blessure.';
+      'Avec la remontée des œstrogènes, la plupart des personnes se sentent plus fortes et plus endurantes ; c\'est en général la meilleure période du cycle pour commencer quelque chose de nouveau, augmenter les charges ou accélérer le rythme. La réparation musculaire y est relativement efficace, donc les séances dures sont mieux encaissées et laissent moins de courbatures persistantes. C\'est aussi une bonne fenêtre pour ce qui demande une tête claire autant qu\'un corps solide : apprendre un nouveau mouvement, corriger la technique, ou faire une distance plus longue que d\'habitude. Deux réserves à garder : progresse graduellement, car beaucoup d\'énergie ne veut pas dire zéro risque de blessure, et la plupart des blessures de surcharge commencent dans une bonne semaine, pas dans une mauvaise. Et protège ton sommeil : l\'adaptation se produit pendant la récupération, pas pendant la séance.';
 
   @override
   String get tipFitnessDetailFertile =>
-      'L\'énergie et la motivation sont souvent au maximum, les séances exigeantes passent donc bien. Chez certaines, les articulations sont un peu plus lâches autour de l\'ovulation : pour les sports à changements de direction brusques, un échauffement plus long est judicieux. Une brève pointe d\'un côté du ventre est fréquente ; si elle est forte ou persiste, repose-toi et consulte.';
+      'L\'énergie et la motivation sont généralement au plus haut, donc les séances exigeantes passent bien — c\'est souvent là que tombent les records personnels. Certaines études suggèrent que les articulations sont un peu plus laxes autour de l\'ovulation ; l\'effet pratique est débattu, mais un échauffement plus long reste une précaution peu coûteuse dans les sports avec changements de direction brusques, sauts et réceptions. La température corporelle est encore basse par rapport à la seconde moitié du cycle, donc la chaleur limite moins qu\'elle ne le fera dans une ou deux semaines. Un bref tiraillement d\'un côté du bas-ventre autour de l\'ovulation est fréquent et passe généralement en quelques heures. Si la douleur est forte, d\'un seul côté et persistante, s\'il y a de la fièvre ou une sensation de malaise, arrête et fais-toi examiner plutôt que de continuer.';
 
   @override
   String get tipFitnessDetailLuteal =>
-      'À l\'approche des règles, l\'énergie peut baisser, le cœur monter plus haut pour le même effort et la récupération s\'allonger. C\'est une oscillation attendue, pas un recul. Des séances modérées, une version un peu allégée de ton travail de force et la marche sont souvent plus tenables ici. En cas de ballonnements et de seins sensibles, une bonne brassière et un échauffement plus long changent vraiment les choses.';
+      'À l\'approche des règles, l\'énergie peut baisser, le pouls peut être plus haut pour le même effort et la récupération peut s\'allonger. C\'est une oscillation attendue, pas un recul, et cela n\'efface pas le travail des deux dernières semaines. La progestérone fait légèrement monter la température au repos et rend l\'évacuation de la chaleur plus difficile : les séances par temps chaud ou humide paraissent donc démesurément dures ici. S\'entraîner plus tôt ou plus tard dans la journée et boire plus que nécessaire aident tous les deux. Des séances modérées, une version un peu allégée du travail de force et la marche sont généralement plus tenables. En cas de ballonnements et de seins sensibles, une brassière bien maintenante et un échauffement plus long font une vraie différence. Si le moral est bas, fais la séance courte et facile plutôt que de la sauter : le seuil pour qu\'elle compte est plus bas qu\'il n\'en a l\'air.';
 
   @override
   String get tipFitnessDetailUnknown =>
-      'Même sans connaître ta phase, bouger aide toujours : une activité modérée répartie sur la plupart des jours de la semaine vaut mieux que des séances très intenses occasionnelles. Ajuste selon ton ressenti — les jours de fatigue, une marche compte aussi. Après quelques cycles notés, tu verras ici des suggestions propres à ta phase.';
+      'Même sans connaître ta phase, bouger aide à tout moment : la recommandation générale est d\'environ 150 minutes d\'activité modérée par semaine, réparties sur la plupart des jours, plus du renforcement deux fois par semaine — et ce schéma fonctionne mieux, pour presque tout le monde, que des séances très intenses occasionnelles. La régularité compte plus que l\'intensité, et la meilleure séance est celle que tu répéteras la semaine prochaine. Ajuste selon ce que tu ressens : les jours de fatigue, une marche compte, et une séance courte faite vaut mieux qu\'une longue sautée. Une fois quelques cycles enregistrés, des suggestions par phase apparaîtront ici.';
 
   @override
   String get tipNutritionDetailMenstrual =>
-      'Le saignement te coûte du fer ; viande rouge, lentilles, pois chiches, légumes à feuilles foncées et mélasse aident à le remplacer. Le fer végétal s\'absorbe nettement mieux avec de la vitamine C — presser du citron sur un plat de lentilles en est la version la plus pratique. Le thé et le café pendant le repas réduisent l\'absorption du fer : une heure d\'écart suffit. Boire assez d\'eau peut atténuer la fatigue et les maux de tête liés au saignement.';
+      'Le saignement coûte du fer ; la viande rouge, les lentilles, les pois chiches, les légumes à feuilles vert foncé et la mélasse aident à le reconstituer. Le fer végétal s\'absorbe nettement mieux avec de la vitamine C — presser du citron sur un plat de lentilles en est la version la plus pratique, et une salade de tomates à côté fait la même chose. Le thé et le café pendant le repas réduisent l\'absorption du fer à cause de leurs tanins : laisser environ une heure entre les deux suffit, il n\'est pas nécessaire d\'y renoncer. Boire suffisamment d\'eau peut atténuer la fatigue et les maux de tête liés au saignement, et les aliments riches en magnésium comme les fruits à coque, les graines et les légumes à feuilles foncées aident certaines personnes contre les crampes. Les jours où la digestion est lente, des repas petits et réguliers passent mieux que des repas copieux. Si tu ressens souvent un essoufflement, des vertiges ou une fatigue inhabituelle autour des règles, cela vaut la peine d\'en parler à un professionnel de santé : le manque de fer est fréquent, facile à vérifier, et ce n\'est pas à une application de le diagnostiquer.';
 
   @override
   String get tipNutritionDetailFollicular =>
-      'Pendant que l\'énergie revient, le corps est en mode reconstruction : assez de protéines, des céréales complètes et des légumes soutiennent cela. Continuer à refaire les réserves de fer après le saignement a aussi du sens. Ne pas sauter de repas est en général plus facile dans cette phase, et tu abordes plus sereinement les variations d\'appétit de la suivante.';
+      'Avec l\'énergie qui revient, le corps est en mode reconstruction : assez de protéines, des céréales complètes et des légumes soutiennent cela, et c\'est la phase où l\'appétit est en général le plus stable et le plus facile à gérer. Il est aussi logique de continuer à refaire les réserves de fer après le saignement plutôt que d\'en faire une affaire de la seule semaine des règles : les réserves se reconstituent en semaines, pas en jours. Ne pas sauter de repas est plus simple ici, et cela permet d\'aborder plus sereinement les variations d\'appétit de la phase suivante. Si tu veux changer ta façon de manger, cette période est généralement plus clémente pour commencer que la semaine précédant les règles, où les envies et le moral bas font paraître toute nouvelle routine plus difficile qu\'elle ne l\'est.';
 
   @override
   String get tipNutritionDetailFertile =>
-      'Aucun régime particulier n\'est nécessaire ici ; des repas équilibrés et assez d\'eau font le plus gros du travail. Certaines personnes se sentent ballonnées, ce qui est généralement hormonal et passager. Si tu envisages une grossesse, c\'est un bon moment pour interroger un professionnel sur l\'acide folique — mais c\'est une conversation avec lui, pas un conseil qu\'une application devrait donner.';
+      'Aucun régime particulier n\'est nécessaire ici ; des repas équilibrés et assez d\'eau font l\'essentiel. Certaines personnes se sentent ballonnées autour de l\'ovulation, ce qui est généralement hormonal et passager plutôt que lié à ce qui a été mangé. L\'appétit baisse légèrement chez les unes et augmente chez les autres — les deux sont ordinaires. Garder des protéines et des fibres dans les repas stabilise l\'énergie pendant ce qui est souvent la période la plus active du mois. Si tu envisages une grossesse, c\'est un bon moment pour interroger un professionnel de santé sur l\'acide folique, généralement conseillé avant la conception plutôt qu\'après — mais c\'est une conversation à avoir avec cette personne, pas un conseil qu\'une application devrait donner.';
 
   @override
   String get tipNutritionDetailLuteal =>
-      'L\'appétit qui augmente et l\'envie de sucre quand la progestérone monte sont très courants : c\'est un changement hormonal, pas un manque de volonté. Ajouter des protéines et des fibres aux repas stabilise la glycémie et adoucit l\'envie. Moins de sel et plus d\'eau peuvent soulager les ballonnements. Les aliments riches en magnésium (amandes, noix, légumes verts foncés, chocolat noir) réduisent crampes et tension chez certaines. Réduire la caféine aide le sommeil haché de cette phase.';
+      'L\'augmentation de l\'appétit et les envies de sucre quand la progestérone monte sont très fréquentes ; c\'est un changement hormonal, pas un problème de volonté, et le corps dépense réellement un peu plus d\'énergie dans cette phase. Ajouter des protéines et des fibres aux repas stabilise la glycémie et adoucit l\'envie bien mieux que d\'essayer de l\'ignorer — une envie satisfaite avec quelque chose de consistant s\'arrête généralement plus tôt qu\'une envie contre laquelle on lutte pendant une heure. Moins de sel et plus d\'eau peuvent soulager les ballonnements ; cela semble contre-intuitif mais ne l\'est pas : bien hydraté, le corps retient moins. Les aliments riches en magnésium (amandes, noix, légumes à feuilles foncées, chocolat noir) réduisent les crampes et la tension chez certaines personnes. Réduire la caféine après midi aide contre le sommeil haché de cette phase, et l\'alcool mérite aussi attention, car il fragmente le sommeil exactement au moment du cycle où il est déjà plus léger.';
 
   @override
   String get tipNutritionDetailUnknown =>
-      'Quelle que soit la phase, ce sont les mêmes choses qui aident : des repas réguliers, assez de protéines, beaucoup de légumes, assez d\'eau et des aliments riches en fer. Comme le saignement coûte du fer, il suffit d\'y prêter un peu plus attention ces jours-là. Après quelques cycles notés, tu verras ici des suggestions propres à ta phase.';
+      'Quelle que soit la phase, ce sont les mêmes choses qui aident le plus : des repas réguliers, assez de protéines, beaucoup de légumes, assez d\'eau et des aliments riches en fer. Comme le saignement coûte du fer, il suffit d\'y prêter un peu plus attention ces jours-là — inutile d\'avoir une alimentation différente chaque semaine du mois. Manger à des heures à peu près constantes fait plus pour une énergie stable que n\'importe quel aliment pris isolément, et aucun ingrédient n\'a besoin d\'être supprimé pour qu\'un cycle soit sain. Une fois quelques cycles enregistrés, des suggestions par phase apparaîtront ici.';
 }

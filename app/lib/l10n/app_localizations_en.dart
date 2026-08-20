@@ -583,6 +583,21 @@ class AppLocalizationsEn extends AppLocalizations {
       'Here\'s exactly what happens to your data, in plain language.';
 
   @override
+  String get privacyScreenStorageTitle => 'Encrypted on this device';
+
+  @override
+  String get privacyScreenNoNetworkTitle => 'No server, no account';
+
+  @override
+  String get privacyScreenNoThirdPartyTitle => 'No tracking';
+
+  @override
+  String get privacyScreenExportTitle => 'Only you can export it';
+
+  @override
+  String get privacyScreenDeleteTitle => 'Deletion is final';
+
+  @override
   String get privacyScreenStorage =>
       'Everything you log is encrypted and stored only on this device, in a single file. The encryption key lives in your phone\'s secure hardware — Keychain on iOS, Keystore on Android — not in the file itself.';
 
@@ -973,6 +988,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get assistantTitle => 'Vera Assistant';
 
   @override
+  String get assistantEndChatTitle => 'End this chat?';
+
+  @override
+  String get assistantEndChatBody =>
+      'The messages are only in memory and are not saved anywhere, so they cannot be brought back.';
+
+  @override
+  String get assistantEndChatConfirm => 'End chat';
+
+  @override
   String get assistantInputHint => 'Ask about your cycle…';
 
   @override
@@ -1115,6 +1140,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get trackerHistoryEmpty => 'No entries in this range yet';
+
+  @override
+  String get trackerStatAverage => 'Average';
+
+  @override
+  String get trackerStatLowest => 'Lowest';
+
+  @override
+  String get trackerStatHighest => 'Highest';
+
+  @override
+  String get trackerStatLatest => 'Latest';
 
   @override
   String get rangeFilter1m => '1 mo';
@@ -1562,6 +1599,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get diagnosticsClear => 'Clear';
 
   @override
+  String get diagnosticsNoteLabel => 'What happened? (optional)';
+
+  @override
+  String get diagnosticsTechnicalDetail => 'Technical detail';
+
+  @override
   String get unitHoursShort => 'h';
 
   @override
@@ -1769,61 +1812,61 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get phaseExplainerMenstrual =>
-      'You are bleeding as the uterine lining sheds. Estrogen and progesterone are at their lowest point of the cycle, which is why many people feel more tired and more inward in the first days. Cramps come from the uterus contracting. Bleeding also costs you iron — which explains part of the fatigue.';
+      'You are bleeding as the uterine lining sheds. Estrogen and progesterone are at their lowest point of the cycle, which is why many people feel more tired and more inward in the first days. Bleeding usually lasts around three to seven days and is heaviest at the start. Cramps come from the uterus contracting, driven by prostaglandins — hormone-like compounds released as the lining breaks down, which is also why some people get lower back pain or loose stools alongside them. Bleeding costs you iron too, and that explains part of the fatigue. Warmth, movement and sleep all help; if bleeding soaks through protection hourly, lasts beyond about a week, or the pain stops you doing ordinary things, that is worth raising with a clinician rather than waiting out.';
 
   @override
   String get phaseExplainerFollicular =>
-      'After bleeding ends, estrogen starts climbing again. Most people notice energy, mood and stamina picking back up. Follicles are maturing in the ovaries; the body is preparing for the next ovulation.';
+      'After bleeding ends, estrogen starts climbing again. In the ovaries a group of follicles is maturing, each holding an egg, and usually only one goes on to be released. Estrogen rebuilds the uterine lining that was just shed, and most people notice energy, mood, skin and stamina picking back up along with it. This is also the stretch of the cycle that varies most between people and between months — stress, illness, travel and sleep tend to show up here by making it longer or shorter. That is the honest reason a period prediction is a range rather than a date: the second half of the cycle is fairly steady, and this half is the one that moves.';
 
   @override
   String get phaseExplainerFertile =>
-      'Estrogen is near its peak and ovulation is expected around these days. Cervical mucus typically turns clear and slippery, some people notice higher libido, and some feel a brief twinge on one side. Energy is often at its highest point in the cycle.';
+      'Estrogen is near its peak and ovulation is expected around these days. A surge of luteinising hormone triggers the release of an egg roughly a day to a day and a half later. The egg itself survives about 12 to 24 hours, but sperm can survive several days in fertile cervical mucus — which is why the window is counted as several days rather than one. Mucus typically turns clear, stretchy and slippery, a bit like raw egg white; some people notice higher libido, tender breasts, or a brief one-sided twinge as the follicle releases. Energy is often at its highest point of the cycle. Remember this window is an estimate from your own logged history, not a measurement, and it is not a method of contraception.';
 
   @override
   String get phaseExplainerLuteal =>
-      'After ovulation progesterone rises, then drops sharply as your period approaches. That drop can trigger PMS symptoms: bloating, breast tenderness, appetite changes, broken sleep and mood swings. Your body temperature runs slightly higher.';
+      'After ovulation the emptied follicle becomes the corpus luteum and starts producing progesterone, which keeps the uterine lining stable in case a pregnancy implants. If none does, progesterone and estrogen drop sharply and your period begins. This half of the cycle is the more consistent one, usually around 12 to 14 days. Progesterone nudges your resting body temperature up slightly — the shift a basal thermometer picks up — and can slow digestion, which is part of the bloating. The drop at the end is what triggers PMS symptoms for many people: breast tenderness, appetite changes, broken sleep, headaches and mood swings, typically easing once bleeding starts. If those symptoms are severe enough to disrupt work or relationships most months, that is worth discussing with a clinician.';
 
   @override
   String get phaseExplainerUnknown =>
-      'There is not enough logged yet to say which phase you are in. Vera would rather say so than invent a phase. Once you have logged a few cycles this section fills in with your own data — until then, the suggestions below are general ones that apply at any point.';
+      'There is not enough logged yet to say which phase you are in. Vera needs at least two complete cycles — a period start, and then the next one — before it can work out your own average and variability, and it would rather say so than invent a phase. Nothing is wasted in the meantime: every day you log is part of that first calculation, and the estimate gets narrower as your history grows. Until then, the suggestions below are general ones that hold at any point in the cycle.';
 
   @override
   String get tipFitnessDetailMenstrual =>
-      'Hard training does not suit most people in the first days, and that is not a discipline problem — your energy genuinely is lower. Walking, gentle stretching, restorative yoga and breathwork improve blood flow and can take the edge off cramps. If you feel good, there is no reason to avoid hard sessions: bleeding is not a reason to stop exercising. One practical note: long, demanding sessions on heavy days can deepen the fatigue, so adjust by how your body actually feels.';
+      'Hard training does not suit most people in the first days, and that is not a discipline problem — your energy genuinely is lower, and losing iron through bleeding makes endurance work feel harder than the same session did last week. Walking, gentle stretching, restorative yoga and breathwork improve blood flow and can take the edge off cramps; for some people regular movement across the whole month reduces cramp intensity more than anything they do on the day itself. If you feel good, there is no reason to avoid hard sessions: bleeding is not a reason to stop exercising, and plenty of athletes compete straight through it. A few practical notes: long, demanding sessions on heavy days can deepen the fatigue, warmth on the lower abdomen before you start can make movement more comfortable, and drinking a little more than usual helps with the headaches that often come with these days. Judge the session by how you feel during it, not by what your best week looked like.';
 
   @override
   String get tipFitnessDetailFollicular =>
-      'As estrogen rises most people feel stronger and more durable; this is usually the best stretch of the cycle to start something new, add weight, or push the pace. Muscle repair is relatively efficient here too. Still, build up gradually: high energy does not mean zero injury risk.';
+      'As estrogen rises most people feel stronger and more durable; this is usually the best stretch of the cycle to start something new, add weight, or push the pace. Muscle repair is relatively efficient here, so harder sessions tend to be absorbed better and leave less lingering soreness. It is a good window for the things that need a clear head as well as a strong body — learning a new lift, fixing technique, or a longer distance than you have done before. Two caveats worth keeping: build up gradually, because high energy does not mean zero injury risk and most overuse injuries start in a good week rather than a bad one, and protect your sleep, since adaptation happens during recovery rather than during the session.';
 
   @override
   String get tipFitnessDetailFertile =>
-      'Energy and motivation are usually at their peak, so demanding sessions tend to land well. Some people have slightly looser joints around ovulation, so a longer warm-up makes sense for sports with sharp changes of direction. A brief twinge on one side of the abdomen is common — but if it is severe or lasts, rest and check with a clinician.';
+      'Energy and motivation are usually at their peak, so demanding sessions tend to land well — this is often where personal bests happen. Some research suggests joints are slightly more lax around ovulation, and while the practical effect is debated, a longer warm-up is a cheap precaution for sports with sharp changes of direction, jumping or landing. Body temperature is still low relative to the second half of the cycle, so heat tends to be less of a limiter than it will be in a week or two. A brief twinge on one side of the lower abdomen around ovulation is common and usually passes within hours. If pain is severe, one-sided and persistent, comes with fever, or you feel faint, stop and get it checked rather than training through it.';
 
   @override
   String get tipFitnessDetailLuteal =>
-      'As your period approaches, energy can drop, your heart rate can sit higher for the same effort, and recovery can take longer. That is an expected swing, not a decline. Moderate sessions, a slightly lighter version of your strength work, and walking are usually more sustainable here. With bloating and breast tenderness, a supportive bra and a longer warm-up make a real difference.';
+      'As your period approaches, energy can drop, your heart rate can sit higher for the same effort, and recovery can take longer. That is an expected swing, not a decline, and it does not undo the work of the past two weeks. Progesterone raises your resting temperature slightly and makes it harder to shed heat, so hot or humid sessions feel disproportionately hard here — training earlier or later in the day, and drinking more than feels necessary, both help. Moderate sessions, a slightly lighter version of your strength work, and walking are usually more sustainable. With bloating and breast tenderness, a supportive bra and a longer warm-up make a real difference. If mood is low, keep the session short and easy rather than skipping it entirely — the bar for it counting is lower than it feels.';
 
   @override
   String get tipFitnessDetailUnknown =>
-      'Even without knowing your phase, movement helps at any point: moderate activity spread across most days of the week beats occasional very intense sessions. Adjust to how you feel — on tired days, a walk counts. Once you have logged a few cycles you will see phase-specific suggestions here.';
+      'Even without knowing your phase, movement helps at any point: general guidance is around 150 minutes of moderate activity a week, spread across most days, plus strengthening work twice a week — and that pattern beats occasional very intense sessions for almost everyone. Consistency matters more than intensity, and the best session is the one you will actually repeat next week. Adjust to how you feel: on tired days, a walk counts, and a short session done is worth more than a long one skipped. Once you have logged a few cycles you will see phase-specific suggestions here.';
 
   @override
   String get tipNutritionDetailMenstrual =>
-      'Bleeding costs you iron; red meat, lentils, chickpeas, dark leafy greens and molasses help replace it. Plant iron absorbs markedly better alongside vitamin C — squeezing lemon over a lentil dish is the most practical version of that. Tea and coffee with a meal reduce iron absorption, so leaving an hour between them is enough. Drinking plenty of water can ease the fatigue and headaches that come with bleeding.';
+      'Bleeding costs you iron; red meat, lentils, chickpeas, dark leafy greens and molasses help replace it. Plant iron absorbs markedly better alongside vitamin C — squeezing lemon over a lentil dish is the most practical version of that, and a tomato salad alongside does the same job. Tea and coffee with a meal reduce iron absorption because of their tannins, so leaving about an hour between them is enough; you do not have to give either up. Drinking plenty of water can ease the fatigue and headaches that come with bleeding, and magnesium-rich foods like nuts, seeds and dark greens help some people with cramps. Small, regular meals tend to sit better than large ones on days when digestion feels off. If you often feel breathless, dizzy or unusually exhausted around your period, that is worth mentioning to a clinician — low iron is common, easy to test for, and not something to diagnose from an app.';
 
   @override
   String get tipNutritionDetailFollicular =>
-      'With energy recovering, the body is in rebuild mode: enough protein, whole grains and vegetables support that. It also makes sense to keep refilling iron stores after bleeding. Not skipping meals is usually easier in this phase, and it sets you up to enter the appetite swings of the next one more evenly.';
+      'With energy recovering, the body is in rebuild mode: enough protein, whole grains and vegetables support that, and this is the phase where appetite is usually steadiest and easiest to work with. It also makes sense to keep refilling iron stores after bleeding rather than treating that as a period-week job only — stores rebuild over weeks, not days. Not skipping meals is usually easier here, and it sets you up to enter the appetite swings of the next phase more evenly. If you are going to change how you eat, this is generally a kinder stretch to start in than the week before your period, when cravings and low mood make any new routine feel harder than it is.';
 
   @override
   String get tipNutritionDetailFertile =>
-      'No special diet is needed here; balanced meals and enough water do the most work. Some people feel bloated, which is usually hormonal and passing. If you are planning a pregnancy, this is a sensible time to ask a clinician about folic acid — but that is a conversation with them, not advice an app should give.';
+      'No special diet is needed here; balanced meals and enough water do the most work. Some people feel bloated around ovulation, which is usually hormonal and passing rather than anything you ate. Appetite can dip slightly for some and rise for others — both are ordinary. Keeping protein and fibre in meals steadies energy through what is often the busiest, most active stretch of the month. If you are planning a pregnancy, this is a sensible time to ask a clinician about folic acid, which is generally advised before conception rather than after — but that is a conversation with them, not advice an app should give.';
 
   @override
   String get tipNutritionDetailLuteal =>
-      'Increased appetite and sugar cravings as progesterone rises are very common; that is a hormonal shift, not a willpower problem. Adding protein and fibre to meals keeps blood sugar steadier and softens the craving. Less salt and more water can ease bloating. Magnesium-rich foods (almonds, walnuts, dark greens, dark chocolate) reduce cramps and tension for some people. Cutting back on caffeine helps the broken sleep of this phase.';
+      'Increased appetite and sugar cravings as progesterone rises are very common; that is a hormonal shift, not a willpower problem, and your body genuinely does use slightly more energy in this phase. Adding protein and fibre to meals keeps blood sugar steadier and softens the craving far better than trying to ignore it — and a craving met with something substantial usually ends sooner than one you fight for an hour. Less salt and more water can ease bloating, which sounds backwards but is not: hydration helps your body hold on to less. Magnesium-rich foods (almonds, walnuts, dark greens, dark chocolate) reduce cramps and tension for some people. Cutting back on caffeine after midday helps the broken sleep of this phase, and alcohol is worth watching too, since it fragments sleep at exactly the point in the cycle where sleep is already lighter.';
 
   @override
   String get tipNutritionDetailUnknown =>
-      'Whatever the phase, the same things help most: regular meals, enough protein, plenty of vegetables, enough water, and iron-rich foods. Since bleeding costs iron, paying a little more attention on those days is enough. Once you have logged a few cycles you will see phase-specific suggestions here.';
+      'Whatever the phase, the same things help most: regular meals, enough protein, plenty of vegetables, enough water, and iron-rich foods. Since bleeding costs iron, paying a little more attention on those days is enough — there is no need for a different diet each week of the month. Eating at roughly consistent times does more for steady energy than any single food does, and no ingredient has to be cut out for a cycle to be healthy. Once you have logged a few cycles you will see phase-specific suggestions here.';
 }

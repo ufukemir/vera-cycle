@@ -585,6 +585,21 @@ class AppLocalizationsTr extends AppLocalizations {
       'Verine tam olarak ne olduğu, düz bir dille.';
 
   @override
+  String get privacyScreenStorageTitle => 'Bu cihazda şifreli';
+
+  @override
+  String get privacyScreenNoNetworkTitle => 'Sunucu yok, hesap yok';
+
+  @override
+  String get privacyScreenNoThirdPartyTitle => 'İzleme yok';
+
+  @override
+  String get privacyScreenExportTitle => 'Dışa aktarmayı yalnızca sen yaparsın';
+
+  @override
+  String get privacyScreenDeleteTitle => 'Silmek kalıcıdır';
+
+  @override
   String get privacyScreenStorage =>
       'Kaydettiğin her şey şifrelenir ve sadece bu cihazda, tek bir dosyada saklanır. Şifreleme anahtarı telefonunun güvenli donanımında yaşar — iOS\'ta Keychain, Android\'de Keystore — dosyanın kendisinde değil.';
 
@@ -976,6 +991,16 @@ class AppLocalizationsTr extends AppLocalizations {
   String get assistantTitle => 'Vera Asistan';
 
   @override
+  String get assistantEndChatTitle => 'Sohbet bitirilsin mi?';
+
+  @override
+  String get assistantEndChatBody =>
+      'Mesajlar yalnızca bellekte tutuluyor ve hiçbir yere kaydedilmiyor, bu yüzden geri getirilemez.';
+
+  @override
+  String get assistantEndChatConfirm => 'Sohbeti bitir';
+
+  @override
   String get assistantInputHint => 'Döngün hakkında sor…';
 
   @override
@@ -1116,6 +1141,18 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get trackerHistoryEmpty => 'Bu aralıkta henüz kayıt yok';
+
+  @override
+  String get trackerStatAverage => 'Ortalama';
+
+  @override
+  String get trackerStatLowest => 'En düşük';
+
+  @override
+  String get trackerStatHighest => 'En yüksek';
+
+  @override
+  String get trackerStatLatest => 'Son';
 
   @override
   String get rangeFilter1m => '1 ay';
@@ -1549,6 +1586,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get diagnosticsClear => 'Temizle';
 
   @override
+  String get diagnosticsNoteLabel => 'Ne oldu? (isteğe bağlı)';
+
+  @override
+  String get diagnosticsTechnicalDetail => 'Teknik ayrıntı';
+
+  @override
   String get unitHoursShort => 'sa';
 
   @override
@@ -1755,61 +1798,61 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get phaseExplainerMenstrual =>
-      'Rahim iç zarı döküldüğü için kanama yaşıyorsun. Östrojen ve progesteron döngünün en düşük seviyesinde; birçok kişi bu yüzden ilk günlerde daha yorgun ve daha içe dönük hisseder. Kramplar, rahmin kasılmasından kaynaklanır. Kanamayla birlikte demir kaybı da olur — bu, bitkinliğin bir kısmını açıklar.';
+      'Rahim iç zarı döküldüğü için kanama yaşıyorsun. Östrojen ve progesteron döngünün en düşük seviyesinde; birçok kişi bu yüzden ilk günlerde daha yorgun ve daha içe dönük hisseder. Kanama genellikle üç ila yedi gün sürer ve en yoğun hâli başlangıçtadır. Kramplar rahmin kasılmasından kaynaklanır; bunu tetikleyen şey, iç zar dökülürken salınan prostaglandinlerdir — bazı kişilerde aynı anda bel ağrısı veya bağırsak düzensizliği görülmesinin sebebi de budur. Kanamayla birlikte demir kaybı da olur ve bu, bitkinliğin bir kısmını açıklar. Sıcak uygulama, hareket ve uyku genelde iyi gelir. Ancak koruman saat başı tamamen doluyorsa, kanama bir haftayı belirgin şekilde aşıyorsa ya da ağrı günlük işlerini yapmanı engelliyorsa, bunu geçmesini beklemek yerine bir hekime danışmak doğru olur.';
 
   @override
   String get phaseExplainerFollicular =>
-      'Kanama bittikten sonra östrojen yeniden yükselmeye başlar. Çoğu kişi bu dönemde enerjisinin, ruh halinin ve dayanıklılığının toparlandığını fark eder. Yumurtalıklarda foliküller olgunlaşıyor; beden bir sonraki ovülasyona hazırlanıyor.';
+      'Kanama bittikten sonra östrojen yeniden yükselmeye başlar. Yumurtalıklarda her biri bir yumurta taşıyan bir grup folikül olgunlaşır ve genellikle yalnızca biri çatlayarak yumurtayı bırakır. Östrojen, yeni dökülen rahim iç zarını yeniden inşa eder; çoğu kişi bununla birlikte enerjisinin, ruh halinin, cildinin ve dayanıklılığının toparlandığını fark eder. Bu evre aynı zamanda döngünün kişiden kişiye ve aydan aya en çok değişen bölümüdür — stres, hastalık, seyahat ve uykusuzluk kendini genellikle burada, bu evreyi uzatarak ya da kısaltarak gösterir. Tahminin tek bir gün değil bir aralık olmasının dürüst sebebi de budur: döngünün ikinci yarısı görece sabittir, oynayan taraf bu yarısıdır.';
 
   @override
   String get phaseExplainerFertile =>
-      'Östrojen zirveye yaklaşıyor ve ovülasyon bu günlerde bekleniyor. Servikal mukus tipik olarak berrak ve kaygan hale gelir, bazı kişilerde libido artar, bazıları yumurtalık bölgesinde hafif bir sancı hisseder. Enerji genelde döngünün en yüksek noktasındadır.';
+      'Östrojen zirveye yaklaşıyor ve ovülasyon bu günlerde bekleniyor. Lüteinleştirici hormondaki ani yükseliş, yaklaşık bir ila bir buçuk gün sonra yumurtanın salınmasını tetikler. Yumurtanın kendisi yaklaşık 12-24 saat canlı kalır; ancak sperm, uygun servikal mukus içinde birkaç gün yaşayabilir — pencerenin tek bir gün değil birkaç gün olarak sayılmasının sebebi budur. Mukus tipik olarak berrak, esneyen ve kaygan bir hâl alır, biraz çiğ yumurta akına benzer; bazı kişilerde libido artar, göğüslerde hassasiyet olur ya da folikül çatlarken tek taraflı kısa bir sancı hissedilir. Enerji genelde döngünün en yüksek noktasındadır. Bu pencerenin, senin kendi kayıtlarından üretilmiş bir tahmin olduğunu unutma: bir ölçüm değildir ve gebelikten korunma yöntemi olarak kullanılamaz.';
 
   @override
   String get phaseExplainerLuteal =>
-      'Ovülasyondan sonra progesteron yükselir ve regl yaklaşırken hızla düşer. Bu düşüş; şişkinlik, göğüslerde hassasiyet, iştah değişimi, uyku bölünmesi ve ruh hali dalgalanmaları gibi PMS belirtilerini tetikleyebilir. Vücut ısın hafifçe yüksek seyreder.';
+      'Ovülasyondan sonra boşalan folikül korpus luteuma dönüşür ve progesteron üretmeye başlar; bu hormon, olası bir gebelik yerleşecek olursa diye rahim iç zarını korur. Yerleşme olmazsa progesteron ve östrojen hızla düşer ve reglin başlar. Döngünün bu yarısı daha tutarlı olanıdır, genellikle 12-14 gün sürer. Progesteron dinlenme hâlindeki vücut ısını hafifçe yükseltir — bazal termometrenin yakaladığı değişim budur — ve sindirimi yavaşlatabilir; şişkinliğin bir kısmı buradan gelir. Sonundaki ani düşüş ise birçok kişide PMS belirtilerini tetikler: göğüs hassasiyeti, iştah değişimi, uyku bölünmesi, baş ağrısı ve ruh hali dalgalanmaları. Bunlar tipik olarak kanama başlayınca hafifler. Belirtiler çoğu ay işini veya ilişkilerini aksatacak kadar şiddetliyse, bunu bir hekimle konuşmakta fayda var.';
 
   @override
   String get phaseExplainerUnknown =>
-      'Şu an hangi evrede olduğunu söyleyebilmek için yeterli kaydın yok. Vera, evre tahminini uydurmak yerine bunu açıkça söylemeyi tercih ediyor. Birkaç döngü kaydettikten sonra bu bölüm kendi verinle dolacak — o zamana kadar aşağıdaki öneriler her döneme uyan genel önerilerdir.';
+      'Şu an hangi evrede olduğunu söyleyebilmek için yeterli kaydın yok. Vera\'nın kendi ortalamanı ve değişkenliğini hesaplayabilmesi için en az iki tam döngü gerekiyor — bir regl başlangıcı ve ardından bir sonraki. Uydurulmuş bir evre göstermektense bunu açıkça söylemeyi tercih ediyor. Bu arada hiçbir şey boşa gitmiyor: kaydettiğin her gün o ilk hesabın parçası oluyor ve geçmişin uzadıkça tahmin aralığı daralıyor. O zamana kadar aşağıdaki öneriler, döngünün her noktasında geçerli olan genel önerilerdir.';
 
   @override
   String get tipFitnessDetailMenstrual =>
-      'İlk günlerde ağır antrenman çoğu kişiye iyi gelmez; bu bir disiplin meselesi değil, enerjinin gerçekten düşük olmasıdır. Yürüyüş, hafif esneme, onarıcı yoga ve nefes çalışması hem kan akışını artırır hem de kramp algısını azaltabilir. Kendini iyi hissediyorsan ağır çalışmaktan kaçınman için bir sebep yok — kanama, spor yapmana engel değildir. Tek pratik not: yoğun kanama günlerinde uzun ve zorlu seanslar yorgunluğu artırabilir, o yüzden bedenini dinleyerek ayarla.';
+      'İlk günlerde ağır antrenman çoğu kişiye iyi gelmez; bu bir disiplin meselesi değil, enerjinin gerçekten düşük olmasıdır. Üstelik kanamayla giden demir, dayanıklılık çalışmalarını geçen haftaki aynı seansa göre daha zor hissettirir. Yürüyüş, hafif esneme, onarıcı yoga ve nefes çalışması hem kan akışını artırır hem de kramp algısını azaltabilir; bazı kişilerde ayın tamamına yayılmış düzenli hareket, o gün yapılan her şeyden daha çok fayda sağlar. Kendini iyi hissediyorsan ağır çalışmaktan kaçınman için bir sebep yok — kanama spor yapmana engel değildir ve pek çok sporcu bu günlerde yarışır. Birkaç pratik not: yoğun kanama günlerinde uzun ve zorlu seanslar yorgunluğu artırabilir; başlamadan önce karın alt bölgesine sıcak uygulamak hareketi rahatlatır; her zamankinden biraz fazla su içmek bu günlerin baş ağrısına iyi gelir. Seansı, en iyi haftanla değil, o an nasıl hissettiğinle ölç.';
 
   @override
   String get tipFitnessDetailFollicular =>
-      'Östrojen yükselirken çoğu kişi kendini daha güçlü ve daha dayanıklı hisseder; yeni bir şeye başlamak, ağırlığı artırmak veya tempoyu yükseltmek için döngünün en uygun dönemi genellikle burasıdır. Kas onarımı da bu dönemde görece verimlidir. Yine de artışı kademeli tut: enerjinin yüksek olması, sakatlanma riskinin sıfır olduğu anlamına gelmez.';
+      'Östrojen yükselirken çoğu kişi kendini daha güçlü ve daha dayanıklı hisseder; yeni bir şeye başlamak, ağırlığı artırmak veya tempoyu yükseltmek için döngünün en uygun dönemi genellikle burasıdır. Kas onarımı bu evrede görece verimlidir, bu yüzden zor seanslar daha iyi sindirilir ve arkasında daha az kalıcı ağrı bırakır. Sadece güç değil, açık zihin de isteyen işler için iyi bir pencere: yeni bir hareketi öğrenmek, tekniği düzeltmek ya da daha önce yapmadığın bir mesafeyi denemek. İki uyarıyı akılda tutmakta fayda var: artışı kademeli tut — enerjinin yüksek olması sakatlanma riskinin sıfır olduğu anlamına gelmez ve aşırı kullanım sakatlıklarının çoğu kötü değil iyi bir haftada başlar. Bir de uykunu koru; gelişme seansın kendisinde değil, toparlanma sırasında olur.';
 
   @override
   String get tipFitnessDetailFertile =>
-      'Enerji ve motivasyon genelde zirvededir, bu yüzden zorlu antrenmanlar bu günlerde iyi oturur. Bazı kişilerde ovülasyon çevresinde eklem gevşekliği biraz artar; ani yön değiştiren sporlarda ısınmaya biraz daha vakit ayırmak mantıklı olur. Karnın bir tarafında hafif bir sancı hissedersen bu yaygındır, ama şiddetliyse veya uzun sürerse dinlenip hekime danış.';
+      'Enerji ve motivasyon genelde zirvededir, bu yüzden zorlu antrenmanlar bu günlerde iyi oturur — kişisel rekorlar çoğu zaman buraya denk gelir. Bazı araştırmalar ovülasyon çevresinde eklem gevşekliğinin biraz arttığını gösteriyor; pratikteki etkisi tartışmalı olsa da, ani yön değiştiren, sıçrama ve iniş içeren sporlarda ısınmaya biraz daha vakit ayırmak ucuza alınmış bir önlem. Vücut ısın döngünün ikinci yarısına kıyasla hâlâ düşük olduğundan, sıcak birkaç hafta sonra olacağı kadar sınırlayıcı değildir. Ovülasyon sırasında karnın bir tarafında hissedilen kısa sancı yaygındır ve genelde saatler içinde geçer. Ancak ağrı şiddetliyse, tek taraflı ve ısrarlıysa, ateş eşlik ediyorsa veya baygınlık hissi varsa, antrenmanı sürdürmek yerine dur ve kontrol ettir.';
 
   @override
   String get tipFitnessDetailLuteal =>
-      'Regl yaklaşırken enerji düşebilir, nabız aynı efora daha yüksek çıkabilir ve toparlanma uzayabilir. Bu bir gerileme değil, beklenen bir dalgalanmadır. Orta şiddetli çalışmalar, kuvvet antrenmanının biraz hafifletilmiş hali ve yürüyüş bu dönemde genelde daha sürdürülebilir. Şişkinlik ve göğüs hassasiyeti varsa iyi bir destek sutyeni ve daha uzun ısınma farkı hissettirir.';
+      'Regl yaklaşırken enerji düşebilir, nabız aynı efora daha yüksek çıkabilir ve toparlanma uzayabilir. Bu bir gerileme değil, beklenen bir dalgalanmadır ve son iki haftanın kazanımlarını silmez. Progesteron dinlenme ısını hafifçe yükseltir ve ısı atmayı zorlaştırır; bu yüzden sıcak veya nemli ortamdaki seanslar bu evrede orantısız zor gelir — günün daha serin saatlerine kaydırmak ve gerekli hissettiğinden fazla su içmek işe yarar. Orta şiddetli çalışmalar, kuvvet antrenmanının biraz hafifletilmiş hâli ve yürüyüş genelde daha sürdürülebilir. Şişkinlik ve göğüs hassasiyeti varsa iyi bir destek sutyeni ve daha uzun ısınma farkı hissettirir. Ruh halin düşükse seansı tamamen iptal etmek yerine kısa ve kolay tut — sayılması için gereken eşik, hissettirdiğinden daha düşüktür.';
 
   @override
   String get tipFitnessDetailUnknown =>
-      'Evreni bilmesek de hareket her dönemde işe yarar: haftanın çoğu gününe yayılmış orta tempolu hareket, ara sıra yapılan çok yoğun antrenmandan daha iyi sonuç verir. Kendini nasıl hissettiğine göre ayarla — yorgun olduğun günlerde yürüyüş de sayılır. Birkaç döngü kaydettikten sonra burada kendi evrene özel öneriler göreceksin.';
+      'Evreni bilmesek de hareket her dönemde işe yarar: genel öneri, haftanın çoğu gününe yayılmış yaklaşık 150 dakika orta tempolu hareket ve haftada iki kez kuvvetlendirme çalışmasıdır — bu düzen, neredeyse herkes için ara sıra yapılan çok yoğun antrenmandan daha iyi sonuç verir. Süreklilik şiddetten daha önemlidir ve en iyi seans, gelecek hafta gerçekten tekrarlayacağın seanstır. Kendini nasıl hissettiğine göre ayarla: yorgun olduğun günlerde yürüyüş de sayılır ve yapılmış kısa bir seans, atlanmış uzun bir seanstan değerlidir. Birkaç döngü kaydettikten sonra burada kendi evrene özel öneriler göreceksin.';
 
   @override
   String get tipNutritionDetailMenstrual =>
-      'Kanamayla birlikte demir kaybedersin; kırmızı et, mercimek, nohut, koyu yeşil yapraklılar ve pekmez bu kaybı karşılamaya yardımcı olur. Bitkisel demirin emilimi C vitaminiyle birlikte alındığında belirgin artar — mercimek yemeğinin yanına limon sıkmak bunun en pratik hali. Çay ve kahveyi yemekle aynı anda içmek ise demir emilimini azaltır, aralarında bir saat bırakmak yeterli. Bol su içmek, kanamanın getirdiği yorgunluğu ve baş ağrısını hafifletebilir.';
+      'Kanamayla birlikte demir kaybedersin; kırmızı et, mercimek, nohut, koyu yeşil yapraklılar ve pekmez bu kaybı karşılamaya yardımcı olur. Bitkisel demirin emilimi C vitaminiyle birlikte alındığında belirgin artar — mercimek yemeğinin yanına limon sıkmak bunun en pratik hâli; yanına bir domates salatası da aynı işi görür. Çay ve kahveyi yemekle aynı anda içmek, içerdikleri tanenler yüzünden demir emilimini azaltır; aralarında bir saat bırakmak yeterli, ikisinden de vazgeçmen gerekmiyor. Bol su içmek kanamanın getirdiği yorgunluğu ve baş ağrısını hafifletebilir; kuruyemiş, tohumlar ve koyu yeşillikler gibi magnezyumdan zengin gıdalar da bazı kişilerde krampları azaltır. Sindirimin ağırlaştığı günlerde küçük ve sık öğünler, büyük öğünlerden daha rahat oturur. Regl dönemlerinde sık sık nefes darlığı, baş dönmesi veya olağandışı bir bitkinlik yaşıyorsan bunu bir hekime söylemekte fayda var — demir düşüklüğü yaygındır, testi kolaydır ve bir uygulamanın teşhis edeceği bir şey değildir.';
 
   @override
   String get tipNutritionDetailFollicular =>
-      'Enerjinin toparlandığı bu dönemde beden yeniden inşa modundadır: yeterli protein, tam tahıl ve sebze bu toparlanmayı destekler. Kanama sonrası demir depolarını doldurmaya devam etmek de mantıklıdır. Öğün atlamamak, bu evrede genellikle daha kolaydır ve bir sonraki evrede iştahın dalgalandığı günlere daha dengeli girmeni sağlar.';
+      'Enerjinin toparlandığı bu dönemde beden yeniden inşa modundadır: yeterli protein, tam tahıl ve sebze bu toparlanmayı destekler ve iştahın genelde en dengeli, en kolay yönetilir olduğu evre burasıdır. Kanama sonrası demir depolarını doldurmaya devam etmek de mantıklıdır; bunu yalnızca regl haftasının işi gibi görmemek gerekir, çünkü depolar günler içinde değil haftalar içinde dolar. Öğün atlamamak bu evrede genellikle daha kolaydır ve bir sonraki evrede iştahın dalgalandığı günlere daha dengeli girmeni sağlar. Beslenme düzeninde bir değişiklik yapacaksan, başlamak için genelde bu dönem, isteklerin ve düşük ruh halinin her yeni alışkanlığı olduğundan zor gösterdiği regl öncesi haftadan daha elverişlidir.';
 
   @override
   String get tipNutritionDetailFertile =>
-      'Bu günlerde özel bir diyet gerekmez; dengeli beslenme ve yeterli su en çok işe yarayan şeydir. Bazı kişilerde şişkinlik hissi olur, bu genelde hormonal ve geçicidir. Gebelik planlıyorsan folik asit takviyesi konusunda hekimine danışmak için doğru zaman burasıdır — ama bu, uygulamanın verebileceği bir tavsiye değil, hekiminle konuşulacak bir konudur.';
+      'Bu günlerde özel bir diyet gerekmez; dengeli beslenme ve yeterli su en çok işe yarayan şeydir. Bazı kişilerde ovülasyon çevresinde şişkinlik hissi olur; bu genelde yediğin bir şeyden değil, hormonaldir ve geçicidir. İştah kimilerinde biraz azalır, kimilerinde artar — ikisi de olağandır. Öğünlerde protein ve lifi korumak, ayın çoğu zaman en yoğun ve en hareketli geçen bu bölümünde enerjini dengede tutar. Gebelik planlıyorsan folik asit konusunda hekimine danışmak için doğru zaman burasıdır; folik asit genellikle gebelik oluştuktan sonra değil öncesinde önerilir — ama bu, uygulamanın verebileceği bir tavsiye değil, hekiminle konuşulacak bir konudur.';
 
   @override
   String get tipNutritionDetailLuteal =>
-      'Progesteron yükselirken iştahın artması ve tatlı isteği çok yaygındır; bu bir irade meselesi değil, hormonal bir değişimdir. Öğünlere protein ve lif eklemek kan şekerini daha dengeli tutar ve isteği yumuşatır. Tuzu azaltmak ve suyu artırmak şişkinliği hafifletebilir. Magnezyumdan zengin gıdalar (badem, ceviz, koyu yeşillikler, bitter çikolata) bazı kişilerde kramp ve gerginliği azaltır. Kafeini kısmak, bu dönemde bölünen uykuya iyi gelir.';
+      'Progesteron yükselirken iştahın artması ve tatlı isteği çok yaygındır; bu bir irade meselesi değil, hormonal bir değişimdir ve bedenin bu evrede gerçekten biraz daha fazla enerji harcar. Öğünlere protein ve lif eklemek kan şekerini daha dengeli tutar ve isteği, onu görmezden gelmeye çalışmaktan çok daha etkili biçimde yumuşatır — doyurucu bir şeyle karşılanan istek, bir saat direnilen istekten genelde daha erken biter. Tuzu azaltmak ve suyu artırmak şişkinliği hafifletebilir; kulağa ters gelse de doğrudur, çünkü yeterli su alınca beden daha az tutma eğiliminde olur. Magnezyumdan zengin gıdalar (badem, ceviz, koyu yeşillikler, bitter çikolata) bazı kişilerde kramp ve gerginliği azaltır. Kafeini öğleden sonra kısmak bu dönemde bölünen uykuya iyi gelir; alkole de dikkat etmekte fayda var, çünkü uykunun zaten hafiflediği bir evrede uykuyu daha da parçalıyor.';
 
   @override
   String get tipNutritionDetailUnknown =>
-      'Evreden bağımsız olarak en çok işe yarayan şeyler aynı: düzenli öğünler, yeterli protein, bol sebze, yeterli su ve demir açısından zengin gıdalar. Regl döneminde demir kaybı arttığı için o günlerde biraz daha dikkat etmek yeterli. Birkaç döngü kaydettikten sonra burada kendi evrene özel öneriler göreceksin.';
+      'Evreden bağımsız olarak en çok işe yarayan şeyler aynı: düzenli öğünler, yeterli protein, bol sebze, yeterli su ve demir açısından zengin gıdalar. Regl döneminde demir kaybı arttığı için o günlerde biraz daha dikkat etmek yeterli; ayın her haftası için ayrı bir beslenme düzenine gerek yok. Enerjinin dengeli kalmasında, öğünleri kabaca aynı saatlerde yemek, tek tek besinlerin hepsinden daha çok işe yarar ve sağlıklı bir döngü için hiçbir gıdayı hayatından çıkarman gerekmez. Birkaç döngü kaydettikten sonra burada kendi evrene özel öneriler göreceksin.';
 }

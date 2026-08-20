@@ -594,6 +594,21 @@ class AppLocalizationsDe extends AppLocalizations {
       'Hier erfährst du in einfacher Sprache genau, was mit deinen Daten passiert.';
 
   @override
+  String get privacyScreenStorageTitle => 'Auf diesem Gerät verschlüsselt';
+
+  @override
+  String get privacyScreenNoNetworkTitle => 'Kein Server, kein Konto';
+
+  @override
+  String get privacyScreenNoThirdPartyTitle => 'Kein Tracking';
+
+  @override
+  String get privacyScreenExportTitle => 'Export nur durch dich';
+
+  @override
+  String get privacyScreenDeleteTitle => 'Löschen ist endgültig';
+
+  @override
   String get privacyScreenStorage =>
       'Alles, was du erfasst, wird verschlüsselt und nur auf diesem Gerät in einer einzigen Datei gespeichert. Der Verschlüsselungscode liegt in der sicheren Hardware deines Telefons — Keychain unter iOS, Keystore unter Android — nicht in der Datei selbst.';
 
@@ -988,6 +1003,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get assistantTitle => 'Vera-Assistentin';
 
   @override
+  String get assistantEndChatTitle => 'Diesen Chat beenden?';
+
+  @override
+  String get assistantEndChatBody =>
+      'Die Nachrichten liegen nur im Arbeitsspeicher und werden nirgends gespeichert, also lassen sie sich nicht zurückholen.';
+
+  @override
+  String get assistantEndChatConfirm => 'Chat beenden';
+
+  @override
   String get assistantInputHint => 'Frag etwas über deinen Zyklus…';
 
   @override
@@ -1130,6 +1155,18 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get trackerHistoryEmpty => 'Noch keine Einträge in diesem Zeitraum';
+
+  @override
+  String get trackerStatAverage => 'Durchschnitt';
+
+  @override
+  String get trackerStatLowest => 'Niedrigster';
+
+  @override
+  String get trackerStatHighest => 'Höchster';
+
+  @override
+  String get trackerStatLatest => 'Letzter';
 
   @override
   String get rangeFilter1m => '1 Mon.';
@@ -1580,6 +1617,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get diagnosticsClear => 'Löschen';
 
   @override
+  String get diagnosticsNoteLabel => 'Was ist passiert? (optional)';
+
+  @override
+  String get diagnosticsTechnicalDetail => 'Technische Details';
+
+  @override
   String get unitHoursShort => 'Std';
 
   @override
@@ -1788,61 +1831,61 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get phaseExplainerMenstrual =>
-      'Du blutest, weil sich die Gebärmutterschleimhaut ablöst. Östrogen und Progesteron sind auf dem tiefsten Stand des Zyklus — deshalb fühlen sich viele in den ersten Tagen müder und nach innen gekehrt. Krämpfe entstehen durch das Zusammenziehen der Gebärmutter. Mit der Blutung verlierst du außerdem Eisen, was einen Teil der Erschöpfung erklärt.';
+      'Du blutest, weil sich die Gebärmutterschleimhaut ablöst. Östrogen und Progesteron sind auf dem tiefsten Stand des Zyklus — deshalb fühlen sich viele Menschen in den ersten Tagen müder und nach innen gekehrt. Die Blutung dauert meist etwa drei bis sieben Tage und ist am Anfang am stärksten. Krämpfe entstehen durch das Zusammenziehen der Gebärmutter, ausgelöst von Prostaglandinen — hormonähnlichen Stoffen, die beim Abbau der Schleimhaut freigesetzt werden. Deshalb kommen bei manchen gleichzeitig Rückenschmerzen oder ein weicher Stuhlgang dazu. Die Blutung kostet außerdem Eisen, was einen Teil der Erschöpfung erklärt. Wärme, Bewegung und Schlaf helfen meist. Wenn der Schutz stündlich durchblutet, die Blutung deutlich länger als eine Woche dauert oder die Schmerzen dich am Alltag hindern, sprich das ärztlich an, statt es auszusitzen.';
 
   @override
   String get phaseExplainerFollicular =>
-      'Nach dem Ende der Blutung steigt Östrogen wieder an. Die meisten merken, wie Energie, Stimmung und Ausdauer zurückkommen. In den Eierstöcken reifen Follikel heran; der Körper bereitet den nächsten Eisprung vor.';
+      'Nach dem Ende der Blutung steigt Östrogen wieder an. In den Eierstöcken reift eine Gruppe von Follikeln heran, jeder mit einer Eizelle, und in der Regel wird nur eine davon freigesetzt. Östrogen baut die eben abgestoßene Schleimhaut wieder auf, und die meisten merken, wie Energie, Stimmung, Haut und Ausdauer mit zurückkommen. Dies ist auch der Abschnitt, der zwischen Personen und zwischen Monaten am stärksten schwankt — Stress, Krankheit, Reisen und Schlafmangel zeigen sich meist hier, indem sie ihn verlängern oder verkürzen. Genau deshalb ist eine Vorhersage ein Zeitraum und kein Datum: die zweite Zyklushälfte ist ziemlich stabil, diese hier ist die bewegliche.';
 
   @override
   String get phaseExplainerFertile =>
-      'Östrogen nähert sich dem Höhepunkt, und der Eisprung wird um diese Tage erwartet. Der Zervixschleim wird typischerweise klar und gleitfähig, manche bemerken mehr Lust, manche ein kurzes Ziehen auf einer Seite. Die Energie ist oft am höchsten im ganzen Zyklus.';
+      'Östrogen ist nahe seinem Höhepunkt, und der Eisprung wird um diese Tage herum erwartet. Ein Anstieg des luteinisierenden Hormons löst die Freisetzung der Eizelle etwa einen bis anderthalb Tage später aus. Die Eizelle selbst überlebt rund 12 bis 24 Stunden, Spermien im fruchtbaren Zervixschleim jedoch mehrere Tage — deshalb wird das Fenster in Tagen gerechnet und nicht in einem Tag. Der Schleim wird typischerweise klar, dehnbar und glitschig, ein wenig wie rohes Eiweiß; manche bemerken mehr Lust, empfindliche Brüste oder ein kurzes einseitiges Ziehen. Die Energie ist oft am höchsten im ganzen Zyklus. Denk daran: dieses Fenster ist eine Schätzung aus deinen eigenen Einträgen, keine Messung — und keine Verhütungsmethode.';
 
   @override
   String get phaseExplainerLuteal =>
-      'Nach dem Eisprung steigt Progesteron und fällt vor der Periode wieder deutlich ab. Dieser Abfall kann PMS-Symptome auslösen: Blähbauch, Spannen in der Brust, Appetitveränderungen, unruhigen Schlaf und Stimmungsschwankungen. Deine Körpertemperatur liegt etwas höher.';
+      'Nach dem Eisprung wird aus dem entleerten Follikel der Gelbkörper, der Progesteron bildet und die Schleimhaut stabil hält, falls sich eine Schwangerschaft einnistet. Passiert das nicht, fallen Progesteron und Östrogen stark ab, und die Periode beginnt. Diese Zyklushälfte ist die verlässlichere, meist etwa 12 bis 14 Tage. Progesteron hebt die Ruhetemperatur leicht an — genau das misst ein Basalthermometer — und kann die Verdauung verlangsamen, was einen Teil des Blähgefühls erklärt. Der Abfall am Ende löst bei vielen PMS aus: Spannen in der Brust, Appetitveränderungen, unruhiger Schlaf, Kopfschmerzen und Stimmungsschwankungen, die mit Beginn der Blutung meist nachlassen. Wenn diese Beschwerden in den meisten Monaten Arbeit oder Beziehungen belasten, ist das ärztlich besprechenswert.';
 
   @override
   String get phaseExplainerUnknown =>
-      'Es ist noch nicht genug erfasst, um zu sagen, in welcher Phase du bist. Vera sagt das lieber, als eine Phase zu erfinden. Nach ein paar erfassten Zyklen füllt sich dieser Abschnitt mit deinen eigenen Daten — bis dahin sind die Vorschläge unten allgemein gültig.';
+      'Es ist noch nicht genug eingetragen, um zu sagen, in welcher Phase du bist. Vera braucht mindestens zwei vollständige Zyklen — einen Periodenbeginn und dann den nächsten — um deinen eigenen Durchschnitt und deine Schwankung zu berechnen, und sagt das lieber, als eine Phase zu erfinden. In der Zwischenzeit geht nichts verloren: jeder eingetragene Tag gehört zu dieser ersten Berechnung, und die Schätzung wird enger, je länger deine Historie wird. Bis dahin gelten die Hinweise unten allgemein, an jedem Punkt des Zyklus.';
 
   @override
   String get tipFitnessDetailMenstrual =>
-      'Hartes Training passt in den ersten Tagen für die meisten nicht, und das ist keine Frage der Disziplin — deine Energie ist tatsächlich niedriger. Spazierengehen, sanftes Dehnen, ruhiges Yoga und Atemübungen fördern die Durchblutung und können Krämpfe abmildern. Wenn es dir gut geht, spricht nichts gegen intensive Einheiten: Blutung ist kein Grund, mit Sport aufzuhören. Ein praktischer Hinweis: lange, fordernde Einheiten an starken Tagen können die Müdigkeit verstärken — richte dich danach, wie sich dein Körper anfühlt.';
+      'Hartes Training passt in den ersten Tagen zu den wenigsten, und das ist kein Disziplinproblem — deine Energie ist tatsächlich niedriger, und der Eisenverlust durch die Blutung lässt Ausdauereinheiten schwerer wirken als dieselbe Einheit letzte Woche. Gehen, sanftes Dehnen, restauratives Yoga und Atemarbeit verbessern die Durchblutung und können Krämpfe abmildern; bei manchen senkt regelmäßige Bewegung über den ganzen Monat die Krampfstärke stärker als alles, was am Tag selbst getan wird. Wenn es dir gut geht, spricht nichts gegen harte Einheiten: Blutung ist kein Grund, mit Sport aufzuhören, und viele Athletinnen und Athleten treten mitten darin an. Ein paar praktische Hinweise: lange, fordernde Einheiten an starken Tagen können die Müdigkeit vertiefen, Wärme auf dem Unterbauch vor dem Start macht Bewegung angenehmer, und etwas mehr trinken als sonst hilft gegen die Kopfschmerzen dieser Tage. Beurteile die Einheit danach, wie sie sich anfühlt — nicht daran, wie deine beste Woche aussah.';
 
   @override
   String get tipFitnessDetailFollicular =>
-      'Mit steigendem Östrogen fühlen sich die meisten kräftiger und belastbarer; das ist meist der beste Abschnitt im Zyklus, um etwas Neues zu beginnen, Gewicht zu erhöhen oder das Tempo anzuziehen. Auch die Muskelregeneration läuft hier vergleichsweise gut. Steigere trotzdem schrittweise: viel Energie heißt nicht null Verletzungsrisiko.';
+      'Mit steigendem Östrogen fühlen sich die meisten kräftiger und belastbarer; das ist meist der beste Abschnitt, um etwas Neues anzufangen, Gewicht zu erhöhen oder das Tempo zu steigern. Die Muskelreparatur läuft hier vergleichsweise effizient, harte Einheiten werden besser verkraftet und hinterlassen weniger langen Muskelkater. Es ist auch ein gutes Fenster für alles, was einen klaren Kopf und nicht nur einen starken Körper braucht — eine neue Übung lernen, Technik korrigieren, eine längere Strecke als bisher. Zwei Einschränkungen bleiben: steigere schrittweise, denn viel Energie heißt nicht null Verletzungsrisiko, und die meisten Überlastungsschäden beginnen in einer guten Woche, nicht in einer schlechten. Und schütze deinen Schlaf — die Anpassung passiert in der Erholung, nicht im Training.';
 
   @override
   String get tipFitnessDetailFertile =>
-      'Energie und Motivation sind meist am höchsten, fordernde Einheiten passen also gut. Bei manchen sind die Gelenke rund um den Eisprung etwas lockerer — bei Sportarten mit abrupten Richtungswechseln lohnt sich ein längeres Aufwärmen. Ein kurzes Ziehen auf einer Bauchseite ist häufig; ist es stark oder hält es an, ruh dich aus und lass es ärztlich abklären.';
+      'Energie und Motivation sind meist auf dem Höhepunkt, fordernde Einheiten sitzen also gut — persönliche Bestleistungen fallen oft hierhin. Manche Studien deuten darauf hin, dass Gelenke um den Eisprung etwas nachgiebiger sind; wie groß der praktische Effekt ist, wird diskutiert, aber ein längeres Aufwärmen ist eine billige Vorsichtsmaßnahme bei Sportarten mit schnellen Richtungswechseln, Sprüngen und Landungen. Die Körpertemperatur ist im Vergleich zur zweiten Zyklushälfte noch niedrig, Hitze begrenzt dich hier also weniger als in ein bis zwei Wochen. Ein kurzes einseitiges Ziehen im Unterbauch rund um den Eisprung ist häufig und vergeht meist innerhalb von Stunden. Bei starken, einseitigen und anhaltenden Schmerzen, bei Fieber oder Schwindel: aufhören und abklären lassen, statt weiterzutrainieren.';
 
   @override
   String get tipFitnessDetailLuteal =>
-      'Vor der Periode kann die Energie sinken, der Puls bei gleicher Belastung höher liegen und die Erholung länger dauern. Das ist eine erwartbare Schwankung, kein Rückschritt. Moderate Einheiten, etwas leichteres Krafttraining und Spaziergänge sind hier meist tragfähiger. Bei Blähbauch und Spannen in der Brust machen ein guter Sport-BH und ein längeres Aufwärmen einen spürbaren Unterschied.';
+      'Wenn die Periode näher rückt, kann die Energie sinken, der Puls bei gleicher Belastung höher liegen und die Erholung länger dauern. Das ist ein erwartbares Schwanken, kein Rückschritt, und es macht die Arbeit der letzten zwei Wochen nicht zunichte. Progesteron hebt die Ruhetemperatur leicht an und erschwert die Wärmeabgabe — heiße oder schwüle Einheiten fühlen sich hier überproportional hart an. Früher oder später am Tag trainieren und mehr trinken, als nötig scheint, hilft beides. Moderate Einheiten, eine etwas leichtere Version deines Krafttrainings und Spazierengehen sind meist besser durchzuhalten. Bei Blähgefühl und Spannen in der Brust machen ein stützender Sport-BH und ein längeres Aufwärmen einen echten Unterschied. Wenn die Stimmung im Keller ist, mach die Einheit lieber kurz und leicht, als sie ganz zu streichen — die Schwelle, ab der sie zählt, liegt niedriger, als sie sich anfühlt.';
 
   @override
   String get tipFitnessDetailUnknown =>
-      'Auch ohne bekannte Phase hilft Bewegung immer: moderate Aktivität an den meisten Tagen der Woche bringt mehr als gelegentliche sehr harte Einheiten. Richte dich danach, wie du dich fühlst — an müden Tagen zählt auch ein Spaziergang. Nach ein paar erfassten Zyklen siehst du hier phasenspezifische Vorschläge.';
+      'Auch ohne bekannte Phase hilft Bewegung zu jedem Zeitpunkt: die allgemeine Empfehlung sind rund 150 Minuten moderate Aktivität pro Woche, verteilt auf die meisten Tage, plus zweimal wöchentlich Kräftigung — und dieses Muster bringt fast allen mehr als gelegentliche sehr intensive Einheiten. Beständigkeit zählt mehr als Intensität, und die beste Einheit ist die, die du nächste Woche wirklich wiederholst. Richte dich danach, wie du dich fühlst: an müden Tagen zählt ein Spaziergang, und eine kurze absolvierte Einheit ist mehr wert als eine lange ausgelassene. Sobald du ein paar Zyklen eingetragen hast, erscheinen hier phasenspezifische Hinweise.';
 
   @override
   String get tipNutritionDetailMenstrual =>
-      'Mit der Blutung verlierst du Eisen; rotes Fleisch, Linsen, Kichererbsen, dunkles Blattgemüse und Melasse helfen, es zu ersetzen. Pflanzliches Eisen wird zusammen mit Vitamin C deutlich besser aufgenommen — Zitrone über das Linsengericht ist die praktischste Form davon. Tee und Kaffee zur Mahlzeit senken die Eisenaufnahme; eine Stunde Abstand genügt. Viel Wasser kann Müdigkeit und Kopfschmerzen während der Blutung lindern.';
+      'Die Blutung kostet Eisen; rotes Fleisch, Linsen, Kichererbsen, dunkles Blattgemüse und Zuckerrübensirup helfen beim Auffüllen. Pflanzliches Eisen wird zusammen mit Vitamin C deutlich besser aufgenommen — Zitrone über das Linsengericht ist die praktischste Version davon, ein Tomatensalat dazu tut dasselbe. Tee und Kaffee zur Mahlzeit senken die Eisenaufnahme wegen ihrer Gerbstoffe; etwa eine Stunde Abstand reicht aus, aufgeben musst du keines von beiden. Viel Wasser kann die Müdigkeit und die Kopfschmerzen der Blutungstage lindern, und magnesiumreiche Lebensmittel wie Nüsse, Samen und dunkles Blattgemüse helfen manchen bei Krämpfen. An Tagen, an denen die Verdauung träge ist, liegen kleine, regelmäßige Mahlzeiten besser als große. Wenn du rund um die Periode oft kurzatmig, schwindelig oder ungewöhnlich erschöpft bist, erwähne das ärztlich — Eisenmangel ist häufig, leicht zu testen und nichts, was eine App diagnostizieren sollte.';
 
   @override
   String get tipNutritionDetailFollicular =>
-      'Während sich die Energie erholt, ist der Körper im Aufbaumodus: genug Eiweiß, Vollkorn und Gemüse unterstützen das. Es ist auch sinnvoll, die Eisenspeicher nach der Blutung weiter aufzufüllen. Mahlzeiten nicht auszulassen fällt in dieser Phase meist leichter — und du gehst ausgeglichener in die Appetitschwankungen der nächsten.';
+      'Während die Energie zurückkommt, ist der Körper im Aufbaumodus: genug Eiweiß, Vollkorn und Gemüse unterstützen das, und in dieser Phase ist der Appetit meist am gleichmäßigsten und am leichtesten zu steuern. Es ist auch sinnvoll, die Eisenspeicher nach der Blutung weiter aufzufüllen, statt das nur als Aufgabe der Periodenwoche zu sehen — Speicher füllen sich über Wochen, nicht über Tage. Mahlzeiten nicht ausfallen zu lassen fällt hier leichter und lässt dich ausgeglichener in die Appetitschwankungen der nächsten Phase gehen. Wenn du etwas an deiner Ernährung ändern willst, ist dieser Abschnitt in der Regel freundlicher dafür als die Woche vor der Periode, in der Heißhunger und gedrückte Stimmung jede neue Routine schwerer wirken lassen, als sie ist.';
 
   @override
   String get tipNutritionDetailFertile =>
-      'Eine spezielle Ernährung ist hier nicht nötig; ausgewogene Mahlzeiten und genug Wasser bringen am meisten. Manche fühlen sich aufgebläht, das ist meist hormonell und vorübergehend. Wenn du eine Schwangerschaft planst, ist das ein guter Zeitpunkt, ärztlich nach Folsäure zu fragen — aber das ist ein Gespräch dort, kein Rat, den eine App geben sollte.';
+      'Hier braucht es keine besondere Ernährung; ausgewogene Mahlzeiten und genug Wasser leisten das meiste. Manche fühlen sich um den Eisprung aufgebläht, was meist hormonell und vorübergehend ist und nicht an etwas Gegessenem liegt. Der Appetit sinkt bei manchen leicht und steigt bei anderen — beides ist gewöhnlich. Eiweiß und Ballaststoffe in den Mahlzeiten halten die Energie stabil durch den oft aktivsten Abschnitt des Monats. Wenn du eine Schwangerschaft planst, ist jetzt ein sinnvoller Zeitpunkt, ärztlich nach Folsäure zu fragen — die wird üblicherweise vor der Empfängnis empfohlen, nicht danach. Aber das ist ein Gespräch dort und kein Rat, den eine App geben sollte.';
 
   @override
   String get tipNutritionDetailLuteal =>
-      'Mehr Appetit und Lust auf Süßes bei steigendem Progesteron sind sehr häufig; das ist eine hormonelle Verschiebung, kein Willensproblem. Eiweiß und Ballaststoffe in den Mahlzeiten halten den Blutzucker stabiler und mildern das Verlangen. Weniger Salz und mehr Wasser können den Blähbauch lindern. Magnesiumreiche Lebensmittel (Mandeln, Walnüsse, dunkles Blattgemüse, Zartbitterschokolade) reduzieren bei manchen Krämpfe und Anspannung. Weniger Koffein hilft dem unruhigen Schlaf dieser Phase.';
+      'Mehr Appetit und Lust auf Süßes, während Progesteron steigt, sind sehr häufig; das ist eine hormonelle Verschiebung, kein Willensproblem, und dein Körper verbraucht in dieser Phase tatsächlich etwas mehr Energie. Eiweiß und Ballaststoffe in den Mahlzeiten halten den Blutzucker stabiler und mildern das Verlangen weit besser, als es zu ignorieren — ein Verlangen, das mit etwas Sättigendem beantwortet wird, endet meist früher als eines, gegen das man eine Stunde ankämpft. Weniger Salz und mehr Wasser können das Blähgefühl lindern; das klingt widersprüchlich, ist es aber nicht: gut versorgt hält der Körper weniger zurück. Magnesiumreiche Lebensmittel (Mandeln, Walnüsse, dunkles Blattgemüse, Zartbitterschokolade) verringern bei manchen Krämpfe und Anspannung. Weniger Koffein nach dem Mittag hilft dem unruhigen Schlaf dieser Phase, und auch Alkohol ist einen Blick wert, weil er den Schlaf genau dann zerstückelt, wenn er ohnehin leichter ist.';
 
   @override
   String get tipNutritionDetailUnknown =>
-      'Unabhängig von der Phase hilft dasselbe am meisten: regelmäßige Mahlzeiten, genug Eiweiß, viel Gemüse, genug Wasser und eisenreiche Lebensmittel. Da die Blutung Eisen kostet, reicht es, an diesen Tagen etwas mehr darauf zu achten. Nach ein paar erfassten Zyklen siehst du hier phasenspezifische Vorschläge.';
+      'Egal in welcher Phase helfen dieselben Dinge am meisten: regelmäßige Mahlzeiten, genug Eiweiß, viel Gemüse, genug Wasser und eisenreiche Lebensmittel. Da die Blutung Eisen kostet, reicht es, an diesen Tagen etwas mehr darauf zu achten — es braucht keine eigene Ernährung für jede Woche des Monats. Ungefähr feste Essenszeiten tun für gleichmäßige Energie mehr als jedes einzelne Lebensmittel, und kein Nahrungsmittel muss gestrichen werden, damit ein Zyklus gesund ist. Sobald du ein paar Zyklen eingetragen hast, erscheinen hier phasenspezifische Hinweise.';
 }
