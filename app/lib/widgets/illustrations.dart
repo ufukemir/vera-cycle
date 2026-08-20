@@ -113,10 +113,40 @@ class MascotAvatar extends StatefulWidget {
 
 class _MascotAvatarState extends State<MascotAvatar>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _controller = AnimationController(
-    vsync: this,
-    duration: const Duration(milliseconds: 2400),
-  )..repeat(reverse: true);
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    // Built here rather than in the field's initializer. As a lazy `late`
+    // field it was never created for Mascot.none — build returns early and
+    // nothing else reads it — so `dispose()` was what first touched it, and
+    // creating a ticker needs the TickerMode of an element that is already
+    // deactivated by then. Every screen carrying a mascot avatar logged
+    // "Looking up a deactivated widget's ancestor is unsafe" on the way
+    // out, for the mascot setting that is the default.
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 2400),
+    );
+    _syncAnimation();
+  }
+
+  @override
+  void didUpdateWidget(MascotAvatar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.mascot != oldWidget.mascot) _syncAnimation();
+  }
+
+  /// Nothing to bob when no mascot is drawn, and an idle repeating
+  /// controller still asks for a frame on every tick.
+  void _syncAnimation() {
+    if (widget.mascot == Mascot.none) {
+      _controller.stop();
+    } else if (!_controller.isAnimating) {
+      _controller.repeat(reverse: true);
+    }
+  }
 
   @override
   void dispose() {

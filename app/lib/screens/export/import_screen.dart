@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../services/csv_cycle_importer.dart';
+import '../../state/app_lock_controller.dart';
 import '../../state/cycle_controller.dart';
 
 /// Brings history over from another tracker.
@@ -32,10 +33,16 @@ class _ImportScreenState extends State<ImportScreen> {
 
   Future<void> _pickFile() async {
     final l10n = AppLocalizations.of(context)!;
-    final picked = await FilePicker.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['csv', 'txt'],
-    );
+    // Through the lock controller: on Android the picker is a separate
+    // activity, so the auto-lock would fire, unmount this screen, and the
+    // await below would resume with `mounted == false` — dropping the
+    // chosen file with no error and no import.
+    final picked = await context.read<AppLockController>().duringSystemSheet(
+          () => FilePicker.pickFiles(
+            type: FileType.custom,
+            allowedExtensions: ['csv', 'txt'],
+          ),
+        );
     if (picked == null || picked.files.isEmpty || !mounted) return;
 
     setState(() {
@@ -69,12 +76,7 @@ class _ImportScreenState extends State<ImportScreen> {
     final controller = context.read<CycleController>();
 
     setState(() => _busy = true);
-    var added = 0;
-    for (final log in preview.logs) {
-      if (controller.logFor(log.date) != null) continue;
-      await controller.upsertDay(log);
-      added++;
-    }
+    final added = await controller.addMissingDays(preview.logs);
     if (!mounted) return;
     setState(() {
       _busy = false;

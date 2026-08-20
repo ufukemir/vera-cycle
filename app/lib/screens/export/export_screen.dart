@@ -18,6 +18,7 @@ import '../../services/backup_service.dart';
 import '../../services/cycle_insights.dart';
 import '../../services/doctor_report_csv.dart';
 import '../../services/doctor_report_pdf.dart';
+import '../../state/app_lock_controller.dart';
 import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
 import '../../util/day.dart';
@@ -42,6 +43,16 @@ class _ExportScreenState extends State<ExportScreen> {
   bool _includeNotes = false;
   bool _busy = false;
 
+  /// Every OS sheet on this screen goes through here.
+  ///
+  /// Without it the auto-lock fires the moment the share chooser or file
+  /// picker takes the foreground, [AppRoot] replaces this screen with the
+  /// lock screen, and the `await` below resumes unmounted — which is how
+  /// restore-from-backup managed to do nothing at all on a real device
+  /// while every test passed.
+  Future<T> _sheet<T>(Future<T> Function() action) =>
+      context.read<AppLockController>().duringSystemSheet(action);
+
   Future<void> _createBackup() async {
     final l10n = AppLocalizations.of(context)!;
     final password = await _promptNewPassword(context);
@@ -52,15 +63,15 @@ class _ExportScreenState extends State<ExportScreen> {
       final logs = context.read<CycleController>().logs;
       final bytes = await _backupService.createBackup(logs, password);
       if (!mounted) return;
-      await SharePlus.instance.share(ShareParams(
-        files: [
-          XFile.fromData(
-            bytes,
-            name: 'cycle-backup-${dayKey(today())}.cyclebackup',
-            mimeType: 'application/octet-stream',
-          ),
-        ],
-      ));
+      await _sheet(() => SharePlus.instance.share(ShareParams(
+            files: [
+              XFile.fromData(
+                bytes,
+                name: 'cycle-backup-${dayKey(today())}.cyclebackup',
+                mimeType: 'application/octet-stream',
+              ),
+            ],
+          )));
       if (!mounted) return;
       await context.read<AppPreferences>().markBackedUpNow();
       if (!mounted) return;
@@ -73,10 +84,10 @@ class _ExportScreenState extends State<ExportScreen> {
   Future<void> _restoreBackup() async {
     final l10n = AppLocalizations.of(context)!;
 
-    final picked = await FilePicker.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['cyclebackup'],
-    );
+    final picked = await _sheet(() => FilePicker.pickFiles(
+          type: FileType.custom,
+          allowedExtensions: ['cyclebackup'],
+        ));
     if (picked == null || picked.files.isEmpty || !mounted) return;
     final bytes = await picked.files.first.readAsBytes();
     if (!mounted) return;
@@ -138,21 +149,22 @@ class _ExportScreenState extends State<ExportScreen> {
       ..add('')
       ..add(l10n.homeFertileWindowDisclaimer);
 
-    await SharePlus.instance.share(ShareParams(text: lines.join('\n')));
+    await _sheet(
+        () => SharePlus.instance.share(ShareParams(text: lines.join('\n'))));
   }
 
   Future<void> _shareCsv() async {
     final logs = context.read<CycleController>().logs;
     final csv = _csvBuilder.build(logs, includeNotes: _includeNotes);
-    await SharePlus.instance.share(ShareParams(
-      files: [
-        XFile.fromData(
-          Uint8List.fromList(utf8.encode(csv)),
-          name: 'cycle-doctor-report-${dayKey(today())}.csv',
-          mimeType: 'text/csv',
-        ),
-      ],
-    ));
+    await _sheet(() => SharePlus.instance.share(ShareParams(
+          files: [
+            XFile.fromData(
+              Uint8List.fromList(utf8.encode(csv)),
+              name: 'cycle-doctor-report-${dayKey(today())}.csv',
+              mimeType: 'text/csv',
+            ),
+          ],
+        )));
   }
 
   /// Loads the report font from the app bundle.
@@ -219,7 +231,7 @@ class _ExportScreenState extends State<ExportScreen> {
       fonts: await _loadReportFonts(),
     );
 
-    await Printing.layoutPdf(onLayout: (_) async => bytes);
+    await _sheet(() => Printing.layoutPdf(onLayout: (_) async => bytes));
   }
 
   void _showSnack(String message) {

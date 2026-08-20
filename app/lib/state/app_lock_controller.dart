@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_initializing_formals, avoid_renaming_method_parameters
+// Private fields, public parameter names — see CycleController.
 import 'package:flutter/material.dart';
 import 'package:local_auth/local_auth.dart';
 
@@ -11,6 +13,10 @@ enum AppLockState { locked, unlocked }
 /// app is positioned on privacy above convenience, so the friction of
 /// re-authenticating after every app switch is accepted deliberately rather
 /// than offering a grace period.
+///
+/// "Backgrounding" means the app actually left the foreground, not
+/// [AppLifecycleState.inactive]. Sheets the app opens itself are excluded
+/// too — see [duringSystemSheet].
 ///
 /// Failed-PIN throttling here is in-memory only and resets on process
 /// restart. That's a known v1 simplification, not an oversight: persisting it
@@ -29,12 +35,27 @@ class AppLockController extends ChangeNotifier with WidgetsBindingObserver {
   static const _throttleAfterAttempts = 5;
   static const _baseBackoff = Duration(seconds: 5);
 
+  /// How long the app may sit in the background during one of its own
+  /// system sheets before the lock applies anyway.
+  ///
+  /// A share chooser that leads the user into another app is no longer a
+  /// sheet — it is a session somewhere else. Two minutes covers "pick an
+  /// app, send, come straight back" without leaving the history readable
+  /// on a phone that was put down.
+  static const _maxSheetAway = Duration(minutes: 2);
+
   final PinVault _pinVault;
   final LocalAuthentication _auth;
 
   AppLockState _state = AppLockState.locked;
   int _failedAttempts = 0;
   DateTime? _lockedOutUntil;
+
+  /// How many [duringSystemSheet] calls are in flight.
+  int _openSheets = 0;
+
+  /// When the app went to the background with a sheet open, if it did.
+  DateTime? _leftDuringSheet;
 
   AppLockState get state => _state;
 
@@ -128,11 +149,61 @@ class AppLockController extends ChangeNotifier with WidgetsBindingObserver {
     notifyListeners();
   }
 
+  /// Runs [action] with the automatic lock suspended.
+  ///
+  /// For the sheets the app opens itself: a share chooser, a file picker,
+  /// the print dialog, a permission screen. On Android each of those is a
+  /// separate activity, so Flutter reports `paused` and the lock fired
+  /// behind the user's back. That was not merely annoying: [AppRoot] swaps
+  /// the whole tree for the lock screen rather than layering over it, so
+  /// the screen that opened the sheet was unmounted and its `await`
+  /// resumed with `mounted == false`. Restoring a backup and importing a
+  /// CSV did nothing at all — silently, with no error — and creating a
+  /// backup shared the file but never recorded that it had, so the
+  /// "time to back up" nudge kept nagging.
+  ///
+  /// The suspension is narrow on purpose: only this call, only while it is
+  /// in flight, and [_maxSheetAway] still locks if the user left for the
+  /// other app rather than coming back.
+  Future<T> duringSystemSheet<T>(Future<T> Function() action) async {
+    _openSheets++;
+    try {
+      return await action();
+    } finally {
+      _openSheets--;
+    }
+  }
+
+  // The parameter is `lifecycleState`, not `state`: this class already has
+  // a `state` getter, and shadowing it inside the one method that decides
+  // when to lock is a worse trade than the lint.
   @override
   void didChangeAppLifecycleState(AppLifecycleState lifecycleState) {
-    if (lifecycleState == AppLifecycleState.paused ||
-        lifecycleState == AppLifecycleState.inactive) {
-      lock();
+    switch (lifecycleState) {
+      // `inactive` is not backgrounding. It is the Face ID prompt, a
+      // permission alert, Control Centre pulled halfway down, an incoming
+      // call banner — and on iOS the share sheet and document picker,
+      // which are presented in-process. Locking on it made the biometric
+      // prompt race its own lock screen and threw the user back to the PIN
+      // pad for every system alert. The app-switcher snapshot is already
+      // hidden natively, so ignoring `inactive` exposes nothing.
+      case AppLifecycleState.inactive:
+        break;
+      case AppLifecycleState.paused:
+      case AppLifecycleState.hidden:
+      case AppLifecycleState.detached:
+        if (_openSheets > 0) {
+          _leftDuringSheet ??= DateTime.now();
+        } else {
+          lock();
+        }
+      case AppLifecycleState.resumed:
+        final leftAt = _leftDuringSheet;
+        _leftDuringSheet = null;
+        if (leftAt != null &&
+            DateTime.now().difference(leftAt) > _maxSheetAway) {
+          lock();
+        }
     }
   }
 

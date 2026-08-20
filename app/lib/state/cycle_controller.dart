@@ -1,3 +1,7 @@
+// ignore_for_file: prefer_initializing_formals
+// The fields are private and the constructor parameters are not, so an
+// initializing formal would force every caller to write `_repository:`.
+// The lint has no way to express "same value, different name".
 import 'package:flutter/foundation.dart';
 
 import '../models/cycle.dart';
@@ -127,13 +131,22 @@ class CycleController extends ChangeNotifier {
   }
 
   Future<void> upsertDay(DayLog log) async {
+    final previous = logFor(log.date);
     _logs = applyUpsert(_logs, log);
     _recompute();
     notifyListeners();
     await _repository.replaceAll(_logs);
     // After the local write, never before: the encrypted store is the
     // source of truth and a health-export failure must not affect it.
-    await _healthSync?.writeDay(log);
+    //
+    // And only when an exported field actually moved. The day-log screen
+    // calls this on every tap, so syncing unconditionally meant a platform
+    // round-trip for each symptom, mood and debounced keystroke — none of
+    // which any health type covers.
+    final sync = _healthSync;
+    if (sync != null && HealthSyncService.exportedFieldsDiffer(previous, log)) {
+      await sync.writeDay(log);
+    }
   }
 
   Future<void> deleteDay(DateTime date) async {
@@ -160,6 +173,30 @@ class CycleController extends ChangeNotifier {
     _predictionEngine = engine;
     _recompute();
     notifyListeners();
+  }
+
+  /// Merges [incoming] days in, keeping any day already logged here.
+  ///
+  /// One write for the whole import. The CSV screen used to call
+  /// [upsertDay] per row, and each of those re-encrypts and rewrites the
+  /// entire store — so a three-year export from another tracker meant a
+  /// thousand full-file encrypt-and-write cycles, on the UI thread, to
+  /// import data that fits in one. Returns how many days were actually
+  /// added.
+  Future<int> addMissingDays(Iterable<DayLog> incoming) async {
+    var added = 0;
+    var next = _logs;
+    for (final log in incoming) {
+      if (next.any((existing) => isSameDay(existing.date, log.date))) continue;
+      next = applyUpsert(next, log);
+      added++;
+    }
+    if (added == 0) return 0;
+    _logs = next;
+    _recompute();
+    notifyListeners();
+    await _repository.replaceAll(_logs);
+    return added;
   }
 
   /// Restores a full history from a decrypted backup.

@@ -51,15 +51,51 @@ class HealthSyncService {
     }
   }
 
-  /// Writes whatever [log] has that maps to a health type. Silent on
-  /// failure by design: a rejected health write must never block or undo
-  /// saving the day locally, which is the source of truth.
+  /// Whether [before] and [after] differ in anything this service exports.
+  ///
+  /// The day-log screen saves on every tap and every debounced keystroke,
+  /// so without this check a single afternoon of logging symptoms, moods
+  /// and a note fired dozens of health writes that all carried identical
+  /// values. Keeping the knowledge of *which* fields are exported next to
+  /// the code that exports them means the two can't drift apart.
+  static bool exportedFieldsDiffer(DayLog? before, DayLog after) {
+    if (before == null) {
+      return after.flow != null ||
+          after.weightKg != null ||
+          after.basalTempC != null;
+    }
+    return before.flow != after.flow ||
+        before.weightKg != after.weightKg ||
+        before.basalTempC != after.basalTempC;
+  }
+
+  /// Writes whatever [log] has that maps to a health type, replacing
+  /// whatever Vera wrote for that day before. Silent on failure by design:
+  /// a rejected health write must never block or undo saving the day
+  /// locally, which is the source of truth.
+  ///
+  /// Each type is cleared over the day's range first. Appending without
+  /// that left every edit behind as its own record — correct the weight
+  /// three times and the health app showed three weights for one day —
+  /// and re-running the backfill duplicated the entire history. Clearing
+  /// also means deleting a value in Vera deletes it in the health app,
+  /// which is what "Vera is the source of truth" has to mean if it means
+  /// anything.
+  ///
+  /// The delete is safe to run unconditionally: both platforms scope it to
+  /// records this app wrote — HealthKit via an `HKSource.default()`
+  /// predicate, Health Connect by refusing to delete other apps' records —
+  /// so a smart scale's weight entries are never touched.
   Future<void> writeDay(DayLog log) async {
     if (!isSupported) return;
     try {
       await _ensureConfigured();
       final start = log.date;
       final end = start.add(const Duration(hours: 23, minutes: 59));
+
+      await _clearDay(HealthDataType.MENSTRUATION_FLOW, start, end);
+      await _clearDay(HealthDataType.WEIGHT, start, end);
+      await _clearDay(HealthDataType.BODY_TEMPERATURE, start, end);
 
       final flow = _mapFlow(log.flow);
       if (flow != null) {
@@ -97,6 +133,18 @@ class HealthSyncService {
     } on Object {
       // Permission revoked, Health Connect missing, type unavailable on
       // this device — none of which should surface as an app error.
+    }
+  }
+
+  /// Removes Vera's own records of one type for one day, so the write that
+  /// follows replaces rather than appends.
+  Future<void> _clearDay(
+      HealthDataType type, DateTime start, DateTime end) async {
+    try {
+      await _health.delete(type: type, startTime: start, endTime: end);
+    } on Object {
+      // Nothing stored yet, or this type isn't available on the device.
+      // The write below is still worth attempting either way.
     }
   }
 
