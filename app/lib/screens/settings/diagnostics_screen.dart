@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../services/crash_log.dart';
+import '../../state/app_lock_controller.dart';
 
-/// Shows the local crash log verbatim and lets the user send it — or not.
+/// Lets the user send a note about a problem — with the crash log attached,
+/// and readable before it goes.
 ///
-/// Displaying the raw text is the point, not a detail: the user is being
-/// asked to share a diagnostic from a health app, and "trust us, there's
-/// nothing sensitive in here" is exactly the sort of claim this product
-/// refuses to make about anything else.
+/// The screen used to open on the raw stack trace. That was the right
+/// instinct applied at the wrong level: nothing may be sent that the user
+/// cannot inspect, but a wall of `Element._debugCheckStateIsActive` is not
+/// inspection, it is intimidation. So the log is now folded away behind a
+/// disclosure, and what leads instead is the one thing that actually makes a
+/// crash fixable — the user's own sentence about what they were doing.
+///
+/// Rejecting Sentry/Crashlytics (see [CrashLog]) is what makes that sentence
+/// necessary rather than merely nice: there is no session replay to fall back
+/// on, so the report is only as good as what the person chose to write.
 class DiagnosticsScreen extends StatefulWidget {
   const DiagnosticsScreen({super.key});
 
@@ -18,6 +27,7 @@ class DiagnosticsScreen extends StatefulWidget {
 }
 
 class _DiagnosticsScreenState extends State<DiagnosticsScreen> {
+  final _note = TextEditingController();
   String? _log;
   bool _loading = true;
 
@@ -27,6 +37,12 @@ class _DiagnosticsScreenState extends State<DiagnosticsScreen> {
     _reload();
   }
 
+  @override
+  void dispose() {
+    _note.dispose();
+    super.dispose();
+  }
+
   Future<void> _reload() async {
     final log = await CrashLog.instance.read();
     if (!mounted) return;
@@ -34,6 +50,17 @@ class _DiagnosticsScreenState extends State<DiagnosticsScreen> {
       _log = log;
       _loading = false;
     });
+  }
+
+  /// The note first, then the log under a marker.
+  ///
+  /// Not localized: this text is read by a developer, not by the user, and
+  /// a report whose section headings arrive in Tamil is harder to triage,
+  /// not friendlier.
+  String _report(String log) {
+    final note = _note.text.trim();
+    if (note.isEmpty) return log;
+    return '$note\n\n----- LOG -----\n$log';
   }
 
   @override
@@ -55,12 +82,31 @@ class _DiagnosticsScreenState extends State<DiagnosticsScreen> {
             else if (log == null)
               Text(l10n.diagnosticsEmpty, style: theme.textTheme.bodyMedium)
             else ...[
+              TextField(
+                controller: _note,
+                minLines: 3,
+                maxLines: 6,
+                textCapitalization: TextCapitalization.sentences,
+                decoration: InputDecoration(
+                  labelText: l10n.diagnosticsNoteLabel,
+                  alignLabelWithHint: true,
+                  filled: true,
+                  fillColor: theme.colorScheme.surfaceContainerHigh,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
               Row(
                 children: [
                   Expanded(
                     child: FilledButton.icon(
-                      onPressed: () => SharePlus.instance
-                          .share(ShareParams(text: log)),
+                      onPressed: () => context
+                          .read<AppLockController>()
+                          .duringSystemSheet(() => SharePlus.instance
+                              .share(ShareParams(text: _report(log)))),
                       icon: const Icon(Icons.ios_share),
                       label: Text(l10n.diagnosticsShare),
                     ),
@@ -75,18 +121,33 @@ class _DiagnosticsScreenState extends State<DiagnosticsScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.surfaceContainerHigh,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: SelectableText(
-                  log,
-                  style: theme.textTheme.bodySmall
-                      ?.copyWith(fontFamily: 'monospace'),
+              const SizedBox(height: 8),
+              // Collapsed, not removed. Folding it away is what the user
+              // asked for; deleting it would mean asking someone to send an
+              // opaque blob out of a health app, which is the exact move
+              // this product refuses everywhere else.
+              Theme(
+                data: theme.copyWith(dividerColor: Colors.transparent),
+                child: ExpansionTile(
+                  title: Text(l10n.diagnosticsTechnicalDetail,
+                      style: theme.textTheme.labelLarge),
+                  tilePadding: EdgeInsets.zero,
+                  childrenPadding: EdgeInsets.zero,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.surfaceContainerHigh,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: SelectableText(
+                        log,
+                        style: theme.textTheme.bodySmall
+                            ?.copyWith(fontFamily: 'monospace'),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

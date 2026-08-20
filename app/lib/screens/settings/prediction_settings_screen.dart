@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../services/prediction_engine.dart';
+import '../../theme/app_theme.dart';
 import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
 import '../../widgets/number_stepper.dart';
@@ -30,10 +31,12 @@ class PredictionSettingsScreen extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.all(20),
           children: [
-            Text(l10n.predictionSettingsIntro,
-                style: Theme.of(context).textTheme.bodyMedium),
-            const SizedBox(height: 28),
-            _SettingRow(
+            _IntroNote(text: l10n.predictionSettingsIntro),
+            const SizedBox(height: 20),
+            _SettingCard(
+              icon: Icons.water_drop_outlined,
+              tint: AppPalette.roseSoft,
+              ink: AppPalette.roseSoftText,
               label: l10n.predictionSettingsPeriodLengthLabel,
               hint: null,
               child: NumberStepper(
@@ -44,8 +47,11 @@ class PredictionSettingsScreen extends StatelessWidget {
                 onChanged: (v) => prefs.setEstimatedPeriodLengthDays(v),
               ),
             ),
-            const SizedBox(height: 24),
-            _SettingRow(
+            const SizedBox(height: 14),
+            _SettingCard(
+              icon: Icons.autorenew_rounded,
+              tint: AppPalette.skySoft,
+              ink: AppPalette.skySoftText,
               label: l10n.predictionSettingsCycleLengthLabel,
               hint: l10n.predictionSettingsCycleLengthHint,
               child: NumberStepper(
@@ -56,8 +62,11 @@ class PredictionSettingsScreen extends StatelessWidget {
                 onChanged: (v) => prefs.setEstimatedCycleLengthDays(v),
               ),
             ),
-            const SizedBox(height: 24),
-            _SettingRow(
+            const SizedBox(height: 14),
+            _SettingCard(
+              icon: Icons.timelapse_rounded,
+              tint: AppPalette.goldSoft,
+              ink: AppPalette.goldSoftText,
               label: l10n.predictionSettingsLutealLabel,
               hint: l10n.predictionSettingsLutealHint,
               child: NumberStepper(
@@ -81,9 +90,59 @@ class PredictionSettingsScreen extends StatelessWidget {
   }
 }
 
-class _SettingRow extends StatelessWidget {
-  const _SettingRow({required this.label, required this.hint, required this.child});
+/// The "these are assumptions, not your data" note.
+///
+/// It was the first paragraph of plain body text on the screen, which is
+/// where a caveat goes to be skipped. Boxed and marked, it reads as the
+/// framing for everything below it — which is what it is: without it, three
+/// steppers labelled "typical cycle length" look like the controls that
+/// drive the real prediction.
+class _IntroNote extends StatelessWidget {
+  const _IntroNote({required this.text});
 
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: scheme.primary.withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: scheme.primary.withValues(alpha: 0.22)),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(Icons.info_outline_rounded, size: 20, color: scheme.primary),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              text,
+              style: theme.textTheme.bodyMedium?.copyWith(height: 1.45),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SettingCard extends StatelessWidget {
+  const _SettingCard({
+    required this.icon,
+    required this.tint,
+    required this.ink,
+    required this.label,
+    required this.hint,
+    required this.child,
+  });
+
+  final IconData icon;
+  final Color tint;
+  final Color ink;
   final String label;
   final String? hint;
   final Widget child;
@@ -91,17 +150,52 @@ class _SettingRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label, style: theme.textTheme.titleMedium),
-        if (hint != null) ...[
-          const SizedBox(height: 4),
-          Text(hint!, style: theme.textTheme.bodySmall),
+    final isDark = theme.brightness == Brightness.dark;
+    final panel = isDark
+        ? Color.alphaBlend(
+            tint.withValues(alpha: 0.09), theme.colorScheme.surface)
+        : tint.withValues(alpha: 0.45);
+    final badge = isDark ? tint.withValues(alpha: 0.16) : tint;
+    final labelInk = isDark ? tint : ink;
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 18),
+      decoration: BoxDecoration(
+        color: panel,
+        borderRadius: BorderRadius.circular(22),
+        border:
+            isDark ? Border.all(color: tint.withValues(alpha: 0.18)) : null,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 32,
+                height: 32,
+                decoration:
+                    BoxDecoration(shape: BoxShape.circle, color: badge),
+                child: Icon(icon, size: 17, color: labelInk),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(label,
+                    style:
+                        theme.textTheme.titleMedium?.copyWith(color: labelInk)),
+              ),
+            ],
+          ),
+          if (hint != null) ...[
+            const SizedBox(height: 8),
+            Text(hint!,
+                style: theme.textTheme.bodySmall?.copyWith(height: 1.4)),
+          ],
+          const SizedBox(height: 14),
+          Center(child: child),
         ],
-        const SizedBox(height: 12),
-        Center(child: child),
-      ],
+      ),
     );
   }
 }

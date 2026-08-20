@@ -6,9 +6,11 @@ import '../../l10n/app_localizations.dart';
 import '../../l10n/enum_labels.dart';
 import '../../models/enums.dart';
 import '../../services/ad_consent_service.dart';
+import '../../services/crash_log.dart';
 import '../../services/health_sync_service.dart';
 import '../../services/pin_vault.dart';
 import '../../services/reminder_service.dart';
+import '../../state/app_lock_controller.dart';
 import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
 import '../export/export_screen.dart';
@@ -247,14 +249,23 @@ class SettingsScreen extends StatelessWidget {
     final prefs = context.read<AppPreferences>();
     final l10n = AppLocalizations.of(context)!;
     final controller = context.read<CycleController>();
+    final lock = context.read<AppLockController>();
 
     if (!enable) {
       await prefs.setHealthSyncEnabled(false);
+      // Detach the live service too, not just the stored preference.
+      // Only `main.dart` read that preference, and only at startup, so
+      // the controller went on writing every edited day to the health
+      // record until the app was next launched — an export the user had
+      // explicitly switched off.
+      controller.healthSync = null;
       return;
     }
 
     final service = HealthSyncService();
-    final granted = await service.requestPermissions();
+    // Health Connect's permission screen is a separate activity, so this
+    // has to hold the auto-lock off the same way the export sheets do.
+    final granted = await lock.duringSystemSheet(service.requestPermissions);
     if (!context.mounted) return;
     if (!granted) {
       ScaffoldMessenger.of(context)
@@ -268,6 +279,10 @@ class SettingsScreen extends StatelessWidget {
     }
 
     await prefs.setHealthSyncEnabled(true);
+    // Same reason as the off branch: without this, days edited after
+    // turning sync on went nowhere until the next launch, so the backfill
+    // below looked like the whole feature.
+    controller.healthSync = service;
     final count = await service.writeAll(controller.logs);
     if (!context.mounted) return;
     ScaffoldMessenger.of(context)
@@ -339,10 +354,19 @@ class SettingsScreen extends StatelessWidget {
       body: SafeArea(
         child: ListView(
           children: [
-            // Grouped by what the user is actually deciding: everything
-            // that changes how the app looks sits together, and the two
-            // measurement choices sit together, rather than alternating
-            // heading/control/divider down the whole screen.
+            // Grouped by what the user is actually deciding, rather than
+            // alternating heading/control/divider down the whole screen:
+            // appearance, then reminders, then tracking.
+            //
+            // Week start and temperature unit live in the tracking group
+            // rather than up here, even though both are presentation
+            // choices. A group called "tracking preferences" holding only
+            // two unit pickers, while the switches that decide what is
+            // actually tracked sat under a separate heading much further
+            // down, read as a misfiled section. Temperature unit in
+            // particular only means anything to someone who turns on the
+            // basal temperature tracker, which is now the next control
+            // after it.
             _groupHeading(context, l10n.settingsGroupAppearance),
             const LanguagePickerTile(),
             _sectionHeading(context, l10n.settingsThemeLabel),
@@ -433,59 +457,6 @@ class SettingsScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const Divider(height: 32),
-            _groupHeading(context, l10n.settingsGroupTracking),
-            _sectionHeading(context, l10n.settingsWeekStartLabel),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              // Three options now, not two: ar, fa and ur conventionally
-              // start the week on Saturday, which the old Monday/Sunday
-              // switch could not express at all.
-              //
-              // The labels come from `intl` rather than from ARB keys, so
-              // they are correct in all 36 languages for free and no new
-              // string has to be translated 36 times to add a weekday.
-              child: SegmentedButton<int>(
-                segments: [
-                  for (final weekday in const [
-                    DateTime.monday,
-                    DateTime.sunday,
-                    DateTime.saturday,
-                  ])
-                    ButtonSegment(
-                      value: weekday,
-                      label: Text(_weekdayName(context, weekday)),
-                    ),
-                ],
-                // Unset means "follow the locale", so show what the locale
-                // actually does rather than a hardcoded Monday. Touching
-                // the control pins the choice.
-                selected: {
-                  prefs.weekStartWeekday ?? _localeFirstWeekday(context),
-                },
-                onSelectionChanged: (s) =>
-                    prefs.setWeekStartWeekday(s.first),
-              ),
-            ),
-            _sectionHeading(context, l10n.settingsTemperatureUnitLabel),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SegmentedButton<TemperatureUnit>(
-                segments: [
-                  ButtonSegment(
-                    value: TemperatureUnit.celsius,
-                    label: Text(l10n.settingsTemperatureCelsius),
-                  ),
-                  ButtonSegment(
-                    value: TemperatureUnit.fahrenheit,
-                    label: Text(l10n.settingsTemperatureFahrenheit),
-                  ),
-                ],
-                selected: {prefs.temperatureUnit},
-                onSelectionChanged: (s) => prefs.setTemperatureUnit(s.first),
-              ),
-            ),
-            const SizedBox(height: 8),
             const Divider(height: 32),
             SwitchListTile(
               title: Text(l10n.settingsRemindersLabel),
@@ -691,6 +662,58 @@ class SettingsScreen extends StatelessWidget {
               },
             ),
             const Divider(),
+            _groupHeading(context, l10n.settingsGroupTracking),
+            _sectionHeading(context, l10n.settingsWeekStartLabel),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              // Three options now, not two: ar, fa and ur conventionally
+              // start the week on Saturday, which the old Monday/Sunday
+              // switch could not express at all.
+              //
+              // The labels come from `intl` rather than from ARB keys, so
+              // they are correct in all 36 languages for free and no new
+              // string has to be translated 36 times to add a weekday.
+              child: SegmentedButton<int>(
+                segments: [
+                  for (final weekday in const [
+                    DateTime.monday,
+                    DateTime.sunday,
+                    DateTime.saturday,
+                  ])
+                    ButtonSegment(
+                      value: weekday,
+                      label: Text(_weekdayName(context, weekday)),
+                    ),
+                ],
+                // Unset means "follow the locale", so show what the locale
+                // actually does rather than a hardcoded Monday. Touching
+                // the control pins the choice.
+                selected: {
+                  prefs.weekStartWeekday ?? _localeFirstWeekday(context),
+                },
+                onSelectionChanged: (s) =>
+                    prefs.setWeekStartWeekday(s.first),
+              ),
+            ),
+            _sectionHeading(context, l10n.settingsTemperatureUnitLabel),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: SegmentedButton<TemperatureUnit>(
+                segments: [
+                  ButtonSegment(
+                    value: TemperatureUnit.celsius,
+                    label: Text(l10n.settingsTemperatureCelsius),
+                  ),
+                  ButtonSegment(
+                    value: TemperatureUnit.fahrenheit,
+                    label: Text(l10n.settingsTemperatureFahrenheit),
+                  ),
+                ],
+                selected: {prefs.temperatureUnit},
+                onSelectionChanged: (s) => prefs.setTemperatureUnit(s.first),
+              ),
+            ),
+            const SizedBox(height: 8),
             _sectionHeading(context, l10n.settingsOptionalTrackersHeading),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -817,12 +840,23 @@ class SettingsScreen extends StatelessWidget {
                 MaterialPageRoute(builder: (_) => const ExportScreen()),
               ),
             ),
-            ListTile(
-              title: Text(l10n.settingsDiagnosticsEntry),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const DiagnosticsScreen()),
-              ),
+            // Only once something has actually been recorded. A permanent
+            // "Diagnostics" row led, for almost every user forever, to a
+            // screen saying nothing had gone wrong — an entry that exists
+            // to advertise the possibility of crashes.
+            FutureBuilder<String?>(
+              future: CrashLog.instance.read(),
+              builder: (context, snapshot) {
+                if (snapshot.data == null) return const SizedBox.shrink();
+                return ListTile(
+                  title: Text(l10n.settingsDiagnosticsEntry),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (_) => const DiagnosticsScreen()),
+                  ),
+                );
+              },
             ),
             ListTile(
               title: Text(l10n.settingsDeleteAllData,
