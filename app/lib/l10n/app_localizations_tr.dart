@@ -1212,6 +1212,27 @@ class AppLocalizationsTr extends AppLocalizations {
   String get ovulationTestPositive => 'Pozitif';
 
   @override
+  String get ovulationTestLow => 'Düşük';
+
+  @override
+  String get ovulationTestHigh => 'Yüksek';
+
+  @override
+  String get ovulationTestPeak => 'Zirve';
+
+  @override
+  String get pregnancyTestLabel => 'Gebelik testi';
+
+  @override
+  String get pregnancyTestPositive => 'Pozitif';
+
+  @override
+  String get pregnancyTestFaint => 'Silik çizgi';
+
+  @override
+  String get pregnancyTestNegative => 'Negatif';
+
+  @override
   String get settingsOvulationTestToggle => 'Ovülasyon testi';
 
   @override

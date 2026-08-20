@@ -2292,6 +2292,48 @@ abstract class AppLocalizations {
   /// **'Positive'**
   String get ovulationTestPositive;
 
+  /// No description provided for @ovulationTestLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get ovulationTestLow;
+
+  /// No description provided for @ovulationTestHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get ovulationTestHigh;
+
+  /// No description provided for @ovulationTestPeak.
+  ///
+  /// In en, this message translates to:
+  /// **'Peak'**
+  String get ovulationTestPeak;
+
+  /// No description provided for @pregnancyTestLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Pregnancy test'**
+  String get pregnancyTestLabel;
+
+  /// No description provided for @pregnancyTestPositive.
+  ///
+  /// In en, this message translates to:
+  /// **'Positive'**
+  String get pregnancyTestPositive;
+
+  /// No description provided for @pregnancyTestFaint.
+  ///
+  /// In en, this message translates to:
+  /// **'Faint line'**
+  String get pregnancyTestFaint;
+
+  /// No description provided for @pregnancyTestNegative.
+  ///
+  /// In en, this message translates to:
+  /// **'Negative'**
+  String get pregnancyTestNegative;
+
   /// No description provided for @settingsOvulationTestToggle.
   ///
   /// In en, this message translates to:

@@ -23,6 +23,7 @@ class DayLog {
     this.basalTempC,
     this.mucus,
     this.ovulationTest,
+    this.pregnancyTest,
     Set<BreastExamFinding>? breastExam,
     this.cervixPosition,
     this.cervixOpening,
@@ -69,6 +70,7 @@ class DayLog {
   final double? basalTempC;
   final CervicalMucus? mucus;
   final OvulationTestResult? ovulationTest;
+  final PregnancyTestResult? pregnancyTest;
   final Set<BreastExamFinding> breastExam;
   final CervixPosition? cervixPosition;
   final CervixOpening? cervixOpening;
@@ -102,6 +104,7 @@ class DayLog {
       basalTempC == null &&
       mucus == null &&
       ovulationTest == null &&
+      pregnancyTest == null &&
       breastExam.isEmpty &&
       cervixPosition == null &&
       cervixOpening == null &&
@@ -140,6 +143,8 @@ class DayLog {
     CervicalMucus? mucus,
     bool clearMucus = false,
     OvulationTestResult? ovulationTest,
+    PregnancyTestResult? pregnancyTest,
+    bool clearPregnancyTest = false,
     bool clearOvulationTest = false,
     Set<BreastExamFinding>? breastExam,
     CervixPosition? cervixPosition,
@@ -174,6 +179,9 @@ class DayLog {
       mucus: clearMucus ? null : (mucus ?? this.mucus),
       ovulationTest:
           clearOvulationTest ? null : (ovulationTest ?? this.ovulationTest),
+      pregnancyTest: clearPregnancyTest
+          ? null
+          : (pregnancyTest ?? this.pregnancyTest),
       breastExam: breastExam ?? this.breastExam,
       cervixPosition: clearCervixPosition
           ? null
@@ -209,6 +217,7 @@ class DayLog {
         if (basalTempC != null) 'basalTempC': basalTempC,
         if (mucus != null) 'mucus': mucus!.name,
         if (ovulationTest != null) 'ovulationTest': ovulationTest!.name,
+        if (pregnancyTest != null) 'pregnancyTest': pregnancyTest!.name,
         if (breastExam.isNotEmpty)
           'breastExam': breastExam.map((b) => b.name).toList()..sort(),
         if (cervixPosition != null) 'cervixPosition': cervixPosition!.name,
@@ -249,6 +258,8 @@ class DayLog {
       mucus: _byName(CervicalMucus.values, json['mucus']),
       ovulationTest:
           _byName(OvulationTestResult.values, json['ovulationTest']),
+      pregnancyTest:
+          _byName(PregnancyTestResult.values, json['pregnancyTest']),
       breastExam: <BreastExamFinding>{
         for (final raw in (json['breastExam'] as List<dynamic>? ?? const []))
           ...[_byName(BreastExamFinding.values, raw)]

@@ -1216,6 +1216,27 @@ class AppLocalizationsId extends AppLocalizations {
   String get ovulationTestPositive => 'Positif';
 
   @override
+  String get ovulationTestLow => 'Rendah';
+
+  @override
+  String get ovulationTestHigh => 'Tinggi';
+
+  @override
+  String get ovulationTestPeak => 'Puncak';
+
+  @override
+  String get pregnancyTestLabel => 'Tes kehamilan';
+
+  @override
+  String get pregnancyTestPositive => 'Positif';
+
+  @override
+  String get pregnancyTestFaint => 'Garis samar';
+
+  @override
+  String get pregnancyTestNegative => 'Negatif';
+
+  @override
   String get settingsOvulationTestToggle => 'Tes ovulasi';
 
   @override

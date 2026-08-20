@@ -139,7 +139,20 @@ enum Mascot {
 /// Optional ovulation (LH) test result for a day. Opt-in tracker, default
 /// off. The app records the result, it never interprets it — see CLAUDE.md
 /// principle 7.
-enum OvulationTestResult { negative, positive }
+/// LH test reading, in the three levels the strips actually distinguish.
+///
+/// The stored names stay `negative` and `positive` so logs written before
+/// the middle level existed still decode: an LH strip with no second line
+/// is the low reading, and a second line as dark as the control is the
+/// peak. `high` is new. Renaming the constants would have made every
+/// existing entry unreadable for a cosmetic tidy.
+enum OvulationTestResult { negative, high, positive }
+
+/// Home pregnancy test reading. `faint` is its own answer rather than a
+/// hedge between the other two: a faint line is what an early positive
+/// looks like, and forcing it into yes/no would throw away the thing the
+/// user most wants to write down.
+enum PregnancyTestResult { positive, faint, negative }
 
 /// Why the user opened the app, collected once during onboarding. Informs
 /// light personalization only (e.g. which optional trackers default on) —

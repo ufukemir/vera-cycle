@@ -1224,6 +1224,27 @@ class AppLocalizationsAr extends AppLocalizations {
   String get ovulationTestPositive => 'إيجابي';
 
   @override
+  String get ovulationTestLow => 'منخفض';
+
+  @override
+  String get ovulationTestHigh => 'مرتفع';
+
+  @override
+  String get ovulationTestPeak => 'الذروة';
+
+  @override
+  String get pregnancyTestLabel => 'اختبار الحمل';
+
+  @override
+  String get pregnancyTestPositive => 'إيجابي';
+
+  @override
+  String get pregnancyTestFaint => 'خط باهت';
+
+  @override
+  String get pregnancyTestNegative => 'سلبي';
+
+  @override
   String get settingsOvulationTestToggle => 'اختبار الإباضة';
 
   @override

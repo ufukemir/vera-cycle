@@ -241,6 +241,9 @@ class _DayLogScreenState extends State<DayLogScreen> {
               ovulationTest: _current.ovulationTest,
               onOvulationTestChanged: (v) => _save(_current.copyWith(
                   ovulationTest: v, clearOvulationTest: v == null)),
+              pregnancyTest: _current.pregnancyTest,
+              onPregnancyTestChanged: (v) => _save(_current.copyWith(
+                  pregnancyTest: v, clearPregnancyTest: v == null)),
               breastExam: _current.breastExam,
               onBreastExamChanged: (s) => _save(_current.copyWith(breastExam: s)),
               cervixPosition: _current.cervixPosition,

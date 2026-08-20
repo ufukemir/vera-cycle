@@ -8,6 +8,7 @@ import '../../../state/app_preferences.dart';
 import '../../../theme/app_theme.dart';
 import '../../../theme/log_icons.dart';
 import '../../../widgets/option_chip.dart';
+import '../../../widgets/test_strip.dart';
 import 'section_card.dart';
 
 /// Sexual activity / BBT / cervical mucus fields — each gated independently
@@ -32,6 +33,8 @@ class OptionalTrackersSection extends StatelessWidget {
     required this.onMucusChanged,
     required this.ovulationTest,
     required this.onOvulationTestChanged,
+    required this.pregnancyTest,
+    required this.onPregnancyTestChanged,
     required this.breastExam,
     required this.onBreastExamChanged,
     required this.cervixPosition,
@@ -52,6 +55,8 @@ class OptionalTrackersSection extends StatelessWidget {
   final ValueChanged<CervicalMucus?> onMucusChanged;
   final OvulationTestResult? ovulationTest;
   final ValueChanged<OvulationTestResult?> onOvulationTestChanged;
+  final PregnancyTestResult? pregnancyTest;
+  final ValueChanged<PregnancyTestResult?> onPregnancyTestChanged;
   final Set<BreastExamFinding> breastExam;
   final ValueChanged<Set<BreastExamFinding>> onBreastExamChanged;
   final CervixPosition? cervixPosition;
@@ -111,7 +116,7 @@ class OptionalTrackersSection extends StatelessWidget {
           foreground: AppPalette.skySoftText,
           child: _MucusSelector(value: mucus, onChanged: onMucusChanged),
         ),
-      if (prefs.ovulationTestTrackingEnabled)
+      if (prefs.ovulationTestTrackingEnabled) ...[
         DayLogSectionCard(
           icon: Icons.science_outlined,
           title: l10n.dayLogOvulationTestLabel,
@@ -120,6 +125,15 @@ class OptionalTrackersSection extends StatelessWidget {
           child: _OvulationTestSelector(
               value: ovulationTest, onChanged: onOvulationTestChanged),
         ),
+        DayLogSectionCard(
+          icon: Icons.pregnant_woman_outlined,
+          title: l10n.pregnancyTestLabel,
+          background: AppPalette.skySoft,
+          foreground: AppPalette.skySoftText,
+          child: _PregnancyTestSelector(
+              value: pregnancyTest, onChanged: onPregnancyTestChanged),
+        ),
+      ],
       if (prefs.breastExamTrackingEnabled)
         DayLogSectionCard(
           icon: Icons.spa_outlined,
@@ -337,6 +351,12 @@ class _MucusSelector extends StatelessWidget {
   }
 }
 
+/// Three readings, each shown as the strip it is read from.
+///
+/// Was two text chips, "Negative" and "Positive", which is not how an LH
+/// test is read: the answer is how dark the test line is next to the
+/// control, and there is a middle state that matters most — the rise before
+/// the peak.
 class _OvulationTestSelector extends StatelessWidget {
   const _OvulationTestSelector({required this.value, required this.onChanged});
 
@@ -346,21 +366,104 @@ class _OvulationTestSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final labels = <OvulationTestResult, String>{
-      OvulationTestResult.negative: l10n.ovulationTestNegative,
-      OvulationTestResult.positive: l10n.ovulationTestPositive,
-    };
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
+    return Row(
       children: [
-        for (final entry in labels.entries)
-          ChoiceChip(
-            label: Text(entry.value),
-            selected: value == entry.key,
-            onSelected: (selected) => onChanged(selected ? entry.key : null),
+        for (final entry in OvulationTestResult.values)
+          Expanded(
+            child: _StripOption(
+              label: ovulationTestLabel(l10n, entry),
+              strip: TestStrip.ovulation(entry),
+              selected: value == entry,
+              onTap: () => onChanged(value == entry ? null : entry),
+            ),
           ),
       ],
+    );
+  }
+}
+
+class _PregnancyTestSelector extends StatelessWidget {
+  const _PregnancyTestSelector({required this.value, required this.onChanged});
+
+  final PregnancyTestResult? value;
+  final ValueChanged<PregnancyTestResult?> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return Row(
+      children: [
+        for (final entry in PregnancyTestResult.values)
+          Expanded(
+            child: _StripOption(
+              label: pregnancyTestLabel(l10n, entry),
+              strip: TestStrip.pregnancy(entry),
+              selected: value == entry,
+              onTap: () => onChanged(value == entry ? null : entry),
+            ),
+          ),
+      ],
+    );
+  }
+}
+
+/// A drawn strip above its name, tappable as one target.
+class _StripOption extends StatelessWidget {
+  const _StripOption({
+    required this.label,
+    required this.strip,
+    required this.selected,
+    required this.onTap,
+  });
+
+  final String label;
+  final Widget strip;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    return Semantics(
+      button: true,
+      selected: selected,
+      label: label,
+      child: ExcludeSemantics(
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(16),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: selected ? scheme.primary : Colors.transparent,
+                      width: 2,
+                    ),
+                  ),
+                  child: strip,
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  label,
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    color: selected ? scheme.primary : scheme.onSurface,
+                    fontWeight: selected ? FontWeight.w700 : null,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

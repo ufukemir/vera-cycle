@@ -85,3 +85,17 @@ String sexLifeLabel(AppLocalizations l10n, SexLifeEntry entry) =>
       SexLifeEntry.orgasm => l10n.sexLifeOrgasm,
       SexLifeEntry.highDesire => l10n.sexLifeHighDesire,
     };
+
+String ovulationTestLabel(AppLocalizations l10n, OvulationTestResult value) =>
+    switch (value) {
+      OvulationTestResult.negative => l10n.ovulationTestLow,
+      OvulationTestResult.high => l10n.ovulationTestHigh,
+      OvulationTestResult.positive => l10n.ovulationTestPeak,
+    };
+
+String pregnancyTestLabel(AppLocalizations l10n, PregnancyTestResult value) =>
+    switch (value) {
+      PregnancyTestResult.positive => l10n.pregnancyTestPositive,
+      PregnancyTestResult.faint => l10n.pregnancyTestFaint,
+      PregnancyTestResult.negative => l10n.pregnancyTestNegative,
+    };

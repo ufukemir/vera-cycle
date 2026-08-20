@@ -1211,6 +1211,27 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ovulationTestPositive => 'Positive';
 
   @override
+  String get ovulationTestLow => 'Low';
+
+  @override
+  String get ovulationTestHigh => 'High';
+
+  @override
+  String get ovulationTestPeak => 'Peak';
+
+  @override
+  String get pregnancyTestLabel => 'Pregnancy test';
+
+  @override
+  String get pregnancyTestPositive => 'Positive';
+
+  @override
+  String get pregnancyTestFaint => 'Faint line';
+
+  @override
+  String get pregnancyTestNegative => 'Negative';
+
+  @override
   String get settingsOvulationTestToggle => 'Ovulation test';
 
   @override

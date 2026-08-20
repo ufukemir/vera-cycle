@@ -92,6 +92,7 @@ class LogIcons {
 
   static IconData ovulationTest(OvulationTestResult value) => switch (value) {
         OvulationTestResult.negative => Icons.remove_circle_outline,
+        OvulationTestResult.high => Icons.trending_up,
         OvulationTestResult.positive => Icons.check_circle_outline,
       };
 
