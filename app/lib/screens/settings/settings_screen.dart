@@ -17,6 +17,7 @@ import '../export/export_screen.dart';
 import '../export/import_screen.dart';
 import '../home/widgets/home_hero.dart';
 import '../premium/premium_screen.dart';
+import '../../theme/app_theme.dart';
 import '../../widgets/illustrations.dart';
 import '../../widgets/premium_lock.dart';
 import 'custom_reminders_screen.dart';
@@ -370,25 +371,34 @@ class SettingsScreen extends StatelessWidget {
             // after it.
             _groupHeading(context, l10n.settingsGroupAppearance),
             const LanguagePickerTile(),
-            _sectionHeading(context, l10n.settingsThemeLabel),
+            // Light/dark is a card too, for the same reason the unit
+            // pickers are: a heading floating above a segmented button ties
+            // the two together only by proximity.
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SegmentedButton<ThemeMode>(
-                segments: [
-                  ButtonSegment(
-                      value: ThemeMode.system,
-                      label: Text(l10n.settingsThemeSystem)),
-                  ButtonSegment(
-                      value: ThemeMode.light,
-                      label: Text(l10n.settingsThemeLight)),
-                  ButtonSegment(
-                      value: ThemeMode.dark,
-                      label: Text(l10n.settingsThemeDark)),
-                ],
-                selected: {prefs.themeMode},
-                onSelectionChanged: (s) => prefs.setThemeMode(s.first),
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+              child: _SettingCard(
+                icon: Icons.brightness_6_outlined,
+                tint: AppPalette.lavenderSoft,
+                ink: AppPalette.lavenderSoftText,
+                label: l10n.settingsThemeLabel,
+                child: SegmentedButton<ThemeMode>(
+                  segments: [
+                    ButtonSegment(
+                        value: ThemeMode.system,
+                        label: Text(l10n.settingsThemeSystem)),
+                    ButtonSegment(
+                        value: ThemeMode.light,
+                        label: Text(l10n.settingsThemeLight)),
+                    ButtonSegment(
+                        value: ThemeMode.dark,
+                        label: Text(l10n.settingsThemeDark)),
+                  ],
+                  selected: {prefs.themeMode},
+                  onSelectionChanged: (s) => prefs.setThemeMode(s.first),
+                ),
               ),
             ),
+            const SizedBox(height: 6),
             _sectionHeading(context, l10n.settingsHomeThemeLabel),
             SizedBox(
               height: 96,
@@ -672,57 +682,72 @@ class SettingsScreen extends StatelessWidget {
             ),
             const Divider(),
             _groupHeading(context, l10n.settingsGroupTracking),
-            _sectionHeading(context, l10n.settingsWeekStartLabel),
+            // Both unit choices sit in cards, like every other settings
+            // screen in the app. They were bare controls on the page
+            // background: a heading, a segmented button, a heading, another
+            // segmented button, with nothing tying either label to the
+            // control under it.
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              // Three options now, not two: ar, fa and ur conventionally
-              // start the week on Saturday, which the old Monday/Sunday
-              // switch could not express at all.
-              //
-              // The labels come from `intl` rather than from ARB keys, so
-              // they are correct in all 36 languages for free and no new
-              // string has to be translated 36 times to add a weekday.
-              child: SegmentedButton<int>(
-                segments: [
-                  for (final weekday in const [
-                    DateTime.monday,
-                    DateTime.sunday,
-                    DateTime.saturday,
-                  ])
+              padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
+              child: _SettingCard(
+                icon: Icons.view_week_outlined,
+                tint: AppPalette.skySoft,
+                ink: AppPalette.skySoftText,
+                label: l10n.settingsWeekStartLabel,
+                // Three options now, not two: ar, fa and ur conventionally
+                // start the week on Saturday, which the old Monday/Sunday
+                // switch could not express at all.
+                //
+                // The labels come from `intl` rather than from ARB keys, so
+                // they are correct in all 36 languages for free and no new
+                // string has to be translated 36 times to add a weekday.
+                child: SegmentedButton<int>(
+                  segments: [
+                    for (final weekday in const [
+                      DateTime.monday,
+                      DateTime.sunday,
+                      DateTime.saturday,
+                    ])
+                      ButtonSegment(
+                        value: weekday,
+                        label: Text(_weekdayName(context, weekday)),
+                      ),
+                  ],
+                  // Unset means "follow the locale", so show what the locale
+                  // actually does rather than a hardcoded Monday. Touching
+                  // the control pins the choice.
+                  selected: {
+                    prefs.weekStartWeekday ?? _localeFirstWeekday(context),
+                  },
+                  onSelectionChanged: (s) =>
+                      prefs.setWeekStartWeekday(s.first),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
+              child: _SettingCard(
+                icon: Icons.thermostat_outlined,
+                tint: AppPalette.terracottaSoft,
+                ink: AppPalette.terracottaSoftText,
+                label: l10n.settingsTemperatureUnitLabel,
+                child: SegmentedButton<TemperatureUnit>(
+                  segments: [
                     ButtonSegment(
-                      value: weekday,
-                      label: Text(_weekdayName(context, weekday)),
+                      value: TemperatureUnit.celsius,
+                      label: Text(l10n.settingsTemperatureCelsius),
                     ),
-                ],
-                // Unset means "follow the locale", so show what the locale
-                // actually does rather than a hardcoded Monday. Touching
-                // the control pins the choice.
-                selected: {
-                  prefs.weekStartWeekday ?? _localeFirstWeekday(context),
-                },
-                onSelectionChanged: (s) =>
-                    prefs.setWeekStartWeekday(s.first),
+                    ButtonSegment(
+                      value: TemperatureUnit.fahrenheit,
+                      label: Text(l10n.settingsTemperatureFahrenheit),
+                    ),
+                  ],
+                  selected: {prefs.temperatureUnit},
+                  onSelectionChanged: (s) => prefs.setTemperatureUnit(s.first),
+                ),
               ),
             ),
-            _sectionHeading(context, l10n.settingsTemperatureUnitLabel),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SegmentedButton<TemperatureUnit>(
-                segments: [
-                  ButtonSegment(
-                    value: TemperatureUnit.celsius,
-                    label: Text(l10n.settingsTemperatureCelsius),
-                  ),
-                  ButtonSegment(
-                    value: TemperatureUnit.fahrenheit,
-                    label: Text(l10n.settingsTemperatureFahrenheit),
-                  ),
-                ],
-                selected: {prefs.temperatureUnit},
-                onSelectionChanged: (s) => prefs.setTemperatureUnit(s.first),
-              ),
-            ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 14),
             _sectionHeading(context, l10n.settingsOptionalTrackersHeading),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -1052,6 +1077,71 @@ class _MascotOption extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// A settings control in a card with its own label and colour — the same
+/// shape the prediction-settings screen uses, so a unit picker in Settings
+/// looks like a unit picker anywhere else in the app.
+class _SettingCard extends StatelessWidget {
+  const _SettingCard({
+    required this.icon,
+    required this.tint,
+    required this.ink,
+    required this.label,
+    required this.child,
+  });
+
+  final IconData icon;
+  final Color tint;
+  final Color ink;
+  final String label;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final panel = isDark
+        ? Color.alphaBlend(
+            tint.withValues(alpha: 0.09), theme.colorScheme.surface)
+        : tint.withValues(alpha: 0.45);
+    final badge = isDark ? tint.withValues(alpha: 0.16) : tint;
+    final labelInk = isDark ? tint : ink;
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
+      decoration: BoxDecoration(
+        color: panel,
+        borderRadius: BorderRadius.circular(22),
+        border: isDark ? Border.all(color: tint.withValues(alpha: 0.18)) : null,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 32,
+                height: 32,
+                decoration:
+                    BoxDecoration(shape: BoxShape.circle, color: badge),
+                child: Icon(icon, size: 17, color: labelInk),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(label,
+                    style:
+                        theme.textTheme.titleSmall?.copyWith(color: labelInk)),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          child,
+        ],
       ),
     );
   }

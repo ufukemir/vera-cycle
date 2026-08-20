@@ -374,6 +374,27 @@ class AppLocalizationsTr extends AppLocalizations {
   String get dayLogSexualActivityLabel => 'Cinsel aktivite';
 
   @override
+  String get sexLifeNone => 'Yoktu';
+
+  @override
+  String get sexLifeUnprotected => 'Korunmasız seks';
+
+  @override
+  String get sexLifeProtected => 'Korunmalı seks';
+
+  @override
+  String get sexLifeMasturbation => 'Mastürbasyon';
+
+  @override
+  String get sexLifeNoOrgasm => 'Orgazm yok';
+
+  @override
+  String get sexLifeOrgasm => 'Orgazm';
+
+  @override
+  String get sexLifeHighDesire => 'Cinsel istek yüksek';
+
+  @override
   String get dayLogBbtLabel => 'Bazal vücut sıcaklığı';
 
   @override

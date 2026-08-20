@@ -97,6 +97,12 @@ class _OnboardingFlowState extends State<OnboardingFlow> {
       await prefs.setMucusTrackingEnabled(true);
     }
     if (!mounted) return;
+    // Count today's daily prompt as already shown. Onboarding *is* the
+    // prompt: someone who has just answered a screenful of questions should
+    // not land on Home and be handed a modal sheet asking another one. The
+    // first real prompt comes tomorrow.
+    await prefs.setLastDailyPromptDay(dayKey(today()));
+    if (!mounted) return;
     await prefs.setOnboardingComplete(true);
     if (!mounted) return;
     context.read<AppLockController>().unlockAfterSetup();

@@ -74,3 +74,14 @@ String reminderChannelName(AppLocalizations l10n, ReminderCategory category) =>
       ReminderCategory.ovulation => l10n.notificationChannelOvulation,
       ReminderCategory.backup => l10n.notificationChannelBackup,
     };
+
+String sexLifeLabel(AppLocalizations l10n, SexLifeEntry entry) =>
+    switch (entry) {
+      SexLifeEntry.none => l10n.sexLifeNone,
+      SexLifeEntry.unprotected => l10n.sexLifeUnprotected,
+      SexLifeEntry.protectedSex => l10n.sexLifeProtected,
+      SexLifeEntry.masturbation => l10n.sexLifeMasturbation,
+      SexLifeEntry.noOrgasm => l10n.sexLifeNoOrgasm,
+      SexLifeEntry.orgasm => l10n.sexLifeOrgasm,
+      SexLifeEntry.highDesire => l10n.sexLifeHighDesire,
+    };

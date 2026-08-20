@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../l10n/app_localizations.dart';
+import '../../../l10n/enum_labels.dart';
 import '../../../models/enums.dart';
 import '../../../state/app_preferences.dart';
 import '../../../theme/app_theme.dart';
@@ -23,6 +24,8 @@ class OptionalTrackersSection extends StatelessWidget {
     super.key,
     required this.sexualActivity,
     required this.onSexualActivityChanged,
+    required this.sexLife,
+    required this.onSexLifeChanged,
     required this.basalTempC,
     required this.onBasalTempChanged,
     required this.mucus,
@@ -41,6 +44,8 @@ class OptionalTrackersSection extends StatelessWidget {
 
   final bool? sexualActivity;
   final ValueChanged<bool> onSexualActivityChanged;
+  final Set<SexLifeEntry> sexLife;
+  final ValueChanged<Set<SexLifeEntry>> onSexLifeChanged;
   final double? basalTempC;
   final ValueChanged<double?> onBasalTempChanged;
   final CervicalMucus? mucus;
@@ -68,9 +73,22 @@ class OptionalTrackersSection extends StatelessWidget {
           title: l10n.dayLogSexualActivityLabel,
           background: AppPalette.roseSoft,
           foreground: AppPalette.roseSoftText,
-          trailing: Switch(
-            value: sexualActivity ?? false,
-            onChanged: onSexualActivityChanged,
+          child: _SexLifeSelector(
+            value: sexLife,
+            onChanged: (next) {
+              onSexLifeChanged(next);
+              // The plain yes/no flag is what the tracker hub and the day
+              // list still read, so it follows the detail rather than
+              // being edited separately: "none" is an answer, not an
+              // absence, and three of these entries mean something
+              // happened.
+              const activity = {
+                SexLifeEntry.unprotected,
+                SexLifeEntry.protectedSex,
+                SexLifeEntry.masturbation,
+              };
+              onSexualActivityChanged(next.any(activity.contains));
+            },
           ),
         ),
       if (prefs.bbtTrackingEnabled)
@@ -145,6 +163,49 @@ class OptionalTrackersSection extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 16),
             child: card,
+          ),
+      ],
+    );
+  }
+}
+
+/// Multi-select, because a day is not one of these things.
+///
+/// It replaces a bare on/off switch that could record only that *something*
+/// happened. Behind the same opt-in preference as before — CLAUDE.md keeps
+/// these questions off unless the user asks for them — and worded so that
+/// "none" and "no orgasm" are ordinary entries rather than failures.
+class _SexLifeSelector extends StatelessWidget {
+  const _SexLifeSelector({required this.value, required this.onChanged});
+
+  final Set<SexLifeEntry> value;
+  final ValueChanged<Set<SexLifeEntry>> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return OptionChipWrap(
+      children: [
+        for (final entry in SexLifeEntry.values)
+          OptionChip(
+            icon: LogIcons.sexLife(entry),
+            label: sexLifeLabel(l10n, entry),
+            selected: value.contains(entry),
+            tint: AppPalette.roseSoft,
+            ink: AppPalette.roseSoftText,
+            onTap: () {
+              // "None" is exclusive: it is the answer that rules the others
+              // out, so picking it clears them and picking anything else
+              // clears it.
+              if (entry == SexLifeEntry.none) {
+                onChanged(value.contains(entry) ? {} : {SexLifeEntry.none});
+                return;
+              }
+              final next = Set<SexLifeEntry>.of(value)
+                ..remove(SexLifeEntry.none);
+              value.contains(entry) ? next.remove(entry) : next.add(entry);
+              onChanged(next);
+            },
           ),
       ],
     );

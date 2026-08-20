@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../state/app_preferences.dart';
 import '../../state/assistant_conversation.dart';
+import '../../state/cycle_controller.dart';
+import '../../util/day.dart';
+import 'widgets/quick_log_sheet.dart';
 import '../calendar/calendar_screen.dart';
 import '../day_log/day_log_screen.dart';
 import '../insights/insights_screen.dart';
 import '../settings/settings_screen.dart';
-import '../../util/day.dart';
 import 'home_screen.dart';
 import 'widgets/vera_bottom_bar.dart';
 
@@ -34,6 +37,41 @@ class _HomeShellState extends State<HomeShell> {
   int _index = 0;
   int _previousIndex = 0;
   final _conversation = AssistantConversation();
+  bool _dailyPromptChecked = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _maybePromptDaily());
+  }
+
+  /// Opens the quick-log sheet once a day, on arriving at Home.
+  ///
+  /// Three conditions, and all three matter. Once per day, recorded when the
+  /// sheet *opens* rather than when something is saved, so dismissing it
+  /// counts — otherwise returning to Home reopens it and a prompt becomes
+  /// nagging. Not at all if today already has something logged, because
+  /// asking how today feels right after being told is the app not listening.
+  /// And never on the day onboarding finished: the user has just answered a
+  /// screenful of questions.
+  Future<void> _maybePromptDaily() async {
+    if (_dailyPromptChecked || !mounted) return;
+    _dailyPromptChecked = true;
+
+    final prefs = context.read<AppPreferences>();
+    final controller = context.read<CycleController>();
+    if (controller.loading) return;
+
+    final key = dayKey(today());
+    if (prefs.lastDailyPromptDay == key) return;
+
+    final logged = controller.logFor(today());
+    if (logged != null && !logged.isEmpty) return;
+
+    await prefs.setLastDailyPromptDay(key);
+    if (!mounted) return;
+    await showQuickLogSheet(context);
+  }
 
   @override
   void dispose() {

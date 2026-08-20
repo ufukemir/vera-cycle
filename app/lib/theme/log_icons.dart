@@ -80,6 +80,16 @@ class LogIcons {
         CervicalMucus.eggWhite => Icons.egg_alt,
       };
 
+  static IconData sexLife(SexLifeEntry value) => switch (value) {
+        SexLifeEntry.none => Icons.do_not_disturb_alt,
+        SexLifeEntry.unprotected => Icons.favorite,
+        SexLifeEntry.protectedSex => Icons.shield_outlined,
+        SexLifeEntry.masturbation => Icons.back_hand_outlined,
+        SexLifeEntry.noOrgasm => Icons.sentiment_neutral,
+        SexLifeEntry.orgasm => Icons.auto_awesome,
+        SexLifeEntry.highDesire => Icons.local_fire_department,
+      };
+
   static IconData ovulationTest(OvulationTestResult value) => switch (value) {
         OvulationTestResult.negative => Icons.remove_circle_outline,
         OvulationTestResult.positive => Icons.check_circle_outline,

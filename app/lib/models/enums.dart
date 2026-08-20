@@ -70,6 +70,23 @@ enum BreastExamFinding {
   discharge,
 }
 
+/// What happened, for people who track their sex life.
+///
+/// Multi-select, and behind the same opt-in switch the old yes/no flag was:
+/// CLAUDE.md keeps sexual questions off by default and only shows them if
+/// the user asks for them. The list is descriptive and non-evaluative for
+/// the same reason the mood list is — [none] and [noOrgasm] are ordinary
+/// entries, not failures to report.
+enum SexLifeEntry {
+  none,
+  unprotected,
+  protectedSex,
+  masturbation,
+  noOrgasm,
+  orgasm,
+  highDesire,
+}
+
 /// Cervix position (fertility-awareness method). Advanced/opt-in tracker.
 enum CervixPosition { low, medium, high }
 

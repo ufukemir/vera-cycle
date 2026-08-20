@@ -792,6 +792,48 @@ abstract class AppLocalizations {
   /// **'Sexual activity'**
   String get dayLogSexualActivityLabel;
 
+  /// No description provided for @sexLifeNone.
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get sexLifeNone;
+
+  /// No description provided for @sexLifeUnprotected.
+  ///
+  /// In en, this message translates to:
+  /// **'Unprotected sex'**
+  String get sexLifeUnprotected;
+
+  /// No description provided for @sexLifeProtected.
+  ///
+  /// In en, this message translates to:
+  /// **'Protected sex'**
+  String get sexLifeProtected;
+
+  /// No description provided for @sexLifeMasturbation.
+  ///
+  /// In en, this message translates to:
+  /// **'Masturbation'**
+  String get sexLifeMasturbation;
+
+  /// No description provided for @sexLifeNoOrgasm.
+  ///
+  /// In en, this message translates to:
+  /// **'No orgasm'**
+  String get sexLifeNoOrgasm;
+
+  /// No description provided for @sexLifeOrgasm.
+  ///
+  /// In en, this message translates to:
+  /// **'Orgasm'**
+  String get sexLifeOrgasm;
+
+  /// No description provided for @sexLifeHighDesire.
+  ///
+  /// In en, this message translates to:
+  /// **'High sex drive'**
+  String get sexLifeHighDesire;
+
   /// No description provided for @dayLogBbtLabel.
   ///
   /// In en, this message translates to:

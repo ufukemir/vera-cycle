@@ -380,6 +380,27 @@ class AppLocalizationsDe extends AppLocalizations {
   String get dayLogSexualActivityLabel => 'Sexuelle Aktivität';
 
   @override
+  String get sexLifeNone => 'Nichts';
+
+  @override
+  String get sexLifeUnprotected => 'Ungeschützter Sex';
+
+  @override
+  String get sexLifeProtected => 'Geschützter Sex';
+
+  @override
+  String get sexLifeMasturbation => 'Masturbation';
+
+  @override
+  String get sexLifeNoOrgasm => 'Kein Orgasmus';
+
+  @override
+  String get sexLifeOrgasm => 'Orgasmus';
+
+  @override
+  String get sexLifeHighDesire => 'Viel Lust';
+
+  @override
   String get dayLogBbtLabel => 'Basaltemperatur';
 
   @override

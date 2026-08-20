@@ -55,6 +55,7 @@ class AppPreferences extends ChangeNotifier {
   static const _kMascot = 'mascot';
   static const _kHomeTheme = 'home_theme';
   static const _kHealthSyncEnabled = 'health_sync_enabled';
+  static const _kLastDailyPrompt = 'last_daily_prompt_day';
   static const _kLastBackupAt = 'last_backup_at';
   static const _kBackupRemindersEnabled = 'backup_reminders_enabled';
   static const _kPremiumActive = 'premium_active';
@@ -504,6 +505,19 @@ class AppPreferences extends ChangeNotifier {
 
   /// Off by default: handing cycle data to the OS health record is the
   /// user's call, not ours.
+  /// The day the "how does today feel?" sheet last opened by itself,
+  /// as `yyyy-mm-dd`.
+  ///
+  /// Recorded when it *opens*, not when something is saved: dismissing it
+  /// has to count, or the app would reopen the same sheet every time the
+  /// user came back to Home, which is nagging rather than prompting.
+  String? get lastDailyPromptDay => _prefs.getString(_kLastDailyPrompt);
+
+  Future<void> setLastDailyPromptDay(String day) async {
+    await _prefs.setString(_kLastDailyPrompt, day);
+    notifyListeners();
+  }
+
   bool get healthSyncEnabled => _prefs.getBool(_kHealthSyncEnabled) ?? false;
 
   Future<void> setHealthSyncEnabled(bool value) async {

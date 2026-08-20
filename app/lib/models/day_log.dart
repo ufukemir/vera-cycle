@@ -19,6 +19,7 @@ class DayLog {
     Set<SkinHairSymptom>? skinHair,
     this.note,
     this.sexualActivity,
+    this.sexLife = const {},
     this.basalTempC,
     this.mucus,
     this.ovulationTest,
@@ -56,6 +57,15 @@ class DayLog {
   /// Optional trackers. All default to disabled in settings; a `null` here means
   /// the user never entered a value, not that the answer was "no".
   final bool? sexualActivity;
+
+  /// What happened, when the user tracks that. Empty for everyone who does
+  /// not — the switch that reveals this is off by default.
+  ///
+  /// [sexualActivity] stays as the plain yes/no it always was: it is what
+  /// the tracker hub and the day list read, and rewriting stored logs to
+  /// drop it would lose history for no gain. The two are kept consistent by
+  /// the editor, not by the model.
+  final Set<SexLifeEntry> sexLife;
   final double? basalTempC;
   final CervicalMucus? mucus;
   final OvulationTestResult? ovulationTest;
@@ -88,6 +98,7 @@ class DayLog {
       skinHair.isEmpty &&
       (note == null || note!.trim().isEmpty) &&
       sexualActivity == null &&
+      sexLife.isEmpty &&
       basalTempC == null &&
       mucus == null &&
       ovulationTest == null &&
@@ -122,6 +133,7 @@ class DayLog {
     String? note,
     bool clearNote = false,
     bool? sexualActivity,
+    Set<SexLifeEntry>? sexLife,
     bool clearSexualActivity = false,
     double? basalTempC,
     bool clearBasalTemp = false,
@@ -154,6 +166,7 @@ class DayLog {
           clearEnergyLevel ? null : (energyLevel ?? this.energyLevel),
       skinHair: skinHair ?? this.skinHair,
       note: clearNote ? null : (note ?? this.note),
+      sexLife: sexLife ?? this.sexLife,
       sexualActivity: clearSexualActivity
           ? null
           : (sexualActivity ?? this.sexualActivity),
@@ -191,6 +204,8 @@ class DayLog {
           'skinHair': skinHair.map((s) => s.name).toList()..sort(),
         if (note != null && note!.isNotEmpty) 'note': note,
         if (sexualActivity != null) 'sexualActivity': sexualActivity,
+        if (sexLife.isNotEmpty)
+          'sexLife': sexLife.map((e) => e.name).toList()..sort(),
         if (basalTempC != null) 'basalTempC': basalTempC,
         if (mucus != null) 'mucus': mucus!.name,
         if (ovulationTest != null) 'ovulationTest': ovulationTest!.name,
@@ -226,6 +241,10 @@ class DayLog {
       },
       note: json['note'] as String?,
       sexualActivity: json['sexualActivity'] as bool?,
+      sexLife: <SexLifeEntry>{
+        for (final raw in (json['sexLife'] as List<dynamic>? ?? const []))
+          ...[_byName(SexLifeEntry.values, raw)].whereType<SexLifeEntry>(),
+      },
       basalTempC: (json['basalTempC'] as num?)?.toDouble(),
       mucus: _byName(CervicalMucus.values, json['mucus']),
       ovulationTest:

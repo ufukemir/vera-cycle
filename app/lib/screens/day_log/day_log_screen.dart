@@ -227,7 +227,10 @@ class _DayLogScreenState extends State<DayLogScreen> {
               ),
             OptionalTrackersSection(
               sexualActivity: _current.sexualActivity,
-              onSexualActivityChanged: (v) => _save(_current.copyWith(sexualActivity: v)),
+              onSexualActivityChanged: (v) =>
+                  _save(_current.copyWith(sexualActivity: v)),
+              sexLife: _current.sexLife,
+              onSexLifeChanged: (v) => _save(_current.copyWith(sexLife: v)),
               basalTempC: _current.basalTempC,
               onBasalTempChanged: (v) => _save(
                 _current.copyWith(basalTempC: v, clearBasalTemp: v == null),
