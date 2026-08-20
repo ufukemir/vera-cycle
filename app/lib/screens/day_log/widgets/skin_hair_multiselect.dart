@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../models/enums.dart';
+import '../../../theme/app_theme.dart';
+import '../../../theme/log_icons.dart';
+import '../../../widgets/option_chip.dart';
 
 /// Multi-select skin & hair chips — descriptive observations, never a
 /// dermatology diagnosis (see [SkinHairSymptom]).
@@ -25,17 +28,18 @@ class SkinHairMultiselect extends StatelessWidget {
       SkinHairSymptom.oilyScalp: l10n.scalpOily,
     };
 
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
+    return OptionChipWrap(
       children: [
         for (final item in SkinHairSymptom.values)
-          FilterChip(
-            label: Text(labels[item]!),
+          OptionChip(
+            icon: LogIcons.skinHair(item),
+            label: labels[item]!,
             selected: value.contains(item),
-            onSelected: (selected) {
+            tint: AppPalette.mintSoft,
+            ink: AppPalette.mintSoftText,
+            onTap: () {
               final next = Set<SkinHairSymptom>.of(value);
-              selected ? next.add(item) : next.remove(item);
+              value.contains(item) ? next.remove(item) : next.add(item);
               onChanged(next);
             },
           ),

@@ -5,6 +5,8 @@ import '../../../l10n/app_localizations.dart';
 import '../../../models/enums.dart';
 import '../../../state/app_preferences.dart';
 import '../../../theme/app_theme.dart';
+import '../../../theme/log_icons.dart';
+import '../../../widgets/option_chip.dart';
 import 'section_card.dart';
 
 /// Sexual activity / BBT / cervical mucus fields — each gated independently
@@ -258,15 +260,16 @@ class _MucusSelector extends StatelessWidget {
       CervicalMucus.eggWhite: l10n.mucusEggWhite,
     };
 
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
+    return OptionChipWrap(
       children: [
         for (final entry in labels.entries)
-          ChoiceChip(
-            label: Text(entry.value),
+          OptionChip(
+            icon: LogIcons.mucus(entry.key),
+            label: entry.value,
             selected: value == entry.key,
-            onSelected: (selected) => onChanged(selected ? entry.key : null),
+            tint: AppPalette.skySoft,
+            ink: AppPalette.skySoftText,
+            onTap: () => onChanged(value == entry.key ? null : entry.key),
           ),
       ],
     );
@@ -319,17 +322,20 @@ class _BreastExamMultiselect extends StatelessWidget {
       BreastExamFinding.discharge: l10n.breastExamDischarge,
     };
 
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
+    return OptionChipWrap(
       children: [
         for (final entry in labels.entries)
-          FilterChip(
-            label: Text(entry.value),
+          OptionChip(
+            icon: LogIcons.breastExam(entry.key),
+            label: entry.value,
             selected: value.contains(entry.key),
-            onSelected: (selected) {
+            tint: AppPalette.mintSoft,
+            ink: AppPalette.mintSoftText,
+            onTap: () {
               final next = Set<BreastExamFinding>.of(value);
-              selected ? next.add(entry.key) : next.remove(entry.key);
+              value.contains(entry.key)
+                  ? next.remove(entry.key)
+                  : next.add(entry.key);
               onChanged(next);
             },
           ),
@@ -374,20 +380,23 @@ class _CervixSelectors extends StatelessWidget {
       CervixFirmness.firm: l10n.cervixFirmnessFirm,
     };
 
-    Widget row<T>(String label, Map<T, String> labels, T? selected, ValueChanged<T?> onSelected) {
+    Widget row<T>(String label, Map<T, String> labels, T? selected,
+        ValueChanged<T?> onSelected, IconData Function(T) iconOf) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           DayLogFieldLabel(label, color: AppPalette.lavenderSoftText),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
+          OptionChipWrap(
             children: [
               for (final entry in labels.entries)
-                ChoiceChip(
-                  label: Text(entry.value),
+                OptionChip(
+                  icon: iconOf(entry.key),
+                  label: entry.value,
                   selected: selected == entry.key,
-                  onSelected: (isSelected) => onSelected(isSelected ? entry.key : null),
+                  tint: AppPalette.lavenderSoft,
+                  ink: AppPalette.lavenderSoftText,
+                  onTap: () =>
+                      onSelected(selected == entry.key ? null : entry.key),
                 ),
             ],
           ),
@@ -398,11 +407,14 @@ class _CervixSelectors extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        row(l10n.cervixPositionLabel, positionLabels, position, onPositionChanged),
+        row(l10n.cervixPositionLabel, positionLabels, position,
+            onPositionChanged, LogIcons.cervixPosition),
         const SizedBox(height: 12),
-        row(l10n.cervixOpeningLabel, openingLabels, opening, onOpeningChanged),
+        row(l10n.cervixOpeningLabel, openingLabels, opening, onOpeningChanged,
+            LogIcons.cervixOpening),
         const SizedBox(height: 12),
-        row(l10n.cervixFirmnessLabel, firmnessLabels, firmness, onFirmnessChanged),
+        row(l10n.cervixFirmnessLabel, firmnessLabels, firmness,
+            onFirmnessChanged, LogIcons.cervixFirmness),
       ],
     );
   }

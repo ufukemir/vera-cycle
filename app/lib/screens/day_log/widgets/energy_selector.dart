@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../models/enums.dart';
+import '../../../theme/app_theme.dart';
+import '../../../theme/log_icons.dart';
+import '../../../widgets/option_chip.dart';
 
 /// Single-select energy chips. Deliberately separate from [MoodSelector] —
 /// see [EnergyLevel].
@@ -21,15 +24,16 @@ class EnergySelector extends StatelessWidget {
       EnergyLevel.energetic: l10n.energyLevelEnergetic,
     };
 
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
+    return OptionChipWrap(
       children: [
         for (final level in EnergyLevel.values)
-          ChoiceChip(
-            label: Text(labels[level]!),
+          OptionChip(
+            icon: LogIcons.energy(level),
+            label: labels[level]!,
             selected: value == level,
-            onSelected: (selected) => onChanged(selected ? level : null),
+            tint: AppPalette.goldSoft,
+            ink: AppPalette.goldSoftText,
+            onTap: () => onChanged(value == level ? null : level),
           ),
       ],
     );

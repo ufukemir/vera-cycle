@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../models/enums.dart';
+import '../../../theme/app_theme.dart';
+import '../../../theme/log_icons.dart';
+import '../../../widgets/option_chip.dart';
 
 /// Multi-select symptom chips — purely descriptive labels, never framed as a
 /// severity score, per CLAUDE.md's "not a medical diagnostic device"
@@ -30,17 +33,20 @@ class SymptomMultiselect extends StatelessWidget {
       Symptom.dizziness: l10n.symptomDizziness,
     };
 
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
+    return OptionChipWrap(
       children: [
         for (final symptom in Symptom.values)
-          FilterChip(
-            label: Text(labels[symptom]!),
+          OptionChip(
+            icon: LogIcons.symptom(symptom),
+            label: labels[symptom]!,
             selected: value.contains(symptom),
-            onSelected: (selected) {
+            tint: AppPalette.lavenderSoft,
+            ink: AppPalette.lavenderSoftText,
+            onTap: () {
               final next = Set<Symptom>.of(value);
-              selected ? next.add(symptom) : next.remove(symptom);
+              value.contains(symptom)
+                  ? next.remove(symptom)
+                  : next.add(symptom);
               onChanged(next);
             },
           ),

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../models/enums.dart';
+import '../../../theme/app_theme.dart';
+import '../../../theme/log_icons.dart';
+import '../../../widgets/option_chip.dart';
 
 /// Single-select flow chips, including an explicit "None" option — clearing a
 /// mistaken entry needs to be as easy as making one.
@@ -22,15 +25,16 @@ class FlowSelector extends StatelessWidget {
       FlowIntensity.heavy: l10n.flowHeavy,
     };
 
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
+    return OptionChipWrap(
       children: [
         for (final entry in options.entries)
-          ChoiceChip(
-            label: Text(entry.value),
+          OptionChip(
+            icon: LogIcons.flow(entry.key),
+            label: entry.value,
             selected: value == entry.key,
-            onSelected: (_) => onChanged(entry.key),
+            tint: AppPalette.roseSoft,
+            ink: AppPalette.roseSoftText,
+            onTap: () => onChanged(entry.key),
           ),
       ],
     );
