@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../widgets/illustrations.dart';
+import 'onboarding_header.dart';
 
 /// Shared layout for a skippable onboarding question, with an illustrated
 /// hero card up top (see [IllustrationScene]).
@@ -18,8 +19,11 @@ class OnboardingQuestionScaffold extends StatelessWidget {
     required this.content,
     required this.onSkip,
     required this.onContinue,
+    required this.progress,
+    this.onBack,
     this.scene,
     this.photoAsset,
+    this.compactHero = false,
   });
 
   final String title;
@@ -29,38 +33,70 @@ class OnboardingQuestionScaffold extends StatelessWidget {
   final VoidCallback onContinue;
   final IllustrationScene? scene;
 
+  /// How far through onboarding this step sits, 0–1.
+  final double progress;
+
+  /// Null on the first step of the flow.
+  final VoidCallback? onBack;
+
   /// When set, wins over [scene] — a real licensed photo hero.
   final String? photoAsset;
+
+  /// Shrinks the hero so a tall control (a wheel) still fits without the
+  /// page scrolling.
+  final bool compactHero;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
+
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const Spacer(),
-              if (photoAsset != null) ...[
-                PhotoHero(asset: photoAsset!, height: 200),
-                const SizedBox(height: 24),
-              ] else if (scene != null) ...[
-                HeroIllustration(scene: scene!, height: 180),
-                const SizedBox(height: 24),
-              ],
-              Text(title,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                  textAlign: TextAlign.center),
-              const SizedBox(height: 12),
-              Text(body,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  textAlign: TextAlign.center),
-              const SizedBox(height: 32),
-              content,
-              const Spacer(),
-              Row(
+        child: Column(
+          children: [
+            OnboardingHeader(
+              progress: progress,
+              onBack: onBack,
+              onSkip: onSkip,
+            ),
+            // The question scrolls; the buttons do not. A hero, a question
+            // and a tall control together do not fit a short phone, and an
+            // onboarding step whose Continue button is pushed off-screen is
+            // one the user cannot finish. Pinning the actions also means
+            // they are always in the same place across ten steps.
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    if (photoAsset != null) ...[
+                      PhotoHero(
+                          asset: photoAsset!,
+                          height: compactHero ? 130 : 200),
+                      const SizedBox(height: 20),
+                    ] else if (scene != null) ...[
+                      HeroIllustration(
+                          scene: scene!, height: compactHero ? 120 : 180),
+                      const SizedBox(height: 20),
+                    ],
+                    Text(title,
+                        style: theme.textTheme.headlineSmall,
+                        textAlign: TextAlign.center),
+                    const SizedBox(height: 12),
+                    Text(body,
+                        style: theme.textTheme.bodyMedium,
+                        textAlign: TextAlign.center),
+                    const SizedBox(height: 20),
+                    content,
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 8, 24, 20),
+              child: Row(
                 children: [
                   Expanded(
                     child: OutlinedButton(
@@ -77,8 +113,8 @@ class OnboardingQuestionScaffold extends StatelessWidget {
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

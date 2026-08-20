@@ -9,9 +9,13 @@ class LastPeriodStep extends StatefulWidget {
     super.key,
     required this.onSkip,
     required this.onContinue,
+    required this.progress,
+    this.onBack,
   });
 
   final VoidCallback onSkip;
+  final double progress;
+  final VoidCallback? onBack;
   final ValueChanged<DateTime> onContinue;
 
   @override
@@ -39,6 +43,9 @@ class _LastPeriodStepState extends State<LastPeriodStep> {
       photoAsset: 'assets/photos/plaid_rest.jpg',
       title: l10n.onboardingLastPeriodTitle,
       body: l10n.onboardingLastPeriodBody,
+      progress: widget.progress,
+      onBack: widget.onBack,
+      compactHero: true,
       onSkip: widget.onSkip,
       onContinue: () {
         final picked = _picked;

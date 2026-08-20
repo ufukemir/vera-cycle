@@ -56,6 +56,18 @@ class OnboardingFlow extends StatefulWidget {
 
 class _OnboardingFlowState extends State<OnboardingFlow> {
   _Step _step = _Step.privacy;
+
+  /// Where the header's bar sits. Derived from the real step list rather
+  /// than a hand-tuned constant per screen, so adding or removing a step
+  /// can never leave the bar lying about how much is left.
+  double get _progress => (_step.index + 1) / _Step.values.length;
+
+  /// The previous step, or null on the first — the header hides its back
+  /// button rather than showing a dead one.
+  VoidCallback? get _back => _step.index == 0
+      ? null
+      : () => setState(() => _step = _Step.values[_step.index - 1]);
+
   Goal _goal = Goal.trackPeriod;
   DateTime? _lastPeriodStart;
   int? _periodLength;
@@ -125,6 +137,8 @@ class _OnboardingFlowState extends State<OnboardingFlow> {
         );
       case _Step.lastPeriod:
         return LastPeriodStep(
+          progress: _progress,
+          onBack: _back,
           onSkip: () => setState(() => _step = _Step.cycleLength),
           onContinue: (date) => setState(() {
             _lastPeriodStart = date;
@@ -133,12 +147,16 @@ class _OnboardingFlowState extends State<OnboardingFlow> {
         );
       case _Step.cycleLength:
         return CycleLengthStep(
+          progress: _progress,
+          onBack: _back,
           onSkip: () => setState(() => _step = _Step.periodLength),
           // The value itself is intentionally not kept — see class doc.
           onContinue: (_) => setState(() => _step = _Step.periodLength),
         );
       case _Step.periodLength:
         return PeriodLengthStep(
+          progress: _progress,
+          onBack: _back,
           onSkip: () => setState(() => _step = _Step.regularity),
           onContinue: (days) => setState(() {
             _periodLength = days;
@@ -147,6 +165,8 @@ class _OnboardingFlowState extends State<OnboardingFlow> {
         );
       case _Step.regularity:
         return ThreeChoiceQuestionStep(
+          progress: _progress,
+          onBack: _back,
           photoAsset: 'assets/photos/cheerful_bangs.jpg',
           title: l10n.onboardingRegularityTitle,
           body: l10n.onboardingRegularityBody,
@@ -154,6 +174,8 @@ class _OnboardingFlowState extends State<OnboardingFlow> {
         );
       case _Step.cramps:
         return ThreeChoiceQuestionStep(
+          progress: _progress,
+          onBack: _back,
           // A calm resting photo, not a laughing one: this step asks about
           // pain, and celebratory imagery over that question reads as
           // tone-deaf.

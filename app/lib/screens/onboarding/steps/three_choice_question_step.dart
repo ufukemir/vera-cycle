@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../widgets/illustrations.dart';
+import 'onboarding_header.dart';
 
 /// Yes / No as large circular buttons plus a quieter "Not sure" underneath —
 /// the reference app's playful answer layout, rebuilt with original
@@ -16,6 +17,8 @@ class ThreeChoiceQuestionStep extends StatelessWidget {
     required this.title,
     required this.body,
     required this.onAnswer,
+    required this.progress,
+    this.onBack,
     this.scene = IllustrationScene.calendarFlowers,
     this.photoAsset,
   });
@@ -23,55 +26,77 @@ class ThreeChoiceQuestionStep extends StatelessWidget {
   final String title;
   final String body;
   final VoidCallback onAnswer;
+  final double progress;
+  final VoidCallback? onBack;
   final IllustrationScene scene;
   final String? photoAsset;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
+
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const Spacer(),
-              if (photoAsset != null)
-                PhotoHero(asset: photoAsset!, height: 210)
-              else
-                HeroIllustration(scene: scene, height: 190),
-              const SizedBox(height: 24),
-              Text(title,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                  textAlign: TextAlign.center),
-              const SizedBox(height: 12),
-              Text(body,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  textAlign: TextAlign.center),
-              const Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: Column(
+          children: [
+            OnboardingHeader(
+              progress: progress,
+              onBack: onBack,
+              onSkip: onAnswer,
+            ),
+            // Same shape as OnboardingQuestionScaffold: the question can
+            // scroll, the answers stay put.
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    if (photoAsset != null)
+                      PhotoHero(asset: photoAsset!, height: 190)
+                    else
+                      HeroIllustration(scene: scene, height: 175),
+                    const SizedBox(height: 22),
+                    Text(title,
+                        style: theme.textTheme.headlineSmall,
+                        textAlign: TextAlign.center),
+                    const SizedBox(height: 12),
+                    Text(body,
+                        style: theme.textTheme.bodyMedium,
+                        textAlign: TextAlign.center),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 8, 24, 12),
+              child: Column(
                 children: [
-                  _CircleAnswerButton(
-                    label: l10n.commonYes,
-                    filled: true,
-                    onTap: onAnswer,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _CircleAnswerButton(
+                        label: l10n.commonYes,
+                        filled: true,
+                        onTap: onAnswer,
+                      ),
+                      _CircleAnswerButton(
+                        label: l10n.commonNo,
+                        filled: false,
+                        onTap: onAnswer,
+                      ),
+                    ],
                   ),
-                  _CircleAnswerButton(
-                    label: l10n.commonNo,
-                    filled: false,
-                    onTap: onAnswer,
+                  const SizedBox(height: 8),
+                  TextButton(
+                    onPressed: onAnswer,
+                    child: Text(l10n.commonNotSure),
                   ),
                 ],
               ),
-              const SizedBox(height: 12),
-              TextButton(
-                onPressed: onAnswer,
-                child: Text(l10n.commonNotSure),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

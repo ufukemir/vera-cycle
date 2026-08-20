@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
-import '../../../widgets/number_stepper.dart';
+import '../../../widgets/number_wheel.dart';
 import 'onboarding_question_scaffold.dart';
 
 /// Bounds match [PredictionEngine.minPlausibleLength]/`maxPlausibleLength` so
@@ -11,10 +11,14 @@ class CycleLengthStep extends StatefulWidget {
     super.key,
     required this.onSkip,
     required this.onContinue,
+    required this.progress,
+    this.onBack,
   });
 
   final VoidCallback onSkip;
   final ValueChanged<int> onContinue;
+  final double progress;
+  final VoidCallback? onBack;
 
   @override
   State<CycleLengthStep> createState() => _CycleLengthStepState();
@@ -30,9 +34,12 @@ class _CycleLengthStepState extends State<CycleLengthStep> {
       photoAsset: 'assets/photos/morning_stretch.jpg',
       title: l10n.onboardingCycleLengthTitle,
       body: l10n.onboardingCycleLengthBody,
+      progress: widget.progress,
+      onBack: widget.onBack,
+      compactHero: true,
       onSkip: widget.onSkip,
       onContinue: () => widget.onContinue(_value),
-      content: NumberStepper(
+      content: NumberWheel(
         value: _value,
         min: 15,
         max: 90,
