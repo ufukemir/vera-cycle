@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../l10n/app_localizations.dart';
@@ -7,6 +8,7 @@ import '../../models/enums.dart';
 import '../../state/app_lock_controller.dart';
 import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
+import '../../theme/app_theme.dart';
 import '../../util/day.dart';
 import '../lock/pin_setup_screen.dart';
 import 'steps/building_plan_step.dart';
@@ -105,7 +107,22 @@ class _OnboardingFlowState extends State<OnboardingFlow> {
     // A soft cross-fade + slide between steps — purely decorative sequencing,
     // never a delay: `key: ValueKey(_step)` swaps instantly underneath, the
     // animation only smooths how it *looks* mid-swap.
-    return AnimatedSwitcher(
+    // Onboarding runs dark regardless of the app's theme setting.
+    //
+    // It is the one stretch of the app that is a sequence rather than a
+    // place: ten screens the user passes through once and never sees again.
+    // Dark separates it from the app proper, holds a photograph far better
+    // than cream does, and makes the progress bar and the single accent
+    // button the only bright things on screen — which is exactly where the
+    // eye should go on a screen with one question and one answer.
+    //
+    // The app's own light/dark preference resumes the moment onboarding
+    // ends, because from then on the user is in a place, not a sequence.
+    return Theme(
+      data: buildDarkAppTheme(),
+      child: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.light,
+        child: AnimatedSwitcher(
       duration: const Duration(milliseconds: 320),
       transitionBuilder: (child, animation) => FadeTransition(
         opacity: animation,
@@ -117,7 +134,9 @@ class _OnboardingFlowState extends State<OnboardingFlow> {
           child: child,
         ),
       ),
-      child: KeyedSubtree(key: ValueKey(_step), child: _buildStep()),
+          child: KeyedSubtree(key: ValueKey(_step), child: _buildStep()),
+        ),
+      ),
     );
   }
 

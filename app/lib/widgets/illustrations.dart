@@ -280,8 +280,11 @@ class PhotoHero extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             Image.asset(asset, fit: BoxFit.cover),
-            // Soft warm wash at the bottom so the card blends into the
-            // cream page instead of ending on a hard photographic edge.
+            // Soft wash at the bottom so the card blends into the page
+            // instead of ending on a hard photographic edge. Takes the
+            // page's own colour rather than the cream constant: onboarding
+            // runs on a dark surface now, where washing a photo towards
+            // cream would leave a pale ledge under every hero.
             DecoratedBox(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -290,7 +293,10 @@ class PhotoHero extends StatelessWidget {
                   stops: const [0.6, 1.0],
                   colors: [
                     Colors.transparent,
-                    AppPalette.cream.withValues(alpha: 0.55),
+                    Theme.of(context)
+                        .colorScheme
+                        .surface
+                        .withValues(alpha: 0.55),
                   ],
                 ),
               ),
