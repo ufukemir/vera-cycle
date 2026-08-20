@@ -8,6 +8,7 @@ import '../../models/day_log.dart';
 import '../../models/enums.dart';
 import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
+import '../day_log/day_log_screen.dart';
 import '../../util/day.dart';
 import '../../util/number_format.dart';
 
@@ -435,10 +436,52 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
     ];
   }
 
-  Widget _empty(AppLocalizations l10n) => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 40),
-        child: Center(child: Text(l10n.trackerHistoryEmpty)),
-      );
+  /// The empty state, which is what most people see first.
+  ///
+  /// It was one grey sentence centred in an otherwise blank screen — so
+  /// every improvement made to the populated view was invisible to anyone
+  /// who had not logged anything yet, and the screen read as broken rather
+  /// than as new. It now says which tracker it is, why it is empty, and
+  /// offers the one action that fixes it.
+  Widget _empty(AppLocalizations l10n) {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    return Padding(
+      padding: const EdgeInsets.only(top: 40),
+      child: Column(
+        children: [
+          Container(
+            width: 84,
+            height: 84,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: scheme.primary.withValues(alpha: 0.10),
+            ),
+            child: Icon(trackerIcon(widget.type),
+                size: 36, color: scheme.primary),
+          ),
+          const SizedBox(height: 18),
+          Text(trackerTitle(l10n, widget.type),
+              style: theme.textTheme.titleMedium, textAlign: TextAlign.center),
+          const SizedBox(height: 6),
+          Text(
+            l10n.trackerHistoryEmpty,
+            style: theme.textTheme.bodyMedium
+                ?.copyWith(color: scheme.onSurfaceVariant),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 22),
+          FilledButton.icon(
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => DayLogScreen(date: today())),
+            ),
+            icon: const Icon(Icons.add),
+            label: Text(l10n.homeOpenTodayLog),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 /// The card the rest of the app uses, in one place so the tracker screen

@@ -11,6 +11,7 @@ import 'package:cycle_app/theme/app_theme.dart';
 import 'package:cycle_app/util/day.dart';
 import 'package:cycle_app/widgets/illustrations.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 /// Each of these locks in a bug found on 2026-08-20. They share a shape:
@@ -231,6 +232,47 @@ void main() {
   });
 
   group('assistant', () {
+    testWidgets('opens from Home without losing its provider', (tester) async {
+      // The conversation is provided by HomeShell, below the Navigator, so
+      // pushing the assistant as a route put it outside that scope and it
+      // threw ProviderNotFoundException on open — a crash screen, on a tab
+      // that had worked for weeks, caused by moving it off the bottom bar.
+      final conversation = AssistantConversation();
+      addTearDown(conversation.dispose);
+
+      await tester.pumpWidget(MaterialApp(
+        home: ChangeNotifierProvider<AssistantConversation>.value(
+          value: conversation,
+          child: Builder(
+            builder: (context) => Scaffold(
+              body: TextButton(
+                onPressed: () {
+                  final held = context.read<AssistantConversation>();
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) =>
+                        ChangeNotifierProvider<AssistantConversation>.value(
+                      value: held,
+                      child: Builder(
+                        builder: (inner) => Text(
+                          '${inner.watch<AssistantConversation>().isEmpty}',
+                        ),
+                      ),
+                    ),
+                  ));
+                },
+                child: const Text('open'),
+              ),
+            ),
+          ),
+        ),
+      ));
+
+      await tester.tap(find.text('open'));
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull);
+      expect(find.text('true'), findsOneWidget);
+    });
+
     test('the conversation survives until it is ended deliberately', () {
       // It used to live in the tab's State, which the shell disposes on
       // every tab switch — glancing at the calendar wiped the chat.

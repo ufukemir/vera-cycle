@@ -9,6 +9,7 @@ import '../../services/home_widget_service.dart';
 import '../../services/pregnancy_info.dart';
 import '../../theme/app_theme.dart';
 import '../../state/app_preferences.dart';
+import '../../state/assistant_conversation.dart';
 import '../../state/cycle_controller.dart';
 import '../../util/day.dart';
 import '../assistant/assistant_screen.dart';
@@ -170,10 +171,28 @@ class _HomeScreenState extends State<HomeScreen> {
                           MaterialPageRoute(
                               builder: (_) => DayLogScreen(date: today())),
                         ),
-                        onOpenAssistant: () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (_) => const AssistantScreen()),
-                        ),
+                        // The conversation is provided by HomeShell, which
+                        // sits *below* the Navigator — so a pushed route is
+                        // outside its scope and reading it there threw
+                        // ProviderNotFoundException the moment the assistant
+                        // opened. Handing the same instance to the route
+                        // keeps the scope correct and the lifetime intact:
+                        // it still dies with the shell, which is what the
+                        // app lock tears down.
+                        onOpenAssistant: () {
+                          final conversation =
+                              context.read<AssistantConversation>();
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  ChangeNotifierProvider<AssistantConversation>
+                                      .value(
+                                value: conversation,
+                                child: const AssistantScreen(),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                       const SizedBox(height: 20),
                       // The ring stays as the detailed, animated view of the
