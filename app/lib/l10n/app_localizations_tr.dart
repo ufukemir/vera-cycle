@@ -1422,6 +1422,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get cycleHistoryTitle => 'Geçmiş döngüler';
 
   @override
+  String get cycleTrendsTitle => 'Döngü eğilimleri';
+
+  @override
   String get cycleHistoryEmpty =>
       'Birkaç regl kaydet, döngü geçmişin burada görünsün.';
 

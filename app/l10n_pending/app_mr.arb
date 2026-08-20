@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "या दिवसासाठी अजून काहीही नोंदवलेले नाही",
   "calendarDayOpenLog": "दिवसाची नोंद उघडा",
   "cycleHistoryTitle": "मागची चक्रे",
+  "cycleTrendsTitle": "चक्र कल",
   "cycleHistoryEmpty": "दोन-तीन पाळी नोंदवा, मग तुमच्या चक्रांचा इतिहास इथे दिसेल.",
   "cycleHistoryOngoing": "चालू",
   "cycleHistoryLength": "{days, plural, one{{days} दिवसाचे चक्र} other{{days} दिवसांचे चक्र}}",

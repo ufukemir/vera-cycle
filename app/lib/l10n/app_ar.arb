@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "لا توجد تسجيلات لهذا اليوم بعد",
   "calendarDayOpenLog": "فتح سجل اليوم",
   "cycleHistoryTitle": "الدورات السابقة",
+  "cycleTrendsTitle": "اتجاهات الدورة",
   "cycleHistoryEmpty": "سجّلي بضع دورات وسيظهر سجل دوراتك هنا.",
   "cycleHistoryOngoing": "مستمرة",
   "cycleHistoryLength": "{days, plural, zero{دورة من {days} يوم} one{دورة من يوم واحد} two{دورة من يومين} few{دورة من {days} أيام} many{دورة من {days} يومًا} other{دورة من {days} يوم}}",

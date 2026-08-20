@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "Nic jeszcze nie zapisano w tym dniu",
   "calendarDayOpenLog": "Otwórz wpis dnia",
   "cycleHistoryTitle": "Poprzednie cykle",
+  "cycleTrendsTitle": "Trendy cyklu",
   "cycleHistoryEmpty": "Zapisz kilka miesiączek, a historia cykli pojawi się tutaj.",
   "cycleHistoryOngoing": "Trwa",
   "cycleHistoryLength": "{days, plural, one{Cykl {days} dzień} few{Cykl {days} dni} many{Cykl {days} dni} other{Cykl {days} dnia}}",

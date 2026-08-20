@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "Nog niets vastgelegd voor deze dag",
   "calendarDayOpenLog": "Dagoverzicht openen",
   "cycleHistoryTitle": "Eerdere cycli",
+  "cycleTrendsTitle": "Cyclustrends",
   "cycleHistoryEmpty": "Leg een paar menstruaties vast, dan verschijnt je cyclusgeschiedenis hier.",
   "cycleHistoryOngoing": "Loopt nog",
   "cycleHistoryLength": "{days, plural, one{Cyclus van {days} dag} other{Cyclus van {days} dagen}}",

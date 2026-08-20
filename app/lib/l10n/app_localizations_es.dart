@@ -1431,6 +1431,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get cycleHistoryTitle => 'Ciclos anteriores';
 
   @override
+  String get cycleTrendsTitle => 'Tendencias del ciclo';
+
+  @override
   String get cycleHistoryEmpty =>
       'Registra un par de periodos y tu historial aparecerá aquí.';
 

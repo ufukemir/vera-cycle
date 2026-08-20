@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "이 날은 아직 기록이 없어요",
   "calendarDayOpenLog": "일일 기록 열기",
   "cycleHistoryTitle": "지난 주기",
+  "cycleTrendsTitle": "주기 추이",
   "cycleHistoryEmpty": "생리를 두어 번 기록하면 주기 기록이 여기에 표시돼요.",
   "cycleHistoryOngoing": "진행 중",
   "cycleHistoryLength": "{days, plural, other{{days}일 주기}}",

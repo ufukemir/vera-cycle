@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "Ancora nessun dato registrato per questo giorno",
   "calendarDayOpenLog": "Apri il registro del giorno",
   "cycleHistoryTitle": "Cicli passati",
+  "cycleTrendsTitle": "Andamento del ciclo",
   "cycleHistoryEmpty": "Registra un paio di mestruazioni e la cronologia dei cicli comparirà qui.",
   "cycleHistoryOngoing": "In corso",
   "cycleHistoryLength": "{days, plural, one{Ciclo di {days} giorno} other{Ciclo di {days} giorni}}",

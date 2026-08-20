@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "Bu gün için henüz kayıt yok",
   "calendarDayOpenLog": "Gün kaydını aç",
   "cycleHistoryTitle": "Geçmiş döngüler",
+  "cycleTrendsTitle": "Döngü eğilimleri",
   "cycleHistoryEmpty": "Birkaç regl kaydet, döngü geçmişin burada görünsün.",
   "cycleHistoryOngoing": "Devam ediyor",
   "cycleHistoryLength": "{days, plural, other{{days} günlük döngü}}",

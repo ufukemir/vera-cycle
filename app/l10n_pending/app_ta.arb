@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "இந்த நாளுக்கு இதுவரை எதுவும் பதிவு செய்யப்படவில்லை",
   "calendarDayOpenLog": "தினசரிப் பதிவைத் திறக்கவும்",
   "cycleHistoryTitle": "கடந்த சுழற்சிகள்",
+  "cycleTrendsTitle": "சுழற்சிப் போக்குகள்",
   "cycleHistoryEmpty": "இரண்டு மாதவிடாய்களைப் பதிவு செய்தால் உங்கள் சுழற்சி வரலாறு இங்கே தோன்றும்.",
   "cycleHistoryOngoing": "தொடர்கிறது",
   "cycleHistoryLength": "{days, plural, one{{days} நாள் சுழற்சி} other{{days} நாள் சுழற்சி}}",

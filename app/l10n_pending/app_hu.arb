@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "Ehhez a naphoz még nincs rögzítve semmi",
   "calendarDayOpenLog": "Napi napló megnyitása",
   "cycleHistoryTitle": "Korábbi ciklusok",
+  "cycleTrendsTitle": "Ciklustrendek",
   "cycleHistoryEmpty": "Rögzíts néhány menstruációt, és itt megjelenik a ciklusaid előzménye.",
   "cycleHistoryOngoing": "Folyamatban",
   "cycleHistoryLength": "{days, plural, one{{days} napos ciklus} other{{days} napos ciklus}}",

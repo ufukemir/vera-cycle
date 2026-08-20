@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "هنوز چیزی برای این روز ثبت نشده",
   "calendarDayOpenLog": "باز کردن ثبت روزانه",
   "cycleHistoryTitle": "چرخه‌های گذشته",
+  "cycleTrendsTitle": "روند چرخه",
   "cycleHistoryEmpty": "چند پریود ثبت کنید تا تاریخچه چرخه‌تان اینجا نمایان شود.",
   "cycleHistoryOngoing": "در جریان",
   "cycleHistoryLength": "{days, plural, one{چرخه {days} روزه} other{چرخه {days} روزه}}",

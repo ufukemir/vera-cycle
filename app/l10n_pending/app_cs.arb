@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "K tomuto dni zatím není nic zaznamenáno",
   "calendarDayOpenLog": "Otevřít denní záznam",
   "cycleHistoryTitle": "Předchozí cykly",
+  "cycleTrendsTitle": "Trendy cyklu",
   "cycleHistoryEmpty": "Zaznamenejte pár menstruací a objeví se tu historie vašich cyklů.",
   "cycleHistoryOngoing": "Probíhá",
   "cycleHistoryLength": "{days, plural, one{Cyklus dlouhý {days} den} few{Cyklus dlouhý {days} dny} many{Cyklus dlouhý {days} dne} other{Cyklus dlouhý {days} dní}}",

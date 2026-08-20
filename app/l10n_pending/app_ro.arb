@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "Nimic notat pentru această zi încă",
   "calendarDayOpenLog": "Deschide jurnalul zilei",
   "cycleHistoryTitle": "Cicluri anterioare",
+  "cycleTrendsTitle": "Tendințele ciclului",
   "cycleHistoryEmpty": "Notează câteva menstruații și istoricul ciclurilor apare aici.",
   "cycleHistoryOngoing": "În desfășurare",
   "cycleHistoryLength": "{days, plural, one{Ciclu de o zi} few{Ciclu de {days} zile} other{Ciclu de {days} de zile}}",

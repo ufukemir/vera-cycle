@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "इस दिन के लिए अभी कुछ दर्ज नहीं",
   "calendarDayOpenLog": "दिन का रिकॉर्ड खोलें",
   "cycleHistoryTitle": "पिछले चक्र",
+  "cycleTrendsTitle": "चक्र रुझान",
   "cycleHistoryEmpty": "दो-तीन पीरियड दर्ज करें, फिर आपका चक्र इतिहास यहाँ दिखेगा।",
   "cycleHistoryOngoing": "जारी",
   "cycleHistoryLength": "{days, plural, one{{days} दिन का चक्र} other{{days} दिन का चक्र}}",

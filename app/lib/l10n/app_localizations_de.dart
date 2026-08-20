@@ -1438,6 +1438,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get cycleHistoryTitle => 'Frühere Zyklen';
 
   @override
+  String get cycleTrendsTitle => 'Zyklusverlauf';
+
+  @override
   String get cycleHistoryEmpty =>
       'Erfasse ein paar Perioden, dann erscheint hier deine Historie.';
 

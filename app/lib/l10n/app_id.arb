@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "Belum ada catatan untuk hari ini",
   "calendarDayOpenLog": "Buka catatan harian",
   "cycleHistoryTitle": "Siklus sebelumnya",
+  "cycleTrendsTitle": "Tren siklus",
   "cycleHistoryEmpty": "Catat beberapa haid dan riwayat siklusmu akan muncul di sini.",
   "cycleHistoryOngoing": "Berlangsung",
   "cycleHistoryLength": "{days, plural, other{Siklus {days} hari}}",

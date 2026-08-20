@@ -511,6 +511,7 @@
   "calendarDayNothingLogged": "Nothing logged for this day yet",
   "calendarDayOpenLog": "Open day log",
   "cycleHistoryTitle": "Past cycles",
+  "cycleTrendsTitle": "Cycle trends",
   "cycleHistoryEmpty": "Log a couple of periods and your cycle history shows up here.",
   "cycleHistoryOngoing": "Ongoing",
   "cycleHistoryLength": "{days, plural, =1{1 day cycle} other{{days} day cycle}}",

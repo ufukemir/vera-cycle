@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "ఈ రోజుకు ఇంకా ఏమీ నమోదు కాలేదు",
   "calendarDayOpenLog": "రోజువారీ నమోదును తెరువు",
   "cycleHistoryTitle": "గత చక్రాలు",
+  "cycleTrendsTitle": "చక్ర ధోరణులు",
   "cycleHistoryEmpty": "రెండు పీరియడ్‌లను నమోదు చేస్తే మీ చక్రాల చరిత్ర ఇక్కడ కనిపిస్తుంది.",
   "cycleHistoryOngoing": "కొనసాగుతోంది",
   "cycleHistoryLength": "{days, plural, one{{days} రోజు చక్రం} other{{days} రోజుల చక్రం}}",

@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "Aún no hay registros para este día",
   "calendarDayOpenLog": "Abrir registro del día",
   "cycleHistoryTitle": "Ciclos anteriores",
+  "cycleTrendsTitle": "Tendencias del ciclo",
   "cycleHistoryEmpty": "Registra un par de periodos y tu historial aparecerá aquí.",
   "cycleHistoryOngoing": "En curso",
   "cycleHistoryLength": "{days, plural, one{Ciclo de un día} other{Ciclo de {days} días}}",

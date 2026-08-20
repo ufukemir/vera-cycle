@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "Bado hakuna kilichoandikwa kwa siku hii",
   "calendarDayOpenLog": "Fungua rekodi ya siku",
   "cycleHistoryTitle": "Mizunguko iliyopita",
+  "cycleTrendsTitle": "Mwelekeo wa mzunguko",
   "cycleHistoryEmpty": "Andika hedhi chache na historia ya mzunguko wako itaonekana hapa.",
   "cycleHistoryOngoing": "Inaendelea",
   "cycleHistoryLength": "{days, plural, one{Mzunguko wa siku {days}} other{Mzunguko wa siku {days}}}",

@@ -1441,6 +1441,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cycleHistoryTitle => 'الدورات السابقة';
 
   @override
+  String get cycleTrendsTitle => 'اتجاهات الدورة';
+
+  @override
   String get cycleHistoryEmpty => 'سجّلي بضع دورات وسيظهر سجل دوراتك هنا.';
 
   @override

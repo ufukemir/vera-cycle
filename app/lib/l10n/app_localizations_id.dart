@@ -1425,6 +1425,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get cycleHistoryTitle => 'Siklus sebelumnya';
 
   @override
+  String get cycleTrendsTitle => 'Tren siklus';
+
+  @override
   String get cycleHistoryEmpty =>
       'Catat beberapa haid dan riwayat siklusmu akan muncul di sini.';
 

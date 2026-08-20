@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "За этот день пока ничего не записано",
   "calendarDayOpenLog": "Открыть запись дня",
   "cycleHistoryTitle": "Прошлые циклы",
+  "cycleTrendsTitle": "Динамика цикла",
   "cycleHistoryEmpty": "Отметьте пару менструаций, и здесь появится история циклов.",
   "cycleHistoryOngoing": "Продолжается",
   "cycleHistoryLength": "{days, plural, one{Цикл {days} день} few{Цикл {days} дня} many{Цикл {days} дней} other{Цикл {days} дня}}",

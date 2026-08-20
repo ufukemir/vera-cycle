@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "اِس دن کے لیے ابھی کچھ درج نہیں",
   "calendarDayOpenLog": "دن کا اندراج کھولیں",
   "cycleHistoryTitle": "گزشتہ سائیکل",
+  "cycleTrendsTitle": "سائیکل رجحانات",
   "cycleHistoryEmpty": "چند ماہواریاں درج کریں، پھر آپ کے سائیکلوں کا ریکارڈ یہاں نظر آئے گا۔",
   "cycleHistoryOngoing": "جاری",
   "cycleHistoryLength": "{days, plural, one{{days} دن کا سائیکل} other{{days} دن کا سائیکل}}",

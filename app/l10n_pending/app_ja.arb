@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "この日はまだ何も記録されていません",
   "calendarDayOpenLog": "この日の記録を開く",
   "cycleHistoryTitle": "過去の周期",
+  "cycleTrendsTitle": "周期の推移",
   "cycleHistoryEmpty": "生理をいくつか記録すると、ここに周期の履歴が表示されます。",
   "cycleHistoryOngoing": "進行中",
   "cycleHistoryLength": "{days, plural, other{{days}日の周期}}",

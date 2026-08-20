@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "Chưa ghi lại gì cho ngày này",
   "calendarDayOpenLog": "Mở nhật ký ngày",
   "cycleHistoryTitle": "Các chu kỳ đã qua",
+  "cycleTrendsTitle": "Xu hướng chu kỳ",
   "cycleHistoryEmpty": "Hãy ghi lại vài kỳ kinh và lịch sử chu kỳ của bạn sẽ hiện ra ở đây.",
   "cycleHistoryOngoing": "Đang diễn ra",
   "cycleHistoryLength": "{days, plural, other{Chu kỳ {days} ngày}}",

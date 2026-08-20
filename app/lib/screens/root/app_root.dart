@@ -57,9 +57,16 @@ class _AppRootState extends State<AppRoot> {
   /// in-app way to silence.
   Future<void> _reconcileReminders() async {
     if (_remindersReconciled || !mounted) return;
-    _remindersReconciled = true;
 
     final prefs = context.read<AppPreferences>();
+    // Nothing to reconcile before onboarding: a fresh install has no
+    // reminders. Touching the notification plugin here initialises it —
+    // and on iOS that is enough to put a system permission prompt in
+    // front of someone who has not seen a single screen yet, which is
+    // both the opposite of the priming step docs/01-mvp-spec.md requires
+    // and the reliable way to be denied for good.
+    if (!prefs.onboardingComplete) return;
+    _remindersReconciled = true;
     final reminders = context.read<ReminderService>();
     final l10n = AppLocalizations.of(context)!;
     final stored = prefs.customReminders;

@@ -2634,6 +2634,12 @@ abstract class AppLocalizations {
   /// **'Past cycles'**
   String get cycleHistoryTitle;
 
+  /// No description provided for @cycleTrendsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cycle trends'**
+  String get cycleTrendsTitle;
+
   /// No description provided for @cycleHistoryEmpty.
   ///
   /// In en, this message translates to:

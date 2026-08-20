@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "Inget loggat för den här dagen ännu",
   "calendarDayOpenLog": "Öppna dagsloggen",
   "cycleHistoryTitle": "Tidigare cykler",
+  "cycleTrendsTitle": "Cykeltrender",
   "cycleHistoryEmpty": "Logga ett par menstruationer så dyker din cykelhistorik upp här.",
   "cycleHistoryOngoing": "Pågående",
   "cycleHistoryLength": "{days, plural, one{Cykel på {days} dag} other{Cykel på {days} dagar}}",

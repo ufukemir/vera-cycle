@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "За цей день ще нічого не записано",
   "calendarDayOpenLog": "Відкрити запис дня",
   "cycleHistoryTitle": "Минулі цикли",
+  "cycleTrendsTitle": "Динаміка циклу",
   "cycleHistoryEmpty": "Запиши кілька місячних — і тут з’явиться історія твоїх циклів.",
   "cycleHistoryOngoing": "Триває",
   "cycleHistoryLength": "{days, plural, one{Цикл: {days} день} few{Цикл: {days} дні} many{Цикл: {days} днів} other{Цикл: {days} дня}}",

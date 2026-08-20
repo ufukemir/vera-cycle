@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "Intet noteret for denne dag endnu",
   "calendarDayOpenLog": "Åbn dagsnotering",
   "cycleHistoryTitle": "Tidligere cyklusser",
+  "cycleTrendsTitle": "Cyklustendenser",
   "cycleHistoryEmpty": "Notér et par menstruationer, så dukker din cyklushistorik op her.",
   "cycleHistoryOngoing": "Igangværende",
   "cycleHistoryLength": "{days, plural, one{Cyklus på {days} dag} other{Cyklus på {days} dage}}",

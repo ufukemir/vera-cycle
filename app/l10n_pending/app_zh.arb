@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "这一天还没有任何记录",
   "calendarDayOpenLog": "打开当日记录",
   "cycleHistoryTitle": "过往周期",
+  "cycleTrendsTitle": "周期趋势",
   "cycleHistoryEmpty": "记录几次月经后，你的周期历史会显示在这里。",
   "cycleHistoryOngoing": "进行中",
   "cycleHistoryLength": "{days, plural, other{{days} 天的周期}}",

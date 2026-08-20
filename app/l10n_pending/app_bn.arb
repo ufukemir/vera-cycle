@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "এই দিনের জন্য এখনও কিছু রেকর্ড করা হয়নি",
   "calendarDayOpenLog": "দিনের রেকর্ড খুলুন",
   "cycleHistoryTitle": "আগের চক্রগুলো",
+  "cycleTrendsTitle": "চক্রের ধারা",
   "cycleHistoryEmpty": "কয়েকটি পিরিয়ড রেকর্ড করুন, আপনার চক্রের ইতিহাস এখানে দেখা যাবে।",
   "cycleHistoryOngoing": "চলছে",
   "cycleHistoryLength": "{days, plural, one{{days} দিনের চক্র} other{{days} দিনের চক্র}}",

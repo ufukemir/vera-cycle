@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "Belum ada apa-apa dicatat untuk hari tersebut",
   "calendarDayOpenLog": "Buka catatan harian",
   "cycleHistoryTitle": "Kitaran lalu",
+  "cycleTrendsTitle": "Trend kitaran",
   "cycleHistoryEmpty": "Catat beberapa haid dan sejarah kitaran anda akan muncul di sini.",
   "cycleHistoryOngoing": "Sedang berlangsung",
   "cycleHistoryLength": "{days, plural, other{Kitaran {days} hari}}",

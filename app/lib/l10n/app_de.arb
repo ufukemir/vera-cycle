@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "Für diesen Tag noch nichts erfasst",
   "calendarDayOpenLog": "Tagesprotokoll öffnen",
   "cycleHistoryTitle": "Frühere Zyklen",
+  "cycleTrendsTitle": "Zyklusverlauf",
   "cycleHistoryEmpty": "Erfasse ein paar Perioden, dann erscheint hier deine Historie.",
   "cycleHistoryOngoing": "Läuft",
   "cycleHistoryLength": "{days, plural, one{{days}-Tages-Zyklus} other{{days}-Tage-Zyklus}}",

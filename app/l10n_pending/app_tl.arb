@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "Wala pang naitala para sa araw na ito",
   "calendarDayOpenLog": "Buksan ang tala ng araw",
   "cycleHistoryTitle": "Mga nakaraang siklo",
+  "cycleTrendsTitle": "Mga trend ng siklo",
   "cycleHistoryEmpty": "Magtala ng ilang regla at lilitaw dito ang kasaysayan ng siklo mo.",
   "cycleHistoryOngoing": "Nagpapatuloy",
   "cycleHistoryLength": "{days, plural, other{{days} araw na siklo}}",

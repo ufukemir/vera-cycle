@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "Tälle päivälle ei ole vielä kirjattu mitään",
   "calendarDayOpenLog": "Avaa päiväkirjaus",
   "cycleHistoryTitle": "Aiemmat kierrot",
+  "cycleTrendsTitle": "Kierron kehitys",
   "cycleHistoryEmpty": "Kirjaa pari kuukautisia, niin kiertohistoriasi näkyy täällä.",
   "cycleHistoryOngoing": "Kesken",
   "cycleHistoryLength": "{days, plural, one{{days} päivän kierto} other{{days} päivän kierto}}",

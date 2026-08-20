@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/cycle.dart';
 import '../../state/cycle_controller.dart';
+import 'widgets/cycle_trends_chart.dart';
 
 /// A plain list of recorded cycles, newest first, each compared against
 /// the user's own average.
@@ -18,7 +19,8 @@ class CycleHistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final cycles = context.watch<CycleController>().cycles.reversed.toList();
+    final ordered = context.watch<CycleController>().cycles;
+    final cycles = ordered.reversed.toList();
     final completed = cycles.where((c) => c.isComplete).toList();
     final average = completed.isEmpty
         ? null
@@ -39,10 +41,22 @@ class CycleHistoryScreen extends StatelessWidget {
               )
             : ListView.separated(
                 padding: const EdgeInsets.all(20),
-                itemCount: cycles.length,
+                // The chart sits above the list as item 0: it answers "is
+                // this normal for me?", which the per-cycle "+3 days"
+                // captions never could.
+                itemCount: cycles.length + 1,
                 separatorBuilder: (_, _) => const SizedBox(height: 12),
-                itemBuilder: (context, i) =>
-                    _CycleTile(cycle: cycles[i], average: average),
+                itemBuilder: (context, i) {
+                  if (i == 0) {
+                    return CycleTrendsChart.canRender(ordered)
+                        ? Padding(
+                            padding: const EdgeInsets.only(bottom: 8),
+                            child: CycleTrendsChart(cycles: ordered),
+                          )
+                        : const SizedBox.shrink();
+                  }
+                  return _CycleTile(cycle: cycles[i - 1], average: average);
+                },
               ),
       ),
     );

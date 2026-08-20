@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "Δεν έχει καταγραφεί τίποτα για αυτή την ημέρα ακόμη",
   "calendarDayOpenLog": "Άνοιγμα ημερήσιας καταγραφής",
   "cycleHistoryTitle": "Προηγούμενοι κύκλοι",
+  "cycleTrendsTitle": "Τάσεις κύκλου",
   "cycleHistoryEmpty": "Κατέγραψε δύο περιόδους και το ιστορικό των κύκλων σου θα εμφανιστεί εδώ.",
   "cycleHistoryOngoing": "Σε εξέλιξη",
   "cycleHistoryLength": "{days, plural, one{Κύκλος 1 ημέρας} other{Κύκλος {days} ημερών}}",

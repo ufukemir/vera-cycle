@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "ยังไม่มีบันทึกของวันที่เลือก",
   "calendarDayOpenLog": "เปิดบันทึกประจำวัน",
   "cycleHistoryTitle": "รอบเดือนที่ผ่านมา",
+  "cycleTrendsTitle": "แนวโน้มรอบเดือน",
   "cycleHistoryEmpty": "บันทึกประจำเดือนสักสองสามครั้ง แล้วประวัติรอบเดือนของคุณจะปรากฏที่นี่",
   "cycleHistoryOngoing": "กำลังดำเนินอยู่",
   "cycleHistoryLength": "{days, plural, other{รอบเดือนยาว {days} วัน}}",

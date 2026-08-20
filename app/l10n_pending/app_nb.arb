@@ -421,6 +421,7 @@
   "calendarDayNothingLogged": "Ingenting registrert for denne dagen ennå",
   "calendarDayOpenLog": "Åpne dagsloggen",
   "cycleHistoryTitle": "Tidligere sykluser",
+  "cycleTrendsTitle": "Syklustrender",
   "cycleHistoryEmpty": "Registrer et par menstruasjoner, så dukker syklushistorikken din opp her.",
   "cycleHistoryOngoing": "Pågår",
   "cycleHistoryLength": "{days, plural, one{Syklus på {days} dag} other{Syklus på {days} dager}}",
