@@ -11,31 +11,36 @@ import '../../state/cycle_controller.dart';
 import '../../theme/app_theme.dart';
 import '../../util/day.dart';
 import '../lock/pin_setup_screen.dart';
+import 'steps/birth_year_step.dart';
 import 'steps/building_plan_step.dart';
 import 'steps/cycle_length_step.dart';
 import 'steps/goal_step.dart';
 import 'steps/last_period_step.dart';
 import 'steps/notification_priming_step.dart';
 import 'steps/period_length_step.dart';
+import 'steps/pms_symptoms_step.dart';
 import 'steps/three_choice_question_step.dart';
 import 'steps/welcome_privacy_step.dart';
 
 enum _Step {
   privacy,
   goal,
+  birthYear,
   lastPeriod,
   cycleLength,
   periodLength,
   regularity,
   cramps,
+  pms,
   notifications,
   pin,
   buildingPlan,
 }
 
-/// Onboarding: privacy promise → goal → 3 skippable cycle questions → 2
-/// conversational yes/no questions → notification priming → mandatory PIN
-/// setup → a short "building your plan" animation.
+/// Onboarding: privacy promise → goal → birth year → 3 skippable cycle
+/// questions → 2 conversational yes/no questions → a PMS multi-select →
+/// notification priming → mandatory PIN setup → a short "building your
+/// plan" animation.
 ///
 /// All answers live in local ephemeral state here — nothing is written to
 /// [AppPreferences] or [CycleController] until [_finish] runs at the very
@@ -43,12 +48,13 @@ enum _Step {
 /// backing out mid-flow (killing the app, etc.) never leaves a
 /// half-onboarded state.
 ///
-/// The self-reported cycle length, and the regularity/cramps answers, are
-/// deliberately collected and then discarded rather than stored anywhere:
-/// per the product decision recorded in docs/01-mvp-spec.md and the
-/// implementation plan, none of them may ever feed a prediction-shaped
-/// estimate, and there is no other use for them in v1. Only [_goal] is
-/// persisted, and only for light personalization — see [_finish].
+/// The self-reported cycle length, the regularity/cramps answers, birth
+/// year and the PMS multi-select are deliberately collected and then
+/// discarded rather than stored anywhere: per the product decision recorded
+/// in docs/01-mvp-spec.md and the implementation plan, none of them may
+/// ever feed a prediction-shaped estimate, and there is no other use for
+/// them in v1. Only [_goal] is persisted, and only for light
+/// personalization — see [_finish].
 class OnboardingFlow extends StatefulWidget {
   const OnboardingFlow({super.key});
 
@@ -157,8 +163,16 @@ class _OnboardingFlowState extends State<OnboardingFlow> {
         return GoalStep(
           onContinue: (goal) => setState(() {
             _goal = goal;
-            _step = _Step.lastPeriod;
+            _step = _Step.birthYear;
           }),
+        );
+      case _Step.birthYear:
+        return BirthYearStep(
+          progress: _progress,
+          onBack: _back,
+          onSkip: () => setState(() => _step = _Step.lastPeriod),
+          // The value itself is intentionally not kept — see class doc.
+          onContinue: () => setState(() => _step = _Step.lastPeriod),
         );
       case _Step.lastPeriod:
         return LastPeriodStep(
@@ -207,7 +221,15 @@ class _OnboardingFlowState extends State<OnboardingFlow> {
           photoAsset: 'assets/photos/tea_blanket_rest.jpg',
           title: l10n.onboardingCrampsTitle,
           body: l10n.onboardingCrampsBody,
-          onAnswer: () => setState(() => _step = _Step.notifications),
+          onAnswer: () => setState(() => _step = _Step.pms),
+        );
+      case _Step.pms:
+        return PmsSymptomsStep(
+          progress: _progress,
+          onBack: _back,
+          onSkip: () => setState(() => _step = _Step.notifications),
+          // The selection itself is intentionally not kept — see class doc.
+          onContinue: () => setState(() => _step = _Step.notifications),
         );
       case _Step.notifications:
         return NotificationPrimingStep(

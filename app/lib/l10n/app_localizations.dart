@@ -378,6 +378,30 @@ abstract class AppLocalizations {
   /// **'We\'ll make sure it\'s easy to log how you\'re feeling on days like that.'**
   String get onboardingCrampsBody;
 
+  /// No description provided for @onboardingBirthYearTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What year were you born?'**
+  String get onboardingBirthYearTitle;
+
+  /// No description provided for @onboardingBirthYearBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Just for a fuller picture — this is never used for any prediction.'**
+  String get onboardingBirthYearBody;
+
+  /// No description provided for @onboardingPmsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Anything usually show up beforehand?'**
+  String get onboardingPmsTitle;
+
+  /// No description provided for @onboardingPmsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick as many as fit. This isn\'t stored anywhere, and there\'s no wrong answer.'**
+  String get onboardingPmsBody;
+
   /// No description provided for @onboardingNotificationTitle.
   ///
   /// In en, this message translates to:

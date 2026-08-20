@@ -156,6 +156,20 @@ class AppLocalizationsAr extends AppLocalizations {
       'سنحرص على أن يكون تسجيل شعورك في تلك الأيام أمرًا سهلاً.';
 
   @override
+  String get onboardingBirthYearTitle => 'في أي سنة وُلدتِ؟';
+
+  @override
+  String get onboardingBirthYearBody =>
+      'فقط لصورة أكمل — لا يُستخدم هذا في أي تنبؤ أبدًا.';
+
+  @override
+  String get onboardingPmsTitle => 'هل يظهر شيء عادةً قبل الدورة؟';
+
+  @override
+  String get onboardingPmsBody =>
+      'اختاري ما يناسبك. لا يُحفظ في أي مكان، ولا توجد إجابة خاطئة.';
+
+  @override
   String get onboardingNotificationTitle => 'هل ترغبين في تذكيرات لطيفة؟';
 
   @override

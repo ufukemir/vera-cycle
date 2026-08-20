@@ -66,9 +66,9 @@ void _mockLocalAuthChannel() {
 }
 
 /// Walks a fresh install through every screen of the expanded onboarding
-/// flow (goal → 3 cycle questions → 2 conversational questions →
-/// notification priming → PIN setup → building-plan animation) and asserts
-/// it lands cleanly on the home shell.
+/// flow (goal → birth year → 3 cycle questions → 2 conversational
+/// questions → PMS multi-select → notification priming → PIN setup →
+/// building-plan animation) and asserts it lands cleanly on the home shell.
 ///
 /// This exists because several of these steps (GoalStep,
 /// ThreeChoiceQuestionStep, NotificationPrimingStep, BuildingPlanStep) were
@@ -109,7 +109,12 @@ void main() {
     await tester.tap(find.text(l10n.goalTrackPeriod));
     await tester.pumpAndSettle();
 
-    // 3-5. Last period / cycle length / period length — all skippable.
+    // 3. Birth year — skippable, discarded answer.
+    expect(find.text(l10n.onboardingBirthYearTitle), findsOneWidget);
+    await tester.tap(find.text(l10n.commonIDontKnow));
+    await tester.pumpAndSettle();
+
+    // 4-6. Last period / cycle length / period length — all skippable.
     expect(find.text(l10n.onboardingLastPeriodTitle), findsOneWidget);
     await tester.tap(find.text(l10n.commonIDontKnow));
     await tester.pumpAndSettle();
@@ -122,7 +127,7 @@ void main() {
     await tester.tap(find.text(l10n.commonIDontKnow));
     await tester.pumpAndSettle();
 
-    // 6-7. Regularity / cramps — conversational, discarded answers.
+    // 7-8. Regularity / cramps — conversational, discarded answers.
     expect(find.text(l10n.onboardingRegularityTitle), findsOneWidget);
     await tester.tap(find.text(l10n.commonNotSure));
     await tester.pumpAndSettle();
@@ -131,13 +136,18 @@ void main() {
     await tester.tap(find.text(l10n.commonNotSure));
     await tester.pumpAndSettle();
 
-    // 8. Notification priming — decline, to avoid touching the (unmocked
+    // 9. PMS multi-select — skippable, discarded answer.
+    expect(find.text(l10n.onboardingPmsTitle), findsOneWidget);
+    await tester.tap(find.text(l10n.commonIDontKnow));
+    await tester.pumpAndSettle();
+
+    // 10. Notification priming — decline, to avoid touching the (unmocked
     // under `flutter test`) notifications platform channel.
     expect(find.text(l10n.onboardingNotificationTitle), findsOneWidget);
     await tester.tap(find.text(l10n.onboardingNotificationNotNow));
     await tester.pumpAndSettle();
 
-    // 9. Mandatory PIN setup — enter, then confirm.
+    // 11. Mandatory PIN setup — enter, then confirm.
     expect(find.text(l10n.pinSetupEnterPrompt), findsOneWidget);
     for (final digit in ['1', '2', '3', '4', '5', '6']) {
       await tester.tap(find.text(digit));
@@ -159,7 +169,7 @@ void main() {
       await tester.pump(const Duration(milliseconds: 300));
     }
 
-    // 10. Home shell.
+    // 12. Home shell.
     expect(find.byType(VeraBottomBar), findsOneWidget);
     await expectLater(
       find.byType(MaterialApp),

@@ -157,6 +157,20 @@ class AppLocalizationsId extends AppLocalizations {
       'Kami akan memastikan mudah untuk mencatat perasaanmu di hari-hari seperti itu.';
 
   @override
+  String get onboardingBirthYearTitle => 'Kamu lahir tahun berapa?';
+
+  @override
+  String get onboardingBirthYearBody =>
+      'Hanya untuk gambaran yang lebih lengkap — tidak pernah dipakai untuk prediksi apa pun.';
+
+  @override
+  String get onboardingPmsTitle => 'Biasanya ada yang muncul sebelumnya?';
+
+  @override
+  String get onboardingPmsBody =>
+      'Pilih sebanyak yang sesuai. Tidak disimpan di mana pun, tidak ada jawaban salah.';
+
+  @override
   String get onboardingNotificationTitle => 'Ingin pengingat yang lembut?';
 
   @override

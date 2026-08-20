@@ -157,6 +157,20 @@ class AppLocalizationsTr extends AppLocalizations {
       'O günlerde nasıl hissettiğini kolayca kaydedebilmeni sağlayacağız.';
 
   @override
+  String get onboardingBirthYearTitle => 'Hangi yıl doğdun?';
+
+  @override
+  String get onboardingBirthYearBody =>
+      'Sadece daha eksiksiz bir resim için — bu hiçbir tahminde kullanılmaz.';
+
+  @override
+  String get onboardingPmsTitle => 'Öncesinde genelde bir şeyler oluyor mu?';
+
+  @override
+  String get onboardingPmsBody =>
+      'İstediğin kadar seç. Hiçbir yerde saklanmaz, yanlış cevap yok.';
+
+  @override
   String get onboardingNotificationTitle => 'Nazik hatırlatmalar ister misin?';
 
   @override

@@ -160,6 +160,20 @@ class AppLocalizationsDe extends AppLocalizations {
       'Wir sorgen dafür, dass du an solchen Tagen leicht festhalten kannst, wie du dich fühlst.';
 
   @override
+  String get onboardingBirthYearTitle => 'In welchem Jahr bist du geboren?';
+
+  @override
+  String get onboardingBirthYearBody =>
+      'Nur für ein vollständigeres Bild — fließt nie in eine Vorhersage ein.';
+
+  @override
+  String get onboardingPmsTitle => 'Zeigt sich vorher meist etwas?';
+
+  @override
+  String get onboardingPmsBody =>
+      'Wähle so viele wie zutreffen. Wird nirgends gespeichert, es gibt keine falsche Antwort.';
+
+  @override
   String get onboardingNotificationTitle => 'Möchtest du sanfte Erinnerungen?';
 
   @override
