@@ -69,7 +69,12 @@ ThemeData _buildTheme(Brightness brightness) {
           onPrimaryContainer: AppPalette.roseSoft,
           secondary: const Color(0xFFEFA98C),
           onSecondary: const Color(0xFF3F1D0E),
-          secondaryContainer: const Color(0xFF5C3423),
+          // Rosewood, not brown. The literal dark-mode translation of
+          // terracotta (0xFF5C3423) came out as mud, and because Material
+          // uses secondaryContainer for every selected segment it turned
+          // the theme picker, the range filter and the quick-log pill into
+          // brown slabs sitting in an otherwise rose app.
+          secondaryContainer: const Color(0xFF63333A),
           onSecondaryContainer: AppPalette.terracottaSoft,
           tertiary: const Color(0xFFE0B45C),
           onTertiary: const Color(0xFF3B2A05),
@@ -126,12 +131,69 @@ ThemeData _buildTheme(Brightness brightness) {
         side: BorderSide(color: colorScheme.outlineVariant.withValues(alpha: 0.4)),
       ),
     ),
+    // The day log is mostly chips, so this is the app's densest surface and
+    // it was also its faintest: a hairline outline and no fill, which read
+    // as disabled text rather than something to press. Worse, a *selected*
+    // chip was filled with primaryContainer — the same soft rose as the
+    // flow card behind it — so on that card the selection disappeared into
+    // its own background. Selected now means the full primary rose, which
+    // holds up on every one of the six pastel section cards.
     chipTheme: ChipThemeData(
       shape: const StadiumBorder(),
-      side: BorderSide(color: colorScheme.outlineVariant),
-      selectedColor: colorScheme.primaryContainer,
-      labelStyle: textTheme.labelLarge,
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      elevation: 0,
+      pressElevation: 0,
+      color: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.disabled)) {
+          return colorScheme.onSurface.withValues(alpha: 0.06);
+        }
+        if (states.contains(WidgetState.selected)) return colorScheme.primary;
+        if (states.contains(WidgetState.pressed)) {
+          return colorScheme.primary.withValues(alpha: 0.16);
+        }
+        // Opaque enough to sit *on* a pastel section card rather than let
+        // it show through, which is what made the chips look unthemed.
+        return colorScheme.surface.withValues(alpha: 0.78);
+      }),
+      side: WidgetStateBorderSide.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return BorderSide(color: colorScheme.primary, width: 1.4);
+        }
+        return BorderSide(color: colorScheme.onSurface.withValues(alpha: 0.12));
+      }),
+      // A WidgetStateColor inside an ordinary TextStyle, NOT a
+      // WidgetStateTextStyle. RawChip resolves the label *colour* per state
+      // (`WidgetStateProperty.resolveAs<Color?>(effectiveLabelStyle.color)`)
+      // but takes the TextStyle itself verbatim, so a WidgetStateTextStyle
+      // is read as the empty style it subclasses — losing the font family
+      // and size without any error. It fails quietly and everywhere: every
+      // chip label in the app dropped to the fallback font.
+      labelStyle: (textTheme.labelLarge ?? const TextStyle()).copyWith(
+        color: WidgetStateColor.resolveWith((states) =>
+            states.contains(WidgetState.selected)
+                ? colorScheme.onPrimary
+                : colorScheme.onSurface),
+      ),
+      checkmarkColor: colorScheme.onPrimary,
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+    ),
+    // Selected segments follow the chips: filled with the rose container,
+    // in both themes. Left to Material's default they took
+    // secondaryContainer and were the one control on screen not speaking
+    // the app's colour language.
+    segmentedButtonTheme: SegmentedButtonThemeData(
+      style: ButtonStyle(
+        backgroundColor: WidgetStateProperty.resolveWith((states) =>
+            states.contains(WidgetState.selected)
+                ? colorScheme.primaryContainer
+                : Colors.transparent),
+        foregroundColor: WidgetStateProperty.resolveWith((states) =>
+            states.contains(WidgetState.selected)
+                ? colorScheme.onPrimaryContainer
+                : colorScheme.onSurface),
+        side: WidgetStateProperty.all(
+            BorderSide(color: colorScheme.outlineVariant)),
+        textStyle: WidgetStateProperty.all(textTheme.labelLarge),
+      ),
     ),
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
@@ -199,8 +261,18 @@ TextTheme _buildTextTheme(ColorScheme colorScheme) {
   // and nothing looked broken because Roboto is a perfectly nice font.
   // It surfaced only when the screenshot harness loaded the real faces and
   // the body text came out as tofu while the headlines rendered.
-  final base =
-      Typography.material2021(colorScheme: colorScheme).black.apply(fontFamily: sans);
+  // `.black` vs `.white` is the *ink*, not the background: Typography's
+  // black theme carries near-black colours on every style. Using it for
+  // both brightnesses painted black text on the dark plum surface, so in
+  // dark mode every string that did not set its own colour disappeared —
+  // section headings, chip labels, helper text. What stayed visible was
+  // whatever happened to name a colour explicitly, which made it look like
+  // scattered missing labels rather than one broken theme.
+  final typography = Typography.material2021(colorScheme: colorScheme);
+  final base = (colorScheme.brightness == Brightness.dark
+          ? typography.white
+          : typography.black)
+      .apply(fontFamily: sans);
   return base.copyWith(
     displayLarge: base.displayLarge?.copyWith(fontFamily: serif, fontWeight: FontWeight.w600),
     displayMedium: base.displayMedium?.copyWith(fontFamily: serif, fontWeight: FontWeight.w600),
