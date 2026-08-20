@@ -536,6 +536,21 @@ class AppLocalizationsId extends AppLocalizations {
   String get settingsRemindersLabel => 'Ingatkan aku sebelum haid';
 
   @override
+  String get remindersScreenTitle => 'Pengingat';
+
+  @override
+  String get remindersGroupCycle => 'Haid & kesuburan';
+
+  @override
+  String get remindersGroupMedication => 'Obat';
+
+  @override
+  String get remindersGroupLifestyle => 'Gaya hidup';
+
+  @override
+  String get remindersGroupAppointment => 'Janji temu';
+
+  @override
   String get settingsRemindersPeriodEndLabel =>
       'Ingatkan saat haidku seharusnya berakhir';
 

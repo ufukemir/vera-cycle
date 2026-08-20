@@ -167,7 +167,7 @@ class _OnboardingFlowState extends State<OnboardingFlow> {
         return ThreeChoiceQuestionStep(
           progress: _progress,
           onBack: _back,
-          photoAsset: 'assets/photos/cheerful_bangs.jpg',
+          photoAsset: 'assets/photos/calendar_marking.jpg',
           title: l10n.onboardingRegularityTitle,
           body: l10n.onboardingRegularityBody,
           onAnswer: () => setState(() => _step = _Step.cramps),

@@ -536,6 +536,21 @@ class AppLocalizationsEs extends AppLocalizations {
   String get settingsRemindersLabel => 'Avisarme antes de mi periodo';
 
   @override
+  String get remindersScreenTitle => 'Recordatorios';
+
+  @override
+  String get remindersGroupCycle => 'Regla y fertilidad';
+
+  @override
+  String get remindersGroupMedication => 'Medicación';
+
+  @override
+  String get remindersGroupLifestyle => 'Estilo de vida';
+
+  @override
+  String get remindersGroupAppointment => 'Citas';
+
+  @override
   String get settingsRemindersPeriodEndLabel =>
       'Avisarme cuando mi periodo deba estar terminando';
 

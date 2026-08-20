@@ -12,14 +12,14 @@ to keep a false claim.)
 
 | File | Source |
 |---|---|
+| calendar_marking.jpg | https://www.pexels.com/photo/6170644/ |
+| phone_knit.jpg | https://www.pexels.com/photo/6788921/ |
 | morning_stretch.jpg | https://www.pexels.com/photo/7622509/ |
 | tea_in_hands.jpg | https://www.pexels.com/photo/6874185/ |
 | plaid_rest.jpg | https://www.pexels.com/photo/8486164/ |
 | garden_friends.jpg | https://www.pexels.com/photo/4834142/ |
 | seaside_smile.jpg | https://www.pexels.com/photo/15485740/ |
-| cheerful_bangs.jpg | https://www.pexels.com/photo/18428647/ |
 | tea_blanket_rest.jpg | https://www.pexels.com/photo/6633308/ |
-| two_friends_laugh.jpg | https://www.pexels.com/photo/33772005/ |
 | selfcare_plants.jpg | https://www.pexels.com/photo/10157911/ |
 | water_glass.jpg | https://www.pexels.com/photo/3794165/ |
 | lemon_water.jpg | https://www.pexels.com/photo/9475301/ |

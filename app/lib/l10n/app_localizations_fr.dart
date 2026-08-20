@@ -543,6 +543,21 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsRemindersLabel => 'Me prévenir avant mes règles';
 
   @override
+  String get remindersScreenTitle => 'Rappels';
+
+  @override
+  String get remindersGroupCycle => 'Règles et fertilité';
+
+  @override
+  String get remindersGroupMedication => 'Médicaments';
+
+  @override
+  String get remindersGroupLifestyle => 'Mode de vie';
+
+  @override
+  String get remindersGroupAppointment => 'Rendez-vous';
+
+  @override
   String get settingsRemindersPeriodEndLabel =>
       'Me prévenir quand mes règles devraient se terminer';
 

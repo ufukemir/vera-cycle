@@ -33,6 +33,7 @@ class _PeriodLengthStepState extends State<PeriodLengthStep> {
       scene: IllustrationScene.dropletFriend,
       title: l10n.onboardingPeriodLengthTitle,
       body: l10n.onboardingPeriodLengthBody,
+      photoAsset: 'assets/photos/sleeping_soft.jpg',
       progress: widget.progress,
       onBack: widget.onBack,
       compactHero: true,

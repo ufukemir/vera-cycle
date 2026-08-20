@@ -1080,6 +1080,36 @@ abstract class AppLocalizations {
   /// **'Remind me before my period'**
   String get settingsRemindersLabel;
 
+  /// No description provided for @remindersScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders'**
+  String get remindersScreenTitle;
+
+  /// No description provided for @remindersGroupCycle.
+  ///
+  /// In en, this message translates to:
+  /// **'Period & fertility'**
+  String get remindersGroupCycle;
+
+  /// No description provided for @remindersGroupMedication.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication'**
+  String get remindersGroupMedication;
+
+  /// No description provided for @remindersGroupLifestyle.
+  ///
+  /// In en, this message translates to:
+  /// **'Lifestyle'**
+  String get remindersGroupLifestyle;
+
+  /// No description provided for @remindersGroupAppointment.
+  ///
+  /// In en, this message translates to:
+  /// **'Appointments'**
+  String get remindersGroupAppointment;
+
   /// No description provided for @settingsRemindersPeriodEndLabel.
   ///
   /// In en, this message translates to:

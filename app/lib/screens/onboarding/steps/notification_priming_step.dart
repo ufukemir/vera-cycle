@@ -48,7 +48,7 @@ class NotificationPrimingStep extends StatelessWidget {
             children: [
               const Spacer(),
               const PhotoHero(
-                  asset: 'assets/photos/two_friends_laugh.jpg', height: 190),
+                  asset: 'assets/photos/phone_knit.jpg', height: 190),
               const SizedBox(height: 24),
               Text(
                 l10n.onboardingNotificationTitle,

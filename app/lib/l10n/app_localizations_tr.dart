@@ -534,6 +534,21 @@ class AppLocalizationsTr extends AppLocalizations {
   String get settingsRemindersLabel => 'Adetimden önce hatırlat';
 
   @override
+  String get remindersScreenTitle => 'Hatırlatıcılar';
+
+  @override
+  String get remindersGroupCycle => 'Regl ve doğurganlık';
+
+  @override
+  String get remindersGroupMedication => 'İlaç';
+
+  @override
+  String get remindersGroupLifestyle => 'Yaşam tarzı';
+
+  @override
+  String get remindersGroupAppointment => 'Randevular';
+
+  @override
   String get settingsRemindersPeriodEndLabel =>
       'Regl dönemim bitmek üzereyken kontrol et';
 

@@ -536,6 +536,21 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsRemindersLabel => 'ذكّريني قبل دورتي';
 
   @override
+  String get remindersScreenTitle => 'التذكيرات';
+
+  @override
+  String get remindersGroupCycle => 'الدورة والخصوبة';
+
+  @override
+  String get remindersGroupMedication => 'الدواء';
+
+  @override
+  String get remindersGroupLifestyle => 'نمط الحياة';
+
+  @override
+  String get remindersGroupAppointment => 'المواعيد';
+
+  @override
   String get settingsRemindersPeriodEndLabel =>
       'ذكّريني عندما يُفترض أن تنتهي دورتي';
 
