@@ -12,9 +12,11 @@ to keep a false claim.)
 
 | File | Source |
 |---|---|
+| morning_stretch.jpg | https://www.pexels.com/photo/7622509/ |
+| tea_in_hands.jpg | https://www.pexels.com/photo/6874185/ |
+| plaid_rest.jpg | https://www.pexels.com/photo/8486164/ |
 | garden_friends.jpg | https://www.pexels.com/photo/4834142/ |
 | seaside_smile.jpg | https://www.pexels.com/photo/15485740/ |
-| greenery_smile.jpg | https://www.pexels.com/photo/32222185/ |
 | cheerful_bangs.jpg | https://www.pexels.com/photo/18428647/ |
 | tea_blanket_rest.jpg | https://www.pexels.com/photo/6633308/ |
 | two_friends_laugh.jpg | https://www.pexels.com/photo/33772005/ |

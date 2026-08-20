@@ -36,7 +36,7 @@ class _LastPeriodStepState extends State<LastPeriodStep> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return OnboardingQuestionScaffold(
-      photoAsset: 'assets/photos/sunny_smile.jpg',
+      photoAsset: 'assets/photos/plaid_rest.jpg',
       title: l10n.onboardingLastPeriodTitle,
       body: l10n.onboardingLastPeriodBody,
       onSkip: widget.onSkip,

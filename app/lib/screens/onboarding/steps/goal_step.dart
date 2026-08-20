@@ -13,7 +13,7 @@ class GoalStep extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return OnboardingChoiceScaffold<Goal>(
-      photoAsset: 'assets/photos/seaside_smile.jpg',
+      photoAsset: 'assets/photos/tea_in_hands.jpg',
       title: l10n.onboardingGoalTitle,
       body: l10n.onboardingGoalBody,
       onSelected: onContinue,

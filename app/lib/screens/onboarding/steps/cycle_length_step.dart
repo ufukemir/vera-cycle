@@ -27,7 +27,7 @@ class _CycleLengthStepState extends State<CycleLengthStep> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return OnboardingQuestionScaffold(
-      photoAsset: 'assets/photos/greenery_smile.jpg',
+      photoAsset: 'assets/photos/morning_stretch.jpg',
       title: l10n.onboardingCycleLengthTitle,
       body: l10n.onboardingCycleLengthBody,
       onSkip: widget.onSkip,
