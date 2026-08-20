@@ -46,7 +46,17 @@ class PhaseTimelineBar extends StatelessWidget {
     return Semantics(
       container: true,
       label: AppLocalizations.of(context)!.a11yPhaseBar(day, cycleLength),
-      child: SizedBox(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            AppLocalizations.of(context)!.homeCycleDayLabel(day),
+            style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                  color: scheme.onSurfaceVariant,
+                ),
+          ),
+          const SizedBox(height: 6),
+          SizedBox(
       height: 26,
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -98,17 +108,23 @@ class PhaseTimelineBar extends StatelessWidget {
                     ),
                   ),
                 ),
-              // Today marker
+              // Today marker.
+              //
+              // Was a 12x20 hollow rounded rectangle, which at that size is
+              // not a marker — it is the digit zero. On Home it sat at the
+              // end of the bar and read as a stray "0" with no label, which
+              // is exactly how it was reported. A filled dot inside a ring
+              // of the page colour cannot be mistaken for a character.
               PositionedDirectional(
-                start: (x(day) + dayWidth / 2 - 6).clamp(0, width - 12),
-                top: 3,
+                start: (x(day) + dayWidth / 2 - 8).clamp(0, width - 16),
+                top: 5,
                 child: Container(
-                  width: 12,
-                  height: 20,
+                  width: 16,
+                  height: 16,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).cardTheme.color,
-                    border: Border.all(color: scheme.onSurface, width: 2),
-                    borderRadius: BorderRadius.circular(6),
+                    shape: BoxShape.circle,
+                    color: scheme.onSurface,
+                    border: Border.all(color: scheme.surface, width: 3),
                   ),
                 ),
               ),
@@ -116,6 +132,8 @@ class PhaseTimelineBar extends StatelessWidget {
           );
         },
       ),
+          ),
+        ],
       ),
     );
   }
