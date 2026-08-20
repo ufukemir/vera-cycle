@@ -15,6 +15,7 @@ import 'package:cycle_app/screens/premium/premium_screen.dart';
 import 'package:cycle_app/screens/settings/custom_reminders_screen.dart';
 import 'package:cycle_app/screens/settings/custom_tags_screen.dart';
 import 'package:cycle_app/screens/settings/prediction_settings_screen.dart';
+import 'package:cycle_app/screens/settings/reminders_screen.dart';
 import 'package:cycle_app/screens/settings/privacy_screen.dart';
 import 'package:cycle_app/screens/settings/settings_screen.dart';
 import 'package:cycle_app/services/in_memory_day_log_repository.dart';
@@ -93,6 +94,7 @@ void main() {
     'premium': () => const PremiumScreen(),
     'privacy': () => const PrivacyScreen(),
     'prediction settings': () => const PredictionSettingsScreen(),
+    'reminders': () => const RemindersScreen(),
     'cycle history': () => const CycleHistoryScreen(),
     'advanced insights': () => const AdvancedInsightsScreen(),
     'custom reminders': () => const CustomRemindersScreen(),
