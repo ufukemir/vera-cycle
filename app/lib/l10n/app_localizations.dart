@@ -2418,6 +2418,30 @@ abstract class AppLocalizations {
   /// **'Billed once a year'**
   String get premiumYearlyNote;
 
+  /// No description provided for @premiumPerMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'{price} / month'**
+  String premiumPerMonth(String price);
+
+  /// No description provided for @premiumBilledMonthly.
+  ///
+  /// In en, this message translates to:
+  /// **'Billed monthly'**
+  String get premiumBilledMonthly;
+
+  /// No description provided for @premiumStaysFreeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What stays free'**
+  String get premiumStaysFreeTitle;
+
+  /// No description provided for @premiumStaysFreeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The calendar, your whole history, the basic statistics and export are free forever. Premium adds things; it never takes anything back.'**
+  String get premiumStaysFreeBody;
+
   /// No description provided for @premiumSubscribeCta.
   ///
   /// In en, this message translates to:

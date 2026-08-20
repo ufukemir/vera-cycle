@@ -444,6 +444,17 @@
   "premiumMonthly": "Monthly",
   "premiumYearly": "Yearly",
   "premiumYearlyNote": "Billed once a year",
+  "premiumPerMonth": "{price} / month",
+  "@premiumPerMonth": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "premiumBilledMonthly": "Billed monthly",
+  "premiumStaysFreeTitle": "What stays free",
+  "premiumStaysFreeBody": "The calendar, your whole history, the basic statistics and export are free forever. Premium adds things; it never takes anything back.",
   "premiumSubscribeCta": "Continue",
   "premiumRestore": "Restore purchase",
   "premiumCancelNote": "Cancel anytime in your app store account. No countdowns, no pressure — if now isn't the time, the free version keeps working exactly as it does today.",

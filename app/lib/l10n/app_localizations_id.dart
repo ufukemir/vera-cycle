@@ -1289,6 +1289,21 @@ class AppLocalizationsId extends AppLocalizations {
   String get premiumYearlyNote => 'Ditagih sekali setahun';
 
   @override
+  String premiumPerMonth(String price) {
+    return '$price / bulan';
+  }
+
+  @override
+  String get premiumBilledMonthly => 'Ditagih bulanan';
+
+  @override
+  String get premiumStaysFreeTitle => 'Yang tetap gratis';
+
+  @override
+  String get premiumStaysFreeBody =>
+      'Kalender, seluruh riwayatmu, statistik dasar, dan ekspor gratis selamanya. Premium menambah, tidak pernah mengambil kembali.';
+
+  @override
   String get premiumSubscribeCta => 'Lanjutkan';
 
   @override

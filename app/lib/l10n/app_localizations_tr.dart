@@ -1286,6 +1286,21 @@ class AppLocalizationsTr extends AppLocalizations {
   String get premiumYearlyNote => 'Yılda bir kez faturalanır';
 
   @override
+  String premiumPerMonth(String price) {
+    return '$price / ay';
+  }
+
+  @override
+  String get premiumBilledMonthly => 'Aylık faturalanır';
+
+  @override
+  String get premiumStaysFreeTitle => 'Ücretsiz kalanlar';
+
+  @override
+  String get premiumStaysFreeBody =>
+      'Takvim, tüm geçmişin, temel istatistikler ve dışa aktarma her zaman ücretsizdir. Premium bir şey ekler, asla var olanı geri almaz.';
+
+  @override
   String get premiumSubscribeCta => 'Devam et';
 
   @override

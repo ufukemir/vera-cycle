@@ -1301,6 +1301,21 @@ class AppLocalizationsDe extends AppLocalizations {
   String get premiumYearlyNote => 'Einmal jährlich abgerechnet';
 
   @override
+  String premiumPerMonth(String price) {
+    return '$price / Monat';
+  }
+
+  @override
+  String get premiumBilledMonthly => 'Monatliche Abrechnung';
+
+  @override
+  String get premiumStaysFreeTitle => 'Was kostenlos bleibt';
+
+  @override
+  String get premiumStaysFreeBody =>
+      'Kalender, gesamter Verlauf, Basisstatistiken und Export bleiben für immer kostenlos. Premium fügt etwas hinzu und nimmt nie etwas weg.';
+
+  @override
   String get premiumSubscribeCta => 'Weiter';
 
   @override

@@ -1301,6 +1301,21 @@ class AppLocalizationsAr extends AppLocalizations {
   String get premiumYearlyNote => 'يُفوتر مرة واحدة سنويًا';
 
   @override
+  String premiumPerMonth(String price) {
+    return '$price / شهر';
+  }
+
+  @override
+  String get premiumBilledMonthly => 'يُحتسب شهريًا';
+
+  @override
+  String get premiumStaysFreeTitle => 'ما يبقى مجانيًا';
+
+  @override
+  String get premiumStaysFreeBody =>
+      'التقويم وسجلك كاملًا والإحصاءات الأساسية والتصدير مجانية دائمًا. البريميوم يضيف ولا يسحب شيئًا.';
+
+  @override
   String get premiumSubscribeCta => 'متابعة';
 
   @override
