@@ -19,118 +19,152 @@ class LogIcons {
   LogIcons._();
 
   static IconData flow(FlowIntensity? value) => switch (value) {
-        null => Icons.do_not_disturb_alt,
-        FlowIntensity.spotting => Icons.water_drop_outlined,
-        FlowIntensity.light => Icons.water_drop,
-        FlowIntensity.medium => Icons.invert_colors,
-        FlowIntensity.heavy => Icons.bloodtype,
-      };
+    null => Icons.do_not_disturb_alt,
+    FlowIntensity.spotting => Icons.water_drop_outlined,
+    FlowIntensity.light => Icons.water_drop,
+    FlowIntensity.medium => Icons.invert_colors,
+    FlowIntensity.heavy => Icons.bloodtype,
+  };
 
   static IconData symptom(Symptom value) => switch (value) {
-        Symptom.cramps => Icons.flash_on,
-        Symptom.headache => Icons.psychology_alt,
-        Symptom.bloating => Icons.bubble_chart,
-        Symptom.breastTenderness => Icons.spa,
-        Symptom.acne => Icons.face_retouching_natural,
-        Symptom.fatigue => Icons.battery_2_bar,
-        Symptom.nausea => Icons.sick,
-        Symptom.backPain => Icons.accessibility_new,
-        Symptom.appetiteChange => Icons.restaurant,
-        Symptom.sleepTrouble => Icons.bedtime_off,
-        Symptom.pelvicPain => Icons.adjust,
-        Symptom.dizziness => Icons.blur_on,
-      };
+    Symptom.cramps => Icons.flash_on,
+    Symptom.headache => Icons.psychology_alt,
+    Symptom.bloating => Icons.bubble_chart,
+    Symptom.breastTenderness => Icons.spa,
+    Symptom.acne => Icons.face_retouching_natural,
+    Symptom.fatigue => Icons.battery_2_bar,
+    Symptom.nausea => Icons.sick,
+    Symptom.backPain => Icons.accessibility_new,
+    Symptom.appetiteChange => Icons.restaurant,
+    Symptom.sleepTrouble => Icons.bedtime_off,
+    Symptom.pelvicPain => Icons.adjust,
+    Symptom.dizziness => Icons.blur_on,
+    Symptom.migraine => Icons.electric_bolt,
+    Symptom.highFever => Icons.thermostat,
+    Symptom.neckPain => Icons.accessibility,
+    Symptom.shoulderPain => Icons.fitness_center,
+    Symptom.limbPain => Icons.pan_tool_alt,
+    Symptom.muscleAche => Icons.sports_martial_arts,
+    Symptom.chills => Icons.ac_unit,
+    Symptom.nightSweats => Icons.nightlight,
+    Symptom.hotFlashes => Icons.local_fire_department,
+    Symptom.weightGain => Icons.trending_up,
+    Symptom.constipation => Icons.block,
+    Symptom.diarrhea => Icons.waves,
+    Symptom.indigestion => Icons.no_food,
+    Symptom.gasPain => Icons.air,
+    Symptom.feelingUnwell => Icons.sentiment_dissatisfied,
+    Symptom.itching => Icons.touch_app,
+    Symptom.troubleFocusing => Icons.center_focus_weak,
+    Symptom.forgetfulness => Icons.question_mark,
+  };
 
   static IconData mood(Mood value) => switch (value) {
-        Mood.calm => Icons.self_improvement,
-        Mood.anxious => Icons.sentiment_neutral,
-        Mood.irritable => Icons.sentiment_very_dissatisfied,
-        Mood.low => Icons.sentiment_dissatisfied,
-        Mood.energetic => Icons.bolt,
-        Mood.happy => Icons.sentiment_very_satisfied,
-        Mood.content => Icons.sentiment_satisfied,
-        Mood.sad => Icons.mood_bad,
-        Mood.depressed => Icons.cloud,
-        Mood.emotional => Icons.favorite,
-      };
+    Mood.calm => Icons.self_improvement,
+    Mood.anxious => Icons.sentiment_neutral,
+    Mood.irritable => Icons.sentiment_very_dissatisfied,
+    Mood.low => Icons.sentiment_dissatisfied,
+    Mood.energetic => Icons.bolt,
+    Mood.happy => Icons.sentiment_very_satisfied,
+    Mood.content => Icons.sentiment_satisfied,
+    Mood.sad => Icons.mood_bad,
+    Mood.depressed => Icons.cloud,
+    Mood.emotional => Icons.favorite,
+    Mood.excited => Icons.celebration,
+    Mood.hopeful => Icons.wb_sunny,
+    Mood.proud => Icons.military_tech,
+    Mood.disappointed => Icons.thumb_down,
+    Mood.confident => Icons.emoji_events,
+    Mood.surprised => Icons.priority_high,
+    Mood.indifferent => Icons.horizontal_rule,
+    Mood.peaceful => Icons.spa,
+    Mood.inLove => Icons.favorite_border,
+    Mood.shy => Icons.visibility_off,
+    Mood.playful => Icons.toys,
+    Mood.exhausted => Icons.battery_alert,
+    Mood.lonely => Icons.person_outline,
+    Mood.overwhelmed => Icons.grain,
+    Mood.grateful => Icons.volunteer_activism,
+    Mood.nostalgic => Icons.history,
+  };
 
   static IconData energy(EnergyLevel value) => switch (value) {
-        EnergyLevel.low => Icons.battery_1_bar,
-        EnergyLevel.medium => Icons.battery_3_bar,
-        EnergyLevel.high => Icons.battery_5_bar,
-        EnergyLevel.energetic => Icons.battery_charging_full,
-      };
+    EnergyLevel.low => Icons.battery_1_bar,
+    EnergyLevel.medium => Icons.battery_3_bar,
+    EnergyLevel.high => Icons.battery_5_bar,
+    EnergyLevel.energetic => Icons.battery_charging_full,
+  };
 
   static IconData skinHair(SkinHairSymptom value) => switch (value) {
-        SkinHairSymptom.healthyGlow => Icons.auto_awesome,
-        SkinHairSymptom.skinRedness => Icons.local_fire_department,
-        SkinHairSymptom.skinDryness => Icons.grain,
-        SkinHairSymptom.skinOiliness => Icons.opacity,
-        SkinHairSymptom.goodHairDay => Icons.brush,
-        SkinHairSymptom.badHairDay => Icons.air,
-        SkinHairSymptom.hairLoss => Icons.content_cut,
-        SkinHairSymptom.oilyScalp => Icons.water_drop,
-      };
+    SkinHairSymptom.healthyGlow => Icons.auto_awesome,
+    SkinHairSymptom.skinRedness => Icons.local_fire_department,
+    SkinHairSymptom.skinDryness => Icons.grain,
+    SkinHairSymptom.skinOiliness => Icons.opacity,
+    SkinHairSymptom.goodHairDay => Icons.brush,
+    SkinHairSymptom.badHairDay => Icons.air,
+    SkinHairSymptom.hairLoss => Icons.content_cut,
+    SkinHairSymptom.oilyScalp => Icons.water_drop,
+  };
 
   static IconData mucus(CervicalMucus value) => switch (value) {
-        CervicalMucus.dry => Icons.grain,
-        CervicalMucus.sticky => Icons.blur_circular,
-        CervicalMucus.creamy => Icons.opacity,
-        CervicalMucus.watery => Icons.water_drop,
-        CervicalMucus.eggWhite => Icons.egg_alt,
-      };
+    CervicalMucus.dry => Icons.grain,
+    CervicalMucus.sticky => Icons.blur_circular,
+    CervicalMucus.creamy => Icons.opacity,
+    CervicalMucus.watery => Icons.water_drop,
+    CervicalMucus.eggWhite => Icons.egg_alt,
+  };
 
   static IconData sexLife(SexLifeEntry value) => switch (value) {
-        SexLifeEntry.none => Icons.do_not_disturb_alt,
-        SexLifeEntry.unprotected => Icons.favorite,
-        SexLifeEntry.protectedSex => Icons.shield_outlined,
-        SexLifeEntry.masturbation => Icons.back_hand_outlined,
-        SexLifeEntry.noOrgasm => Icons.sentiment_neutral,
-        SexLifeEntry.orgasm => Icons.auto_awesome,
-        SexLifeEntry.highDesire => Icons.local_fire_department,
-      };
+    SexLifeEntry.none => Icons.do_not_disturb_alt,
+    SexLifeEntry.unprotected => Icons.favorite,
+    SexLifeEntry.protectedSex => Icons.shield_outlined,
+    SexLifeEntry.masturbation => Icons.back_hand_outlined,
+    SexLifeEntry.noOrgasm => Icons.sentiment_neutral,
+    SexLifeEntry.orgasm => Icons.auto_awesome,
+    SexLifeEntry.highDesire => Icons.local_fire_department,
+  };
 
   static IconData birthControl(BirthControlEntry value) => switch (value) {
-        BirthControlEntry.pillTaken => Icons.check_circle_outline,
-        BirthControlEntry.pillLate => Icons.schedule,
-        BirthControlEntry.pillMissed => Icons.remove_circle_outline,
-        BirthControlEntry.patch => Icons.crop_square,
-        BirthControlEntry.ring => Icons.circle_outlined,
-        BirthControlEntry.injection => Icons.vaccines_outlined,
-        BirthControlEntry.implant => Icons.horizontal_rule,
-        BirthControlEntry.iud => Icons.change_history,
-      };
+    BirthControlEntry.pillTaken => Icons.check_circle_outline,
+    BirthControlEntry.pillLate => Icons.schedule,
+    BirthControlEntry.pillMissed => Icons.remove_circle_outline,
+    BirthControlEntry.patch => Icons.crop_square,
+    BirthControlEntry.ring => Icons.circle_outlined,
+    BirthControlEntry.injection => Icons.vaccines_outlined,
+    BirthControlEntry.implant => Icons.horizontal_rule,
+    BirthControlEntry.iud => Icons.change_history,
+  };
 
   static IconData ovulationTest(OvulationTestResult value) => switch (value) {
-        OvulationTestResult.negative => Icons.remove_circle_outline,
-        OvulationTestResult.high => Icons.trending_up,
-        OvulationTestResult.positive => Icons.check_circle_outline,
-      };
+    OvulationTestResult.negative => Icons.remove_circle_outline,
+    OvulationTestResult.high => Icons.trending_up,
+    OvulationTestResult.positive => Icons.check_circle_outline,
+  };
 
   static IconData breastExam(BreastExamFinding value) => switch (value) {
-        BreastExamFinding.allNormal => Icons.check_circle_outline,
-        BreastExamFinding.lump => Icons.radio_button_checked,
-        BreastExamFinding.indentation => Icons.adjust,
-        BreastExamFinding.redness => Icons.local_fire_department,
-        BreastExamFinding.crackedNipple => Icons.healing,
-        BreastExamFinding.discharge => Icons.water_drop,
-      };
+    BreastExamFinding.allNormal => Icons.check_circle_outline,
+    BreastExamFinding.lump => Icons.radio_button_checked,
+    BreastExamFinding.indentation => Icons.adjust,
+    BreastExamFinding.redness => Icons.local_fire_department,
+    BreastExamFinding.crackedNipple => Icons.healing,
+    BreastExamFinding.discharge => Icons.water_drop,
+  };
 
   static IconData cervixPosition(CervixPosition value) => switch (value) {
-        CervixPosition.low => Icons.vertical_align_bottom,
-        CervixPosition.medium => Icons.height,
-        CervixPosition.high => Icons.vertical_align_top,
-      };
+    CervixPosition.low => Icons.vertical_align_bottom,
+    CervixPosition.medium => Icons.height,
+    CervixPosition.high => Icons.vertical_align_top,
+  };
 
   static IconData cervixOpening(CervixOpening value) => switch (value) {
-        CervixOpening.closed => Icons.lock_outline,
-        CervixOpening.medium => Icons.lock_open,
-        CervixOpening.open => Icons.circle_outlined,
-      };
+    CervixOpening.closed => Icons.lock_outline,
+    CervixOpening.medium => Icons.lock_open,
+    CervixOpening.open => Icons.circle_outlined,
+  };
 
   static IconData cervixFirmness(CervixFirmness value) => switch (value) {
-        CervixFirmness.soft => Icons.cloud_outlined,
-        CervixFirmness.medium => Icons.circle,
-        CervixFirmness.firm => Icons.fitness_center,
-      };
+    CervixFirmness.soft => Icons.cloud_outlined,
+    CervixFirmness.medium => Icons.circle,
+    CervixFirmness.firm => Icons.fitness_center,
+  };
 }

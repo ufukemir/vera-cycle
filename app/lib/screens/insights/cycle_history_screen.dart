@@ -25,7 +25,7 @@ class CycleHistoryScreen extends StatelessWidget {
     final average = completed.isEmpty
         ? null
         : completed.map((c) => c.length!).reduce((a, b) => a + b) /
-            completed.length;
+              completed.length;
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.cycleHistoryTitle)),
@@ -34,9 +34,11 @@ class CycleHistoryScreen extends StatelessWidget {
             ? Center(
                 child: Padding(
                   padding: const EdgeInsets.all(32),
-                  child: Text(l10n.cycleHistoryEmpty,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyMedium),
+                  child: Text(
+                    l10n.cycleHistoryEmpty,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
                 ),
               )
             : ListView.separated(
@@ -82,7 +84,8 @@ class _CycleTile extends StatelessWidget {
       final diff = (length - average!).round();
       if (diff != 0) {
         comparison = l10n.cycleHistoryVsAverage(
-            '${diff > 0 ? '+' : ''}$diff ${l10n.onboardingDaysUnit}');
+          '${diff > 0 ? '+' : ''}$diff ${l10n.onboardingDaysUnit}',
+        );
       }
     }
 
@@ -123,23 +126,29 @@ class _CycleTile extends StatelessWidget {
               children: [
                 Container(
                   height: 10,
-                  color: theme.colorScheme.outlineVariant.withValues(alpha: 0.3),
+                  color: theme.colorScheme.outlineVariant.withValues(
+                    alpha: 0.3,
+                  ),
                 ),
                 FractionallySizedBox(
                   widthFactor: fraction,
-                  child: Container(height: 10, color: theme.colorScheme.primary),
+                  child: Container(
+                    height: 10,
+                    color: theme.colorScheme.primary,
+                  ),
                 ),
                 FractionallySizedBox(
                   widthFactor: (cycle.periodLength / 40).clamp(0.05, 1.0),
-                  child: Container(
-                      height: 10, color: theme.colorScheme.error),
+                  child: Container(height: 10, color: theme.colorScheme.error),
                 ),
               ],
             ),
           ),
           const SizedBox(height: 8),
-          Text(l10n.cycleHistoryPeriodLength(cycle.periodLength),
-              style: theme.textTheme.bodySmall),
+          Text(
+            l10n.cycleHistoryPeriodLength(cycle.periodLength),
+            style: theme.textTheme.bodySmall,
+          ),
           if (comparison != null)
             Text(comparison, style: theme.textTheme.bodySmall),
         ],

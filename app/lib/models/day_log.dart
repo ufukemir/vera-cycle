@@ -34,15 +34,15 @@ class DayLog {
     this.weightKg,
     List<String>? medications,
     Set<String>? customTags,
-  })  : date = dateOnly(date),
-        symptoms = Set.unmodifiable(symptoms ?? const <Symptom>{}),
-        skinHair = Set.unmodifiable(skinHair ?? const <SkinHairSymptom>{}),
-        breastExam =
-            Set.unmodifiable(breastExam ?? const <BreastExamFinding>{}),
-        birthControl =
-            Set.unmodifiable(birthControl ?? const <BirthControlEntry>{}),
-        medications = List.unmodifiable(medications ?? const <String>[]),
-        customTags = Set.unmodifiable(customTags ?? const <String>{});
+  }) : date = dateOnly(date),
+       symptoms = Set.unmodifiable(symptoms ?? const <Symptom>{}),
+       skinHair = Set.unmodifiable(skinHair ?? const <SkinHairSymptom>{}),
+       breastExam = Set.unmodifiable(breastExam ?? const <BreastExamFinding>{}),
+       birthControl = Set.unmodifiable(
+         birthControl ?? const <BirthControlEntry>{},
+       ),
+       medications = List.unmodifiable(medications ?? const <String>[]),
+       customTags = Set.unmodifiable(customTags ?? const <String>{});
 
   final DateTime date;
 
@@ -62,19 +62,23 @@ class DayLog {
   /// the user never entered a value, not that the answer was "no".
   final bool? sexualActivity;
 
-  /// What happened, when the user tracks that. Empty for everyone who does
-  /// not — the switch that reveals this is off by default.
+  /// What happened, when the user tracks that, and how many times — a day
+  /// with two separate occasions is a real difference from one, and a count
+  /// says so instead of collapsing both into the same checked box. Absent
+  /// keys mean zero; there is no explicit zero entry. Empty for everyone who
+  /// does not track this — the switch that reveals it is off by default.
   ///
   /// [sexualActivity] stays as the plain yes/no it always was: it is what
   /// the tracker hub and the day list read, and rewriting stored logs to
   /// drop it would lose history for no gain. The two are kept consistent by
   /// the editor, not by the model.
-  final Set<SexLifeEntry> sexLife;
+  final Map<SexLifeEntry, int> sexLife;
   final double? basalTempC;
   final CervicalMucus? mucus;
   final OvulationTestResult? ovulationTest;
   final PregnancyTestResult? pregnancyTest;
   final Set<BreastExamFinding> breastExam;
+
   /// Contraception taken, or missed, today. Empty for anyone who does not
   /// track it; it is not gated behind a preference because it lives inside
   /// the medication card the user already opened.
@@ -129,8 +133,7 @@ class DayLog {
   /// Bleeding heavy enough to mark the start of a period.
   ///
   /// Spotting is excluded on purpose — see [FlowIntensity.spotting].
-  bool get hasMenstrualFlow =>
-      flow != null && flow != FlowIntensity.spotting;
+  bool get hasMenstrualFlow => flow != null && flow != FlowIntensity.spotting;
 
   DayLog copyWith({
     FlowIntensity? flow,
@@ -144,7 +147,7 @@ class DayLog {
     String? note,
     bool clearNote = false,
     bool? sexualActivity,
-    Set<SexLifeEntry>? sexLife,
+    Map<SexLifeEntry, int>? sexLife,
     bool clearSexualActivity = false,
     double? basalTempC,
     bool clearBasalTemp = false,
@@ -176,8 +179,7 @@ class DayLog {
       flow: clearFlow ? null : (flow ?? this.flow),
       symptoms: symptoms ?? this.symptoms,
       mood: clearMood ? null : (mood ?? this.mood),
-      energyLevel:
-          clearEnergyLevel ? null : (energyLevel ?? this.energyLevel),
+      energyLevel: clearEnergyLevel ? null : (energyLevel ?? this.energyLevel),
       skinHair: skinHair ?? this.skinHair,
       note: clearNote ? null : (note ?? this.note),
       sexLife: sexLife ?? this.sexLife,
@@ -186,8 +188,9 @@ class DayLog {
           : (sexualActivity ?? this.sexualActivity),
       basalTempC: clearBasalTemp ? null : (basalTempC ?? this.basalTempC),
       mucus: clearMucus ? null : (mucus ?? this.mucus),
-      ovulationTest:
-          clearOvulationTest ? null : (ovulationTest ?? this.ovulationTest),
+      ovulationTest: clearOvulationTest
+          ? null
+          : (ovulationTest ?? this.ovulationTest),
       pregnancyTest: clearPregnancyTest
           ? null
           : (pregnancyTest ?? this.pregnancyTest),
@@ -195,15 +198,18 @@ class DayLog {
       cervixPosition: clearCervixPosition
           ? null
           : (cervixPosition ?? this.cervixPosition),
-      cervixOpening:
-          clearCervixOpening ? null : (cervixOpening ?? this.cervixOpening),
+      cervixOpening: clearCervixOpening
+          ? null
+          : (cervixOpening ?? this.cervixOpening),
       cervixFirmness: clearCervixFirmness
           ? null
           : (cervixFirmness ?? this.cervixFirmness),
-      waterIntakeMl:
-          clearWaterIntake ? null : (waterIntakeMl ?? this.waterIntakeMl),
-      sleepMinutes:
-          clearSleepMinutes ? null : (sleepMinutes ?? this.sleepMinutes),
+      waterIntakeMl: clearWaterIntake
+          ? null
+          : (waterIntakeMl ?? this.waterIntakeMl),
+      sleepMinutes: clearSleepMinutes
+          ? null
+          : (sleepMinutes ?? this.sleepMinutes),
       weightKg: clearWeight ? null : (weightKg ?? this.weightKg),
       medications: medications ?? this.medications,
       customTags: customTags ?? this.customTags,
@@ -211,36 +217,35 @@ class DayLog {
   }
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'date': dayKey(date),
-        if (flow != null) 'flow': flow!.name,
-        if (symptoms.isNotEmpty)
-          'symptoms': symptoms.map((s) => s.name).toList()..sort(),
-        if (mood != null) 'mood': mood!.name,
-        if (energyLevel != null) 'energyLevel': energyLevel!.name,
-        if (skinHair.isNotEmpty)
-          'skinHair': skinHair.map((s) => s.name).toList()..sort(),
-        if (note != null && note!.isNotEmpty) 'note': note,
-        if (sexualActivity != null) 'sexualActivity': sexualActivity,
-        if (sexLife.isNotEmpty)
-          'sexLife': sexLife.map((e) => e.name).toList()..sort(),
-        if (basalTempC != null) 'basalTempC': basalTempC,
-        if (mucus != null) 'mucus': mucus!.name,
-        if (ovulationTest != null) 'ovulationTest': ovulationTest!.name,
-        if (pregnancyTest != null) 'pregnancyTest': pregnancyTest!.name,
-        if (breastExam.isNotEmpty)
-          'breastExam': breastExam.map((b) => b.name).toList()..sort(),
-        if (cervixPosition != null) 'cervixPosition': cervixPosition!.name,
-        if (cervixOpening != null) 'cervixOpening': cervixOpening!.name,
-        if (cervixFirmness != null) 'cervixFirmness': cervixFirmness!.name,
-        if (birthControl.isNotEmpty)
-          'birthControl': birthControl.map((e) => e.name).toList()..sort(),
-        if (waterIntakeMl != null) 'waterIntakeMl': waterIntakeMl,
-        if (sleepMinutes != null) 'sleepMinutes': sleepMinutes,
-        if (weightKg != null) 'weightKg': weightKg,
-        if (medications.isNotEmpty) 'medications': medications,
-        if (customTags.isNotEmpty)
-          'customTags': customTags.toList()..sort(),
-      };
+    'date': dayKey(date),
+    if (flow != null) 'flow': flow!.name,
+    if (symptoms.isNotEmpty)
+      'symptoms': symptoms.map((s) => s.name).toList()..sort(),
+    if (mood != null) 'mood': mood!.name,
+    if (energyLevel != null) 'energyLevel': energyLevel!.name,
+    if (skinHair.isNotEmpty)
+      'skinHair': skinHair.map((s) => s.name).toList()..sort(),
+    if (note != null && note!.isNotEmpty) 'note': note,
+    if (sexualActivity != null) 'sexualActivity': sexualActivity,
+    if (sexLife.isNotEmpty)
+      'sexLife': {for (final e in sexLife.entries) e.key.name: e.value},
+    if (basalTempC != null) 'basalTempC': basalTempC,
+    if (mucus != null) 'mucus': mucus!.name,
+    if (ovulationTest != null) 'ovulationTest': ovulationTest!.name,
+    if (pregnancyTest != null) 'pregnancyTest': pregnancyTest!.name,
+    if (breastExam.isNotEmpty)
+      'breastExam': breastExam.map((b) => b.name).toList()..sort(),
+    if (cervixPosition != null) 'cervixPosition': cervixPosition!.name,
+    if (cervixOpening != null) 'cervixOpening': cervixOpening!.name,
+    if (cervixFirmness != null) 'cervixFirmness': cervixFirmness!.name,
+    if (birthControl.isNotEmpty)
+      'birthControl': birthControl.map((e) => e.name).toList()..sort(),
+    if (waterIntakeMl != null) 'waterIntakeMl': waterIntakeMl,
+    if (sleepMinutes != null) 'sleepMinutes': sleepMinutes,
+    if (weightKg != null) 'weightKg': weightKg,
+    if (medications.isNotEmpty) 'medications': medications,
+    if (customTags.isNotEmpty) 'customTags': customTags.toList()..sort(),
+  };
 
   /// Unknown enum values decode to `null` rather than throwing: a log written by
   /// a newer version of the app must not make the whole store unreadable on an
@@ -257,32 +262,31 @@ class DayLog {
       energyLevel: _byName(EnergyLevel.values, json['energyLevel']),
       skinHair: <SkinHairSymptom>{
         for (final raw in (json['skinHair'] as List<dynamic>? ?? const []))
-          ...[_byName(SkinHairSymptom.values, raw)].whereType<SkinHairSymptom>(),
+          ...[
+            _byName(SkinHairSymptom.values, raw),
+          ].whereType<SkinHairSymptom>(),
       },
       note: json['note'] as String?,
       sexualActivity: json['sexualActivity'] as bool?,
-      sexLife: <SexLifeEntry>{
-        for (final raw in (json['sexLife'] as List<dynamic>? ?? const []))
-          ...[_byName(SexLifeEntry.values, raw)].whereType<SexLifeEntry>(),
-      },
+      sexLife: _decodeSexLife(json['sexLife']),
       basalTempC: (json['basalTempC'] as num?)?.toDouble(),
       mucus: _byName(CervicalMucus.values, json['mucus']),
-      ovulationTest:
-          _byName(OvulationTestResult.values, json['ovulationTest']),
-      pregnancyTest:
-          _byName(PregnancyTestResult.values, json['pregnancyTest']),
+      ovulationTest: _byName(OvulationTestResult.values, json['ovulationTest']),
+      pregnancyTest: _byName(PregnancyTestResult.values, json['pregnancyTest']),
       breastExam: <BreastExamFinding>{
         for (final raw in (json['breastExam'] as List<dynamic>? ?? const []))
-          ...[_byName(BreastExamFinding.values, raw)]
-              .whereType<BreastExamFinding>(),
+          ...[
+            _byName(BreastExamFinding.values, raw),
+          ].whereType<BreastExamFinding>(),
       },
       cervixPosition: _byName(CervixPosition.values, json['cervixPosition']),
       cervixOpening: _byName(CervixOpening.values, json['cervixOpening']),
       cervixFirmness: _byName(CervixFirmness.values, json['cervixFirmness']),
       birthControl: <BirthControlEntry>{
         for (final raw in (json['birthControl'] as List<dynamic>? ?? const []))
-          ...[_byName(BirthControlEntry.values, raw)]
-              .whereType<BirthControlEntry>(),
+          ...[
+            _byName(BirthControlEntry.values, raw),
+          ].whereType<BirthControlEntry>(),
       },
       waterIntakeMl: (json['waterIntakeMl'] as num?)?.toInt(),
       sleepMinutes: (json['sleepMinutes'] as num?)?.toInt(),
@@ -296,6 +300,26 @@ class DayLog {
           if (raw is String && raw.trim().isNotEmpty) raw,
       },
     );
+  }
+
+  /// Reads both the current `{entry: count}` shape and the older
+  /// `[entry, entry, ...]` shape a log written before counting existed —
+  /// each name in the old list becomes a count of 1, so history from before
+  /// this feature still reads back as "it happened," just without a tally.
+  static Map<SexLifeEntry, int> _decodeSexLife(Object? raw) {
+    final out = <SexLifeEntry, int>{};
+    if (raw is Map) {
+      for (final entry in raw.entries) {
+        final key = _byName(SexLifeEntry.values, entry.key);
+        if (key != null) out[key] = (entry.value as num).toInt();
+      }
+    } else if (raw is List) {
+      for (final name in raw) {
+        final key = _byName(SexLifeEntry.values, name);
+        if (key != null) out[key] = 1;
+      }
+    }
+    return out;
   }
 
   static T? _byName<T extends Enum>(List<T> values, Object? raw) {

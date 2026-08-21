@@ -77,8 +77,11 @@ void main() {
     test('a share sheet or file picker does not lock', () async {
       await lock.duringSystemSheet(() async {
         lock.didChangeAppLifecycleState(AppLifecycleState.paused);
-        expect(lock.state, AppLockState.unlocked,
-            reason: 'the picker would be unmounted mid-await');
+        expect(
+          lock.state,
+          AppLockState.unlocked,
+          reason: 'the picker would be unmounted mid-await',
+        );
       });
       lock.didChangeAppLifecycleState(AppLifecycleState.resumed);
       expect(lock.state, AppLockState.unlocked);
@@ -86,8 +89,11 @@ void main() {
 
     test('the suspension ends with the sheet, not after it', () {
       lock.didChangeAppLifecycleState(AppLifecycleState.paused);
-      expect(lock.state, AppLockState.locked,
-          reason: 'no sheet is open, so this is an ordinary backgrounding');
+      expect(
+        lock.state,
+        AppLockState.locked,
+        reason: 'no sheet is open, so this is an ordinary backgrounding',
+      );
     });
   });
 
@@ -99,27 +105,30 @@ void main() {
         healthSync: sync,
       );
 
-      await controller.upsertDay(DayLog(
-        date: today(),
-        flow: FlowIntensity.medium,
-      ));
+      await controller.upsertDay(
+        DayLog(date: today(), flow: FlowIntensity.medium),
+      );
       expect(sync.written, hasLength(1));
 
       // The day-log screen saves on every tap; a symptom is not a health
       // type, so this must not become a second record for the same day.
-      await controller.upsertDay(DayLog(
-        date: today(),
-        flow: FlowIntensity.medium,
-        symptoms: const {Symptom.cramps},
-      ));
+      await controller.upsertDay(
+        DayLog(
+          date: today(),
+          flow: FlowIntensity.medium,
+          symptoms: const {Symptom.cramps},
+        ),
+      );
       expect(sync.written, hasLength(1));
 
       // Changing the flow itself is a real change and does sync.
-      await controller.upsertDay(DayLog(
-        date: today(),
-        flow: FlowIntensity.heavy,
-        symptoms: const {Symptom.cramps},
-      ));
+      await controller.upsertDay(
+        DayLog(
+          date: today(),
+          flow: FlowIntensity.heavy,
+          symptoms: const {Symptom.cramps},
+        ),
+      );
       expect(sync.written, hasLength(2));
     });
 
@@ -134,7 +143,8 @@ void main() {
       // app launch, so an export the user had switched off kept running.
       controller.healthSync = null;
       await controller.upsertDay(
-          DayLog(date: today(), flow: FlowIntensity.medium));
+        DayLog(date: today(), flow: FlowIntensity.medium),
+      );
       expect(sync.written, isEmpty);
     });
 
@@ -142,16 +152,22 @@ void main() {
       final base = DayLog(date: today(), weightKg: 60);
       expect(
         HealthSyncService.exportedFieldsDiffer(
-            base, base.copyWith(mood: Mood.calm)),
+          base,
+          base.copyWith(mood: Mood.calm),
+        ),
         isFalse,
       );
       expect(
         HealthSyncService.exportedFieldsDiffer(
-            base, base.copyWith(weightKg: 61)),
+          base,
+          base.copyWith(weightKg: 61),
+        ),
         isTrue,
       );
-      expect(HealthSyncService.exportedFieldsDiffer(null, DayLog(date: today())),
-          isFalse);
+      expect(
+        HealthSyncService.exportedFieldsDiffer(null, DayLog(date: today())),
+        isFalse,
+      );
     });
   });
 
@@ -159,8 +175,9 @@ void main() {
     test('a whole import is one write, and existing days win', () async {
       final repo = _CountingRepository(InMemoryDayLogRepository());
       final controller = CycleController(repository: repo);
-      await controller
-          .upsertDay(DayLog(date: today(), flow: FlowIntensity.heavy));
+      await controller.upsertDay(
+        DayLog(date: today(), flow: FlowIntensity.heavy),
+      );
       repo.writes = 0;
 
       final added = await controller.addMissingDays([
@@ -170,8 +187,11 @@ void main() {
       ]);
 
       expect(added, 40);
-      expect(repo.writes, 1,
-          reason: 'per-row upsert re-encrypted the whole store 40 times');
+      expect(
+        repo.writes,
+        1,
+        reason: 'per-row upsert re-encrypted the whole store 40 times',
+      );
       expect(controller.logFor(today())?.flow, FlowIntensity.heavy);
     });
   });
@@ -186,11 +206,15 @@ void main() {
 
       double luminance(Color? c) => c!.computeLuminance();
 
-      expect(luminance(dark.textTheme.titleMedium?.color),
-          greaterThan(luminance(dark.colorScheme.surface)),
-          reason: 'dark-mode body ink must be lighter than the surface');
-      expect(luminance(light.textTheme.titleMedium?.color),
-          lessThan(luminance(light.colorScheme.surface)));
+      expect(
+        luminance(dark.textTheme.titleMedium?.color),
+        greaterThan(luminance(dark.colorScheme.surface)),
+        reason: 'dark-mode body ink must be lighter than the surface',
+      );
+      expect(
+        luminance(light.textTheme.titleMedium?.color),
+        lessThan(luminance(light.colorScheme.surface)),
+      );
     });
 
     test('chip labels keep the app font', () {
@@ -202,8 +226,11 @@ void main() {
         // fontSize is deliberately not asserted: Typography leaves it to
         // the Material defaults at this layer, so it is null here in a
         // perfectly healthy theme. The family is the thing that broke.
-        expect(label?.fontFamily, 'Quicksand',
-            reason: 'chip labels fell back to the platform font');
+        expect(
+          label?.fontFamily,
+          'Quicksand',
+          reason: 'chip labels fell back to the platform font',
+        );
       }
     });
 
@@ -211,8 +238,7 @@ void main() {
       // Selected chips were filled with primaryContainer, which is exactly
       // the flow card's own background — the selection disappeared into it.
       for (final theme in [buildAppTheme(), buildDarkAppTheme()]) {
-        final selected = theme.chipTheme.color
-            ?.resolve({WidgetState.selected});
+        final selected = theme.chipTheme.color?.resolve({WidgetState.selected});
         expect(selected, isNot(theme.colorScheme.primaryContainer));
       }
     });
@@ -223,9 +249,9 @@ void main() {
       // The controller was a lazy `late` field that build never touched for
       // Mascot.none, so dispose() was what first created it — building a
       // ticker against an already-deactivated element.
-      await tester.pumpWidget(const MaterialApp(
-        home: MascotAvatar(mascot: Mascot.none),
-      ));
+      await tester.pumpWidget(
+        const MaterialApp(home: MascotAvatar(mascot: Mascot.none)),
+      );
       await tester.pumpWidget(const MaterialApp(home: SizedBox()));
       expect(tester.takeException(), isNull);
     });
@@ -240,32 +266,36 @@ void main() {
       final conversation = AssistantConversation();
       addTearDown(conversation.dispose);
 
-      await tester.pumpWidget(MaterialApp(
-        home: ChangeNotifierProvider<AssistantConversation>.value(
-          value: conversation,
-          child: Builder(
-            builder: (context) => Scaffold(
-              body: TextButton(
-                onPressed: () {
-                  final held = context.read<AssistantConversation>();
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) =>
-                        ChangeNotifierProvider<AssistantConversation>.value(
-                      value: held,
-                      child: Builder(
-                        builder: (inner) => Text(
-                          '${inner.watch<AssistantConversation>().isEmpty}',
-                        ),
+      await tester.pumpWidget(
+        MaterialApp(
+          home: ChangeNotifierProvider<AssistantConversation>.value(
+            value: conversation,
+            child: Builder(
+              builder: (context) => Scaffold(
+                body: TextButton(
+                  onPressed: () {
+                    final held = context.read<AssistantConversation>();
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            ChangeNotifierProvider<AssistantConversation>.value(
+                              value: held,
+                              child: Builder(
+                                builder: (inner) => Text(
+                                  '${inner.watch<AssistantConversation>().isEmpty}',
+                                ),
+                              ),
+                            ),
                       ),
-                    ),
-                  ));
-                },
-                child: const Text('open'),
+                    );
+                  },
+                  child: const Text('open'),
+                ),
               ),
             ),
           ),
         ),
-      ));
+      );
 
       await tester.tap(find.text('open'));
       await tester.pumpAndSettle();

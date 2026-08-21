@@ -61,8 +61,7 @@ Set<int> _coveredCodepoints(File file) {
         if (rangeOffset == 0) {
           glyph = (c + delta) & 0xFFFF;
         } else {
-          final index =
-              rangeOffsets + seg * 2 + rangeOffset + (c - start) * 2;
+          final index = rangeOffsets + seg * 2 + rangeOffset + (c - start) * 2;
           if (index + 1 >= bytes.length) continue;
           glyph = data.getUint16(index);
           if (glyph != 0) glyph = (glyph + delta) & 0xFFFF;
@@ -112,9 +111,13 @@ void main() {
       if (!covers(text)) broken.add(language);
     });
 
-    expect(broken, isEmpty,
-        reason: 'the report font cannot render: $broken — these languages '
-            'would print crossed boxes in the doctor report');
+    expect(
+      broken,
+      isEmpty,
+      reason:
+          'the report font cannot render: $broken — these languages '
+          'would print crossed boxes in the doctor report',
+    );
   });
 
   test('a report built with the font renders without placeholders', () {
@@ -129,9 +132,13 @@ void main() {
     expect(theme.defaultTextStyle.font, isNotNull);
     expect(theme.defaultTextStyle.fontNormal, isNotNull);
     for (final rune in 'Akış Baş ağrısı'.runes) {
-      expect(quicksandGlyphs.contains(rune), isTrue,
-          reason: 'U+${rune.toRadixString(16).padLeft(4, '0')} would print '
-              'as a box');
+      expect(
+        quicksandGlyphs.contains(rune),
+        isTrue,
+        reason:
+            'U+${rune.toRadixString(16).padLeft(4, '0')} would print '
+            'as a box',
+      );
     }
   });
 
@@ -157,10 +164,14 @@ void main() {
     };
 
     for (final entry in uncovered.entries) {
-      expect(covers(entry.value), isFalse,
-          reason: '${entry.key} is now covered by the bundled font — remove '
-              'it from this list and from the caveat in '
-              'ExportScreen._loadReportFonts');
+      expect(
+        covers(entry.value),
+        isFalse,
+        reason:
+            '${entry.key} is now covered by the bundled font — remove '
+            'it from this list and from the caveat in '
+            'ExportScreen._loadReportFonts',
+      );
     }
   });
 }

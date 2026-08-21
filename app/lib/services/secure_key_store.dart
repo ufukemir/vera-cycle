@@ -15,7 +15,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 /// disk.
 class SecureKeyStore {
   SecureKeyStore({FlutterSecureStorage? storage})
-      : _storage = storage ?? const FlutterSecureStorage(iOptions: iosOptions);
+    : _storage = storage ?? const FlutterSecureStorage(iOptions: iosOptions);
 
   /// `first_unlock_this_device` rather than the plugin's default.
   ///
@@ -27,8 +27,9 @@ class SecureKeyStore {
   /// to this phone; `first_unlock` (not `unlocked`) is required so a
   /// notification or widget refresh can still read data before the first
   /// manual unlock after a reboot.
-  static const iosOptions =
-      IOSOptions(accessibility: KeychainAccessibility.first_unlock_this_device);
+  static const iosOptions = IOSOptions(
+    accessibility: KeychainAccessibility.first_unlock_this_device,
+  );
 
   static const _keyName = 'cycle_data_key_v1';
 

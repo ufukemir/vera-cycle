@@ -24,6 +24,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get actionCancel => 'Vazgeç';
 
   @override
+  String get actionClear => 'Temizle';
+
+  @override
   String get actionDelete => 'Sil';
 
   @override
@@ -74,7 +77,28 @@ class AppLocalizationsTr extends AppLocalizations {
   String get lockScreenUseBiometrics => 'Biyometri kullan';
 
   @override
+  String get lockScreenUseFaceId => 'Face ID kullan';
+
+  @override
+  String get lockScreenUseFingerprint => 'Parmak izi kullan';
+
+  @override
   String get lockScreenForgotPin => 'PIN\'ini mi unuttun?';
+
+  @override
+  String get lockScreenForgotPinChoiceTitle =>
+      'PIN\'ini nasıl sıfırlamak istersin?';
+
+  @override
+  String get lockScreenResetViaDevice => 'Cihazla doğrula';
+
+  @override
+  String get lockScreenResetViaDeviceBody =>
+      'Verilerin kalır. Telefonunun kendi kilidiyle (Face ID, parmak izi veya şifre) doğrulaman yeterli.';
+
+  @override
+  String get lockScreenResetViaDeviceReason =>
+      'Yeni bir PIN belirlemek için doğrula';
 
   @override
   String lockScreenThrottled(int seconds) {
@@ -219,6 +243,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get navSettings => 'Ayarlar';
 
   @override
+  String get navReminders => 'Hatırlatmalar';
+
+  @override
+  String get navProfile => 'Profilim';
+
+  @override
   String get navTrack => 'Takip et';
 
   @override
@@ -343,6 +373,75 @@ class AppLocalizationsTr extends AppLocalizations {
   String get symptomDizziness => 'Baş dönmesi';
 
   @override
+  String get symptomMigraine => 'Migren';
+
+  @override
+  String get symptomHighFever => 'Yüksek ateş';
+
+  @override
+  String get symptomNeckPain => 'Boyun ağrısı';
+
+  @override
+  String get symptomShoulderPain => 'Omuz ağrısı';
+
+  @override
+  String get symptomLimbPain => 'Uzuv ağrıları';
+
+  @override
+  String get symptomMuscleAche => 'Kas ağrısı';
+
+  @override
+  String get symptomChills => 'Üşüme';
+
+  @override
+  String get symptomNightSweats => 'Gece terlemesi';
+
+  @override
+  String get symptomHotFlashes => 'Ateş basması';
+
+  @override
+  String get symptomWeightGain => 'Kilo alımı';
+
+  @override
+  String get symptomConstipation => 'Kabızlık';
+
+  @override
+  String get symptomDiarrhea => 'İshal';
+
+  @override
+  String get symptomIndigestion => 'Hazımsızlık';
+
+  @override
+  String get symptomGasPain => 'Gaz sancısı';
+
+  @override
+  String get symptomFeelingUnwell => 'Kendini iyi hissetmeme';
+
+  @override
+  String get symptomItching => 'Kaşıntı';
+
+  @override
+  String get symptomTroubleFocusing => 'Odaklanma güçlüğü';
+
+  @override
+  String get symptomForgetfulness => 'Unutkanlık';
+
+  @override
+  String get symptomGroupHead => 'Baş';
+
+  @override
+  String get symptomGroupBody => 'Gövde';
+
+  @override
+  String get symptomGroupAbdomen => 'Karın';
+
+  @override
+  String get symptomGroupGeneral => 'Genel';
+
+  @override
+  String get symptomGroupCognitive => 'Zihinsel';
+
+  @override
   String get dayLogMoodLabel => 'Ruh hali';
 
   @override
@@ -374,6 +473,54 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get moodEmotional => 'Duygusal';
+
+  @override
+  String get moodExcited => 'Heyecanlı';
+
+  @override
+  String get moodHopeful => 'Umutlu';
+
+  @override
+  String get moodProud => 'Gururlu';
+
+  @override
+  String get moodDisappointed => 'Hayal kırıklığına uğramış';
+
+  @override
+  String get moodConfident => 'Özgüvenli';
+
+  @override
+  String get moodSurprised => 'Şaşırmış';
+
+  @override
+  String get moodIndifferent => 'Kayıtsız';
+
+  @override
+  String get moodPeaceful => 'Huzurlu';
+
+  @override
+  String get moodInLove => 'Aşık';
+
+  @override
+  String get moodShy => 'Utangaç';
+
+  @override
+  String get moodPlayful => 'Şakacı';
+
+  @override
+  String get moodExhausted => 'Bitkin';
+
+  @override
+  String get moodLonely => 'Yalnız';
+
+  @override
+  String get moodOverwhelmed => 'Bunalmış';
+
+  @override
+  String get moodGrateful => 'Minnettar';
+
+  @override
+  String get moodNostalgic => 'Nostaljik';
 
   @override
   String get dayLogNoteLabel => 'Not';
@@ -548,6 +695,86 @@ class AppLocalizationsTr extends AppLocalizations {
   String get settingsLanguageUrdu => 'اردو';
 
   @override
+  String get settingsLanguageDutch => 'Nederlands';
+
+  @override
+  String get settingsLanguageSwedish => 'Svenska';
+
+  @override
+  String get settingsLanguageNorwegian => 'Norsk bokmål';
+
+  @override
+  String get settingsLanguageDanish => 'Dansk';
+
+  @override
+  String get settingsLanguagePolish => 'Polski';
+
+  @override
+  String get settingsLanguageUkrainian => 'Українська';
+
+  @override
+  String get settingsLanguageCzech => 'Čeština';
+
+  @override
+  String get settingsLanguageHungarian => 'Magyar';
+
+  @override
+  String get settingsLanguageRomanian => 'Română';
+
+  @override
+  String get settingsLanguageFinnish => 'Suomi';
+
+  @override
+  String get settingsLanguageGreek => 'Ελληνικά';
+
+  @override
+  String get settingsLanguageMalay => 'Bahasa Melayu';
+
+  @override
+  String get tourSkip => 'Atla';
+
+  @override
+  String get tourNext => 'İleri';
+
+  @override
+  String get tourStart => 'Başlayalım';
+
+  @override
+  String get tourHomeTitle => 'Ana Sayfa';
+
+  @override
+  String get tourHomeBody =>
+      'Bugün nerede olduğunu bir bakışta gör — döngü günün, tahmini pencerene kalan süre ve yol arkadaşın hep burada.';
+
+  @override
+  String get tourCalendarTitle => 'Takvim';
+
+  @override
+  String get tourCalendarBody =>
+      'Geçmiş ve gelecek döngülerini takvimde gör. Herhangi bir güne dokunup o günün kaydını aç.';
+
+  @override
+  String get tourTrackTitle => 'Kaydet';
+
+  @override
+  String get tourTrackBody =>
+      'Ortadaki + düğmesi nerede olursan ol bugünün kaydını açar — akış, semptomlar, ruh hali ve daha fazlası.';
+
+  @override
+  String get tourRemindersTitle => 'Hatırlatmalar';
+
+  @override
+  String get tourRemindersBody =>
+      'Yaklaşan reglin, ilaçların ya da su içmen için hatırlatıcılar kur — hepsi telefonunda kalır, hiçbir yere gönderilmez.';
+
+  @override
+  String get tourProfileTitle => 'Profilim';
+
+  @override
+  String get tourProfileBody =>
+      'İçgörülerini, takip ettiğin her şeyi ve ayarlarını burada bul.';
+
+  @override
   String get settingsWeekStartLabel => 'Hafta başlangıcı';
 
   @override
@@ -572,6 +799,320 @@ class AppLocalizationsTr extends AppLocalizations {
   String get remindersScreenTitle => 'Hatırlatıcılar';
 
   @override
+  String get reminderDetailNotification => 'Bildirim';
+
+  @override
+  String get reminderDetailAlert => 'Uyarı';
+
+  @override
+  String get reminderDetailAlertToday => 'Gününde';
+
+  @override
+  String get reminderDetailTime => 'Zaman';
+
+  @override
+  String get reminderDetailMessage => 'Mesaj';
+
+  @override
+  String get reminderDetailMessageEditTitle => 'Mesajı düzenle';
+
+  @override
+  String get reminderDetailMessageHint => 'Kendi mesajını yaz';
+
+  @override
+  String reminderDetailAlertDaysBefore(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count gün önce',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String optionsShowMore(int count) {
+    return '+$count tane daha';
+  }
+
+  @override
+  String get optionsShowLess => 'Daha az göster';
+
+  @override
+  String get trackerHistoryEntry => 'Geçmiş';
+
+  @override
+  String get actionSend => 'Gönder';
+
+  @override
+  String get actionRemove => 'Kaldır';
+
+  @override
+  String get feedbackEntry => 'Geri Bildirim';
+
+  @override
+  String get cloudBackupEntry => 'Hesapla Yedekle';
+
+  @override
+  String get cloudBackupTitle => 'Hesapla Yedekle';
+
+  @override
+  String get cloudBackupNotConfiguredTitle => 'Bu sürümde henüz kullanılamıyor';
+
+  @override
+  String get cloudBackupNotConfiguredBody =>
+      'Hesapla yedekleme, bu sürüm için henüz kurulmamış bir hesap servisine ihtiyaç duyuyor. Kurulana kadar burada hiçbir şey kullanılamaz.';
+
+  @override
+  String get cloudBackupIntro1Title => 'Geçmişini asla kaybetme';
+
+  @override
+  String get cloudBackupIntro1Body =>
+      'Telefonunu kaybetsen ya da yenisine geçsen bile döngü geçmişin güvende kalır.';
+
+  @override
+  String get cloudBackupIntro2Title => 'Yalnızca sen açabilirsin';
+
+  @override
+  String get cloudBackupIntro2Body =>
+      'Yedeğin telefonundan çıkmadan önce bir parolayla şifrelenir — biz okuyamayız, başka kimse de okuyamaz.';
+
+  @override
+  String get cloudBackupIntro3Title => 'Saniyeler içinde geri getir';
+
+  @override
+  String get cloudBackupIntro3Body =>
+      'Yeni bir cihazda giriş yap ve aynı parolayla geçmişini geri getir.';
+
+  @override
+  String get cloudBackupSignedInTitle => 'Giriş yapıldı';
+
+  @override
+  String get cloudBackupUploadButton => 'Şimdi yedekle';
+
+  @override
+  String get cloudBackupDownloadButton => 'Buluttan geri getir';
+
+  @override
+  String get cloudBackupUploadSuccess => 'Hesabına yedeklendi';
+
+  @override
+  String get cloudBackupNoBackupFound =>
+      'Bu hesap için henüz bulut yedeği yok.';
+
+  @override
+  String get partnerModeEntry => 'Partner Modu';
+
+  @override
+  String get partnerModeTitle => 'Partner Modu';
+
+  @override
+  String get partnerModeNotConfiguredTitle => 'Bu sürümde henüz kullanılamıyor';
+
+  @override
+  String get partnerModeNotConfiguredBody =>
+      'Partner Modu, bu sürüm için henüz kurulmamış bir hesap servisine ihtiyaç duyuyor. Kurulana kadar burada hiçbir şey kullanılamaz.';
+
+  @override
+  String get partnerModeHeroTitle => 'Az ama kendi şartlarında paylaş';
+
+  @override
+  String get partnerModeHeroBody =>
+      'Partnerinle eşleş ve yalnızca aşağıda açtığın şeyleri paylaş — asla tüm geçmişini, asla otomatik olarak.';
+
+  @override
+  String get partnerModeSignInGoogle => 'Google ile devam et';
+
+  @override
+  String get partnerModeSignInApple => 'Apple ile devam et';
+
+  @override
+  String get partnerModeFaqTitle => 'Giriş yapmadan önce';
+
+  @override
+  String get partnerModeFaq1Q => 'Partnerim gerçekte ne görecek?';
+
+  @override
+  String get partnerModeFaq1A =>
+      'Yalnızca Partner Modu\'nda açtığın alanları, yalnızca o anki anlık görünümünü — asla kayıtlı geçmişini, asla açıkça paylaşmadığın hiçbir şeyi.';
+
+  @override
+  String get partnerModeFaq2Q => 'Bunu sonra kapatabilir miyim?';
+
+  @override
+  String get partnerModeFaq2A =>
+      'Evet. Eşleşmeyi kaldırmak paylaşımı ikinizde de anında bitirir; eşleşmeyi bozmadan istediğin zaman tek tek alanları da kapatabilirsin.';
+
+  @override
+  String get partnerModeFaq3Q =>
+      'Partnerimin de bu uygulamaya ihtiyacı var mı?';
+
+  @override
+  String get partnerModeFaq3A =>
+      'Evet — aynı şekilde giriş yapar ve ona gönderdiğin bir kodla eşleşir.';
+
+  @override
+  String get partnerModeNotPairedTitle => 'Henüz eşleşmedin';
+
+  @override
+  String get partnerModeNotPairedBody =>
+      'Partnerini tek kullanımlık bir kodla davet et, ya da sana gönderdiği kodu gir.';
+
+  @override
+  String get partnerModeInviteButton => 'Partnerimi davet et';
+
+  @override
+  String get partnerModeEnterCodeButton => 'Kod gir';
+
+  @override
+  String get partnerModeSignOut => 'Çıkış yap';
+
+  @override
+  String get partnerModePairedTitle => 'Eşleşti';
+
+  @override
+  String get partnerModePairedBody =>
+      'Sen ve partnerin bağlandınız. Paylaşım yine yalnızca aşağıda açtığın şeylerle sınırlı.';
+
+  @override
+  String get partnerModeShareSectionTitle => 'Neyi paylaşıyorsun';
+
+  @override
+  String get partnerModeShareCyclePhase => 'Döngü evresi ve günü';
+
+  @override
+  String get partnerModeShareMood => 'Bugünkü ruh halin';
+
+  @override
+  String get partnerModeShareSymptoms => 'Bugünkü belirtilerin';
+
+  @override
+  String get partnerModeShareHighDesire => 'Bugün yakınlık hissi';
+
+  @override
+  String get partnerModeShareNow => 'Şimdi paylaş';
+
+  @override
+  String get partnerModeShareSuccess => 'Partnerinle paylaşıldı';
+
+  @override
+  String get partnerModeUnpair => 'Eşleşmeyi kaldır';
+
+  @override
+  String get partnerModeUnpairConfirmTitle =>
+      'Partnerinle eşleşme kaldırılsın mı?';
+
+  @override
+  String get partnerModeUnpairConfirmBody =>
+      'Bu, paylaşımı ikinizde de anında bitirir. Daha sonra yeni bir kodla tekrar eşleşebilirsin.';
+
+  @override
+  String get partnerModePartnerSnapshotEmpty =>
+      'Partnerin henüz bir şey paylaşmadı.';
+
+  @override
+  String get partnerModeErrorNotConfigured =>
+      'Partner Modu bu sürümde henüz kurulmadı.';
+
+  @override
+  String get partnerModeErrorCodeNotFound =>
+      'Bu kod bulunamadı. Kontrol edip tekrar dene.';
+
+  @override
+  String get partnerModeErrorCodeExpired =>
+      'Bu kodun süresi doldu. Yeni bir kod iste.';
+
+  @override
+  String get partnerModeErrorCodeIsOwn =>
+      'Bu senin kendi kodun — partnerinden kendi kodunu iste.';
+
+  @override
+  String get partnerModeErrorNotSignedIn => 'Önce giriş yap.';
+
+  @override
+  String get partnerModeErrorUnknown =>
+      'Bir şeyler ters gitti. Lütfen tekrar dene.';
+
+  @override
+  String get partnerModeInviteTitle => 'Partnerini davet et';
+
+  @override
+  String get partnerModeInviteBody =>
+      'Bu kodu partnerine gönder. Seninle eşleşmek için kendi uygulamasında bu kodu girecek.';
+
+  @override
+  String get partnerModeInviteExpiry => '7 gün geçerli';
+
+  @override
+  String get partnerModeInviteShare => 'Kodu paylaş';
+
+  @override
+  String partnerModeInviteMessage(String code) {
+    return 'İşte Vera eşleşme kodum: $code';
+  }
+
+  @override
+  String get partnerModeEnterTitle => 'Kod gir';
+
+  @override
+  String get partnerModeEnterBody => 'Partnerinin sana gönderdiği kodu gir.';
+
+  @override
+  String get partnerModeEnterHint => '6 karakterli kod';
+
+  @override
+  String get partnerModeEnterSubmit => 'Eşleş';
+
+  @override
+  String get homeInvitePartnerTitle => 'Partnerinle paylaş';
+
+  @override
+  String get homeInvitePartnerBody =>
+      'Eşleş ve yalnızca seçtiğini paylaş — geçmişin sende kalır.';
+
+  @override
+  String get homeInvitePartnerCta => 'Partner Modu\'nu kur';
+
+  @override
+  String get feedbackTitle => 'Neyi beğenmedin?';
+
+  @override
+  String get feedbackSubtitle => 'Bir konu seç, istersen detay da yaz.';
+
+  @override
+  String get feedbackCategoryPredictions => 'Tahminler';
+
+  @override
+  String get feedbackCategoryBackup => 'Yedekleme';
+
+  @override
+  String get feedbackCategorySubscription => 'Abonelik';
+
+  @override
+  String get feedbackCategoryAds => 'Reklamlar';
+
+  @override
+  String get feedbackCategoryDesign => 'Tasarım';
+
+  @override
+  String get feedbackCategoryTranslation => 'Çeviri';
+
+  @override
+  String get feedbackCategoryOther => 'Diğer';
+
+  @override
+  String get feedbackDescriptionLabel => 'Anlat bize (isteğe bağlı)';
+
+  @override
+  String get feedbackDescriptionHint =>
+      'Ne oldu? Gönder\'e dokununca nereden paylaşacağını (e-posta uygulaman dahil) sen seçersin.';
+
+  @override
+  String get feedbackAttachPhoto => 'Fotoğraf ekle';
+
+  @override
+  String get feedbackPhotoAttached => 'Fotoğraf eklendi';
+
+  @override
   String get remindersGroupCycle => 'Regl ve doğurganlık';
 
   @override
@@ -581,7 +1122,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get remindersGroupLifestyle => 'Yaşam tarzı';
 
   @override
-  String get remindersGroupAppointment => 'Randevular';
+  String get remindersGroupAppointment => 'Doktor randevuları';
 
   @override
   String get settingsRemindersPeriodEndLabel =>
@@ -594,7 +1135,8 @@ class AppLocalizationsTr extends AppLocalizations {
   String get settingsRemindersWaterLabel => 'Su hatırlatıcısı';
 
   @override
-  String get settingsRemindersAppointmentLabel => 'Randevu hatırlatıcısı';
+  String get settingsRemindersAppointmentLabel =>
+      'Doktor randevusu hatırlatıcısı';
 
   @override
   String get settingsRemindersAppointmentSet => 'Tarih ve saat belirle';
@@ -626,6 +1168,22 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get settingsPrivacyEntry => 'Mahremiyet';
+
+  @override
+  String get settingsRateEntry => 'Bizi değerlendir';
+
+  @override
+  String get rateAppTitle => 'Vera işine yarıyor mu?';
+
+  @override
+  String get rateAppBody =>
+      'Öyleyse mağazada birkaç saniyeni ayırıp değerlendirmen, Vera\'yı arayan başkalarının da bulmasına yardımcı olur.';
+
+  @override
+  String get rateAppCta => 'Değerlendir';
+
+  @override
+  String get rateAppDismiss => 'Şimdi değil';
 
   @override
   String get settingsDeleteAllData => 'Tüm veriyi sil';
@@ -705,10 +1263,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get reminderWaterBody => 'Küçük bir su hatırlatıcısı.';
 
   @override
-  String get reminderAppointmentTitle => 'Yaklaşan randevu';
+  String get reminderAppointmentTitle => 'Yaklaşan doktor randevusu';
 
   @override
-  String get reminderAppointmentBody => 'Yaklaşan bir randevun var.';
+  String get reminderAppointmentBody => 'Yaklaşan bir doktor randevun var.';
 
   @override
   String get settingsExportEntry => 'Dışa aktarma & yedekleme';
@@ -1301,6 +1859,10 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
+  String get trackerLowSampleNote =>
+      'Az kayıtla yüzdeler henüz güvenilir değil — birkaç kayıt daha eklendikçe netleşecek.';
+
+  @override
   String get assistantTyping => 'Vera yazıyor…';
 
   @override
@@ -1398,6 +1960,33 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get pregnancyDisclaimer =>
       'Tarihler, son adetinden standart 280 günlük kurala göre tahmin edilir. Ultrason daha doğru tarih verir ve geç ovülasyon bu sayıları kaydırır — bu bilgilendirmedir, tıbbi takip değildir.';
+
+  @override
+  String get pregnancySizeLabel => 'Bebeğinin büyüklüğü';
+
+  @override
+  String get pregnancySizeUnder5 => 'Haşhaş tohumu (~2 mm)';
+
+  @override
+  String get pregnancySizeUnder9 => 'Yaban mersini (~1.6 cm)';
+
+  @override
+  String get pregnancySizeUnder13 => 'Misket limonu (~5.4 cm)';
+
+  @override
+  String get pregnancySizeUnder20 => 'Avokado (~11.6 cm)';
+
+  @override
+  String get pregnancySizeUnder28 => 'Mango (~30 cm)';
+
+  @override
+  String get pregnancySizeUnder34 => 'Ananas (~44 cm)';
+
+  @override
+  String get pregnancySizeUnder38 => 'Kavun (~46 cm)';
+
+  @override
+  String get pregnancySizeTerm => 'Küçük bir karpuz (~51 cm)';
 
   @override
   String get pregnancyNoteUnder5 =>
@@ -1906,13 +2495,34 @@ class AppLocalizationsTr extends AppLocalizations {
   String get homeThemeBloom => 'Çiçeklenme';
 
   @override
+  String get homeThemeOcean => 'Deniz';
+
+  @override
+  String get homeThemeAutumn => 'Sonbahar';
+
+  @override
+  String get homeThemeNight => 'Gece';
+
+  @override
   String get mascotStar => 'Yıldız';
 
   @override
   String get mascotLeaf => 'Yaprak';
 
   @override
+  String get mascotCat => 'Kedi';
+
+  @override
+  String get mascotRabbit => 'Tavşan';
+
+  @override
+  String get mascotBird => 'Kuş';
+
+  @override
   String get tipDetailWhatsHappening => 'Şu an bedeninde ne oluyor?';
+
+  @override
+  String get tipDetailGeneralHeading => 'Genel öneriler';
 
   @override
   String get tipDetailDisclaimer =>
@@ -1977,4 +2587,47 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get tipNutritionDetailUnknown =>
       'Evreden bağımsız olarak en çok işe yarayan şeyler aynı: düzenli öğünler, yeterli protein, bol sebze, yeterli su ve demir açısından zengin gıdalar. Regl döneminde demir kaybı arttığı için o günlerde biraz daha dikkat etmek yeterli; ayın her haftası için ayrı bir beslenme düzenine gerek yok. Enerjinin dengeli kalmasında, öğünleri kabaca aynı saatlerde yemek, tek tek besinlerin hepsinden daha çok işe yarar ve sağlıklı bir döngü için hiçbir gıdayı hayatından çıkarman gerekmez. Birkaç döngü kaydettikten sonra burada kendi evrene özel öneriler göreceksin.';
+
+  @override
+  String get tipSleepLabel => 'Uyku';
+
+  @override
+  String get tipSleepMenstrual =>
+      'Kramp ve rahatsızlık uykuyu bölebilir; yatmadan önce sıcak bir duş veya ısı yastığı bazı kişilere yardımcı olabilir.';
+
+  @override
+  String get tipSleepFollicular =>
+      'Enerji ve uyanıklık genelde arttığı için bu dönemde uyku ihtiyacın biraz azalmış hissedebilir — yine de düzenli saatler faydalı.';
+
+  @override
+  String get tipSleepFertile =>
+      'Vücut ısındaki hafif yükselme bazılarında uykuya dalmayı biraz zorlaştırabilir; serin bir oda işe yarayabilir.';
+
+  @override
+  String get tipSleepLuteal =>
+      'Progesteron vücut ısını hafifçe yükseltir ve derin uykuyu bölebilir; serin, karanlık bir oda ve düzenli yatış saati bu evrede özellikle işe yarayabilir.';
+
+  @override
+  String get tipSleepUnknown =>
+      'Uyku kalitesi döngünün her evresinde farklı hissedebilir; düzenli bir yatış saati evreden bağımsız en güvenilir temel.';
+
+  @override
+  String get tipSleepDetailMenstrual =>
+      'Regl döneminde uyku sıklıkla bölünür — kramplar, rahatsızlık ve bazı kişilerde artan tuvalet ihtiyacı gece boyu uyanmalara yol açabilir. Prostaglandinler hem krampların hem bu uyku bölünmesinin bir parçası olabilir. Yatmadan önce sıcak bir duş, ısı yastığı veya hafif esneme bazı kişilerde krampları hafifletip uykuya geçişi kolaylaştırabilir. Ağrı kesici kullanıyorsan, etkisi geceye yayılacak şekilde zamanlaması ilk uyku saatlerini koruyabilir. Uyku hâlâ zorlanıyorsa bu normaldir — evre geçtikçe genelde kendiliğinden düzelir.';
+
+  @override
+  String get tipSleepDetailFollicular =>
+      'Östrojenin yükseldiği bu evrede birçok kişi kendini daha uyanık ve enerjik hisseder, bu bazen uyku ihtiyacının azaldığı hissini verir. Bu, daha az uykuya ihtiyacın olduğu anlamına gelmez — sadece uyanıklığın daha kolay geldiği anlamına gelir. Düzenli bir yatış saatini korumak, sonraki evrelerde uyku daha kırılgan hâle geldiğinde faydasını gösterir. Bu dönem yeni bir uyku rutini denemek için görece kolay bir zaman olabilir, çünkü vücut değişime karşı daha az dirençli hissedebilir.';
+
+  @override
+  String get tipSleepDetailFertile =>
+      'Ovülasyona yakın vücut ısısındaki hafif yükseliş bazı kişilerde uykuya dalmayı biraz zorlaştırabilir, çünkü vücut doğal olarak uykudan önce soğumak ister. Serin bir oda, hafif bir yorgan veya yatmadan önce ılık bir duş bu etkiyi dengeleyebilir. Bu evrede cinsel istek ve sosyal enerjinin arttığını fark eden kişiler için geç saatlere kadar uyanık kalma isteği de uyku saatini kaydırabilir — bu bir sorun değil, sadece fark edilmeye değer bir örüntü.';
+
+  @override
+  String get tipSleepDetailLuteal =>
+      'Ovülasyondan sonra yükselen progesteron vücudun dinlenme ısısını hafifçe artırır ve bu derin uykunun kalitesini düşürebilir — sıcak basması gibi hissedilebilir veya sadece \'uyku eskisi kadar dinlendirici değil\' hissi olarak fark edilebilir. Regl yaklaşırken buna adet öncesi gerginlik de eklenebilir. Serin, karanlık bir oda, yatmadan önce az ekran süresi ve düzenli bir yatış saati bu evrede özellikle işe yarar. Uyku hâlâ zorsa bu bir başarısızlık değil, evrenin beklenen bir parçasıdır.';
+
+  @override
+  String get tipSleepDetailUnknown =>
+      'Şu an hangi evrede olduğunu söylemek için yeterli veri olmasa da, uyku kalitesinin döngü boyunca dalgalanması yaygın bir örüntüdür — genelde regl öncesi ve sırasında daha kırılgan, döngünün ilk yarısında daha kararlı olur. Evreden bağımsız en güvenilir temel: düzenli bir yatış-kalkış saati, yatmadan önce az ekran süresi ve serin/karanlık bir oda. Birkaç döngü kaydettikten sonra burada kendi örüntünle ilgili daha özel gözlemler göreceksin.';
 }

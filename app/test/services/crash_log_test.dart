@@ -61,8 +61,7 @@ void main() {
     final log = await CrashLog.instance.read();
     // The oldest are dropped, the newest survive.
     expect(log, isNot(contains('error 0')));
-    expect(log,
-        contains('error ${CrashLog.maxEntries + 6}'));
+    expect(log, contains('error ${CrashLog.maxEntries + 6}'));
   });
 
   test('truncates a huge stack instead of writing it whole', () async {
@@ -94,8 +93,11 @@ void main() {
 
     await CrashLog.instance.record(StateError('boom'), StackTrace.empty);
     expect(recorder.paths.single, endsWith('vera_diagnostics.log'));
-    expect(File(recorder.paths.single).existsSync(), isTrue,
-        reason: 'the attribute is applied after the write, not before');
+    expect(
+      File(recorder.paths.single).existsSync(),
+      isTrue,
+      reason: 'the attribute is applied after the write, not before',
+    );
 
     // Re-applied on every append, not only on the first one.
     await CrashLog.instance.record(StateError('again'), StackTrace.empty);

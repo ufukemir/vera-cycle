@@ -25,6 +25,12 @@ String? homeThemeAsset(HomeTheme theme) {
       return 'assets/photos/theme_petal.jpg';
     case HomeTheme.bloom:
       return 'assets/photos/theme_bloom.jpg';
+    case HomeTheme.ocean:
+      return 'assets/photos/theme_ocean.jpg';
+    case HomeTheme.autumn:
+      return 'assets/photos/theme_autumn.jpg';
+    case HomeTheme.night:
+      return 'assets/photos/theme_night.jpg';
   }
 }
 
@@ -87,8 +93,10 @@ class HomeHero extends StatelessWidget {
     // list of cards under it; it is now the screen you land on, so it has to
     // hold the eye on its own. Clamped at both ends so a small phone still
     // shows the card beneath and a tall one does not turn it into a poster.
-    final height =
-        (MediaQuery.sizeOf(context).height * 0.52).clamp(330.0, 480.0);
+    final height = (MediaQuery.sizeOf(context).height * 0.52).clamp(
+      330.0,
+      480.0,
+    );
     final topInset = MediaQuery.paddingOf(context).top;
 
     return SizedBox(
@@ -110,7 +118,11 @@ class HomeHero extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   stops: [0, 0.45, 1],
-                  colors: [Color(0x40000000), Color(0x1A000000), Color(0xB3000000)],
+                  colors: [
+                    Color(0x40000000),
+                    Color(0x1A000000),
+                    Color(0xB3000000),
+                  ],
                 ),
               ),
             ),
@@ -152,19 +164,19 @@ class HomeHero extends StatelessWidget {
                     eyebrow,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: textColor.withValues(alpha: 0.92),
-                          letterSpacing: 0.4,
-                        ),
+                      color: textColor.withValues(alpha: 0.92),
+                      letterSpacing: 0.4,
+                    ),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     headline,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                          color: textColor,
-                          fontWeight: FontWeight.w600,
-                          height: 1.05,
-                        ),
+                      color: textColor,
+                      fontWeight: FontWeight.w600,
+                      height: 1.05,
+                    ),
                   ),
                   if (secondary != null) ...[
                     const SizedBox(height: 6),
@@ -172,20 +184,22 @@ class HomeHero extends StatelessWidget {
                       secondary!,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: textColor.withValues(alpha: 0.92),
-                          ),
+                        color: textColor.withValues(alpha: 0.92),
+                      ),
                     ),
                   ],
                   const SizedBox(height: 20),
                   FilledButton(
                     onPressed: onCtaPressed,
                     style: FilledButton.styleFrom(
-                      backgroundColor:
-                          onPhoto ? Colors.white : scheme.primary,
-                      foregroundColor:
-                          onPhoto ? scheme.primary : scheme.onPrimary,
+                      backgroundColor: onPhoto ? Colors.white : scheme.primary,
+                      foregroundColor: onPhoto
+                          ? scheme.primary
+                          : scheme.onPrimary,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 28, vertical: 16),
+                        horizontal: 28,
+                        vertical: 16,
+                      ),
                     ),
                     child: Text(ctaLabel),
                   ),
@@ -202,9 +216,9 @@ class HomeHero extends StatelessWidget {
 /// Fallback gradient for [HomeTheme.plain].
 class AppPaletteGradient extends LinearGradient {
   const AppPaletteGradient()
-      : super(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: const [Color(0xFFFFD9E4), Color(0xFFFFE3D4)],
-        );
+    : super(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: const [Color(0xFFFFD9E4), Color(0xFFFFE3D4)],
+      );
 }

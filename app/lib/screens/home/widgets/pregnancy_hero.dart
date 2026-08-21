@@ -33,10 +33,14 @@ class PregnancyHero extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
-    final dateFmt = DateFormat.yMMMMd(Localizations.localeOf(context).toString());
+    final dateFmt = DateFormat.yMMMMd(
+      Localizations.localeOf(context).toString(),
+    );
     final daysLeft = info.daysUntilDue();
-    final height =
-        (MediaQuery.sizeOf(context).height * 0.52).clamp(330.0, 480.0);
+    final height = (MediaQuery.sizeOf(context).height * 0.52).clamp(
+      330.0,
+      480.0,
+    );
     final topInset = MediaQuery.paddingOf(context).top;
 
     return SizedBox(
@@ -109,8 +113,9 @@ class PregnancyHero extends StatelessWidget {
                     '${l10n.pregnancyDueDateLabel}: '
                     '${dateFmt.format(info.dueDate)}',
                     textAlign: TextAlign.center,
-                    style: theme.textTheme.bodyLarge
-                        ?.copyWith(color: Colors.white.withValues(alpha: 0.92)),
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      color: Colors.white.withValues(alpha: 0.92),
+                    ),
                   ),
                   if (daysLeft > 0) ...[
                     const SizedBox(height: 2),
@@ -118,7 +123,8 @@ class PregnancyHero extends StatelessWidget {
                       l10n.pregnancyDaysLeft(daysLeft),
                       textAlign: TextAlign.center,
                       style: theme.textTheme.bodyMedium?.copyWith(
-                          color: Colors.white.withValues(alpha: 0.8)),
+                        color: Colors.white.withValues(alpha: 0.8),
+                      ),
                     ),
                   ],
                 ],
@@ -135,8 +141,7 @@ class PregnancyHero extends StatelessWidget {
                 value: info.progress,
                 minHeight: 8,
                 backgroundColor: Colors.white.withValues(alpha: 0.28),
-                valueColor:
-                    const AlwaysStoppedAnimation<Color>(Colors.white),
+                valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
               ),
             ),
           ),

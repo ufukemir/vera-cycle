@@ -15,6 +15,8 @@ import 'package:cycle_app/services/reminder_service.dart';
 import 'package:cycle_app/state/app_preferences.dart';
 import 'package:cycle_app/state/assistant_conversation.dart';
 import 'package:cycle_app/state/cycle_controller.dart';
+import 'package:cycle_app/state/cloud_backup_controller.dart';
+import 'package:cycle_app/state/partner_controller.dart';
 import 'package:cycle_app/theme/app_theme.dart';
 import 'package:cycle_app/util/day.dart';
 import 'package:flutter/material.dart';
@@ -35,11 +37,13 @@ Future<Widget> _wrap(Widget child, {required Locale locale}) async {
   final controller = CycleController(repository: InMemoryDayLogRepository());
   for (final start in [-56, -28]) {
     for (var i = 0; i < 5; i++) {
-      await controller.upsertDay(DayLog(
-        date: addDays(today(), start + i),
-        flow: FlowIntensity.medium,
-        symptoms: const {Symptom.cramps},
-      ));
+      await controller.upsertDay(
+        DayLog(
+          date: addDays(today(), start + i),
+          flow: FlowIntensity.medium,
+          symptoms: const {Symptom.cramps},
+        ),
+      );
     }
   }
 
@@ -47,10 +51,19 @@ Future<Widget> _wrap(Widget child, {required Locale locale}) async {
     providers: [
       ChangeNotifierProvider<AppPreferences>.value(value: prefs),
       ChangeNotifierProvider<AssistantConversation>(
-          create: (_) => AssistantConversation()),
+        create: (_) => AssistantConversation(),
+      ),
       ChangeNotifierProvider<CycleController>.value(value: controller),
       Provider<PinVault>(create: (_) => PinVault()),
       Provider<ReminderService>(create: (_) => ReminderService()),
+      // Same reasoning as all_screens_smoke_test.dart: PartnerInviteCard and
+      // PartnerModeScreen read this unconditionally on build.
+      ChangeNotifierProvider<PartnerController>(
+        create: (_) => PartnerController()..init(),
+      ),
+      ChangeNotifierProvider<CloudBackupController>(
+        create: (_) => CloudBackupController()..init(),
+      ),
     ],
     child: MaterialApp(
       theme: buildAppTheme(),
@@ -63,17 +76,19 @@ Future<Widget> _wrap(Widget child, {required Locale locale}) async {
 }
 
 void main() {
-  testWidgets('home lays out in Arabic (RTL) without overflow',
-      (tester) async {
+  testWidgets('home lays out in Arabic (RTL) without overflow', (tester) async {
     await tester.pumpWidget(
-        await _wrap(const HomeScreen(), locale: const Locale('ar')));
+      await _wrap(const HomeScreen(), locale: const Locale('ar')),
+    );
     for (var i = 0; i < 6; i++) {
       await tester.pump(const Duration(milliseconds: 200));
     }
 
     expect(tester.takeException(), isNull);
-    expect(Directionality.of(tester.element(find.byType(HomeScreen))),
-        TextDirection.rtl);
+    expect(
+      Directionality.of(tester.element(find.byType(HomeScreen))),
+      TextDirection.rtl,
+    );
 
     await expectLater(
       find.byType(MaterialApp),
@@ -81,10 +96,12 @@ void main() {
     );
   });
 
-  testWidgets('day log lays out in Arabic (RTL) without overflow',
-      (tester) async {
-    await tester.pumpWidget(await _wrap(DayLogScreen(date: today()),
-        locale: const Locale('ar')));
+  testWidgets('day log lays out in Arabic (RTL) without overflow', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      await _wrap(DayLogScreen(date: today()), locale: const Locale('ar')),
+    );
     await tester.pump(const Duration(milliseconds: 300));
 
     expect(tester.takeException(), isNull);
@@ -95,11 +112,13 @@ void main() {
     );
   });
 
-  testWidgets('the painted phase bar exposes a label to screen readers',
-      (tester) async {
+  testWidgets('the painted phase bar exposes a label to screen readers', (
+    tester,
+  ) async {
     final handle = tester.ensureSemantics();
     await tester.pumpWidget(
-        await _wrap(const HomeScreen(), locale: const Locale('en')));
+      await _wrap(const HomeScreen(), locale: const Locale('en')),
+    );
     for (var i = 0; i < 6; i++) {
       await tester.pump(const Duration(milliseconds: 200));
     }
@@ -111,19 +130,23 @@ void main() {
     // the same cycle-day number the hero already states, at twice the size,
     // directly beneath it. The number is still exposed — as the hero's own
     // text, which needs no Semantics wrapper because it is real text.
-    expect(find.bySemanticsLabel(RegExp(r'Cycle progress: day \d+')),
-        findsOneWidget);
+    expect(
+      find.bySemanticsLabel(RegExp(r'Cycle progress: day \d+')),
+      findsOneWidget,
+    );
     handle.dispose();
   });
 
-  testWidgets('the chat mirrors: assistant at start, user at end',
-      (tester) async {
+  testWidgets('the chat mirrors: assistant at start, user at end', (
+    tester,
+  ) async {
     // The bubbles were pinned with Alignment.centerLeft/centerRight, so in
     // Arabic the whole conversation read as an LTR chat dropped into an RTL
     // screen — the assistant on the right, the user on the left, each on
     // the other's side. Nothing overflowed, so no existing test noticed.
     await tester.pumpWidget(
-        await _wrap(const AssistantScreen(), locale: const Locale('ar')));
+      await _wrap(const AssistantScreen(), locale: const Locale('ar')),
+    );
     for (var i = 0; i < 6; i++) {
       await tester.pump(const Duration(milliseconds: 200));
     }
@@ -139,20 +162,27 @@ void main() {
     // Both bubbles must use directional alignment. A physical
     // Alignment.centerLeft/Right here is the bug returning.
     final aligns = tester
-        .widgetList<Align>(find.descendant(
-          of: find.byType(ListView),
-          matching: find.byType(Align),
-        ))
-        .where((a) =>
-            a.alignment == Alignment.centerLeft ||
-            a.alignment == Alignment.centerRight);
-    expect(aligns, isEmpty,
-        reason: 'chat bubbles must align with AlignmentDirectional so they '
-            'mirror in RTL');
+        .widgetList<Align>(
+          find.descendant(
+            of: find.byType(ListView),
+            matching: find.byType(Align),
+          ),
+        )
+        .where(
+          (a) =>
+              a.alignment == Alignment.centerLeft ||
+              a.alignment == Alignment.centerRight,
+        );
+    expect(
+      aligns,
+      isEmpty,
+      reason:
+          'chat bubbles must align with AlignmentDirectional so they '
+          'mirror in RTL',
+    );
   });
 
-  testWidgets('every screen builds in Arabic without overflow',
-      (tester) async {
+  testWidgets('every screen builds in Arabic without overflow', (tester) async {
     // The previous RTL coverage was Home and Day Log only; the four real
     // RTL bugs found in review were all on screens no test ever opened.
     final screens = <String, Widget Function()>{
@@ -166,12 +196,16 @@ void main() {
 
     for (final entry in screens.entries) {
       await tester.pumpWidget(
-          await _wrap(entry.value(), locale: const Locale('ar')));
+        await _wrap(entry.value(), locale: const Locale('ar')),
+      );
       for (var i = 0; i < 6; i++) {
         await tester.pump(const Duration(milliseconds: 200));
       }
-      expect(tester.takeException(), isNull,
-          reason: '${entry.key} threw in Arabic');
+      expect(
+        tester.takeException(),
+        isNull,
+        reason: '${entry.key} threw in Arabic',
+      );
     }
   });
 
@@ -180,7 +214,8 @@ void main() {
     addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
 
     await tester.pumpWidget(
-        await _wrap(const HomeScreen(), locale: const Locale('tr')));
+      await _wrap(const HomeScreen(), locale: const Locale('tr')),
+    );
     for (var i = 0; i < 6; i++) {
       await tester.pump(const Duration(milliseconds: 200));
     }

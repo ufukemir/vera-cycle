@@ -6,23 +6,98 @@
 enum FlowIntensity { spotting, light, medium, heavy }
 
 /// Physical symptoms a user can log. Neutral, non-judgemental wording only.
+///
+/// Grown from the original 12 to cover the ground a comparable app's
+/// symptom list does — [SymptomGroup] is what makes 30 of them scannable
+/// instead of a single long wall of chips. Left out on purpose: cervical
+/// mucus texture, which is already [CervicalMucus], its own tracker with
+/// its own screen; and a handful of the reference app's "symptoms" that
+/// read as personality traits or moods rather than physical sensations —
+/// those belong under [Mood], or nowhere, not duplicated here.
 enum Symptom {
-  cramps,
+  // Baş — head
   headache,
-  bloating,
-  breastTenderness,
+  migraine,
+  dizziness,
   acne,
-  fatigue,
-  nausea,
+  highFever,
+  // Gövde — body
+  neckPain,
+  shoulderPain,
+  breastTenderness,
   backPain,
+  limbPain,
+  muscleAche,
+  chills,
+  nightSweats,
+  hotFlashes,
+  weightGain,
+  // Karın — abdomen
+  cramps,
+  bloating,
+  constipation,
+  diarrhea,
+  nausea,
+  indigestion,
+  gasPain,
+  pelvicPain,
+  // Genel — general
+  fatigue,
   appetiteChange,
   sleepTrouble,
-  pelvicPain,
-  dizziness,
+  feelingUnwell,
+  itching,
+  // Zihinsel — cognitive (not emotional; those are Mood's job)
+  troubleFocusing,
+  forgetfulness,
 }
+
+/// The section a [Symptom] is shown under, in the order the picker groups
+/// them — an anatomical/functional grouping, not alphabetical, because
+/// "what part of you does this concern" is how a person actually scans a
+/// list of thirty options looking for one.
+enum SymptomGroup { head, body, abdomen, general, cognitive }
+
+SymptomGroup symptomGroup(Symptom value) => switch (value) {
+  Symptom.headache ||
+  Symptom.migraine ||
+  Symptom.dizziness ||
+  Symptom.acne ||
+  Symptom.highFever => SymptomGroup.head,
+  Symptom.neckPain ||
+  Symptom.shoulderPain ||
+  Symptom.breastTenderness ||
+  Symptom.backPain ||
+  Symptom.limbPain ||
+  Symptom.muscleAche ||
+  Symptom.chills ||
+  Symptom.nightSweats ||
+  Symptom.hotFlashes ||
+  Symptom.weightGain => SymptomGroup.body,
+  Symptom.cramps ||
+  Symptom.bloating ||
+  Symptom.constipation ||
+  Symptom.diarrhea ||
+  Symptom.nausea ||
+  Symptom.indigestion ||
+  Symptom.gasPain ||
+  Symptom.pelvicPain => SymptomGroup.abdomen,
+  Symptom.fatigue ||
+  Symptom.appetiteChange ||
+  Symptom.sleepTrouble ||
+  Symptom.feelingUnwell ||
+  Symptom.itching => SymptomGroup.general,
+  Symptom.troubleFocusing || Symptom.forgetfulness => SymptomGroup.cognitive,
+};
 
 /// Mood labels. Chosen to be descriptive rather than evaluative — no "good"/"bad"
 /// days, because the app must not imply the user's cycle makes them a worse person.
+///
+/// Grown from 10 to 26. The reference app's own mood picker runs past 50,
+/// but roughly half of those are judgemental or joke self-labels —
+/// "stupid," "dangerous," "tormenting," "devil" — which is exactly what
+/// this enum's own founding rule above rules out. Added only the ones that
+/// name a feeling, not a verdict on the person having it.
 enum Mood {
   calm,
   anxious,
@@ -34,6 +109,22 @@ enum Mood {
   sad,
   depressed,
   emotional,
+  excited,
+  hopeful,
+  proud,
+  disappointed,
+  confident,
+  surprised,
+  indifferent,
+  peaceful,
+  inLove,
+  shy,
+  playful,
+  exhausted,
+  lonely,
+  overwhelmed,
+  grateful,
+  nostalgic,
 }
 
 /// Cervical mucus observation (fertility-awareness users). Optional tracker,
@@ -133,7 +224,10 @@ enum HomeTheme {
   dusk(premium: true),
   meadow(premium: true),
   petal(premium: true),
-  bloom(premium: true);
+  bloom(premium: true),
+  ocean(premium: true),
+  autumn(premium: true),
+  night(premium: true);
 
   const HomeTheme({this.premium = false});
 
@@ -151,7 +245,10 @@ enum Mascot {
 
   // Premium, same reasoning as the premium [HomeTheme] values.
   star(premium: true),
-  leaf(premium: true);
+  leaf(premium: true),
+  cat(premium: true),
+  rabbit(premium: true),
+  bird(premium: true);
 
   const Mascot({this.premium = false});
 

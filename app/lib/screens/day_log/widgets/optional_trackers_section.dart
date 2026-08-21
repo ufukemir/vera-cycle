@@ -9,6 +9,7 @@ import '../../../theme/app_theme.dart';
 import '../../../theme/log_icons.dart';
 import '../../../widgets/option_chip.dart';
 import '../../../widgets/test_strip.dart';
+import '../../insights/tracker_history_screen.dart' show TrackerType;
 import 'section_card.dart';
 
 /// Sexual activity / BBT / cervical mucus fields — each gated independently
@@ -43,12 +44,18 @@ class OptionalTrackersSection extends StatelessWidget {
     required this.onCervixOpeningChanged,
     required this.cervixFirmness,
     required this.onCervixFirmnessChanged,
+    this.sectionKeys = const {},
   });
+
+  /// Scroll targets for [DayLogScreen.scrollTo] — only the four tracker
+  /// types this section renders a card for (bbt, sexualActivity,
+  /// ovulationTest, breastExam) need an entry.
+  final Map<TrackerType, GlobalKey> sectionKeys;
 
   final bool? sexualActivity;
   final ValueChanged<bool> onSexualActivityChanged;
-  final Set<SexLifeEntry> sexLife;
-  final ValueChanged<Set<SexLifeEntry>> onSexLifeChanged;
+  final Map<SexLifeEntry, int> sexLife;
+  final ValueChanged<Map<SexLifeEntry, int>> onSexLifeChanged;
   final double? basalTempC;
   final ValueChanged<double?> onBasalTempChanged;
   final CervicalMucus? mucus;
@@ -73,39 +80,45 @@ class OptionalTrackersSection extends StatelessWidget {
 
     final cards = <Widget>[
       if (prefs.sexualActivityTrackingEnabled)
-        DayLogSectionCard(
-          icon: Icons.favorite_outline,
-          title: l10n.dayLogSexualActivityLabel,
-          background: AppPalette.roseSoft,
-          foreground: AppPalette.roseSoftText,
-          child: _SexLifeSelector(
-            value: sexLife,
-            onChanged: (next) {
-              onSexLifeChanged(next);
-              // The plain yes/no flag is what the tracker hub and the day
-              // list still read, so it follows the detail rather than
-              // being edited separately: "none" is an answer, not an
-              // absence, and three of these entries mean something
-              // happened.
-              const activity = {
-                SexLifeEntry.unprotected,
-                SexLifeEntry.protectedSex,
-                SexLifeEntry.masturbation,
-              };
-              onSexualActivityChanged(next.any(activity.contains));
-            },
+        KeyedSubtree(
+          key: sectionKeys[TrackerType.sexualActivity],
+          child: DayLogSectionCard(
+            icon: Icons.favorite_outline,
+            title: l10n.dayLogSexualActivityLabel,
+            background: AppPalette.roseSoft,
+            foreground: AppPalette.roseSoftText,
+            child: _SexLifeSelector(
+              value: sexLife,
+              onChanged: (next) {
+                onSexLifeChanged(next);
+                // The plain yes/no flag is what the tracker hub and the day
+                // list still read, so it follows the detail rather than
+                // being edited separately: "none" is an answer, not an
+                // absence, and three of these entries mean something
+                // happened.
+                const activity = {
+                  SexLifeEntry.unprotected,
+                  SexLifeEntry.protectedSex,
+                  SexLifeEntry.masturbation,
+                };
+                onSexualActivityChanged(next.keys.any(activity.contains));
+              },
+            ),
           ),
         ),
       if (prefs.bbtTrackingEnabled)
-        DayLogSectionCard(
-          icon: Icons.thermostat_outlined,
-          title: l10n.dayLogBbtLabel,
-          background: AppPalette.terracottaSoft,
-          foreground: AppPalette.terracottaSoftText,
-          child: _BasalTempField(
-            valueC: basalTempC,
-            unit: prefs.temperatureUnit,
-            onChangedC: onBasalTempChanged,
+        KeyedSubtree(
+          key: sectionKeys[TrackerType.bbt],
+          child: DayLogSectionCard(
+            icon: Icons.thermostat_outlined,
+            title: l10n.dayLogBbtLabel,
+            background: AppPalette.terracottaSoft,
+            foreground: AppPalette.terracottaSoftText,
+            child: _BasalTempField(
+              valueC: basalTempC,
+              unit: prefs.temperatureUnit,
+              onChangedC: onBasalTempChanged,
+            ),
           ),
         ),
       if (prefs.mucusTrackingEnabled)
@@ -117,13 +130,18 @@ class OptionalTrackersSection extends StatelessWidget {
           child: _MucusSelector(value: mucus, onChanged: onMucusChanged),
         ),
       if (prefs.ovulationTestTrackingEnabled) ...[
-        DayLogSectionCard(
-          icon: Icons.science_outlined,
-          title: l10n.dayLogOvulationTestLabel,
-          background: AppPalette.goldSoft,
-          foreground: AppPalette.goldSoftText,
-          child: _OvulationTestSelector(
-              value: ovulationTest, onChanged: onOvulationTestChanged),
+        KeyedSubtree(
+          key: sectionKeys[TrackerType.ovulationTest],
+          child: DayLogSectionCard(
+            icon: Icons.science_outlined,
+            title: l10n.dayLogOvulationTestLabel,
+            background: AppPalette.goldSoft,
+            foreground: AppPalette.goldSoftText,
+            child: _OvulationTestSelector(
+              value: ovulationTest,
+              onChanged: onOvulationTestChanged,
+            ),
+          ),
         ),
         DayLogSectionCard(
           icon: Icons.pregnant_woman_outlined,
@@ -131,17 +149,24 @@ class OptionalTrackersSection extends StatelessWidget {
           background: AppPalette.skySoft,
           foreground: AppPalette.skySoftText,
           child: _PregnancyTestSelector(
-              value: pregnancyTest, onChanged: onPregnancyTestChanged),
+            value: pregnancyTest,
+            onChanged: onPregnancyTestChanged,
+          ),
         ),
       ],
       if (prefs.breastExamTrackingEnabled)
-        DayLogSectionCard(
-          icon: Icons.spa_outlined,
-          title: l10n.dayLogBreastExamLabel,
-          background: AppPalette.mintSoft,
-          foreground: AppPalette.mintSoftText,
-          child: _BreastExamMultiselect(
-              value: breastExam, onChanged: onBreastExamChanged),
+        KeyedSubtree(
+          key: sectionKeys[TrackerType.breastExam],
+          child: DayLogSectionCard(
+            icon: Icons.spa_outlined,
+            title: l10n.dayLogBreastExamLabel,
+            background: AppPalette.mintSoft,
+            foreground: AppPalette.mintSoftText,
+            child: _BreastExamMultiselect(
+              value: breastExam,
+              onChanged: onBreastExamChanged,
+            ),
+          ),
         ),
       if (prefs.cervixTrackingEnabled)
         DayLogSectionCard(
@@ -170,20 +195,21 @@ class OptionalTrackersSection extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 12),
-          child: Text(l10n.dayLogOptionalTrackersLabel,
-              style: Theme.of(context).textTheme.titleMedium),
+          child: Text(
+            l10n.dayLogOptionalTrackersLabel,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
         ),
         for (final card in cards)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16),
-            child: card,
-          ),
+          Padding(padding: const EdgeInsets.only(bottom: 16), child: card),
       ],
     );
   }
 }
 
-/// Multi-select, because a day is not one of these things.
+/// Multi-select, because a day is not one of these things — and each one
+/// carries a count, because a day with two separate occasions is a real
+/// difference from one.
 ///
 /// It replaces a bare on/off switch that could record only that *something*
 /// happened. Behind the same opt-in preference as before — CLAUDE.md keeps
@@ -192,8 +218,13 @@ class OptionalTrackersSection extends StatelessWidget {
 class _SexLifeSelector extends StatelessWidget {
   const _SexLifeSelector({required this.value, required this.onChanged});
 
-  final Set<SexLifeEntry> value;
-  final ValueChanged<Set<SexLifeEntry>> onChanged;
+  final Map<SexLifeEntry, int> value;
+  final ValueChanged<Map<SexLifeEntry, int>> onChanged;
+
+  /// Tapping past this many wraps back to zero rather than climbing forever
+  /// — a day genuinely has an upper bound worth naming, and a chip reading
+  /// "×47" would say more about a stuck finger than about the day.
+  static const _maxCount = 9;
 
   @override
   Widget build(BuildContext context) {
@@ -203,8 +234,14 @@ class _SexLifeSelector extends StatelessWidget {
         for (final entry in SexLifeEntry.values)
           OptionChip(
             icon: LogIcons.sexLife(entry),
-            label: sexLifeLabel(l10n, entry),
-            selected: value.contains(entry),
+            // The count rides in the label rather than a separate badge
+            // widget: OptionChip's own Semantics label picks it up for free,
+            // so "Korunmasız seks ×2" is what a screen reader says too, not
+            // just what is drawn.
+            label: (value[entry] ?? 0) > 1
+                ? '${sexLifeLabel(l10n, entry)} ×${value[entry]}'
+                : sexLifeLabel(l10n, entry),
+            selected: value.containsKey(entry),
             tint: AppPalette.roseSoft,
             ink: AppPalette.roseSoftText,
             onTap: () {
@@ -212,12 +249,19 @@ class _SexLifeSelector extends StatelessWidget {
               // out, so picking it clears them and picking anything else
               // clears it.
               if (entry == SexLifeEntry.none) {
-                onChanged(value.contains(entry) ? {} : {SexLifeEntry.none});
+                onChanged(
+                  value.containsKey(entry) ? {} : {SexLifeEntry.none: 1},
+                );
                 return;
               }
-              final next = Set<SexLifeEntry>.of(value)
+              final next = Map<SexLifeEntry, int>.of(value)
                 ..remove(SexLifeEntry.none);
-              value.contains(entry) ? next.remove(entry) : next.add(entry);
+              final current = next[entry] ?? 0;
+              if (current >= _maxCount) {
+                next.remove(entry);
+              } else {
+                next[entry] = current + 1;
+              }
               onChanged(next);
             },
           ),
@@ -242,8 +286,9 @@ class _BasalTempField extends StatefulWidget {
 }
 
 class _BasalTempFieldState extends State<_BasalTempField> {
-  late final TextEditingController _controller =
-      TextEditingController(text: _displayText());
+  late final TextEditingController _controller = TextEditingController(
+    text: _displayText(),
+  );
 
   String _displayText() {
     if (widget.valueC == null) return '';
@@ -255,7 +300,9 @@ class _BasalTempFieldState extends State<_BasalTempField> {
   }
 
   double _toDisplayUnit(double celsius) =>
-      widget.unit == TemperatureUnit.fahrenheit ? celsius * 9 / 5 + 32 : celsius;
+      widget.unit == TemperatureUnit.fahrenheit
+      ? celsius * 9 / 5 + 32
+      : celsius;
 
   @override
   void didUpdateWidget(covariant _BasalTempField oldWidget) {
@@ -277,8 +324,9 @@ class _BasalTempFieldState extends State<_BasalTempField> {
       widget.onChangedC(null);
       return;
     }
-    final celsius =
-        widget.unit == TemperatureUnit.fahrenheit ? (parsed - 32) * 5 / 9 : parsed;
+    final celsius = widget.unit == TemperatureUnit.fahrenheit
+        ? (parsed - 32) * 5 / 9
+        : parsed;
     widget.onChangedC(celsius);
   }
 
@@ -298,8 +346,10 @@ class _BasalTempFieldState extends State<_BasalTempField> {
         filled: true,
         fillColor: scheme.surface.withValues(alpha: 0.7),
         isDense: true,
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 14,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide.none,
@@ -544,8 +594,13 @@ class _CervixSelectors extends StatelessWidget {
       CervixFirmness.firm: l10n.cervixFirmnessFirm,
     };
 
-    Widget row<T>(String label, Map<T, String> labels, T? selected,
-        ValueChanged<T?> onSelected, IconData Function(T) iconOf) {
+    Widget row<T>(
+      String label,
+      Map<T, String> labels,
+      T? selected,
+      ValueChanged<T?> onSelected,
+      IconData Function(T) iconOf,
+    ) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -571,14 +626,29 @@ class _CervixSelectors extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        row(l10n.cervixPositionLabel, positionLabels, position,
-            onPositionChanged, LogIcons.cervixPosition),
+        row(
+          l10n.cervixPositionLabel,
+          positionLabels,
+          position,
+          onPositionChanged,
+          LogIcons.cervixPosition,
+        ),
         const SizedBox(height: 12),
-        row(l10n.cervixOpeningLabel, openingLabels, opening, onOpeningChanged,
-            LogIcons.cervixOpening),
+        row(
+          l10n.cervixOpeningLabel,
+          openingLabels,
+          opening,
+          onOpeningChanged,
+          LogIcons.cervixOpening,
+        ),
         const SizedBox(height: 12),
-        row(l10n.cervixFirmnessLabel, firmnessLabels, firmness,
-            onFirmnessChanged, LogIcons.cervixFirmness),
+        row(
+          l10n.cervixFirmnessLabel,
+          firmnessLabels,
+          firmness,
+          onFirmnessChanged,
+          LogIcons.cervixFirmness,
+        ),
       ],
     );
   }

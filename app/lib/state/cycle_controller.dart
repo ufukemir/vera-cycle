@@ -32,10 +32,10 @@ class CycleController extends ChangeNotifier {
     CycleAnalyzer analyzer = const CycleAnalyzer(),
     PredictionEngine predictionEngine = const PredictionEngine(),
     HealthSyncService? healthSync,
-  })  : _repository = repository,
-        _analyzer = analyzer,
-        _predictionEngine = predictionEngine,
-        _healthSync = healthSync;
+  }) : _repository = repository,
+       _analyzer = analyzer,
+       _predictionEngine = predictionEngine,
+       _healthSync = healthSync;
 
   /// Set only when the user has opted into health export. Null keeps the
   /// controller free of platform channels, which is what tests rely on.
@@ -58,10 +58,10 @@ class CycleController extends ChangeNotifier {
   CyclePrediction get prediction => _prediction;
 
   CycleStatus statusOn(DateTime date) => _predictionEngine.status(
-        cycles: _cycles,
-        prediction: _prediction,
-        on: date,
-      );
+    cycles: _cycles,
+    prediction: _prediction,
+    on: date,
+  );
 
   CycleStatus get todayStatus => statusOn(today());
 
@@ -161,8 +161,9 @@ class CycleController extends ChangeNotifier {
   /// exists, without discarding any symptoms already logged for the day.
   Future<void> markPeriodStartedToday() async {
     final existing = logFor(today());
-    final updated =
-        (existing ?? DayLog(date: today())).copyWith(flow: FlowIntensity.medium);
+    final updated = (existing ?? DayLog(date: today())).copyWith(
+      flow: FlowIntensity.medium,
+    );
     await upsertDay(updated);
   }
 

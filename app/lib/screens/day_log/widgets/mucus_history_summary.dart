@@ -11,7 +11,11 @@ import '../../../util/day.dart';
 /// pattern without leaving this screen. Read-only: editing still only
 /// happens through [OptionalTrackersSection]'s selector.
 class MucusHistorySummary extends StatelessWidget {
-  const MucusHistorySummary({super.key, required this.upToExclusive, required this.logs});
+  const MucusHistorySummary({
+    super.key,
+    required this.upToExclusive,
+    required this.logs,
+  });
 
   /// The day currently being edited — history is everything strictly before
   /// it, so today's own not-yet-saved selection never appears twice.
@@ -21,10 +25,11 @@ class MucusHistorySummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cutoff = dateOnly(upToExclusive);
-    final recent = logs
-        .where((log) => log.mucus != null && log.date.isBefore(cutoff))
-        .toList()
-      ..sort((a, b) => b.date.compareTo(a.date));
+    final recent =
+        logs
+            .where((log) => log.mucus != null && log.date.isBefore(cutoff))
+            .toList()
+          ..sort((a, b) => b.date.compareTo(a.date));
     final entries = recent.take(3).toList();
     if (entries.isEmpty) return const SizedBox.shrink();
 
@@ -36,7 +41,9 @@ class MucusHistorySummary extends StatelessWidget {
       CervicalMucus.watery: l10n.mucusWatery,
       CervicalMucus.eggWhite: l10n.mucusEggWhite,
     };
-    final dateFormat = DateFormat.MMMd(Localizations.localeOf(context).toString());
+    final dateFormat = DateFormat.MMMd(
+      Localizations.localeOf(context).toString(),
+    );
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
@@ -46,7 +53,9 @@ class MucusHistorySummary extends StatelessWidget {
         children: [
           for (final entry in entries.reversed)
             Chip(
-              label: Text('${dateFormat.format(entry.date)}: ${labels[entry.mucus!]}'),
+              label: Text(
+                '${dateFormat.format(entry.date)}: ${labels[entry.mucus!]}',
+              ),
               visualDensity: VisualDensity.compact,
             ),
         ],

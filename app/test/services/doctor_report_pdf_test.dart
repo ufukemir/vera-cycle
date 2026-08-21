@@ -34,14 +34,8 @@ const _labels = DoctorReportPdfLabels(
     FlowIntensity.medium: 'Medium',
     FlowIntensity.heavy: 'Heavy',
   },
-  symptomNames: {
-    Symptom.cramps: 'Cramps',
-    Symptom.headache: 'Headache',
-  },
-  moodNames: {
-    Mood.calm: 'Calm',
-    Mood.irritable: 'Irritable',
-  },
+  symptomNames: {Symptom.cramps: 'Cramps', Symptom.headache: 'Headache'},
+  moodNames: {Mood.calm: 'Calm', Mood.irritable: 'Irritable'},
   localeName: 'en',
 );
 
@@ -63,8 +57,11 @@ void main() {
 
   test('does not throw with a populated history', () async {
     final logs = [
-      DayLog(date: DateTime(2026, 5, 1), flow: FlowIntensity.medium,
-          symptoms: const {Symptom.cramps}),
+      DayLog(
+        date: DateTime(2026, 5, 1),
+        flow: FlowIntensity.medium,
+        symptoms: const {Symptom.cramps},
+      ),
       DayLog(date: DateTime(2026, 5, 2), flow: FlowIntensity.light),
     ];
 

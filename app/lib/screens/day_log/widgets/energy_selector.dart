@@ -9,7 +9,11 @@ import '../../../widgets/option_chip.dart';
 /// Single-select energy chips. Deliberately separate from [MoodSelector] —
 /// see [EnergyLevel].
 class EnergySelector extends StatelessWidget {
-  const EnergySelector({super.key, required this.value, required this.onChanged});
+  const EnergySelector({
+    super.key,
+    required this.value,
+    required this.onChanged,
+  });
 
   final EnergyLevel? value;
   final ValueChanged<EnergyLevel?> onChanged;

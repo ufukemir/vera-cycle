@@ -14,46 +14,55 @@ Future<void> _pump(
   required bool hasPredictedWindow,
   required bool hasFertileEstimate,
 }) {
-  return tester.pumpWidget(MaterialApp(
-    localizationsDelegates: AppLocalizations.localizationsDelegates,
-    supportedLocales: AppLocalizations.supportedLocales,
-    home: Scaffold(
-      body: CalendarLegend(
-        hasPredictedWindow: hasPredictedWindow,
-        hasFertileEstimate: hasFertileEstimate,
+  return tester.pumpWidget(
+    MaterialApp(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      home: Scaffold(
+        body: CalendarLegend(
+          hasPredictedWindow: hasPredictedWindow,
+          hasFertileEstimate: hasFertileEstimate,
+        ),
       ),
     ),
-  ));
+  );
 }
 
 void main() {
-  testWidgets('with no estimates yet, only the logged-period entry shows',
-      (tester) async {
+  testWidgets('with no estimates yet, only the logged-period entry shows', (
+    tester,
+  ) async {
     await _pump(tester, hasPredictedWindow: false, hasFertileEstimate: false);
     final l10n = await AppLocalizations.delegate.load(const Locale('en'));
 
     expect(find.text(l10n.calendarLegendActual), findsOneWidget);
-    expect(find.text(l10n.calendarLegendPredicted), findsNothing,
-        reason: 'promises a ring the grid has nothing to draw');
+    expect(
+      find.text(l10n.calendarLegendPredicted),
+      findsNothing,
+      reason: 'promises a ring the grid has nothing to draw',
+    );
     expect(find.text(l10n.calendarLegendFertile), findsNothing);
     expect(find.text(l10n.calendarLegendOvulation), findsNothing);
   });
 
-  testWidgets('a period prediction without a fertile estimate shows only that',
-      (tester) async {
-    // The two estimates come from different thresholds in the prediction
-    // engine and can become available at different times, so the legend
-    // has to reflect them independently rather than as one bundle.
-    await _pump(tester, hasPredictedWindow: true, hasFertileEstimate: false);
-    final l10n = await AppLocalizations.delegate.load(const Locale('en'));
+  testWidgets(
+    'a period prediction without a fertile estimate shows only that',
+    (tester) async {
+      // The two estimates come from different thresholds in the prediction
+      // engine and can become available at different times, so the legend
+      // has to reflect them independently rather than as one bundle.
+      await _pump(tester, hasPredictedWindow: true, hasFertileEstimate: false);
+      final l10n = await AppLocalizations.delegate.load(const Locale('en'));
 
-    expect(find.text(l10n.calendarLegendPredicted), findsOneWidget);
-    expect(find.text(l10n.calendarLegendFertile), findsNothing);
-    expect(find.text(l10n.calendarLegendOvulation), findsNothing);
-  });
+      expect(find.text(l10n.calendarLegendPredicted), findsOneWidget);
+      expect(find.text(l10n.calendarLegendFertile), findsNothing);
+      expect(find.text(l10n.calendarLegendOvulation), findsNothing);
+    },
+  );
 
-  testWidgets('once both estimates exist, every entry is shown',
-      (tester) async {
+  testWidgets('once both estimates exist, every entry is shown', (
+    tester,
+  ) async {
     await _pump(tester, hasPredictedWindow: true, hasFertileEstimate: true);
     final l10n = await AppLocalizations.delegate.load(const Locale('en'));
 

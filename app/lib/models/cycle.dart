@@ -8,10 +8,9 @@ class ObservedCycle {
     required DateTime startDate,
     required DateTime periodEndDate,
     DateTime? nextStartDate,
-  })  : startDate = dateOnly(startDate),
-        periodEndDate = dateOnly(periodEndDate),
-        nextStartDate =
-            nextStartDate == null ? null : dateOnly(nextStartDate);
+  }) : startDate = dateOnly(startDate),
+       periodEndDate = dateOnly(periodEndDate),
+       nextStartDate = nextStartDate == null ? null : dateOnly(nextStartDate);
 
   /// Day 1: the first day of menstrual flow in this cycle.
   final DateTime startDate;

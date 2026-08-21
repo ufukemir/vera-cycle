@@ -50,8 +50,6 @@ class CycleCodec {
     );
     final clearText = await _algorithm.decrypt(box, secretKey: key);
     final json = jsonDecode(utf8.decode(clearText)) as List<dynamic>;
-    return json
-        .map((e) => DayLog.fromJson(e as Map<String, dynamic>))
-        .toList();
+    return json.map((e) => DayLog.fromJson(e as Map<String, dynamic>)).toList();
   }
 }

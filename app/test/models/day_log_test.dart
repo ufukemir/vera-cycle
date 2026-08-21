@@ -25,7 +25,10 @@ void main() {
     final restored = DayLog.fromJson(log.toJson());
 
     expect(restored.energyLevel, EnergyLevel.energetic);
-    expect(restored.skinHair, {SkinHairSymptom.hairLoss, SkinHairSymptom.oilyScalp});
+    expect(restored.skinHair, {
+      SkinHairSymptom.hairLoss,
+      SkinHairSymptom.oilyScalp,
+    });
     expect(restored.breastExam, {BreastExamFinding.allNormal});
     expect(restored.cervixPosition, CervixPosition.high);
     expect(restored.cervixOpening, CervixOpening.medium);
@@ -42,16 +45,19 @@ void main() {
     expect(log.isEmpty, isFalse);
   });
 
-  test('an unknown skinHair value in storage decodes to nothing, not a crash', () {
-    final json = {
-      'date': '2026-05-01',
-      'skinHair': ['futureValueNotYetSupported', 'hairLoss'],
-    };
+  test(
+    'an unknown skinHair value in storage decodes to nothing, not a crash',
+    () {
+      final json = {
+        'date': '2026-05-01',
+        'skinHair': ['futureValueNotYetSupported', 'hairLoss'],
+      };
 
-    final restored = DayLog.fromJson(json);
+      final restored = DayLog.fromJson(json);
 
-    expect(restored.skinHair, {SkinHairSymptom.hairLoss});
-  });
+      expect(restored.skinHair, {SkinHairSymptom.hairLoss});
+    },
+  );
 
   test('copyWith clears cervix fields independently', () {
     final log = DayLog(
@@ -74,8 +80,10 @@ void main() {
 
     final restored = DayLog.fromJson(log.toJson());
 
-    expect(restored.birthControl,
-        {BirthControlEntry.pillTaken, BirthControlEntry.iud});
+    expect(restored.birthControl, {
+      BirthControlEntry.pillTaken,
+      BirthControlEntry.iud,
+    });
     expect(restored.isEmpty, isFalse);
   });
 
@@ -86,5 +94,42 @@ void main() {
     });
 
     expect(restored.birthControl, {BirthControlEntry.patch});
+  });
+
+  test('sexLife counts round-trip through storage', () {
+    final log = DayLog(
+      date: DateTime(2026, 5, 1),
+      sexLife: const {SexLifeEntry.unprotected: 2, SexLifeEntry.orgasm: 1},
+    );
+
+    final restored = DayLog.fromJson(log.toJson());
+
+    expect(restored.sexLife, {
+      SexLifeEntry.unprotected: 2,
+      SexLifeEntry.orgasm: 1,
+    });
+    expect(restored.isEmpty, isFalse);
+  });
+
+  test('a sexLife log written before counting existed (a plain name list) '
+      'still decodes, each entry worth a count of one', () {
+    final restored = DayLog.fromJson({
+      'date': '2026-05-01',
+      'sexLife': ['unprotected', 'orgasm'],
+    });
+
+    expect(restored.sexLife, {
+      SexLifeEntry.unprotected: 1,
+      SexLifeEntry.orgasm: 1,
+    });
+  });
+
+  test('an unknown sexLife value decodes to nothing, not a crash', () {
+    final restored = DayLog.fromJson({
+      'date': '2026-05-01',
+      'sexLife': {'someFutureEntry': 3, 'orgasm': 2},
+    });
+
+    expect(restored.sexLife, {SexLifeEntry.orgasm: 2});
   });
 }

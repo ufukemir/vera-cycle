@@ -47,13 +47,15 @@ class BackupService {
     final key = await _deriveKey(password, salt, _iterations, _keyBits);
     final payload = await _codec.encode(logs, key);
 
-    final header = utf8.encode(jsonEncode({
-      'format': _format,
-      'version': _formatVersion,
-      'kdf': 'pbkdf2-hmac-sha256',
-      'kdfParams': {'iterations': _iterations, 'bits': _keyBits},
-      'salt': base64Encode(salt),
-    }));
+    final header = utf8.encode(
+      jsonEncode({
+        'format': _format,
+        'version': _formatVersion,
+        'kdf': 'pbkdf2-hmac-sha256',
+        'kdfParams': {'iterations': _iterations, 'bits': _keyBits},
+        'salt': base64Encode(salt),
+      }),
+    );
 
     return Uint8List.fromList([
       ..._uint32BE(header.length),
@@ -79,8 +81,9 @@ class BackupService {
 
     final Map<String, dynamic> header;
     try {
-      header = jsonDecode(utf8.decode(bytes.sublist(4, 4 + headerLength)))
-          as Map<String, dynamic>;
+      header =
+          jsonDecode(utf8.decode(bytes.sublist(4, 4 + headerLength)))
+              as Map<String, dynamic>;
     } on FormatException {
       rethrow;
     } on Object {
@@ -120,11 +123,11 @@ class BackupService {
   }
 
   List<int> _uint32BE(int value) => [
-        (value >> 24) & 0xFF,
-        (value >> 16) & 0xFF,
-        (value >> 8) & 0xFF,
-        value & 0xFF,
-      ];
+    (value >> 24) & 0xFF,
+    (value >> 16) & 0xFF,
+    (value >> 8) & 0xFF,
+    value & 0xFF,
+  ];
 
   int _readUint32BE(Uint8List bytes, int offset) =>
       (bytes[offset] << 24) |

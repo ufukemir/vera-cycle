@@ -9,7 +9,11 @@ import '../../../widgets/option_chip.dart';
 /// Multi-select skin & hair chips — descriptive observations, never a
 /// dermatology diagnosis (see [SkinHairSymptom]).
 class SkinHairMultiselect extends StatelessWidget {
-  const SkinHairMultiselect({super.key, required this.value, required this.onChanged});
+  const SkinHairMultiselect({
+    super.key,
+    required this.value,
+    required this.onChanged,
+  });
 
   final Set<SkinHairSymptom> value;
   final ValueChanged<Set<SkinHairSymptom>> onChanged;

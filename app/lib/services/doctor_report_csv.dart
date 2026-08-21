@@ -48,7 +48,10 @@ class DoctorReportCsv {
   /// double any embedded quotes.
   String _encodeField(String value) {
     final needsQuoting =
-        value.contains(',') || value.contains('"') || value.contains('\n') || value.contains('\r');
+        value.contains(',') ||
+        value.contains('"') ||
+        value.contains('\n') ||
+        value.contains('\r');
     if (!needsQuoting) return value;
     return '"${value.replaceAll('"', '""')}"';
   }

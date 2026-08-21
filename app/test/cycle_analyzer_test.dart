@@ -5,8 +5,11 @@ import 'package:cycle_app/util/day.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 /// Bleeding days starting at [start], one log per day.
-List<DayLog> period(DateTime start, int days,
-    {FlowIntensity flow = FlowIntensity.medium}) {
+List<DayLog> period(
+  DateTime start,
+  int days, {
+  FlowIntensity flow = FlowIntensity.medium,
+}) {
   return List.generate(
     days,
     (i) => DayLog(date: addDays(start, i), flow: flow),
@@ -77,21 +80,26 @@ void main() {
     expect(cycles.single.startDate, DateTime(2026, 4, 3));
   });
 
-  test('mid-cycle bleeding is absorbed rather than fabricating a short cycle',
-      () {
-    final logs = [
-      ...period(DateTime(2026, 5, 1), 4),
-      // Breakthrough bleeding on day 11 — too soon to be a new cycle.
-      DayLog(date: DateTime(2026, 5, 11), flow: FlowIntensity.light),
-      ...period(DateTime(2026, 5, 29), 4),
-    ];
-    final cycles = analyzer.analyze(logs);
+  test(
+    'mid-cycle bleeding is absorbed rather than fabricating a short cycle',
+    () {
+      final logs = [
+        ...period(DateTime(2026, 5, 1), 4),
+        // Breakthrough bleeding on day 11 — too soon to be a new cycle.
+        DayLog(date: DateTime(2026, 5, 11), flow: FlowIntensity.light),
+        ...period(DateTime(2026, 5, 29), 4),
+      ];
+      final cycles = analyzer.analyze(logs);
 
-    expect(cycles, hasLength(2));
-    expect(cycles.first.startDate, DateTime(2026, 5, 1));
-    expect(cycles.first.length, 28,
-        reason: 'the day-11 bleed must not become its own cycle');
-  });
+      expect(cycles, hasLength(2));
+      expect(cycles.first.startDate, DateTime(2026, 5, 1));
+      expect(
+        cycles.first.length,
+        28,
+        reason: 'the day-11 bleed must not become its own cycle',
+      );
+    },
+  );
 
   test('logs in arbitrary order are handled', () {
     final logs = [

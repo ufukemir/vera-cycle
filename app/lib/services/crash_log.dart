@@ -82,7 +82,10 @@ class CrashLog {
       final existing = await file.exists() ? await file.readAsString() : '';
       final entries = existing.isEmpty
           ? <String>[]
-          : existing.split(_separator).where((e) => e.trim().isNotEmpty).toList();
+          : existing
+                .split(_separator)
+                .where((e) => e.trim().isNotEmpty)
+                .toList();
       entries.add(entry.toString());
       final kept = entries.length > maxEntries
           ? entries.sublist(entries.length - maxEntries)

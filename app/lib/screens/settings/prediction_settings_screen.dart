@@ -78,8 +78,8 @@ class PredictionSettingsScreen extends StatelessWidget {
                   await prefs.setLutealPhaseDays(v);
                   if (!context.mounted) return;
                   context.read<CycleController>().updatePredictionEngine(
-                        PredictionEngine(lutealPhaseDays: v),
-                      );
+                    PredictionEngine(lutealPhaseDays: v),
+                  );
                 },
               ),
             ),
@@ -153,7 +153,9 @@ class _SettingCard extends StatelessWidget {
     final isDark = theme.brightness == Brightness.dark;
     final panel = isDark
         ? Color.alphaBlend(
-            tint.withValues(alpha: 0.09), theme.colorScheme.surface)
+            tint.withValues(alpha: 0.09),
+            theme.colorScheme.surface,
+          )
         : tint.withValues(alpha: 0.45);
     final badge = isDark ? tint.withValues(alpha: 0.16) : tint;
     final labelInk = isDark ? tint : ink;
@@ -164,8 +166,7 @@ class _SettingCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: panel,
         borderRadius: BorderRadius.circular(22),
-        border:
-            isDark ? Border.all(color: tint.withValues(alpha: 0.18)) : null,
+        border: isDark ? Border.all(color: tint.withValues(alpha: 0.18)) : null,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -175,22 +176,24 @@ class _SettingCard extends StatelessWidget {
               Container(
                 width: 32,
                 height: 32,
-                decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: badge),
+                decoration: BoxDecoration(shape: BoxShape.circle, color: badge),
                 child: Icon(icon, size: 17, color: labelInk),
               ),
               const SizedBox(width: 10),
               Expanded(
-                child: Text(label,
-                    style:
-                        theme.textTheme.titleMedium?.copyWith(color: labelInk)),
+                child: Text(
+                  label,
+                  style: theme.textTheme.titleMedium?.copyWith(color: labelInk),
+                ),
               ),
             ],
           ),
           if (hint != null) ...[
             const SizedBox(height: 8),
-            Text(hint!,
-                style: theme.textTheme.bodySmall?.copyWith(height: 1.4)),
+            Text(
+              hint!,
+              style: theme.textTheme.bodySmall?.copyWith(height: 1.4),
+            ),
           ],
           const SizedBox(height: 14),
           Center(child: child),

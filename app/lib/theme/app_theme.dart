@@ -128,7 +128,9 @@ ThemeData _buildTheme(Brightness brightness) {
       color: cardColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
-        side: BorderSide(color: colorScheme.outlineVariant.withValues(alpha: 0.4)),
+        side: BorderSide(
+          color: colorScheme.outlineVariant.withValues(alpha: 0.4),
+        ),
       ),
     ),
     // The day log is mostly chips, so this is the app's densest surface and
@@ -168,10 +170,11 @@ ThemeData _buildTheme(Brightness brightness) {
       // and size without any error. It fails quietly and everywhere: every
       // chip label in the app dropped to the fallback font.
       labelStyle: (textTheme.labelLarge ?? const TextStyle()).copyWith(
-        color: WidgetStateColor.resolveWith((states) =>
-            states.contains(WidgetState.selected)
-                ? colorScheme.onPrimary
-                : colorScheme.onSurface),
+        color: WidgetStateColor.resolveWith(
+          (states) => states.contains(WidgetState.selected)
+              ? colorScheme.onPrimary
+              : colorScheme.onSurface,
+        ),
       ),
       checkmarkColor: colorScheme.onPrimary,
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
@@ -182,16 +185,19 @@ ThemeData _buildTheme(Brightness brightness) {
     // the app's colour language.
     segmentedButtonTheme: SegmentedButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.resolveWith((states) =>
-            states.contains(WidgetState.selected)
-                ? colorScheme.primaryContainer
-                : Colors.transparent),
-        foregroundColor: WidgetStateProperty.resolveWith((states) =>
-            states.contains(WidgetState.selected)
-                ? colorScheme.onPrimaryContainer
-                : colorScheme.onSurface),
+        backgroundColor: WidgetStateProperty.resolveWith(
+          (states) => states.contains(WidgetState.selected)
+              ? colorScheme.primaryContainer
+              : Colors.transparent,
+        ),
+        foregroundColor: WidgetStateProperty.resolveWith(
+          (states) => states.contains(WidgetState.selected)
+              ? colorScheme.onPrimaryContainer
+              : colorScheme.onSurface,
+        ),
         side: WidgetStateProperty.all(
-            BorderSide(color: colorScheme.outlineVariant)),
+          BorderSide(color: colorScheme.outlineVariant),
+        ),
         textStyle: WidgetStateProperty.all(textTheme.labelLarge),
       ),
     ),
@@ -232,7 +238,10 @@ class _GentleSlidePageTransitionsBuilder extends PageTransitionsBuilder {
     Animation<double> secondaryAnimation,
     Widget child,
   ) {
-    final curved = CurvedAnimation(parent: animation, curve: Curves.easeOutCubic);
+    final curved = CurvedAnimation(
+      parent: animation,
+      curve: Curves.easeOutCubic,
+    );
     return FadeTransition(
       opacity: curved,
       child: SlideTransition(
@@ -269,17 +278,39 @@ TextTheme _buildTextTheme(ColorScheme colorScheme) {
   // whatever happened to name a colour explicitly, which made it look like
   // scattered missing labels rather than one broken theme.
   final typography = Typography.material2021(colorScheme: colorScheme);
-  final base = (colorScheme.brightness == Brightness.dark
-          ? typography.white
-          : typography.black)
-      .apply(fontFamily: sans);
+  final base =
+      (colorScheme.brightness == Brightness.dark
+              ? typography.white
+              : typography.black)
+          .apply(fontFamily: sans);
   return base.copyWith(
-    displayLarge: base.displayLarge?.copyWith(fontFamily: serif, fontWeight: FontWeight.w600),
-    displayMedium: base.displayMedium?.copyWith(fontFamily: serif, fontWeight: FontWeight.w600),
-    displaySmall: base.displaySmall?.copyWith(fontFamily: serif, fontWeight: FontWeight.w600),
-    headlineLarge: base.headlineLarge?.copyWith(fontFamily: serif, fontWeight: FontWeight.w600),
-    headlineMedium: base.headlineMedium?.copyWith(fontFamily: serif, fontWeight: FontWeight.w600),
-    headlineSmall: base.headlineSmall?.copyWith(fontFamily: serif, fontWeight: FontWeight.w600),
-    titleLarge: base.titleLarge?.copyWith(fontFamily: serif, fontWeight: FontWeight.w600),
+    displayLarge: base.displayLarge?.copyWith(
+      fontFamily: serif,
+      fontWeight: FontWeight.w600,
+    ),
+    displayMedium: base.displayMedium?.copyWith(
+      fontFamily: serif,
+      fontWeight: FontWeight.w600,
+    ),
+    displaySmall: base.displaySmall?.copyWith(
+      fontFamily: serif,
+      fontWeight: FontWeight.w600,
+    ),
+    headlineLarge: base.headlineLarge?.copyWith(
+      fontFamily: serif,
+      fontWeight: FontWeight.w600,
+    ),
+    headlineMedium: base.headlineMedium?.copyWith(
+      fontFamily: serif,
+      fontWeight: FontWeight.w600,
+    ),
+    headlineSmall: base.headlineSmall?.copyWith(
+      fontFamily: serif,
+      fontWeight: FontWeight.w600,
+    ),
+    titleLarge: base.titleLarge?.copyWith(
+      fontFamily: serif,
+      fontWeight: FontWeight.w600,
+    ),
   );
 }

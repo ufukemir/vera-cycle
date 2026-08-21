@@ -45,8 +45,7 @@ void main() {
     final wallClock = DateTime(2026, 8, 17, 9, 30);
     final converted = tz.TZDateTime.from(wallClock.toUtc(), tz.local);
 
-    expect(converted.millisecondsSinceEpoch,
-        wallClock.millisecondsSinceEpoch);
+    expect(converted.millisecondsSinceEpoch, wallClock.millisecondsSinceEpoch);
   });
 
   group('nextOccurrenceOf', () {

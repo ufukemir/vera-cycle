@@ -57,8 +57,11 @@ class PremiumLock extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(Icons.lock_outline,
-                    size: 18, color: theme.colorScheme.primary),
+                Icon(
+                  Icons.lock_outline,
+                  size: 18,
+                  color: theme.colorScheme.primary,
+                ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(title, style: theme.textTheme.titleMedium),
@@ -70,10 +73,7 @@ class PremiumLock extends StatelessWidget {
               description ?? l10n.premiumLockedTitle,
               style: theme.textTheme.bodySmall,
             ),
-            if (preview != null) ...[
-              const SizedBox(height: 12),
-              preview,
-            ],
+            if (preview != null) ...[const SizedBox(height: 12), preview],
             Align(
               alignment: AlignmentDirectional.centerEnd,
               child: TextButton(

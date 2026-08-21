@@ -41,10 +41,14 @@ class CycleInsights {
 
   static CycleInsights compute(List<ObservedCycle> cycles, List<DayLog> logs) {
     final periodLengths = cycles.map((c) => c.periodLength).toList();
-    final completedLengths = cycles.map((c) => c.length).whereType<int>().toList();
+    final completedLengths = cycles
+        .map((c) => c.length)
+        .whereType<int>()
+        .toList();
 
-    final averagePeriodLength =
-        periodLengths.isEmpty ? null : _mean(periodLengths);
+    final averagePeriodLength = periodLengths.isEmpty
+        ? null
+        : _mean(periodLengths);
 
     double? averageCycleLength;
     double? cycleLengthStdDev;
@@ -76,8 +80,10 @@ class CycleInsights {
   static int? _cycleDayFor(DateTime date, List<ObservedCycle> cycles) {
     for (final cycle in cycles) {
       final nextStart = cycle.nextStartDate;
-      final withinOpenCycle = nextStart == null && !date.isBefore(cycle.startDate);
-      final withinClosedCycle = nextStart != null &&
+      final withinOpenCycle =
+          nextStart == null && !date.isBefore(cycle.startDate);
+      final withinClosedCycle =
+          nextStart != null &&
           !date.isBefore(cycle.startDate) &&
           date.isBefore(nextStart);
       if (withinOpenCycle || withinClosedCycle) {
@@ -91,7 +97,10 @@ class CycleInsights {
       xs.fold<int>(0, (a, b) => a + b) / xs.length;
 
   static double _stdDev(List<int> xs, double mean) {
-    final sumOfSquares = xs.fold<double>(0, (a, x) => a + math.pow(x - mean, 2));
+    final sumOfSquares = xs.fold<double>(
+      0,
+      (a, x) => a + math.pow(x - mean, 2),
+    );
     return math.sqrt(sumOfSquares / (xs.length - 1));
   }
 }

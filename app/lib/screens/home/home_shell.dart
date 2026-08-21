@@ -10,7 +10,7 @@ import 'widgets/quick_log_sheet.dart';
 import '../calendar/calendar_screen.dart';
 import '../day_log/day_log_screen.dart';
 import '../insights/insights_screen.dart';
-import '../settings/settings_screen.dart';
+import '../settings/reminders_screen.dart';
 import 'home_screen.dart';
 import 'widgets/vera_bottom_bar.dart';
 
@@ -85,11 +85,17 @@ class _HomeShellState extends State<HomeShell> {
     // Four destinations; logging is the raised centre action, not a tab.
     // The assistant moved to the home screen's quick actions — see
     // VeraBottomBar for why the middle slot is worth a destination.
+    //
+    // Settings lost its own slot to Reminders — eight toggles buried two
+    // taps deep under Profile were worse than one screen was worth a
+    // permanent destination for — and now lives one tap into Profile via
+    // its gear icon instead, the way it already did from most other
+    // screens in the app.
     const tabs = [
       HomeScreen(),
       CalendarScreen(),
+      RemindersScreen(),
       InsightsScreen(),
-      SettingsScreen(),
     ];
     final movingRight = _index >= _previousIndex;
 
@@ -99,8 +105,12 @@ class _HomeShellState extends State<HomeShell> {
     );
   }
 
-  Widget _buildShell(BuildContext context, AppLocalizations l10n,
-      List<Widget> tabs, bool movingRight) {
+  Widget _buildShell(
+    BuildContext context,
+    AppLocalizations l10n,
+    List<Widget> tabs,
+    bool movingRight,
+  ) {
     return Scaffold(
       body: AnimatedSwitcher(
         duration: const Duration(milliseconds: 280),
@@ -128,9 +138,9 @@ class _HomeShellState extends State<HomeShell> {
           _previousIndex = _index;
           _index = i;
         }),
-        onTrack: () => Navigator.of(context).push(
-          MaterialPageRoute(builder: (_) => DayLogScreen(date: today())),
-        ),
+        onTrack: () => Navigator.of(
+          context,
+        ).push(MaterialPageRoute(builder: (_) => DayLogScreen(date: today()))),
       ),
     );
   }

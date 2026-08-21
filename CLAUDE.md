@@ -13,6 +13,32 @@ Premium reklamları kaldırır.
 > reklamlar Google AdMob üzerinden gösterilir ve AdMob kendi çerçevesinde cihaz
 > tanımlayıcıları işleyebilir." Sağlık verisi hiçbir zaman reklam ağına GÖNDERİLMEZ.
 
+> **PARTNER MODU REVİZYONU (2026-08-21, Ufuk'un açık kararı):** Aşağıdaki 1
+> numaralı ilke bir kez daha yumuşatıldı. Ufuk, ekran görüntüleriyle
+> gösterdiği bir rakip özelliği örnek alarak gerçek hesap + gerçek sunucu
+> tabanlı bir "Partner Modu" istedi — Apple/Google ile giriş, Firestore'da
+> eşleştirme ve seçilen alanların partnerle paylaşımı. Bu, "sağlık verisi
+> hiçbir zaman sunucuya gitmez" sözünün kullanıcının AÇIKÇA OPT-IN olduğu,
+> AÇIKÇA SEÇTİĞİ alanlarla sınırlı, tek istisnasıdır — tam geçmiş asla
+> paylaşılmaz, yalnızca o anki anlık görünüm ve yalnızca işaretlenen
+> kategoriler (bkz. `pubspec.yaml`'daki gerekçe notu). Bağımlılıklar:
+> `firebase_core`, `firebase_auth`, `cloud_firestore`, `google_sign_in`,
+> `sign_in_with_apple`. Firebase yapılandırması (proje, config dosyaları,
+> Apple/Google kimlik bilgileri) Ufuk'un kendi hesaplarını gerektirir —
+> ajan bunları oluşturamaz, sadece istemci tarafı kodu yazabilir.
+
+> **BULUT YEDEKLEME REVİZYONU (2026-08-21, Ufuk'un kararı):** 1 numaralı ilke
+> ikinci kez, dar bir kapsamda yumuşatıldı. Partner Modu için kurulan
+> Google/Apple girişi, şimdi isteğe bağlı bir "hesapla yedekle" özelliği için
+> de kullanılıyor: kullanıcı giriş yapıp `BackupService`'in ürettiği AYNI
+> parola-şifreli dosyayı (yerel dışa aktarmada zaten var olan format) Firebase
+> Storage'a yükleyebiliyor. Bu, Partner Modu'ndan daha dar bir istisnadır —
+> sunucu hiçbir zaman düz metin görmez, yalnızca zaten şifrelenmiş baytları
+> taşır; parolayı bilmeyen biri (biz dahil) dosyayı açamaz. Amaç cihaz
+> değiştirme/kaybetme durumunda geri getirme, sürekli senkron değil. Yeni
+> bağımlılık: `firebase_storage` (bkz. `pubspec.yaml` gerekçe notu).
+> Firebase yapılandırması burada da Ufuk'un kendi hesaplarını gerektirir.
+
 > Uygulama içi görünen ad **Vera** (2026-08-13'te seçildi — Latince "gerçek/doğru",
 > dürüst tahmin ilkesini isme kodluyor). Dart paket adı/dizin adı/bundle id hâlâ
 > `cycle`/`cycle_app`/`com.ufukemir.cycle_app` — bunları değiştirmek daha büyük bir
@@ -28,10 +54,15 @@ Premium reklamları kaldırır.
 
 ## Mimari ilkeler (2026-08-14 revizyonuyla)
 
-1. **Sağlık verisi cihazdan çıkmaz.** Sunucu yok, hesap yok, e-posta yok, bulut senkronu
-   yok. Kullanıcının kendi başlattığı dışa aktarma/paylaşma dışında sağlık verisi hiçbir
-   yere gitmez. Reklam SDK'sının kendi trafiği bu kapsamda değildir ama ona ASLA sağlık
-   verisi, döngü bilgisi veya türevi sinyal verilmez.
+1. ~~Sağlık verisi cihazdan çıkmaz~~ **(REVİZE, 2026-08-21)** Sunucu yok, hesap yok,
+   e-posta yok, bulut senkronu yok — **Partner Modu opt-in'i ve isteğe bağlı
+   hesapla bulut yedeği dışında.** Kullanıcının kendi başlattığı dışa
+   aktarma/paylaşma, Partner Modu'nda açıkça işaretlediği alanların anlık
+   paylaşımı ve hesapla giriş yapıp yüklediği ŞİFRELİ yedek dışında sağlık
+   verisi hiçbir yere gitmez — bulut yedeği durumunda sunucu yalnızca zaten
+   şifrelenmiş baytları görür, düz metni asla. Reklam SDK'sının kendi
+   trafiği bu kapsamda değildir ama ona ASLA sağlık verisi, döngü bilgisi
+   veya türevi sinyal verilmez.
 2. ~~Android'de INTERNET izni yoktur~~ **(REVİZE)** INTERNET izni yalnızca reklam SDK'sı
    için vardır. Uygulamanın kendi kodu ağ çağrısı YAPMAZ; bunun regresyon testi
    `android_manifest_test.dart`'ta izin listesi sabitlemesiyle sürer.
@@ -103,6 +134,14 @@ Premium reklamları kaldırır.
   `l10n_pending/`'de bekler. Yarım çeviri = kullanıcıya karışık dilli ekran, bu
   yüzden "önce ekle sonra tamamla" yapılmaz. Sağlık terimlerinde makine çevirisi
   yanıltıcı olabilir; yeni dil için anadili konuşan gözden geçirme şart.
+  **İstisna (2026-08-21, Ufuk'un kararı):** 15 dil (Çekçe, Danca, Yunanca,
+  Fince, Macarca, İtalyanca, Malayca, Norveççe, Felemenkçe, Lehçe, Portekizce,
+  Rumence, Rusça, İsveççe, Ukraynaca) anadili gözden geçirmesi OLMADAN
+  `l10n_pending/`'den `lib/l10n/`'e taşınıp listeye eklendi — çeviri kalitesine
+  duyulan güvenle, resmî bir inceleme değil. Kalan 14 dil (Bengalce, Farsça,
+  Hintçe, Japonca, Korece, Marathi, Svahili, Tamilce, Telugu, Tayca, Tagalog,
+  Urduca, Vietnamca, Çince) kuralın asıl haliyle beklemeye devam ediyor —
+  bunlar için gerçek bir anadili incelemesi hâlâ şart.
 - Kod/commit dili: İngilizce. Ufuk'la konuşma: Türkçe.
 - Fontlar (Quicksand, Fraunces) `assets/fonts/`'ta yerel paketlenir, `google_fonts`
   paketinin çalışma zamanı ağ indirmesi KULLANILMAZ — ilke 2'yi ihlal eder.

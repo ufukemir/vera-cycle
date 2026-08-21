@@ -77,7 +77,7 @@ void main() {
     await _openLog(tester);
 
     await _scrollToNote(tester);
-    await tester.enterText(find.byType(NoteField),'başım ağrıyor');
+    await tester.enterText(find.byType(NoteField), 'başım ağrıyor');
     await tester.pump(const Duration(milliseconds: 500));
 
     expect(controller.logFor(today())?.note, 'başım ağrıyor');
@@ -90,14 +90,16 @@ void main() {
     await _openLog(tester);
 
     await _scrollToNote(tester);
-    await tester.enterText(find.byType(NoteField),'not');
+    await tester.enterText(find.byType(NoteField), 'not');
     await tester.pump(const Duration(milliseconds: 500));
     expect(
       tester
-          .widget<AnimatedOpacity>(find.ancestor(
-            of: find.text('Kaydedildi'),
-            matching: find.byType(AnimatedOpacity),
-          ))
+          .widget<AnimatedOpacity>(
+            find.ancestor(
+              of: find.text('Kaydedildi'),
+              matching: find.byType(AnimatedOpacity),
+            ),
+          )
           .opacity,
       1,
     );
@@ -105,24 +107,27 @@ void main() {
     await tester.pump(const Duration(seconds: 3));
     expect(
       tester
-          .widget<AnimatedOpacity>(find.ancestor(
-            of: find.text('Kaydedildi'),
-            matching: find.byType(AnimatedOpacity),
-          ))
+          .widget<AnimatedOpacity>(
+            find.ancestor(
+              of: find.text('Kaydedildi'),
+              matching: find.byType(AnimatedOpacity),
+            ),
+          )
           .opacity,
       0,
     );
     expect(controller.logFor(today())?.note, 'not');
   });
 
-  testWidgets('leaving inside the debounce window still saves the note',
-      (tester) async {
+  testWidgets('leaving inside the debounce window still saves the note', (
+    tester,
+  ) async {
     final (app, controller) = await _app();
     await tester.pumpWidget(app);
     await _openLog(tester);
 
     await _scrollToNote(tester);
-    await tester.enterText(find.byType(NoteField),'yarıda kaldı');
+    await tester.enterText(find.byType(NoteField), 'yarıda kaldı');
     // Deliberately shorter than the 400ms debounce: this is the case that
     // used to lose the last keystrokes.
     await tester.pump(const Duration(milliseconds: 50));
@@ -139,7 +144,7 @@ void main() {
     await _openLog(tester);
 
     await _scrollToNote(tester);
-    await tester.enterText(find.byType(NoteField),'geri tuşu');
+    await tester.enterText(find.byType(NoteField), 'geri tuşu');
     await tester.pump(const Duration(milliseconds: 50));
     await tester.tap(find.byType(BackButton));
     await tester.pumpAndSettle();

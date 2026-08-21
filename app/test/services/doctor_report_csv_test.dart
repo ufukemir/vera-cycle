@@ -8,8 +8,11 @@ void main() {
 
   test('the header row lists every column', () {
     final output = csv.build(const []);
-    expect(output, 'date,flow,symptoms,mood,sexual_activity,basal_temp_c,'
-        'cervical_mucus,note');
+    expect(
+      output,
+      'date,flow,symptoms,mood,sexual_activity,basal_temp_c,'
+      'cervical_mucus,note',
+    );
   });
 
   test('one plain row after the header', () {
@@ -37,9 +40,7 @@ void main() {
   });
 
   test('notes are excluded by default even when present', () {
-    final logs = [
-      DayLog(date: DateTime(2026, 4, 1), note: 'private thoughts'),
-    ];
+    final logs = [DayLog(date: DateTime(2026, 4, 1), note: 'private thoughts')];
 
     final output = csv.build(logs);
 
@@ -47,9 +48,7 @@ void main() {
   });
 
   test('notes are included when explicitly requested', () {
-    final logs = [
-      DayLog(date: DateTime(2026, 4, 1), note: 'private thoughts'),
-    ];
+    final logs = [DayLog(date: DateTime(2026, 4, 1), note: 'private thoughts')];
 
     final output = csv.build(logs, includeNotes: true);
 
@@ -67,9 +66,7 @@ void main() {
   });
 
   test('a note containing a quote is escaped by doubling it', () {
-    final logs = [
-      DayLog(date: DateTime(2026, 4, 1), note: 'felt "off" today'),
-    ];
+    final logs = [DayLog(date: DateTime(2026, 4, 1), note: 'felt "off" today')];
 
     final row = csv.build(logs, includeNotes: true).split('\r\n')[1];
 
@@ -77,9 +74,7 @@ void main() {
   });
 
   test('sexual activity renders as true/false, not 1/0', () {
-    final logs = [
-      DayLog(date: DateTime(2026, 4, 1), sexualActivity: true),
-    ];
+    final logs = [DayLog(date: DateTime(2026, 4, 1), sexualActivity: true)];
 
     final row = csv.build(logs).split('\r\n')[1];
 

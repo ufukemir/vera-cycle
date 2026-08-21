@@ -6,12 +6,27 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_ar.dart';
+import 'app_localizations_cs.dart';
+import 'app_localizations_da.dart';
 import 'app_localizations_de.dart';
+import 'app_localizations_el.dart';
 import 'app_localizations_en.dart';
 import 'app_localizations_es.dart';
+import 'app_localizations_fi.dart';
 import 'app_localizations_fr.dart';
+import 'app_localizations_hu.dart';
 import 'app_localizations_id.dart';
+import 'app_localizations_it.dart';
+import 'app_localizations_ms.dart';
+import 'app_localizations_nb.dart';
+import 'app_localizations_nl.dart';
+import 'app_localizations_pl.dart';
+import 'app_localizations_pt.dart';
+import 'app_localizations_ro.dart';
+import 'app_localizations_ru.dart';
+import 'app_localizations_sv.dart';
 import 'app_localizations_tr.dart';
+import 'app_localizations_uk.dart';
 
 // ignore_for_file: type=lint
 
@@ -100,12 +115,27 @@ abstract class AppLocalizations {
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('ar'),
+    Locale('cs'),
+    Locale('da'),
     Locale('de'),
+    Locale('el'),
     Locale('en'),
     Locale('es'),
+    Locale('fi'),
     Locale('fr'),
+    Locale('hu'),
     Locale('id'),
+    Locale('it'),
+    Locale('ms'),
+    Locale('nb'),
+    Locale('nl'),
+    Locale('pl'),
+    Locale('pt'),
+    Locale('ro'),
+    Locale('ru'),
+    Locale('sv'),
     Locale('tr'),
+    Locale('uk'),
   ];
 
   /// The application name, shown as the app title.
@@ -137,6 +167,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel'**
   String get actionCancel;
+
+  /// No description provided for @actionClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get actionClear;
 
   /// No description provided for @actionDelete.
   ///
@@ -234,11 +270,47 @@ abstract class AppLocalizations {
   /// **'Use biometrics'**
   String get lockScreenUseBiometrics;
 
+  /// No description provided for @lockScreenUseFaceId.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Face ID'**
+  String get lockScreenUseFaceId;
+
+  /// No description provided for @lockScreenUseFingerprint.
+  ///
+  /// In en, this message translates to:
+  /// **'Use fingerprint'**
+  String get lockScreenUseFingerprint;
+
   /// No description provided for @lockScreenForgotPin.
   ///
   /// In en, this message translates to:
   /// **'Forgot your PIN?'**
   String get lockScreenForgotPin;
+
+  /// No description provided for @lockScreenForgotPinChoiceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How do you want to reset it?'**
+  String get lockScreenForgotPinChoiceTitle;
+
+  /// No description provided for @lockScreenResetViaDevice.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify with this device'**
+  String get lockScreenResetViaDevice;
+
+  /// No description provided for @lockScreenResetViaDeviceBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your data stays. Confirming with this phone\'s own lock — Face ID, fingerprint, or passcode — is enough.'**
+  String get lockScreenResetViaDeviceBody;
+
+  /// No description provided for @lockScreenResetViaDeviceReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify to set a new PIN'**
+  String get lockScreenResetViaDeviceReason;
 
   /// No description provided for @lockScreenThrottled.
   ///
@@ -492,6 +564,18 @@ abstract class AppLocalizations {
   /// **'Settings'**
   String get navSettings;
 
+  /// No description provided for @navReminders.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders'**
+  String get navReminders;
+
+  /// No description provided for @navProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get navProfile;
+
   /// No description provided for @navTrack.
   ///
   /// In en, this message translates to:
@@ -726,6 +810,144 @@ abstract class AppLocalizations {
   /// **'Dizziness'**
   String get symptomDizziness;
 
+  /// No description provided for @symptomMigraine.
+  ///
+  /// In en, this message translates to:
+  /// **'Migraine'**
+  String get symptomMigraine;
+
+  /// No description provided for @symptomHighFever.
+  ///
+  /// In en, this message translates to:
+  /// **'High fever'**
+  String get symptomHighFever;
+
+  /// No description provided for @symptomNeckPain.
+  ///
+  /// In en, this message translates to:
+  /// **'Neck pain'**
+  String get symptomNeckPain;
+
+  /// No description provided for @symptomShoulderPain.
+  ///
+  /// In en, this message translates to:
+  /// **'Shoulder pain'**
+  String get symptomShoulderPain;
+
+  /// No description provided for @symptomLimbPain.
+  ///
+  /// In en, this message translates to:
+  /// **'Limb pain'**
+  String get symptomLimbPain;
+
+  /// No description provided for @symptomMuscleAche.
+  ///
+  /// In en, this message translates to:
+  /// **'Muscle ache'**
+  String get symptomMuscleAche;
+
+  /// No description provided for @symptomChills.
+  ///
+  /// In en, this message translates to:
+  /// **'Chills'**
+  String get symptomChills;
+
+  /// No description provided for @symptomNightSweats.
+  ///
+  /// In en, this message translates to:
+  /// **'Night sweats'**
+  String get symptomNightSweats;
+
+  /// No description provided for @symptomHotFlashes.
+  ///
+  /// In en, this message translates to:
+  /// **'Hot flashes'**
+  String get symptomHotFlashes;
+
+  /// No description provided for @symptomWeightGain.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight gain'**
+  String get symptomWeightGain;
+
+  /// No description provided for @symptomConstipation.
+  ///
+  /// In en, this message translates to:
+  /// **'Constipation'**
+  String get symptomConstipation;
+
+  /// No description provided for @symptomDiarrhea.
+  ///
+  /// In en, this message translates to:
+  /// **'Diarrhea'**
+  String get symptomDiarrhea;
+
+  /// No description provided for @symptomIndigestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Indigestion'**
+  String get symptomIndigestion;
+
+  /// No description provided for @symptomGasPain.
+  ///
+  /// In en, this message translates to:
+  /// **'Gas pain'**
+  String get symptomGasPain;
+
+  /// No description provided for @symptomFeelingUnwell.
+  ///
+  /// In en, this message translates to:
+  /// **'Feeling unwell'**
+  String get symptomFeelingUnwell;
+
+  /// No description provided for @symptomItching.
+  ///
+  /// In en, this message translates to:
+  /// **'Itching'**
+  String get symptomItching;
+
+  /// No description provided for @symptomTroubleFocusing.
+  ///
+  /// In en, this message translates to:
+  /// **'Trouble focusing'**
+  String get symptomTroubleFocusing;
+
+  /// No description provided for @symptomForgetfulness.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgetfulness'**
+  String get symptomForgetfulness;
+
+  /// No description provided for @symptomGroupHead.
+  ///
+  /// In en, this message translates to:
+  /// **'Head'**
+  String get symptomGroupHead;
+
+  /// No description provided for @symptomGroupBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Body'**
+  String get symptomGroupBody;
+
+  /// No description provided for @symptomGroupAbdomen.
+  ///
+  /// In en, this message translates to:
+  /// **'Abdomen'**
+  String get symptomGroupAbdomen;
+
+  /// No description provided for @symptomGroupGeneral.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get symptomGroupGeneral;
+
+  /// No description provided for @symptomGroupCognitive.
+  ///
+  /// In en, this message translates to:
+  /// **'Cognitive'**
+  String get symptomGroupCognitive;
+
   /// No description provided for @dayLogMoodLabel.
   ///
   /// In en, this message translates to:
@@ -791,6 +1013,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Emotional'**
   String get moodEmotional;
+
+  /// No description provided for @moodExcited.
+  ///
+  /// In en, this message translates to:
+  /// **'Excited'**
+  String get moodExcited;
+
+  /// No description provided for @moodHopeful.
+  ///
+  /// In en, this message translates to:
+  /// **'Hopeful'**
+  String get moodHopeful;
+
+  /// No description provided for @moodProud.
+  ///
+  /// In en, this message translates to:
+  /// **'Proud'**
+  String get moodProud;
+
+  /// No description provided for @moodDisappointed.
+  ///
+  /// In en, this message translates to:
+  /// **'Disappointed'**
+  String get moodDisappointed;
+
+  /// No description provided for @moodConfident.
+  ///
+  /// In en, this message translates to:
+  /// **'Confident'**
+  String get moodConfident;
+
+  /// No description provided for @moodSurprised.
+  ///
+  /// In en, this message translates to:
+  /// **'Surprised'**
+  String get moodSurprised;
+
+  /// No description provided for @moodIndifferent.
+  ///
+  /// In en, this message translates to:
+  /// **'Indifferent'**
+  String get moodIndifferent;
+
+  /// No description provided for @moodPeaceful.
+  ///
+  /// In en, this message translates to:
+  /// **'Peaceful'**
+  String get moodPeaceful;
+
+  /// No description provided for @moodInLove.
+  ///
+  /// In en, this message translates to:
+  /// **'In love'**
+  String get moodInLove;
+
+  /// No description provided for @moodShy.
+  ///
+  /// In en, this message translates to:
+  /// **'Shy'**
+  String get moodShy;
+
+  /// No description provided for @moodPlayful.
+  ///
+  /// In en, this message translates to:
+  /// **'Playful'**
+  String get moodPlayful;
+
+  /// No description provided for @moodExhausted.
+  ///
+  /// In en, this message translates to:
+  /// **'Exhausted'**
+  String get moodExhausted;
+
+  /// No description provided for @moodLonely.
+  ///
+  /// In en, this message translates to:
+  /// **'Lonely'**
+  String get moodLonely;
+
+  /// No description provided for @moodOverwhelmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Overwhelmed'**
+  String get moodOverwhelmed;
+
+  /// No description provided for @moodGrateful.
+  ///
+  /// In en, this message translates to:
+  /// **'Grateful'**
+  String get moodGrateful;
+
+  /// No description provided for @moodNostalgic.
+  ///
+  /// In en, this message translates to:
+  /// **'Nostalgic'**
+  String get moodNostalgic;
 
   /// No description provided for @dayLogNoteLabel.
   ///
@@ -1104,6 +1422,156 @@ abstract class AppLocalizations {
   /// **'اردو'**
   String get settingsLanguageUrdu;
 
+  /// No description provided for @settingsLanguageDutch.
+  ///
+  /// In en, this message translates to:
+  /// **'Nederlands'**
+  String get settingsLanguageDutch;
+
+  /// No description provided for @settingsLanguageSwedish.
+  ///
+  /// In en, this message translates to:
+  /// **'Svenska'**
+  String get settingsLanguageSwedish;
+
+  /// No description provided for @settingsLanguageNorwegian.
+  ///
+  /// In en, this message translates to:
+  /// **'Norsk bokmål'**
+  String get settingsLanguageNorwegian;
+
+  /// No description provided for @settingsLanguageDanish.
+  ///
+  /// In en, this message translates to:
+  /// **'Dansk'**
+  String get settingsLanguageDanish;
+
+  /// No description provided for @settingsLanguagePolish.
+  ///
+  /// In en, this message translates to:
+  /// **'Polski'**
+  String get settingsLanguagePolish;
+
+  /// No description provided for @settingsLanguageUkrainian.
+  ///
+  /// In en, this message translates to:
+  /// **'Українська'**
+  String get settingsLanguageUkrainian;
+
+  /// No description provided for @settingsLanguageCzech.
+  ///
+  /// In en, this message translates to:
+  /// **'Čeština'**
+  String get settingsLanguageCzech;
+
+  /// No description provided for @settingsLanguageHungarian.
+  ///
+  /// In en, this message translates to:
+  /// **'Magyar'**
+  String get settingsLanguageHungarian;
+
+  /// No description provided for @settingsLanguageRomanian.
+  ///
+  /// In en, this message translates to:
+  /// **'Română'**
+  String get settingsLanguageRomanian;
+
+  /// No description provided for @settingsLanguageFinnish.
+  ///
+  /// In en, this message translates to:
+  /// **'Suomi'**
+  String get settingsLanguageFinnish;
+
+  /// No description provided for @settingsLanguageGreek.
+  ///
+  /// In en, this message translates to:
+  /// **'Ελληνικά'**
+  String get settingsLanguageGreek;
+
+  /// No description provided for @settingsLanguageMalay.
+  ///
+  /// In en, this message translates to:
+  /// **'Bahasa Melayu'**
+  String get settingsLanguageMalay;
+
+  /// No description provided for @tourSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get tourSkip;
+
+  /// No description provided for @tourNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get tourNext;
+
+  /// No description provided for @tourStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s start'**
+  String get tourStart;
+
+  /// No description provided for @tourHomeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get tourHomeTitle;
+
+  /// No description provided for @tourHomeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'See where you are today at a glance — your cycle day, how long until your estimated window, and your companion are always here.'**
+  String get tourHomeBody;
+
+  /// No description provided for @tourCalendarTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Calendar'**
+  String get tourCalendarTitle;
+
+  /// No description provided for @tourCalendarBody.
+  ///
+  /// In en, this message translates to:
+  /// **'See your past and upcoming cycles on the calendar. Tap any day to open its log.'**
+  String get tourCalendarBody;
+
+  /// No description provided for @tourTrackTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Log'**
+  String get tourTrackTitle;
+
+  /// No description provided for @tourTrackBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The + button in the middle opens today\'s log from anywhere — flow, symptoms, mood, and more.'**
+  String get tourTrackBody;
+
+  /// No description provided for @tourRemindersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders'**
+  String get tourRemindersTitle;
+
+  /// No description provided for @tourRemindersBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Set reminders for your upcoming period, medication, or drinking water — they all stay on your phone and go nowhere else.'**
+  String get tourRemindersBody;
+
+  /// No description provided for @tourProfileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get tourProfileTitle;
+
+  /// No description provided for @tourProfileBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Find your insights, everything you track, and your settings here.'**
+  String get tourProfileBody;
+
   /// No description provided for @settingsWeekStartLabel.
   ///
   /// In en, this message translates to:
@@ -1152,6 +1620,564 @@ abstract class AppLocalizations {
   /// **'Reminders'**
   String get remindersScreenTitle;
 
+  /// No description provided for @reminderDetailNotification.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification'**
+  String get reminderDetailNotification;
+
+  /// No description provided for @reminderDetailAlert.
+  ///
+  /// In en, this message translates to:
+  /// **'Alert'**
+  String get reminderDetailAlert;
+
+  /// No description provided for @reminderDetailAlertToday.
+  ///
+  /// In en, this message translates to:
+  /// **'On the day'**
+  String get reminderDetailAlertToday;
+
+  /// No description provided for @reminderDetailTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get reminderDetailTime;
+
+  /// No description provided for @reminderDetailMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Message'**
+  String get reminderDetailMessage;
+
+  /// No description provided for @reminderDetailMessageEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit message'**
+  String get reminderDetailMessageEditTitle;
+
+  /// No description provided for @reminderDetailMessageHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Write your own message'**
+  String get reminderDetailMessageHint;
+
+  /// No description provided for @reminderDetailAlertDaysBefore.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{{count} day earlier} other{{count} days earlier}}'**
+  String reminderDetailAlertDaysBefore(int count);
+
+  /// No description provided for @optionsShowMore.
+  ///
+  /// In en, this message translates to:
+  /// **'+{count} more'**
+  String optionsShowMore(int count);
+
+  /// No description provided for @optionsShowLess.
+  ///
+  /// In en, this message translates to:
+  /// **'Show less'**
+  String get optionsShowLess;
+
+  /// No description provided for @trackerHistoryEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get trackerHistoryEntry;
+
+  /// No description provided for @actionSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get actionSend;
+
+  /// No description provided for @actionRemove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get actionRemove;
+
+  /// No description provided for @feedbackEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback'**
+  String get feedbackEntry;
+
+  /// No description provided for @cloudBackupEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'Back Up with Account'**
+  String get cloudBackupEntry;
+
+  /// No description provided for @cloudBackupTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Back Up with Account'**
+  String get cloudBackupTitle;
+
+  /// No description provided for @cloudBackupNotConfiguredTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Not available in this build yet'**
+  String get cloudBackupNotConfiguredTitle;
+
+  /// No description provided for @cloudBackupNotConfiguredBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Cloud backup needs an account service that hasn\'t been set up for this build yet. Nothing here can be used until it is.'**
+  String get cloudBackupNotConfiguredBody;
+
+  /// No description provided for @cloudBackupIntro1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Never lose your history'**
+  String get cloudBackupIntro1Title;
+
+  /// No description provided for @cloudBackupIntro1Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Your cycle history stays safe even if you lose your phone or switch to a new one.'**
+  String get cloudBackupIntro1Body;
+
+  /// No description provided for @cloudBackupIntro2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Only you can open it'**
+  String get cloudBackupIntro2Title;
+
+  /// No description provided for @cloudBackupIntro2Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Your backup is encrypted with a password before it ever leaves your phone — we cannot read it, and neither can anyone else.'**
+  String get cloudBackupIntro2Body;
+
+  /// No description provided for @cloudBackupIntro3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore in seconds'**
+  String get cloudBackupIntro3Title;
+
+  /// No description provided for @cloudBackupIntro3Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in on a new device and bring your history back with the same password.'**
+  String get cloudBackupIntro3Body;
+
+  /// No description provided for @cloudBackupSignedInTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Signed in'**
+  String get cloudBackupSignedInTitle;
+
+  /// No description provided for @cloudBackupUploadButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Back up now'**
+  String get cloudBackupUploadButton;
+
+  /// No description provided for @cloudBackupDownloadButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore from cloud'**
+  String get cloudBackupDownloadButton;
+
+  /// No description provided for @cloudBackupUploadSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Backed up to your account'**
+  String get cloudBackupUploadSuccess;
+
+  /// No description provided for @cloudBackupNoBackupFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No cloud backup found for this account yet.'**
+  String get cloudBackupNoBackupFound;
+
+  /// No description provided for @partnerModeEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'Partner Mode'**
+  String get partnerModeEntry;
+
+  /// No description provided for @partnerModeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Partner Mode'**
+  String get partnerModeTitle;
+
+  /// No description provided for @partnerModeNotConfiguredTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Not available in this build yet'**
+  String get partnerModeNotConfiguredTitle;
+
+  /// No description provided for @partnerModeNotConfiguredBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Partner Mode needs an account service that hasn\'t been set up for this build yet. Nothing here can be used until it is.'**
+  String get partnerModeNotConfiguredBody;
+
+  /// No description provided for @partnerModeHeroTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Share a little, on your terms'**
+  String get partnerModeHeroTitle;
+
+  /// No description provided for @partnerModeHeroBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Pair with your partner and share only the specific things you turn on below — never your full history, never automatically.'**
+  String get partnerModeHeroBody;
+
+  /// No description provided for @partnerModeSignInGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Google'**
+  String get partnerModeSignInGoogle;
+
+  /// No description provided for @partnerModeSignInApple.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Apple'**
+  String get partnerModeSignInApple;
+
+  /// No description provided for @partnerModeFaqTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Before you sign in'**
+  String get partnerModeFaqTitle;
+
+  /// No description provided for @partnerModeFaq1Q.
+  ///
+  /// In en, this message translates to:
+  /// **'What will my partner actually see?'**
+  String get partnerModeFaq1Q;
+
+  /// No description provided for @partnerModeFaq1A.
+  ///
+  /// In en, this message translates to:
+  /// **'Only the fields you turn on in Partner Mode, and only your current snapshot — never your logged history, and never anything you haven\'t explicitly shared.'**
+  String get partnerModeFaq1A;
+
+  /// No description provided for @partnerModeFaq2Q.
+  ///
+  /// In en, this message translates to:
+  /// **'Can I turn this off later?'**
+  String get partnerModeFaq2Q;
+
+  /// No description provided for @partnerModeFaq2A.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes. Unpairing ends sharing immediately for both of you, and you can turn off any individual toggle at any time without unpairing.'**
+  String get partnerModeFaq2A;
+
+  /// No description provided for @partnerModeFaq3Q.
+  ///
+  /// In en, this message translates to:
+  /// **'Does my partner need this app?'**
+  String get partnerModeFaq3Q;
+
+  /// No description provided for @partnerModeFaq3A.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes — they sign in the same way and pair using a code you send them.'**
+  String get partnerModeFaq3A;
+
+  /// No description provided for @partnerModeNotPairedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Not paired yet'**
+  String get partnerModeNotPairedTitle;
+
+  /// No description provided for @partnerModeNotPairedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite your partner with a one-time code, or enter the code they sent you.'**
+  String get partnerModeNotPairedBody;
+
+  /// No description provided for @partnerModeInviteButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite my partner'**
+  String get partnerModeInviteButton;
+
+  /// No description provided for @partnerModeEnterCodeButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a code'**
+  String get partnerModeEnterCodeButton;
+
+  /// No description provided for @partnerModeSignOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get partnerModeSignOut;
+
+  /// No description provided for @partnerModePairedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Paired'**
+  String get partnerModePairedTitle;
+
+  /// No description provided for @partnerModePairedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You and your partner are connected. Sharing still only happens for what you turn on below.'**
+  String get partnerModePairedBody;
+
+  /// No description provided for @partnerModeShareSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What you share'**
+  String get partnerModeShareSectionTitle;
+
+  /// No description provided for @partnerModeShareCyclePhase.
+  ///
+  /// In en, this message translates to:
+  /// **'Cycle phase and day'**
+  String get partnerModeShareCyclePhase;
+
+  /// No description provided for @partnerModeShareMood.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s mood'**
+  String get partnerModeShareMood;
+
+  /// No description provided for @partnerModeShareSymptoms.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s symptoms'**
+  String get partnerModeShareSymptoms;
+
+  /// No description provided for @partnerModeShareHighDesire.
+  ///
+  /// In en, this message translates to:
+  /// **'Feeling close today'**
+  String get partnerModeShareHighDesire;
+
+  /// No description provided for @partnerModeShareNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Share now'**
+  String get partnerModeShareNow;
+
+  /// No description provided for @partnerModeShareSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Shared with your partner'**
+  String get partnerModeShareSuccess;
+
+  /// No description provided for @partnerModeUnpair.
+  ///
+  /// In en, this message translates to:
+  /// **'Unpair'**
+  String get partnerModeUnpair;
+
+  /// No description provided for @partnerModeUnpairConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Unpair from your partner?'**
+  String get partnerModeUnpairConfirmTitle;
+
+  /// No description provided for @partnerModeUnpairConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This ends sharing for both of you immediately. You can pair again later with a new code.'**
+  String get partnerModeUnpairConfirmBody;
+
+  /// No description provided for @partnerModePartnerSnapshotEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Your partner hasn\'t shared anything yet.'**
+  String get partnerModePartnerSnapshotEmpty;
+
+  /// No description provided for @partnerModeErrorNotConfigured.
+  ///
+  /// In en, this message translates to:
+  /// **'Partner Mode isn\'t set up on this build yet.'**
+  String get partnerModeErrorNotConfigured;
+
+  /// No description provided for @partnerModeErrorCodeNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'That code wasn\'t found. Check it and try again.'**
+  String get partnerModeErrorCodeNotFound;
+
+  /// No description provided for @partnerModeErrorCodeExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'That code has expired. Ask for a new one.'**
+  String get partnerModeErrorCodeExpired;
+
+  /// No description provided for @partnerModeErrorCodeIsOwn.
+  ///
+  /// In en, this message translates to:
+  /// **'That\'s your own code — ask your partner for theirs.'**
+  String get partnerModeErrorCodeIsOwn;
+
+  /// No description provided for @partnerModeErrorNotSignedIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in first.'**
+  String get partnerModeErrorNotSignedIn;
+
+  /// No description provided for @partnerModeErrorUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get partnerModeErrorUnknown;
+
+  /// No description provided for @partnerModeInviteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite your partner'**
+  String get partnerModeInviteTitle;
+
+  /// No description provided for @partnerModeInviteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Send this code to your partner. They\'ll enter it in their own app to pair with you.'**
+  String get partnerModeInviteBody;
+
+  /// No description provided for @partnerModeInviteExpiry.
+  ///
+  /// In en, this message translates to:
+  /// **'Valid for 7 days'**
+  String get partnerModeInviteExpiry;
+
+  /// No description provided for @partnerModeInviteShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Share code'**
+  String get partnerModeInviteShare;
+
+  /// No description provided for @partnerModeInviteMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Here\'s my Vera pairing code: {code}'**
+  String partnerModeInviteMessage(String code);
+
+  /// No description provided for @partnerModeEnterTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a code'**
+  String get partnerModeEnterTitle;
+
+  /// No description provided for @partnerModeEnterBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the code your partner sent you.'**
+  String get partnerModeEnterBody;
+
+  /// No description provided for @partnerModeEnterHint.
+  ///
+  /// In en, this message translates to:
+  /// **'6-character code'**
+  String get partnerModeEnterHint;
+
+  /// No description provided for @partnerModeEnterSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Pair'**
+  String get partnerModeEnterSubmit;
+
+  /// No description provided for @homeInvitePartnerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Share with your partner'**
+  String get homeInvitePartnerTitle;
+
+  /// No description provided for @homeInvitePartnerBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Pair up and share only what you choose — your history stays yours.'**
+  String get homeInvitePartnerBody;
+
+  /// No description provided for @homeInvitePartnerCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Set up Partner Mode'**
+  String get homeInvitePartnerCta;
+
+  /// No description provided for @feedbackTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What didn\'t you like?'**
+  String get feedbackTitle;
+
+  /// No description provided for @feedbackSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a topic, and write more if you want.'**
+  String get feedbackSubtitle;
+
+  /// No description provided for @feedbackCategoryPredictions.
+  ///
+  /// In en, this message translates to:
+  /// **'Predictions'**
+  String get feedbackCategoryPredictions;
+
+  /// No description provided for @feedbackCategoryBackup.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup & restore'**
+  String get feedbackCategoryBackup;
+
+  /// No description provided for @feedbackCategorySubscription.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription'**
+  String get feedbackCategorySubscription;
+
+  /// No description provided for @feedbackCategoryAds.
+  ///
+  /// In en, this message translates to:
+  /// **'Ads'**
+  String get feedbackCategoryAds;
+
+  /// No description provided for @feedbackCategoryDesign.
+  ///
+  /// In en, this message translates to:
+  /// **'Design'**
+  String get feedbackCategoryDesign;
+
+  /// No description provided for @feedbackCategoryTranslation.
+  ///
+  /// In en, this message translates to:
+  /// **'Translation'**
+  String get feedbackCategoryTranslation;
+
+  /// No description provided for @feedbackCategoryOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get feedbackCategoryOther;
+
+  /// No description provided for @feedbackDescriptionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us more (optional)'**
+  String get feedbackDescriptionLabel;
+
+  /// No description provided for @feedbackDescriptionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'What happened? When you tap Send, you\'ll choose where to share it from — your mail app or anywhere else.'**
+  String get feedbackDescriptionHint;
+
+  /// No description provided for @feedbackAttachPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a photo'**
+  String get feedbackAttachPhoto;
+
+  /// No description provided for @feedbackPhotoAttached.
+  ///
+  /// In en, this message translates to:
+  /// **'Photo attached'**
+  String get feedbackPhotoAttached;
+
   /// No description provided for @remindersGroupCycle.
   ///
   /// In en, this message translates to:
@@ -1173,7 +2199,7 @@ abstract class AppLocalizations {
   /// No description provided for @remindersGroupAppointment.
   ///
   /// In en, this message translates to:
-  /// **'Appointments'**
+  /// **'Doctor appointments'**
   String get remindersGroupAppointment;
 
   /// No description provided for @settingsRemindersPeriodEndLabel.
@@ -1197,7 +2223,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsRemindersAppointmentLabel.
   ///
   /// In en, this message translates to:
-  /// **'Appointment reminder'**
+  /// **'Doctor appointment reminder'**
   String get settingsRemindersAppointmentLabel;
 
   /// No description provided for @settingsRemindersAppointmentSet.
@@ -1259,6 +2285,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Privacy'**
   String get settingsPrivacyEntry;
+
+  /// No description provided for @settingsRateEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate us'**
+  String get settingsRateEntry;
+
+  /// No description provided for @rateAppTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Is Vera working for you?'**
+  String get rateAppTitle;
+
+  /// No description provided for @rateAppBody.
+  ///
+  /// In en, this message translates to:
+  /// **'If so, a few seconds rating it in the store helps other people looking for something like it actually find it.'**
+  String get rateAppBody;
+
+  /// No description provided for @rateAppCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate Vera'**
+  String get rateAppCta;
+
+  /// No description provided for @rateAppDismiss.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get rateAppDismiss;
 
   /// No description provided for @settingsDeleteAllData.
   ///
@@ -1401,13 +2457,13 @@ abstract class AppLocalizations {
   /// No description provided for @reminderAppointmentTitle.
   ///
   /// In en, this message translates to:
-  /// **'Upcoming appointment'**
+  /// **'Upcoming doctor appointment'**
   String get reminderAppointmentTitle;
 
   /// No description provided for @reminderAppointmentBody.
   ///
   /// In en, this message translates to:
-  /// **'You have an appointment coming up.'**
+  /// **'You have a doctor\'s appointment coming up.'**
   String get reminderAppointmentBody;
 
   /// No description provided for @settingsExportEntry.
@@ -2448,6 +3504,12 @@ abstract class AppLocalizations {
   /// **'{count, plural, =1{1 entry} other{{count} entries}}'**
   String trackerEntriesCount(int count);
 
+  /// No description provided for @trackerLowSampleNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Percentages aren\'t reliable yet with this few entries — they\'ll sharpen as you log more.'**
+  String get trackerLowSampleNote;
+
   /// No description provided for @assistantTyping.
   ///
   /// In en, this message translates to:
@@ -2609,6 +3671,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Dates are estimated from your last period using the standard 280-day rule. An ultrasound gives a more accurate date, and late ovulation shifts these numbers — this is information, not medical care.'**
   String get pregnancyDisclaimer;
+
+  /// No description provided for @pregnancySizeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Baby\'s size'**
+  String get pregnancySizeLabel;
+
+  /// No description provided for @pregnancySizeUnder5.
+  ///
+  /// In en, this message translates to:
+  /// **'Poppy seed (~2 mm)'**
+  String get pregnancySizeUnder5;
+
+  /// No description provided for @pregnancySizeUnder9.
+  ///
+  /// In en, this message translates to:
+  /// **'Blueberry (~1.6 cm)'**
+  String get pregnancySizeUnder9;
+
+  /// No description provided for @pregnancySizeUnder13.
+  ///
+  /// In en, this message translates to:
+  /// **'Lime (~5.4 cm)'**
+  String get pregnancySizeUnder13;
+
+  /// No description provided for @pregnancySizeUnder20.
+  ///
+  /// In en, this message translates to:
+  /// **'Avocado (~11.6 cm)'**
+  String get pregnancySizeUnder20;
+
+  /// No description provided for @pregnancySizeUnder28.
+  ///
+  /// In en, this message translates to:
+  /// **'Mango (~30 cm)'**
+  String get pregnancySizeUnder28;
+
+  /// No description provided for @pregnancySizeUnder34.
+  ///
+  /// In en, this message translates to:
+  /// **'Pineapple (~44 cm)'**
+  String get pregnancySizeUnder34;
+
+  /// No description provided for @pregnancySizeUnder38.
+  ///
+  /// In en, this message translates to:
+  /// **'Cantaloupe (~46 cm)'**
+  String get pregnancySizeUnder38;
+
+  /// No description provided for @pregnancySizeTerm.
+  ///
+  /// In en, this message translates to:
+  /// **'Small watermelon (~51 cm)'**
+  String get pregnancySizeTerm;
 
   /// No description provided for @pregnancyNoteUnder5.
   ///
@@ -3408,6 +4524,24 @@ abstract class AppLocalizations {
   /// **'Bloom'**
   String get homeThemeBloom;
 
+  /// No description provided for @homeThemeOcean.
+  ///
+  /// In en, this message translates to:
+  /// **'Ocean'**
+  String get homeThemeOcean;
+
+  /// No description provided for @homeThemeAutumn.
+  ///
+  /// In en, this message translates to:
+  /// **'Autumn'**
+  String get homeThemeAutumn;
+
+  /// No description provided for @homeThemeNight.
+  ///
+  /// In en, this message translates to:
+  /// **'Night'**
+  String get homeThemeNight;
+
   /// No description provided for @mascotStar.
   ///
   /// In en, this message translates to:
@@ -3420,11 +4554,35 @@ abstract class AppLocalizations {
   /// **'Leaf'**
   String get mascotLeaf;
 
+  /// No description provided for @mascotCat.
+  ///
+  /// In en, this message translates to:
+  /// **'Cat'**
+  String get mascotCat;
+
+  /// No description provided for @mascotRabbit.
+  ///
+  /// In en, this message translates to:
+  /// **'Rabbit'**
+  String get mascotRabbit;
+
+  /// No description provided for @mascotBird.
+  ///
+  /// In en, this message translates to:
+  /// **'Bird'**
+  String get mascotBird;
+
   /// No description provided for @tipDetailWhatsHappening.
   ///
   /// In en, this message translates to:
   /// **'What\'s happening in your body'**
   String get tipDetailWhatsHappening;
+
+  /// No description provided for @tipDetailGeneralHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'General suggestions'**
+  String get tipDetailGeneralHeading;
 
   /// No description provided for @tipDetailDisclaimer.
   ///
@@ -3521,6 +4679,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Whatever the phase, the same things help most: regular meals, enough protein, plenty of vegetables, enough water, and iron-rich foods. Since bleeding costs iron, paying a little more attention on those days is enough — there is no need for a different diet each week of the month. Eating at roughly consistent times does more for steady energy than any single food does, and no ingredient has to be cut out for a cycle to be healthy. Once you have logged a few cycles you will see phase-specific suggestions here.'**
   String get tipNutritionDetailUnknown;
+
+  /// No description provided for @tipSleepLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep'**
+  String get tipSleepLabel;
+
+  /// No description provided for @tipSleepMenstrual.
+  ///
+  /// In en, this message translates to:
+  /// **'Cramps and discomfort can fragment sleep; a warm shower or heating pad before bed can help some people fall asleep more easily.'**
+  String get tipSleepMenstrual;
+
+  /// No description provided for @tipSleepFollicular.
+  ///
+  /// In en, this message translates to:
+  /// **'With rising energy, many people need less prompting to feel awake — sleep needs don\'t actually drop, though.'**
+  String get tipSleepFollicular;
+
+  /// No description provided for @tipSleepFertile.
+  ///
+  /// In en, this message translates to:
+  /// **'The slight body-temperature rise near ovulation can make falling asleep a bit harder; a cooler room can offset it.'**
+  String get tipSleepFertile;
+
+  /// No description provided for @tipSleepLuteal.
+  ///
+  /// In en, this message translates to:
+  /// **'Progesterone raises resting temperature and can make deep sleep lighter; a cool, dark room and a consistent bedtime help most here.'**
+  String get tipSleepLuteal;
+
+  /// No description provided for @tipSleepUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep quality tends to shift across the cycle — usually lightest right before and during a period. A steady bedtime is the most reliable baseline regardless of phase.'**
+  String get tipSleepUnknown;
+
+  /// No description provided for @tipSleepDetailMenstrual.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep is often more fragmented during a period — cramps, discomfort, and for some people more frequent bathroom trips can cause waking through the night. Prostaglandins, the same compounds behind cramping, may play a role in this too. A warm shower, a heating pad, or gentle stretching before bed can ease cramps enough to make falling asleep easier. If you take pain relief, timing it so its effect covers the first stretch of the night can protect early sleep. If sleep is still difficult, that\'s normal — it usually eases as the phase passes.'**
+  String get tipSleepDetailMenstrual;
+
+  /// No description provided for @tipSleepDetailFollicular.
+  ///
+  /// In en, this message translates to:
+  /// **'With oestrogen rising through this phase, many people feel more alert and energetic, which can read as needing less sleep. That\'s not quite right — it usually just means wakefulness comes more easily. Keeping a steady bedtime here pays off later, once sleep gets more fragile in other phases. This can also be a relatively easy window to try a new sleep routine, since the body tends to feel less resistant to change.'**
+  String get tipSleepDetailFollicular;
+
+  /// No description provided for @tipSleepDetailFertile.
+  ///
+  /// In en, this message translates to:
+  /// **'The small rise in body temperature around ovulation can make falling asleep a touch harder, since the body naturally wants to cool down before sleep. A cooler room, a lighter blanket, or a warm shower before bed can offset that. Anyone who notices higher libido or social energy in this window might also find themselves staying up later by choice, which shifts bedtime on its own — a pattern worth noticing, not a problem to fix.'**
+  String get tipSleepDetailFertile;
+
+  /// No description provided for @tipSleepDetailLuteal.
+  ///
+  /// In en, this message translates to:
+  /// **'Progesterone rising after ovulation nudges resting body temperature up slightly, which can make deep sleep feel lighter — sometimes as an actual hot-flash-like sensation, sometimes just as sleep feeling less restorative. As a period approaches, premenstrual tension can add to that. A cool, dark room, less screen time before bed, and a consistent bedtime tend to help most here. If sleep is still hard, that\'s not a failure — it\'s an expected part of the phase.'**
+  String get tipSleepDetailLuteal;
+
+  /// No description provided for @tipSleepDetailUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'There isn\'t enough data yet to say which phase this is, but sleep quality shifting across a cycle is a common pattern — usually more fragile right before and during a period, steadier in the first half. The most reliable baseline regardless of phase: a consistent bed and wake time, less screen time before bed, and a cool, dark room. After a few logged cycles, you\'ll see more specific patterns here.'**
+  String get tipSleepDetailUnknown;
 }
 
 class _AppLocalizationsDelegate
@@ -3535,12 +4759,27 @@ class _AppLocalizationsDelegate
   @override
   bool isSupported(Locale locale) => <String>[
     'ar',
+    'cs',
+    'da',
     'de',
+    'el',
     'en',
     'es',
+    'fi',
     'fr',
+    'hu',
     'id',
+    'it',
+    'ms',
+    'nb',
+    'nl',
+    'pl',
+    'pt',
+    'ro',
+    'ru',
+    'sv',
     'tr',
+    'uk',
   ].contains(locale.languageCode);
 
   @override
@@ -3552,18 +4791,48 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   switch (locale.languageCode) {
     case 'ar':
       return AppLocalizationsAr();
+    case 'cs':
+      return AppLocalizationsCs();
+    case 'da':
+      return AppLocalizationsDa();
     case 'de':
       return AppLocalizationsDe();
+    case 'el':
+      return AppLocalizationsEl();
     case 'en':
       return AppLocalizationsEn();
     case 'es':
       return AppLocalizationsEs();
+    case 'fi':
+      return AppLocalizationsFi();
     case 'fr':
       return AppLocalizationsFr();
+    case 'hu':
+      return AppLocalizationsHu();
     case 'id':
       return AppLocalizationsId();
+    case 'it':
+      return AppLocalizationsIt();
+    case 'ms':
+      return AppLocalizationsMs();
+    case 'nb':
+      return AppLocalizationsNb();
+    case 'nl':
+      return AppLocalizationsNl();
+    case 'pl':
+      return AppLocalizationsPl();
+    case 'pt':
+      return AppLocalizationsPt();
+    case 'ro':
+      return AppLocalizationsRo();
+    case 'ru':
+      return AppLocalizationsRu();
+    case 'sv':
+      return AppLocalizationsSv();
     case 'tr':
       return AppLocalizationsTr();
+    case 'uk':
+      return AppLocalizationsUk();
   }
 
   throw FlutterError(

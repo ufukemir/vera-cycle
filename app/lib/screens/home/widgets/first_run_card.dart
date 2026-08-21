@@ -37,12 +37,17 @@ class FirstRunCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(Icons.waving_hand_outlined,
-                  size: 20, color: theme.colorScheme.onPrimaryContainer),
+              Icon(
+                Icons.waving_hand_outlined,
+                size: 20,
+                color: theme.colorScheme.onPrimaryContainer,
+              ),
               const SizedBox(width: 8),
               Expanded(
-                child:
-                    Text(l10n.homeEmptyTitle, style: theme.textTheme.titleSmall),
+                child: Text(
+                  l10n.homeEmptyTitle,
+                  style: theme.textTheme.titleSmall,
+                ),
               ),
             ],
           ),

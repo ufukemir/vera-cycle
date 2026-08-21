@@ -55,6 +55,7 @@ class _BirthYearStepState extends State<BirthYearStep> {
         min: 1940,
         max: DateTime.now().year - 8,
         onChanged: (v) => setState(() => _value = v),
+        useGrouping: false,
       ),
     );
   }

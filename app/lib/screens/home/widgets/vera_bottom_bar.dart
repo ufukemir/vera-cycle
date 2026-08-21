@@ -34,25 +34,21 @@ class VeraBottomBar extends StatelessWidget {
     final isDark = theme.brightness == Brightness.dark;
 
     final destinations = <({IconData icon, IconData active, String label})>[
-      (
-        icon: Icons.home_outlined,
-        active: Icons.home,
-        label: l10n.navHome,
-      ),
+      (icon: Icons.home_outlined, active: Icons.home, label: l10n.navHome),
       (
         icon: Icons.calendar_month_outlined,
         active: Icons.calendar_month,
         label: l10n.navCalendar,
       ),
       (
-        icon: Icons.insights_outlined,
-        active: Icons.insights,
-        label: l10n.navInsights,
+        icon: Icons.notifications_active_outlined,
+        active: Icons.notifications_active,
+        label: l10n.navReminders,
       ),
       (
-        icon: Icons.settings_outlined,
-        active: Icons.settings,
-        label: l10n.navSettings,
+        icon: Icons.person_outline,
+        active: Icons.person,
+        label: l10n.navProfile,
       ),
     ];
 
@@ -65,7 +61,8 @@ class VeraBottomBar extends StatelessWidget {
             color: isDark ? scheme.surfaceContainerHigh : Colors.white,
             borderRadius: BorderRadius.circular(28),
             border: Border.all(
-                color: scheme.outlineVariant.withValues(alpha: 0.4)),
+              color: scheme.outlineVariant.withValues(alpha: 0.4),
+            ),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
           child: Row(
@@ -137,8 +134,11 @@ class _BarDestination extends StatelessWidget {
                   // hanging below its taller neighbour.
                   SizedBox(
                     height: 40,
-                    child: Icon(selected ? activeIcon : icon,
-                        size: 22, color: color),
+                    child: Icon(
+                      selected ? activeIcon : icon,
+                      size: 22,
+                      color: color,
+                    ),
                   ),
                   const SizedBox(height: 2),
                   Text(
@@ -188,16 +188,16 @@ class _TrackButton extends StatelessWidget {
                       color: scheme.primary,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(Icons.add,
-                        size: 24, color: scheme.onPrimary),
+                    child: Icon(Icons.add, size: 24, color: scheme.onPrimary),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     label,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.labelSmall
-                        ?.copyWith(color: scheme.primary),
+                    style: theme.textTheme.labelSmall?.copyWith(
+                      color: scheme.primary,
+                    ),
                   ),
                 ],
               ),

@@ -28,15 +28,17 @@ void main() {
     );
   });
 
-  test('appears once enough days are logged and nothing is backed up',
-      () async {
-    SharedPreferences.setMockInitialValues({});
-    final prefs = await AppPreferences.load();
-    expect(
-      BackupNudgeCard.shouldShow(prefs, await _controllerWith(20)),
-      isTrue,
-    );
-  });
+  test(
+    'appears once enough days are logged and nothing is backed up',
+    () async {
+      SharedPreferences.setMockInitialValues({});
+      final prefs = await AppPreferences.load();
+      expect(
+        BackupNudgeCard.shouldShow(prefs, await _controllerWith(20)),
+        isTrue,
+      );
+    },
+  );
 
   test('goes quiet right after a backup', () async {
     SharedPreferences.setMockInitialValues({});
@@ -49,10 +51,12 @@ void main() {
   });
 
   test('returns once the last backup goes stale', () async {
-    final stale = DateTime.now()
-        .subtract(BackupNudgeCard.staleAfter + const Duration(days: 1));
-    SharedPreferences.setMockInitialValues(
-        {'last_backup_at': stale.millisecondsSinceEpoch});
+    final stale = DateTime.now().subtract(
+      BackupNudgeCard.staleAfter + const Duration(days: 1),
+    );
+    SharedPreferences.setMockInitialValues({
+      'last_backup_at': stale.millisecondsSinceEpoch,
+    });
     final prefs = await AppPreferences.load();
     expect(
       BackupNudgeCard.shouldShow(prefs, await _controllerWith(20)),

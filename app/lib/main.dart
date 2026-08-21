@@ -15,7 +15,9 @@ import 'services/prediction_engine.dart';
 import 'services/reminder_service.dart';
 import 'state/app_lock_controller.dart';
 import 'state/app_preferences.dart';
+import 'state/cloud_backup_controller.dart';
 import 'state/cycle_controller.dart';
+import 'state/partner_controller.dart';
 import 'theme/app_theme.dart';
 
 Future<void> main() async {
@@ -54,20 +56,36 @@ class MainApp extends StatelessWidget {
         ChangeNotifierProvider<CycleController>(
           create: (_) => CycleController(
             repository: repository ?? FileDayLogRepository(),
-            predictionEngine:
-                PredictionEngine(lutealPhaseDays: preferences.lutealPhaseDays),
-            healthSync:
-                preferences.healthSyncEnabled ? HealthSyncService() : null,
+            predictionEngine: PredictionEngine(
+              lutealPhaseDays: preferences.lutealPhaseDays,
+            ),
+            healthSync: preferences.healthSyncEnabled
+                ? HealthSyncService()
+                : null,
           )..load(),
         ),
         ChangeNotifierProvider<AppLockController>(
           create: (ctx) => AppLockController(pinVault: ctx.read<PinVault>()),
         ),
+        // Firebase init is attempted lazily inside PartnerController.init()
+        // and swallows failure (see PartnerService.ensureInitialized) — a
+        // checkout with no GoogleService-Info.plist/google-services.json
+        // yet must still boot the rest of the app normally, Partner Modu
+        // just reports itself unconfigured.
+        ChangeNotifierProvider<PartnerController>(
+          create: (_) => PartnerController()..init(),
+        ),
+        // Same lazy-init/swallow-failure reasoning as PartnerController —
+        // see CloudBackupService's doc comment.
+        ChangeNotifierProvider<CloudBackupController>(
+          create: (_) => CloudBackupController()..init(),
+        ),
       ],
       child: Consumer<AppPreferences>(
         builder: (context, prefs, _) {
           return MaterialApp(
-            onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
+            onGenerateTitle: (context) =>
+                AppLocalizations.of(context)!.appTitle,
             debugShowCheckedModeBanner: false,
             theme: buildAppTheme(),
             darkTheme: buildDarkAppTheme(),

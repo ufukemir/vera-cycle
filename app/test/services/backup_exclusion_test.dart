@@ -51,47 +51,56 @@ void main() {
     // read would mint a fresh key per save, and the second save would fail
     // to decrypt what the first one wrote.
     final keychain = <String, String>{};
-    const channel =
-        MethodChannel('plugins.it_nomads.com/flutter_secure_storage');
+    const channel = MethodChannel(
+      'plugins.it_nomads.com/flutter_secure_storage',
+    );
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(channel, (call) async {
-      final key = (call.arguments as Map?)?['key'] as String?;
-      switch (call.method) {
-        case 'read':
-          return keychain[key];
-        case 'write':
-          keychain[key!] = (call.arguments as Map)['value'] as String;
-          return null;
-        default:
-          return null;
-      }
-    });
+          final key = (call.arguments as Map?)?['key'] as String?;
+          switch (call.method) {
+            case 'read':
+              return keychain[key];
+            case 'write':
+              keychain[key!] = (call.arguments as Map)['value'] as String;
+              return null;
+            default:
+              return null;
+          }
+        });
   });
 
   tearDown(() async {
     if (await temp.exists()) await temp.delete(recursive: true);
   });
 
-  test('every save re-applies the backup exclusion to the data file',
-      () async {
+  test('every save re-applies the backup exclusion to the data file', () async {
     final repository = FileDayLogRepository(backupExclusion: exclusion);
 
     await repository.upsert(DayLog(date: today(), flow: FlowIntensity.medium));
-    expect(exclusion.paths, hasLength(1),
-        reason: 'the first save must mark the file');
+    expect(
+      exclusion.paths,
+      hasLength(1),
+      reason: 'the first save must mark the file',
+    );
 
     await repository.upsert(
       DayLog(date: addDays(today(), -1), flow: FlowIntensity.light),
     );
-    expect(exclusion.paths, hasLength(2),
-        reason: 'the rename replaces the file, so it must be re-marked');
+    expect(
+      exclusion.paths,
+      hasLength(2),
+      reason: 'the rename replaces the file, so it must be re-marked',
+    );
 
     expect(
       exclusion.paths.toSet().single,
       endsWith('cycle_data.enc'),
       reason: 'the marked path must be the diary, not the temp file',
     );
-    expect(File(exclusion.paths.last).existsSync(), isTrue,
-        reason: 'the attribute is set after the rename, not before');
+    expect(
+      File(exclusion.paths.last).existsSync(),
+      isTrue,
+      reason: 'the attribute is set after the rename, not before',
+    );
   });
 }

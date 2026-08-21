@@ -18,9 +18,9 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   final l10nDir = Directory('lib/l10n');
 
-  Map<String, dynamic> arb(String code) => jsonDecode(
-        File('${l10nDir.path}/app_$code.arb').readAsStringSync(),
-      ) as Map<String, dynamic>;
+  Map<String, dynamic> arb(String code) =>
+      jsonDecode(File('${l10nDir.path}/app_$code.arb').readAsStringSync())
+          as Map<String, dynamic>;
 
   Set<String> messageKeys(Map<String, dynamic> data) =>
       data.keys.where((k) => !k.startsWith('@')).toSet();
@@ -36,15 +36,25 @@ void main() {
 
     for (final code in offered) {
       final file = File('${l10nDir.path}/app_$code.arb');
-      expect(file.existsSync(), isTrue,
-          reason: '$code is offered in the picker but has no .arb file');
+      expect(
+        file.existsSync(),
+        isTrue,
+        reason: '$code is offered in the picker but has no .arb file',
+      );
 
       final keys = messageKeys(arb(code));
-      expect(keys.difference(english), isEmpty,
-          reason: '$code defines keys English does not');
-      expect(english.difference(keys), isEmpty,
-          reason: '$code is missing keys — a partially translated language '
-              'must stay out of the picker until it is complete');
+      expect(
+        keys.difference(english),
+        isEmpty,
+        reason: '$code defines keys English does not',
+      );
+      expect(
+        english.difference(keys),
+        isEmpty,
+        reason:
+            '$code is missing keys — a partially translated language '
+            'must stay out of the picker until it is complete',
+      );
     }
   });
 
@@ -58,13 +68,19 @@ void main() {
     final onDisk = l10nDir
         .listSync()
         .whereType<File>()
-        .map((f) => RegExp(r'app_([a-z]{2})\.arb$').firstMatch(f.path)?.group(1))
+        .map(
+          (f) => RegExp(r'app_([a-z]{2})\.arb$').firstMatch(f.path)?.group(1),
+        )
         .whereType<String>()
         .toSet();
 
-    expect(generated, equals(onDisk),
-        reason: 'the set of .arb files and the set of offered locales must '
-            'match exactly in both directions');
+    expect(
+      generated,
+      equals(onDisk),
+      reason:
+          'the set of .arb files and the set of offered locales must '
+          'match exactly in both directions',
+    );
   });
 
   test('placeholders match across every locale', () {
@@ -84,8 +100,11 @@ void main() {
         final a = english[key];
         final b = other[key];
         if (a is! String || b is! String) continue;
-        expect(names(b), equals(names(a)),
-            reason: '$code:$key uses different placeholders than English');
+        expect(
+          names(b),
+          equals(names(a)),
+          reason: '$code:$key uses different placeholders than English',
+        );
       }
     }
   });
@@ -101,32 +120,38 @@ void main() {
     //     reachable only by changing the device language;
     //   * a code is added to _supportedCodes without a _labelFor case, and
     //     the picker renders the literal string "pl" as its own label.
-    final source =
-        File('lib/screens/settings/widgets/language_picker_tile.dart')
-            .readAsStringSync();
+    final source = File(
+      'lib/screens/settings/widgets/language_picker_tile.dart',
+    ).readAsStringSync();
 
-    final listed = RegExp(r"_supportedCodes\s*=\s*<String>\[(.*?)\]",
-            dotAll: true)
-        .firstMatch(source)!
-        .group(1)!;
-    final codes = RegExp(r"'([a-z]{2})'")
-        .allMatches(listed)
-        .map((m) => m.group(1)!)
-        .toSet();
+    final listed = RegExp(
+      r"_supportedCodes\s*=\s*<String>\[(.*?)\]",
+      dotAll: true,
+    ).firstMatch(source)!.group(1)!;
+    final codes = RegExp(
+      r"'([a-z]{2})'",
+    ).allMatches(listed).map((m) => m.group(1)!).toSet();
 
     final generated = AppLocalizations.supportedLocales
         .map((l) => l.languageCode)
         .toSet();
 
-    expect(codes, equals(generated),
-        reason: 'the picker and the generated locales disagree');
+    expect(
+      codes,
+      equals(generated),
+      reason: 'the picker and the generated locales disagree',
+    );
 
     // Every offered code needs a real label, not the `default: return code`
     // fallback.
     for (final code in codes) {
-      expect(source, contains("case '$code':"),
-          reason: '$code has no _labelFor case — the picker would show the '
-              'raw code as its own name');
+      expect(
+        source,
+        contains("case '$code':"),
+        reason:
+            '$code has no _labelFor case — the picker would show the '
+            'raw code as its own name',
+      );
     }
   });
 
@@ -142,16 +167,18 @@ void main() {
     // Checking structure only — never wording — because these are drafts
     // awaiting native review, not shipped copy.
     final pendingDir = Directory('l10n_pending');
-    final english = jsonDecode(File('lib/l10n/app_en.arb').readAsStringSync())
-        as Map<String, dynamic>;
-    final englishKeys =
-        english.keys.where((k) => !k.startsWith('@')).toList();
+    final english =
+        jsonDecode(File('lib/l10n/app_en.arb').readAsStringSync())
+            as Map<String, dynamic>;
+    final englishKeys = english.keys.where((k) => !k.startsWith('@')).toList();
 
     // `search`, not `match`: a plural is not always the first thing in the
     // string. That distinction is the whole reason this group exists.
     final pluralPattern = RegExp(r'\{\w+,\s*plural,');
     final pluralKeys = englishKeys
-        .where((k) => english[k] is String && pluralPattern.hasMatch(english[k]))
+        .where(
+          (k) => english[k] is String && pluralPattern.hasMatch(english[k]),
+        )
         .toList();
 
     final files = pendingDir
@@ -162,45 +189,67 @@ void main() {
 
     test('there are parked files to check', () {
       expect(files, isNotEmpty);
-      expect(pluralKeys, isNotEmpty,
-          reason: 'English has no ICU plurals — the pattern is wrong');
+      expect(
+        pluralKeys,
+        isNotEmpty,
+        reason: 'English has no ICU plurals — the pattern is wrong',
+      );
     });
 
     for (final file in files) {
       final code = RegExp(r'app_(\w+)\.arb$').firstMatch(file.path)!.group(1)!;
 
       test('$code matches the English key set and order', () {
-        final data = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
+        final data =
+            jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
         final keys = data.keys.where((k) => !k.startsWith('@')).toList();
 
-        expect(keys.toSet().difference(englishKeys.toSet()), isEmpty,
-            reason: '$code has keys English does not');
-        expect(englishKeys.toSet().difference(keys.toSet()), isEmpty,
-            reason: '$code is missing keys English has');
-        expect(keys, orderedEquals(englishKeys),
-            reason: '$code key order drifted, which makes diffs unreadable');
+        expect(
+          keys.toSet().difference(englishKeys.toSet()),
+          isEmpty,
+          reason: '$code has keys English does not',
+        );
+        expect(
+          englishKeys.toSet().difference(keys.toSet()),
+          isEmpty,
+          reason: '$code is missing keys English has',
+        );
+        expect(
+          keys,
+          orderedEquals(englishKeys),
+          reason: '$code key order drifted, which makes diffs unreadable',
+        );
       });
 
       test('$code carries every ICU plural as a plural', () {
-        final data = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
+        final data =
+            jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
         final flat = pluralKeys
             .where((k) => data[k] is String && !data[k].contains(', plural,'))
             .toList();
-        expect(flat, isEmpty,
-            reason: '$code still has flat strings where English pluralises: '
-                '$flat');
+        expect(
+          flat,
+          isEmpty,
+          reason:
+              '$code still has flat strings where English pluralises: '
+              '$flat',
+        );
       });
 
       test('$code uses the same placeholders as English', () {
-        final data = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
+        final data =
+            jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
         final names = RegExp(r'\{(\w+)[,}]');
         Set<String> of(String v) =>
             names.allMatches(v).map((m) => m.group(1)!).toSet();
 
         for (final key in englishKeys) {
           if (english[key] is! String || data[key] is! String) continue;
-          expect(of(data[key]), equals(of(english[key])),
-              reason: '$code:$key placeholder mismatch');
+          expect(
+            of(data[key]),
+            equals(of(english[key])),
+            reason: '$code:$key placeholder mismatch',
+          );
         }
       });
     }

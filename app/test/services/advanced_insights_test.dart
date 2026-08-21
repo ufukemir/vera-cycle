@@ -75,8 +75,10 @@ void main() {
       _onCycleDay(cycles, 25, symptom: Symptom.bloating),
     );
 
-    expect(insights.symptomPatterns.single.value.peakSegment,
-        CycleSegment.beforePeriod);
+    expect(
+      insights.symptomPatterns.single.value.peakSegment,
+      CycleSegment.beforePeriod,
+    );
   });
 
   test('a symptom spread evenly across the cycle is not called a pattern', () {
@@ -122,10 +124,10 @@ void main() {
       ..._onCycleDay(cycles.take(2).toList(), 3, symptom: Symptom.acne),
     ]);
 
-    expect(
-      insights.symptomPatterns.map((e) => e.key),
-      [Symptom.cramps, Symptom.acne],
-    );
+    expect(insights.symptomPatterns.map((e) => e.key), [
+      Symptom.cramps,
+      Symptom.acne,
+    ]);
   });
 
   test('the still-open cycle is excluded from placement', () {
@@ -148,10 +150,7 @@ void main() {
     final insights = AdvancedInsights.compute(
       [...closed, open],
       [
-        DayLog(
-          date: addDays(firstStart, 90),
-          symptoms: const {Symptom.cramps},
-        ),
+        DayLog(date: addDays(firstStart, 90), symptoms: const {Symptom.cramps}),
       ],
     );
 
@@ -204,18 +203,23 @@ void main() {
       final volatile = <ObservedCycle>[];
       for (final length in [26, 40, 20, 32, 24].take(count)) {
         final next = addDays(cursor, length);
-        volatile.add(ObservedCycle(
-          startDate: cursor,
-          periodEndDate: addDays(cursor, 4),
-          nextStartDate: next,
-        ));
+        volatile.add(
+          ObservedCycle(
+            startDate: cursor,
+            periodEndDate: addDays(cursor, 4),
+            nextStartDate: next,
+          ),
+        );
         cursor = next;
       }
 
       final insights = AdvancedInsights.compute(volatile, const []);
       expect(insights.cycleLengthTrend, hasLength(count));
-      expect(insights.cycleLengthDrift, isNull,
-          reason: '$count cycles is not two comparable groups');
+      expect(
+        insights.cycleLengthDrift,
+        isNull,
+        reason: '$count cycles is not two comparable groups',
+      );
       expect(insights.driftGroupSize, isNull);
     }
   });
@@ -235,14 +239,18 @@ void main() {
     ];
 
     final insights = AdvancedInsights.compute(cycles, logs);
-    final bloating =
-        insights.symptomPatterns.firstWhere((e) => e.key == Symptom.bloating);
+    final bloating = insights.symptomPatterns.firstWhere(
+      (e) => e.key == Symptom.bloating,
+    );
 
     expect(bloating.value.totalDays, 4);
     expect(bloating.value.peakShare, 1.0);
     expect(bloating.value.cyclesInPeak, 1);
-    expect(bloating.value.isPronounced, isFalse,
-        reason: 'one event repeated over four days is still one event');
+    expect(
+      bloating.value.isPronounced,
+      isFalse,
+      reason: 'one event repeated over four days is still one event',
+    );
   });
 
   test('the same symptom across separate cycles does count as a pattern', () {
@@ -253,8 +261,9 @@ void main() {
     ];
 
     final insights = AdvancedInsights.compute(cycles, logs);
-    final bloating =
-        insights.symptomPatterns.firstWhere((e) => e.key == Symptom.bloating);
+    final bloating = insights.symptomPatterns.firstWhere(
+      (e) => e.key == Symptom.bloating,
+    );
 
     expect(bloating.value.cyclesInPeak, 4);
     expect(bloating.value.isPronounced, isTrue);
@@ -271,16 +280,20 @@ void main() {
     final lengthening = <ObservedCycle>[];
     for (final length in [26, 26, 30, 30, 32, 32]) {
       final next = addDays(cursor, length);
-      lengthening.add(ObservedCycle(
-        startDate: cursor,
-        periodEndDate: addDays(cursor, 4),
-        nextStartDate: next,
-      ));
+      lengthening.add(
+        ObservedCycle(
+          startDate: cursor,
+          periodEndDate: addDays(cursor, 4),
+          nextStartDate: next,
+        ),
+      );
       cursor = next;
     }
 
-    final drift =
-        AdvancedInsights.compute(lengthening, const []).cycleLengthDrift;
+    final drift = AdvancedInsights.compute(
+      lengthening,
+      const [],
+    ).cycleLengthDrift;
     expect(drift, isNotNull);
     expect(drift, greaterThan(0));
   });

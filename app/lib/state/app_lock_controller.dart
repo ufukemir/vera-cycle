@@ -7,6 +7,11 @@ import '../services/pin_vault.dart';
 
 enum AppLockState { locked, unlocked }
 
+/// Which "Use ___" label fits the device's actual biometric method —
+/// resolved by [AppLockController.biometricLabelKind], picked in the UI
+/// layer so it stays localizable rather than hardcoded here.
+enum BiometricLabelKind { face, fingerprint, generic }
+
 /// Gates the app behind a PIN (with optional biometric shortcut).
 ///
 /// Re-locks on every backgrounding — an owner decision, not a default: this
@@ -27,8 +32,8 @@ enum AppLockState { locked, unlocked }
 /// automated guessing within a single app session.
 class AppLockController extends ChangeNotifier with WidgetsBindingObserver {
   AppLockController({required PinVault pinVault, LocalAuthentication? auth})
-      : _pinVault = pinVault,
-        _auth = auth ?? LocalAuthentication() {
+    : _pinVault = pinVault,
+      _auth = auth ?? LocalAuthentication() {
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -75,24 +80,98 @@ class AppLockController extends ChangeNotifier with WidgetsBindingObserver {
     }
   }
 
+  /// Whether this device has *any* lock of its own — biometric or a plain
+  /// passcode — that [verifyDeviceOwnership] could check against. Unlike
+  /// [canUseBiometrics], this is true even with no biometrics enrolled, as
+  /// long as the device has a passcode: that is still enough to gate a PIN
+  /// reset on.
+  Future<bool> canVerifyDeviceOwnership() async {
+    try {
+      return await _auth.isDeviceSupported();
+    } on Object {
+      return false;
+    }
+  }
+
+  /// Proves the person holding the phone can unlock the phone itself —
+  /// Face ID, a fingerprint, or the device's own passcode — as the bar for
+  /// replacing a forgotten app PIN.
+  ///
+  /// This is deliberately not [unlockWithBiometrics]: the data was never
+  /// encrypted with the PIN (see [PinVault]'s class doc), so proving you
+  /// own the device is enough to let you set a new one without touching a
+  /// single byte of health data. `biometricOnly: false` is the one thing
+  /// that makes this different from the regular unlock shortcut — a device
+  /// with no biometrics enrolled, only a passcode, can still clear this
+  /// bar, whereas [unlockWithBiometrics] would reject it outright.
+  Future<bool> verifyDeviceOwnership(String localizedReason) async {
+    try {
+      return await _auth.authenticate(
+        localizedReason: localizedReason,
+        biometricOnly: false,
+        persistAcrossBackgrounding: true,
+      );
+    } on Object {
+      return false;
+    }
+  }
+
+  /// [getAvailableBiometrics] can return more than one type; face is
+  /// preferred when offered since it is the newer, camera-based method and
+  /// the one most likely to be what a modern iPhone actually has. `null`
+  /// means the lookup failed (not that biometrics are unavailable — callers
+  /// already gate on [canUseBiometrics] separately) and callers should fall
+  /// back to generic copy rather than guessing a specific method.
+  Future<BiometricType?> _primaryBiometricType() async {
+    try {
+      final types = await _auth.getAvailableBiometrics();
+      if (types.contains(BiometricType.face)) return BiometricType.face;
+      if (types.contains(BiometricType.iris)) return BiometricType.iris;
+      if (types.contains(BiometricType.fingerprint)) {
+        return BiometricType.fingerprint;
+      }
+    } on Object {
+      // Falls through to null below.
+    }
+    return null;
+  }
+
   /// The icon that matches what the device actually offers.
   ///
   /// Both lock screens used a hardcoded fingerprint icon regardless of the
   /// device, so a Face ID phone — the whole iPhone line since the X — showed
   /// a fingerprint glyph for a feature the user unlocks by looking at their
-  /// phone. [getAvailableBiometrics] can return more than one type; face is
-  /// preferred when offered since it is the newer, camera-based method and
-  /// the one most likely to be what a modern iPhone actually has.
+  /// phone.
   Future<IconData> biometricIcon() async {
-    try {
-      final types = await _auth.getAvailableBiometrics();
-      if (types.contains(BiometricType.face)) return Icons.face_outlined;
-      if (types.contains(BiometricType.iris)) return Icons.visibility_outlined;
-    } on Object {
-      // Falls through to the fingerprint default below — still correct for
-      // the common case, just not tailored to this specific device.
+    switch (await _primaryBiometricType()) {
+      case BiometricType.face:
+        return Icons.face_outlined;
+      case BiometricType.iris:
+        return Icons.visibility_outlined;
+      case BiometricType.fingerprint:
+      case BiometricType.strong:
+      case BiometricType.weak:
+      case null:
+        return Icons.fingerprint;
     }
-    return Icons.fingerprint;
+  }
+
+  /// Which button label fits the icon above — Apple's own guidance is to
+  /// call Face ID and Touch ID by name rather than the generic "biometrics",
+  /// and the button used to say "Use biometrics" on every device regardless
+  /// of which one it actually was.
+  Future<BiometricLabelKind> biometricLabelKind() async {
+    switch (await _primaryBiometricType()) {
+      case BiometricType.face:
+        return BiometricLabelKind.face;
+      case BiometricType.fingerprint:
+        return BiometricLabelKind.fingerprint;
+      case BiometricType.iris:
+      case BiometricType.strong:
+      case BiometricType.weak:
+      case null:
+        return BiometricLabelKind.generic;
+    }
   }
 
   /// [localizedReason] is supplied by the caller so this controller never

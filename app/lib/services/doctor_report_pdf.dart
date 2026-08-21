@@ -43,17 +43,25 @@ class DoctorReportPdf {
     doc.addPage(
       pw.MultiPage(
         build: (context) => [
-          pw.Text(labels.title,
-              style: pw.TextStyle(fontSize: 20, fontWeight: pw.FontWeight.bold)),
+          pw.Text(
+            labels.title,
+            style: pw.TextStyle(fontSize: 20, fontWeight: pw.FontWeight.bold),
+          ),
           pw.SizedBox(height: 4),
-          pw.Text('${labels.generatedOn}: ${dayKey(generatedAt)}',
-              style: const pw.TextStyle(fontSize: 10)),
+          pw.Text(
+            '${labels.generatedOn}: ${dayKey(generatedAt)}',
+            style: const pw.TextStyle(fontSize: 10),
+          ),
           pw.SizedBox(height: 12),
-          pw.Text(labels.disclaimer,
-              style: const pw.TextStyle(fontSize: 9, color: PdfColors.grey700)),
+          pw.Text(
+            labels.disclaimer,
+            style: const pw.TextStyle(fontSize: 9, color: PdfColors.grey700),
+          ),
           pw.Divider(height: 24),
-          pw.Text(labels.summaryHeading,
-              style: pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 13)),
+          pw.Text(
+            labels.summaryHeading,
+            style: pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 13),
+          ),
           pw.SizedBox(height: 6),
           pw.Text('${labels.cyclesLogged}: ${insights.cyclesLoggedCount}'),
           if (insights.hasPeriodLengthStats)
@@ -69,16 +77,20 @@ class DoctorReportPdf {
             ),
           if (cycles.isNotEmpty) ...[
             pw.Divider(height: 24),
-            pw.Text(labels.timelineHeading,
-                style: pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 13)),
+            pw.Text(
+              labels.timelineHeading,
+              style: pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 13),
+            ),
             pw.SizedBox(height: 8),
             _buildTimelineLegend(labels),
             pw.SizedBox(height: 8),
             ..._buildTimelineRows(cycles, labels),
           ],
           pw.Divider(height: 24),
-          pw.Text(labels.dailyLogHeading,
-              style: pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 13)),
+          pw.Text(
+            labels.dailyLogHeading,
+            style: pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 13),
+          ),
           pw.SizedBox(height: 6),
           pw.TableHelper.fromTextArray(
             headers: [
@@ -100,7 +112,10 @@ class DoctorReportPdf {
                 ],
             ],
             cellStyle: const pw.TextStyle(fontSize: 9),
-            headerStyle: pw.TextStyle(fontSize: 9, fontWeight: pw.FontWeight.bold),
+            headerStyle: pw.TextStyle(
+              fontSize: 9,
+              fontWeight: pw.FontWeight.bold,
+            ),
           ),
         ],
       ),
@@ -114,19 +129,21 @@ class DoctorReportPdf {
 
   pw.Widget _buildTimelineLegend(DoctorReportPdfLabels labels) {
     pw.Widget swatch(PdfColor color, String label) => pw.Row(
-          mainAxisSize: pw.MainAxisSize.min,
-          children: [
-            pw.Container(width: 10, height: 10, color: color),
-            pw.SizedBox(width: 4),
-            pw.Text(label, style: const pw.TextStyle(fontSize: 9)),
-          ],
-        );
+      mainAxisSize: pw.MainAxisSize.min,
+      children: [
+        pw.Container(width: 10, height: 10, color: color),
+        pw.SizedBox(width: 4),
+        pw.Text(label, style: const pw.TextStyle(fontSize: 9)),
+      ],
+    );
 
-    return pw.Row(children: [
-      swatch(_periodBarColor, labels.timelineLegendPeriod),
-      pw.SizedBox(width: 16),
-      swatch(_cycleBarColor, labels.timelineLegendCycle),
-    ]);
+    return pw.Row(
+      children: [
+        swatch(_periodBarColor, labels.timelineLegendPeriod),
+        pw.SizedBox(width: 16),
+        swatch(_cycleBarColor, labels.timelineLegendCycle),
+      ],
+    );
   }
 
   /// One horizontal bar per recorded cycle: a solid segment for the period,
@@ -150,8 +167,10 @@ class DoctorReportPdf {
             children: [
               pw.SizedBox(
                 width: 60,
-                child: pw.Text('${labels.cycleLabel} ${i + 1}',
-                    style: const pw.TextStyle(fontSize: 9)),
+                child: pw.Text(
+                  '${labels.cycleLabel} ${i + 1}',
+                  style: const pw.TextStyle(fontSize: 9),
+                ),
               ),
               pw.Container(
                 width: cycles[i].periodLength * pointsPerDay,
@@ -160,14 +179,18 @@ class DoctorReportPdf {
               ),
               if (cycles[i].isComplete)
                 pw.Container(
-                  width: (cycles[i].length! - cycles[i].periodLength) * pointsPerDay,
+                  width:
+                      (cycles[i].length! - cycles[i].periodLength) *
+                      pointsPerDay,
                   height: _barHeight,
                   color: _cycleBarColor,
                 )
               else ...[
                 pw.SizedBox(width: 6),
-                pw.Text(labels.timelineOngoing,
-                    style: pw.TextStyle(fontSize: 8, color: PdfColors.grey700)),
+                pw.Text(
+                  labels.timelineOngoing,
+                  style: pw.TextStyle(fontSize: 8, color: PdfColors.grey700),
+                ),
               ],
             ],
           ),
@@ -188,17 +211,21 @@ class DoctorReportPdf {
 /// — Arabic, Cyrillic, Greek, CJK, Indic — needs a face appended here, or
 /// it prints as a crossed box.
 class DoctorReportFonts {
-  const DoctorReportFonts({required this.base, this.bold, this.fallbacks = const []});
+  const DoctorReportFonts({
+    required this.base,
+    this.bold,
+    this.fallbacks = const [],
+  });
 
   final pw.Font base;
   final pw.Font? bold;
   final List<pw.Font> fallbacks;
 
   pw.ThemeData toTheme() => pw.ThemeData.withFont(
-        base: base,
-        bold: bold ?? base,
-        fontFallback: fallbacks,
-      );
+    base: base,
+    bold: bold ?? base,
+    fontFallback: fallbacks,
+  );
 }
 
 /// All display strings [DoctorReportPdf] needs, supplied by the caller so

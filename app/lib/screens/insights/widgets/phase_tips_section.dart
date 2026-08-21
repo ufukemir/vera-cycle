@@ -49,18 +49,35 @@ class PhaseTipsSection extends StatelessWidget {
     }
   }
 
+  String _sleepTip(AppLocalizations l10n) {
+    switch (phase) {
+      case CyclePhase.menstrual:
+        return l10n.tipSleepMenstrual;
+      case CyclePhase.follicular:
+        return l10n.tipSleepFollicular;
+      case CyclePhase.fertileWindow:
+        return l10n.tipSleepFertile;
+      case CyclePhase.luteal:
+        return l10n.tipSleepLuteal;
+      case CyclePhase.unknown:
+        return l10n.tipSleepUnknown;
+    }
+  }
+
   void _openDetail(
     BuildContext context,
     PhaseTipCategory category,
     String photoAsset,
   ) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (_) => PhaseTipDetailScreen(
-        phase: phase,
-        category: category,
-        photoAsset: photoAsset,
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => PhaseTipDetailScreen(
+          phase: phase,
+          category: category,
+          photoAsset: photoAsset,
+        ),
       ),
-    ));
+    );
   }
 
   @override
@@ -69,8 +86,10 @@ class PhaseTipsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(l10n.insightsPhaseTipsTitle,
-            style: Theme.of(context).textTheme.titleMedium),
+        Text(
+          l10n.insightsPhaseTipsTitle,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
         const SizedBox(height: 12),
         _TipCard(
           icon: Icons.directions_walk_outlined,
@@ -78,7 +97,10 @@ class PhaseTipsSection extends StatelessWidget {
           tip: _fitnessTip(l10n),
           photoAsset: 'assets/photos/pier_stretch.jpg',
           onTap: () => _openDetail(
-              context, PhaseTipCategory.fitness, 'assets/photos/pier_stretch.jpg'),
+            context,
+            PhaseTipCategory.fitness,
+            'assets/photos/pier_stretch.jpg',
+          ),
         ),
         const SizedBox(height: 12),
         _TipCard(
@@ -86,8 +108,23 @@ class PhaseTipsSection extends StatelessWidget {
           label: l10n.tipNutritionLabel,
           tip: _nutritionTip(l10n),
           photoAsset: 'assets/photos/kitchen_salad.jpg',
-          onTap: () => _openDetail(context, PhaseTipCategory.nutrition,
-              'assets/photos/kitchen_salad.jpg'),
+          onTap: () => _openDetail(
+            context,
+            PhaseTipCategory.nutrition,
+            'assets/photos/kitchen_salad.jpg',
+          ),
+        ),
+        const SizedBox(height: 12),
+        _TipCard(
+          icon: Icons.bedtime_outlined,
+          label: l10n.tipSleepLabel,
+          tip: _sleepTip(l10n),
+          photoAsset: 'assets/photos/sleeping_soft.jpg',
+          onTap: () => _openDetail(
+            context,
+            PhaseTipCategory.sleep,
+            'assets/photos/sleeping_soft.jpg',
+          ),
         ),
       ],
     );
@@ -130,8 +167,13 @@ class _TipCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(14),
                 // cacheWidth caps decode size: without it a 72px-wide
                 // thumbnail still decodes the full-resolution bitmap.
-                child: Image.asset(photoAsset,
-                    width: 72, height: 88, fit: BoxFit.cover, cacheWidth: 216),
+                child: Image.asset(
+                  photoAsset,
+                  width: 72,
+                  height: 88,
+                  fit: BoxFit.cover,
+                  cacheWidth: 216,
+                ),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -145,8 +187,11 @@ class _TipCard extends StatelessWidget {
                         Expanded(
                           child: Text(label, style: theme.textTheme.labelLarge),
                         ),
-                        Icon(Icons.chevron_right,
-                            size: 18, color: theme.colorScheme.onSurfaceVariant),
+                        Icon(
+                          Icons.chevron_right,
+                          size: 18,
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
                       ],
                     ),
                     const SizedBox(height: 6),

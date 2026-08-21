@@ -73,21 +73,28 @@ class OnboardingQuestionScaffold extends StatelessWidget {
                   children: [
                     if (photoAsset != null) ...[
                       PhotoHero(
-                          asset: photoAsset!,
-                          height: compactHero ? 130 : 200),
+                        asset: photoAsset!,
+                        height: compactHero ? 130 : 200,
+                      ),
                       const SizedBox(height: 20),
                     ] else if (scene != null) ...[
                       HeroIllustration(
-                          scene: scene!, height: compactHero ? 120 : 180),
+                        scene: scene!,
+                        height: compactHero ? 120 : 180,
+                      ),
                       const SizedBox(height: 20),
                     ],
-                    Text(title,
-                        style: theme.textTheme.headlineSmall,
-                        textAlign: TextAlign.center),
+                    Text(
+                      title,
+                      style: theme.textTheme.headlineSmall,
+                      textAlign: TextAlign.center,
+                    ),
                     const SizedBox(height: 12),
-                    Text(body,
-                        style: theme.textTheme.bodyMedium,
-                        textAlign: TextAlign.center),
+                    Text(
+                      body,
+                      style: theme.textTheme.bodyMedium,
+                      textAlign: TextAlign.center,
+                    ),
                     const SizedBox(height: 20),
                     content,
                   ],

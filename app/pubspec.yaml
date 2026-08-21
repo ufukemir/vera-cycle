@@ -7,6 +7,20 @@ environment:
   sdk: ^3.12.2
 
 dependencies:
+  # Partner Modu (2026-08-21, Ufuk's explicit decision — see CLAUDE.md's
+  # architecture-revision note). This is the one deliberate exception to
+  # "health data never leaves the device": a user who opts in and pairs
+  # with a partner shares only the specific fields they've toggled on,
+  # never their full history. cloud_firestore/firebase_auth/google_sign_in/
+  # sign_in_with_apple are the four pieces that exception actually needs —
+  # account + a place for two phones to exchange data neither one hosts.
+  cloud_firestore: ^6.8.0
+  # A second crypto package alongside `cryptography` on purpose: this one is
+  # a synchronous SHA-256 for the Sign in with Apple nonce (Apple wants the
+  # hash, Firebase verifies against the raw value) — a different job from
+  # `cryptography`'s AES-GCM encryption of the health-data file, not a
+  # duplicate of it.
+  crypto: ^3.0.7
   cryptography: ^2.9.0
   # Pinned to a 12.x beta deliberately: file_picker <12 pins win32 ^5.9.0,
   # which conflicts with share_plus's win32 ^6.0.1. Forcing win32 via
@@ -17,6 +31,16 @@ dependencies:
   # is the first version whose Windows source was actually updated for
   # win32 ^6, so this is a real fix, not a version-solver workaround.
   file_picker: ^12.0.0-beta.7
+  firebase_auth: ^6.5.7
+  firebase_core: ^4.13.0
+  # Cloud backup (2026-08-21, Ufuk's explicit decision — see CLAUDE.md's
+  # architecture-revision note). A second, narrower exception alongside
+  # Partner Modu's: the *only* thing this uploads is the exact
+  # password-encrypted file `BackupService` already produces for local
+  # export — Firebase Storage never sees plaintext, so signing in for a
+  # cloud backup is not the same trust step as Partner Modu's field
+  # sharing, even though both reuse the same Google/Apple sign-in.
+  firebase_storage: ^13.4.6
   flutter:
     sdk: flutter
   flutter_local_notifications: ^22.3.0
@@ -25,8 +49,13 @@ dependencies:
   flutter_secure_storage: ^10.3.1
   flutter_timezone: ^5.1.0
   google_mobile_ads: ^9.1.0
+  google_sign_in: ^7.2.0
   health: ^13.3.2
   home_widget: ^0.9.3
+  # A thin wrapper over the OS's own review sheet (SKStoreReviewController /
+  # Play In-App Review) — same class as local_auth: one call to a platform
+  # API already on the device, no network request or telemetry of its own.
+  in_app_review: ^2.0.10
   intl: ^0.20.2
   local_auth: ^3.0.2
   path_provider: ^2.1.6
@@ -35,6 +64,7 @@ dependencies:
   provider: ^6.1.5+1
   share_plus: ^13.3.0
   shared_preferences: ^2.5.5
+  sign_in_with_apple: ^8.1.0
   table_calendar: ^3.2.1
   timezone: ^0.11.1
 

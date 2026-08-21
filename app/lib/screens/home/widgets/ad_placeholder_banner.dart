@@ -98,18 +98,20 @@ class _AdPlaceholderBannerState extends State<AdPlaceholderBanner> {
             child: Center(
               child: Text(
                 l10n.adPlaceholderLabel,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall
-                    ?.copyWith(color: scheme.outline),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall?.copyWith(color: scheme.outline),
               ),
             ),
           ),
         TextButton(
-          onPressed: () => Navigator.of(context).push(
-            MaterialPageRoute(builder: (_) => const PremiumScreen()),
+          onPressed: () => Navigator.of(
+            context,
+          ).push(MaterialPageRoute(builder: (_) => const PremiumScreen())),
+          child: Text(
+            l10n.adPlaceholderUpgradeCta,
+            textAlign: TextAlign.center,
           ),
-          child: Text(l10n.adPlaceholderUpgradeCta, textAlign: TextAlign.center),
         ),
       ],
     );

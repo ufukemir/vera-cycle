@@ -23,7 +23,9 @@ class OrganicBlobBackground extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         Positioned.fill(
-          child: CustomPaint(painter: _BlobPainter(Theme.of(context).colorScheme)),
+          child: CustomPaint(
+            painter: _BlobPainter(Theme.of(context).colorScheme),
+          ),
         ),
         child,
       ],
@@ -60,16 +62,21 @@ class _BlobPainter extends CustomPainter {
   /// A wobbly circle built from four cubic Bézier arcs with randomized-looking
   /// (but deterministic) control-point offsets, so it reads as organic rather
   /// than a perfect geometric circle.
-  void _blob(Canvas canvas, {required Offset center, required double radius, required Color color}) {
+  void _blob(
+    Canvas canvas, {
+    required Offset center,
+    required double radius,
+    required Color color,
+  }) {
     final paint = Paint()..color = color;
     final path = Path();
     const wobble = 0.18;
     final offsets = [1.0, 1.0 + wobble, 1.0 - wobble * 0.6, 1.0 + wobble * 0.4];
 
     Offset pointAt(double angle, double scale) => Offset(
-          center.dx + radius * scale * math.cos(angle),
-          center.dy + radius * scale * math.sin(angle),
-        );
+      center.dx + radius * scale * math.cos(angle),
+      center.dy + radius * scale * math.sin(angle),
+    );
 
     final p0 = pointAt(-1.5708, offsets[0]);
     path.moveTo(p0.dx, p0.dy);
@@ -86,5 +93,6 @@ class _BlobPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant _BlobPainter oldDelegate) => oldDelegate.scheme != scheme;
+  bool shouldRepaint(covariant _BlobPainter oldDelegate) =>
+      oldDelegate.scheme != scheme;
 }

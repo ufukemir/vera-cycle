@@ -24,6 +24,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get actionCancel => 'Batal';
 
   @override
+  String get actionClear => 'Hapus';
+
+  @override
   String get actionDelete => 'Hapus';
 
   @override
@@ -73,7 +76,28 @@ class AppLocalizationsId extends AppLocalizations {
   String get lockScreenUseBiometrics => 'Gunakan biometrik';
 
   @override
+  String get lockScreenUseFaceId => 'Gunakan Face ID';
+
+  @override
+  String get lockScreenUseFingerprint => 'Gunakan sidik jari';
+
+  @override
   String get lockScreenForgotPin => 'Lupa PIN?';
+
+  @override
+  String get lockScreenForgotPinChoiceTitle =>
+      'Bagaimana kamu ingin mengaturnya ulang?';
+
+  @override
+  String get lockScreenResetViaDevice => 'Verifikasi dengan perangkat ini';
+
+  @override
+  String get lockScreenResetViaDeviceBody =>
+      'Datamu tetap aman. Cukup konfirmasi dengan kunci ponselmu sendiri — Face ID, sidik jari, atau kata sandi.';
+
+  @override
+  String get lockScreenResetViaDeviceReason =>
+      'Verifikasi untuk mengatur PIN baru';
 
   @override
   String lockScreenThrottled(int seconds) {
@@ -220,6 +244,12 @@ class AppLocalizationsId extends AppLocalizations {
   String get navSettings => 'Pengaturan';
 
   @override
+  String get navReminders => 'Pengingat';
+
+  @override
+  String get navProfile => 'Profil';
+
+  @override
   String get navTrack => 'Lacak';
 
   @override
@@ -344,6 +374,75 @@ class AppLocalizationsId extends AppLocalizations {
   String get symptomDizziness => 'Pusing';
 
   @override
+  String get symptomMigraine => 'Migrain';
+
+  @override
+  String get symptomHighFever => 'Demam tinggi';
+
+  @override
+  String get symptomNeckPain => 'Nyeri leher';
+
+  @override
+  String get symptomShoulderPain => 'Nyeri bahu';
+
+  @override
+  String get symptomLimbPain => 'Nyeri anggota tubuh';
+
+  @override
+  String get symptomMuscleAche => 'Nyeri otot';
+
+  @override
+  String get symptomChills => 'Menggigil';
+
+  @override
+  String get symptomNightSweats => 'Keringat malam';
+
+  @override
+  String get symptomHotFlashes => 'Rasa panas mendadak';
+
+  @override
+  String get symptomWeightGain => 'Kenaikan berat badan';
+
+  @override
+  String get symptomConstipation => 'Sembelit';
+
+  @override
+  String get symptomDiarrhea => 'Diare';
+
+  @override
+  String get symptomIndigestion => 'Gangguan pencernaan';
+
+  @override
+  String get symptomGasPain => 'Nyeri kembung';
+
+  @override
+  String get symptomFeelingUnwell => 'Merasa tidak enak badan';
+
+  @override
+  String get symptomItching => 'Gatal';
+
+  @override
+  String get symptomTroubleFocusing => 'Sulit fokus';
+
+  @override
+  String get symptomForgetfulness => 'Mudah lupa';
+
+  @override
+  String get symptomGroupHead => 'Kepala';
+
+  @override
+  String get symptomGroupBody => 'Tubuh';
+
+  @override
+  String get symptomGroupAbdomen => 'Perut';
+
+  @override
+  String get symptomGroupGeneral => 'Umum';
+
+  @override
+  String get symptomGroupCognitive => 'Kognitif';
+
+  @override
   String get dayLogMoodLabel => 'Suasana hati';
 
   @override
@@ -375,6 +474,54 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get moodEmotional => 'Sensitif';
+
+  @override
+  String get moodExcited => 'Bersemangat';
+
+  @override
+  String get moodHopeful => 'Penuh harap';
+
+  @override
+  String get moodProud => 'Bangga';
+
+  @override
+  String get moodDisappointed => 'Kecewa';
+
+  @override
+  String get moodConfident => 'Percaya diri';
+
+  @override
+  String get moodSurprised => 'Terkejut';
+
+  @override
+  String get moodIndifferent => 'Acuh tak acuh';
+
+  @override
+  String get moodPeaceful => 'Tenang';
+
+  @override
+  String get moodInLove => 'Jatuh cinta';
+
+  @override
+  String get moodShy => 'Malu';
+
+  @override
+  String get moodPlayful => 'Jenaka';
+
+  @override
+  String get moodExhausted => 'Kelelahan';
+
+  @override
+  String get moodLonely => 'Kesepian';
+
+  @override
+  String get moodOverwhelmed => 'Kewalahan';
+
+  @override
+  String get moodGrateful => 'Bersyukur';
+
+  @override
+  String get moodNostalgic => 'Nostalgia';
 
   @override
   String get dayLogNoteLabel => 'Catatan';
@@ -550,6 +697,86 @@ class AppLocalizationsId extends AppLocalizations {
   String get settingsLanguageUrdu => 'اردو';
 
   @override
+  String get settingsLanguageDutch => 'Nederlands';
+
+  @override
+  String get settingsLanguageSwedish => 'Svenska';
+
+  @override
+  String get settingsLanguageNorwegian => 'Norsk bokmål';
+
+  @override
+  String get settingsLanguageDanish => 'Dansk';
+
+  @override
+  String get settingsLanguagePolish => 'Polski';
+
+  @override
+  String get settingsLanguageUkrainian => 'Українська';
+
+  @override
+  String get settingsLanguageCzech => 'Čeština';
+
+  @override
+  String get settingsLanguageHungarian => 'Magyar';
+
+  @override
+  String get settingsLanguageRomanian => 'Română';
+
+  @override
+  String get settingsLanguageFinnish => 'Suomi';
+
+  @override
+  String get settingsLanguageGreek => 'Ελληνικά';
+
+  @override
+  String get settingsLanguageMalay => 'Bahasa Melayu';
+
+  @override
+  String get tourSkip => 'Lewati';
+
+  @override
+  String get tourNext => 'Lanjut';
+
+  @override
+  String get tourStart => 'Ayo mulai';
+
+  @override
+  String get tourHomeTitle => 'Beranda';
+
+  @override
+  String get tourHomeBody =>
+      'Lihat sekilas posisimu hari ini — hari siklusmu, berapa lama lagi menuju perkiraan jendelamu, dan maskotmu selalu ada di sini.';
+
+  @override
+  String get tourCalendarTitle => 'Kalender';
+
+  @override
+  String get tourCalendarBody =>
+      'Lihat siklus lalu dan mendatangmu di kalender. Ketuk hari mana pun untuk membuka catatannya.';
+
+  @override
+  String get tourTrackTitle => 'Catat';
+
+  @override
+  String get tourTrackBody =>
+      'Tombol + di tengah membuka catatan hari ini dari mana saja — flow, gejala, suasana hati, dan lainnya.';
+
+  @override
+  String get tourRemindersTitle => 'Pengingat';
+
+  @override
+  String get tourRemindersBody =>
+      'Atur pengingat untuk periode mendatang, obat, atau minum air — semuanya tetap di ponselmu dan tidak ke mana-mana.';
+
+  @override
+  String get tourProfileTitle => 'Profil';
+
+  @override
+  String get tourProfileBody =>
+      'Temukan wawasanmu, semua yang kamu lacak, dan pengaturanmu di sini.';
+
+  @override
   String get settingsWeekStartLabel => 'Minggu dimulai pada';
 
   @override
@@ -574,6 +801,320 @@ class AppLocalizationsId extends AppLocalizations {
   String get remindersScreenTitle => 'Pengingat';
 
   @override
+  String get reminderDetailNotification => 'Notifikasi';
+
+  @override
+  String get reminderDetailAlert => 'Peringatan';
+
+  @override
+  String get reminderDetailAlertToday => 'Pada hari itu';
+
+  @override
+  String get reminderDetailTime => 'Waktu';
+
+  @override
+  String get reminderDetailMessage => 'Pesan';
+
+  @override
+  String get reminderDetailMessageEditTitle => 'Edit pesan';
+
+  @override
+  String get reminderDetailMessageHint => 'Tulis pesanmu sendiri';
+
+  @override
+  String reminderDetailAlertDaysBefore(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count hari lebih awal',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String optionsShowMore(int count) {
+    return '+$count lainnya';
+  }
+
+  @override
+  String get optionsShowLess => 'Tampilkan lebih sedikit';
+
+  @override
+  String get trackerHistoryEntry => 'Riwayat';
+
+  @override
+  String get actionSend => 'Kirim';
+
+  @override
+  String get actionRemove => 'Hapus';
+
+  @override
+  String get feedbackEntry => 'Masukan';
+
+  @override
+  String get cloudBackupEntry => 'Cadangkan dengan Akun';
+
+  @override
+  String get cloudBackupTitle => 'Cadangkan dengan Akun';
+
+  @override
+  String get cloudBackupNotConfiguredTitle => 'Belum tersedia di versi ini';
+
+  @override
+  String get cloudBackupNotConfiguredBody =>
+      'Cadangan cloud membutuhkan layanan akun yang belum disiapkan untuk versi ini. Belum ada yang bisa digunakan di sini sampai itu siap.';
+
+  @override
+  String get cloudBackupIntro1Title => 'Jangan pernah kehilangan riwayatmu';
+
+  @override
+  String get cloudBackupIntro1Body =>
+      'Riwayat siklusmu tetap aman meskipun kamu kehilangan ponsel atau beralih ke ponsel baru.';
+
+  @override
+  String get cloudBackupIntro2Title => 'Hanya kamu yang bisa membukanya';
+
+  @override
+  String get cloudBackupIntro2Body =>
+      'Cadanganmu dienkripsi dengan kata sandi sebelum meninggalkan ponselmu — kami tidak bisa membacanya, begitu juga orang lain.';
+
+  @override
+  String get cloudBackupIntro3Title => 'Pulihkan dalam hitungan detik';
+
+  @override
+  String get cloudBackupIntro3Body =>
+      'Masuk di perangkat baru dan kembalikan riwayatmu dengan kata sandi yang sama.';
+
+  @override
+  String get cloudBackupSignedInTitle => 'Sudah masuk';
+
+  @override
+  String get cloudBackupUploadButton => 'Cadangkan sekarang';
+
+  @override
+  String get cloudBackupDownloadButton => 'Pulihkan dari cloud';
+
+  @override
+  String get cloudBackupUploadSuccess => 'Dicadangkan ke akunmu';
+
+  @override
+  String get cloudBackupNoBackupFound =>
+      'Belum ada cadangan cloud untuk akun ini.';
+
+  @override
+  String get partnerModeEntry => 'Mode Pasangan';
+
+  @override
+  String get partnerModeTitle => 'Mode Pasangan';
+
+  @override
+  String get partnerModeNotConfiguredTitle => 'Belum tersedia di versi ini';
+
+  @override
+  String get partnerModeNotConfiguredBody =>
+      'Mode Pasangan membutuhkan layanan akun yang belum disiapkan untuk versi ini. Belum ada yang bisa digunakan di sini sampai itu siap.';
+
+  @override
+  String get partnerModeHeroTitle => 'Bagikan sedikit, dengan caramu sendiri';
+
+  @override
+  String get partnerModeHeroBody =>
+      'Terhubung dengan pasanganmu dan hanya bagikan hal yang kamu aktifkan di bawah — tidak pernah seluruh riwayatmu, tidak pernah otomatis.';
+
+  @override
+  String get partnerModeSignInGoogle => 'Lanjutkan dengan Google';
+
+  @override
+  String get partnerModeSignInApple => 'Lanjutkan dengan Apple';
+
+  @override
+  String get partnerModeFaqTitle => 'Sebelum kamu masuk';
+
+  @override
+  String get partnerModeFaq1Q => 'Apa yang sebenarnya akan dilihat pasanganku?';
+
+  @override
+  String get partnerModeFaq1A =>
+      'Hanya kolom yang kamu aktifkan di Mode Pasangan, dan hanya kondisi terkinimu — tidak pernah riwayat yang tersimpan, dan tidak pernah apa pun yang belum kamu bagikan secara eksplisit.';
+
+  @override
+  String get partnerModeFaq2Q => 'Bisakah aku mematikannya nanti?';
+
+  @override
+  String get partnerModeFaq2A =>
+      'Ya. Memutuskan hubungan langsung menghentikan berbagi untuk kalian berdua, dan kamu bisa mematikan sakelar mana pun kapan saja tanpa memutuskan hubungan.';
+
+  @override
+  String get partnerModeFaq3Q => 'Apakah pasanganku perlu aplikasi ini?';
+
+  @override
+  String get partnerModeFaq3A =>
+      'Ya — dia masuk dengan cara yang sama dan terhubung menggunakan kode yang kamu kirimkan.';
+
+  @override
+  String get partnerModeNotPairedTitle => 'Belum terhubung';
+
+  @override
+  String get partnerModeNotPairedBody =>
+      'Undang pasanganmu dengan kode sekali pakai, atau masukkan kode yang dikirimkannya.';
+
+  @override
+  String get partnerModeInviteButton => 'Undang pasanganku';
+
+  @override
+  String get partnerModeEnterCodeButton => 'Masukkan kode';
+
+  @override
+  String get partnerModeSignOut => 'Keluar';
+
+  @override
+  String get partnerModePairedTitle => 'Terhubung';
+
+  @override
+  String get partnerModePairedBody =>
+      'Kamu dan pasanganmu sudah terhubung. Berbagi tetap hanya untuk hal yang kamu aktifkan di bawah.';
+
+  @override
+  String get partnerModeShareSectionTitle => 'Apa yang kamu bagikan';
+
+  @override
+  String get partnerModeShareCyclePhase => 'Fase dan hari siklus';
+
+  @override
+  String get partnerModeShareMood => 'Suasana hati hari ini';
+
+  @override
+  String get partnerModeShareSymptoms => 'Gejala hari ini';
+
+  @override
+  String get partnerModeShareHighDesire => 'Ingin kedekatan hari ini';
+
+  @override
+  String get partnerModeShareNow => 'Bagikan sekarang';
+
+  @override
+  String get partnerModeShareSuccess => 'Dibagikan ke pasanganmu';
+
+  @override
+  String get partnerModeUnpair => 'Putuskan hubungan';
+
+  @override
+  String get partnerModeUnpairConfirmTitle =>
+      'Putuskan hubungan dengan pasanganmu?';
+
+  @override
+  String get partnerModeUnpairConfirmBody =>
+      'Ini langsung menghentikan berbagi untuk kalian berdua. Kamu bisa terhubung lagi nanti dengan kode baru.';
+
+  @override
+  String get partnerModePartnerSnapshotEmpty =>
+      'Pasanganmu belum membagikan apa pun.';
+
+  @override
+  String get partnerModeErrorNotConfigured =>
+      'Mode Pasangan belum disiapkan di versi ini.';
+
+  @override
+  String get partnerModeErrorCodeNotFound =>
+      'Kode itu tidak ditemukan. Periksa lagi dan coba lagi.';
+
+  @override
+  String get partnerModeErrorCodeExpired =>
+      'Kode itu sudah kedaluwarsa. Minta yang baru.';
+
+  @override
+  String get partnerModeErrorCodeIsOwn =>
+      'Itu kodemu sendiri — minta kode milik pasanganmu.';
+
+  @override
+  String get partnerModeErrorNotSignedIn => 'Masuk terlebih dahulu.';
+
+  @override
+  String get partnerModeErrorUnknown =>
+      'Ada yang tidak beres. Silakan coba lagi.';
+
+  @override
+  String get partnerModeInviteTitle => 'Undang pasanganmu';
+
+  @override
+  String get partnerModeInviteBody =>
+      'Kirim kode ini ke pasanganmu. Dia akan memasukkannya di aplikasinya sendiri untuk terhubung denganmu.';
+
+  @override
+  String get partnerModeInviteExpiry => 'Berlaku selama 7 hari';
+
+  @override
+  String get partnerModeInviteShare => 'Bagikan kode';
+
+  @override
+  String partnerModeInviteMessage(String code) {
+    return 'Ini kode pasangan Vera-ku: $code';
+  }
+
+  @override
+  String get partnerModeEnterTitle => 'Masukkan kode';
+
+  @override
+  String get partnerModeEnterBody => 'Masukkan kode yang dikirim pasanganmu.';
+
+  @override
+  String get partnerModeEnterHint => 'Kode 6 karakter';
+
+  @override
+  String get partnerModeEnterSubmit => 'Hubungkan';
+
+  @override
+  String get homeInvitePartnerTitle => 'Bagikan dengan pasanganmu';
+
+  @override
+  String get homeInvitePartnerBody =>
+      'Terhubunglah dan hanya bagikan yang kamu pilih — riwayatmu tetap milikmu.';
+
+  @override
+  String get homeInvitePartnerCta => 'Siapkan Mode Pasangan';
+
+  @override
+  String get feedbackTitle => 'Apa yang tidak kamu suka?';
+
+  @override
+  String get feedbackSubtitle =>
+      'Pilih satu topik, dan tulis detailnya jika mau.';
+
+  @override
+  String get feedbackCategoryPredictions => 'Prediksi';
+
+  @override
+  String get feedbackCategoryBackup => 'Cadangkan & pulihkan';
+
+  @override
+  String get feedbackCategorySubscription => 'Langganan';
+
+  @override
+  String get feedbackCategoryAds => 'Iklan';
+
+  @override
+  String get feedbackCategoryDesign => 'Desain';
+
+  @override
+  String get feedbackCategoryTranslation => 'Terjemahan';
+
+  @override
+  String get feedbackCategoryOther => 'Lainnya';
+
+  @override
+  String get feedbackDescriptionLabel => 'Ceritakan lebih lanjut (opsional)';
+
+  @override
+  String get feedbackDescriptionHint =>
+      'Apa yang terjadi? Saat kamu tap Kirim, kamu memilih sendiri ke mana membagikannya — aplikasi email atau lainnya.';
+
+  @override
+  String get feedbackAttachPhoto => 'Tambahkan foto';
+
+  @override
+  String get feedbackPhotoAttached => 'Foto terlampir';
+
+  @override
   String get remindersGroupCycle => 'Haid & kesuburan';
 
   @override
@@ -583,7 +1124,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get remindersGroupLifestyle => 'Gaya hidup';
 
   @override
-  String get remindersGroupAppointment => 'Janji temu';
+  String get remindersGroupAppointment => 'Janji dokter';
 
   @override
   String get settingsRemindersPeriodEndLabel =>
@@ -596,7 +1137,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get settingsRemindersWaterLabel => 'Pengingat minum air';
 
   @override
-  String get settingsRemindersAppointmentLabel => 'Pengingat janji temu';
+  String get settingsRemindersAppointmentLabel => 'Pengingat janji dokter';
 
   @override
   String get settingsRemindersAppointmentSet => 'Atur tanggal & waktu';
@@ -628,6 +1169,22 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get settingsPrivacyEntry => 'Privasi';
+
+  @override
+  String get settingsRateEntry => 'Beri nilai';
+
+  @override
+  String get rateAppTitle => 'Apakah Vera bermanfaat untukmu?';
+
+  @override
+  String get rateAppBody =>
+      'Jika ya, beberapa detik untuk memberi nilai di toko aplikasi membantu orang lain yang mencari aplikasi seperti ini menemukannya.';
+
+  @override
+  String get rateAppCta => 'Nilai Vera';
+
+  @override
+  String get rateAppDismiss => 'Nanti saja';
 
   @override
   String get settingsDeleteAllData => 'Hapus semua data';
@@ -708,11 +1265,11 @@ class AppLocalizationsId extends AppLocalizations {
   String get reminderWaterBody => 'Pengingat kecil untuk minum air.';
 
   @override
-  String get reminderAppointmentTitle => 'Janji temu mendatang';
+  String get reminderAppointmentTitle => 'Janji dokter mendatang';
 
   @override
   String get reminderAppointmentBody =>
-      'Kamu punya janji temu yang akan datang.';
+      'Kamu punya janji dokter yang akan datang.';
 
   @override
   String get settingsExportEntry => 'Ekspor & cadangan';
@@ -1304,6 +1861,10 @@ class AppLocalizationsId extends AppLocalizations {
   }
 
   @override
+  String get trackerLowSampleNote =>
+      'Dengan catatan sesedikit ini, persentase belum bisa diandalkan — akan lebih akurat seiring bertambahnya catatan.';
+
+  @override
   String get assistantTyping => 'Vera sedang mengetik…';
 
   @override
@@ -1401,6 +1962,33 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get pregnancyDisclaimer =>
       'Tanggal diperkirakan dari haid terakhirmu memakai aturan standar 280 hari. USG memberi tanggal yang lebih akurat, dan ovulasi terlambat menggeser angka ini — ini informasi, bukan perawatan medis.';
+
+  @override
+  String get pregnancySizeLabel => 'Ukuran bayi';
+
+  @override
+  String get pregnancySizeUnder5 => 'Biji poppy (~2 mm)';
+
+  @override
+  String get pregnancySizeUnder9 => 'Blueberry (~1.6 cm)';
+
+  @override
+  String get pregnancySizeUnder13 => 'Jeruk nipis (~5.4 cm)';
+
+  @override
+  String get pregnancySizeUnder20 => 'Alpukat (~11.6 cm)';
+
+  @override
+  String get pregnancySizeUnder28 => 'Mangga (~30 cm)';
+
+  @override
+  String get pregnancySizeUnder34 => 'Nanas (~44 cm)';
+
+  @override
+  String get pregnancySizeUnder38 => 'Melon (~46 cm)';
+
+  @override
+  String get pregnancySizeTerm => 'Semangka kecil (~51 cm)';
 
   @override
   String get pregnancyNoteUnder5 =>
@@ -1909,13 +2497,34 @@ class AppLocalizationsId extends AppLocalizations {
   String get homeThemeBloom => 'Mekar';
 
   @override
+  String get homeThemeOcean => 'Laut';
+
+  @override
+  String get homeThemeAutumn => 'Musim Gugur';
+
+  @override
+  String get homeThemeNight => 'Malam';
+
+  @override
   String get mascotStar => 'Bintang';
 
   @override
   String get mascotLeaf => 'Daun';
 
   @override
+  String get mascotCat => 'Kucing';
+
+  @override
+  String get mascotRabbit => 'Kelinci';
+
+  @override
+  String get mascotBird => 'Burung';
+
+  @override
   String get tipDetailWhatsHappening => 'Apa yang sedang terjadi di tubuhmu';
+
+  @override
+  String get tipDetailGeneralHeading => 'Saran umum';
 
   @override
   String get tipDetailDisclaimer =>
@@ -1980,4 +2589,47 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get tipNutritionDetailUnknown =>
       'Apa pun fasenya, hal yang paling membantu tetap sama: makan teratur, protein cukup, banyak sayur, air cukup, dan makanan kaya zat besi. Karena perdarahan menguras zat besi, cukup memberi sedikit perhatian lebih di hari-hari itu — tidak perlu pola makan berbeda untuk tiap minggu dalam sebulan. Makan pada jam yang kurang lebih tetap lebih berpengaruh pada kestabilan energi dibanding satu jenis makanan mana pun, dan tidak ada bahan yang harus dihilangkan agar sebuah siklus menjadi sehat. Setelah beberapa siklus tercatat, saran khusus per fase akan muncul di sini.';
+
+  @override
+  String get tipSleepLabel => 'Tidur';
+
+  @override
+  String get tipSleepMenstrual =>
+      'Kram dan rasa tidak nyaman bisa memecah tidur; mandi air hangat atau kompres hangat sebelum tidur bisa membantu.';
+
+  @override
+  String get tipSleepFollicular =>
+      'Dengan energi yang meningkat, banyak orang merasa lebih terjaga — meski kebutuhan tidur sebenarnya tidak benar-benar berkurang.';
+
+  @override
+  String get tipSleepFertile =>
+      'Sedikit kenaikan suhu tubuh dekat ovulasi bisa membuat sulit tidur; kamar yang lebih sejuk bisa membantu.';
+
+  @override
+  String get tipSleepLuteal =>
+      'Progesteron sedikit menaikkan suhu tubuh istirahat dan bisa membuat tidur nyenyak lebih ringan; kamar sejuk dan gelap serta jam tidur teratur paling membantu di fase ini.';
+
+  @override
+  String get tipSleepUnknown =>
+      'Kualitas tidur cenderung berubah sepanjang siklus — biasanya paling rapuh tepat sebelum dan saat haid. Jam tidur yang konsisten adalah dasar paling andal apa pun fasenya.';
+
+  @override
+  String get tipSleepDetailMenstrual =>
+      'Saat haid, tidur sering lebih terpecah — kram, ketidaknyamanan, dan bagi sebagian orang lebih sering ke kamar mandi bisa membangunkan di malam hari. Prostaglandin, senyawa yang sama penyebab kram, mungkin juga berperan di sini. Mandi air hangat, kompres hangat, atau peregangan ringan sebelum tidur bisa meredakan kram. Jika minum pereda nyeri, waktukan agar efeknya menutupi awal malam. Jika tidur masih sulit, itu wajar — biasanya membaik seiring berlalunya fase.';
+
+  @override
+  String get tipSleepDetailFollicular =>
+      'Dengan estrogen yang meningkat, banyak orang merasa lebih waspada dan berenergi, yang bisa terasa seperti butuh tidur lebih sedikit. Itu tidak sepenuhnya benar — terjaga hanya terasa lebih mudah. Menjaga jam tidur konsisten di sini akan terasa manfaatnya nanti, saat tidur lebih rapuh di fase lain. Ini juga bisa jadi waktu yang relatif mudah untuk mencoba rutinitas tidur baru.';
+
+  @override
+  String get tipSleepDetailFertile =>
+      'Sedikit kenaikan suhu tubuh dekat ovulasi bisa membuat sulit tidur, karena tubuh secara alami ingin mendingin sebelum tidur. Kamar lebih sejuk, selimut lebih tipis, atau mandi air hangat sebelum tidur bisa mengimbanginya. Yang merasakan hasrat atau energi sosial lebih tinggi di masa ini mungkin juga memilih begadang — pola yang layak diperhatikan, bukan masalah yang perlu diperbaiki.';
+
+  @override
+  String get tipSleepDetailLuteal =>
+      'Progesteron yang naik setelah ovulasi sedikit menaikkan suhu tubuh istirahat, yang bisa membuat tidur nyenyak terasa lebih ringan — kadang seperti sensasi panas ringan, kadang hanya terasa tidur kurang memulihkan. Menjelang haid, ketegangan pramenstruasi bisa menambah ini. Kamar sejuk dan gelap, kurangi layar sebelum tidur, dan jam tidur konsisten paling membantu di fase ini. Jika tidur masih sulit, itu bukan kegagalan — itu bagian yang wajar dari fase ini.';
+
+  @override
+  String get tipSleepDetailUnknown =>
+      'Belum cukup data untuk mengetahui fase saat ini, tapi kualitas tidur yang berubah sepanjang siklus adalah pola umum — biasanya lebih rapuh tepat sebelum dan saat haid, lebih stabil di paruh pertama. Dasar paling andal apa pun fasenya: jam tidur dan bangun yang konsisten, kurangi layar sebelum tidur, dan kamar sejuk dan gelap. Setelah beberapa siklus tercatat, pola yang lebih spesifik akan terlihat di sini.';
 }

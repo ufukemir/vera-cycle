@@ -17,9 +17,15 @@ void main() {
       'pt-BR': const Locale('pt', 'BR'),
       'zh-Hans': Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
       'zh-Hant-TW': Locale.fromSubtags(
-          languageCode: 'zh', scriptCode: 'Hant', countryCode: 'TW'),
+        languageCode: 'zh',
+        scriptCode: 'Hant',
+        countryCode: 'TW',
+      ),
       'sr-Cyrl-RS': Locale.fromSubtags(
-          languageCode: 'sr', scriptCode: 'Cyrl', countryCode: 'RS'),
+        languageCode: 'sr',
+        scriptCode: 'Cyrl',
+        countryCode: 'RS',
+      ),
     };
 
     cases.forEach((tag, locale) {
@@ -76,7 +82,8 @@ void main() {
     expect(prefs.locale, isNull, reason: 'default is follow-the-system');
 
     await prefs.setLocale(
-        Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'));
+      Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'),
+    );
     expect(prefs.locale?.scriptCode, 'Hant');
 
     await prefs.setLocale(null);

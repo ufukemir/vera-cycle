@@ -22,13 +22,13 @@ class CyclePrediction {
   /// The "not enough data yet" prediction. Shown instead of a guess dressed up
   /// as a forecast.
   const CyclePrediction.insufficient({this.cyclesUsed = 0})
-      : confidence = PredictionConfidence.none,
-        earliestStart = null,
-        likelyStart = null,
-        latestStart = null,
-        meanLength = null,
-        stdDev = null,
-        irregular = false;
+    : confidence = PredictionConfidence.none,
+      earliestStart = null,
+      likelyStart = null,
+      latestStart = null,
+      meanLength = null,
+      stdDev = null,
+      irregular = false;
 
   final PredictionConfidence confidence;
 
@@ -64,7 +64,7 @@ class CyclePrediction {
   @override
   String toString() => hasPrediction
       ? 'CyclePrediction(${dayKey(earliestStart!)}–${dayKey(latestStart!)}, '
-          '${confidence.name}, n=$cyclesUsed)'
+            '${confidence.name}, n=$cyclesUsed)'
       : 'CyclePrediction(none, n=$cyclesUsed)';
 }
 

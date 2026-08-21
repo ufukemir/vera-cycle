@@ -109,9 +109,9 @@ class _AppRootState extends State<AppRoot> {
       _launchActionHandled = true;
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (!mounted) return;
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (_) => const PrivacyScreen()),
-        );
+        Navigator.of(
+          context,
+        ).push(MaterialPageRoute(builder: (_) => const PrivacyScreen()));
       });
     }
 

@@ -156,8 +156,7 @@ class PredictionEngine {
   }) {
     // Recorded bleeding always wins over any estimate: what the user observed
     // outranks what the model expected.
-    if (!date.isBefore(cycle.startDate) &&
-        !date.isAfter(cycle.periodEndDate)) {
+    if (!date.isBefore(cycle.startDate) && !date.isAfter(cycle.periodEndDate)) {
       return CyclePhase.menstrual;
     }
 
@@ -200,8 +199,7 @@ class PredictionEngine {
     return PredictionConfidence.low;
   }
 
-  double _mean(List<int> xs) =>
-      xs.fold<int>(0, (a, b) => a + b) / xs.length;
+  double _mean(List<int> xs) => xs.fold<int>(0, (a, b) => a + b) / xs.length;
 
   /// Sample standard deviation (n−1). With a single value there is no spread to
   /// measure, so the caller's floor takes over.

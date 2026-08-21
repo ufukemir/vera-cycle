@@ -67,8 +67,9 @@ class PrivacyScreen extends StatelessWidget {
           children: [
             Text(
               l10n.privacyScreenIntro,
-              style: theme.textTheme.headlineSmall
-                  ?.copyWith(color: theme.colorScheme.onSurface),
+              style: theme.textTheme.headlineSmall?.copyWith(
+                color: theme.colorScheme.onSurface,
+              ),
             ),
             const SizedBox(height: 24),
             for (final section in sections)
@@ -114,7 +115,9 @@ class _PrivacyCard extends StatelessWidget {
     // keeps only a trace of the hue.
     final panel = isDark
         ? Color.alphaBlend(
-            point.tint.withValues(alpha: 0.09), theme.colorScheme.surface)
+            point.tint.withValues(alpha: 0.09),
+            theme.colorScheme.surface,
+          )
         : point.tint.withValues(alpha: 0.45);
     final badge = isDark ? point.tint.withValues(alpha: 0.16) : point.tint;
     final ink = isDark ? point.tint : point.ink;
@@ -137,8 +140,7 @@ class _PrivacyCard extends StatelessWidget {
               Container(
                 width: 34,
                 height: 34,
-                decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: badge),
+                decoration: BoxDecoration(shape: BoxShape.circle, color: badge),
                 child: Icon(point.icon, size: 18, color: ink),
               ),
               const SizedBox(width: 10),

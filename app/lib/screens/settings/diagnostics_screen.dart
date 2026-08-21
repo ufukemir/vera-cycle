@@ -6,19 +6,21 @@ import '../../l10n/app_localizations.dart';
 import '../../services/crash_log.dart';
 import '../../state/app_lock_controller.dart';
 
-/// Lets the user send a note about a problem — with the crash log attached,
-/// and readable before it goes.
+/// Lets the user send a note about a problem — with the crash log attached
+/// automatically, so they don't have to reproduce or describe the technical
+/// side of it themselves.
 ///
-/// The screen used to open on the raw stack trace. That was the right
-/// instinct applied at the wrong level: nothing may be sent that the user
-/// cannot inspect, but a wall of `Element._debugCheckStateIsActive` is not
-/// inspection, it is intimidation. So the log is now folded away behind a
-/// disclosure, and what leads instead is the one thing that actually makes a
-/// crash fixable — the user's own sentence about what they were doing.
+/// The screen used to open on the raw stack trace, then folded it away
+/// behind a disclosure. Even collapsed, a `Element._debugCheckStateIsActive`
+/// heading sitting on a health app's own screen read as more intimidating
+/// than reassuring to someone who just wants to report a problem (2026-08-21,
+/// Ufuk's call) — so the log itself no longer renders here at all. It is
+/// still attached to what "Geliştiriciye gönder" shares (see [_report]);
+/// only the in-app display of it is gone.
 ///
-/// Rejecting Sentry/Crashlytics (see [CrashLog]) is what makes that sentence
-/// necessary rather than merely nice: there is no session replay to fall back
-/// on, so the report is only as good as what the person chose to write.
+/// Rejecting Sentry/Crashlytics (see [CrashLog]) is what makes the log worth
+/// attaching at all: there is no session replay to fall back on, so the
+/// report is only as good as the technical detail that travels with it.
 class DiagnosticsScreen extends StatefulWidget {
   const DiagnosticsScreen({super.key});
 
@@ -103,10 +105,12 @@ class _DiagnosticsScreenState extends State<DiagnosticsScreen> {
                 children: [
                   Expanded(
                     child: FilledButton.icon(
-                      onPressed: () => context
-                          .read<AppLockController>()
-                          .duringSystemSheet(() => SharePlus.instance
-                              .share(ShareParams(text: _report(log)))),
+                      onPressed: () =>
+                          context.read<AppLockController>().duringSystemSheet(
+                            () => SharePlus.instance.share(
+                              ShareParams(text: _report(log)),
+                            ),
+                          ),
                       icon: const Icon(Icons.ios_share),
                       label: Text(l10n.diagnosticsShare),
                     ),
@@ -120,35 +124,6 @@ class _DiagnosticsScreenState extends State<DiagnosticsScreen> {
                     child: Text(l10n.diagnosticsClear),
                   ),
                 ],
-              ),
-              const SizedBox(height: 8),
-              // Collapsed, not removed. Folding it away is what the user
-              // asked for; deleting it would mean asking someone to send an
-              // opaque blob out of a health app, which is the exact move
-              // this product refuses everywhere else.
-              Theme(
-                data: theme.copyWith(dividerColor: Colors.transparent),
-                child: ExpansionTile(
-                  title: Text(l10n.diagnosticsTechnicalDetail,
-                      style: theme.textTheme.labelLarge),
-                  tilePadding: EdgeInsets.zero,
-                  childrenPadding: EdgeInsets.zero,
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: theme.colorScheme.surfaceContainerHigh,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: SelectableText(
-                        log,
-                        style: theme.textTheme.bodySmall
-                            ?.copyWith(fontFamily: 'monospace'),
-                      ),
-                    ),
-                  ],
-                ),
               ),
             ],
           ],

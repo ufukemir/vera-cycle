@@ -19,7 +19,8 @@ import 'widgets/month_jump_sheet.dart';
 /// decides (0 = Sunday … 6 = Saturday). Following the locale is what makes
 /// Saturday-first languages (ar, fa, ur) correct by default.
 StartingDayOfWeek startingDayFor(int? weekday, BuildContext context) {
-  final effective = weekday ??
+  final effective =
+      weekday ??
       switch (MaterialLocalizations.of(context).firstDayOfWeekIndex) {
         0 => DateTime.sunday,
         2 => DateTime.tuesday,
@@ -149,9 +150,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 // only cue that the month name opens the jump sheet.
                 titleTextStyle:
                     Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: Theme.of(context).colorScheme.primary,
-                            ) ??
-                        const TextStyle(),
+                      color: Theme.of(context).colorScheme.primary,
+                    ) ??
+                    const TextStyle(),
               ),
               calendarBuilders: CalendarBuilders(
                 defaultBuilder: (context, day, focusedDay) => CalendarDayCell(

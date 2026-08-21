@@ -16,8 +16,9 @@ import 'secure_key_store.dart';
 /// weakening that separation.
 class PinVault {
   PinVault({FlutterSecureStorage? storage})
-      : _storage =
-            storage ?? const FlutterSecureStorage(iOptions: SecureKeyStore.iosOptions);
+    : _storage =
+          storage ??
+          const FlutterSecureStorage(iOptions: SecureKeyStore.iosOptions);
 
   static const _hashKey = 'cycle_pin_hash_v1';
   static const _saltKey = 'cycle_pin_salt_v1';

@@ -20,6 +20,7 @@ import 'widgets/backup_nudge_card.dart';
 import 'widgets/daily_insight_card.dart';
 import 'widgets/first_run_card.dart';
 import 'widgets/home_hero.dart';
+import 'widgets/partner_invite_card.dart';
 import 'widgets/phase_timeline_bar.dart';
 import 'widgets/pregnancy_card.dart';
 import 'widgets/pregnancy_hero.dart';
@@ -53,11 +54,13 @@ class _HomeScreenState extends State<HomeScreen> {
     _lastWidgetPayload = payload;
     // Fire-and-forget by design; HomeWidgetService swallows platform
     // failures, and a missing widget must never affect this screen.
-    unawaited(const HomeWidgetService().update(
-      eyebrow: eyebrow,
-      headline: headline,
-      secondary: secondary,
-    ));
+    unawaited(
+      const HomeWidgetService().update(
+        eyebrow: eyebrow,
+        headline: headline,
+        secondary: secondary,
+      ),
+    );
   }
 
   @override
@@ -165,80 +168,86 @@ class _HomeScreenState extends State<HomeScreen> {
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.surface,
                     borderRadius: const BorderRadius.vertical(
-                        top: Radius.circular(30)),
+                      top: Radius.circular(30),
+                    ),
                   ),
                   padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
                   child: Column(
                     children: [
-                    if (pregnancyInfo != null) ...[
-                      const SizedBox(height: 20),
-                      PregnancyCard(info: pregnancyInfo),
-                    ] else ...[
-                      const FirstRunCard(),
-                      _QuickActionsRow(
-                        onQuickLog: () => showQuickLogSheet(context),
-                        onOpenDetails: () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (_) => DayLogScreen(date: today())),
-                        ),
-                        // The conversation is provided by HomeShell, which
-                        // sits *below* the Navigator — so a pushed route is
-                        // outside its scope and reading it there threw
-                        // ProviderNotFoundException the moment the assistant
-                        // opened. Handing the same instance to the route
-                        // keeps the scope correct and the lifetime intact:
-                        // it still dies with the shell, which is what the
-                        // app lock tears down.
-                        onOpenAssistant: () {
-                          final conversation =
-                              context.read<AssistantConversation>();
-                          Navigator.of(context).push(
+                      if (pregnancyInfo != null) ...[
+                        const SizedBox(height: 20),
+                        PregnancyCard(info: pregnancyInfo),
+                      ] else ...[
+                        const FirstRunCard(),
+                        _QuickActionsRow(
+                          onQuickLog: () => showQuickLogSheet(context),
+                          onOpenDetails: () => Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (_) =>
-                                  ChangeNotifierProvider<AssistantConversation>
-                                      .value(
-                                value: conversation,
-                                child: const AssistantScreen(),
+                              builder: (_) => DayLogScreen(date: today()),
+                            ),
+                          ),
+                          // The conversation is provided by HomeShell, which
+                          // sits *below* the Navigator — so a pushed route is
+                          // outside its scope and reading it there threw
+                          // ProviderNotFoundException the moment the assistant
+                          // opened. Handing the same instance to the route
+                          // keeps the scope correct and the lifetime intact:
+                          // it still dies with the shell, which is what the
+                          // app lock tears down.
+                          onOpenAssistant: () {
+                            final conversation = context
+                                .read<AssistantConversation>();
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) =>
+                                    ChangeNotifierProvider<
+                                      AssistantConversation
+                                    >.value(
+                                      value: conversation,
+                                      child: const AssistantScreen(),
+                                    ),
+                              ),
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 20),
+                        PredictionRangeCard(prediction: prediction),
+                        const SizedBox(height: 16),
+                        PhaseTimelineBar(
+                          status: status,
+                          cycleLength: ringLength,
+                          periodLength: prefs.estimatedPeriodLengthDays,
+                        ),
+                        if (status.hasFertileEstimate) ...[
+                          const SizedBox(height: 12),
+                          // Was a bare line of grey disclaimer text. The
+                          // fertile window is the estimate people most want
+                          // explained, so it now opens the screen that
+                          // explains it instead of only warning about it.
+                          _FertileWindowTile(
+                            onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => const FertilityDetailScreen(),
                               ),
                             ),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      PredictionRangeCard(prediction: prediction),
-                      const SizedBox(height: 16),
-                      PhaseTimelineBar(
-                        status: status,
-                        cycleLength: ringLength,
-                        periodLength: prefs.estimatedPeriodLengthDays,
-                      ),
-                      if (status.hasFertileEstimate) ...[
-                        const SizedBox(height: 12),
-                        // Was a bare line of grey disclaimer text. The
-                        // fertile window is the estimate people most want
-                        // explained, so it now opens the screen that
-                        // explains it instead of only warning about it.
-                        _FertileWindowTile(
-                          onTap: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (_) => const FertilityDetailScreen()),
                           ),
-                        ),
+                        ],
                       ],
-                    ],
-                    const SizedBox(height: 20),
-                    const BackupNudgeCard(),
-                    if (pregnancyInfo == null) ...[
                       const SizedBox(height: 20),
-                      // Cycle-phase facts, so only in cycle mode: this card
-                      // was explaining what period blood is to someone who
-                      // had just told the app she is pregnant.
-                      DailyInsightCard(phase: status.phase),
+                      const BackupNudgeCard(),
+                      const SizedBox(height: 12),
+                      const PartnerInviteCard(),
+                      if (pregnancyInfo == null) ...[
+                        const SizedBox(height: 20),
+                        // Cycle-phase facts, so only in cycle mode: this card
+                        // was explaining what period blood is to someone who
+                        // had just told the app she is pregnant.
+                        DailyInsightCard(phase: status.phase),
+                      ],
+                      const SizedBox(height: 24),
+                      const AdPlaceholderBanner(),
+                      const SizedBox(height: 8),
                     ],
-                    const SizedBox(height: 24),
-                    const AdPlaceholderBanner(),
-                    const SizedBox(height: 8),
-                  ],
                   ),
                 ),
               ),
@@ -285,7 +294,9 @@ class _QuickActionsRow extends StatelessWidget {
       decoration: BoxDecoration(
         color: isDark
             ? Color.alphaBlend(
-                AppPalette.roseSoft.withValues(alpha: 0.10), scheme.surface)
+                AppPalette.roseSoft.withValues(alpha: 0.10),
+                scheme.surface,
+              )
             : AppPalette.roseSoft.withValues(alpha: 0.45),
         borderRadius: BorderRadius.circular(24),
       ),
@@ -295,7 +306,8 @@ class _QuickActionsRow extends StatelessWidget {
           Text(
             l10n.homeQuickLogTitle,
             style: theme.textTheme.titleMedium?.copyWith(
-                color: isDark ? AppPalette.roseSoft : AppPalette.roseSoftText),
+              color: isDark ? AppPalette.roseSoft : AppPalette.roseSoftText,
+            ),
           ),
           const SizedBox(height: 14),
           Row(
@@ -342,7 +354,9 @@ class _FertileWindowTile extends StatelessWidget {
     return Material(
       color: isDark
           ? Color.alphaBlend(
-              AppPalette.goldSoft.withValues(alpha: 0.10), scheme.surface)
+              AppPalette.goldSoft.withValues(alpha: 0.10),
+              scheme.surface,
+            )
           : AppPalette.goldSoft.withValues(alpha: 0.45),
       borderRadius: BorderRadius.circular(20),
       clipBehavior: Clip.antiAlias,
@@ -361,22 +375,26 @@ class _FertileWindowTile extends StatelessWidget {
                       ? AppPalette.goldSoft.withValues(alpha: 0.18)
                       : AppPalette.goldSoft,
                 ),
-                child: Icon(Icons.adjust,
-                    size: 18,
-                    color: isDark
-                        ? AppPalette.goldSoft
-                        : AppPalette.goldSoftText),
+                child: Icon(
+                  Icons.adjust,
+                  size: 18,
+                  color: isDark ? AppPalette.goldSoft : AppPalette.goldSoftText,
+                ),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(l10n.calendarLegendFertile,
-                        style: theme.textTheme.titleSmall),
+                    Text(
+                      l10n.calendarLegendFertile,
+                      style: theme.textTheme.titleSmall,
+                    ),
                     const SizedBox(height: 2),
-                    Text(l10n.homeFertileWindowDisclaimer,
-                        style: theme.textTheme.bodySmall),
+                    Text(
+                      l10n.homeFertileWindowDisclaimer,
+                      style: theme.textTheme.bodySmall,
+                    ),
                   ],
                 ),
               ),

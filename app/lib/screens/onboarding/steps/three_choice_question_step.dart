@@ -58,13 +58,17 @@ class ThreeChoiceQuestionStep extends StatelessWidget {
                     else
                       HeroIllustration(scene: scene, height: 175),
                     const SizedBox(height: 22),
-                    Text(title,
-                        style: theme.textTheme.headlineSmall,
-                        textAlign: TextAlign.center),
+                    Text(
+                      title,
+                      style: theme.textTheme.headlineSmall,
+                      textAlign: TextAlign.center,
+                    ),
                     const SizedBox(height: 12),
-                    Text(body,
-                        style: theme.textTheme.bodyMedium,
-                        textAlign: TextAlign.center),
+                    Text(
+                      body,
+                      style: theme.textTheme.bodyMedium,
+                      textAlign: TextAlign.center,
+                    ),
                   ],
                 ),
               ),
@@ -130,9 +134,9 @@ class _CircleAnswerButton extends StatelessWidget {
             child: Text(
               label,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: filled ? scheme.onPrimary : scheme.onSurface,
-                    fontWeight: FontWeight.w700,
-                  ),
+                color: filled ? scheme.onPrimary : scheme.onSurface,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
         ),

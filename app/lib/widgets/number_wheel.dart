@@ -23,6 +23,7 @@ class NumberWheel extends StatefulWidget {
     required this.onChanged,
     this.unitLabel,
     this.height = 210,
+    this.useGrouping = true,
   });
 
   final int value;
@@ -31,6 +32,10 @@ class NumberWheel extends StatefulWidget {
   final ValueChanged<int> onChanged;
   final String? unitLabel;
   final double height;
+
+  /// Off for values like a calendar year, which no locale groups in
+  /// thousands — on for everything else, matching [formatDecimal]'s default.
+  final bool useGrouping;
 
   @override
   State<NumberWheel> createState() => _NumberWheelState();
@@ -103,22 +108,28 @@ class _NumberWheelState extends State<NumberWheel> {
                       textBaseline: TextBaseline.alphabetic,
                       children: [
                         Text(
-                          formatDecimal(context, number.toDouble(),
-                              decimals: 0),
+                          formatDecimal(
+                            context,
+                            number.toDouble(),
+                            decimals: 0,
+                            useGrouping: widget.useGrouping,
+                          ),
                           style: theme.textTheme.headlineMedium?.copyWith(
                             color: selected
                                 ? scheme.primary
                                 : scheme.onSurface.withValues(alpha: 0.45),
-                            fontWeight:
-                                selected ? FontWeight.w700 : FontWeight.w500,
+                            fontWeight: selected
+                                ? FontWeight.w700
+                                : FontWeight.w500,
                           ),
                         ),
                         if (widget.unitLabel != null && selected) ...[
                           const SizedBox(width: 10),
                           Text(
                             widget.unitLabel!,
-                            style: theme.textTheme.titleMedium
-                                ?.copyWith(color: scheme.primary),
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              color: scheme.primary,
+                            ),
                           ),
                         ],
                       ],

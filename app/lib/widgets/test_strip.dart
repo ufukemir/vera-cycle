@@ -23,29 +23,33 @@ class TestStrip extends StatelessWidget {
 
   /// An LH strip: no second line at all, a faint one, or one as dark as the
   /// control.
-  factory TestStrip.ovulation(OvulationTestResult value,
-          {double width = 66, double height = 40}) =>
-      TestStrip._(
-        secondLineOpacity: switch (value) {
-          OvulationTestResult.negative => 0,
-          OvulationTestResult.high => 0.42,
-          OvulationTestResult.positive => 1,
-        },
-        width: width,
-        height: height,
-      );
+  factory TestStrip.ovulation(
+    OvulationTestResult value, {
+    double width = 66,
+    double height = 40,
+  }) => TestStrip._(
+    secondLineOpacity: switch (value) {
+      OvulationTestResult.negative => 0,
+      OvulationTestResult.high => 0.42,
+      OvulationTestResult.positive => 1,
+    },
+    width: width,
+    height: height,
+  );
 
-  factory TestStrip.pregnancy(PregnancyTestResult value,
-          {double width = 66, double height = 40}) =>
-      TestStrip._(
-        secondLineOpacity: switch (value) {
-          PregnancyTestResult.negative => 0,
-          PregnancyTestResult.faint => 0.38,
-          PregnancyTestResult.positive => 1,
-        },
-        width: width,
-        height: height,
-      );
+  factory TestStrip.pregnancy(
+    PregnancyTestResult value, {
+    double width = 66,
+    double height = 40,
+  }) => TestStrip._(
+    secondLineOpacity: switch (value) {
+      PregnancyTestResult.negative => 0,
+      PregnancyTestResult.faint => 0.38,
+      PregnancyTestResult.positive => 1,
+    },
+    width: width,
+    height: height,
+  );
 
   final double secondLineOpacity;
   final double width;
@@ -106,7 +110,11 @@ class _StripPainter extends CustomPainter {
       canvas.drawRRect(
         RRect.fromRectAndRadius(
           Rect.fromLTRB(
-              centreX - lineWidth / 2, top, centreX + lineWidth / 2, bottom),
+            centreX - lineWidth / 2,
+            top,
+            centreX + lineWidth / 2,
+            bottom,
+          ),
           Radius.circular(lineWidth / 2),
         ),
         Paint()..color = line.withValues(alpha: opacity),

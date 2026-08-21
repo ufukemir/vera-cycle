@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/custom_reminder.dart';
 import '../models/enums.dart';
+import '../services/reminder_service.dart' show ReminderCategory;
 
 /// Temperature unit for basal body temperature entries.
 enum TemperatureUnit { celsius, fahrenheit }
@@ -43,9 +44,11 @@ class AppPreferences extends ChangeNotifier {
   static const _kLutealPhaseDays = 'luteal_phase_days';
   static const _kGoal = 'goal';
   static const _kPeriodEndRemindersEnabled = 'period_end_reminders_enabled';
-  static const _kPeriodEndReminderMinuteOfDay = 'period_end_reminder_minute_of_day';
+  static const _kPeriodEndReminderMinuteOfDay =
+      'period_end_reminder_minute_of_day';
   static const _kMedicationRemindersEnabled = 'medication_reminders_enabled';
-  static const _kMedicationReminderMinuteOfDay = 'medication_reminder_minute_of_day';
+  static const _kMedicationReminderMinuteOfDay =
+      'medication_reminder_minute_of_day';
   static const _kWaterRemindersEnabled = 'water_reminders_enabled';
   static const _kWaterReminderMinuteOfDay = 'water_reminder_minute_of_day';
   static const _kAppointmentReminderAt = 'appointment_reminder_at';
@@ -61,6 +64,10 @@ class AppPreferences extends ChangeNotifier {
   static const _kPremiumActive = 'premium_active';
   static const _kPregnancyMode = 'pregnancy_mode';
   static const _kPregnancyLmp = 'pregnancy_lmp';
+  static const _kPartnerShareCyclePhase = 'partner_share_cycle_phase';
+  static const _kPartnerShareMood = 'partner_share_mood';
+  static const _kPartnerShareSymptoms = 'partner_share_symptoms';
+  static const _kPartnerShareHighDesire = 'partner_share_high_desire';
 
   bool get onboardingComplete => _prefs.getBool(_kOnboardingComplete) ?? false;
 
@@ -101,11 +108,11 @@ class AppPreferences extends ChangeNotifier {
   static String localeTag(Locale value) => _localeTag(value);
 
   static String _localeTag(Locale value) => [
-        value.languageCode,
-        if (value.scriptCode != null) value.scriptCode,
-        if (value.countryCode != null && value.countryCode!.isNotEmpty)
-          value.countryCode,
-      ].join('-');
+    value.languageCode,
+    if (value.scriptCode != null) value.scriptCode,
+    if (value.countryCode != null && value.countryCode!.isNotEmpty)
+      value.countryCode,
+  ].join('-');
 
   @visibleForTesting
   static Locale parseLocale(String tag) => _parseLocale(tag);
@@ -340,7 +347,9 @@ class AppPreferences extends ChangeNotifier {
 
   Future<void> setPeriodEndReminderTime(TimeOfDay value) async {
     await _prefs.setInt(
-        _kPeriodEndReminderMinuteOfDay, value.hour * 60 + value.minute);
+      _kPeriodEndReminderMinuteOfDay,
+      value.hour * 60 + value.minute,
+    );
     notifyListeners();
   }
 
@@ -359,7 +368,9 @@ class AppPreferences extends ChangeNotifier {
 
   Future<void> setMedicationReminderTime(TimeOfDay value) async {
     await _prefs.setInt(
-        _kMedicationReminderMinuteOfDay, value.hour * 60 + value.minute);
+      _kMedicationReminderMinuteOfDay,
+      value.hour * 60 + value.minute,
+    );
     notifyListeners();
   }
 
@@ -407,9 +418,9 @@ class AppPreferences extends ChangeNotifier {
       ]);
 
   Future<void> removeCustomReminder(int id) => _writeCustomReminders([
-        for (final existing in customReminders)
-          if (existing.id != id) existing,
-      ]);
+    for (final existing in customReminders)
+      if (existing.id != id) existing,
+  ]);
 
   /// Wipes every user-authored reminder, label and all.
   ///
@@ -424,14 +435,14 @@ class AppPreferences extends ChangeNotifier {
   }
 
   Future<void> _writeCustomReminders(List<CustomReminder> reminders) async {
-    await _prefs.setStringList(
-      _kCustomReminders,
-      [for (final r in reminders) jsonEncode(r.toJson())],
-    );
+    await _prefs.setStringList(_kCustomReminders, [
+      for (final r in reminders) jsonEncode(r.toJson()),
+    ]);
     notifyListeners();
   }
 
-  bool get waterRemindersEnabled => _prefs.getBool(_kWaterRemindersEnabled) ?? false;
+  bool get waterRemindersEnabled =>
+      _prefs.getBool(_kWaterRemindersEnabled) ?? false;
 
   Future<void> setWaterRemindersEnabled(bool value) async {
     await _prefs.setBool(_kWaterRemindersEnabled, value);
@@ -444,7 +455,10 @@ class AppPreferences extends ChangeNotifier {
   }
 
   Future<void> setWaterReminderTime(TimeOfDay value) async {
-    await _prefs.setInt(_kWaterReminderMinuteOfDay, value.hour * 60 + value.minute);
+    await _prefs.setInt(
+      _kWaterReminderMinuteOfDay,
+      value.hour * 60 + value.minute,
+    );
     notifyListeners();
   }
 
@@ -460,7 +474,10 @@ class AppPreferences extends ChangeNotifier {
     if (value == null) {
       await _prefs.remove(_kAppointmentReminderAt);
     } else {
-      await _prefs.setInt(_kAppointmentReminderAt, value.millisecondsSinceEpoch);
+      await _prefs.setInt(
+        _kAppointmentReminderAt,
+        value.millisecondsSinceEpoch,
+      );
     }
     notifyListeners();
   }
@@ -618,6 +635,86 @@ class AppPreferences extends ChangeNotifier {
     } else {
       await _prefs.setInt(_kPregnancyLmp, value.millisecondsSinceEpoch);
     }
+    notifyListeners();
+  }
+
+  /// How many days before the event a date-relative reminder — period
+  /// start, period end, the fertile window — fires. Keyed by
+  /// [ReminderCategory.channelId] rather than one field per category: nine
+  /// near-identical getter/setter pairs said nothing nine copies of this
+  /// comment wouldn't already say once. 0 means "on the day," matching
+  /// every reminder's behaviour before this existed.
+  int reminderOffsetDays(ReminderCategory category) =>
+      _prefs.getInt('reminder_offset_${category.channelId}') ?? 0;
+
+  Future<void> setReminderOffsetDays(
+    ReminderCategory category,
+    int days,
+  ) async {
+    await _prefs.setInt('reminder_offset_${category.channelId}', days);
+    notifyListeners();
+  }
+
+  /// The user's own wording for a reminder's notification body, overriding
+  /// the built-in localized default. `null` means "no override" — every
+  /// caller still has a real fallback string, so an empty preference is
+  /// never shown as an empty notification.
+  String? reminderMessage(ReminderCategory category) {
+    final value = _prefs.getString('reminder_message_${category.channelId}');
+    return (value == null || value.trim().isEmpty) ? null : value;
+  }
+
+  Future<void> setReminderMessage(
+    ReminderCategory category,
+    String? message,
+  ) async {
+    final trimmed = message?.trim();
+    if (trimmed == null || trimmed.isEmpty) {
+      await _prefs.remove('reminder_message_${category.channelId}');
+    } else {
+      await _prefs.setString('reminder_message_${category.channelId}', trimmed);
+    }
+    notifyListeners();
+  }
+
+  /// Partner Modu share toggles — each is its own independent flag, all
+  /// default OFF. These decide what [PartnerController] is *allowed* to put
+  /// in the shared snapshot; they say nothing about whether Partner Modu is
+  /// even signed in or paired. See CLAUDE.md's 2026-08-21 revision note:
+  /// full history is never shared, only whichever of these the user has
+  /// explicitly turned on.
+  bool get partnerShareCyclePhase =>
+      _prefs.getBool(_kPartnerShareCyclePhase) ?? false;
+
+  Future<void> setPartnerShareCyclePhase(bool value) async {
+    await _prefs.setBool(_kPartnerShareCyclePhase, value);
+    notifyListeners();
+  }
+
+  bool get partnerShareMood => _prefs.getBool(_kPartnerShareMood) ?? false;
+
+  Future<void> setPartnerShareMood(bool value) async {
+    await _prefs.setBool(_kPartnerShareMood, value);
+    notifyListeners();
+  }
+
+  bool get partnerShareSymptoms =>
+      _prefs.getBool(_kPartnerShareSymptoms) ?? false;
+
+  Future<void> setPartnerShareSymptoms(bool value) async {
+    await _prefs.setBool(_kPartnerShareSymptoms, value);
+    notifyListeners();
+  }
+
+  /// "High desire" — a single boolean derived from the sex-life tracker,
+  /// deliberately the only sexual-activity-adjacent signal Partner Modu can
+  /// ever share, and only when the user turns this on. Counts/history never
+  /// leave the device.
+  bool get partnerShareHighDesire =>
+      _prefs.getBool(_kPartnerShareHighDesire) ?? false;
+
+  Future<void> setPartnerShareHighDesire(bool value) async {
+    await _prefs.setBool(_kPartnerShareHighDesire, value);
     notifyListeners();
   }
 }

@@ -139,7 +139,10 @@ class HealthSyncService {
   /// Removes Vera's own records of one type for one day, so the write that
   /// follows replaces rather than appends.
   Future<void> _clearDay(
-      HealthDataType type, DateTime start, DateTime end) async {
+    HealthDataType type,
+    DateTime start,
+    DateTime end,
+  ) async {
     try {
       await _health.delete(type: type, startTime: start, endTime: end);
     } on Object {
@@ -164,10 +167,10 @@ class HealthSyncService {
   }
 
   static MenstrualFlow? _mapFlow(FlowIntensity? flow) => switch (flow) {
-        FlowIntensity.spotting => MenstrualFlow.spotting,
-        FlowIntensity.light => MenstrualFlow.light,
-        FlowIntensity.medium => MenstrualFlow.medium,
-        FlowIntensity.heavy => MenstrualFlow.heavy,
-        null => null,
-      };
+    FlowIntensity.spotting => MenstrualFlow.spotting,
+    FlowIntensity.light => MenstrualFlow.light,
+    FlowIntensity.medium => MenstrualFlow.medium,
+    FlowIntensity.heavy => MenstrualFlow.heavy,
+    null => null,
+  };
 }

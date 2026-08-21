@@ -39,8 +39,10 @@ class CalendarLegend extends StatelessWidget {
             _entry(_ringDot(scheme.primary), l10n.calendarLegendPredicted),
           if (hasFertileEstimate) ...[
             _entry(_ringDot(scheme.tertiary), l10n.calendarLegendFertile),
-            _entry(_filledDot(scheme.tertiary, size: 8),
-                l10n.calendarLegendOvulation),
+            _entry(
+              _filledDot(scheme.tertiary, size: 8),
+              l10n.calendarLegendOvulation,
+            ),
           ],
         ],
       ),
@@ -48,19 +50,19 @@ class CalendarLegend extends StatelessWidget {
   }
 
   Widget _filledDot(Color color, {double size = 14}) => Container(
-        width: size,
-        height: size,
-        decoration: BoxDecoration(shape: BoxShape.circle, color: color),
-      );
+    width: size,
+    height: size,
+    decoration: BoxDecoration(shape: BoxShape.circle, color: color),
+  );
 
   Widget _ringDot(Color color) => Container(
-        width: 14,
-        height: 14,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(color: color, width: 2),
-        ),
-      );
+    width: 14,
+    height: 14,
+    decoration: BoxDecoration(
+      shape: BoxShape.circle,
+      border: Border.all(color: color, width: 2),
+    ),
+  );
 
   /// One legend entry: a dot and its label.
   ///
@@ -70,11 +72,11 @@ class CalendarLegend extends StatelessWidget {
   /// rather than wrapping. `mainAxisSize.min` keeps the entry tight when it
   /// does fit.
   Widget _entry(Widget dot, String label) => Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          dot,
-          const SizedBox(width: 6),
-          Flexible(child: Text(label)),
-        ],
-      );
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      dot,
+      const SizedBox(width: 6),
+      Flexible(child: Text(label)),
+    ],
+  );
 }

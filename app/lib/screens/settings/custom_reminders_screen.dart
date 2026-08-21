@@ -245,6 +245,11 @@ Future<_ReminderDraft?> _promptForReminder(
                   final picked = await showTimePicker(
                     context: dialogContext,
                     initialTime: time,
+                    // Digit entry, not the analogue dial: typing "09:00" is
+                    // faster and more precise than dragging a clock hand,
+                    // and it is what every value on this screen already
+                    // shows itself as.
+                    initialEntryMode: TimePickerEntryMode.input,
                   );
                   if (picked != null) setState(() => time = picked);
                 },

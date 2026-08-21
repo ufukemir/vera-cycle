@@ -87,9 +87,7 @@ class PinPadState extends State<PinPad> {
         for (final row in rows)
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              for (final key in row) _keypadButton(key),
-            ],
+            children: [for (final key in row) _keypadButton(key)],
           ),
       ],
     );

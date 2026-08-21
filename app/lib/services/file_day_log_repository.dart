@@ -25,9 +25,9 @@ class FileDayLogRepository implements DayLogRepository {
     SecureKeyStore? keyStore,
     CycleCodec? codec,
     BackupExclusion? backupExclusion,
-  })  : _keyStore = keyStore ?? SecureKeyStore(),
-        _codec = codec ?? const CycleCodec(),
-        _backupExclusion = backupExclusion ?? const BackupExclusion();
+  }) : _keyStore = keyStore ?? SecureKeyStore(),
+       _codec = codec ?? const CycleCodec(),
+       _backupExclusion = backupExclusion ?? const BackupExclusion();
 
   static const _fileName = 'cycle_data.enc';
 

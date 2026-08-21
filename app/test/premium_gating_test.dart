@@ -83,8 +83,9 @@ void main() {
   // same tester carries the first one's scroll offset over, which silently
   // hides widgets the second pass is looking for.
   for (final premium in [false, true]) {
-    testWidgets('free tracking is present with premium=$premium',
-        (tester) async {
+    testWidgets('free tracking is present with premium=$premium', (
+      tester,
+    ) async {
       final (app, _, _) = await _app(premium: premium);
       await tester.pumpWidget(app);
       await _settle(tester);
@@ -105,28 +106,31 @@ void main() {
   // passed in both premium states while proving nothing. Assert the actual
   // rule instead — the free fields are present and ungated.
   for (final premium in [false, true]) {
-    testWidgets('no core tracking field sits behind a lock (premium=$premium)',
-        (tester) async {
-      final (app, _, _) = await _app(premium: premium);
-      await tester.pumpWidget(app);
-      await _settle(tester);
+    testWidgets(
+      'no core tracking field sits behind a lock (premium=$premium)',
+      (tester) async {
+        final (app, _, _) = await _app(premium: premium);
+        await tester.pumpWidget(app);
+        await _settle(tester);
 
-      for (final label in ['Akış', 'Semptomlar', 'Ruh hali']) {
-        await tester.scrollUntilVisible(find.text(label), 300);
-        expect(
-          find.ancestor(
-            of: find.text(label),
-            matching: find.byType(PremiumLock),
-          ),
-          findsNothing,
-          reason: '"$label" is core tracking and must never be gated',
-        );
-      }
-    });
+        for (final label in ['Akış', 'Semptomlar', 'Ruh hali']) {
+          await tester.scrollUntilVisible(find.text(label), 300);
+          expect(
+            find.ancestor(
+              of: find.text(label),
+              matching: find.byType(PremiumLock),
+            ),
+            findsNothing,
+            reason: '"$label" is core tracking and must never be gated',
+          );
+        }
+      },
+    );
   }
 
-  testWidgets('a lapsed subscription still shows tags already recorded',
-      (tester) async {
+  testWidgets('a lapsed subscription still shows tags already recorded', (
+    tester,
+  ) async {
     // Principle 6: Premium adds, it never takes away. Losing the ability to
     // ADD a tag is the deal; losing sight of what you already wrote is not.
     final (app, _, _) = await _app(
@@ -137,57 +141,71 @@ void main() {
     await _settle(tester);
 
     await tester.scrollUntilVisible(find.text('migren'), 300);
-    expect(find.text('migren'), findsOneWidget,
-        reason: 'the tag is the user\'s own record, not a Premium feature');
-    expect(find.text('Takip ekle'), findsNothing,
-        reason: 'adding is still the gated part');
-  });
-
-  test('a lapsed subscription falls back to a free background, and remembers',
-      () async {
-    // CLAUDE.md principle 6 and enums.dart both promised this; nothing
-    // implemented it, so a lapsed user kept the paid background (and saw it
-    // rendered as selected AND locked in the picker at the same time).
-    SharedPreferences.setMockInitialValues({
-      'onboarding_complete': true,
-      'premium_active': true,
-      'home_theme': HomeTheme.dusk.name,
-      'mascot': Mascot.star.name,
-    });
-    final prefs = await AppPreferences.load();
-
-    expect(prefs.homeTheme, HomeTheme.dusk);
-    expect(prefs.mascot, Mascot.star);
-
-    await prefs.setPremiumActive(false);
-
-    expect(prefs.homeTheme, HomeTheme.wheat, reason: 'falls back to free');
-    expect(prefs.mascot, Mascot.droplet);
-    // The choice is remembered, not erased — resubscribing restores it.
-    expect(prefs.selectedHomeTheme, HomeTheme.dusk);
-    expect(prefs.selectedMascot, Mascot.star);
-
-    await prefs.setPremiumActive(true);
-    expect(prefs.homeTheme, HomeTheme.dusk);
-    expect(prefs.mascot, Mascot.star);
-  });
-
-  test('erasing everything takes the user-written reminder labels with it',
-      () async {
-    SharedPreferences.setMockInitialValues({'premium_active': true});
-    final prefs = await AppPreferences.load();
-    await prefs.addCustomReminder(
-      label: 'hapımı al',
-      time: const TimeOfDay(hour: 9, minute: 0),
+    expect(
+      find.text('migren'),
+      findsOneWidget,
+      reason: 'the tag is the user\'s own record, not a Premium feature',
     );
-    expect(prefs.customReminders, hasLength(1));
-
-    await prefs.clearCustomReminders();
-
-    expect(prefs.customReminders, isEmpty,
-        reason: 'free text the user wrote about themselves must not survive '
-            '"erase everything"');
+    expect(
+      find.text('Takip ekle'),
+      findsNothing,
+      reason: 'adding is still the gated part',
+    );
   });
+
+  test(
+    'a lapsed subscription falls back to a free background, and remembers',
+    () async {
+      // CLAUDE.md principle 6 and enums.dart both promised this; nothing
+      // implemented it, so a lapsed user kept the paid background (and saw it
+      // rendered as selected AND locked in the picker at the same time).
+      SharedPreferences.setMockInitialValues({
+        'onboarding_complete': true,
+        'premium_active': true,
+        'home_theme': HomeTheme.dusk.name,
+        'mascot': Mascot.star.name,
+      });
+      final prefs = await AppPreferences.load();
+
+      expect(prefs.homeTheme, HomeTheme.dusk);
+      expect(prefs.mascot, Mascot.star);
+
+      await prefs.setPremiumActive(false);
+
+      expect(prefs.homeTheme, HomeTheme.wheat, reason: 'falls back to free');
+      expect(prefs.mascot, Mascot.droplet);
+      // The choice is remembered, not erased — resubscribing restores it.
+      expect(prefs.selectedHomeTheme, HomeTheme.dusk);
+      expect(prefs.selectedMascot, Mascot.star);
+
+      await prefs.setPremiumActive(true);
+      expect(prefs.homeTheme, HomeTheme.dusk);
+      expect(prefs.mascot, Mascot.star);
+    },
+  );
+
+  test(
+    'erasing everything takes the user-written reminder labels with it',
+    () async {
+      SharedPreferences.setMockInitialValues({'premium_active': true});
+      final prefs = await AppPreferences.load();
+      await prefs.addCustomReminder(
+        label: 'hapımı al',
+        time: const TimeOfDay(hour: 9, minute: 0),
+      );
+      expect(prefs.customReminders, hasLength(1));
+
+      await prefs.clearCustomReminders();
+
+      expect(
+        prefs.customReminders,
+        isEmpty,
+        reason:
+            'free text the user wrote about themselves must not survive '
+            '"erase everything"',
+      );
+    },
+  );
 
   test('custom tags round-trip through serialisation', () {
     final log = DayLog(
@@ -206,18 +224,28 @@ void main() {
     expect(DayLog(date: today()).isEmpty, isTrue);
   });
 
-  test('the tag list is derived from the logs, deduplicated and sorted',
-      () async {
-    final controller = CycleController(repository: InMemoryDayLogRepository());
-    await controller.upsertDay(
-      DayLog(date: addDays(today(), -2), customTags: const {'Spor', 'migren'}),
-    );
-    await controller.upsertDay(
-      DayLog(date: addDays(today(), -1), customTags: const {'migren', 'ağrı'}),
-    );
+  test(
+    'the tag list is derived from the logs, deduplicated and sorted',
+    () async {
+      final controller = CycleController(
+        repository: InMemoryDayLogRepository(),
+      );
+      await controller.upsertDay(
+        DayLog(
+          date: addDays(today(), -2),
+          customTags: const {'Spor', 'migren'},
+        ),
+      );
+      await controller.upsertDay(
+        DayLog(
+          date: addDays(today(), -1),
+          customTags: const {'migren', 'ağrı'},
+        ),
+      );
 
-    expect(controller.customTags, ['ağrı', 'migren', 'Spor']);
-  });
+      expect(controller.customTags, ['ağrı', 'migren', 'Spor']);
+    },
+  );
 
   test('deleting a tag removes it from every day that used it', () async {
     final controller = CycleController(repository: InMemoryDayLogRepository());
@@ -257,8 +285,7 @@ void main() {
     expect(prefs.customReminders, isEmpty);
   });
 
-  test('custom reminder ids never collide with the fixed categories',
-      () async {
+  test('custom reminder ids never collide with the fixed categories', () async {
     SharedPreferences.setMockInitialValues({});
     final prefs = await AppPreferences.load();
 
@@ -271,13 +298,16 @@ void main() {
       time: const TimeOfDay(hour: 14, minute: 0),
     );
 
-    final fixedIds =
-        ReminderCategory.values.map((c) => c.notificationId).toSet();
+    final fixedIds = ReminderCategory.values
+        .map((c) => c.notificationId)
+        .toSet();
     expect(fixedIds.contains(first.notificationId), isFalse);
     expect(fixedIds.contains(second.notificationId), isFalse);
     expect(first.notificationId, isNot(second.notificationId));
-    expect(first.notificationId,
-        greaterThanOrEqualTo(CustomReminder.notificationIdBase));
+    expect(
+      first.notificationId,
+      greaterThanOrEqualTo(CustomReminder.notificationIdBase),
+    );
   });
 
   test('a deleted reminder does not hand its id to the next one', () async {

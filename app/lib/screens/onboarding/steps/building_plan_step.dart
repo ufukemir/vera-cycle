@@ -61,7 +61,9 @@ class _BuildingPlanStepState extends State<BuildingPlanStep> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const HeroIllustration(
-                    scene: IllustrationScene.sunrise, height: 170),
+                  scene: IllustrationScene.sunrise,
+                  height: 170,
+                ),
                 const SizedBox(height: 28),
                 Text(
                   _completedSteps >= steps.length
@@ -98,12 +100,19 @@ class _ChecklistRow extends StatelessWidget {
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 300),
             child: done
-                ? Icon(Icons.check_circle, key: const ValueKey('done'), color: scheme.primary)
+                ? Icon(
+                    Icons.check_circle,
+                    key: const ValueKey('done'),
+                    color: scheme.primary,
+                  )
                 : SizedBox(
                     key: const ValueKey('pending'),
                     width: 24,
                     height: 24,
-                    child: CircularProgressIndicator(strokeWidth: 2, color: scheme.outline),
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: scheme.outline,
+                    ),
                   ),
           ),
           const SizedBox(width: 16),
@@ -111,8 +120,8 @@ class _ChecklistRow extends StatelessWidget {
             child: Text(
               label,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: done ? null : scheme.onSurfaceVariant,
-                  ),
+                color: done ? null : scheme.onSurfaceVariant,
+              ),
             ),
           ),
         ],

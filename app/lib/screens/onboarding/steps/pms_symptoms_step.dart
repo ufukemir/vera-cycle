@@ -52,7 +52,7 @@ class _PmsSymptomsStepState extends State<PmsSymptomsStep> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return OnboardingQuestionScaffold(
-      photoAsset: 'assets/photos/tea_blanket_rest.jpg',
+      photoAsset: 'assets/photos/couch_blanket_nap.jpg',
       title: l10n.onboardingPmsTitle,
       body: l10n.onboardingPmsBody,
       progress: widget.progress,

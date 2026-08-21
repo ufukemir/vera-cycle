@@ -67,7 +67,9 @@ class MedicationsSection extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialogContext),
-            child: Text(MaterialLocalizations.of(dialogContext).cancelButtonLabel),
+            child: Text(
+              MaterialLocalizations.of(dialogContext).cancelButtonLabel,
+            ),
           ),
           FilledButton(
             onPressed: () => Navigator.pop(dialogContext, controller.text),
@@ -96,9 +98,12 @@ class MedicationsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(l10n.dayLogBirthControlLabel,
-            style: theme.textTheme.labelLarge
-                ?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+        Text(
+          l10n.dayLogBirthControlLabel,
+          style: theme.textTheme.labelLarge?.copyWith(
+            color: theme.colorScheme.onSurfaceVariant,
+          ),
+        ),
         const SizedBox(height: 8),
         OptionChipWrap(
           children: [
@@ -114,19 +119,19 @@ class MedicationsSection extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 18),
-        Text(l10n.dayLogOtherMedicationsLabel,
-            style: theme.textTheme.labelLarge
-                ?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+        Text(
+          l10n.dayLogOtherMedicationsLabel,
+          style: theme.textTheme.labelLarge?.copyWith(
+            color: theme.colorScheme.onSurfaceVariant,
+          ),
+        ),
         const SizedBox(height: 8),
         Wrap(
           spacing: 8,
           runSpacing: 8,
           children: [
             for (var i = 0; i < value.length; i++)
-              InputChip(
-                label: Text(value[i]),
-                onDeleted: () => _remove(i),
-              ),
+              InputChip(label: Text(value[i]), onDeleted: () => _remove(i)),
             ActionChip(
               avatar: const Icon(Icons.add, size: 18),
               label: Text(l10n.dayLogAddMedication),

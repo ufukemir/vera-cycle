@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import '../../../widgets/illustrations.dart';
 
 class OnboardingChoiceOption<T> {
-  const OnboardingChoiceOption({required this.value, required this.label, this.icon});
+  const OnboardingChoiceOption({
+    required this.value,
+    required this.label,
+    this.icon,
+  });
 
   final T value;
   final String label;
@@ -49,16 +53,23 @@ class OnboardingChoiceScaffold<T> extends StatelessWidget {
                 HeroIllustration(scene: scene!, height: 160),
                 const SizedBox(height: 20),
               ],
-              Text(title,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                  textAlign: TextAlign.center),
+              Text(
+                title,
+                style: Theme.of(context).textTheme.headlineSmall,
+                textAlign: TextAlign.center,
+              ),
               const SizedBox(height: 12),
-              Text(body,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  textAlign: TextAlign.center),
+              Text(
+                body,
+                style: Theme.of(context).textTheme.bodyMedium,
+                textAlign: TextAlign.center,
+              ),
               const SizedBox(height: 32),
               for (final option in options) ...[
-                _ChoiceCard<T>(option: option, onTap: () => onSelected(option.value)),
+                _ChoiceCard<T>(
+                  option: option,
+                  onTap: () => onSelected(option.value),
+                ),
                 const SizedBox(height: 12),
               ],
               const Spacer(),
@@ -94,7 +105,10 @@ class _ChoiceCard<T> extends StatelessWidget {
                 const SizedBox(width: 16),
               ],
               Expanded(
-                child: Text(option.label, style: Theme.of(context).textTheme.titleMedium),
+                child: Text(
+                  option.label,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
               ),
               Icon(Icons.chevron_right_rounded, color: scheme.outline),
             ],

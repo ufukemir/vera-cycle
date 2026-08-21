@@ -26,8 +26,10 @@ class PredictionRangeCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(l10n.homePredictionInsufficientTitle,
-                  style: theme.textTheme.titleMedium),
+              Text(
+                l10n.homePredictionInsufficientTitle,
+                style: theme.textTheme.titleMedium,
+              ),
               const SizedBox(height: 4),
               Text(l10n.homePredictionInsufficientBody),
             ],
@@ -77,10 +79,19 @@ class _ConfidenceChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final (label, icon) = switch (confidence) {
-      PredictionConfidence.high => (l10n.homeConfidenceHigh, Icons.check_circle_outline),
-      PredictionConfidence.medium => (l10n.homeConfidenceMedium, Icons.remove_circle_outline),
+      PredictionConfidence.high => (
+        l10n.homeConfidenceHigh,
+        Icons.check_circle_outline,
+      ),
+      PredictionConfidence.medium => (
+        l10n.homeConfidenceMedium,
+        Icons.remove_circle_outline,
+      ),
       PredictionConfidence.low => (l10n.homeConfidenceLow, Icons.error_outline),
-      PredictionConfidence.none => (l10n.homeConfidenceLow, Icons.error_outline),
+      PredictionConfidence.none => (
+        l10n.homeConfidenceLow,
+        Icons.error_outline,
+      ),
     };
     return Chip(
       avatar: Icon(icon, size: 18),

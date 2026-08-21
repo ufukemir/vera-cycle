@@ -16,7 +16,11 @@ enum ReminderCategory {
   ovulation(6, 'ovulation', 'Fertile window'),
   backup(7, 'backup', 'Backup reminder');
 
-  const ReminderCategory(this.notificationId, this.channelId, this.fallbackName);
+  const ReminderCategory(
+    this.notificationId,
+    this.channelId,
+    this.fallbackName,
+  );
 
   final int notificationId;
   final String channelId;
@@ -58,7 +62,7 @@ enum ReminderCategory {
 /// belt-and-braces: it stays correct even in the UTC-fallback case.
 class ReminderService {
   ReminderService({FlutterLocalNotificationsPlugin? plugin})
-      : _plugin = plugin ?? FlutterLocalNotificationsPlugin();
+    : _plugin = plugin ?? FlutterLocalNotificationsPlugin();
 
   final FlutterLocalNotificationsPlugin _plugin;
   bool _initialized = false;
@@ -116,7 +120,10 @@ class ReminderService {
       requestSoundPermission: false,
     );
     await _plugin.initialize(
-      settings: const InitializationSettings(android: androidInit, iOS: darwinInit),
+      settings: const InitializationSettings(
+        android: androidInit,
+        iOS: darwinInit,
+      ),
     );
     _initialized = true;
   }
@@ -167,11 +174,13 @@ class ReminderService {
     await _ensureInitialized();
     final androidGranted = await _plugin
         .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+          AndroidFlutterLocalNotificationsPlugin
+        >()
         ?.requestNotificationsPermission();
     final iosGranted = await _plugin
         .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin>()
+          IOSFlutterLocalNotificationsPlugin
+        >()
         ?.requestPermissions(alert: true, badge: true, sound: true);
     return (androidGranted ?? true) && (iosGranted ?? true);
   }
@@ -201,7 +210,9 @@ class ReminderService {
       scheduledDate: target,
       notificationDetails: NotificationDetails(
         android: AndroidNotificationDetails(
-            category.channelId, channelName ?? category.fallbackName),
+          category.channelId,
+          channelName ?? category.fallbackName,
+        ),
         iOS: const DarwinNotificationDetails(),
       ),
       // Inexact rather than exact: firing within a rough window of the
@@ -231,7 +242,9 @@ class ReminderService {
       scheduledDate: nextOccurrenceOf(time),
       notificationDetails: NotificationDetails(
         android: AndroidNotificationDetails(
-            category.channelId, channelName ?? category.fallbackName),
+          category.channelId,
+          channelName ?? category.fallbackName,
+        ),
         iOS: const DarwinNotificationDetails(),
       ),
       androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
@@ -282,7 +295,7 @@ class ReminderService {
   /// while Premium is active.
   Future<void> reconcileCustomReminders({
     required Iterable<({int notificationId, TimeOfDay time, String title})>
-        wanted,
+    wanted,
     required Iterable<int> knownIds,
     required String channelName,
   }) async {

@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../l10n/app_localizations.dart';
-import '../../models/enums.dart';
 import '../../services/ad_consent_service.dart';
 import '../../services/crash_log.dart';
 import '../../services/health_sync_service.dart';
@@ -14,16 +13,18 @@ import '../../state/app_preferences.dart';
 import '../../state/cycle_controller.dart';
 import '../export/export_screen.dart';
 import '../export/import_screen.dart';
-import '../home/widgets/home_hero.dart';
 import '../premium/premium_screen.dart';
 import '../../theme/app_theme.dart';
-import '../../widgets/illustrations.dart';
 import '../../widgets/premium_lock.dart';
+import '../partner/partner_mode_screen.dart';
 import 'custom_tags_screen.dart';
 import 'diagnostics_screen.dart';
+import 'feedback_screen.dart';
 import 'prediction_settings_screen.dart';
 import 'privacy_screen.dart';
+import 'rate_app_screen.dart';
 import 'reminders_screen.dart';
+import 'theme_screen.dart';
 import 'widgets/language_picker_tile.dart';
 
 /// Localized weekday name, e.g. "Monday" / "Pazartesi" / "السبت".
@@ -34,8 +35,9 @@ import 'widgets/language_picker_tile.dart';
 String _weekdayName(BuildContext context, int weekday) {
   // Any week works; 2024-01-01 was a Monday, so +offset lands on the day.
   final date = DateTime(2024, 1, 1).add(Duration(days: weekday - 1));
-  return DateFormat.EEEE(Localizations.localeOf(context).toString())
-      .format(date);
+  return DateFormat.EEEE(
+    Localizations.localeOf(context).toString(),
+  ).format(date);
 }
 
 int _localeFirstWeekday(BuildContext context) =>
@@ -44,6 +46,17 @@ int _localeFirstWeekday(BuildContext context) =>
       6 => DateTime.saturday,
       _ => DateTime.monday,
     };
+
+/// Shrinks a [SegmentedButton] to fit a compact settings row — the default
+/// sizing is comfortable as the sole control under a full [_SettingCard]
+/// heading, but two of them stacked in one grouped card read as oversized
+/// next to the group's own row height.
+final ButtonStyle _compactSegmentStyle = SegmentedButton.styleFrom(
+  visualDensity: VisualDensity.compact,
+  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+  textStyle: const TextStyle(fontSize: 12.5),
+);
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -76,11 +89,13 @@ class SettingsScreen extends StatelessWidget {
     if (!granted) {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
-        ..showSnackBar(SnackBar(
-          content: Text(l10n.healthSyncDenied),
-          behavior: SnackBarBehavior.floating,
-          margin: const EdgeInsets.all(16),
-        ));
+        ..showSnackBar(
+          SnackBar(
+            content: Text(l10n.healthSyncDenied),
+            behavior: SnackBarBehavior.floating,
+            margin: const EdgeInsets.all(16),
+          ),
+        );
       return;
     }
 
@@ -93,11 +108,13 @@ class SettingsScreen extends StatelessWidget {
     if (!context.mounted) return;
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(
-        content: Text(l10n.healthSyncBackfilled(count)),
-        behavior: SnackBarBehavior.floating,
-        margin: const EdgeInsets.all(16),
-      ));
+      ..showSnackBar(
+        SnackBar(
+          content: Text(l10n.healthSyncBackfilled(count)),
+          behavior: SnackBarBehavior.floating,
+          margin: const EdgeInsets.all(16),
+        ),
+      );
   }
 
   Future<void> _pickLmp(BuildContext context, AppPreferences prefs) async {
@@ -175,122 +192,45 @@ class SettingsScreen extends StatelessWidget {
             // after it.
             _groupHeading(context, l10n.settingsGroupAppearance),
             const LanguagePickerTile(),
-            // Light/dark is a card too, for the same reason the unit
-            // pickers are: a heading floating above a segmented button ties
-            // the two together only by proximity.
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-              child: _SettingCard(
-                icon: Icons.brightness_6_outlined,
-                tint: AppPalette.lavenderSoft,
-                ink: AppPalette.lavenderSoftText,
-                label: l10n.settingsThemeLabel,
-                child: SegmentedButton<ThemeMode>(
-                  segments: [
-                    ButtonSegment(
-                        value: ThemeMode.system,
-                        label: Text(l10n.settingsThemeSystem)),
-                    ButtonSegment(
-                        value: ThemeMode.light,
-                        label: Text(l10n.settingsThemeLight)),
-                    ButtonSegment(
-                        value: ThemeMode.dark,
-                        label: Text(l10n.settingsThemeDark)),
-                  ],
-                  selected: {prefs.themeMode},
-                  onSelectionChanged: (s) => prefs.setThemeMode(s.first),
-                ),
+            // Theme mode, home background and mascot moved to their own
+            // screen (also reachable as the profile screen's "Tema" quick
+            // action) — a real destination rather than "Ayarlar" scrolled to
+            // a different spot, which read as the same tap twice.
+            ListTile(
+              leading: Icon(
+                Icons.checkroom_outlined,
+                color: Theme.of(context).colorScheme.primary,
               ),
-            ),
-            const SizedBox(height: 6),
-            _sectionHeading(context, l10n.settingsHomeThemeLabel),
-            SizedBox(
-              height: 96,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                children: [
-                  for (final entry in {
-                    HomeTheme.wheat: l10n.homeThemeWheat,
-                    HomeTheme.sky: l10n.homeThemeSky,
-                    HomeTheme.field: l10n.homeThemeField,
-                    HomeTheme.blossom: l10n.homeThemeBlossom,
-                    HomeTheme.plain: l10n.homeThemePlain,
-                    HomeTheme.dusk: l10n.homeThemeDusk,
-                    HomeTheme.meadow: l10n.homeThemeMeadow,
-                    HomeTheme.petal: l10n.homeThemePetal,
-                    HomeTheme.bloom: l10n.homeThemeBloom,
-                  }.entries)
-                    Padding(
-                      // Directional: in RTL the gap belongs after the
-                      // swatch in reading order, not on its physical right.
-                      padding: const EdgeInsetsDirectional.only(end: 10),
-                      child: _ThemeSwatch(
-                        label: entry.value,
-                        theme: entry.key,
-                        // The companion previews inside the swatch, so
-                        // picking a background shows the scene you will
-                        // actually land on rather than an empty backdrop.
-                        mascot: prefs.mascot,
-                        // The user's actual choice, not the one currently
-                        // rendered: a lapsed Premium theme stays ticked
-                        // here so resubscribing restores it, and so the
-                        // picker never shows two swatches as selected.
-                        selected: prefs.selectedHomeTheme == entry.key,
-                        // Locked swatches are shown, not hidden: seeing what
-                        // Premium adds is the honest version of an upsell.
-                        locked: entry.key.premium && !prefs.premiumActive,
-                        onTap: () => entry.key.premium && !prefs.premiumActive
-                            ? _openPremium(context)
-                            : prefs.setHomeTheme(entry.key),
-                      ),
-                    ),
-                ],
-              ),
-            ),
-            _sectionHeading(context, l10n.settingsMascotLabel),
-            // Characters, not words. The picker listed "Droplet", "Flower",
-            // "Moon" as text chips — you had to choose a companion you could
-            // not see, then leave Settings to find out what you picked. They
-            // are drawn characters; showing them is the whole point of
-            // having them.
-            SizedBox(
-              height: 108,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                children: [
-                  for (final entry in {
-                    Mascot.droplet: l10n.mascotDroplet,
-                    Mascot.flower: l10n.mascotFlower,
-                    Mascot.moon: l10n.mascotMoon,
-                    Mascot.star: l10n.mascotStar,
-                    Mascot.leaf: l10n.mascotLeaf,
-                    Mascot.none: l10n.mascotNone,
-                  }.entries)
-                    _MascotOption(
-                      mascot: entry.key,
-                      label: entry.value,
-                      selected: prefs.selectedMascot == entry.key,
-                      locked: entry.key.premium && !prefs.premiumActive,
-                      onTap: () => entry.key.premium && !prefs.premiumActive
-                          ? _openPremium(context)
-                          : prefs.setMascot(entry.key),
-                    ),
-                ],
-              ),
+              title: Text(l10n.settingsThemeLabel),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => Navigator.of(
+                context,
+              ).push(MaterialPageRoute(builder: (_) => const ThemeScreen())),
             ),
             const Divider(height: 32),
             // Reminders moved to their own screen: eight switches in the
             // middle of Settings meant scrolling a long page to answer "is
             // the water one on?".
             ListTile(
-              leading: Icon(Icons.notifications_active_outlined,
-                  color: Theme.of(context).colorScheme.primary),
+              leading: Icon(
+                Icons.notifications_active_outlined,
+                color: Theme.of(context).colorScheme.primary,
+              ),
               title: Text(l10n.remindersScreenTitle),
               trailing: const Icon(Icons.chevron_right),
               onTap: () => Navigator.of(context).push(
                 MaterialPageRoute(builder: (_) => const RemindersScreen()),
+              ),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.favorite_outline,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              title: Text(l10n.partnerModeEntry),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const PartnerModeScreen()),
               ),
             ),
             Padding(
@@ -302,91 +242,120 @@ class SettingsScreen extends StatelessWidget {
                 // your own trackers is managing your own data, and locking
                 // the door on it would strand whatever you recorded before
                 // the subscription lapsed.
-                lockedPreview: context.watch<CycleController>().customTags.isEmpty
+                lockedPreview:
+                    context.watch<CycleController>().customTags.isEmpty
                     ? null
                     : Card(
                         child: ListTile(
                           title: Text(l10n.customTagManageEntry),
                           trailing: const Icon(Icons.chevron_right),
                           onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (_) => const CustomTagsScreen())),
+                            MaterialPageRoute(
+                              builder: (_) => const CustomTagsScreen(),
+                            ),
+                          ),
                         ),
                       ),
                 child: Card(
                   child: ListTile(
                     title: Text(l10n.customTagManageEntry),
                     trailing: const Icon(Icons.chevron_right),
-                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                        builder: (_) => const CustomTagsScreen())),
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => const CustomTagsScreen(),
+                      ),
+                    ),
                   ),
                 ),
               ),
             ),
             const Divider(),
             _groupHeading(context, l10n.settingsGroupTracking),
-            // Both unit choices sit in cards, like every other settings
-            // screen in the app. They were bare controls on the page
-            // background: a heading, a segmented button, a heading, another
-            // segmented button, with nothing tying either label to the
-            // control under it.
+            // One card, not two stacked full-height ones. Both are small
+            // unit pickers a person sets once and rarely revisits — giving
+            // each its own tinted panel with a 32px icon badge weighed as
+            // much on screen as the reminder toggles and the custom-tracker
+            // manager above them, which is what someone actually came to
+            // this screen to change. Grouped under a shared roof with a
+            // compact row each, the way iOS groups a whole block of
+            // low-stakes settings under one table section.
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
-              child: _SettingCard(
-                icon: Icons.view_week_outlined,
-                tint: AppPalette.skySoft,
-                ink: AppPalette.skySoftText,
-                label: l10n.settingsWeekStartLabel,
-                // Three options now, not two: ar, fa and ur conventionally
-                // start the week on Saturday, which the old Monday/Sunday
-                // switch could not express at all.
-                //
-                // The labels come from `intl` rather than from ARB keys, so
-                // they are correct in all 36 languages for free and no new
-                // string has to be translated 36 times to add a weekday.
-                child: SegmentedButton<int>(
-                  segments: [
-                    for (final weekday in const [
-                      DateTime.monday,
-                      DateTime.sunday,
-                      DateTime.saturday,
-                    ])
-                      ButtonSegment(
-                        value: weekday,
-                        label: Text(_weekdayName(context, weekday)),
-                      ),
-                  ],
-                  // Unset means "follow the locale", so show what the locale
-                  // actually does rather than a hardcoded Monday. Touching
-                  // the control pins the choice.
-                  selected: {
-                    prefs.weekStartWeekday ?? _localeFirstWeekday(context),
-                  },
-                  onSelectionChanged: (s) =>
-                      prefs.setWeekStartWeekday(s.first),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surfaceContainerHigh,
+                  borderRadius: BorderRadius.circular(18),
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
-              child: _SettingCard(
-                icon: Icons.thermostat_outlined,
-                tint: AppPalette.terracottaSoft,
-                ink: AppPalette.terracottaSoftText,
-                label: l10n.settingsTemperatureUnitLabel,
-                child: SegmentedButton<TemperatureUnit>(
-                  segments: [
-                    ButtonSegment(
-                      value: TemperatureUnit.celsius,
-                      label: Text(l10n.settingsTemperatureCelsius),
+                child: Column(
+                  children: [
+                    _CompactPreferenceRow(
+                      icon: Icons.view_week_outlined,
+                      tint: AppPalette.skySoft,
+                      ink: AppPalette.skySoftText,
+                      label: l10n.settingsWeekStartLabel,
+                      // Three options now, not two: ar, fa and ur
+                      // conventionally start the week on Saturday, which the
+                      // old Monday/Sunday switch could not express at all.
+                      //
+                      // The labels come from `intl` rather than from ARB
+                      // keys, so they are correct in all 36 languages for
+                      // free and no new string has to be translated 36 times
+                      // to add a weekday.
+                      child: SegmentedButton<int>(
+                        style: _compactSegmentStyle,
+                        segments: [
+                          for (final weekday in const [
+                            DateTime.monday,
+                            DateTime.sunday,
+                            DateTime.saturday,
+                          ])
+                            ButtonSegment(
+                              value: weekday,
+                              label: Text(_weekdayName(context, weekday)),
+                            ),
+                        ],
+                        // Unset means "follow the locale", so show what the
+                        // locale actually does rather than a hardcoded
+                        // Monday. Touching the control pins the choice.
+                        selected: {
+                          prefs.weekStartWeekday ??
+                              _localeFirstWeekday(context),
+                        },
+                        onSelectionChanged: (s) =>
+                            prefs.setWeekStartWeekday(s.first),
+                      ),
                     ),
-                    ButtonSegment(
-                      value: TemperatureUnit.fahrenheit,
-                      label: Text(l10n.settingsTemperatureFahrenheit),
+                    Divider(
+                      height: 1,
+                      indent: 16,
+                      endIndent: 16,
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.outlineVariant.withValues(alpha: 0.5),
+                    ),
+                    _CompactPreferenceRow(
+                      icon: Icons.thermostat_outlined,
+                      tint: AppPalette.terracottaSoft,
+                      ink: AppPalette.terracottaSoftText,
+                      label: l10n.settingsTemperatureUnitLabel,
+                      child: SegmentedButton<TemperatureUnit>(
+                        style: _compactSegmentStyle,
+                        segments: [
+                          ButtonSegment(
+                            value: TemperatureUnit.celsius,
+                            label: Text(l10n.settingsTemperatureCelsius),
+                          ),
+                          ButtonSegment(
+                            value: TemperatureUnit.fahrenheit,
+                            label: Text(l10n.settingsTemperatureFahrenheit),
+                          ),
+                        ],
+                        selected: {prefs.temperatureUnit},
+                        onSelectionChanged: (s) =>
+                            prefs.setTemperatureUnit(s.first),
+                      ),
                     ),
                   ],
-                  selected: {prefs.temperatureUnit},
-                  onSelectionChanged: (s) => prefs.setTemperatureUnit(s.first),
                 ),
               ),
             ),
@@ -394,8 +363,10 @@ class SettingsScreen extends StatelessWidget {
             _sectionHeading(context, l10n.settingsOptionalTrackersHeading),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text(l10n.settingsOptionalTrackersBody,
-                  style: Theme.of(context).textTheme.bodySmall),
+              child: Text(
+                l10n.settingsOptionalTrackersBody,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
             ),
             SwitchListTile(
               title: Text(l10n.settingsSexualActivityToggle),
@@ -443,30 +414,38 @@ class SettingsScreen extends StatelessWidget {
             if (prefs.pregnancyMode)
               ListTile(
                 title: Text(l10n.pregnancyLmpLabel),
-                subtitle: Text(prefs.pregnancyLmp == null
-                    ? l10n.pregnancyNeedsLmp
-                    : MaterialLocalizations.of(context)
-                        .formatMediumDate(prefs.pregnancyLmp!)),
+                subtitle: Text(
+                  prefs.pregnancyLmp == null
+                      ? l10n.pregnancyNeedsLmp
+                      : MaterialLocalizations.of(
+                          context,
+                        ).formatMediumDate(prefs.pregnancyLmp!),
+                ),
                 trailing: const Icon(Icons.calendar_today_outlined),
                 onTap: () => _pickLmp(context, prefs),
               ),
             const Divider(),
             ListTile(
-              leading: Icon(Icons.workspace_premium_outlined,
-                  color: Theme.of(context).colorScheme.primary),
-              title: Text(l10n.settingsPremiumEntry),
-              subtitle:
-                  prefs.premiumActive ? Text(l10n.premiumActiveBadge) : null,
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const PremiumScreen()),
+              leading: Icon(
+                Icons.workspace_premium_outlined,
+                color: Theme.of(context).colorScheme.primary,
               ),
+              title: Text(l10n.settingsPremiumEntry),
+              subtitle: prefs.premiumActive
+                  ? Text(l10n.premiumActiveBadge)
+                  : null,
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => Navigator.of(
+                context,
+              ).push(MaterialPageRoute(builder: (_) => const PremiumScreen())),
             ),
             ListTile(
               title: Text(l10n.predictionSettingsEntry),
               trailing: const Icon(Icons.chevron_right),
               onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const PredictionSettingsScreen()),
+                MaterialPageRoute(
+                  builder: (_) => const PredictionSettingsScreen(),
+                ),
               ),
             ),
             // Required to stay reachable wherever the user's region
@@ -477,23 +456,36 @@ class SettingsScreen extends StatelessWidget {
               trailing: const Icon(Icons.chevron_right),
               onTap: () async {
                 final messenger = ScaffoldMessenger.of(context);
-                final shown =
-                    await const AdConsentService().showPrivacyOptions();
+                final shown = await const AdConsentService()
+                    .showPrivacyOptions();
                 if (shown) return;
                 messenger.hideCurrentSnackBar();
-                messenger.showSnackBar(SnackBar(
-                  content: Text(l10n.settingsAdPrivacyUnavailable),
-                  behavior: SnackBarBehavior.floating,
-                  duration: const Duration(seconds: 5),
-                ));
+                messenger.showSnackBar(
+                  SnackBar(
+                    content: Text(l10n.settingsAdPrivacyUnavailable),
+                    behavior: SnackBarBehavior.floating,
+                    duration: const Duration(seconds: 5),
+                  ),
+                );
               },
             ),
             ListTile(
               title: Text(l10n.settingsPrivacyEntry),
               trailing: const Icon(Icons.chevron_right),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const PrivacyScreen()),
+              onTap: () => Navigator.of(
+                context,
+              ).push(MaterialPageRoute(builder: (_) => const PrivacyScreen())),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.star_outline,
+                color: Theme.of(context).colorScheme.primary,
               ),
+              title: Text(l10n.settingsRateEntry),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => Navigator.of(
+                context,
+              ).push(MaterialPageRoute(builder: (_) => const RateAppScreen())),
             ),
             if (HealthSyncService.isSupported) ...[
               SwitchListTile(
@@ -506,16 +498,16 @@ class SettingsScreen extends StatelessWidget {
             ListTile(
               title: Text(l10n.settingsImportEntry),
               trailing: const Icon(Icons.chevron_right),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const ImportScreen()),
-              ),
+              onTap: () => Navigator.of(
+                context,
+              ).push(MaterialPageRoute(builder: (_) => const ImportScreen())),
             ),
             ListTile(
               title: Text(l10n.settingsExportEntry),
               trailing: const Icon(Icons.chevron_right),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const ExportScreen()),
-              ),
+              onTap: () => Navigator.of(
+                context,
+              ).push(MaterialPageRoute(builder: (_) => const ExportScreen())),
             ),
             // Only once something has actually been recorded. A permanent
             // "Diagnostics" row led, for almost every user forever, to a
@@ -530,14 +522,24 @@ class SettingsScreen extends StatelessWidget {
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(
-                        builder: (_) => const DiagnosticsScreen()),
+                      builder: (_) => const DiagnosticsScreen(),
+                    ),
                   ),
                 );
               },
             ),
             ListTile(
-              title: Text(l10n.settingsDeleteAllData,
-                  style: TextStyle(color: errorColor)),
+              title: Text(l10n.feedbackEntry),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => Navigator.of(
+                context,
+              ).push(MaterialPageRoute(builder: (_) => const FeedbackScreen())),
+            ),
+            ListTile(
+              title: Text(
+                l10n.settingsDeleteAllData,
+                style: TextStyle(color: errorColor),
+              ),
               onTap: () => _confirmErase(context),
             ),
             const SizedBox(height: 24),
@@ -547,189 +549,32 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  void _openPremium(BuildContext context) => Navigator.of(context).push(
-        MaterialPageRoute(builder: (_) => const PremiumScreen()),
-      );
-
   Widget _sectionHeading(BuildContext context, String text) => Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-        child: Text(text, style: Theme.of(context).textTheme.titleMedium),
-      );
+    padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+    child: Text(text, style: Theme.of(context).textTheme.titleMedium),
+  );
 
   /// One level above [_sectionHeading]: names a whole group of related
   /// settings, in the accent colour so the two tiers read as a hierarchy
   /// rather than as identical repeated labels.
   Widget _groupHeading(BuildContext context, String text) => Padding(
-        padding: const EdgeInsets.fromLTRB(16, 20, 16, 4),
-        child: Text(
-          text.toUpperCase(),
-          style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                color: Theme.of(context).colorScheme.primary,
-                letterSpacing: 1.1,
-                fontWeight: FontWeight.w700,
-              ),
-        ),
-      );
-}
-
-class _ThemeSwatch extends StatelessWidget {
-  const _ThemeSwatch({
-    required this.label,
-    required this.theme,
-    required this.selected,
-    required this.onTap,
-    required this.mascot,
-    this.locked = false,
-  });
-
-  final String label;
-  final HomeTheme theme;
-  final Mascot mascot;
-  final bool selected;
-  final VoidCallback onTap;
-  final bool locked;
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    final asset = homeThemeAsset(theme);
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        children: [
-          Container(
-            width: 62,
-            height: 62,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: selected ? scheme.primary : scheme.outlineVariant,
-                width: selected ? 3 : 1,
-              ),
-              image: asset == null
-                  ? null
-                  : DecorationImage(
-                      image: ResizeImage(AssetImage(asset), width: 186),
-                      fit: BoxFit.cover,
-                      // Dimmed rather than blurred out: the point is to show
-                      // what it looks like, not to tease it.
-                      opacity: locked ? 0.45 : 1,
-                    ),
-              gradient: asset == null ? const AppPaletteGradient() : null,
-            ),
-            child: locked
-                ? Icon(Icons.lock_outline, size: 20, color: scheme.primary)
-                : mascot != Mascot.none
-                    ? Align(
-                        alignment: AlignmentDirectional.bottomStart,
-                        child: Padding(
-                          padding: const EdgeInsets.all(4),
-                          child: MascotAvatar(mascot: mascot, size: 24),
-                        ),
-                      )
-                : null,
-          ),
-          const SizedBox(height: 4),
-          Text(label, style: Theme.of(context).textTheme.labelSmall),
-        ],
+    padding: const EdgeInsets.fromLTRB(16, 20, 16, 4),
+    child: Text(
+      text.toUpperCase(),
+      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+        color: Theme.of(context).colorScheme.primary,
+        letterSpacing: 1.1,
+        fontWeight: FontWeight.w700,
       ),
-    );
-  }
+    ),
+  );
 }
 
-/// One companion in the picker: the character itself, its name, and a lock
-/// when it is a Premium one.
-class _MascotOption extends StatelessWidget {
-  const _MascotOption({
-    required this.mascot,
-    required this.label,
-    required this.selected,
-    required this.locked,
-    required this.onTap,
-  });
-
-  final Mascot mascot;
-  final String label;
-  final bool selected;
-  final bool locked;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final scheme = theme.colorScheme;
-
-    return Padding(
-      padding: const EdgeInsetsDirectional.only(end: 10),
-      child: Material(
-        color: selected
-            ? scheme.primary.withValues(alpha: 0.12)
-            : scheme.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(20),
-        clipBehavior: Clip.antiAlias,
-        child: InkWell(
-          onTap: onTap,
-          child: Container(
-            width: 86,
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                color: selected
-                    ? scheme.primary
-                    : scheme.outlineVariant.withValues(alpha: 0.5),
-                width: selected ? 1.6 : 1,
-              ),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 52,
-                  child: Center(
-                    child: mascot == Mascot.none
-                        ? Icon(Icons.do_not_disturb_alt,
-                            size: 30, color: scheme.onSurfaceVariant)
-                        : Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              MascotAvatar(mascot: mascot, size: 46),
-                              if (locked)
-                                Positioned(
-                                  right: 0,
-                                  bottom: 0,
-                                  child: Icon(Icons.lock,
-                                      size: 15, color: scheme.primary),
-                                ),
-                            ],
-                          ),
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  label,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.labelSmall?.copyWith(
-                    color: selected ? scheme.primary : scheme.onSurface,
-                    fontWeight: selected ? FontWeight.w700 : null,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-/// A settings control in a card with its own label and colour — the same
-/// shape the prediction-settings screen uses, so a unit picker in Settings
-/// looks like a unit picker anywhere else in the app.
-class _SettingCard extends StatelessWidget {
-  const _SettingCard({
+/// One row inside a shared grouped card — an icon-badge and label at a
+/// lighter weight than a full card needs, since the card's own background
+/// already does the grouping a tinted panel would otherwise provide.
+class _CompactPreferenceRow extends StatelessWidget {
+  const _CompactPreferenceRow({
     required this.icon,
     required this.tint,
     required this.ink,
@@ -747,42 +592,34 @@ class _SettingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final panel = isDark
-        ? Color.alphaBlend(
-            tint.withValues(alpha: 0.09), theme.colorScheme.surface)
-        : tint.withValues(alpha: 0.45);
     final badge = isDark ? tint.withValues(alpha: 0.16) : tint;
     final labelInk = isDark ? tint : ink;
 
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
-      decoration: BoxDecoration(
-        color: panel,
-        borderRadius: BorderRadius.circular(22),
-        border: isDark ? Border.all(color: tint.withValues(alpha: 0.18)) : null,
-      ),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
               Container(
-                width: 32,
-                height: 32,
-                decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: badge),
-                child: Icon(icon, size: 17, color: labelInk),
+                width: 24,
+                height: 24,
+                decoration: BoxDecoration(shape: BoxShape.circle, color: badge),
+                child: Icon(icon, size: 13, color: labelInk),
               ),
               const SizedBox(width: 10),
               Expanded(
-                child: Text(label,
-                    style:
-                        theme.textTheme.titleSmall?.copyWith(color: labelInk)),
+                child: Text(
+                  label,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 10),
           child,
         ],
       ),

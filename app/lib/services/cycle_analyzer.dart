@@ -9,10 +9,7 @@ import '../util/day.dart';
 /// deliberately conservative — when the data is ambiguous we would rather merge
 /// two events into one cycle than invent a 6-day cycle that poisons the average.
 class CycleAnalyzer {
-  const CycleAnalyzer({
-    this.maxGapWithinPeriod = 1,
-    this.minCycleLength = 15,
-  });
+  const CycleAnalyzer({this.maxGapWithinPeriod = 1, this.minCycleLength = 15});
 
   /// How many consecutive non-bleeding days may sit inside a single period
   /// before it is treated as two separate periods. One day absorbs the common
@@ -33,11 +30,9 @@ class CycleAnalyzer {
   /// Only [DayLog.hasMenstrualFlow] days open a cycle — spotting alone never
   /// does.
   List<ObservedCycle> analyze(Iterable<DayLog> logs) {
-    final bleedingDays = logs
-        .where((l) => l.hasMenstrualFlow)
-        .map((l) => l.date)
-        .toList()
-      ..sort();
+    final bleedingDays =
+        logs.where((l) => l.hasMenstrualFlow).map((l) => l.date).toList()
+          ..sort();
 
     if (bleedingDays.isEmpty) return const [];
 
@@ -46,11 +41,13 @@ class CycleAnalyzer {
 
     final cycles = <ObservedCycle>[];
     for (var i = 0; i < merged.length; i++) {
-      cycles.add(ObservedCycle(
-        startDate: merged[i].start,
-        periodEndDate: merged[i].end,
-        nextStartDate: i + 1 < merged.length ? merged[i + 1].start : null,
-      ));
+      cycles.add(
+        ObservedCycle(
+          startDate: merged[i].start,
+          periodEndDate: merged[i].end,
+          nextStartDate: i + 1 < merged.length ? merged[i + 1].start : null,
+        ),
+      );
     }
     return cycles;
   }

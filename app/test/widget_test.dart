@@ -12,14 +12,14 @@ Future<AppPreferences> _emptyPreferences() async {
 }
 
 void main() {
-  testWidgets('a fresh install lands on onboarding, not the home shell',
-      (tester) async {
+  testWidgets('a fresh install lands on onboarding, not the home shell', (
+    tester,
+  ) async {
     final preferences = await _emptyPreferences();
 
-    await tester.pumpWidget(MainApp(
-      preferences: preferences,
-      repository: InMemoryDayLogRepository(),
-    ));
+    await tester.pumpWidget(
+      MainApp(preferences: preferences, repository: InMemoryDayLogRepository()),
+    );
     // First frame is the splash screen while CycleController.load() runs.
     await tester.pumpAndSettle();
 
@@ -37,10 +37,9 @@ void main() {
     SharedPreferences.setMockInitialValues({'onboarding_complete': true});
     final preferences = await AppPreferences.load();
 
-    await tester.pumpWidget(MainApp(
-      preferences: preferences,
-      repository: InMemoryDayLogRepository(),
-    ));
+    await tester.pumpWidget(
+      MainApp(preferences: preferences, repository: InMemoryDayLogRepository()),
+    );
     await tester.pumpAndSettle();
 
     expect(find.byType(MaterialApp), findsOneWidget);

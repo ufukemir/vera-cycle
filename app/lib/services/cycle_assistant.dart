@@ -17,6 +17,7 @@ class AssistantContext {
 
   final int? cycleDay;
   final CyclePhase phase;
+
   /// Already locale-formatted ("28,4" in tr/de/fr, "٢٨٫٤" in ar).
   ///
   /// The assistant used to receive a raw double and render it with
@@ -57,12 +58,13 @@ class CycleAssistant {
 
   /// Suggested tap-to-ask questions for the empty state.
   ///
-  /// The hand-picked `suggested` topics lead, then the list is topped up
-  /// from the rest in order. Only four topics carry the flag, and four
-  /// chips under a blank chat made a 37-topic knowledge base look like it
-  /// knew four things — the opening screen is the only place most people
-  /// ever learn what this assistant covers.
-  List<String> suggestions(String languageCode, {int count = 9}) {
+  /// The hand-picked `suggested` topics lead (a mix of health and
+  /// app-mechanics questions, so the opening screen shows both halves of
+  /// what this assistant covers), then the list is topped up from the rest
+  /// in order. Raised from 9 to 14 alongside the topic count nearly
+  /// doubling — a fixed nine chips under a now much larger knowledge base
+  /// would have shown a shrinking fraction of it on first launch.
+  List<String> suggestions(String languageCode, {int count = 14}) {
     final lang = _lang(languageCode);
     final out = <String>[
       for (final t in _topics)
@@ -85,13 +87,13 @@ class CycleAssistant {
     // supplements?" and "hamile miyim şüpheliyim" — real health questions
     // answered with "Hi! 👋". Every phrase below is matched as a complete
     // word or word sequence.
-    final padded =
-        ' ${_tokenize(normalized).join(' ')} ';
+    final padded = ' ${_tokenize(normalized).join(' ')} ';
     bool hasAny(List<String> phrases) =>
         phrases.any((p) => padded.contains(' $p '));
     final short = normalized.length < 30;
 
-    if (short && hasAny(['merhaba', 'selam', 'selamlar', 'hello', 'hi', 'hey'])) {
+    if (short &&
+        hasAny(['merhaba', 'selam', 'selamlar', 'hello', 'hi', 'hey'])) {
       return lang == 'tr'
           ? 'Merhaba. Regl, döngü veya Vera hakkında ne merak ediyorsun?'
           : 'Hello. What would you like to know about periods, cycles, or Vera?';
@@ -211,17 +213,31 @@ class CycleAssistant {
 
   /// Follow-up questions to offer after an answer — the next-tap
   /// suggestions a chat UI shows under the reply.
-  List<String> followUps(String languageCode, String lastQuestion,
-      {int count = 3}) {
+  ///
+  /// [askedQuestions] is the *whole* conversation so far (every message the
+  /// user has sent, current one included), not just the one that was just
+  /// answered. Checking only the last question let earlier ones resurface a
+  /// couple of turns later — someone who'd already asked and read the
+  /// answer to "Ovülasyonum ne zaman?" saw it offered again as if it were
+  /// new, which reads as the assistant not remembering its own reply.
+  List<String> followUps(
+    String languageCode,
+    List<String> askedQuestions, {
+    int count = 3,
+  }) {
     final lang = _lang(languageCode);
-    final normalized = _normalize(lastQuestion);
+    final askedNormalized = askedQuestions.map(_normalize).toSet();
+    final askedTokens = askedQuestions
+        .expand((q) => _tokenize(_normalize(q)))
+        .toSet();
     final out = <String>[];
     for (final topic in _topics) {
       final sample = topic.sampleQuestion[lang]!;
-      if (_normalize(sample) == normalized) continue;
-      if (topic.keywords.any((k) => !k.contains(' ') &&
-          normalized.split(RegExp(r'[^a-z0-9]+')).any((t) => t.startsWith(k)))) {
-        continue; // skip the topic we just answered
+      if (askedNormalized.contains(_normalize(sample))) continue;
+      if (topic.keywords.any(
+        (k) => !k.contains(' ') && askedTokens.any((t) => t.startsWith(k)),
+      )) {
+        continue; // skip topics close to anything already asked
       }
       out.add(sample);
       if (out.length == count) break;
@@ -275,9 +291,9 @@ class CycleAssistant {
       }
       // Words shared with the topic's own sample question, so phrasing the
       // question the way the app itself phrases it always lands.
-      final sampleTokens = _tokenize(_normalize(topic.sampleQuestion[lang]!))
-          .where((t) => t.length >= 5)
-          .toSet();
+      final sampleTokens = _tokenize(
+        _normalize(topic.sampleQuestion[lang]!),
+      ).where((t) => t.length >= 5).toSet();
       score += tokens.where(sampleTokens.contains).length;
 
       if (score > bestScore) {
@@ -296,7 +312,11 @@ class CycleAssistant {
   /// token is compared, at the three lengths a single edit can produce.
   static bool _nearlyStartsWith(String token, String keyword) {
     if (token.length < 4) return false;
-    for (final length in [keyword.length - 1, keyword.length, keyword.length + 1]) {
+    for (final length in [
+      keyword.length - 1,
+      keyword.length,
+      keyword.length + 1,
+    ]) {
       if (length < 4 || length > token.length) continue;
       if (_withinOneEdit(token.substring(0, length), keyword)) return true;
     }
@@ -357,13 +377,13 @@ class CycleAssistant {
         .join('\n');
     return lang == 'tr'
         ? 'Bunun cevabı bilgi tabanımda yok — uydurmaktansa bilmediğimi söylerim. '
-            'Tıbbi bir konuysa bir sağlık profesyoneline sormak en doğrusu. '
-            'Bana şunları sorabilirsin:\n$examples\n\n'
-            'Neleri bildiğimin tam listesi için "neler sorabilirim" yazabilirsin.'
+              'Tıbbi bir konuysa bir sağlık profesyoneline sormak en doğrusu. '
+              'Bana şunları sorabilirsin:\n$examples\n\n'
+              'Neleri bildiğimin tam listesi için "neler sorabilirim" yazabilirsin.'
         : "That one isn't in my knowledge base — I'd rather say so than invent an answer. "
-            'If it is a medical question, a clinician is the right place to ask. '
-            'Here is what I can help with:\n$examples\n\n'
-            'Type "what can I ask" for the full list.';
+              'If it is a medical question, a clinician is the right place to ask. '
+              'Here is what I can help with:\n$examples\n\n'
+              'Type "what can I ask" for the full list.';
   }
 
   /// Substitutes the user's own numbers into an answer template.
@@ -379,42 +399,46 @@ class CycleAssistant {
 
     // "28.4 gün" / "28.4 days", or a phrase that stands alone.
     out = out.replaceAll(
-        '{meanLength}',
-        ctx.meanCycleLengthLabel != null
-            ? (tr
+      '{meanLength}',
+      ctx.meanCycleLengthLabel != null
+          ? (tr
                 ? '${ctx.meanCycleLengthLabel} gün'
                 : '${ctx.meanCycleLengthLabel} days')
-            : (tr ? 'henüz bilinmiyor' : 'not known yet'));
+          : (tr ? 'henüz bilinmiyor' : 'not known yet'),
+    );
 
     // A full clause: the day number alone cannot be dropped into
     // "you are on day ___" when it is unknown.
     out = out.replaceAll(
-        '{cycleDayClause}',
-        ctx.cycleDay != null
-            ? (tr
+      '{cycleDayClause}',
+      ctx.cycleDay != null
+          ? (tr
                 ? 'şu an döngünün ${ctx.cycleDay}. günündesin'
                 : 'you are on cycle day ${ctx.cycleDay}')
-            : (tr
+          : (tr
                 ? 'bu döngü için henüz kayıt girmemişsin'
-                : "you haven't logged this cycle yet"));
+                : "you haven't logged this cycle yet"),
+    );
 
     out = out.replaceAll('{cyclesLogged}', ctx.cyclesLogged.toString());
 
     out = out.replaceAll(
-        '{prediction}',
-        ctx.predictionRangeLabel ??
-            (tr
-                ? 'henüz tahmin için yeterli veri yok (en az 2 tam döngü gerekir)'
-                : 'there is not enough data for a prediction yet (at least 2 full cycles needed)'));
+      '{prediction}',
+      ctx.predictionRangeLabel ??
+          (tr
+              ? 'henüz tahmin için yeterli veri yok (en az 2 tam döngü gerekir)'
+              : 'there is not enough data for a prediction yet (at least 2 full cycles needed)'),
+    );
 
     // The ovulation window is NOT the period window — see
     // [AssistantContext.ovulationRangeLabel].
     out = out.replaceAll(
-        '{ovulation}',
-        ctx.ovulationRangeLabel ??
-            (tr
-                ? 'henüz tahmin için yeterli veri yok (en az 2 tam döngü gerekir)'
-                : 'there is not enough data for an estimate yet (at least 2 full cycles needed)'));
+      '{ovulation}',
+      ctx.ovulationRangeLabel ??
+          (tr
+              ? 'henüz tahmin için yeterli veri yok (en az 2 tam döngü gerekir)'
+              : 'there is not enough data for an estimate yet (at least 2 full cycles needed)'),
+    );
 
     return out;
   }
@@ -432,26 +456,77 @@ class CycleAssistant {
   /// Non-Latin scripts are deliberately left untouched: folding Arabic or
   /// Cyrillic would be wrong, and [_tokenize] no longer needs it.
   static const _fold = {
-    'à': 'a', 'á': 'a', 'â': 'a', 'ã': 'a', 'ä': 'a', 'å': 'a', 'ā': 'a',
-    'ă': 'a', 'ą': 'a',
-    'ç': 'c', 'ć': 'c', 'č': 'c',
-    'ď': 'd', 'đ': 'd',
-    'è': 'e', 'é': 'e', 'ê': 'e', 'ë': 'e', 'ē': 'e', 'ė': 'e', 'ę': 'e',
+    'à': 'a',
+    'á': 'a',
+    'â': 'a',
+    'ã': 'a',
+    'ä': 'a',
+    'å': 'a',
+    'ā': 'a',
+    'ă': 'a',
+    'ą': 'a',
+    'ç': 'c',
+    'ć': 'c',
+    'č': 'c',
+    'ď': 'd',
+    'đ': 'd',
+    'è': 'e',
+    'é': 'e',
+    'ê': 'e',
+    'ë': 'e',
+    'ē': 'e',
+    'ė': 'e',
+    'ę': 'e',
     'ě': 'e',
-    'ğ': 'g', 'ģ': 'g',
-    'ì': 'i', 'í': 'i', 'î': 'i', 'ï': 'i', 'ī': 'i', 'į': 'i', 'ı': 'i',
-    'ł': 'l', 'ļ': 'l',
-    'ñ': 'n', 'ń': 'n', 'ň': 'n', 'ņ': 'n',
-    'ò': 'o', 'ó': 'o', 'ô': 'o', 'õ': 'o', 'ö': 'o', 'ø': 'o', 'ō': 'o',
+    'ğ': 'g',
+    'ģ': 'g',
+    'ì': 'i',
+    'í': 'i',
+    'î': 'i',
+    'ï': 'i',
+    'ī': 'i',
+    'į': 'i',
+    'ı': 'i',
+    'ł': 'l',
+    'ļ': 'l',
+    'ñ': 'n',
+    'ń': 'n',
+    'ň': 'n',
+    'ņ': 'n',
+    'ò': 'o',
+    'ó': 'o',
+    'ô': 'o',
+    'õ': 'o',
+    'ö': 'o',
+    'ø': 'o',
+    'ō': 'o',
     'ő': 'o',
     'ř': 'r',
-    'ś': 's', 'š': 's', 'ş': 's', 'ș': 's',
-    'ť': 't', 'ţ': 't', 'ț': 't',
-    'ù': 'u', 'ú': 'u', 'û': 'u', 'ü': 'u', 'ū': 'u', 'ů': 'u', 'ű': 'u',
+    'ś': 's',
+    'š': 's',
+    'ş': 's',
+    'ș': 's',
+    'ť': 't',
+    'ţ': 't',
+    'ț': 't',
+    'ù': 'u',
+    'ú': 'u',
+    'û': 'u',
+    'ü': 'u',
+    'ū': 'u',
+    'ů': 'u',
+    'ű': 'u',
     'ų': 'u',
-    'ý': 'y', 'ÿ': 'y',
-    'ź': 'z', 'ż': 'z', 'ž': 'z',
-    'æ': 'ae', 'œ': 'oe', 'ß': 'ss', 'þ': 'th', 'ð': 'd',
+    'ý': 'y',
+    'ÿ': 'y',
+    'ź': 'z',
+    'ż': 'z',
+    'ž': 'z',
+    'æ': 'ae',
+    'œ': 'oe',
+    'ß': 'ss',
+    'þ': 'th',
+    'ð': 'd',
   };
 
   String _normalize(String s) {
@@ -504,8 +579,7 @@ class CycleAssistant {
   /// Bengali, Tamil, Telugu, Thai and Arabic write vowels as marks, so
   /// omitting them splits every word at its own vowels — "मेरा" came apart
   /// into ['म','र'].
-  static final _tokenBoundary =
-      RegExp(r'[^\p{L}\p{N}\p{M}]+', unicode: true);
+  static final _tokenBoundary = RegExp(r'[^\p{L}\p{N}\p{M}]+', unicode: true);
 
   List<String> _tokenize(String normalized) =>
       normalized.split(_tokenBoundary).where((t) => t.isNotEmpty).toList();
@@ -574,10 +648,7 @@ const _topics = <_Topic>[
   _Topic(
     suggested: true,
     keywords: ['ovulasyon', 'ovulat', 'yumurtlama', 'dogurgan', 'fertile'],
-    sampleQuestion: {
-      'tr': 'Ovülasyonum ne zaman?',
-      'en': 'When do I ovulate?',
-    },
+    sampleQuestion: {'tr': 'Ovülasyonum ne zaman?', 'en': 'When do I ovulate?'},
     answer: {
       'tr':
           'Ovülasyon genelde bir sonraki reglden yaklaşık 14 gün önce olur — döngü başından itibaren değil, sondan geriye sayılır. {cycleDayClause}. Regl tahminin {prediction} olduğuna göre ovülasyon penceren kabaca {ovulation} aralığına denk gelir. Bunlar tahmindir, kesin gün vermek dürüst olmaz — vücut belirtileri (servikal mukus, bazal sıcaklık) tabloyu netleştirebilir.',
@@ -627,10 +698,7 @@ const _topics = <_Topic>[
   ),
   _Topic(
     keywords: ['pms', 'gerginlik', 'sinirli', 'mood', 'ruh hali', 'duygu'],
-    sampleQuestion: {
-      'tr': 'PMS neden olur?',
-      'en': 'What causes PMS?',
-    },
+    sampleQuestion: {'tr': 'PMS neden olur?', 'en': 'What causes PMS?'},
     answer: {
       'tr':
           'Regl öncesi progesteron ve östrojenin hızla düşmesi; duygu durumu, uyku ve iştahı etkileyebilir — PMS dediğimiz şey bu geçiş döneminin belirtileridir ve kanama başladıktan bir-iki gün sonra genelde hafifler. Düzenli uyku, hareket ve kaydettiğin belirtilere bakıp kendi örüntünü tanımak gerçekten yardımcı olur. Belirtiler hayatını ciddi etkiliyorsa (PMDD olasılığı) bir hekime danışmak önemli.',
@@ -639,7 +707,14 @@ const _topics = <_Topic>[
     },
   ),
   _Topic(
-    keywords: ['yogun', 'heavy', 'asiri kanama', 'cok kanama', 'pihtili', 'clot'],
+    keywords: [
+      'yogun',
+      'heavy',
+      'asiri kanama',
+      'cok kanama',
+      'pihtili',
+      'clot',
+    ],
     sampleQuestion: {
       'tr': 'Kanamam çok yoğun, normal mi?',
       'en': 'My flow is very heavy — is that normal?',
@@ -678,7 +753,14 @@ const _topics = <_Topic>[
     },
   ),
   _Topic(
-    keywords: ['tahmin nasil', 'prediction', 'how does vera', 'nasil hesap', 'nasil tahmin', 'dogru mu'],
+    keywords: [
+      'tahmin nasil',
+      'prediction',
+      'how does vera',
+      'nasil hesap',
+      'nasil tahmin',
+      'dogru mu',
+    ],
     sampleQuestion: {
       'tr': 'Vera tahminleri nasıl hesaplıyor?',
       'en': 'How does Vera calculate predictions?',
@@ -691,11 +773,19 @@ const _topics = <_Topic>[
     },
   ),
   _Topic(
-    keywords: ['veri', 'mahremiyet', 'gizlilik', 'privacy', 'data', 'guvenli', 'secure', 'sunucu', 'server'],
-    sampleQuestion: {
-      'tr': 'Verilerim güvende mi?',
-      'en': 'Is my data safe?',
-    },
+    suggested: true,
+    keywords: [
+      'veri',
+      'mahremiyet',
+      'gizlilik',
+      'privacy',
+      'data',
+      'guvenli',
+      'secure',
+      'sunucu',
+      'server',
+    ],
+    sampleQuestion: {'tr': 'Verilerim güvende mi?', 'en': 'Is my data safe?'},
     answer: {
       'tr':
           'Verilerin yalnızca bu cihazda, AES-GCM ile şifreli durur; anahtar telefonunun güvenli donanımında (Keychain/Keystore) saklanır. Hesap yok, bulut senkronu yok — kaydettiklerin hiçbir yere yüklenmez. Ben de dahil: bu sohbet tamamen cihazında çalışır, hiçbir soru veya cevap dışarı gitmez. Ücretsiz sürümde gösterilen reklamlar internete bağlanır ama sağlık verilerine erişmez; Premium reklamları tamamen kaldırır.',
@@ -782,7 +872,13 @@ const _topics = <_Topic>[
     },
   ),
   _Topic(
-    keywords: ['doktor', 'hekim', 'clinician', 'when should i see', 'ne zaman git'],
+    keywords: [
+      'doktor',
+      'hekim',
+      'clinician',
+      'when should i see',
+      'ne zaman git',
+    ],
     sampleQuestion: {
       'tr': 'Ne zaman doktora gitmeliyim?',
       'en': 'When should I see a doctor?',
@@ -841,8 +937,16 @@ const _topics = <_Topic>[
   // to "I didn't catch that".
   // ---------------------------------------------------------------------
   _Topic(
-    keywords: ['nasil kaydet', 'kayit ekle', 'gun kaydi', 'how do i log',
-      'add a log', 'log a day', 'kaydetmek'],
+    suggested: true,
+    keywords: [
+      'nasil kaydet',
+      'kayit ekle',
+      'gun kaydi',
+      'how do i log',
+      'add a log',
+      'log a day',
+      'kaydetmek',
+    ],
     sampleQuestion: {
       'tr': 'Günlük kaydı nasıl eklerim?',
       'en': 'How do I log a day?',
@@ -855,8 +959,16 @@ const _topics = <_Topic>[
     },
   ),
   _Topic(
-    keywords: ['disa aktar', 'export', 'doktora goster', 'rapor', 'pdf',
-      'csv', 'yedek', 'backup'],
+    keywords: [
+      'disa aktar',
+      'export',
+      'doktora goster',
+      'rapor',
+      'pdf',
+      'csv',
+      'yedek',
+      'backup',
+    ],
     sampleQuestion: {
       'tr': 'Verimi doktoruma nasıl gösteririm?',
       'en': 'How do I share my data with my doctor?',
@@ -869,8 +981,15 @@ const _topics = <_Topic>[
     },
   ),
   _Topic(
-    keywords: ['premium', 'abonelik', 'subscription', 'ucretli', 'para',
-      'satin al', 'reklamsiz'],
+    keywords: [
+      'premium',
+      'abonelik',
+      'subscription',
+      'ucretli',
+      'para',
+      'satin al',
+      'reklamsiz',
+    ],
     sampleQuestion: {
       'tr': 'Premium ne veriyor?',
       'en': 'What does Premium give me?',
@@ -883,8 +1002,7 @@ const _topics = <_Topic>[
     },
   ),
   _Topic(
-    keywords: ['hatirlatici', 'bildirim', 'reminder', 'notification',
-      'alarm'],
+    keywords: ['hatirlatici', 'bildirim', 'reminder', 'notification', 'alarm'],
     sampleQuestion: {
       'tr': 'Hatırlatıcıları nasıl açarım?',
       'en': 'How do I turn on reminders?',
@@ -897,8 +1015,16 @@ const _topics = <_Topic>[
     },
   ),
   _Topic(
-    keywords: ['telefonu kaybet', 'yeni telefon', 'lost my phone',
-      'new phone', 'aktarim', 'transfer', 'geri yukle', 'restore'],
+    keywords: [
+      'telefonu kaybet',
+      'yeni telefon',
+      'lost my phone',
+      'new phone',
+      'aktarim',
+      'transfer',
+      'geri yukle',
+      'restore',
+    ],
     sampleQuestion: {
       'tr': 'Telefonumu değiştirirsem verim ne olur?',
       'en': 'What happens to my data if I change phones?',
@@ -911,17 +1037,25 @@ const _topics = <_Topic>[
     },
   ),
   _Topic(
-    keywords: ['pin', 'kilit', 'sifre', 'passcode', 'biyometrik', 'biometric',
-      'parmak izi', 'face id'],
+    keywords: [
+      'pin',
+      'kilit',
+      'sifre',
+      'passcode',
+      'biyometrik',
+      'biometric',
+      'parmak izi',
+      'face id',
+    ],
     sampleQuestion: {
       'tr': 'Uygulamayı nasıl kilitlerim?',
       'en': 'How do I lock the app?',
     },
     answer: {
       'tr':
-          'Kurulumda 6 haneli bir PIN belirlersin; istersen parmak izi/yüz tanımayı da açabilirsin, PIN yedek olarak kalır. Uygulama arka plana her alındığında anında kilitlenir ve uygulama değiştiricide içeriğin görünmez. PIN\'i unutursan tek çıkış yolu tüm veriyi silmektir — sunucu tarafında kurtarma yok, çünkü sunucu yok.',
+          'Kurulumda 6 haneli bir PIN belirlersin; istersen parmak izi/yüz tanımayı da açabilirsin, PIN yedek olarak kalır. Uygulama arka plana her alındığında anında kilitlenir ve uygulama değiştiricide içeriğin görünmez. PIN\'i unutursan kilit ekranındaki "PIN\'ini mi unuttun?" bağlantısına dokun: cihazının kendi kilidiyle (parmak izi/yüz/telefon şifresi) kimliğini doğrulayıp verini kaybetmeden yeni bir PIN belirleyebilirsin. Cihaz kimlik doğrulaman yoksa ya da onu tercih etmezsen tek alternatif tüm veriyi silmektir — sunucu tarafında kurtarma yok, çünkü sunucu yok.',
       'en':
-          'You set a 6-digit PIN during setup, and can add fingerprint/face unlock on top — the PIN stays as the fallback. The app re-locks the instant it goes to the background, and your content is hidden in the app switcher. If you forget the PIN the only way out is erasing everything: there is no server-side recovery, because there is no server.',
+          'You set a 6-digit PIN during setup, and can add fingerprint/face unlock on top — the PIN stays as the fallback. The app re-locks the instant it goes to the background, and your content is hidden in the app switcher. If you forget the PIN, tap "Forgot your PIN?" on the lock screen: verify with your device\'s own lock (fingerprint/face/passcode) and set a new PIN without losing your data. Without device authentication, or if you\'d rather not use it, the only alternative is erasing everything — there is no server-side recovery, because there is no server.',
     },
   ),
 
@@ -929,8 +1063,13 @@ const _topics = <_Topic>[
   // Common health questions that were missing.
   // ---------------------------------------------------------------------
   _Topic(
-    keywords: ['menopoz', 'menopause', 'perimenopoz', 'perimenopause',
-      '40 yas'],
+    keywords: [
+      'menopoz',
+      'menopause',
+      'perimenopoz',
+      'perimenopause',
+      '40 yas',
+    ],
     sampleQuestion: {
       'tr': 'Menopoza yaklaştığımı nasıl anlarım?',
       'en': 'How do I know if I am approaching menopause?',
@@ -943,8 +1082,15 @@ const _topics = <_Topic>[
     },
   ),
   _Topic(
-    keywords: ['pcos', 'polikistik', 'endometriozis', 'endometriosis',
-      'adenomyoz', 'miyom', 'fibroid'],
+    keywords: [
+      'pcos',
+      'polikistik',
+      'endometriozis',
+      'endometriosis',
+      'adenomyoz',
+      'miyom',
+      'fibroid',
+    ],
     sampleQuestion: {
       'tr': 'PCOS veya endometriozis olabilir miyim?',
       'en': 'Could I have PCOS or endometriosis?',
@@ -957,8 +1103,15 @@ const _topics = <_Topic>[
     },
   ),
   _Topic(
-    keywords: ['ped', 'tampon', 'kap', 'kupa', 'pad', 'menstrual cup',
-      'kullanmali'],
+    keywords: [
+      'ped',
+      'tampon',
+      'kap',
+      'kupa',
+      'pad',
+      'menstrual cup',
+      'kullanmali',
+    ],
     sampleQuestion: {
       'tr': 'Ped, tampon ve kap arasında ne fark var?',
       'en': 'What is the difference between pads, tampons and cups?',
@@ -1023,8 +1176,17 @@ const _topics = <_Topic>[
     },
   ),
   _Topic(
-    keywords: ['kokusu', 'koku', 'smell', 'kasinti', 'itch', 'yanma',
-      'enfeksiyon', 'infection', 'mantar'],
+    keywords: [
+      'kokusu',
+      'koku',
+      'smell',
+      'kasinti',
+      'itch',
+      'yanma',
+      'enfeksiyon',
+      'infection',
+      'mantar',
+    ],
     sampleQuestion: {
       'tr': 'Akıntının kokusu veya kaşıntı normal mi?',
       'en': 'Is unusual discharge smell or itching normal?',
@@ -1034,6 +1196,248 @@ const _topics = <_Topic>[
           'Akıntının döngü boyunca miktar ve kıvam değiştirmesi normaldir. Normal olmayan: keskin/kötü koku, kaşıntı, yanma, yeşilimsi veya köpüklü görünüm, idrar yaparken acı. Bunlar genelde tedavisi kolay bir enfeksiyona işaret eder ama kendi kendine geçmesini beklemek doğru değil — hekime görünmek gerekir. Bu, Vera\'nın yorumlayabileceği bir şey değil.',
       'en':
           'Discharge changing in amount and texture across the cycle is normal. What is not: a sharp or bad smell, itching, burning, a greenish or frothy look, or pain when peeing. These usually point at an infection that is easy to treat — but waiting it out is the wrong move; see a clinician. This is not something Vera can interpret for you.',
+    },
+  ),
+
+  // ---------------------------------------------------------------------
+  // More "how do I use this" and "what is this feature for" questions.
+  // The first batch of app-mechanics topics only covered logging, export,
+  // Premium, reminders, phone transfer and the lock screen — the six most
+  // obvious ones. Everything else the app can do (optional trackers, the
+  // theme/mascot picker, ads/permissions, feedback, rating, pregnancy mode)
+  // still fell through to the fallback, which is a worse first impression
+  // than not having an assistant at all.
+  // ---------------------------------------------------------------------
+  _Topic(
+    suggested: true,
+    keywords: [
+      'internet izni',
+      'internet permission',
+      'neden internet',
+      'why internet',
+      'reklam veri',
+      'ad data',
+      'takip ediliyor',
+      'tracked',
+    ],
+    sampleQuestion: {
+      'tr': 'Uygulama neden internet izni istiyor?',
+      'en': 'Why does the app need internet permission?',
+    },
+    answer: {
+      'tr':
+          'Tek nedeni ücretsiz sürümdeki reklamlar — Google AdMob reklam göstermek için ağa bağlanır. Vera\'nın kendi kodu hiçbir ağ çağrısı yapmaz: kayıtların, sohbetin, tahminlerin hep cihazında kalır. Reklam SDK\'sı kendi çerçevesinde bir cihaz tanımlayıcısı işleyebilir ama ona asla sağlık verisi, döngü bilgisi ya da bu sohbetten hiçbir şey verilmez. Premium reklamları tamamen kaldırır, ki o zaman internet izninin tek kullanım amacı da ortadan kalkar.',
+      'en':
+          'The only reason is ads in the free version — Google AdMob connects to the network to show them. Vera\'s own code makes no network calls at all: your logs, this chat, and your predictions stay on the device. The ad SDK may process a device identifier within its own framework, but it is never given health data, cycle information, or anything from this chat. Premium removes ads entirely, which removes internet permission\'s one purpose along with them.',
+    },
+  ),
+  _Topic(
+    keywords: [
+      'cinsel aktivite',
+      'sexual activity',
+      'cinsellik',
+      'sex tracking',
+      'mahrem takip',
+    ],
+    sampleQuestion: {
+      'tr': 'Cinsel aktivite takibi ne işe yarar, kimseyle paylaşılır mı?',
+      'en': 'What is sexual activity tracking for, and who sees it?',
+    },
+    answer: {
+      'tr':
+          'Cinsel aktivite kendini, korumalı/korumasız birliktelik, mastürbasyon, orgazm ve cinsel istek gibi seçenekleri kaydetmeni sağlar — döngü ile ilişkiyi görmek, doğurgan pencereyle örtüşmeyi fark etmek ya da sadece kendi örüntünü takip etmek isteyenler için. Bu sorular varsayılan olarak KAPALIDIR; Ayarlar\'dan kendin açmadıkça hiçbir yerde görünmez. Açtığında bile veri diğer her şey gibi cihazında şifreli kalır, hiçbir yere gönderilmez.',
+      'en':
+          'Sexual activity lets you log protected/unprotected sex, masturbation, orgasm, and desire — useful for seeing the connection to your cycle, noticing overlap with the fertile window, or just tracking your own pattern. These questions are OFF by default and appear nowhere until you turn them on yourself in Settings. Even once on, the data stays encrypted on your device like everything else, and goes nowhere.',
+    },
+  ),
+  _Topic(
+    keywords: [
+      'gogus muayene',
+      'breast exam',
+      'kendi kendine muayene',
+      'self exam',
+      'meme',
+    ],
+    sampleQuestion: {
+      'tr': 'Kendi kendine göğüs muayenesi takibi nedir?',
+      'en': 'What is the self breast-exam tracker?',
+    },
+    answer: {
+      'tr':
+          'Ayarlar\'dan açtığında, gün kaydına aylık kendi kendine göğüs muayeneni not edebileceğin bir alan eklenir — her şeyin normal olduğunu, ya da bir kitle, çekinti, kızarıklık, çatlak meme ucu ya da akıntı fark ettiğini işaretleyebilirsin. Bu bir tanı aracı değil, sadece bir hatırlatma ve kayıt yeridir; herhangi bir değişiklik fark edersen bir sağlık profesyoneline görünmen gerekir.',
+      'en':
+          'Turn it on in Settings and your day log gets a field for a monthly self breast-exam note — mark everything as normal, or flag a lump, dimpling, redness, a cracked nipple, or discharge. This is not a diagnostic tool, just a reminder and a place to keep the note; if you notice any change, see a healthcare professional.',
+    },
+  ),
+  _Topic(
+    keywords: [
+      'ovulasyon testi',
+      'ovulation test',
+      'lh testi',
+      'lh test',
+      'ovulasyon seridi',
+      'ovulation strip',
+    ],
+    sampleQuestion: {
+      'tr': 'Ovülasyon testi takibi ne işe yarar?',
+      'en': 'What is the ovulation test tracker for?',
+    },
+    answer: {
+      'tr':
+          'Eczaneden aldığın bir LH testinin sonucunu (pozitif/negatif) gün kaydına işlemeni sağlar. LH testi, vücudunun ovülasyondan hemen önceki hormon artışını yakalar — kendi ölçtüğün bu sonuç, Vera\'nın geçmiş döngülerinden çıkardığı tahminden daha doğrudan bir sinyaldir. Ayarlar\'dan açman gerekir; kapalıyken gün kaydında görünmez.',
+      'en':
+          'Lets you log an LH ovulation test result (positive/negative) from a drugstore kit into your day log. An LH test catches the hormone surge right before ovulation — a more direct signal than the estimate Vera derives from past cycles. Turn it on in Settings; it stays out of your day log until you do.',
+    },
+  ),
+  _Topic(
+    keywords: [
+      'servikal pozisyon',
+      'cervix position',
+      'rahim agzi',
+      'cervix opening',
+      'cervix firmness',
+    ],
+    sampleQuestion: {
+      'tr': 'Servikal pozisyon takibi nedir?',
+      'en': 'What is cervical position tracking?',
+    },
+    answer: {
+      'tr':
+          'Doğurganlık farkındalığı yöntemi kullananlar için bir ileri-seviye takiptir: rahim ağzının konumu (alçak/orta/yüksek), açıklığı ve sertliği ovülasyona yaklaşırken değişir — yumuşar, yükselir ve hafifçe açılır. Servikal mukusla birlikte kullanıldığında doğurgan pencereyi daha net gösterir. Ayarlar\'dan açılan isteğe bağlı bir takip alanıdır.',
+      'en':
+          'An advanced tracker for people using fertility-awareness methods: cervix position (low/medium/high), opening, and firmness change as ovulation approaches — it softens, rises, and opens slightly. Combined with cervical mucus it gives a clearer picture of the fertile window. It is an optional field you turn on in Settings.',
+    },
+  ),
+  _Topic(
+    keywords: [
+      'gebelik modu',
+      'pregnancy mode',
+      'hamileyim',
+      'im pregnant',
+      'gebelik takibi',
+    ],
+    sampleQuestion: {
+      'tr': 'Gebelik modu nedir, nasıl açarım?',
+      'en': 'What is pregnancy mode, and how do I turn it on?',
+    },
+    answer: {
+      'tr':
+          'Ayarlar\'dan son adet tarihini (LMP) girerek açarsın; Ana Sayfa döngü tahmini yerine gebelik haftana, trimesterine ve tahmini doğum tarihine döner, artı haftaya göre bir büyüklük karşılaştırması gösterir. Bunların hepsi LMP\'ye dayalı kaba bir hesaptır (Naegele kuralı) ve bir ultrason kadar kesin değildir — Vera tıbbi takibin yerini tutmaz, bilgilendirme amaçlıdır.',
+      'en':
+          'Turn it on in Settings by entering your last menstrual period (LMP) date; Home switches from a cycle prediction to your pregnancy week, trimester, and estimated due date, plus a size-for-week comparison. All of this is a rough LMP-based estimate (Naegele\'s rule), not as precise as an ultrasound — Vera is informational and does not replace medical care.',
+    },
+  ),
+  _Topic(
+    keywords: [
+      'kendi hatirlatici',
+      'custom reminder',
+      'ozel hatirlatici',
+      'kendi etiket',
+      'custom tag',
+      'kendi takip',
+      'custom tracker',
+    ],
+    sampleQuestion: {
+      'tr': 'Kendi hatırlatıcımı veya takip alanımı nasıl eklerim?',
+      'en': 'How do I add my own reminder or tracker?',
+    },
+    answer: {
+      'tr':
+          'İkisi de Premium\'da: Ayarlar → Hatırlatıcılar → Özel hatırlatıcılar\'dan kendi metnini ve saatini yazdığın hatırlatıcılar ekleyebilirsin; Ayarlar\'dan da adını kendin verdiğin, kendi ikonunu seçtiğin takip alanları oluşturabilirsin. Premium biterse bu alanlar kaybolmaz, sadece yenisini eklemek kilitlenir — zaten kaydettiğin her şey elinde kalır.',
+      'en':
+          'Both are Premium: Settings → Reminders → Custom reminders lets you add ones with your own text and time, and Settings also lets you create trackers with a name and icon you choose. If Premium lapses these do not disappear — only adding new ones locks again — everything you already recorded stays yours.',
+    },
+  ),
+  _Topic(
+    keywords: [
+      'tema degistir',
+      'change theme',
+      'maskot degistir',
+      'change mascot',
+      'ana ekran arka plan',
+      'home background',
+      'yol arkadasi',
+    ],
+    sampleQuestion: {
+      'tr': 'Temamı veya yol arkadaşı maskotumu nasıl değiştiririm?',
+      'en': 'How do I change my theme or companion mascot?',
+    },
+    answer: {
+      'tr':
+          'Profilim → Tema\'dan (ya da Ayarlar\'dan) açık/koyu mod, Ana Sayfa arka planı ve yol arkadaşı maskotunu seçersin. Bazı arka plan ve maskotlar Premium\'a özeldir ama kilitliyken de görünür, öyle olduğunu bilmen için — bu, görmeden karar vermeni istemeyen bir tercih.',
+      'en':
+          'Profilim → Tema (or Settings) is where you pick light/dark mode, your Home background, and your companion mascot. Some backgrounds and mascots are Premium-only but stay visible even locked, so you can see what you\'d be choosing rather than deciding blind.',
+    },
+  ),
+  _Topic(
+    keywords: [
+      'dil degistir',
+      'change language',
+      'uygulama dili',
+      'app language',
+    ],
+    sampleQuestion: {
+      'tr': 'Uygulama dilini nasıl değiştiririm?',
+      'en': 'How do I change the app language?',
+    },
+    answer: {
+      'tr':
+          'Ayarlar\'ın en üstünde bir dil seçici var. Vera yalnızca tamamen çevrilmiş dilleri listeler — yarım çevrilmiş bir sağlık uygulaması, hangi yarısının doğru olduğunu bilemeyeceğin bir şeydir, o yüzden eksik olanlar anadili konuşanlarca gözden geçirilene kadar listeye girmez.',
+      'en':
+          'There is a language picker right at the top of Settings. Vera only lists languages that are fully translated — a half-translated health app is one where you cannot tell which half to trust, so incomplete ones stay off the list until a native speaker has reviewed them.',
+    },
+  ),
+  _Topic(
+    keywords: ['widget', 'ana ekran widget', 'home screen widget'],
+    sampleQuestion: {
+      'tr': 'Widget\'ı ana ekranıma nasıl eklerim?',
+      'en': 'How do I add the widget to my home screen?',
+    },
+    answer: {
+      'tr':
+          'iOS\'ta ana ekranda boş bir alana basılı tut → sağ üstteki "+" → Vera\'yı ara. Android\'de ana ekranda basılı tut → Widget\'lar → Vera. Widget döngü gününü ve en yakın tahmini gösterir, hiçbir sağlık ayrıntısı vermez — kilit ekranından da görünebileceği için özellikle mahrem tutulur.',
+      'en':
+          'On iOS, long-press an empty spot on your home screen → the "+" in the top corner → search for Vera. On Android, long-press the home screen → Widgets → Vera. The widget shows your cycle day and nearest estimate and nothing more detailed — deliberately kept plain since it can be visible from the lock screen too.',
+    },
+  ),
+  _Topic(
+    keywords: [
+      'geri bildirim',
+      'feedback',
+      'sorun bildir',
+      'report a problem',
+      'hata bildir',
+    ],
+    sampleQuestion: {
+      'tr': 'Bir sorunu nasıl bildiririm ya da geri bildirim gönderirim?',
+      'en': 'How do I report a problem or send feedback?',
+    },
+    answer: {
+      'tr':
+          'Profilim\'deki "Geri Bildirim" kısayolundan ya da Ayarlar\'ın altındaki aynı isimli girişten: bir konu seç, istersen yaz, istersen bir ekran görüntüsü ekle, Gönder\'e dokun. Bu, seni bir e-posta göndermeye zorlamaz — kendi paylaşım penceren açılır ve nereden göndereceğini (e-posta uygulaman dahil) sen seçersin.',
+      'en':
+          'Use the "Geri Bildirim" shortcut on your profile, or the same entry under Settings: pick a topic, write more if you like, attach a screenshot if you like, tap Send. This does not force you into any one mail app — your own share sheet opens and you choose where it goes, your mail app included.',
+    },
+  ),
+  _Topic(
+    keywords: [
+      'hesap',
+      'account',
+      'giris yap',
+      'sign in',
+      'uye ol',
+      'sign up',
+      'kayit ol',
+    ],
+    sampleQuestion: {
+      'tr': 'Hesabım var mı, giriş yapmam gerekiyor mu?',
+      'en': 'Do I have an account, or need to sign in?',
+    },
+    answer: {
+      'tr':
+          'Hayır — Vera\'nın çekirdek takip özellikleri için hesap yoktur, e-posta istemez, şifre belirlemezsin. Uygulamayı açtığın an kayda başlarsın. Kilit ekranındaki PIN bir hesap değil, sadece telefonundaki bu uygulamayı açan yerel bir anahtardır.',
+      'en':
+          'No — Vera\'s core tracking needs no account, no email, no password to set. You start logging the moment you open the app. The PIN on the lock screen is not an account; it is just a local key that opens this app on your own phone.',
     },
   ),
 ];

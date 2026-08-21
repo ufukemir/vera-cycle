@@ -38,7 +38,8 @@ class PhaseTimelineBar extends StatelessWidget {
     int? fertileEndDay;
     if (status.hasFertileEstimate) {
       fertileStartDay =
-          daysBetween(status.currentCycleStart!, status.fertileWindowStart!) + 1;
+          daysBetween(status.currentCycleStart!, status.fertileWindowStart!) +
+          1;
       fertileEndDay =
           daysBetween(status.currentCycleStart!, status.fertileWindowEnd!) + 1;
     }
@@ -51,87 +52,87 @@ class PhaseTimelineBar extends StatelessWidget {
         children: [
           Text(
             AppLocalizations.of(context)!.homeCycleDayLabel(day),
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  color: scheme.onSurfaceVariant,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.labelMedium?.copyWith(color: scheme.onSurfaceVariant),
           ),
           const SizedBox(height: 6),
           SizedBox(
-      height: 26,
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final width = constraints.maxWidth;
-          final dayWidth = width / cycleLength;
-          double x(int d) => ((d - 1).clamp(0, cycleLength)) * dayWidth;
+            height: 26,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final width = constraints.maxWidth;
+                final dayWidth = width / cycleLength;
+                double x(int d) => ((d - 1).clamp(0, cycleLength)) * dayWidth;
 
-          return Stack(
-            clipBehavior: Clip.none,
-            children: [
-              // Track
-              Positioned(
-                left: 0,
-                right: 0,
-                top: 9,
-                child: Container(
-                  height: 8,
-                  decoration: BoxDecoration(
-                    color: scheme.outlineVariant.withValues(alpha: 0.35),
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                ),
-              ),
-              // Period segment
-              PositionedDirectional(
-                start: 0,
-                top: 9,
-                child: Container(
-                  width: x(periodLength + 1),
-                  height: 8,
-                  decoration: BoxDecoration(
-                    color: scheme.primary,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                ),
-              ),
-              // Fertile estimate segment
-              if (fertileStartDay != null && fertileEndDay != null)
-                PositionedDirectional(
-                  start: x(fertileStartDay),
-                  top: 9,
-                  child: Container(
-                    width: (x(fertileEndDay + 1) - x(fertileStartDay))
-                        .clamp(dayWidth, width),
-                    height: 8,
-                    decoration: BoxDecoration(
-                      color: scheme.tertiary.withValues(alpha: 0.7),
-                      borderRadius: BorderRadius.circular(4),
+                return Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    // Track
+                    Positioned(
+                      left: 0,
+                      right: 0,
+                      top: 9,
+                      child: Container(
+                        height: 8,
+                        decoration: BoxDecoration(
+                          color: scheme.outlineVariant.withValues(alpha: 0.35),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              // Today marker.
-              //
-              // Was a 12x20 hollow rounded rectangle, which at that size is
-              // not a marker — it is the digit zero. On Home it sat at the
-              // end of the bar and read as a stray "0" with no label, which
-              // is exactly how it was reported. A filled dot inside a ring
-              // of the page colour cannot be mistaken for a character.
-              PositionedDirectional(
-                start: (x(day) + dayWidth / 2 - 8).clamp(0, width - 16),
-                top: 5,
-                child: Container(
-                  width: 16,
-                  height: 16,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: scheme.onSurface,
-                    border: Border.all(color: scheme.surface, width: 3),
-                  ),
-                ),
-              ),
-            ],
-          );
-        },
-      ),
+                    // Period segment
+                    PositionedDirectional(
+                      start: 0,
+                      top: 9,
+                      child: Container(
+                        width: x(periodLength + 1),
+                        height: 8,
+                        decoration: BoxDecoration(
+                          color: scheme.primary,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                      ),
+                    ),
+                    // Fertile estimate segment
+                    if (fertileStartDay != null && fertileEndDay != null)
+                      PositionedDirectional(
+                        start: x(fertileStartDay),
+                        top: 9,
+                        child: Container(
+                          width: (x(fertileEndDay + 1) - x(fertileStartDay))
+                              .clamp(dayWidth, width),
+                          height: 8,
+                          decoration: BoxDecoration(
+                            color: scheme.tertiary.withValues(alpha: 0.7),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                        ),
+                      ),
+                    // Today marker.
+                    //
+                    // Was a 12x20 hollow rounded rectangle, which at that size is
+                    // not a marker — it is the digit zero. On Home it sat at the
+                    // end of the bar and read as a stray "0" with no label, which
+                    // is exactly how it was reported. A filled dot inside a ring
+                    // of the page colour cannot be mistaken for a character.
+                    PositionedDirectional(
+                      start: (x(day) + dayWidth / 2 - 8).clamp(0, width - 16),
+                      top: 5,
+                      child: Container(
+                        width: 16,
+                        height: 16,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: scheme.onSurface,
+                          border: Border.all(color: scheme.surface, width: 3),
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
           ),
         ],
       ),

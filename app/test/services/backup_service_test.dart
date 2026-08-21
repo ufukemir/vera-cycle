@@ -21,28 +21,37 @@ void main() {
 
   test('round-trips a history with the correct password', () async {
     final bytes = await service.createBackup(sample, 'correct horse battery');
-    final restored = await service.restoreBackup(bytes, 'correct horse battery');
+    final restored = await service.restoreBackup(
+      bytes,
+      'correct horse battery',
+    );
 
     expect(restored, hasLength(2));
     expect(restored[1].note, 'feeling okay');
     expect(restored[1].symptoms, {Symptom.cramps});
   });
 
-  test('the wrong password fails loudly rather than returning garbage', () async {
-    final bytes = await service.createBackup(sample, 'right password');
+  test(
+    'the wrong password fails loudly rather than returning garbage',
+    () async {
+      final bytes = await service.createBackup(sample, 'right password');
 
-    expect(
-      () => service.restoreBackup(bytes, 'wrong password'),
-      throwsA(isA<SecretBoxAuthenticationError>()),
-    );
-  });
+      expect(
+        () => service.restoreBackup(bytes, 'wrong password'),
+        throwsA(isA<SecretBoxAuthenticationError>()),
+      );
+    },
+  );
 
   test('two backups of the same data are not byte-identical', () async {
     final a = await service.createBackup(sample, 'same password');
     final b = await service.createBackup(sample, 'same password');
 
-    expect(a, isNot(equals(b)),
-        reason: 'a fresh salt and nonce must be used each time');
+    expect(
+      a,
+      isNot(equals(b)),
+      reason: 'a fresh salt and nonce must be used each time',
+    );
   });
 
   test('rejects a file that is too short to contain a header', () async {

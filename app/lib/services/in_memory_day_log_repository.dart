@@ -9,7 +9,7 @@ import 'day_log_repository.dart';
 /// environment). Never used to hold real user data.
 class InMemoryDayLogRepository implements DayLogRepository {
   InMemoryDayLogRepository([List<DayLog>? seed])
-      : _logs = List.of(seed ?? const []);
+    : _logs = List.of(seed ?? const []);
 
   List<DayLog> _logs;
 

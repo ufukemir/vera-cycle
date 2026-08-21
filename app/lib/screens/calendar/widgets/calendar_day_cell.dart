@@ -37,7 +37,10 @@ class CalendarDayCell extends StatelessWidget {
 
     switch (mark) {
       case CalendarDayMark.actual:
-        decoration = BoxDecoration(shape: BoxShape.circle, color: scheme.primary);
+        decoration = BoxDecoration(
+          shape: BoxShape.circle,
+          color: scheme.primary,
+        );
         textColor = scheme.onPrimary;
       case CalendarDayMark.predicted:
         decoration = BoxDecoration(
@@ -79,7 +82,10 @@ class CalendarDayCell extends StatelessWidget {
                 child: Container(
                   width: 8,
                   height: 8,
-                  decoration: BoxDecoration(shape: BoxShape.circle, color: scheme.tertiary),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: scheme.tertiary,
+                  ),
                 ),
               ),
           ],

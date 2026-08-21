@@ -25,9 +25,13 @@ void main() {
 
   test('the main Android manifest requests only the permissions we vetted', () {
     final manifest = File('android/app/src/main/AndroidManifest.xml');
-    expect(manifest.existsSync(), isTrue,
-        reason: 'expected to find the manifest relative to the app/ '
-            'directory — run flutter test from app/, not the repo root');
+    expect(
+      manifest.existsSync(),
+      isTrue,
+      reason:
+          'expected to find the manifest relative to the app/ '
+          'directory — run flutter test from app/, not the repo root',
+    );
 
     // Only <uses-permission> counts as "the app asks for this", and only
     // when it isn't a tools:node="remove" directive — those exist to take
@@ -35,27 +39,30 @@ void main() {
     // would flag the very thing that removes them. An android:permission
     // attribute elsewhere is also excluded: that's a restriction on who
     // may invoke a component, the opposite of a request.
-    final declared = RegExp(
-      r'<uses-permission\s+android:name="([^"]+)"([^>]*)>',
-      multiLine: true,
-      dotAll: true,
-    )
-        .allMatches(manifest.readAsStringSync())
-        .where((m) => !m.group(2)!.contains('tools:node="remove"'))
-        .map((m) => m.group(1)!)
-        .toSet();
+    final declared =
+        RegExp(
+              r'<uses-permission\s+android:name="([^"]+)"([^>]*)>',
+              multiLine: true,
+              dotAll: true,
+            )
+            .allMatches(manifest.readAsStringSync())
+            .where((m) => !m.group(2)!.contains('tools:node="remove"'))
+            .map((m) => m.group(1)!)
+            .toSet();
 
     expect(
       declared.difference(allowedPermissions),
       isEmpty,
-      reason: 'a dependency requested a permission nobody reviewed; add it to '
+      reason:
+          'a dependency requested a permission nobody reviewed; add it to '
           'allowedPermissions here only after deciding it is genuinely needed',
     );
   });
 
   test('the advertising id stays removed', () {
-    final contents =
-        File('android/app/src/main/AndroidManifest.xml').readAsStringSync();
+    final contents = File(
+      'android/app/src/main/AndroidManifest.xml',
+    ).readAsStringSync();
     // Personalization is off (tagForUnderAgeOfConsent), so the ad id is
     // never used. If a dependency bump quietly reintroduces it, Play's
     // Data Safety answer stops being true.
@@ -67,11 +74,16 @@ void main() {
   });
 
   test('no health READ permissions are ever requested', () {
-    final contents =
-        File('android/app/src/main/AndroidManifest.xml').readAsStringSync();
-    expect(contents.contains('permission.health.READ'), isFalse,
-        reason: 'health sync is deliberately write-only — reading would '
-            'mean asking for access to the whole health record');
+    final contents = File(
+      'android/app/src/main/AndroidManifest.xml',
+    ).readAsStringSync();
+    expect(
+      contents.contains('permission.health.READ'),
+      isFalse,
+      reason:
+          'health sync is deliberately write-only — reading would '
+          'mean asking for access to the whole health record',
+    );
   });
 
   test('the SHIPPED permission set is what the privacy policy claims', () {
@@ -84,13 +96,13 @@ void main() {
     // For an app whose whole pitch is verifiable honesty, that is the one
     // claim that must not be falsifiable. This pins the real list so the
     // policy can be written against it and stay true.
-    final merged = Directory('build/app/intermediates/merged_manifests')
-        .existsSync()
+    final merged =
+        Directory('build/app/intermediates/merged_manifests').existsSync()
         ? Directory('build/app/intermediates/merged_manifests')
-            .listSync(recursive: true)
-            .whereType<File>()
-            .where((f) => f.path.endsWith('AndroidManifest.xml'))
-            .toList()
+              .listSync(recursive: true)
+              .whereType<File>()
+              .where((f) => f.path.endsWith('AndroidManifest.xml'))
+              .toList()
         : <File>[];
 
     if (merged.isEmpty) {
@@ -101,8 +113,8 @@ void main() {
     final declared = <String>{};
     for (final file in merged) {
       for (final match in RegExp(
-              r'<uses-permission[^>]*android:name="([^"]+)"[^>]*/?>')
-          .allMatches(file.readAsStringSync())) {
+        r'<uses-permission[^>]*android:name="([^"]+)"[^>]*/?>',
+      ).allMatches(file.readAsStringSync())) {
         final name = match.group(1)!;
         // tools:node="remove" entries are removals, not requests.
         if (match.group(0)!.contains('tools:node="remove"')) continue;
@@ -136,15 +148,25 @@ void main() {
         .where((p) => !p.endsWith('DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'))
         .toSet();
 
-    expect(unexpected, isEmpty,
-        reason: 'a dependency added a permission the privacy policy does '
-            'not disclose: $unexpected');
+    expect(
+      unexpected,
+      isEmpty,
+      reason:
+          'a dependency added a permission the privacy policy does '
+          'not disclose: $unexpected',
+    );
 
     // The advertising id must stay OUT of the merged output, not just the
     // source — that is what the Data Safety answer rests on.
-    expect(declared, isNot(contains('com.google.android.gms.permission.AD_ID')));
+    expect(
+      declared,
+      isNot(contains('com.google.android.gms.permission.AD_ID')),
+    );
     expect(declared.where((p) => p.contains('ACCESS_ADSERVICES')), isEmpty);
-    expect(declared.where((p) => p.contains('permission.health.READ')), isEmpty);
+    expect(
+      declared.where((p) => p.contains('permission.health.READ')),
+      isEmpty,
+    );
   });
 
   test('OS backup and device transfer stay switched off', () {
@@ -153,43 +175,60 @@ void main() {
     // things, the reminder labels the user wrote themselves. Android's
     // default is allowBackup=true, so this has to be turned off explicitly
     // and stay off.
-    final contents =
-        File('android/app/src/main/AndroidManifest.xml').readAsStringSync();
+    final contents = File(
+      'android/app/src/main/AndroidManifest.xml',
+    ).readAsStringSync();
     expect(contents.contains('android:allowBackup="false"'), isTrue);
     expect(contents.contains('android:fullBackupContent="false"'), isTrue);
     expect(
-      contents.contains('android:dataExtractionRules="@xml/data_extraction_rules"'),
+      contents.contains(
+        'android:dataExtractionRules="@xml/data_extraction_rules"',
+      ),
       isTrue,
     );
 
     // API 31+ path: both cloud backup and device-to-device transfer must
     // refuse every domain, sharedpref included.
-    final rules =
-        File('android/app/src/main/res/xml/data_extraction_rules.xml')
-            .readAsStringSync();
+    final rules = File(
+      'android/app/src/main/res/xml/data_extraction_rules.xml',
+    ).readAsStringSync();
     for (final section in ['cloud-backup', 'device-transfer']) {
-      final body = RegExp('<$section>(.*?)</$section>', dotAll: true)
-          .firstMatch(rules)
-          ?.group(1);
+      final body = RegExp(
+        '<$section>(.*?)</$section>',
+        dotAll: true,
+      ).firstMatch(rules)?.group(1);
       expect(body, isNotNull, reason: '<$section> must be declared');
-      for (final domain in ['root', 'file', 'database', 'sharedpref', 'external']) {
-        expect(body, contains('<exclude domain="$domain" />'),
-            reason: '$section must exclude $domain');
+      for (final domain in [
+        'root',
+        'file',
+        'database',
+        'sharedpref',
+        'external',
+      ]) {
+        expect(
+          body,
+          contains('<exclude domain="$domain" />'),
+          reason: '$section must exclude $domain',
+        );
       }
     }
   });
 
   test('location and contacts permissions stay out', () {
-    final contents =
-        File('android/app/src/main/AndroidManifest.xml').readAsStringSync();
+    final contents = File(
+      'android/app/src/main/AndroidManifest.xml',
+    ).readAsStringSync();
     for (final banned in [
       'ACCESS_FINE_LOCATION',
       'ACCESS_COARSE_LOCATION',
       'READ_CONTACTS',
       'READ_EXTERNAL_STORAGE',
     ]) {
-      expect(contents.contains(banned), isFalse,
-          reason: '$banned has no business in a cycle tracker');
+      expect(
+        contents.contains(banned),
+        isFalse,
+        reason: '$banned has no business in a cycle tracker',
+      );
     }
   });
 }

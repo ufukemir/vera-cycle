@@ -27,8 +27,9 @@ void main() {
   });
 
   test('matches headers that merely contain a known word', () {
-    final result =
-        importer.parse('Period start date,Menstrual flow\n2026-03-01,light\n');
+    final result = importer.parse(
+      'Period start date,Menstrual flow\n2026-03-01,light\n',
+    );
     expect(result.detectedDateHeader, 'Period start date');
     expect(result.detectedFlowHeader, 'Menstrual flow');
     expect(result.logs.single.flow, FlowIntensity.light);
@@ -88,16 +89,26 @@ void main() {
   test('an empty file is rejected outright', () {
     expect(
       () => importer.parse('   \n'),
-      throwsA(isA<CsvImportException>()
-          .having((e) => e.reason, 'reason', CsvImportFailure.empty)),
+      throwsA(
+        isA<CsvImportException>().having(
+          (e) => e.reason,
+          'reason',
+          CsvImportFailure.empty,
+        ),
+      ),
     );
   });
 
   test('a file without a date column is rejected outright', () {
     expect(
       () => importer.parse('mood,note\nhappy,hello\n'),
-      throwsA(isA<CsvImportException>()
-          .having((e) => e.reason, 'reason', CsvImportFailure.noDateColumn)),
+      throwsA(
+        isA<CsvImportException>().having(
+          (e) => e.reason,
+          'reason',
+          CsvImportFailure.noDateColumn,
+        ),
+      ),
     );
   });
 
@@ -129,8 +140,11 @@ void main() {
       test('$language headers import instead of failing', () {
         final result = importer.parse(csv);
         expect(result.logs, hasLength(1), reason: '$language row was dropped');
-        expect(result.logs.single.flow, FlowIntensity.heavy,
-            reason: '$language flow value was not understood');
+        expect(
+          result.logs.single.flow,
+          FlowIntensity.heavy,
+          reason: '$language flow value was not understood',
+        );
       });
     });
   });
@@ -140,8 +154,11 @@ void main() {
     // codepoint from Turkish ş (U+015F, cedilla) — never matched.
     for (final header in ['Datum', 'DATUM', 'Fecha', 'Début', 'Data']) {
       final result = importer.parse('$header\n2026-03-01\n');
-      expect(result.detectedDateHeader, header,
-          reason: '"$header" was not recognised as a date column');
+      expect(
+        result.detectedDateHeader,
+        header,
+        reason: '"$header" was not recognised as a date column',
+      );
     }
   });
 }

@@ -11,12 +11,40 @@ import '../../../state/app_preferences.dart';
 /// (both of which a bare `null` from [showModalBottomSheet] would conflate).
 const _systemSentinel = '_system_';
 
-/// Only fully-translated locales are offered. Eight more exist at ~15%
-/// in l10n_pending/ — listing those meant a Japanese user seeing a
-/// mostly-English app, which is worse than not offering the language.
+/// Only fully-translated locales are offered. 14 more exist at 100% key
+/// parity in l10n_pending/ but stay parked there — CLAUDE.md requires a
+/// native-speaker review before a language goes live, and those 14
+/// (Bengali, Persian, Hindi, Japanese, Korean, Marathi, Swahili, Tamil,
+/// Telugu, Thai, Tagalog, Urdu, Vietnamese, Chinese) have not had one.
+/// The 15 added here on 2026-08-21 (Czech, Danish, Greek, Finnish,
+/// Hungarian, Italian, Malay, Norwegian, Dutch, Polish, Portuguese,
+/// Romanian, Russian, Swedish, Ukrainian) are a deliberate, named
+/// exception to that rule — promoted on translation-quality confidence
+/// rather than an actual native-speaker pass, Ufuk's explicit call.
 const _supportedCodes = <String>[
   _systemSentinel,
-  'en', 'tr', 'ar', 'es', 'fr', 'de', 'id',
+  'en',
+  'tr',
+  'ar',
+  'es',
+  'fr',
+  'de',
+  'id',
+  'cs',
+  'da',
+  'el',
+  'fi',
+  'hu',
+  'it',
+  'ms',
+  'nb',
+  'nl',
+  'pl',
+  'pt',
+  'ro',
+  'ru',
+  'sv',
+  'uk',
 ];
 
 String _labelFor(AppLocalizations l10n, String code) {
@@ -37,6 +65,36 @@ String _labelFor(AppLocalizations l10n, String code) {
       return l10n.settingsLanguageGerman;
     case 'id':
       return l10n.settingsLanguageIndonesian;
+    case 'cs':
+      return l10n.settingsLanguageCzech;
+    case 'da':
+      return l10n.settingsLanguageDanish;
+    case 'el':
+      return l10n.settingsLanguageGreek;
+    case 'fi':
+      return l10n.settingsLanguageFinnish;
+    case 'hu':
+      return l10n.settingsLanguageHungarian;
+    case 'it':
+      return l10n.settingsLanguageItalian;
+    case 'ms':
+      return l10n.settingsLanguageMalay;
+    case 'nb':
+      return l10n.settingsLanguageNorwegian;
+    case 'nl':
+      return l10n.settingsLanguageDutch;
+    case 'pl':
+      return l10n.settingsLanguagePolish;
+    case 'pt':
+      return l10n.settingsLanguagePortuguese;
+    case 'ro':
+      return l10n.settingsLanguageRomanian;
+    case 'ru':
+      return l10n.settingsLanguageRussian;
+    case 'sv':
+      return l10n.settingsLanguageSwedish;
+    case 'uk':
+      return l10n.settingsLanguageUkrainian;
     default:
       return code;
   }
@@ -74,7 +132,9 @@ class LanguagePickerTile extends StatelessWidget {
     );
 
     if (selected == null) return; // dismissed without picking
-    await prefs.setLocale(selected == _systemSentinel ? null : Locale(selected));
+    await prefs.setLocale(
+      selected == _systemSentinel ? null : Locale(selected),
+    );
   }
 
   @override

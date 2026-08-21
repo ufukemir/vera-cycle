@@ -40,7 +40,8 @@ class _QuickLogSheetState extends State<_QuickLogSheet> {
   @override
   void initState() {
     super.initState();
-    _draft = context.read<CycleController>().logFor(today()) ??
+    _draft =
+        context.read<CycleController>().logFor(today()) ??
         DayLog(date: today());
   }
 
@@ -64,16 +65,24 @@ class _QuickLogSheetState extends State<_QuickLogSheet> {
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.fromLTRB(
-            20, 0, 20, 20 + MediaQuery.viewInsetsOf(context).bottom),
+          20,
+          0,
+          20,
+          20 + MediaQuery.viewInsetsOf(context).bottom,
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(l10n.homeQuickLogTitle,
-                style: Theme.of(context).textTheme.titleLarge),
+            Text(
+              l10n.homeQuickLogTitle,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
             const SizedBox(height: 16),
-            Text(l10n.dayLogFlowLabel,
-                style: Theme.of(context).textTheme.titleSmall),
+            Text(
+              l10n.dayLogFlowLabel,
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,
@@ -83,16 +92,20 @@ class _QuickLogSheetState extends State<_QuickLogSheet> {
                   ChoiceChip(
                     label: Text(entry.value),
                     selected: _draft.flow == entry.key,
-                    onSelected: (selected) => setState(() => _draft =
-                        _draft.copyWith(
-                            flow: selected ? entry.key : null,
-                            clearFlow: !selected)),
+                    onSelected: (selected) => setState(
+                      () => _draft = _draft.copyWith(
+                        flow: selected ? entry.key : null,
+                        clearFlow: !selected,
+                      ),
+                    ),
                   ),
               ],
             ),
             const SizedBox(height: 16),
-            Text(l10n.dayLogSymptomsLabel,
-                style: Theme.of(context).textTheme.titleSmall),
+            Text(
+              l10n.dayLogSymptomsLabel,
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,

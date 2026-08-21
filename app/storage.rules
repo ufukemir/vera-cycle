@@ -1,0 +1,20 @@
+rules_version = '2';
+
+// Cloud backup's security rules — see CLAUDE.md's 2026-08-21 cloud-backup
+// revision note and lib/services/cloud_backup_service.dart's own doc
+// comment. Deploy with `firebase deploy --only storage` once Ufuk's own
+// Firebase project exists; this file has no effect until then.
+//
+// One path per account, owner-only in both directions: unlike Partner
+// Modu's `sharedData`, nothing here is ever readable by anyone but the
+// account that uploaded it — a backup is not something to share, and the
+// file itself is opaque ciphertext anyway (see CloudBackupService's doc
+// comment: the server never has the password, so read access wouldn't
+// reveal anything even if it were granted).
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /backups/{uid}/{fileName} {
+      allow read, write, delete: if request.auth != null && request.auth.uid == uid;
+    }
+  }
+}

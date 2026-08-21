@@ -81,7 +81,16 @@ class _AssistantScreenState extends State<AssistantScreen> {
     // table — bounded and short, never long enough to hide information.
     await Future<void>.delayed(const Duration(milliseconds: 650));
     if (!mounted) return;
-    conversation.addReply(reply, _assistant.followUps(lang, trimmed));
+    conversation.addReply(
+      reply,
+      _assistant.followUps(
+        lang,
+        conversation.messages
+            .where((m) => m.fromUser)
+            .map((m) => m.text)
+            .toList(),
+      ),
+    );
     _scrollDown();
   }
 
@@ -148,87 +157,90 @@ class _AssistantScreenState extends State<AssistantScreen> {
         if (!didPop) _endChat();
       },
       child: Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.assistantTitle),
-        leading: hasChat
-            ? IconButton(
-                icon: const BackButtonIcon(),
-                tooltip: l10n.assistantEndChatConfirm,
-                onPressed: _endChat,
-              )
-            : null,
-      ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: !hasChat
-                  ? _EmptyState(
-                      intro: l10n.assistantIntro,
-                      suggestions: _assistant.suggestions(lang),
-                      onSuggestionTap: _send,
-                    )
-                  : ListView(
-                      controller: _scroll,
-                      padding: const EdgeInsets.all(16),
-                      children: [
-                        for (final m in conversation.messages)
-                          _Bubble(message: m),
-                        if (conversation.typing)
-                          _TypingBubble(label: l10n.assistantTyping),
-                        if (!conversation.typing &&
-                            conversation.followUps.isNotEmpty)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: Wrap(
-                              spacing: 8,
-                              runSpacing: 8,
-                              children: [
-                                for (final q in conversation.followUps)
-                                  ActionChip(
+        appBar: AppBar(
+          title: Text(l10n.assistantTitle),
+          leading: hasChat
+              ? IconButton(
+                  icon: const BackButtonIcon(),
+                  tooltip: l10n.assistantEndChatConfirm,
+                  onPressed: _endChat,
+                )
+              : null,
+        ),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: !hasChat
+                    ? _EmptyState(
+                        intro: l10n.assistantIntro,
+                        suggestions: _assistant.suggestions(lang),
+                        onSuggestionTap: _send,
+                      )
+                    : ListView(
+                        controller: _scroll,
+                        padding: const EdgeInsets.all(16),
+                        children: [
+                          for (final m in conversation.messages)
+                            _Bubble(message: m),
+                          if (conversation.typing)
+                            _TypingBubble(label: l10n.assistantTyping),
+                          if (!conversation.typing &&
+                              conversation.followUps.isNotEmpty)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: [
+                                  for (final q in conversation.followUps)
+                                    ActionChip(
                                       label: Text(q),
-                                      onPressed: () => _send(q)),
-                              ],
+                                      onPressed: () => _send(q),
+                                    ),
+                                ],
+                              ),
                             ),
+                        ],
+                      ),
+              ),
+              Container(
+                padding: const EdgeInsets.fromLTRB(16, 8, 8, 12),
+                color: scheme.surface,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _input,
+                        textInputAction: TextInputAction.send,
+                        onSubmitted: _send,
+                        decoration: InputDecoration(
+                          hintText: l10n.assistantInputHint,
+                          filled: true,
+                          fillColor: scheme.surfaceContainerHigh,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(24),
+                            borderSide: BorderSide.none,
                           ),
-                      ],
-                    ),
-            ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(16, 8, 8, 12),
-              color: scheme.surface,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: _input,
-                      textInputAction: TextInputAction.send,
-                      onSubmitted: _send,
-                      decoration: InputDecoration(
-                        hintText: l10n.assistantInputHint,
-                        filled: true,
-                        fillColor: scheme.surfaceContainerHigh,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(24),
-                          borderSide: BorderSide.none,
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 18,
+                            vertical: 12,
+                          ),
                         ),
-                        contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 18, vertical: 12),
                       ),
                     ),
-                  ),
-                  const SizedBox(width: 4),
-                  IconButton.filled(
-                    icon: const Icon(Icons.arrow_upward_rounded),
-                    onPressed: () => _send(_input.text),
-                  ),
-                ],
+                    const SizedBox(width: 4),
+                    IconButton.filled(
+                      icon: const Icon(Icons.arrow_upward_rounded),
+                      onPressed: () => _send(_input.text),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-    ),
     );
   }
 }
@@ -249,7 +261,10 @@ class _EmptyState extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(20),
       children: [
-        const PhotoHero(asset: 'assets/photos/selfcare_plants.jpg', height: 190),
+        const PhotoHero(
+          asset: 'assets/photos/selfcare_plants.jpg',
+          height: 190,
+        ),
         const SizedBox(height: 20),
         Text(intro, style: Theme.of(context).textTheme.bodyMedium),
         const SizedBox(height: 20),
@@ -322,13 +337,16 @@ class _TypingBubbleState extends State<_TypingBubble>
                         height: 7,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: scheme.onSurface
-                              .withValues(alpha: i == phase ? 0.8 : 0.3),
+                          color: scheme.onSurface.withValues(
+                            alpha: i == phase ? 0.8 : 0.3,
+                          ),
                         ),
                       ),
                     const SizedBox(width: 8),
-                    Text(widget.label,
-                        style: Theme.of(context).textTheme.bodySmall),
+                    Text(
+                      widget.label,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
                   ],
                 );
               },
@@ -368,30 +386,30 @@ class _Bubble extends StatelessWidget {
     );
   }
 
-  Widget _bubbleBody(
-      BuildContext context, ColorScheme scheme, bool fromUser) {
+  Widget _bubbleBody(BuildContext context, ColorScheme scheme, bool fromUser) {
     return Container(
-        margin: const EdgeInsets.symmetric(vertical: 4),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        constraints: BoxConstraints(
-            maxWidth: MediaQuery.sizeOf(context).width * 0.78),
-        decoration: BoxDecoration(
-          color: fromUser ? scheme.primary : scheme.surfaceContainerHigh,
-          // Directional so the 6px "tail" corner stays on the speaker's
-          // own side after mirroring.
-          borderRadius: BorderRadiusDirectional.only(
-            topStart: const Radius.circular(20),
-            topEnd: const Radius.circular(20),
-            bottomStart: Radius.circular(fromUser ? 20 : 6),
-            bottomEnd: Radius.circular(fromUser ? 6 : 20),
-          ),
+      margin: const EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      constraints: BoxConstraints(
+        maxWidth: MediaQuery.sizeOf(context).width * 0.78,
+      ),
+      decoration: BoxDecoration(
+        color: fromUser ? scheme.primary : scheme.surfaceContainerHigh,
+        // Directional so the 6px "tail" corner stays on the speaker's
+        // own side after mirroring.
+        borderRadius: BorderRadiusDirectional.only(
+          topStart: const Radius.circular(20),
+          topEnd: const Radius.circular(20),
+          bottomStart: Radius.circular(fromUser ? 20 : 6),
+          bottomEnd: Radius.circular(fromUser ? 6 : 20),
         ),
-        child: Text(
-          message.text,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: fromUser ? scheme.onPrimary : scheme.onSurface,
-              ),
+      ),
+      child: Text(
+        message.text,
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+          color: fromUser ? scheme.onPrimary : scheme.onSurface,
         ),
+      ),
     );
   }
 }

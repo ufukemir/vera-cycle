@@ -25,8 +25,10 @@ void main() {
   });
 
   test('a future LMP is rejected rather than producing negative weeks', () {
-    expect(PregnancyInfo.from(DateTime(2026, 6, 1), on: DateTime(2026, 5, 1)),
-        isNull);
+    expect(
+      PregnancyInfo.from(DateTime(2026, 6, 1), on: DateTime(2026, 5, 1)),
+      isNull,
+    );
   });
 
   test('past 42 weeks it returns null instead of an absurd week count', () {

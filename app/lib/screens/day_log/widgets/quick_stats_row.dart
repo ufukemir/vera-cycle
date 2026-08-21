@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../widgets/number_stepper.dart';
+import '../../../widgets/number_wheel.dart';
 import '../../../util/number_format.dart';
 
 /// Water/sleep/weight — lifestyle stats shown to everyone, unlike the
@@ -60,8 +61,9 @@ class QuickStatsRow extends StatelessWidget {
             child: _StatCard(
               icon: Icons.bedtime_outlined,
               label: l10n.dayLogSleepLabel,
-              value:
-                  sleepMinutes == null ? '—' : formatSleep(l10n, sleepMinutes!),
+              value: sleepMinutes == null
+                  ? '—'
+                  : formatSleep(l10n, sleepMinutes!),
               onTap: () => _pickSleep(context),
             ),
           ),
@@ -149,40 +151,84 @@ class QuickStatsRow extends StatelessWidget {
     if (result != null) onSleepChanged(result == 0 ? null : result);
   }
 
+  /// A whole-kilogram wheel and a tenths wheel side by side, not a text
+  /// field. The keyboard version showed the OS's phone dial pad instead of
+  /// a numeric one on some devices, and — the deeper reason it changed —
+  /// scrolling to a value reads as a deliberate choice on a screen full of
+  /// wheels already, where typing digits felt like the odd one out. Two
+  /// wheels rather than one whole-kilogram wheel: a single wheel loses the
+  /// decimal a home scale actually reports.
   Future<void> _pickWeight(BuildContext context) async {
-    final controller = TextEditingController(
-      text: weightKg == null ? '' : weightKg!.toStringAsFixed(1),
-    );
+    final current = weightKg ?? 60.0;
+    var whole = current.truncate().clamp(20, 250);
+    var tenth = ((current - current.truncate()) * 10).round().clamp(0, 9);
     final l10n = AppLocalizations.of(context)!;
+    final hadValue = weightKg != null;
 
-    final result = await showDialog<String>(
+    final result = await showDialog<double>(
       context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: Text(l10n.dayLogWeightLabel),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-          keyboardType: const TextInputType.numberWithOptions(decimal: true),
-          decoration: InputDecoration(suffixText: l10n.unitKilograms),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext),
-            child: Text(
-              MaterialLocalizations.of(dialogContext).cancelButtonLabel,
+      builder: (dialogContext) => StatefulBuilder(
+        builder: (dialogContext, setState) => AlertDialog(
+          title: Text(l10n.dayLogWeightLabel),
+          content: Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: NumberWheel(
+                  value: whole,
+                  min: 20,
+                  max: 250,
+                  height: 160,
+                  onChanged: (v) => setState(() => whole = v),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 2),
+                child: Text(
+                  '.',
+                  style: Theme.of(dialogContext).textTheme.headlineSmall,
+                ),
+              ),
+              Expanded(
+                child: NumberWheel(
+                  value: tenth,
+                  min: 0,
+                  max: 9,
+                  height: 160,
+                  unitLabel: l10n.unitKilograms,
+                  onChanged: (v) => setState(() => tenth = v),
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            if (hadValue)
+              TextButton(
+                onPressed: () {
+                  onWeightChanged(null);
+                  Navigator.pop(dialogContext);
+                },
+                child: Text(l10n.actionClear),
+              ),
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext),
+              child: Text(
+                MaterialLocalizations.of(dialogContext).cancelButtonLabel,
+              ),
             ),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.pop(dialogContext, controller.text),
-            child: Text(MaterialLocalizations.of(dialogContext).okButtonLabel),
-          ),
-        ],
+            FilledButton(
+              onPressed: () => Navigator.pop(dialogContext, whole + tenth / 10),
+              child: Text(
+                MaterialLocalizations.of(dialogContext).okButtonLabel,
+              ),
+            ),
+          ],
+        ),
       ),
     );
 
-    if (result == null) return;
-    final parsed = double.tryParse(result.trim().replaceAll(',', '.'));
-    onWeightChanged(parsed);
+    if (result != null) onWeightChanged(result);
   }
 }
 

@@ -13,8 +13,11 @@ void main() {
   test('no stored preference means "follow the locale"', () async {
     SharedPreferences.setMockInitialValues({});
     final prefs = await AppPreferences.load();
-    expect(prefs.weekStartWeekday, isNull,
-        reason: 'an unset preference must not masquerade as a Monday choice');
+    expect(
+      prefs.weekStartWeekday,
+      isNull,
+      reason: 'an unset preference must not masquerade as a Monday choice',
+    );
   });
 
   test('an explicit choice is stored and survives a reload', () async {
@@ -47,20 +50,29 @@ void main() {
       expect(prefs.weekStartWeekday, DateTime.sunday);
     });
 
-    test('writing the new key retires the old one so they cannot disagree',
-        () async {
-      SharedPreferences.setMockInitialValues({'week_start_monday': true});
-      final prefs = await AppPreferences.load();
+    test(
+      'writing the new key retires the old one so they cannot disagree',
+      () async {
+        SharedPreferences.setMockInitialValues({'week_start_monday': true});
+        final prefs = await AppPreferences.load();
 
-      await prefs.setWeekStartWeekday(DateTime.saturday);
-      expect(prefs.weekStartWeekday, DateTime.saturday,
-          reason: 'the stale boolean must not win over the new value');
+        await prefs.setWeekStartWeekday(DateTime.saturday);
+        expect(
+          prefs.weekStartWeekday,
+          DateTime.saturday,
+          reason: 'the stale boolean must not win over the new value',
+        );
 
-      await prefs.setWeekStartWeekday(null);
-      expect(prefs.weekStartWeekday, isNull,
-          reason: 'clearing must clear both keys, not fall back to the old '
-              'boolean');
-    });
+        await prefs.setWeekStartWeekday(null);
+        expect(
+          prefs.weekStartWeekday,
+          isNull,
+          reason:
+              'clearing must clear both keys, not fall back to the old '
+              'boolean',
+        );
+      },
+    );
   });
 
   testWidgets('MaterialLocalizations disagrees across locales', (tester) async {
@@ -70,20 +82,26 @@ void main() {
     final firstDays = <String, int>{};
     for (final code in ['en', 'tr', 'ar', 'de', 'es', 'fr', 'id']) {
       late BuildContext captured;
-      await tester.pumpWidget(MaterialApp(
-        locale: Locale(code),
-        localizationsDelegates: GlobalMaterialLocalizations.delegates,
-        supportedLocales: [Locale(code)],
-        home: Builder(builder: (context) {
-          captured = context;
-          return const SizedBox();
-        }),
-      ));
-      firstDays[code] =
-          MaterialLocalizations.of(captured).firstDayOfWeekIndex;
+      await tester.pumpWidget(
+        MaterialApp(
+          locale: Locale(code),
+          localizationsDelegates: GlobalMaterialLocalizations.delegates,
+          supportedLocales: [Locale(code)],
+          home: Builder(
+            builder: (context) {
+              captured = context;
+              return const SizedBox();
+            },
+          ),
+        ),
+      );
+      firstDays[code] = MaterialLocalizations.of(captured).firstDayOfWeekIndex;
     }
 
-    expect(firstDays.values.toSet().length, greaterThan(1),
-        reason: 'locales must not all agree, or this setting is moot');
+    expect(
+      firstDays.values.toSet().length,
+      greaterThan(1),
+      reason: 'locales must not all agree, or this setting is moot',
+    );
   });
 }

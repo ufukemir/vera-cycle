@@ -46,9 +46,13 @@ void main() {
     final a = await codec.encode(sample, key);
     final b = await codec.encode(sample, key);
 
-    expect(a, isNot(equals(b)),
-        reason: 'a fresh random nonce must be used on every encrypt call, '
-            'or an attacker could detect unchanged data across two backups');
+    expect(
+      a,
+      isNot(equals(b)),
+      reason:
+          'a fresh random nonce must be used on every encrypt call, '
+          'or an attacker could detect unchanged data across two backups',
+    );
   });
 
   test('decrypting with the wrong key fails loudly', () async {

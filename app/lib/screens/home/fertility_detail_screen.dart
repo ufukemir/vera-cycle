@@ -47,12 +47,15 @@ class FertilityDetailScreen extends StatelessWidget {
             if (status.cycleDay != null)
               Text(
                 l10n.homeCycleDayLabel(status.cycleDay!),
-                style: theme.textTheme.labelLarge
-                    ?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+                style: theme.textTheme.labelLarge?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
               ),
             const SizedBox(height: 4),
-            Text(l10n.calendarLegendFertile,
-                style: theme.textTheme.headlineSmall),
+            Text(
+              l10n.calendarLegendFertile,
+              style: theme.textTheme.headlineSmall,
+            ),
             const SizedBox(height: 20),
             if (start != null && end != null && cycleStart != null) ...[
               _CurveCard(
@@ -79,8 +82,10 @@ class FertilityDetailScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
             ],
-            Text(l10n.phaseExplainerFertile,
-                style: theme.textTheme.bodyMedium?.copyWith(height: 1.5)),
+            Text(
+              l10n.phaseExplainerFertile,
+              style: theme.textTheme.bodyMedium?.copyWith(height: 1.5),
+            ),
             const SizedBox(height: 20),
             Container(
               padding: const EdgeInsets.all(14),
@@ -88,18 +93,23 @@ class FertilityDetailScreen extends StatelessWidget {
                 color: theme.colorScheme.primary.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(18),
                 border: Border.all(
-                    color: theme.colorScheme.primary.withValues(alpha: 0.22)),
+                  color: theme.colorScheme.primary.withValues(alpha: 0.22),
+                ),
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(Icons.info_outline_rounded,
-                      size: 20, color: theme.colorScheme.primary),
+                  Icon(
+                    Icons.info_outline_rounded,
+                    size: 20,
+                    color: theme.colorScheme.primary,
+                  ),
                   const SizedBox(width: 10),
                   Expanded(
-                    child: Text(l10n.homeFertileWindowDisclaimer,
-                        style:
-                            theme.textTheme.bodyMedium?.copyWith(height: 1.45)),
+                    child: Text(
+                      l10n.homeFertileWindowDisclaimer,
+                      style: theme.textTheme.bodyMedium?.copyWith(height: 1.45),
+                    ),
                   ),
                 ],
               ),
@@ -133,9 +143,12 @@ class _DateRow extends StatelessWidget {
         Icon(icon, size: 18, color: theme.colorScheme.primary),
         const SizedBox(width: 10),
         Expanded(child: Text(label, style: theme.textTheme.bodyMedium)),
-        Text(value,
-            style: theme.textTheme.titleSmall
-                ?.copyWith(color: theme.colorScheme.primary)),
+        Text(
+          value,
+          style: theme.textTheme.titleSmall?.copyWith(
+            color: theme.colorScheme.primary,
+          ),
+        ),
       ],
     );
   }
@@ -169,8 +182,7 @@ class _CurveCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: scheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(22),
-        border:
-            Border.all(color: scheme.outlineVariant.withValues(alpha: 0.4)),
+        border: Border.all(color: scheme.outlineVariant.withValues(alpha: 0.4)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,10 +211,14 @@ class _CurveCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(l10n.homeCycleDayLabel(1),
-                  style: theme.textTheme.labelSmall),
-              Text(l10n.homeCycleDayLabel(math.max(cycleLength, endDay + 2)),
-                  style: theme.textTheme.labelSmall),
+              Text(
+                l10n.homeCycleDayLabel(1),
+                style: theme.textTheme.labelSmall,
+              ),
+              Text(
+                l10n.homeCycleDayLabel(math.max(cycleLength, endDay + 2)),
+                style: theme.textTheme.labelSmall,
+              ),
             ],
           ),
         ],
@@ -242,8 +258,13 @@ class _FertilityCurvePainter extends CustomPainter {
     final baseline = size.height - 18;
     double xFor(num day) => (day / cycleLength) * size.width;
 
-    canvas.drawLine(Offset(0, baseline), Offset(size.width, baseline),
-        Paint()..color = grid.withValues(alpha: 0.6)..strokeWidth = 1);
+    canvas.drawLine(
+      Offset(0, baseline),
+      Offset(size.width, baseline),
+      Paint()
+        ..color = grid.withValues(alpha: 0.6)
+        ..strokeWidth = 1,
+    );
 
     // Gaussian centred on the window, wide enough that its tails reach the
     // window edges rather than stopping dead at them.

@@ -34,9 +34,9 @@ class SymptomFrequencyBarRow extends StatelessWidget {
                   height: maxCount == 0
                       ? _minBarHeight
                       : _minBarHeight +
-                          (_maxBarHeight - _minBarHeight) *
-                              (frequencyByCycleDay[day] ?? 0) /
-                              maxCount,
+                            (_maxBarHeight - _minBarHeight) *
+                                (frequencyByCycleDay[day] ?? 0) /
+                                maxCount,
                   margin: const EdgeInsets.symmetric(horizontal: 2),
                   decoration: BoxDecoration(
                     color: scheme.primary,

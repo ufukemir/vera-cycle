@@ -46,24 +46,25 @@ class _PremiumScreenState extends State<PremiumScreen> {
   /// Placeholder pricing in Turkish lira. Real prices come from the store
   /// once billing exists, already localised; until then the symbol is fixed
   /// and only the number formatting follows the locale.
-  String _price(BuildContext context, double amount) =>
-      NumberFormat.currency(
-        locale: Localizations.localeOf(context).toString(),
-        symbol: '₺',
-        decimalDigits: 2,
-      ).format(amount);
+  String _price(BuildContext context, double amount) => NumberFormat.currency(
+    locale: Localizations.localeOf(context).toString(),
+    symbol: '₺',
+    decimalDigits: 2,
+  ).format(amount);
 
   /// Replaces any visible snackbar instead of queueing behind it — two
   /// taps used to mean two sequential toasts.
   void _showComingSoon(BuildContext context, AppLocalizations l10n) {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(
-        content: Text(l10n.comingSoon),
-        duration: const Duration(seconds: 3),
-        behavior: SnackBarBehavior.floating,
-        margin: const EdgeInsets.all(16),
-      ));
+      ..showSnackBar(
+        SnackBar(
+          content: Text(l10n.comingSoon),
+          duration: const Duration(seconds: 3),
+          behavior: SnackBarBehavior.floating,
+          margin: const EdgeInsets.all(16),
+        ),
+      );
   }
 
   @override
@@ -82,8 +83,11 @@ class _PremiumScreenState extends State<PremiumScreen> {
             foregroundColor: Colors.white,
             backgroundColor: scheme.primary,
             flexibleSpace: FlexibleSpaceBar(
-              titlePadding:
-                  const EdgeInsetsDirectional.only(start: 56, bottom: 14, end: 16),
+              titlePadding: const EdgeInsetsDirectional.only(
+                start: 56,
+                bottom: 14,
+                end: 16,
+              ),
               title: Text(
                 l10n.premiumTitle,
                 style: const TextStyle(color: Colors.white, fontSize: 18),
@@ -91,8 +95,10 @@ class _PremiumScreenState extends State<PremiumScreen> {
               background: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.asset('assets/photos/seaside_smile.jpg',
-                      fit: BoxFit.cover),
+                  Image.asset(
+                    'assets/photos/seaside_smile.jpg',
+                    fit: BoxFit.cover,
+                  ),
                   const DecoratedBox(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -119,67 +125,87 @@ class _PremiumScreenState extends State<PremiumScreen> {
                   Card(
                     color: scheme.primaryContainer,
                     child: ListTile(
-                      leading: Icon(Icons.check_circle,
-                          color: scheme.onPrimaryContainer),
+                      leading: Icon(
+                        Icons.check_circle,
+                        color: scheme.onPrimaryContainer,
+                      ),
                       title: Text(
                         l10n.premiumActiveBadge,
                         style: TextStyle(color: scheme.onPrimaryContainer),
                       ),
                     ),
                   ),
-                Text(l10n.premiumHeadline,
-                    style: theme.textTheme.headlineSmall
-                        ?.copyWith(fontWeight: FontWeight.w600)),
+                Text(
+                  l10n.premiumHeadline,
+                  style: theme.textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
                 const SizedBox(height: 8),
                 Text(l10n.premiumSubhead, style: theme.textTheme.bodyMedium),
                 const SizedBox(height: 22),
                 _Benefit(
-                    icon: Icons.do_not_disturb_on_outlined,
-                    text: l10n.premiumBenefitNoAds),
+                  icon: Icons.do_not_disturb_on_outlined,
+                  text: l10n.premiumBenefitNoAds,
+                ),
                 _Benefit(
-                    icon: Icons.dashboard_customize_outlined,
-                    text: l10n.premiumBenefitCustomTrackers),
+                  icon: Icons.dashboard_customize_outlined,
+                  text: l10n.premiumBenefitCustomTrackers,
+                ),
                 _Benefit(
-                    icon: Icons.insights_outlined,
-                    text: l10n.premiumBenefitAdvancedInsights),
+                  icon: Icons.insights_outlined,
+                  text: l10n.premiumBenefitAdvancedInsights,
+                ),
                 _Benefit(
-                    icon: Icons.notifications_active_outlined,
-                    text: l10n.premiumBenefitAdvancedReminders),
+                  icon: Icons.notifications_active_outlined,
+                  text: l10n.premiumBenefitAdvancedReminders,
+                ),
                 _Benefit(
-                    icon: Icons.palette_outlined,
-                    text: l10n.premiumBenefitPersonalisation),
+                  icon: Icons.palette_outlined,
+                  text: l10n.premiumBenefitPersonalisation,
+                ),
                 _Benefit(
-                    icon: Icons.favorite_outline,
-                    text: l10n.premiumBenefitSupport),
+                  icon: Icons.favorite_outline,
+                  text: l10n.premiumBenefitSupport,
+                ),
                 const SizedBox(height: 24),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Expanded(
-                      child: _PlanCard(
-                        title: l10n.premiumMonthly,
-                        price: _price(context, _monthlyPrice),
-                        note: l10n.premiumBilledMonthly,
-                        selected: _selected == _Plan.monthly,
-                        onTap: () =>
-                            setState(() => _selected = _Plan.monthly),
+                // IntrinsicHeight so `stretch` has a height to stretch to —
+                // this Row sits in a sliver, which hands it unbounded
+                // height, and `stretch` against unbounded height crashes
+                // the whole sliver list's layout (the giveaway was every
+                // other section on the screen going blank too, not just
+                // the two cards).
+                IntrinsicHeight(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Expanded(
+                        child: _PlanCard(
+                          title: l10n.premiumMonthly,
+                          price: _price(context, _monthlyPrice),
+                          note: l10n.premiumBilledMonthly,
+                          selected: _selected == _Plan.monthly,
+                          onTap: () =>
+                              setState(() => _selected = _Plan.monthly),
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: _PlanCard(
-                        title: l10n.premiumYearly,
-                        price: _price(context, _yearlyPrice),
-                        note: l10n.premiumYearlyNote,
-                        // Plain division, shown so the two cards can be
-                        // compared on the same unit.
-                        footnote: l10n.premiumPerMonth(
-                            _price(context, _yearlyPrice / 12)),
-                        selected: _selected == _Plan.yearly,
-                        onTap: () => setState(() => _selected = _Plan.yearly),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: _PlanCard(
+                          title: l10n.premiumYearly,
+                          price: _price(context, _yearlyPrice),
+                          note: l10n.premiumYearlyNote,
+                          // Plain division, shown so the two cards can be
+                          // compared on the same unit.
+                          footnote: l10n.premiumPerMonth(
+                            _price(context, _yearlyPrice / 12),
+                          ),
+                          selected: _selected == _Plan.yearly,
+                          onTap: () => setState(() => _selected = _Plan.yearly),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 24),
                 // The promise this app is built on, restated where someone
@@ -195,18 +221,25 @@ class _PremiumScreenState extends State<PremiumScreen> {
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.lock_open_outlined,
-                                size: 20, color: scheme.primary),
+                            Icon(
+                              Icons.lock_open_outlined,
+                              size: 20,
+                              color: scheme.primary,
+                            ),
                             const SizedBox(width: 8),
                             Expanded(
-                              child: Text(l10n.premiumStaysFreeTitle,
-                                  style: theme.textTheme.titleSmall),
+                              child: Text(
+                                l10n.premiumStaysFreeTitle,
+                                style: theme.textTheme.titleSmall,
+                              ),
                             ),
                           ],
                         ),
                         const SizedBox(height: 8),
-                        Text(l10n.premiumStaysFreeBody,
-                            style: theme.textTheme.bodySmall),
+                        Text(
+                          l10n.premiumStaysFreeBody,
+                          style: theme.textTheme.bodySmall,
+                        ),
                       ],
                     ),
                   ),
@@ -257,8 +290,9 @@ class _PremiumScreenState extends State<PremiumScreen> {
               ),
               Text(
                 l10n.premiumCancelNote,
-                style: theme.textTheme.bodySmall
-                    ?.copyWith(color: scheme.onSurfaceVariant),
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: scheme.onSurfaceVariant,
+                ),
                 textAlign: TextAlign.center,
               ),
             ],
@@ -368,9 +402,12 @@ class _PlanCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 2),
-              Text(note,
-                  style: theme.textTheme.bodySmall
-                      ?.copyWith(color: scheme.onSurfaceVariant)),
+              Text(
+                note,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: scheme.onSurfaceVariant,
+                ),
+              ),
               if (footnote != null) ...[
                 const SizedBox(height: 6),
                 Text(

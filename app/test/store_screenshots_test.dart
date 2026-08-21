@@ -16,6 +16,8 @@ import 'package:cycle_app/services/pin_vault.dart';
 import 'package:cycle_app/services/reminder_service.dart';
 import 'package:cycle_app/state/app_preferences.dart';
 import 'package:cycle_app/state/cycle_controller.dart';
+import 'package:cycle_app/state/cloud_backup_controller.dart';
+import 'package:cycle_app/state/partner_controller.dart';
 import 'package:cycle_app/theme/app_theme.dart';
 import 'package:cycle_app/widgets/illustrations.dart';
 import 'package:cycle_app/util/day.dart';
@@ -55,7 +57,11 @@ const _devices = <String, _Device>{
 };
 
 class _Device {
-  const _Device({required this.width, required this.height, required this.ratio});
+  const _Device({
+    required this.width,
+    required this.height,
+    required this.ratio,
+  });
 
   final double width;
   final double height;
@@ -84,18 +90,21 @@ Future<void> _loadFonts() async {
   // unloaded text — which looked like a layout bug in the first draft of
   // these images. It ships inside the SDK rather than the app, so it is
   // located relative to the running Flutter install instead of assets/.
-  final flutterRoot = Platform.environment['FLUTTER_ROOT'] ??
-      _flutterRootFromDartExecutable();
+  final flutterRoot =
+      Platform.environment['FLUTTER_ROOT'] ?? _flutterRootFromDartExecutable();
   final icons = File(
-      '$flutterRoot/bin/cache/artifacts/material_fonts/MaterialIcons-Regular.otf');
+    '$flutterRoot/bin/cache/artifacts/material_fonts/MaterialIcons-Regular.otf',
+  );
   if (icons.existsSync()) {
     await _loadFont('MaterialIcons', icons.path);
   } else {
     // Not fatal: the images are still generated, just with box glyphs
     // where icons should be. Loud enough to notice in the log.
     // ignore: avoid_print
-    print('WARNING: MaterialIcons not found at ${icons.path} — icons will '
-        'render as boxes. Set FLUTTER_ROOT.');
+    print(
+      'WARNING: MaterialIcons not found at ${icons.path} — icons will '
+      'render as boxes. Set FLUTTER_ROOT.',
+    );
   }
 }
 
@@ -120,15 +129,17 @@ Future<Widget> _app(Widget screen, String locale) async {
   // honest uncertainty.
   for (final start in [-88, -57, -28]) {
     for (var i = 0; i < 5; i++) {
-      await controller.upsertDay(DayLog(
-        date: addDays(today(), start + i),
-        flow: i < 2 ? FlowIntensity.medium : FlowIntensity.light,
-        symptoms: i < 2 ? const {Symptom.cramps} : const {Symptom.fatigue},
-        mood: i < 2 ? Mood.low : Mood.calm,
-        weightKg: 61.5,
-        sleepMinutes: 450,
-        waterIntakeMl: 1600,
-      ));
+      await controller.upsertDay(
+        DayLog(
+          date: addDays(today(), start + i),
+          flow: i < 2 ? FlowIntensity.medium : FlowIntensity.light,
+          symptoms: i < 2 ? const {Symptom.cramps} : const {Symptom.fatigue},
+          mood: i < 2 ? Mood.low : Mood.calm,
+          weightKg: 61.5,
+          sleepMinutes: 450,
+          waterIntakeMl: 1600,
+        ),
+      );
     }
   }
 
@@ -138,6 +149,14 @@ Future<Widget> _app(Widget screen, String locale) async {
       ChangeNotifierProvider<CycleController>.value(value: controller),
       Provider<PinVault>(create: (_) => PinVault()),
       Provider<ReminderService>(create: (_) => ReminderService()),
+      // Same reasoning as all_screens_smoke_test.dart: PartnerInviteCard
+      // reads this unconditionally on build.
+      ChangeNotifierProvider<PartnerController>(
+        create: (_) => PartnerController()..init(),
+      ),
+      ChangeNotifierProvider<CloudBackupController>(
+        create: (_) => CloudBackupController()..init(),
+      ),
     ],
     child: MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -165,7 +184,10 @@ void main() {
     for (final device in _devices.entries) {
       for (final screen in screens.entries) {
         testWidgets('$locale/${device.key}/${screen.key}', (tester) async {
-          tester.view.physicalSize = Size(device.value.width, device.value.height);
+          tester.view.physicalSize = Size(
+            device.value.width,
+            device.value.height,
+          );
           tester.view.devicePixelRatio = device.value.ratio;
           addTearDown(tester.view.resetPhysicalSize);
           addTearDown(tester.view.resetDevicePixelRatio);
@@ -200,9 +222,9 @@ void main() {
   /// one-line promise and is already length-checked for the store.
   String taglineFor(String locale) {
     final dir = locale == 'en' ? 'en-US' : locale;
-    return File('../fastlane/metadata/ios/$dir/subtitle.txt')
-        .readAsStringSync()
-        .trim();
+    return File(
+      '../fastlane/metadata/ios/$dir/subtitle.txt',
+    ).readAsStringSync().trim();
   }
 
   // Play requires a 1024x500 feature graphic for every listing and will not

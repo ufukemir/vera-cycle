@@ -51,7 +51,9 @@ class _BackupNudgeCardState extends State<BackupNudgeCard> {
     final l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final last = prefs.lastBackupAt;
-    final dateFmt = DateFormat.yMMMd(Localizations.localeOf(context).toString());
+    final dateFmt = DateFormat.yMMMd(
+      Localizations.localeOf(context).toString(),
+    );
 
     return Container(
       width: double.infinity,
@@ -65,12 +67,17 @@ class _BackupNudgeCardState extends State<BackupNudgeCard> {
         children: [
           Row(
             children: [
-              Icon(Icons.shield_outlined,
-                  size: 20, color: theme.colorScheme.onSecondaryContainer),
+              Icon(
+                Icons.shield_outlined,
+                size: 20,
+                color: theme.colorScheme.onSecondaryContainer,
+              ),
               const SizedBox(width: 8),
               Expanded(
-                child: Text(l10n.backupNudgeTitle,
-                    style: theme.textTheme.titleSmall),
+                child: Text(
+                  l10n.backupNudgeTitle,
+                  style: theme.textTheme.titleSmall,
+                ),
               ),
             ],
           ),
@@ -97,9 +104,9 @@ class _BackupNudgeCardState extends State<BackupNudgeCard> {
                 child: Text(l10n.backupNudgeDismiss),
               ),
               FilledButton(
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const ExportScreen()),
-                ),
+                onPressed: () => Navigator.of(
+                  context,
+                ).push(MaterialPageRoute(builder: (_) => const ExportScreen())),
                 child: Text(l10n.backupNudgeCta),
               ),
             ],

@@ -4,6 +4,7 @@ import 'package:intl/intl.dart' hide TextDirection;
 import 'package:provider/provider.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../l10n/enum_labels.dart';
 import '../../models/day_log.dart';
 import '../../models/enums.dart';
 import '../../state/app_preferences.dart';
@@ -82,27 +83,38 @@ IconData trackerIcon(TrackerType type) {
 /// different things rather than ten identical pink squares — and so a
 /// tracker looks the same in the grid as it does on its own screen.
 ({Color tint, Color ink}) trackerPalette(TrackerType type) => switch (type) {
-      TrackerType.bbt =>
-        (tint: AppPalette.terracottaSoft, ink: AppPalette.terracottaSoftText),
-      TrackerType.weight =>
-        (tint: AppPalette.lavenderSoft, ink: AppPalette.lavenderSoftText),
-      TrackerType.sleep =>
-        (tint: AppPalette.skySoft, ink: AppPalette.skySoftText),
-      TrackerType.water =>
-        (tint: AppPalette.skySoft, ink: AppPalette.skySoftText),
-      TrackerType.symptoms =>
-        (tint: AppPalette.lavenderSoft, ink: AppPalette.lavenderSoftText),
-      TrackerType.mood =>
-        (tint: AppPalette.goldSoft, ink: AppPalette.goldSoftText),
-      TrackerType.energy =>
-        (tint: AppPalette.goldSoft, ink: AppPalette.goldSoftText),
-      TrackerType.sexualActivity =>
-        (tint: AppPalette.roseSoft, ink: AppPalette.roseSoftText),
-      TrackerType.ovulationTest =>
-        (tint: AppPalette.mintSoft, ink: AppPalette.mintSoftText),
-      TrackerType.breastExam =>
-        (tint: AppPalette.mintSoft, ink: AppPalette.mintSoftText),
-    };
+  TrackerType.bbt => (
+    tint: AppPalette.terracottaSoft,
+    ink: AppPalette.terracottaSoftText,
+  ),
+  TrackerType.weight => (
+    tint: AppPalette.lavenderSoft,
+    ink: AppPalette.lavenderSoftText,
+  ),
+  TrackerType.sleep => (tint: AppPalette.skySoft, ink: AppPalette.skySoftText),
+  TrackerType.water => (tint: AppPalette.skySoft, ink: AppPalette.skySoftText),
+  TrackerType.symptoms => (
+    tint: AppPalette.lavenderSoft,
+    ink: AppPalette.lavenderSoftText,
+  ),
+  TrackerType.mood => (tint: AppPalette.goldSoft, ink: AppPalette.goldSoftText),
+  TrackerType.energy => (
+    tint: AppPalette.goldSoft,
+    ink: AppPalette.goldSoftText,
+  ),
+  TrackerType.sexualActivity => (
+    tint: AppPalette.roseSoft,
+    ink: AppPalette.roseSoftText,
+  ),
+  TrackerType.ovulationTest => (
+    tint: AppPalette.mintSoft,
+    ink: AppPalette.mintSoftText,
+  ),
+  TrackerType.breastExam => (
+    tint: AppPalette.mintSoft,
+    ink: AppPalette.mintSoftText,
+  ),
+};
 
 /// The newest value for [type], formatted for the hub grid — or null when
 /// nothing has been logged.
@@ -111,8 +123,12 @@ IconData trackerIcon(TrackerType type) {
 /// and "what did I last put here" is the question a glance asks. Averages
 /// live one tap away, where they can be shown with the range they came
 /// from.
-String? trackerLatestLabel(BuildContext context, AppLocalizations l10n,
-    TrackerType type, List<DayLog> logs) {
+String? trackerLatestLabel(
+  BuildContext context,
+  AppLocalizations l10n,
+  TrackerType type,
+  List<DayLog> logs,
+) {
   final ordered = [...logs]..sort((a, b) => b.date.compareTo(a.date));
 
   String? numeric(double? Function(DayLog) valueOf, String unit, int decimals) {
@@ -127,7 +143,8 @@ String? trackerLatestLabel(BuildContext context, AppLocalizations l10n,
 
   switch (type) {
     case TrackerType.bbt:
-      final fahrenheit = context.watch<AppPreferences>().temperatureUnit ==
+      final fahrenheit =
+          context.watch<AppPreferences>().temperatureUnit ==
           TemperatureUnit.fahrenheit;
       return numeric(
         (l) => l.basalTempC == null
@@ -140,10 +157,16 @@ String? trackerLatestLabel(BuildContext context, AppLocalizations l10n,
       return numeric((l) => l.weightKg, l10n.unitKilograms, 1);
     case TrackerType.sleep:
       return numeric(
-          (l) => l.sleepMinutes?.toDouble(), l10n.unitMinutesShort, 0);
+        (l) => l.sleepMinutes?.toDouble(),
+        l10n.unitMinutesShort,
+        0,
+      );
     case TrackerType.water:
       return numeric(
-          (l) => l.waterIntakeMl?.toDouble(), l10n.unitMilliliters, 0);
+        (l) => l.waterIntakeMl?.toDouble(),
+        l10n.unitMilliliters,
+        0,
+      );
     case TrackerType.symptoms:
       final n = ordered.where((l) => l.symptoms.isNotEmpty).length;
       return n == 0 ? null : l10n.trackerEntriesCount(n);
@@ -182,10 +205,13 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
     final l10n = AppLocalizations.of(context)!;
     final logs = context.watch<CycleController>().logs;
     final cutoff = addDays(today(), -30 * _months);
-    final inRange = logs
-        .where((log) => !log.date.isBefore(cutoff) && !log.date.isAfter(today()))
-        .toList()
-      ..sort((a, b) => a.date.compareTo(b.date));
+    final inRange =
+        logs
+            .where(
+              (log) => !log.date.isBefore(cutoff) && !log.date.isAfter(today()),
+            )
+            .toList()
+          ..sort((a, b) => a.date.compareTo(b.date));
 
     return Scaffold(
       appBar: AppBar(title: Text(trackerTitle(l10n, widget.type))),
@@ -211,7 +237,10 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
   }
 
   List<Widget> _content(
-      BuildContext context, AppLocalizations l10n, List<DayLog> logs) {
+    BuildContext context,
+    AppLocalizations l10n,
+    List<DayLog> logs,
+  ) {
     switch (widget.type) {
       case TrackerType.bbt:
         final prefs = context.watch<AppPreferences>();
@@ -226,16 +255,31 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
           decimals: 1,
         );
       case TrackerType.weight:
-        return _numericSeries(l10n, logs, (log) => log.weightKg,
-            unit: l10n.unitKilograms, decimals: 1);
+        return _numericSeries(
+          l10n,
+          logs,
+          (log) => log.weightKg,
+          unit: l10n.unitKilograms,
+          decimals: 1,
+        );
       case TrackerType.sleep:
         return _numericSeries(
-            l10n, logs, (log) => log.sleepMinutes?.toDouble(),
-            unit: l10n.unitMinutesShort, decimals: 0, bars: true);
+          l10n,
+          logs,
+          (log) => log.sleepMinutes?.toDouble(),
+          unit: l10n.unitMinutesShort,
+          decimals: 0,
+          bars: true,
+        );
       case TrackerType.water:
         return _numericSeries(
-            l10n, logs, (log) => log.waterIntakeMl?.toDouble(),
-            unit: l10n.unitMilliliters, decimals: 0, bars: true);
+          l10n,
+          logs,
+          (log) => log.waterIntakeMl?.toDouble(),
+          unit: l10n.unitMilliliters,
+          decimals: 0,
+          bars: true,
+        );
       case TrackerType.symptoms:
         final labels = <Symptom, String>{
           Symptom.cramps: l10n.symptomCramps,
@@ -257,8 +301,7 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
             counts[symptom] = (counts[symptom] ?? 0) + 1;
           }
         }
-        return _countList(
-            l10n, counts.map((k, v) => MapEntry(labels[k]!, v)));
+        return _countList(l10n, counts.map((k, v) => MapEntry(labels[k]!, v)));
       case TrackerType.mood:
         final labels = <Mood, String>{
           Mood.calm: l10n.moodCalm,
@@ -274,10 +317,11 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
         };
         final counts = <Mood, int>{};
         for (final log in logs) {
-          if (log.mood != null) counts[log.mood!] = (counts[log.mood!] ?? 0) + 1;
+          if (log.mood != null) {
+            counts[log.mood!] = (counts[log.mood!] ?? 0) + 1;
+          }
         }
-        return _countList(
-            l10n, counts.map((k, v) => MapEntry(labels[k]!, v)));
+        return _countList(l10n, counts.map((k, v) => MapEntry(labels[k]!, v)));
       case TrackerType.energy:
         final labels = <EnergyLevel, String>{
           EnergyLevel.low: l10n.energyLevelLow,
@@ -291,19 +335,29 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
             counts[log.energyLevel!] = (counts[log.energyLevel!] ?? 0) + 1;
           }
         }
-        return _countList(
-            l10n, counts.map((k, v) => MapEntry(labels[k]!, v)));
+        return _countList(l10n, counts.map((k, v) => MapEntry(labels[k]!, v)));
       case TrackerType.sexualActivity:
         final days = logs.where((log) => log.sexualActivity == true).toList();
-        return _dateList(l10n, days, (_) => '');
+        return _dateList(
+          l10n,
+          days,
+          (log) => log.sexLife.entries
+              .map(
+                (e) => e.value > 1
+                    ? '${sexLifeLabel(l10n, e.key)} ×${e.value}'
+                    : sexLifeLabel(l10n, e.key),
+              )
+              .join(', '),
+        );
       case TrackerType.ovulationTest:
         final days = logs.where((log) => log.ovulationTest != null).toList();
         return _dateList(
-            l10n,
-            days,
-            (log) => log.ovulationTest == OvulationTestResult.positive
-                ? l10n.ovulationTestPositive
-                : l10n.ovulationTestNegative);
+          l10n,
+          days,
+          (log) => log.ovulationTest == OvulationTestResult.positive
+              ? l10n.ovulationTestPositive
+              : l10n.ovulationTestNegative,
+        );
       case TrackerType.breastExam:
         final labels = <BreastExamFinding, String>{
           BreastExamFinding.allNormal: l10n.breastExamAllNormal,
@@ -314,8 +368,11 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
           BreastExamFinding.discharge: l10n.breastExamDischarge,
         };
         final days = logs.where((log) => log.breastExam.isNotEmpty).toList();
-        return _dateList(l10n, days,
-            (log) => log.breastExam.map((f) => labels[f]!).join(', '));
+        return _dateList(
+          l10n,
+          days,
+          (log) => log.breastExam.map((f) => labels[f]!).join(', '),
+        );
     }
   }
 
@@ -345,12 +402,14 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
       // The numbers first. Opening "Weight" used to show an unlabelled
       // squiggle and a list of dates — everything needed to work out the
       // average, and nothing that had worked it out.
-      _StatRow(stats: [
-        (label: l10n.trackerStatAverage, value: show(mean)),
-        (label: l10n.trackerStatLowest, value: show(lo)),
-        (label: l10n.trackerStatHighest, value: show(hi)),
-        (label: l10n.trackerStatLatest, value: show(points.last.value)),
-      ]),
+      _StatRow(
+        stats: [
+          (label: l10n.trackerStatAverage, value: show(mean)),
+          (label: l10n.trackerStatLowest, value: show(lo)),
+          (label: l10n.trackerStatHighest, value: show(hi)),
+          (label: l10n.trackerStatLatest, value: show(points.last.value)),
+        ],
+      ),
       const SizedBox(height: 16),
       _Panel(
         child: Column(
@@ -360,11 +419,7 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
             // spoken summary and the per-entry list below carries the detail.
             Semantics(
               container: true,
-              label: l10n.a11yChartSummary(
-                values.length,
-                show(lo),
-                show(hi),
-              ),
+              label: l10n.a11yChartSummary(values.length, show(lo), show(hi)),
               child: ExcludeSemantics(
                 child: SizedBox(
                   height: 170,
@@ -380,13 +435,12 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
                       // precision this app exists to avoid.
                       highLabel: show(hi),
                       lowLabel: show(lo),
-                      labelStyle: Theme.of(context)
-                          .textTheme
-                          .labelSmall!
+                      labelStyle: Theme.of(context).textTheme.labelSmall!
                           .copyWith(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurfaceVariant),
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onSurfaceVariant,
+                          ),
                       textDirection: Directionality.of(context),
                     ),
                   ),
@@ -397,18 +451,24 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(fmt.format(points.first.key),
-                    style: Theme.of(context).textTheme.labelSmall),
-                Text(fmt.format(points.last.key),
-                    style: Theme.of(context).textTheme.labelSmall),
+                Text(
+                  fmt.format(points.first.key),
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+                Text(
+                  fmt.format(points.last.key),
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
               ],
             ),
           ],
         ),
       ),
       const SizedBox(height: 16),
-      Text(l10n.trackerEntriesCount(points.length),
-          style: Theme.of(context).textTheme.bodySmall),
+      Text(
+        l10n.trackerEntriesCount(points.length),
+        style: Theme.of(context).textTheme.bodySmall,
+      ),
       const SizedBox(height: 8),
       _Panel(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
@@ -422,14 +482,23 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
                 dense: true,
                 contentPadding: EdgeInsets.zero,
                 title: Text(fmt.format(p.key)),
-                trailing: Text(show(p.value),
-                    style: Theme.of(context).textTheme.titleSmall),
+                trailing: Text(
+                  show(p.value),
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
               ),
           ],
         ),
       ),
     ];
   }
+
+  // Below this many total entries, a percentage is arithmetic more than
+  // insight — "1 of 1" and "1 of 4" are both real numbers but neither says
+  // anything about a pattern yet. Matches this app's rule elsewhere
+  // (CyclePrediction, phase tips) of saying plainly when there isn't
+  // enough data rather than dressing up too little of it as certainty.
+  static const _minSampleForPercent = 5;
 
   List<Widget> _countList(AppLocalizations l10n, Map<String, int> counts) {
     if (counts.isEmpty) return [_empty(l10n)];
@@ -438,9 +507,21 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
     final max = sorted.first.value;
     final total = sorted.fold<int>(0, (a, e) => a + e.value);
     final scheme = Theme.of(context).colorScheme;
+    final lowSample = total < _minSampleForPercent;
     return [
-      Text(l10n.trackerEntriesCount(total),
-          style: Theme.of(context).textTheme.bodySmall),
+      Text(
+        l10n.trackerEntriesCount(total),
+        style: Theme.of(context).textTheme.bodySmall,
+      ),
+      if (lowSample) ...[
+        const SizedBox(height: 4),
+        Text(
+          l10n.trackerLowSampleNote,
+          style: Theme.of(
+            context,
+          ).textTheme.bodySmall?.copyWith(color: scheme.onSurfaceVariant),
+        ),
+      ],
       const SizedBox(height: 8),
       _Panel(
         child: Column(
@@ -457,25 +538,30 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
                       Row(
                         children: [
                           Expanded(
-                            child: Text(entry.key,
-                                style:
-                                    Theme.of(context).textTheme.bodyMedium),
+                            child: Text(
+                              entry.key,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
                           ),
                           const SizedBox(width: 8),
                           // The share matters more than the raw count: "8
                           // times" means nothing without knowing whether
-                          // that is most days or a handful.
-                          Text(
-                            formatPercent(context, entry.value / total),
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelMedium
-                                ?.copyWith(color: scheme.onSurfaceVariant),
-                          ),
+                          // that is most days or a handful. Below
+                          // [_minSampleForPercent] entries, showing a
+                          // percentage right next to a note saying
+                          // percentages aren't reliable yet would say two
+                          // contradictory things in the same row.
+                          if (!lowSample)
+                            Text(
+                              formatPercent(context, entry.value / total),
+                              style: Theme.of(context).textTheme.labelMedium
+                                  ?.copyWith(color: scheme.onSurfaceVariant),
+                            ),
                           const SizedBox(width: 10),
-                          Text('${entry.value}×',
-                              style:
-                                  Theme.of(context).textTheme.titleSmall),
+                          Text(
+                            '${entry.value}×',
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
                         ],
                       ),
                       const SizedBox(height: 6),
@@ -484,8 +570,9 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
                         child: LinearProgressIndicator(
                           value: entry.value / max,
                           minHeight: 8,
-                          backgroundColor:
-                              scheme.outlineVariant.withValues(alpha: 0.3),
+                          backgroundColor: scheme.outlineVariant.withValues(
+                            alpha: 0.3,
+                          ),
                         ),
                       ),
                     ],
@@ -498,13 +585,18 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
     ];
   }
 
-  List<Widget> _dateList(AppLocalizations l10n, List<DayLog> days,
-      String Function(DayLog) detail) {
+  List<Widget> _dateList(
+    AppLocalizations l10n,
+    List<DayLog> days,
+    String Function(DayLog) detail,
+  ) {
     if (days.isEmpty) return [_empty(l10n)];
     final fmt = DateFormat.yMMMd(Localizations.localeOf(context).toString());
     return [
-      Text(l10n.trackerEntriesCount(days.length),
-          style: Theme.of(context).textTheme.bodySmall),
+      Text(
+        l10n.trackerEntriesCount(days.length),
+        style: Theme.of(context).textTheme.bodySmall,
+      ),
       const SizedBox(height: 8),
       _Panel(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
@@ -515,8 +607,7 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
                 dense: true,
                 contentPadding: EdgeInsets.zero,
                 title: Text(fmt.format(log.date)),
-                subtitle:
-                    detail(log).isEmpty ? null : Text(detail(log)),
+                subtitle: detail(log).isEmpty ? null : Text(detail(log)),
               ),
           ],
         ),
@@ -534,32 +625,56 @@ class _TrackerHistoryScreenState extends State<TrackerHistoryScreen> {
   Widget _empty(AppLocalizations l10n) {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
+    // The tracker's own colour, not a generic primary-tinted circle —
+    // every tracker's empty state looked identical regardless of which one
+    // it was, breaking the identity the hub grid gives each tracker.
+    final palette = trackerPalette(widget.type);
+    final isDark = theme.brightness == Brightness.dark;
+    final ink = isDark ? palette.tint : palette.ink;
     return Padding(
       padding: const EdgeInsets.only(top: 40),
       child: Column(
         children: [
           Container(
-            width: 84,
-            height: 84,
+            width: 88,
+            height: 88,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: scheme.primary.withValues(alpha: 0.10),
+              color: isDark
+                  ? palette.tint.withValues(alpha: 0.20)
+                  : palette.tint,
+              boxShadow: isDark
+                  ? null
+                  : [
+                      BoxShadow(
+                        color: palette.tint.withValues(alpha: 0.55),
+                        blurRadius: 16,
+                        offset: const Offset(0, 6),
+                      ),
+                    ],
             ),
-            child: Icon(trackerIcon(widget.type),
-                size: 36, color: scheme.primary),
+            child: Icon(trackerIcon(widget.type), size: 38, color: ink),
           ),
-          const SizedBox(height: 18),
-          Text(trackerTitle(l10n, widget.type),
-              style: theme.textTheme.titleMedium, textAlign: TextAlign.center),
+          const SizedBox(height: 20),
+          Text(
+            trackerTitle(l10n, widget.type),
+            style: theme.textTheme.titleMedium,
+            textAlign: TextAlign.center,
+          ),
           const SizedBox(height: 6),
           Text(
             l10n.trackerHistoryEmpty,
-            style: theme.textTheme.bodyMedium
-                ?.copyWith(color: scheme.onSurfaceVariant),
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: scheme.onSurfaceVariant,
+            ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 22),
           FilledButton.icon(
+            style: FilledButton.styleFrom(
+              backgroundColor: ink,
+              foregroundColor: palette.tint,
+            ),
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute(builder: (_) => DayLogScreen(date: today())),
             ),
@@ -631,14 +746,16 @@ class _StatRow extends StatelessWidget {
                             Text(
                               stat.label,
                               style: theme.textTheme.labelSmall?.copyWith(
-                                  color: theme.colorScheme.onSurfaceVariant),
+                                color: theme.colorScheme.onSurfaceVariant,
+                              ),
                             ),
                             const SizedBox(height: 2),
                             Text(
                               stat.value,
                               style: theme.textTheme.titleMedium?.copyWith(
-                                  color: theme.colorScheme.primary,
-                                  fontWeight: FontWeight.w600),
+                                color: theme.colorScheme.primary,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ],
                         ),
@@ -686,7 +803,13 @@ class _SeriesPainter extends CustomPainter {
     final x = textDirection == TextDirection.rtl
         ? 0.0
         : size.width - painter.width;
-    painter.paint(canvas, Offset(x, (y - painter.height / 2).clamp(0.0, size.height - painter.height)));
+    painter.paint(
+      canvas,
+      Offset(
+        x,
+        (y - painter.height / 2).clamp(0.0, size.height - painter.height),
+      ),
+    );
   }
 
   @override
@@ -695,14 +818,16 @@ class _SeriesPainter extends CustomPainter {
     final min = values.reduce((a, b) => a < b ? a : b);
     final max = values.reduce((a, b) => a > b ? a : b);
     final span = (max - min).abs() < 1e-9 ? 1.0 : max - min;
-    double yFor(double v) => size.height - ((v - min) / span) * (size.height - 16) - 8;
+    double yFor(double v) =>
+        size.height - ((v - min) / span) * (size.height - 16) - 8;
 
     // The plot stops short of the trailing edge so the high/low labels have
     // somewhere to live; the whole point of adding them is that a line with
     // no scale can be read as any trend at all.
     final plotLeft = textDirection == TextDirection.rtl ? _gutter : 0.0;
-    final plotRight =
-        textDirection == TextDirection.rtl ? size.width : size.width - _gutter;
+    final plotRight = textDirection == TextDirection.rtl
+        ? size.width
+        : size.width - _gutter;
     final plotWidth = plotRight - plotLeft;
     final step = values.length == 1 ? 0.0 : plotWidth / (values.length - 1);
     double xFor(int i) =>
@@ -726,8 +851,12 @@ class _SeriesPainter extends CustomPainter {
         final x = xFor(i);
         canvas.drawRRect(
           RRect.fromRectAndRadius(
-            Rect.fromLTRB(x - barWidth / 2, yFor(values[i]), x + barWidth / 2,
-                size.height),
+            Rect.fromLTRB(
+              x - barWidth / 2,
+              yFor(values[i]),
+              x + barWidth / 2,
+              size.height,
+            ),
             const Radius.circular(3),
           ),
           paint,
@@ -760,10 +889,7 @@ class _SeriesPainter extends CustomPainter {
         ..shader = LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [
-            color.withValues(alpha: 0.22),
-            color.withValues(alpha: 0.0),
-          ],
+          colors: [color.withValues(alpha: 0.22), color.withValues(alpha: 0.0)],
         ).createShader(Rect.fromLTWH(plotLeft, 0, plotWidth, size.height)),
     );
 

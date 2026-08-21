@@ -27,12 +27,13 @@ void main() {
 
   test('an unknown action is ignored rather than crashing', () async {
     messenger.setMockMethodCallHandler(
-        channel, (call) async => 'something_added_later');
+      channel,
+      (call) async => 'something_added_later',
+    );
     expect(await const LaunchIntent().take(), isNull);
   });
 
-  test('no platform channel (iOS, tests) just means a normal launch',
-      () async {
+  test('no platform channel (iOS, tests) just means a normal launch', () async {
     // No handler registered at all.
     expect(await const LaunchIntent().take(), isNull);
   });

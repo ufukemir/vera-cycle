@@ -48,7 +48,9 @@ class NotificationPrimingStep extends StatelessWidget {
             children: [
               const Spacer(),
               const PhotoHero(
-                  asset: 'assets/photos/phone_knit.jpg', height: 190),
+                asset: 'assets/photos/phone_knit.jpg',
+                height: 190,
+              ),
               const SizedBox(height: 24),
               Text(
                 l10n.onboardingNotificationTitle,
@@ -109,9 +111,15 @@ class _NotificationMockup extends StatelessWidget {
               height: 40,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                gradient: LinearGradient(colors: [scheme.primary, scheme.secondary]),
+                gradient: LinearGradient(
+                  colors: [scheme.primary, scheme.secondary],
+                ),
               ),
-              child: const Icon(Icons.water_drop, size: 20, color: Colors.white),
+              child: const Icon(
+                Icons.water_drop,
+                size: 20,
+                color: Colors.white,
+              ),
             ),
             const SizedBox(width: 12),
             Expanded(

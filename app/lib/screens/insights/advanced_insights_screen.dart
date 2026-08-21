@@ -72,15 +72,15 @@ class _NotEnough extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Center(
-        child: Padding(
-          padding: const EdgeInsets.all(32),
-          child: Text(
-            message,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-        ),
-      );
+    child: Padding(
+      padding: const EdgeInsets.all(32),
+      child: Text(
+        message,
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.bodyMedium,
+      ),
+    ),
+  );
 }
 
 class _Report extends StatelessWidget {
@@ -96,8 +96,10 @@ class _Report extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(20),
       children: [
-        Text(l10n.advancedInsightsPatternsTitle,
-            style: theme.textTheme.titleMedium),
+        Text(
+          l10n.advancedInsightsPatternsTitle,
+          style: theme.textTheme.titleMedium,
+        ),
         const SizedBox(height: 12),
         for (final entry in insights.symptomPatterns)
           _PatternTile(
@@ -108,20 +110,28 @@ class _Report extends StatelessWidget {
           _PatternTile(label: entry.key, pattern: entry.value),
         if (insights.cycleLengthTrend.length >= 2) ...[
           const SizedBox(height: 28),
-          Text(l10n.advancedInsightsTrendTitle,
-              style: theme.textTheme.titleMedium),
+          Text(
+            l10n.advancedInsightsTrendTitle,
+            style: theme.textTheme.titleMedium,
+          ),
           const SizedBox(height: 12),
           _TrendBars(points: insights.cycleLengthTrend),
           const SizedBox(height: 8),
           Text(
-            _driftLine(l10n, insights, Localizations.localeOf(context).toString()),
+            _driftLine(
+              l10n,
+              insights,
+              Localizations.localeOf(context).toString(),
+            ),
             style: theme.textTheme.bodyMedium,
           ),
         ],
         if (insights.dominantMoodBySegment.isNotEmpty) ...[
           const SizedBox(height: 28),
-          Text(l10n.advancedInsightsMoodTitle,
-              style: theme.textTheme.titleMedium),
+          Text(
+            l10n.advancedInsightsMoodTitle,
+            style: theme.textTheme.titleMedium,
+          ),
           const SizedBox(height: 8),
           for (final entry in insights.dominantMoodBySegment.entries)
             Padding(
@@ -136,8 +146,9 @@ class _Report extends StatelessWidget {
         const SizedBox(height: 28),
         Text(
           l10n.advancedInsightsDisclaimer,
-          style: theme.textTheme.bodySmall
-              ?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+          style: theme.textTheme.bodySmall?.copyWith(
+            color: theme.colorScheme.onSurfaceVariant,
+          ),
         ),
       ],
     );
@@ -165,9 +176,9 @@ class _Report extends StatelessWidget {
 
     // Locale-formatted like every other number on this screen: "6,0" in
     // tr/de/fr, not "6.0".
-    final days = NumberFormat.decimalPattern(localeName).format(
-      double.parse(drift.abs().toStringAsFixed(1)),
-    );
+    final days = NumberFormat.decimalPattern(
+      localeName,
+    ).format(double.parse(drift.abs().toStringAsFixed(1)));
     return drift > 0
         ? l10n.advancedInsightsDriftLonger(days, cycles)
         : l10n.advancedInsightsDriftShorter(days, cycles);
@@ -194,7 +205,9 @@ class _PatternTile extends StatelessWidget {
           Text(
             pattern.isPronounced && peak != null
                 ? l10n.advancedInsightsPatternLine(
-                    label, cycleSegmentLabel(l10n, peak))
+                    label,
+                    cycleSegmentLabel(l10n, peak),
+                  )
                 : l10n.advancedInsightsNoPattern(label),
             style: theme.textTheme.bodyLarge,
           ),
@@ -204,8 +217,9 @@ class _PatternTile extends StatelessWidget {
               pattern.totalDays,
               pattern.averageCycleDay.round(),
             ),
-            style: theme.textTheme.bodySmall
-                ?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
           ),
         ],
       ),
@@ -243,8 +257,10 @@ class _TrendBars extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text('${point.length}',
-                        style: Theme.of(context).textTheme.labelSmall),
+                    Text(
+                      '${point.length}',
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
                     const SizedBox(height: 4),
                     Container(
                       height: range == 0

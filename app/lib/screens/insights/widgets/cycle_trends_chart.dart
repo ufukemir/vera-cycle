@@ -54,8 +54,7 @@ class CycleTrendsChart extends StatelessWidget {
       decoration: BoxDecoration(
         color: scheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(22),
-        border:
-            Border.all(color: scheme.outlineVariant.withValues(alpha: 0.4)),
+        border: Border.all(color: scheme.outlineVariant.withValues(alpha: 0.4)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,8 +96,9 @@ class CycleTrendsChart extends StatelessWidget {
                       (values: periodLengths, color: scheme.primary),
                     ],
                     grid: scheme.outlineVariant,
-                    labelStyle: theme.textTheme.labelSmall!
-                        .copyWith(color: scheme.onSurfaceVariant),
+                    labelStyle: theme.textTheme.labelSmall!.copyWith(
+                      color: scheme.onSurfaceVariant,
+                    ),
                     textDirection: Directionality.of(context),
                     localeName: Localizations.localeOf(context).toString(),
                   ),
@@ -110,10 +110,14 @@ class CycleTrendsChart extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(fmt.format(shown.first.startDate),
-                  style: theme.textTheme.labelSmall),
-              Text(fmt.format(shown.last.startDate),
-                  style: theme.textTheme.labelSmall),
+              Text(
+                fmt.format(shown.first.startDate),
+                style: theme.textTheme.labelSmall,
+              ),
+              Text(
+                fmt.format(shown.last.startDate),
+                style: theme.textTheme.labelSmall,
+              ),
             ],
           ),
         ],
@@ -123,8 +127,8 @@ class CycleTrendsChart extends StatelessWidget {
 
   static Color _cycleColor(ColorScheme scheme) =>
       scheme.brightness == Brightness.dark
-          ? const Color(0xFF8FB8E8)
-          : const Color(0xFF3E6D9C);
+      ? const Color(0xFF8FB8E8)
+      : const Color(0xFF3E6D9C);
 
   static double _mean(List<double> xs) =>
       xs.isEmpty ? 0 : xs.reduce((a, b) => a + b) / xs.length;
@@ -152,22 +156,28 @@ class _AverageChip extends StatelessWidget {
       decoration: BoxDecoration(
         color: isDark
             ? Color.alphaBlend(
-                tint.withValues(alpha: 0.10), theme.colorScheme.surface)
+                tint.withValues(alpha: 0.10),
+                theme.colorScheme.surface,
+              )
             : tint.withValues(alpha: 0.45),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label,
-              maxLines: 2,
-              style: theme.textTheme.labelSmall
-                  ?.copyWith(color: isDark ? tint : ink)),
+          Text(
+            label,
+            maxLines: 2,
+            style: theme.textTheme.labelSmall?.copyWith(
+              color: isDark ? tint : ink,
+            ),
+          ),
           const SizedBox(height: 4),
           Text(
             formatDecimal(context, value),
-            style: theme.textTheme.titleLarge
-                ?.copyWith(color: isDark ? tint : ink),
+            style: theme.textTheme.titleLarge?.copyWith(
+              color: isDark ? tint : ink,
+            ),
           ),
         ],
       ),
@@ -205,8 +215,9 @@ class _TrendsPainter extends CustomPainter {
     final span = (hi - lo).abs() < 1e-9 ? 1.0 : hi - lo;
 
     final left = textDirection == m.TextDirection.rtl ? 0.0 : _gutter;
-    final right =
-        textDirection == m.TextDirection.rtl ? size.width - _gutter : size.width;
+    final right = textDirection == m.TextDirection.rtl
+        ? size.width - _gutter
+        : size.width;
     final plotWidth = right - left;
     double yFor(double v) => size.height - ((v - lo) / span) * size.height;
 
@@ -215,24 +226,28 @@ class _TrendsPainter extends CustomPainter {
       canvas.drawLine(
         Offset(left, y),
         Offset(right, y),
-        Paint()..color = grid.withValues(alpha: 0.35)..strokeWidth = 1,
+        Paint()
+          ..color = grid.withValues(alpha: 0.35)
+          ..strokeWidth = 1,
       );
-      _label(canvas, formatDecimalIn(localeName, lo + span * (3 - i) / 3,
-              decimals: 0),
-          Offset(textDirection == m.TextDirection.rtl ? right + 6 : 4, y - 7));
+      _label(
+        canvas,
+        formatDecimalIn(localeName, lo + span * (3 - i) / 3, decimals: 0),
+        Offset(textDirection == m.TextDirection.rtl ? right + 6 : 4, y - 7),
+      );
     }
 
     for (final s in series) {
       if (s.values.length < 2) continue;
-      final step =
-          s.values.length == 1 ? 0.0 : plotWidth / (s.values.length - 1);
+      final step = s.values.length == 1
+          ? 0.0
+          : plotWidth / (s.values.length - 1);
       double xFor(int i) => left + i * step;
 
       // The band this series' own history calls typical.
       final mean = s.values.reduce((a, b) => a + b) / s.values.length;
-      final variance = s.values
-              .map((v) => (v - mean) * (v - mean))
-              .reduce((a, b) => a + b) /
+      final variance =
+          s.values.map((v) => (v - mean) * (v - mean)).reduce((a, b) => a + b) /
           (s.values.length - 1);
       final sd = math.sqrt(variance);
       if (sd > 0) {
@@ -258,7 +273,10 @@ class _TrendsPainter extends CustomPainter {
       );
       for (var i = 0; i < s.values.length; i++) {
         canvas.drawCircle(
-            Offset(xFor(i), yFor(s.values[i])), 4, Paint()..color = s.color);
+          Offset(xFor(i), yFor(s.values[i])),
+          4,
+          Paint()..color = s.color,
+        );
       }
     }
   }

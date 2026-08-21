@@ -24,6 +24,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get actionCancel => 'Annuler';
 
   @override
+  String get actionClear => 'Effacer';
+
+  @override
   String get actionDelete => 'Supprimer';
 
   @override
@@ -74,7 +77,28 @@ class AppLocalizationsFr extends AppLocalizations {
   String get lockScreenUseBiometrics => 'Utiliser la biométrie';
 
   @override
+  String get lockScreenUseFaceId => 'Utiliser Face ID';
+
+  @override
+  String get lockScreenUseFingerprint => 'Utiliser l\'empreinte digitale';
+
+  @override
   String get lockScreenForgotPin => 'Code PIN oublié ?';
+
+  @override
+  String get lockScreenForgotPinChoiceTitle =>
+      'Comment veux-tu le réinitialiser ?';
+
+  @override
+  String get lockScreenResetViaDevice => 'Vérifier avec cet appareil';
+
+  @override
+  String get lockScreenResetViaDeviceBody =>
+      'Tes données restent intactes. Il suffit de confirmer avec le verrouillage de ton téléphone — Face ID, empreinte ou code.';
+
+  @override
+  String get lockScreenResetViaDeviceReason =>
+      'Vérifie-toi pour définir un nouveau code';
 
   @override
   String lockScreenThrottled(int seconds) {
@@ -225,6 +249,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get navSettings => 'Réglages';
 
   @override
+  String get navReminders => 'Rappels';
+
+  @override
+  String get navProfile => 'Profil';
+
+  @override
   String get navTrack => 'Suivre';
 
   @override
@@ -350,6 +380,75 @@ class AppLocalizationsFr extends AppLocalizations {
   String get symptomDizziness => 'Vertiges';
 
   @override
+  String get symptomMigraine => 'Migraine';
+
+  @override
+  String get symptomHighFever => 'Forte fièvre';
+
+  @override
+  String get symptomNeckPain => 'Douleur au cou';
+
+  @override
+  String get symptomShoulderPain => 'Douleur à l\'épaule';
+
+  @override
+  String get symptomLimbPain => 'Douleurs aux membres';
+
+  @override
+  String get symptomMuscleAche => 'Douleurs musculaires';
+
+  @override
+  String get symptomChills => 'Frissons';
+
+  @override
+  String get symptomNightSweats => 'Sueurs nocturnes';
+
+  @override
+  String get symptomHotFlashes => 'Bouffées de chaleur';
+
+  @override
+  String get symptomWeightGain => 'Prise de poids';
+
+  @override
+  String get symptomConstipation => 'Constipation';
+
+  @override
+  String get symptomDiarrhea => 'Diarrhée';
+
+  @override
+  String get symptomIndigestion => 'Indigestion';
+
+  @override
+  String get symptomGasPain => 'Ballonnements douloureux';
+
+  @override
+  String get symptomFeelingUnwell => 'Malaise';
+
+  @override
+  String get symptomItching => 'Démangeaisons';
+
+  @override
+  String get symptomTroubleFocusing => 'Difficulté à se concentrer';
+
+  @override
+  String get symptomForgetfulness => 'Oublis';
+
+  @override
+  String get symptomGroupHead => 'Tête';
+
+  @override
+  String get symptomGroupBody => 'Corps';
+
+  @override
+  String get symptomGroupAbdomen => 'Abdomen';
+
+  @override
+  String get symptomGroupGeneral => 'Général';
+
+  @override
+  String get symptomGroupCognitive => 'Cognitif';
+
+  @override
   String get dayLogMoodLabel => 'Humeur';
 
   @override
@@ -381,6 +480,54 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get moodEmotional => 'Émotive';
+
+  @override
+  String get moodExcited => 'Excitée';
+
+  @override
+  String get moodHopeful => 'Pleine d\'espoir';
+
+  @override
+  String get moodProud => 'Fière';
+
+  @override
+  String get moodDisappointed => 'Déçue';
+
+  @override
+  String get moodConfident => 'Confiante';
+
+  @override
+  String get moodSurprised => 'Surprise';
+
+  @override
+  String get moodIndifferent => 'Indifférente';
+
+  @override
+  String get moodPeaceful => 'Apaisée';
+
+  @override
+  String get moodInLove => 'Amoureuse';
+
+  @override
+  String get moodShy => 'Timide';
+
+  @override
+  String get moodPlayful => 'Joueuse';
+
+  @override
+  String get moodExhausted => 'Épuisée';
+
+  @override
+  String get moodLonely => 'Seule';
+
+  @override
+  String get moodOverwhelmed => 'Débordée';
+
+  @override
+  String get moodGrateful => 'Reconnaissante';
+
+  @override
+  String get moodNostalgic => 'Nostalgique';
 
   @override
   String get dayLogNoteLabel => 'Note';
@@ -558,6 +705,86 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsLanguageUrdu => 'اردو';
 
   @override
+  String get settingsLanguageDutch => 'Nederlands';
+
+  @override
+  String get settingsLanguageSwedish => 'Svenska';
+
+  @override
+  String get settingsLanguageNorwegian => 'Norsk bokmål';
+
+  @override
+  String get settingsLanguageDanish => 'Dansk';
+
+  @override
+  String get settingsLanguagePolish => 'Polski';
+
+  @override
+  String get settingsLanguageUkrainian => 'Українська';
+
+  @override
+  String get settingsLanguageCzech => 'Čeština';
+
+  @override
+  String get settingsLanguageHungarian => 'Magyar';
+
+  @override
+  String get settingsLanguageRomanian => 'Română';
+
+  @override
+  String get settingsLanguageFinnish => 'Suomi';
+
+  @override
+  String get settingsLanguageGreek => 'Ελληνικά';
+
+  @override
+  String get settingsLanguageMalay => 'Bahasa Melayu';
+
+  @override
+  String get tourSkip => 'Passer';
+
+  @override
+  String get tourNext => 'Suivant';
+
+  @override
+  String get tourStart => 'Commencer';
+
+  @override
+  String get tourHomeTitle => 'Accueil';
+
+  @override
+  String get tourHomeBody =>
+      'Vois où tu en es aujourd\'hui en un coup d\'œil — ton jour de cycle, le temps avant ta fenêtre estimée, et ta compagne sont toujours là.';
+
+  @override
+  String get tourCalendarTitle => 'Calendrier';
+
+  @override
+  String get tourCalendarBody =>
+      'Vois tes cycles passés et à venir sur le calendrier. Touche un jour pour ouvrir son journal.';
+
+  @override
+  String get tourTrackTitle => 'Enregistrer';
+
+  @override
+  String get tourTrackBody =>
+      'Le bouton + au milieu ouvre le journal du jour depuis n\'importe où — flux, symptômes, humeur et plus.';
+
+  @override
+  String get tourRemindersTitle => 'Rappels';
+
+  @override
+  String get tourRemindersBody =>
+      'Configure des rappels pour tes prochaines règles, tes médicaments ou boire de l\'eau — tout reste sur ton téléphone et ne va nulle part ailleurs.';
+
+  @override
+  String get tourProfileTitle => 'Profil';
+
+  @override
+  String get tourProfileBody =>
+      'Retrouve ici tes tendances, tout ce que tu suis, et tes réglages.';
+
+  @override
   String get settingsWeekStartLabel => 'La semaine commence le';
 
   @override
@@ -582,6 +809,324 @@ class AppLocalizationsFr extends AppLocalizations {
   String get remindersScreenTitle => 'Rappels';
 
   @override
+  String get reminderDetailNotification => 'Notification';
+
+  @override
+  String get reminderDetailAlert => 'Alerte';
+
+  @override
+  String get reminderDetailAlertToday => 'Le jour même';
+
+  @override
+  String get reminderDetailTime => 'Heure';
+
+  @override
+  String get reminderDetailMessage => 'Message';
+
+  @override
+  String get reminderDetailMessageEditTitle => 'Modifier le message';
+
+  @override
+  String get reminderDetailMessageHint => 'Écris ton propre message';
+
+  @override
+  String reminderDetailAlertDaysBefore(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count jours plus tôt',
+      one: '$count jour plus tôt',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String optionsShowMore(int count) {
+    return '+$count de plus';
+  }
+
+  @override
+  String get optionsShowLess => 'Afficher moins';
+
+  @override
+  String get trackerHistoryEntry => 'Historique';
+
+  @override
+  String get actionSend => 'Envoyer';
+
+  @override
+  String get actionRemove => 'Retirer';
+
+  @override
+  String get feedbackEntry => 'Retour';
+
+  @override
+  String get cloudBackupEntry => 'Sauvegarde avec compte';
+
+  @override
+  String get cloudBackupTitle => 'Sauvegarde avec compte';
+
+  @override
+  String get cloudBackupNotConfiguredTitle =>
+      'Pas encore disponible dans cette version';
+
+  @override
+  String get cloudBackupNotConfiguredBody =>
+      'La sauvegarde cloud nécessite un service de comptes qui n\'a pas encore été configuré pour cette version. Rien ici ne peut être utilisé avant.';
+
+  @override
+  String get cloudBackupIntro1Title => 'Ne perdez jamais votre historique';
+
+  @override
+  String get cloudBackupIntro1Body =>
+      'Votre historique de cycle reste en sécurité même si vous perdez votre téléphone ou en changez.';
+
+  @override
+  String get cloudBackupIntro2Title => 'Vous seule pouvez l\'ouvrir';
+
+  @override
+  String get cloudBackupIntro2Body =>
+      'Votre sauvegarde est chiffrée avec un mot de passe avant même de quitter votre téléphone — nous ne pouvons pas la lire, et personne d\'autre non plus.';
+
+  @override
+  String get cloudBackupIntro3Title => 'Restaurez en quelques secondes';
+
+  @override
+  String get cloudBackupIntro3Body =>
+      'Connectez-vous sur un nouvel appareil et récupérez votre historique avec le même mot de passe.';
+
+  @override
+  String get cloudBackupSignedInTitle => 'Connecté';
+
+  @override
+  String get cloudBackupUploadButton => 'Sauvegarder maintenant';
+
+  @override
+  String get cloudBackupDownloadButton => 'Restaurer depuis le cloud';
+
+  @override
+  String get cloudBackupUploadSuccess => 'Sauvegardé sur votre compte';
+
+  @override
+  String get cloudBackupNoBackupFound =>
+      'Aucune sauvegarde cloud trouvée pour ce compte.';
+
+  @override
+  String get partnerModeEntry => 'Mode Partenaire';
+
+  @override
+  String get partnerModeTitle => 'Mode Partenaire';
+
+  @override
+  String get partnerModeNotConfiguredTitle =>
+      'Pas encore disponible dans cette version';
+
+  @override
+  String get partnerModeNotConfiguredBody =>
+      'Le Mode Partenaire nécessite un service de comptes qui n\'a pas encore été configuré pour cette version. Rien ici ne peut être utilisé avant.';
+
+  @override
+  String get partnerModeHeroTitle => 'Partagez un peu, à vos conditions';
+
+  @override
+  String get partnerModeHeroBody =>
+      'Associez-vous à votre partenaire et ne partagez que ce que vous activez ci-dessous — jamais tout votre historique, jamais automatiquement.';
+
+  @override
+  String get partnerModeSignInGoogle => 'Continuer avec Google';
+
+  @override
+  String get partnerModeSignInApple => 'Continuer avec Apple';
+
+  @override
+  String get partnerModeFaqTitle => 'Avant de vous connecter';
+
+  @override
+  String get partnerModeFaq1Q => 'Que verra vraiment mon partenaire ?';
+
+  @override
+  String get partnerModeFaq1A =>
+      'Seulement les champs que vous activez dans le Mode Partenaire, et seulement votre instantané actuel — jamais votre historique enregistré, ni rien que vous n\'ayez explicitement partagé.';
+
+  @override
+  String get partnerModeFaq2Q => 'Puis-je désactiver cela plus tard ?';
+
+  @override
+  String get partnerModeFaq2A =>
+      'Oui. La dissociation met fin au partage immédiatement pour vous deux, et vous pouvez désactiver n\'importe quel réglage à tout moment sans vous dissocier.';
+
+  @override
+  String get partnerModeFaq3Q =>
+      'Mon partenaire a-t-il besoin de cette appli ?';
+
+  @override
+  String get partnerModeFaq3A =>
+      'Oui — il se connecte de la même façon et s\'associe avec un code que vous lui envoyez.';
+
+  @override
+  String get partnerModeNotPairedTitle => 'Pas encore associé';
+
+  @override
+  String get partnerModeNotPairedBody =>
+      'Invitez votre partenaire avec un code à usage unique, ou entrez le code qu\'il vous a envoyé.';
+
+  @override
+  String get partnerModeInviteButton => 'Inviter mon partenaire';
+
+  @override
+  String get partnerModeEnterCodeButton => 'Entrer un code';
+
+  @override
+  String get partnerModeSignOut => 'Se déconnecter';
+
+  @override
+  String get partnerModePairedTitle => 'Associé';
+
+  @override
+  String get partnerModePairedBody =>
+      'Vous et votre partenaire êtes connectés. Le partage reste limité à ce que vous activez ci-dessous.';
+
+  @override
+  String get partnerModeShareSectionTitle => 'Ce que vous partagez';
+
+  @override
+  String get partnerModeShareCyclePhase => 'Phase et jour du cycle';
+
+  @override
+  String get partnerModeShareMood => 'Humeur du jour';
+
+  @override
+  String get partnerModeShareSymptoms => 'Symptômes du jour';
+
+  @override
+  String get partnerModeShareHighDesire => 'Envie de proximité aujourd\'hui';
+
+  @override
+  String get partnerModeShareNow => 'Partager maintenant';
+
+  @override
+  String get partnerModeShareSuccess => 'Partagé avec votre partenaire';
+
+  @override
+  String get partnerModeUnpair => 'Dissocier';
+
+  @override
+  String get partnerModeUnpairConfirmTitle =>
+      'Se dissocier de votre partenaire ?';
+
+  @override
+  String get partnerModeUnpairConfirmBody =>
+      'Cela met fin au partage immédiatement pour vous deux. Vous pourrez vous réassocier plus tard avec un nouveau code.';
+
+  @override
+  String get partnerModePartnerSnapshotEmpty =>
+      'Votre partenaire n\'a encore rien partagé.';
+
+  @override
+  String get partnerModeErrorNotConfigured =>
+      'Le Mode Partenaire n\'est pas encore configuré dans cette version.';
+
+  @override
+  String get partnerModeErrorCodeNotFound =>
+      'Ce code est introuvable. Vérifiez-le et réessayez.';
+
+  @override
+  String get partnerModeErrorCodeExpired =>
+      'Ce code a expiré. Demandez-en un nouveau.';
+
+  @override
+  String get partnerModeErrorCodeIsOwn =>
+      'C\'est votre propre code — demandez le sien à votre partenaire.';
+
+  @override
+  String get partnerModeErrorNotSignedIn => 'Connectez-vous d\'abord.';
+
+  @override
+  String get partnerModeErrorUnknown =>
+      'Un problème est survenu. Veuillez réessayer.';
+
+  @override
+  String get partnerModeInviteTitle => 'Invitez votre partenaire';
+
+  @override
+  String get partnerModeInviteBody =>
+      'Envoyez ce code à votre partenaire. Il l\'entrera dans sa propre appli pour s\'associer à vous.';
+
+  @override
+  String get partnerModeInviteExpiry => 'Valable 7 jours';
+
+  @override
+  String get partnerModeInviteShare => 'Partager le code';
+
+  @override
+  String partnerModeInviteMessage(String code) {
+    return 'Voici mon code d\'association Vera : $code';
+  }
+
+  @override
+  String get partnerModeEnterTitle => 'Entrer un code';
+
+  @override
+  String get partnerModeEnterBody =>
+      'Entrez le code que votre partenaire vous a envoyé.';
+
+  @override
+  String get partnerModeEnterHint => 'Code à 6 caractères';
+
+  @override
+  String get partnerModeEnterSubmit => 'S\'associer';
+
+  @override
+  String get homeInvitePartnerTitle => 'Partagez avec votre partenaire';
+
+  @override
+  String get homeInvitePartnerBody =>
+      'Associez-vous et ne partagez que ce que vous choisissez — votre historique reste le vôtre.';
+
+  @override
+  String get homeInvitePartnerCta => 'Configurer le Mode Partenaire';
+
+  @override
+  String get feedbackTitle => 'Qu\'est-ce qui ne t\'a pas plu ?';
+
+  @override
+  String get feedbackSubtitle => 'Choisis un sujet, et détaille si tu veux.';
+
+  @override
+  String get feedbackCategoryPredictions => 'Prédictions';
+
+  @override
+  String get feedbackCategoryBackup => 'Sauvegarde et restauration';
+
+  @override
+  String get feedbackCategorySubscription => 'Abonnement';
+
+  @override
+  String get feedbackCategoryAds => 'Publicités';
+
+  @override
+  String get feedbackCategoryDesign => 'Design';
+
+  @override
+  String get feedbackCategoryTranslation => 'Traduction';
+
+  @override
+  String get feedbackCategoryOther => 'Autre';
+
+  @override
+  String get feedbackDescriptionLabel => 'Dis-nous en plus (facultatif)';
+
+  @override
+  String get feedbackDescriptionHint =>
+      'Que s\'est-il passé ? En appuyant sur Envoyer, tu choisis où le partager — ton appli mail ou ailleurs.';
+
+  @override
+  String get feedbackAttachPhoto => 'Ajouter une photo';
+
+  @override
+  String get feedbackPhotoAttached => 'Photo ajoutée';
+
+  @override
   String get remindersGroupCycle => 'Règles et fertilité';
 
   @override
@@ -591,7 +1136,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get remindersGroupLifestyle => 'Mode de vie';
 
   @override
-  String get remindersGroupAppointment => 'Rendez-vous';
+  String get remindersGroupAppointment => 'Rendez-vous médicaux';
 
   @override
   String get settingsRemindersPeriodEndLabel =>
@@ -604,7 +1149,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsRemindersWaterLabel => 'Rappel d\'eau';
 
   @override
-  String get settingsRemindersAppointmentLabel => 'Rappel de rendez-vous';
+  String get settingsRemindersAppointmentLabel =>
+      'Rappel de rendez-vous médical';
 
   @override
   String get settingsRemindersAppointmentSet => 'Définir date et heure';
@@ -636,6 +1182,22 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get settingsPrivacyEntry => 'Confidentialité';
+
+  @override
+  String get settingsRateEntry => 'Notez-nous';
+
+  @override
+  String get rateAppTitle => 'Vera te convient-elle ?';
+
+  @override
+  String get rateAppBody =>
+      'Si oui, quelques secondes pour la noter dans le store aident d\'autres personnes cherchant la même chose à la trouver.';
+
+  @override
+  String get rateAppCta => 'Noter Vera';
+
+  @override
+  String get rateAppDismiss => 'Plus tard';
 
   @override
   String get settingsDeleteAllData => 'Supprimer toutes les données';
@@ -719,10 +1281,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get reminderWaterBody => 'Un petit rappel pour boire de l\'eau.';
 
   @override
-  String get reminderAppointmentTitle => 'Rendez-vous à venir';
+  String get reminderAppointmentTitle => 'Rendez-vous médical à venir';
 
   @override
-  String get reminderAppointmentBody => 'Tu as un rendez-vous à venir.';
+  String get reminderAppointmentBody => 'Tu as un rendez-vous médical à venir.';
 
   @override
   String get settingsExportEntry => 'Exporter et sauvegarder';
@@ -1321,6 +1883,10 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String get trackerLowSampleNote =>
+      'Avec aussi peu d\'entrées, les pourcentages ne sont pas encore fiables — ils s\'affineront à mesure que tu en ajoutes.';
+
+  @override
   String get assistantTyping => 'Vera écrit…';
 
   @override
@@ -1419,6 +1985,33 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get pregnancyDisclaimer =>
       'Les dates sont estimées à partir de tes dernières règles selon la règle standard des 280 jours. Une échographie donne une date plus précise et une ovulation tardive décale ces chiffres — ceci est une information, pas un suivi médical.';
+
+  @override
+  String get pregnancySizeLabel => 'Taille de bébé';
+
+  @override
+  String get pregnancySizeUnder5 => 'Graine de pavot (~2 mm)';
+
+  @override
+  String get pregnancySizeUnder9 => 'Myrtille (~1.6 cm)';
+
+  @override
+  String get pregnancySizeUnder13 => 'Citron vert (~5.4 cm)';
+
+  @override
+  String get pregnancySizeUnder20 => 'Avocat (~11.6 cm)';
+
+  @override
+  String get pregnancySizeUnder28 => 'Mangue (~30 cm)';
+
+  @override
+  String get pregnancySizeUnder34 => 'Ananas (~44 cm)';
+
+  @override
+  String get pregnancySizeUnder38 => 'Melon (~46 cm)';
+
+  @override
+  String get pregnancySizeTerm => 'Petite pastèque (~51 cm)';
 
   @override
   String get pregnancyNoteUnder5 =>
@@ -1945,13 +2538,34 @@ class AppLocalizationsFr extends AppLocalizations {
   String get homeThemeBloom => 'Floraison';
 
   @override
+  String get homeThemeOcean => 'Océan';
+
+  @override
+  String get homeThemeAutumn => 'Automne';
+
+  @override
+  String get homeThemeNight => 'Nuit';
+
+  @override
   String get mascotStar => 'Étoile';
 
   @override
   String get mascotLeaf => 'Feuille';
 
   @override
+  String get mascotCat => 'Chat';
+
+  @override
+  String get mascotRabbit => 'Lapin';
+
+  @override
+  String get mascotBird => 'Oiseau';
+
+  @override
   String get tipDetailWhatsHappening => 'Ce qui se passe dans ton corps';
+
+  @override
+  String get tipDetailGeneralHeading => 'Suggestions générales';
 
   @override
   String get tipDetailDisclaimer =>
@@ -2016,4 +2630,47 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get tipNutritionDetailUnknown =>
       'Quelle que soit la phase, ce sont les mêmes choses qui aident le plus : des repas réguliers, assez de protéines, beaucoup de légumes, assez d\'eau et des aliments riches en fer. Comme le saignement coûte du fer, il suffit d\'y prêter un peu plus attention ces jours-là — inutile d\'avoir une alimentation différente chaque semaine du mois. Manger à des heures à peu près constantes fait plus pour une énergie stable que n\'importe quel aliment pris isolément, et aucun ingrédient n\'a besoin d\'être supprimé pour qu\'un cycle soit sain. Une fois quelques cycles enregistrés, des suggestions par phase apparaîtront ici.';
+
+  @override
+  String get tipSleepLabel => 'Sommeil';
+
+  @override
+  String get tipSleepMenstrual =>
+      'Les crampes et l\'inconfort peuvent fragmenter le sommeil ; une douche chaude ou une bouillotte avant de dormir peut aider.';
+
+  @override
+  String get tipSleepFollicular =>
+      'Avec l\'énergie qui augmente, beaucoup se sentent plus éveillées — le besoin de sommeil ne diminue pas vraiment pour autant.';
+
+  @override
+  String get tipSleepFertile =>
+      'La légère hausse de température autour de l\'ovulation peut rendre l\'endormissement un peu plus difficile ; une chambre plus fraîche peut compenser.';
+
+  @override
+  String get tipSleepLuteal =>
+      'La progestérone élève légèrement la température au repos et peut alléger le sommeil profond ; une chambre fraîche et sombre et un coucher régulier aident le plus ici.';
+
+  @override
+  String get tipSleepUnknown =>
+      'La qualité du sommeil varie souvent au fil du cycle — généralement plus fragile juste avant et pendant les règles. Un coucher régulier reste la base la plus fiable, quelle que soit la phase.';
+
+  @override
+  String get tipSleepDetailMenstrual =>
+      'Pendant les règles, le sommeil est souvent plus fragmenté — crampes, inconfort et, pour certaines, des passages aux toilettes plus fréquents peuvent réveiller la nuit. Les prostaglandines, responsables aussi des crampes, y jouent probablement un rôle. Une douche chaude, une bouillotte ou des étirements doux avant de dormir peuvent soulager les crampes. En cas d\'antidouleur, le prendre pour que son effet couvre le début de la nuit peut protéger le premier sommeil. Si le sommeil reste difficile, c\'est normal — cela s\'atténue généralement avec la phase.';
+
+  @override
+  String get tipSleepDetailFollicular =>
+      'Avec la hausse d\'œstrogène, beaucoup se sentent plus alertes et énergiques, ce qui peut donner l\'impression de moins avoir besoin de sommeil. Ce n\'est pas tout à fait exact — l\'éveil vient simplement plus facilement. Garder un coucher régulier ici paie plus tard, quand le sommeil devient plus fragile dans d\'autres phases. C\'est aussi une fenêtre relativement facile pour essayer une nouvelle routine de sommeil.';
+
+  @override
+  String get tipSleepDetailFertile =>
+      'La légère hausse de température autour de l\'ovulation peut rendre l\'endormissement un peu plus difficile, le corps voulant naturellement se refroidir avant de dormir. Une chambre plus fraîche, une couverture plus légère ou une douche chaude avant de dormir peuvent compenser. Celles qui remarquent plus de désir ou d\'énergie sociale dans cette fenêtre peuvent aussi se coucher plus tard par choix — un schéma à observer, pas un problème à résoudre.';
+
+  @override
+  String get tipSleepDetailLuteal =>
+      'La progestérone qui augmente après l\'ovulation élève légèrement la température au repos, ce qui peut alléger le sommeil profond — parfois comme une bouffée de chaleur, parfois juste un sommeil moins réparateur. À l\'approche des règles, la tension prémenstruelle peut s\'y ajouter. Une chambre fraîche et sombre, moins d\'écran avant de dormir et un coucher régulier aident le plus ici. Si le sommeil reste difficile, ce n\'est pas un échec — c\'est une part attendue de cette phase.';
+
+  @override
+  String get tipSleepDetailUnknown =>
+      'Il n\'y a pas encore assez de données pour dire dans quelle phase tu es, mais la qualité du sommeil qui varie au fil du cycle est un schéma courant — généralement plus fragile juste avant et pendant les règles, plus stable dans la première moitié. La base la plus fiable, quelle que soit la phase : des horaires de coucher et lever réguliers, moins d\'écran avant de dormir, et une chambre fraîche et sombre. Après quelques cycles enregistrés, des schémas plus précis apparaîtront ici.';
 }

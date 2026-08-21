@@ -35,7 +35,8 @@ class CycleRing extends StatefulWidget {
   State<CycleRing> createState() => _CycleRingState();
 }
 
-class _CycleRingState extends State<CycleRing> with SingleTickerProviderStateMixin {
+class _CycleRingState extends State<CycleRing>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _reveal;
 
@@ -81,21 +82,21 @@ class _CycleRingState extends State<CycleRing> with SingleTickerProviderStateMix
           ? null
           : l10n.a11yCycleRing(widget.cycleDay!, widget.cycleLength),
       child: AnimatedBuilder(
-      animation: _reveal,
-      builder: (context, _) {
-        return CustomPaint(
-          painter: _RingPainter(
-            fraction: targetFraction * _reveal.value,
-            trackColor: scheme.outlineVariant.withValues(alpha: 0.35),
-            gradientColors: [scheme.primary, scheme.secondary],
-          ),
-          child: SizedBox(
-            width: 224,
-            height: 224,
-            child: Center(child: widget.child),
-          ),
-        );
-      },
+        animation: _reveal,
+        builder: (context, _) {
+          return CustomPaint(
+            painter: _RingPainter(
+              fraction: targetFraction * _reveal.value,
+              trackColor: scheme.outlineVariant.withValues(alpha: 0.35),
+              gradientColors: [scheme.primary, scheme.secondary],
+            ),
+            child: SizedBox(
+              width: 224,
+              height: 224,
+              child: Center(child: widget.child),
+            ),
+          );
+        },
       ),
     );
   }
@@ -139,7 +140,13 @@ class _RingPainter extends CustomPainter {
       ..strokeWidth = _strokeWidth
       ..strokeCap = StrokeCap.round;
 
-    canvas.drawArc(rect, -math.pi / 2, 2 * math.pi * fraction, false, progressPaint);
+    canvas.drawArc(
+      rect,
+      -math.pi / 2,
+      2 * math.pi * fraction,
+      false,
+      progressPaint,
+    );
   }
 
   @override

@@ -97,9 +97,11 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
                 children: [
                   Icon(_biometricIcon, size: 64),
                   const SizedBox(height: 16),
-                  Text(l10n.pinSetupBiometricTitle,
-                      style: Theme.of(context).textTheme.headlineSmall,
-                      textAlign: TextAlign.center),
+                  Text(
+                    l10n.pinSetupBiometricTitle,
+                    style: Theme.of(context).textTheme.headlineSmall,
+                    textAlign: TextAlign.center,
+                  ),
                   const SizedBox(height: 12),
                   Text(l10n.pinSetupBiometricBody, textAlign: TextAlign.center),
                   const SizedBox(height: 24),
@@ -137,15 +139,15 @@ class _PinSetupScreenState extends State<PinSetupScreen> {
                 ),
                 if (_error != null) ...[
                   const SizedBox(height: 8),
-                  Text(_error!,
-                      style: TextStyle(color: Theme.of(context).colorScheme.error)),
+                  Text(
+                    _error!,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.error,
+                    ),
+                  ),
                 ],
                 const SizedBox(height: 24),
-                PinPad(
-                  key: _pinPadKey,
-                  length: 6,
-                  onSubmit: _onDigitsEntered,
-                ),
+                PinPad(key: _pinPadKey, length: 6, onSubmit: _onDigitsEntered),
               ],
             ),
           ),

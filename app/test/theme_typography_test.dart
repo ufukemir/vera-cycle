@@ -10,40 +10,56 @@ import 'package:flutter_test/flutter_test.dart';
 /// brand sans simply never appeared. Pin both families so a future
 /// refactor cannot quietly drop one again.
 void main() {
-  for (final build in {'light': buildAppTheme, 'dark': buildDarkAppTheme}.entries) {
-    test('${build.key} theme uses the bundled families, not the platform ones',
-        () {
-      final text = build.value().textTheme;
+  for (final build in {
+    'light': buildAppTheme,
+    'dark': buildDarkAppTheme,
+  }.entries) {
+    test(
+      '${build.key} theme uses the bundled families, not the platform ones',
+      () {
+        final text = build.value().textTheme;
 
-      const sansStyles = ['bodyLarge', 'bodyMedium', 'bodySmall', 'labelLarge',
-          'labelMedium', 'labelSmall', 'titleMedium', 'titleSmall'];
-      final resolved = <String, String?>{
-        'bodyLarge': text.bodyLarge?.fontFamily,
-        'bodyMedium': text.bodyMedium?.fontFamily,
-        'bodySmall': text.bodySmall?.fontFamily,
-        'labelLarge': text.labelLarge?.fontFamily,
-        'labelMedium': text.labelMedium?.fontFamily,
-        'labelSmall': text.labelSmall?.fontFamily,
-        'titleMedium': text.titleMedium?.fontFamily,
-        'titleSmall': text.titleSmall?.fontFamily,
-      };
-      for (final name in sansStyles) {
-        expect(resolved[name], 'Quicksand',
-            reason: '$name fell back to ${resolved[name]}');
-      }
+        const sansStyles = [
+          'bodyLarge',
+          'bodyMedium',
+          'bodySmall',
+          'labelLarge',
+          'labelMedium',
+          'labelSmall',
+          'titleMedium',
+          'titleSmall',
+        ];
+        final resolved = <String, String?>{
+          'bodyLarge': text.bodyLarge?.fontFamily,
+          'bodyMedium': text.bodyMedium?.fontFamily,
+          'bodySmall': text.bodySmall?.fontFamily,
+          'labelLarge': text.labelLarge?.fontFamily,
+          'labelMedium': text.labelMedium?.fontFamily,
+          'labelSmall': text.labelSmall?.fontFamily,
+          'titleMedium': text.titleMedium?.fontFamily,
+          'titleSmall': text.titleSmall?.fontFamily,
+        };
+        for (final name in sansStyles) {
+          expect(
+            resolved[name],
+            'Quicksand',
+            reason: '$name fell back to ${resolved[name]}',
+          );
+        }
 
-      // The serif is the deliberate exception, on headlines only.
-      for (final style in [
-        text.displayLarge,
-        text.displayMedium,
-        text.displaySmall,
-        text.headlineLarge,
-        text.headlineMedium,
-        text.headlineSmall,
-        text.titleLarge,
-      ]) {
-        expect(style?.fontFamily, 'Fraunces');
-      }
-    });
+        // The serif is the deliberate exception, on headlines only.
+        for (final style in [
+          text.displayLarge,
+          text.displayMedium,
+          text.displaySmall,
+          text.headlineLarge,
+          text.headlineMedium,
+          text.headlineSmall,
+          text.titleLarge,
+        ]) {
+          expect(style?.fontFamily, 'Fraunces');
+        }
+      },
+    );
   }
 }

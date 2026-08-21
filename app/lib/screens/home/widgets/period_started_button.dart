@@ -74,14 +74,16 @@ class _PeriodStartedButtonState extends State<PeriodStartedButton>
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return ScaleTransition(
-      scale: Tween(begin: 1.0, end: 1.08)
-          .chain(CurveTween(curve: Curves.easeOutBack))
-          .animate(_pulse),
+      scale: Tween(
+        begin: 1.0,
+        end: 1.08,
+      ).chain(CurveTween(curve: Curves.easeOutBack)).animate(_pulse),
       child: FilledButton.icon(
         onPressed: () => _handleTap(context),
         icon: AnimatedSwitcher(
           duration: const Duration(milliseconds: 200),
-          transitionBuilder: (child, anim) => ScaleTransition(scale: anim, child: child),
+          transitionBuilder: (child, anim) =>
+              ScaleTransition(scale: anim, child: child),
           child: Icon(
             _justLogged ? Icons.check_circle : Icons.water_drop_outlined,
             key: ValueKey(_justLogged),

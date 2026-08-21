@@ -17,31 +17,30 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// fake, so the PIN-setup step of onboarding can actually be exercised.
 void _mockSecureStorageChannel() {
   final store = <String, String>{};
-  const channel =
-      MethodChannel('plugins.it_nomads.com/flutter_secure_storage');
+  const channel = MethodChannel('plugins.it_nomads.com/flutter_secure_storage');
   TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
       .setMockMethodCallHandler(channel, (call) async {
-    final args = (call.arguments as Map?)?.cast<String, dynamic>();
-    switch (call.method) {
-      case 'write':
-        store[args!['key'] as String] = args['value'] as String;
-        return null;
-      case 'read':
-        return store[args!['key'] as String];
-      case 'containsKey':
-        return store.containsKey(args!['key'] as String);
-      case 'delete':
-        store.remove(args!['key'] as String);
-        return null;
-      case 'deleteAll':
-        store.clear();
-        return null;
-      case 'readAll':
-        return store;
-      default:
-        return null;
-    }
-  });
+        final args = (call.arguments as Map?)?.cast<String, dynamic>();
+        switch (call.method) {
+          case 'write':
+            store[args!['key'] as String] = args['value'] as String;
+            return null;
+          case 'read':
+            return store[args!['key'] as String];
+          case 'containsKey':
+            return store.containsKey(args!['key'] as String);
+          case 'delete':
+            store.remove(args!['key'] as String);
+            return null;
+          case 'deleteAll':
+            store.clear();
+            return null;
+          case 'readAll':
+            return store;
+          default:
+            return null;
+        }
+      });
 }
 
 /// Same reasoning as [_mockSecureStorageChannel], for `local_auth`'s
@@ -54,21 +53,22 @@ void _mockLocalAuthChannel() {
   const channel = MethodChannel('plugins.flutter.io/local_auth');
   TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
       .setMockMethodCallHandler(channel, (call) async {
-    switch (call.method) {
-      case 'isDeviceSupported':
-        return false;
-      case 'getAvailableBiometrics':
-        return <String>[];
-      default:
-        return null;
-    }
-  });
+        switch (call.method) {
+          case 'isDeviceSupported':
+            return false;
+          case 'getAvailableBiometrics':
+            return <String>[];
+          default:
+            return null;
+        }
+      });
 }
 
 /// Walks a fresh install through every screen of the expanded onboarding
 /// flow (goal → birth year → 3 cycle questions → 2 conversational
-/// questions → PMS multi-select → notification priming → PIN setup →
-/// building-plan animation) and asserts it lands cleanly on the home shell.
+/// questions → PMS multi-select → notification priming → PIN setup → app
+/// tour → building-plan animation) and asserts it lands cleanly on the
+/// home shell.
 ///
 /// This exists because several of these steps (GoalStep,
 /// ThreeChoiceQuestionStep, NotificationPrimingStep, BuildingPlanStep) were
@@ -78,17 +78,17 @@ void _mockLocalAuthChannel() {
 void main() {
   final l10n = AppLocalizationsEn();
 
-  testWidgets('fresh install reaches the home shell via every new step',
-      (tester) async {
+  testWidgets('fresh install reaches the home shell via every new step', (
+    tester,
+  ) async {
     _mockSecureStorageChannel();
     _mockLocalAuthChannel();
     SharedPreferences.setMockInitialValues({});
     final preferences = await AppPreferences.load();
 
-    await tester.pumpWidget(MainApp(
-      preferences: preferences,
-      repository: InMemoryDayLogRepository(),
-    ));
+    await tester.pumpWidget(
+      MainApp(preferences: preferences, repository: InMemoryDayLogRepository()),
+    );
     await tester.pumpAndSettle();
 
     // 1. Welcome/privacy.
@@ -162,14 +162,26 @@ void main() {
     }
     // With both platform channels mocked, canUseBiometrics() resolves to
     // false cleanly — the biometric-offer stage is skipped and onComplete
-    // fires directly, straight into BuildingPlanStep's ~2.2s checklist.
-    // Bounded pumps rather than pumpAndSettle: the home screen hosts an
-    // endlessly-repeating mascot animation, so the tree never "settles".
+    // fires directly, straight into the app tour.
+    await tester.pumpAndSettle();
+
+    // 12. App tour — skip it, the same shortcut a real user has, to reach
+    // the home shell without stepping through all five pages. A single
+    // pump, not pumpAndSettle: skipping goes straight into BuildingPlanStep
+    // and from there into Home's endlessly-repeating mascot animation, so
+    // "settled" never arrives — same reason the loop below exists.
+    expect(find.text(l10n.tourHomeTitle), findsOneWidget);
+    await tester.tap(find.text(l10n.tourSkip));
+    await tester.pump();
+
+    // BuildingPlanStep's ~2.2s checklist follows. Bounded pumps rather than
+    // pumpAndSettle: the home screen hosts an endlessly-repeating mascot
+    // animation, so the tree never "settles".
     for (var i = 0; i < 14; i++) {
       await tester.pump(const Duration(milliseconds: 300));
     }
 
-    // 12. Home shell.
+    // 13. Home shell.
     expect(find.byType(VeraBottomBar), findsOneWidget);
     await expectLater(
       find.byType(MaterialApp),

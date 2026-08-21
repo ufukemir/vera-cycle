@@ -24,6 +24,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get actionCancel => 'إلغاء';
 
   @override
+  String get actionClear => 'مسح';
+
+  @override
   String get actionDelete => 'حذف';
 
   @override
@@ -73,7 +76,26 @@ class AppLocalizationsAr extends AppLocalizations {
   String get lockScreenUseBiometrics => 'استخدام البصمة الحيوية';
 
   @override
+  String get lockScreenUseFaceId => 'استخدام Face ID';
+
+  @override
+  String get lockScreenUseFingerprint => 'استخدام بصمة الإصبع';
+
+  @override
   String get lockScreenForgotPin => 'نسيت رمز PIN؟';
+
+  @override
+  String get lockScreenForgotPinChoiceTitle => 'كيف تريدين إعادة تعيينه؟';
+
+  @override
+  String get lockScreenResetViaDevice => 'التحقق عبر هذا الجهاز';
+
+  @override
+  String get lockScreenResetViaDeviceBody =>
+      'تبقى بياناتك كما هي. يكفي التحقق باستخدام قفل هاتفك نفسه — Face ID أو بصمة الإصبع أو كلمة المرور.';
+
+  @override
+  String get lockScreenResetViaDeviceReason => 'تحققي لتعيين رمز PIN جديد';
 
   @override
   String lockScreenThrottled(int seconds) {
@@ -216,6 +238,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get navSettings => 'الإعدادات';
 
   @override
+  String get navReminders => 'التذكيرات';
+
+  @override
+  String get navProfile => 'ملفي';
+
+  @override
   String get navTrack => 'تتبّع';
 
   @override
@@ -340,6 +368,75 @@ class AppLocalizationsAr extends AppLocalizations {
   String get symptomDizziness => 'دوخة';
 
   @override
+  String get symptomMigraine => 'الشقيقة';
+
+  @override
+  String get symptomHighFever => 'حمى شديدة';
+
+  @override
+  String get symptomNeckPain => 'ألم في الرقبة';
+
+  @override
+  String get symptomShoulderPain => 'ألم في الكتف';
+
+  @override
+  String get symptomLimbPain => 'ألم في الأطراف';
+
+  @override
+  String get symptomMuscleAche => 'ألم عضلي';
+
+  @override
+  String get symptomChills => 'قشعريرة';
+
+  @override
+  String get symptomNightSweats => 'تعرّق ليلي';
+
+  @override
+  String get symptomHotFlashes => 'هبات ساخنة';
+
+  @override
+  String get symptomWeightGain => 'زيادة الوزن';
+
+  @override
+  String get symptomConstipation => 'إمساك';
+
+  @override
+  String get symptomDiarrhea => 'إسهال';
+
+  @override
+  String get symptomIndigestion => 'عسر هضم';
+
+  @override
+  String get symptomGasPain => 'ألم الغازات';
+
+  @override
+  String get symptomFeelingUnwell => 'شعور بالتوعك';
+
+  @override
+  String get symptomItching => 'حكة';
+
+  @override
+  String get symptomTroubleFocusing => 'صعوبة في التركيز';
+
+  @override
+  String get symptomForgetfulness => 'النسيان';
+
+  @override
+  String get symptomGroupHead => 'الرأس';
+
+  @override
+  String get symptomGroupBody => 'الجسم';
+
+  @override
+  String get symptomGroupAbdomen => 'البطن';
+
+  @override
+  String get symptomGroupGeneral => 'عام';
+
+  @override
+  String get symptomGroupCognitive => 'إدراكي';
+
+  @override
   String get dayLogMoodLabel => 'المزاج';
 
   @override
@@ -371,6 +468,54 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get moodEmotional => 'عاطفية';
+
+  @override
+  String get moodExcited => 'متحمسة';
+
+  @override
+  String get moodHopeful => 'متفائلة';
+
+  @override
+  String get moodProud => 'فخورة';
+
+  @override
+  String get moodDisappointed => 'محبطة';
+
+  @override
+  String get moodConfident => 'واثقة';
+
+  @override
+  String get moodSurprised => 'متفاجئة';
+
+  @override
+  String get moodIndifferent => 'غير مبالية';
+
+  @override
+  String get moodPeaceful => 'هادئة';
+
+  @override
+  String get moodInLove => 'واقعة في الحب';
+
+  @override
+  String get moodShy => 'خجولة';
+
+  @override
+  String get moodPlayful => 'مرحة';
+
+  @override
+  String get moodExhausted => 'منهكة';
+
+  @override
+  String get moodLonely => 'وحيدة';
+
+  @override
+  String get moodOverwhelmed => 'مثقلة';
+
+  @override
+  String get moodGrateful => 'ممتنة';
+
+  @override
+  String get moodNostalgic => 'حانّة';
 
   @override
   String get dayLogNoteLabel => 'ملاحظة';
@@ -550,6 +695,86 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsLanguageUrdu => 'اردو';
 
   @override
+  String get settingsLanguageDutch => 'Nederlands';
+
+  @override
+  String get settingsLanguageSwedish => 'Svenska';
+
+  @override
+  String get settingsLanguageNorwegian => 'Norsk bokmål';
+
+  @override
+  String get settingsLanguageDanish => 'Dansk';
+
+  @override
+  String get settingsLanguagePolish => 'Polski';
+
+  @override
+  String get settingsLanguageUkrainian => 'Українська';
+
+  @override
+  String get settingsLanguageCzech => 'Čeština';
+
+  @override
+  String get settingsLanguageHungarian => 'Magyar';
+
+  @override
+  String get settingsLanguageRomanian => 'Română';
+
+  @override
+  String get settingsLanguageFinnish => 'Suomi';
+
+  @override
+  String get settingsLanguageGreek => 'Ελληνικά';
+
+  @override
+  String get settingsLanguageMalay => 'Bahasa Melayu';
+
+  @override
+  String get tourSkip => 'تخطي';
+
+  @override
+  String get tourNext => 'التالي';
+
+  @override
+  String get tourStart => 'لنبدأ';
+
+  @override
+  String get tourHomeTitle => 'الرئيسية';
+
+  @override
+  String get tourHomeBody =>
+      'اطّلعي على وضعك اليوم بلمحة — يوم دورتك، الوقت المتبقي حتى نافذتك المقدّرة، ورفيقك موجودان دائمًا هنا.';
+
+  @override
+  String get tourCalendarTitle => 'التقويم';
+
+  @override
+  String get tourCalendarBody =>
+      'شاهدي دوراتك السابقة والقادمة في التقويم. اضغطي أي يوم لفتح سجله.';
+
+  @override
+  String get tourTrackTitle => 'تسجيل';
+
+  @override
+  String get tourTrackBody =>
+      'زر + في المنتصف يفتح سجل اليوم من أي مكان — التدفق، الأعراض، المزاج والمزيد.';
+
+  @override
+  String get tourRemindersTitle => 'التذكيرات';
+
+  @override
+  String get tourRemindersBody =>
+      'اضبطي تذكيرات لدورتك القادمة أو أدويتك أو شرب الماء — كل شيء يبقى في هاتفك ولا يُرسل لأي مكان آخر.';
+
+  @override
+  String get tourProfileTitle => 'ملفي';
+
+  @override
+  String get tourProfileBody =>
+      'اعثري هنا على رؤاك، وكل ما تتابعينه، وإعداداتك.';
+
+  @override
   String get settingsWeekStartLabel => 'يبدأ الأسبوع يوم';
 
   @override
@@ -574,6 +799,320 @@ class AppLocalizationsAr extends AppLocalizations {
   String get remindersScreenTitle => 'التذكيرات';
 
   @override
+  String get reminderDetailNotification => 'الإشعار';
+
+  @override
+  String get reminderDetailAlert => 'التنبيه';
+
+  @override
+  String get reminderDetailAlertToday => 'في نفس اليوم';
+
+  @override
+  String get reminderDetailTime => 'الوقت';
+
+  @override
+  String get reminderDetailMessage => 'الرسالة';
+
+  @override
+  String get reminderDetailMessageEditTitle => 'تعديل الرسالة';
+
+  @override
+  String get reminderDetailMessageHint => 'اكتبي رسالتك الخاصة';
+
+  @override
+  String reminderDetailAlertDaysBefore(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count يوم قبل',
+      many: '$count يومًا قبل',
+      few: '$count أيام قبل',
+      two: 'يومان قبل',
+      one: 'يوم واحد قبل',
+      zero: 'بدون أيام مسبقًا',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String optionsShowMore(int count) {
+    return '+$count أخرى';
+  }
+
+  @override
+  String get optionsShowLess => 'عرض أقل';
+
+  @override
+  String get trackerHistoryEntry => 'السجل';
+
+  @override
+  String get actionSend => 'إرسال';
+
+  @override
+  String get actionRemove => 'إزالة';
+
+  @override
+  String get feedbackEntry => 'ملاحظات';
+
+  @override
+  String get cloudBackupEntry => 'نسخ احتياطي بالحساب';
+
+  @override
+  String get cloudBackupTitle => 'نسخ احتياطي بالحساب';
+
+  @override
+  String get cloudBackupNotConfiguredTitle => 'غير متاح بعد في هذا الإصدار';
+
+  @override
+  String get cloudBackupNotConfiguredBody =>
+      'تحتاج النسخة الاحتياطية السحابية إلى خدمة حسابات لم يتم إعدادها بعد لهذا الإصدار. لا يمكن استخدام أي شيء هنا حتى ذلك.';
+
+  @override
+  String get cloudBackupIntro1Title => 'لا تفقدي سجلك أبداً';
+
+  @override
+  String get cloudBackupIntro1Body =>
+      'يبقى سجل دورتك آمناً حتى لو فقدتِ هاتفك أو انتقلتِ إلى جهاز جديد.';
+
+  @override
+  String get cloudBackupIntro2Title => 'أنتِ فقط من يمكنها فتحه';
+
+  @override
+  String get cloudBackupIntro2Body =>
+      'تُشفَّر نسختك الاحتياطية بكلمة مرور قبل أن تغادر هاتفك — لا يمكننا قراءتها، ولا يمكن لأي شخص آخر أيضاً.';
+
+  @override
+  String get cloudBackupIntro3Title => 'استعيدي في ثوانٍ';
+
+  @override
+  String get cloudBackupIntro3Body =>
+      'سجّلي الدخول على جهاز جديد وأعيدي سجلك بنفس كلمة المرور.';
+
+  @override
+  String get cloudBackupSignedInTitle => 'تم تسجيل الدخول';
+
+  @override
+  String get cloudBackupUploadButton => 'احفظي نسخة احتياطية الآن';
+
+  @override
+  String get cloudBackupDownloadButton => 'استعادة من السحابة';
+
+  @override
+  String get cloudBackupUploadSuccess => 'تم الحفظ في حسابك';
+
+  @override
+  String get cloudBackupNoBackupFound =>
+      'لا توجد نسخة احتياطية سحابية لهذا الحساب بعد.';
+
+  @override
+  String get partnerModeEntry => 'وضع الشريك';
+
+  @override
+  String get partnerModeTitle => 'وضع الشريك';
+
+  @override
+  String get partnerModeNotConfiguredTitle => 'غير متاح بعد في هذا الإصدار';
+
+  @override
+  String get partnerModeNotConfiguredBody =>
+      'يحتاج وضع الشريك إلى خدمة حسابات لم يتم إعدادها بعد لهذا الإصدار. لا يمكن استخدام أي شيء هنا حتى ذلك.';
+
+  @override
+  String get partnerModeHeroTitle => 'شاركي القليل، بشروطك';
+
+  @override
+  String get partnerModeHeroBody =>
+      'ارتبطي بشريكك وشاركي فقط الأشياء التي تفعّلينها أدناه — ليس سجلك الكامل أبداً، وليس تلقائياً أبداً.';
+
+  @override
+  String get partnerModeSignInGoogle => 'المتابعة عبر جوجل';
+
+  @override
+  String get partnerModeSignInApple => 'المتابعة عبر آبل';
+
+  @override
+  String get partnerModeFaqTitle => 'قبل تسجيل الدخول';
+
+  @override
+  String get partnerModeFaq1Q => 'ماذا سيرى شريكي فعليًا؟';
+
+  @override
+  String get partnerModeFaq1A =>
+      'فقط الحقول التي تفعّلينها في وضع الشريك، ولقطة واحدة حالية فقط — ليس سجلك المحفوظ أبداً، ولا أي شيء لم تشاركيه صراحةً.';
+
+  @override
+  String get partnerModeFaq2Q => 'هل يمكنني إيقاف ذلك لاحقاً؟';
+
+  @override
+  String get partnerModeFaq2A =>
+      'نعم. إلغاء الارتباط ينهي المشاركة فوراً لكليكما، ويمكنك إيقاف أي خيار منفرد في أي وقت دون إلغاء الارتباط.';
+
+  @override
+  String get partnerModeFaq3Q => 'هل يحتاج شريكي إلى هذا التطبيق؟';
+
+  @override
+  String get partnerModeFaq3A =>
+      'نعم — يسجل الدخول بنفس الطريقة ويرتبط باستخدام رمز ترسلينه له.';
+
+  @override
+  String get partnerModeNotPairedTitle => 'لم يتم الارتباط بعد';
+
+  @override
+  String get partnerModeNotPairedBody =>
+      'ادعي شريكك برمز لمرة واحدة، أو أدخلي الرمز الذي أرسله لك.';
+
+  @override
+  String get partnerModeInviteButton => 'ادعي شريكي';
+
+  @override
+  String get partnerModeEnterCodeButton => 'إدخال رمز';
+
+  @override
+  String get partnerModeSignOut => 'تسجيل الخروج';
+
+  @override
+  String get partnerModePairedTitle => 'مرتبط';
+
+  @override
+  String get partnerModePairedBody =>
+      'أنت وشريكك متصلان. المشاركة لا تزال مقتصرة على ما تفعّلينه أدناه.';
+
+  @override
+  String get partnerModeShareSectionTitle => 'ما تشاركينه';
+
+  @override
+  String get partnerModeShareCyclePhase => 'مرحلة الدورة ويومها';
+
+  @override
+  String get partnerModeShareMood => 'المزاج اليوم';
+
+  @override
+  String get partnerModeShareSymptoms => 'أعراض اليوم';
+
+  @override
+  String get partnerModeShareHighDesire => 'الشعور بالقرب اليوم';
+
+  @override
+  String get partnerModeShareNow => 'شاركي الآن';
+
+  @override
+  String get partnerModeShareSuccess => 'تمت المشاركة مع شريكك';
+
+  @override
+  String get partnerModeUnpair => 'إلغاء الارتباط';
+
+  @override
+  String get partnerModeUnpairConfirmTitle => 'إلغاء الارتباط مع شريكك؟';
+
+  @override
+  String get partnerModeUnpairConfirmBody =>
+      'سينهي هذا المشاركة فوراً لكليكما. يمكنك الارتباط مجدداً لاحقاً برمز جديد.';
+
+  @override
+  String get partnerModePartnerSnapshotEmpty => 'لم يشارك شريكك أي شيء بعد.';
+
+  @override
+  String get partnerModeErrorNotConfigured =>
+      'وضع الشريك غير معد في هذا الإصدار بعد.';
+
+  @override
+  String get partnerModeErrorCodeNotFound =>
+      'لم يُعثر على هذا الرمز. تحققي منه وأعيدي المحاولة.';
+
+  @override
+  String get partnerModeErrorCodeExpired =>
+      'انتهت صلاحية هذا الرمز. اطلبي رمزاً جديداً.';
+
+  @override
+  String get partnerModeErrorCodeIsOwn => 'هذا رمزك أنت — اطلبي من شريكك رمزه.';
+
+  @override
+  String get partnerModeErrorNotSignedIn => 'سجّلي الدخول أولاً.';
+
+  @override
+  String get partnerModeErrorUnknown => 'حدث خطأ ما. يُرجى المحاولة مجدداً.';
+
+  @override
+  String get partnerModeInviteTitle => 'ادعي شريكك';
+
+  @override
+  String get partnerModeInviteBody =>
+      'أرسلي هذا الرمز إلى شريكك. سيدخله في تطبيقه للارتباط بك.';
+
+  @override
+  String get partnerModeInviteExpiry => 'صالح لمدة 7 أيام';
+
+  @override
+  String get partnerModeInviteShare => 'مشاركة الرمز';
+
+  @override
+  String partnerModeInviteMessage(String code) {
+    return 'هذا رمز الارتباط الخاص بي في Vera: $code';
+  }
+
+  @override
+  String get partnerModeEnterTitle => 'إدخال رمز';
+
+  @override
+  String get partnerModeEnterBody => 'أدخلي الرمز الذي أرسله شريكك إليك.';
+
+  @override
+  String get partnerModeEnterHint => 'رمز من 6 أحرف';
+
+  @override
+  String get partnerModeEnterSubmit => 'ارتباط';
+
+  @override
+  String get homeInvitePartnerTitle => 'شاركي شريكك';
+
+  @override
+  String get homeInvitePartnerBody =>
+      'ارتبطا وشاركي ما تختارينه فقط — سجلك يبقى لك.';
+
+  @override
+  String get homeInvitePartnerCta => 'إعداد وضع الشريك';
+
+  @override
+  String get feedbackTitle => 'ما الذي لم يعجبك؟';
+
+  @override
+  String get feedbackSubtitle => 'اختاري موضوعًا، واكتبي التفاصيل إن أردتِ.';
+
+  @override
+  String get feedbackCategoryPredictions => 'التوقعات';
+
+  @override
+  String get feedbackCategoryBackup => 'النسخ الاحتياطي والاستعادة';
+
+  @override
+  String get feedbackCategorySubscription => 'الاشتراك';
+
+  @override
+  String get feedbackCategoryAds => 'الإعلانات';
+
+  @override
+  String get feedbackCategoryDesign => 'التصميم';
+
+  @override
+  String get feedbackCategoryTranslation => 'الترجمة';
+
+  @override
+  String get feedbackCategoryOther => 'أخرى';
+
+  @override
+  String get feedbackDescriptionLabel => 'أخبرينا أكثر (اختياري)';
+
+  @override
+  String get feedbackDescriptionHint =>
+      'ماذا حدث؟ عند الضغط على إرسال، تختارين أين تشاركينه — تطبيق البريد أو غيره.';
+
+  @override
+  String get feedbackAttachPhoto => 'إضافة صورة';
+
+  @override
+  String get feedbackPhotoAttached => 'تم إرفاق الصورة';
+
+  @override
   String get remindersGroupCycle => 'الدورة والخصوبة';
 
   @override
@@ -583,7 +1122,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get remindersGroupLifestyle => 'نمط الحياة';
 
   @override
-  String get remindersGroupAppointment => 'المواعيد';
+  String get remindersGroupAppointment => 'مواعيد الطبيب';
 
   @override
   String get settingsRemindersPeriodEndLabel =>
@@ -596,7 +1135,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsRemindersWaterLabel => 'تذكير بشرب الماء';
 
   @override
-  String get settingsRemindersAppointmentLabel => 'تذكير بموعد';
+  String get settingsRemindersAppointmentLabel => 'تذكير بموعد الطبيب';
 
   @override
   String get settingsRemindersAppointmentSet => 'تحديد التاريخ والوقت';
@@ -628,6 +1167,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get settingsPrivacyEntry => 'الخصوصية';
+
+  @override
+  String get settingsRateEntry => 'قيّمينا';
+
+  @override
+  String get rateAppTitle => 'هل يفيدك Vera؟';
+
+  @override
+  String get rateAppBody =>
+      'إذا كان الأمر كذلك، فإن تقييمه في المتجر لبضع ثوانٍ يساعد أشخاصًا آخرين يبحثون عن شيء مشابه على إيجاده.';
+
+  @override
+  String get rateAppCta => 'قيّمي Vera';
+
+  @override
+  String get rateAppDismiss => 'ليس الآن';
 
   @override
   String get settingsDeleteAllData => 'حذف جميع البيانات';
@@ -707,10 +1262,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get reminderWaterBody => 'تذكير بسيط بشرب الماء.';
 
   @override
-  String get reminderAppointmentTitle => 'موعد قادم';
+  String get reminderAppointmentTitle => 'موعد طبيب قادم';
 
   @override
-  String get reminderAppointmentBody => 'لديك موعد قادم.';
+  String get reminderAppointmentBody => 'لديك موعد طبيب قادم.';
 
   @override
   String get settingsExportEntry => 'التصدير والنسخ الاحتياطي';
@@ -1317,6 +1872,10 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String get trackerLowSampleNote =>
+      'بهذا العدد القليل من التسجيلات، النسب المئوية ليست موثوقة بعد — ستصبح أدق كلما سجّلتِ المزيد.';
+
+  @override
   String get assistantTyping => 'فيرا تكتب…';
 
   @override
@@ -1418,6 +1977,33 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get pregnancyDisclaimer =>
       'تُقدَّر التواريخ من آخر دورة وفق قاعدة الـ280 يومًا المعتادة. تعطي الموجات فوق الصوتية تاريخًا أدق، والإباضة المتأخرة تزيح هذه الأرقام — هذه معلومات وليست رعاية طبية.';
+
+  @override
+  String get pregnancySizeLabel => 'حجم الطفل';
+
+  @override
+  String get pregnancySizeUnder5 => 'بذرة خشخاش (~2 mm)';
+
+  @override
+  String get pregnancySizeUnder9 => 'توت أزرق (~1.6 cm)';
+
+  @override
+  String get pregnancySizeUnder13 => 'ليمون أخضر (~5.4 cm)';
+
+  @override
+  String get pregnancySizeUnder20 => 'أفوكادو (~11.6 cm)';
+
+  @override
+  String get pregnancySizeUnder28 => 'مانجو (~30 cm)';
+
+  @override
+  String get pregnancySizeUnder34 => 'أناناس (~44 cm)';
+
+  @override
+  String get pregnancySizeUnder38 => 'شمام (~46 cm)';
+
+  @override
+  String get pregnancySizeTerm => 'بطيخة صغيرة (~51 cm)';
 
   @override
   String get pregnancyNoteUnder5 =>
@@ -1968,13 +2554,34 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeThemeBloom => 'إزهار';
 
   @override
+  String get homeThemeOcean => 'المحيط';
+
+  @override
+  String get homeThemeAutumn => 'الخريف';
+
+  @override
+  String get homeThemeNight => 'الليل';
+
+  @override
   String get mascotStar => 'نجمة';
 
   @override
   String get mascotLeaf => 'ورقة';
 
   @override
+  String get mascotCat => 'قطة';
+
+  @override
+  String get mascotRabbit => 'أرنب';
+
+  @override
+  String get mascotBird => 'طائر';
+
+  @override
   String get tipDetailWhatsHappening => 'ما الذي يحدث في جسمك الآن';
+
+  @override
+  String get tipDetailGeneralHeading => 'اقتراحات عامة';
 
   @override
   String get tipDetailDisclaimer =>
@@ -2039,4 +2646,47 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get tipNutritionDetailUnknown =>
       'أيًا كانت المرحلة، فالأمور نفسها هي الأكثر فائدة: وجبات منتظمة، وبروتين كافٍ، وخضروات وفيرة، وماء كافٍ، وأطعمة غنية بالحديد. ولأن النزف يستهلك الحديد، يكفي الانتباه قليلًا أكثر في تلك الأيام — ولا حاجة إلى نظام غذائي مختلف لكل أسبوع من الشهر. وتناول الطعام في أوقات متقاربة الثبات يفيد استقرار الطاقة أكثر من أي صنف بمفرده، ولا يلزم حذف أي مكوّن كي تكون الدورة صحية. وبعد تسجيل بضع دورات ستظهر هنا اقتراحات خاصة بمرحلتك.';
+
+  @override
+  String get tipSleepLabel => 'النوم';
+
+  @override
+  String get tipSleepMenstrual =>
+      'قد تُقطّع التقلصات والانزعاج نومك؛ قد يساعد دش دافئ أو وسادة تدفئة قبل النوم.';
+
+  @override
+  String get tipSleepFollicular =>
+      'مع ارتفاع الطاقة، تشعر كثيرات بيقظة أكبر — لكن الحاجة الفعلية للنوم لا تقل حقًا.';
+
+  @override
+  String get tipSleepFertile =>
+      'قد يجعل الارتفاع الطفيف في حرارة الجسم قرب الإباضة النوم أصعب قليلًا؛ قد تساعد غرفة أكثر برودة.';
+
+  @override
+  String get tipSleepLuteal =>
+      'يرفع البروجستيرون حرارة الراحة قليلًا وقد يجعل النوم العميق أخف؛ غرفة باردة ومظلمة وموعد نوم ثابت يساعدان أكثر هنا.';
+
+  @override
+  String get tipSleepUnknown =>
+      'تميل جودة النوم للتذبذب عبر الدورة — عادة أضعف قبل الدورة وأثناءها مباشرة. موعد نوم ثابت هو الأساس الأكثر موثوقية بغض النظر عن المرحلة.';
+
+  @override
+  String get tipSleepDetailMenstrual =>
+      'غالبًا ما يكون النوم أكثر تقطعًا أثناء الدورة — التقلصات والانزعاج، ولدى البعض زيارات أكثر للحمام، قد توقظك ليلًا. البروستاغلاندين، المسؤول أيضًا عن التقلصات، قد يلعب دورًا هنا أيضًا. دش دافئ أو وسادة تدفئة أو تمدد خفيف قبل النوم قد يخفف التقلصات. إذا كنتِ تتناولين مسكنًا، فتوقيته ليغطي مفعوله الجزء الأول من الليل قد يحمي بداية نومك. إذا ظل النوم صعبًا، فهذا طبيعي — عادة يتحسن مع مرور المرحلة.';
+
+  @override
+  String get tipSleepDetailFollicular =>
+      'مع ارتفاع الإستروجين، تشعر كثيرات بيقظة ونشاط أكبر، ما قد يبدو كحاجة أقل للنوم. هذا غير دقيق تمامًا — الأمر فقط أن اليقظة تأتي بسهولة أكبر. الحفاظ على موعد نوم ثابت هنا يُفيد لاحقًا، حين يصبح النوم أكثر هشاشة في مراحل أخرى. قد تكون هذه فترة مناسبة نسبيًا لتجربة روتين نوم جديد.';
+
+  @override
+  String get tipSleepDetailFertile =>
+      'قد يجعل الارتفاع الطفيف في حرارة الجسم قرب الإباضة النوم أصعب قليلًا، لأن الجسم يريد طبيعيًا أن يبرد قبل النوم. غرفة أبرد أو غطاء أخف أو دش دافئ قبل النوم قد يعوض ذلك. من تلاحظ رغبة أو طاقة اجتماعية أعلى في هذه الفترة قد تسهر أيضًا لوقت أطول باختيارها — نمط يستحق الملاحظة، لا مشكلة يجب حلها.';
+
+  @override
+  String get tipSleepDetailLuteal =>
+      'يرفع البروجستيرون المتصاعد بعد الإباضة حرارة الراحة قليلًا، ما قد يجعل النوم العميق أخف — أحيانًا كإحساس هبة حرارة خفيفة، وأحيانًا فقط كنوم أقل تجديدًا. مع اقتراب الدورة، قد يضاف التوتر السابق للدورة إلى ذلك. غرفة باردة ومظلمة، وقت شاشة أقل قبل النوم، وموعد نوم ثابت تساعد أكثر هنا. إذا ظل النوم صعبًا، فهذا ليس فشلًا — إنه جزء متوقع من هذه المرحلة.';
+
+  @override
+  String get tipSleepDetailUnknown =>
+      'لا توجد بيانات كافية بعد لمعرفة المرحلة الحالية، لكن تذبذب جودة النوم عبر الدورة نمط شائع — عادة أضعف قبل الدورة وأثناءها، وأكثر استقرارًا في النصف الأول. الأساس الأكثر موثوقية بغض النظر عن المرحلة: مواعيد نوم واستيقاظ ثابتة، وقت شاشة أقل قبل النوم، وغرفة باردة ومظلمة. بعد تسجيل بضع دورات، ستظهرين أنماطًا أكثر تحديدًا هنا.';
 }

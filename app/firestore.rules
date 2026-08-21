@@ -1,0 +1,93 @@
+rules_version = '2';
+
+// Partner Modu's security rules — see CLAUDE.md's 2026-08-21 revision note
+// and lib/services/partner_service.dart's own doc comment for the data
+// model this enforces. Deploy with `firebase deploy --only firestore:rules`
+// once Ufuk's own Firebase project exists; this file has no effect until
+// then, same as the rest of Partner Modu's client code.
+//
+// Three collections, three different trust shapes:
+//   pairingCodes/{code}       — a one-time invite. Anyone signed in may
+//                               create one for themselves, or redeem
+//                               someone else's by document id (which
+//                               requires already knowing the code — there
+//                               is no listable query allowed here).
+//   partnerships/{uidA_uidB}  — the pairing itself: {uidA, uidB, code,
+//                               createdAt}, doc id is the two paired uids
+//                               sorted and joined with `_` (see
+//                               PartnerService._pairId). Either uid may
+//                               create it (provably, against a real code)
+//                               or delete it (to unpair) — there is no
+//                               "owner" here, membership in the doc IS the
+//                               permission, which is what lets one side
+//                               write a fact about the other without a
+//                               Cloud Function: nobody writes into the
+//                               other user's own document, both write into
+//                               a document that belongs to the pair.
+//   sharedData/{uid}          — the actual shared snapshot. Owner writes
+//                               it; only the paired partner (or the owner)
+//                               may read it, checked by testing whether a
+//                               `partnerships` doc exists for that pair.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function pairId(a, b) {
+      return a < b ? a + '_' + b : b + '_' + a;
+    }
+
+    // True when the caller is currently paired with `uid` — a stale
+    // partnership (the other side has since unpaired) simply means this
+    // doc no longer exists, so there is nothing here to actively clean up.
+    function isPairedWith(uid) {
+      return signedIn() && exists(
+        /databases/$(database)/documents/partnerships/$(pairId(uid, request.auth.uid))
+      );
+    }
+
+    match /pairingCodes/{code} {
+      // A code is a bearer secret shared out-of-band (share sheet, spoken
+      // aloud) by the person who created it — knowing the exact code is
+      // itself the authorization to read or consume it, the same trust
+      // model as a physical door key. Only its own uid may ever be written
+      // into a code at creation, and a code is immutable afterward:
+      // redeeming it deletes it (see PartnerService.redeemPairingCode)
+      // rather than mutating it, so no update rule is granted at all.
+      allow read, delete: if signedIn();
+      allow create: if signedIn() && request.resource.data.uid == request.auth.uid;
+    }
+
+    match /partnerships/{pairingId} {
+      allow read, delete: if signedIn() &&
+        (resource.data.uidA == request.auth.uid ||
+         resource.data.uidB == request.auth.uid);
+      // Provable pairing, not merely "I say we're paired": the doc id must
+      // be the canonical sorted id for the two uids it names, the caller
+      // must be one of those two uids, and — read at its pre-batch state,
+      // so this still holds even when the same batch also deletes it —
+      // `pairingCodes/{code}` must show the code was genuinely created by
+      // whichever of the two uids isn't the caller.
+      allow create: if signedIn() &&
+        request.resource.data.uidA < request.resource.data.uidB &&
+        pairingId == pairId(request.resource.data.uidA, request.resource.data.uidB) &&
+        (request.resource.data.uidA == request.auth.uid ||
+         request.resource.data.uidB == request.auth.uid) &&
+        get(/databases/$(database)/documents/pairingCodes/$(request.resource.data.code)).data.uid ==
+          (request.resource.data.uidA == request.auth.uid
+            ? request.resource.data.uidB
+            : request.resource.data.uidA);
+    }
+
+    match /sharedData/{uid} {
+      allow read: if isOwner(uid) || isPairedWith(uid);
+      allow write: if isOwner(uid);
+    }
+  }
+}

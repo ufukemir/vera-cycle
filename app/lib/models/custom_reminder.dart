@@ -33,11 +33,11 @@ class CustomReminder {
       );
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'label': label,
-        'minuteOfDay': minuteOfDay,
-        'enabled': enabled,
-      };
+    'id': id,
+    'label': label,
+    'minuteOfDay': minuteOfDay,
+    'enabled': enabled,
+  };
 
   /// Returns `null` for anything malformed rather than throwing — one bad
   /// entry must not make the whole reminder list unreadable.

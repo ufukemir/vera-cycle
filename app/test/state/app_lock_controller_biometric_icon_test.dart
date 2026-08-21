@@ -22,19 +22,18 @@ void main() {
   void mockBiometrics(List<String> available) {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(channel, (call) async {
-      switch (call.method) {
-        case 'isDeviceSupported':
-          return true;
-        case 'getAvailableBiometrics':
-          return available;
-        default:
-          return null;
-      }
-    });
+          switch (call.method) {
+            case 'isDeviceSupported':
+              return true;
+            case 'getAvailableBiometrics':
+              return available;
+            default:
+              return null;
+          }
+        });
   }
 
-  AppLockController controller() =>
-      AppLockController(pinVault: PinVault());
+  AppLockController controller() => AppLockController(pinVault: PinVault());
 
   tearDown(() {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
@@ -46,14 +45,15 @@ void main() {
     expect(await controller().biometricIcon(), Icons.face_outlined);
   });
 
-  test('a Touch ID / Android fingerprint device gets the fingerprint icon',
-      () async {
-    mockBiometrics(['fingerprint']);
-    expect(await controller().biometricIcon(), Icons.fingerprint);
-  });
+  test(
+    'a Touch ID / Android fingerprint device gets the fingerprint icon',
+    () async {
+      mockBiometrics(['fingerprint']);
+      expect(await controller().biometricIcon(), Icons.fingerprint);
+    },
+  );
 
-  test('face is preferred when a device reports more than one type',
-      () async {
+  test('face is preferred when a device reports more than one type', () async {
     // getAvailableBiometrics can return several; face is the newer,
     // camera-based method and the one most likely to be what a modern
     // device actually presents to the user.
@@ -71,12 +71,14 @@ void main() {
     expect(await controller().biometricIcon(), Icons.fingerprint);
   });
 
-  test('a channel failure degrades to fingerprint rather than throwing',
-      () async {
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMethodCallHandler(channel, (call) async {
-      throw PlatformException(code: 'no_auth');
-    });
-    expect(await controller().biometricIcon(), Icons.fingerprint);
-  });
+  test(
+    'a channel failure degrades to fingerprint rather than throwing',
+    () async {
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(channel, (call) async {
+            throw PlatformException(code: 'no_auth');
+          });
+      expect(await controller().biometricIcon(), Icons.fingerprint);
+    },
+  );
 }

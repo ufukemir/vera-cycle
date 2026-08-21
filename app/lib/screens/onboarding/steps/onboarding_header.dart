@@ -65,8 +65,7 @@ class OnboardingHeader extends StatelessWidget {
                 child: IconButton(
                   onPressed: onBack,
                   icon: const Icon(Icons.chevron_left),
-                  tooltip:
-                      MaterialLocalizations.of(context).backButtonTooltip,
+                  tooltip: MaterialLocalizations.of(context).backButtonTooltip,
                   style: IconButton.styleFrom(
                     backgroundColor: scheme.onSurface.withValues(alpha: 0.06),
                   ),
@@ -81,7 +80,9 @@ class OnboardingHeader extends StatelessWidget {
                     shape: const StadiumBorder(),
                     backgroundColor: scheme.onSurface.withValues(alpha: 0.06),
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 8),
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
                     minimumSize: Size.zero,
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),

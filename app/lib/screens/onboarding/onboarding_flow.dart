@@ -11,6 +11,7 @@ import '../../state/cycle_controller.dart';
 import '../../theme/app_theme.dart';
 import '../../util/day.dart';
 import '../lock/pin_setup_screen.dart';
+import 'steps/app_tour_step.dart';
 import 'steps/birth_year_step.dart';
 import 'steps/building_plan_step.dart';
 import 'steps/cycle_length_step.dart';
@@ -34,13 +35,14 @@ enum _Step {
   pms,
   notifications,
   pin,
+  tour,
   buildingPlan,
 }
 
 /// Onboarding: privacy promise → goal → birth year → 3 skippable cycle
 /// questions → 2 conversational yes/no questions → a PMS multi-select →
-/// notification priming → mandatory PIN setup → a short "building your
-/// plan" animation.
+/// notification priming → mandatory PIN setup → a short skippable tour of
+/// what the bottom bar does → a short "building your plan" animation.
 ///
 /// All answers live in local ephemeral state here — nothing is written to
 /// [AppPreferences] or [CycleController] until [_finish] runs at the very
@@ -135,17 +137,20 @@ class _OnboardingFlowState extends State<OnboardingFlow> {
       child: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: AnimatedSwitcher(
-      duration: const Duration(milliseconds: 320),
-      transitionBuilder: (child, animation) => FadeTransition(
-        opacity: animation,
-        child: SlideTransition(
-          position: Tween<Offset>(
-            begin: const Offset(0.04, 0),
-            end: Offset.zero,
-          ).animate(CurvedAnimation(parent: animation, curve: Curves.easeOut)),
-          child: child,
-        ),
-      ),
+          duration: const Duration(milliseconds: 320),
+          transitionBuilder: (child, animation) => FadeTransition(
+            opacity: animation,
+            child: SlideTransition(
+              position:
+                  Tween<Offset>(
+                    begin: const Offset(0.04, 0),
+                    end: Offset.zero,
+                  ).animate(
+                    CurvedAnimation(parent: animation, curve: Curves.easeOut),
+                  ),
+              child: child,
+            ),
+          ),
           child: KeyedSubtree(key: ValueKey(_step), child: _buildStep()),
         ),
       ),
@@ -237,7 +242,11 @@ class _OnboardingFlowState extends State<OnboardingFlow> {
         );
       case _Step.pin:
         return PinSetupScreen(
-          onComplete: () => setState(() => _step = _Step.buildingPlan),
+          onComplete: () => setState(() => _step = _Step.tour),
+        );
+      case _Step.tour:
+        return AppTourStep(
+          onContinue: () => setState(() => _step = _Step.buildingPlan),
         );
       case _Step.buildingPlan:
         return BuildingPlanStep(onFinished: _finish);

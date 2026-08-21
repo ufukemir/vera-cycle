@@ -58,9 +58,9 @@ class _LastPeriodStepState extends State<LastPeriodStep> {
       content: OutlinedButton.icon(
         onPressed: _pickDate,
         icon: const Icon(Icons.calendar_today_outlined),
-        label: Text(_picked == null
-            ? l10n.onboardingPickDate
-            : dayKey(_picked!)),
+        label: Text(
+          _picked == null ? l10n.onboardingPickDate : dayKey(_picked!),
+        ),
       ),
     );
   }

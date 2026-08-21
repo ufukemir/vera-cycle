@@ -38,7 +38,12 @@ to keep a false claim.)
 | theme_meadow.jpg | https://www.pexels.com/photo/13520803/ |
 | theme_petal.jpg | https://www.pexels.com/photo/7067261/ |
 | theme_bloom.jpg | https://www.pexels.com/photo/30265338/ |
+| theme_ocean.jpg | https://www.pexels.com/photo/4321802/ |
+| theme_autumn.jpg | https://www.pexels.com/photo/10180387/ |
+| theme_night.jpg | https://www.pexels.com/photo/1624496/ |
 
 Downloaded 2026-08-14 at w=900 via the images.pexels.com CDN;
 tea_blanket_rest.jpg, two_friends_laugh.jpg and the four theme_*.jpg
-backgrounds added 2026-08-17 the same way.
+backgrounds added 2026-08-17 the same way; theme_ocean.jpg,
+theme_autumn.jpg and theme_night.jpg added 2026-08-21 the same way, as
+three more Premium home backgrounds.

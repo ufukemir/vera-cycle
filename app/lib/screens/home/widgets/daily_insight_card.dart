@@ -106,8 +106,12 @@ class DailyInsightCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Phase-matched licensed photo (assets/photos/NOTICE.md).
-          Image.asset(_photoAsset,
-              height: 110, width: double.infinity, fit: BoxFit.cover),
+          Image.asset(
+            _photoAsset,
+            height: 110,
+            width: double.infinity,
+            fit: BoxFit.cover,
+          ),
           Padding(
             padding: const EdgeInsets.all(18),
             child: Column(
@@ -117,8 +121,10 @@ class DailyInsightCard extends StatelessWidget {
                   children: [
                     const Icon(Icons.spa_outlined, size: 18),
                     const SizedBox(width: 6),
-                    Text(l10n.dailyInsightLabel,
-                        style: theme.textTheme.labelLarge),
+                    Text(
+                      l10n.dailyInsightLabel,
+                      style: theme.textTheme.labelLarge,
+                    ),
                   ],
                 ),
                 const SizedBox(height: 8),

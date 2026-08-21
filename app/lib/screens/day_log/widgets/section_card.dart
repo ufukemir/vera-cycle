@@ -48,10 +48,11 @@ class DayLogSectionCard extends StatelessWidget {
     // distinguishable without pretending to be a pastel card.
     final panel = isDark
         ? Color.alphaBlend(
-            background.withValues(alpha: 0.10), theme.colorScheme.surface)
+            background.withValues(alpha: 0.10),
+            theme.colorScheme.surface,
+          )
         : background.withValues(alpha: 0.55);
-    final badge =
-        isDark ? background.withValues(alpha: 0.16) : background;
+    final badge = isDark ? background.withValues(alpha: 0.16) : background;
     final ink = isDark ? background : foreground;
 
     final header = Row(
@@ -89,10 +90,7 @@ class DayLogSectionCard extends StatelessWidget {
           // Merged so a bare trailing switch is announced with the title
           // that names it, instead of as an unlabelled "switch, off".
           if (trailing != null) MergeSemantics(child: header) else header,
-          if (child != null) ...[
-            const SizedBox(height: 12),
-            child!,
-          ],
+          if (child != null) ...[const SizedBox(height: 12), child!],
         ],
       ),
     );
@@ -117,9 +115,9 @@ class DayLogFieldLabel extends StatelessWidget {
       child: Text(
         text,
         style: Theme.of(context).textTheme.labelLarge?.copyWith(
-              color: color.withValues(alpha: 0.85),
-              fontWeight: FontWeight.w600,
-            ),
+          color: color.withValues(alpha: 0.85),
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }

@@ -8,9 +8,9 @@ import 'package:flutter_test/flutter_test.dart';
 const analyzer = CycleAnalyzer();
 
 List<DayLog> _period(DateTime start, int days) => List.generate(
-      days,
-      (i) => DayLog(date: addDays(start, i), flow: FlowIntensity.medium),
-    );
+  days,
+  (i) => DayLog(date: addDays(start, i), flow: FlowIntensity.medium),
+);
 
 void main() {
   group('cycle-length stats', () {
@@ -29,8 +29,11 @@ void main() {
 
       expect(insights.cyclesLoggedCount, 1);
       expect(insights.averagePeriodLength, 5);
-      expect(insights.hasCycleLengthStats, isFalse,
-          reason: 'one data point has no measurable cycle-length variability');
+      expect(
+        insights.hasCycleLengthStats,
+        isFalse,
+        reason: 'one data point has no measurable cycle-length variability',
+      );
     });
 
     test('two completed cycles: cycle length and stddev appear', () {
@@ -66,8 +69,10 @@ void main() {
       final logs = [
         ..._period(start, 4),
         DayLog(date: addDays(start, 0), symptoms: const {Symptom.cramps}),
-        DayLog(date: addDays(start, 1),
-            symptoms: const {Symptom.cramps, Symptom.headache}),
+        DayLog(
+          date: addDays(start, 1),
+          symptoms: const {Symptom.cramps, Symptom.headache},
+        ),
       ];
       final cycles = analyzer.analyze(logs);
       final insights = CycleInsights.compute(cycles, logs);
@@ -88,9 +93,12 @@ void main() {
       final cycles = analyzer.analyze(logs);
       final insights = CycleInsights.compute(cycles, logs);
 
-      expect(insights.symptomFrequencyByCycleDay.containsKey(
-              CycleInsights.maxCycleDay + 1),
-          isFalse);
+      expect(
+        insights.symptomFrequencyByCycleDay.containsKey(
+          CycleInsights.maxCycleDay + 1,
+        ),
+        isFalse,
+      );
     });
 
     test('days with no symptoms logged do not appear', () {

@@ -23,7 +23,9 @@ void main() {
 
   test('delete removes a log', () async {
     final repo = InMemoryDayLogRepository();
-    await repo.upsert(DayLog(date: DateTime(2026, 5, 1), flow: FlowIntensity.medium));
+    await repo.upsert(
+      DayLog(date: DateTime(2026, 5, 1), flow: FlowIntensity.medium),
+    );
 
     await repo.delete(DateTime(2026, 5, 1));
 
@@ -57,10 +59,14 @@ void main() {
 
   test('loadAll returns a snapshot that later writes cannot mutate', () async {
     final repo = InMemoryDayLogRepository();
-    await repo.upsert(DayLog(date: DateTime(2026, 1, 1), flow: FlowIntensity.medium));
+    await repo.upsert(
+      DayLog(date: DateTime(2026, 1, 1), flow: FlowIntensity.medium),
+    );
 
     final snapshot = await repo.loadAll();
-    await repo.upsert(DayLog(date: DateTime(2026, 1, 2), flow: FlowIntensity.medium));
+    await repo.upsert(
+      DayLog(date: DateTime(2026, 1, 2), flow: FlowIntensity.medium),
+    );
 
     expect(snapshot, hasLength(1));
   });
